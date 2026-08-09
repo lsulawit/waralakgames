@@ -1090,6 +1090,29 @@ body.dark .bbSelectedSummary b{color:#fff}
 }
 @media(max-width:380px){.bbRoomPlayers{grid-template-columns:1fr}.bbPeopleQuick{grid-template-columns:repeat(5,1fr)}}
 
+
+/* ===== Brain Buddy v22 — Actual Ranked Gameplay ===== */
+.bbRankedGameHud{
+  position:sticky;top:84px;z-index:40;margin:0 0 10px;
+  background:linear-gradient(135deg,#30243d,#5d4688);color:#fff;
+  border-radius:18px;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  box-shadow:0 10px 26px rgba(49,33,62,.14)
+}
+.bbRankedGameHud>div:first-child{display:flex;align-items:center;gap:8px}
+.bbRankedGameHud span{font-size:8px;font-weight:950;padding:5px 7px;border-radius:999px;background:rgba(255,255,255,.12)}
+.bbRankedGameHud b{font-size:11px}
+.bbRankedGameClock{display:flex;align-items:center;gap:7px}
+.bbRankedGameClock small{font-size:8px;color:#ded5e5}
+.bbRankedGameClock strong{font-size:16px;min-width:34px;text-align:center}
+body.bbRankedPlaying .v17bar,body.bbRankedPlaying .bbPlayerStatus,body.bbRankedPlaying .bbRankedTeaser,body.bbRankedPlaying .bbModeHub{display:none!important}
+body.bbRankedPlaying .topbar{display:none!important}
+body.bbRankedPlaying .game{padding-top:12px!important}
+body.bbRankedPlaying #hintBtn,body.bbRankedPlaying #replayBtn{display:none!important}
+@media(max-width:600px){
+ .bbRankedGameHud{top:6px;border-radius:15px;padding:8px 10px}
+ .bbRankedGameHud b{font-size:10px}.bbRankedGameClock strong{font-size:14px}
+}
+
 </style>
 
 <script>
@@ -2133,7 +2156,7 @@ let draft={...cfg};let teamData=[{name:"ทีม A",emoji:"🩷",color:TEAMCOL[
 let layout=[],baseLayout=[],asked=new Set(),correct=0,score=0,combo=0,bestCombo=0,lives=3,hints=3,state="idle",targetIndex=null,pickedIndex=null,lastTarget=null,missingId=null,swapPair=[],swapPicks=[],changeIndex=null,changeAlt=null,matchFirst=null,matchLock=false,matchDone=0,sequenceOrder=[],sequencePick=[],sequencePlaying=false,teamคะแนนs=[0,0,0,0,0,0],roundStarted=false,roundComplete=false,roundXP=0,adaptiveShift=0,adaptiveWins=0,adaptiveMisses=0,timerId=null,timerEnd=0,lucky=false,customImages=[];
 let audioCtx=null,musicLoop=null,musicEnabled=false,sfxEnabled=true,musicVolume=.28,sfxVolume=.55,musicTheme="cozy",musicStep=0,themeMode="light",motionMode="full",tapCount=0,tapReset=null;
 const MUSIC={cozy:[261.6,329.6,392,329.6,293.7,349.2,440,349.2],dream:[293.7,370,440,554.4,440,370,329.6,415.3],night:[220,277.2,329.6,415.3,329.6,277.2,246.9,311.1],focus:[196,246.9,293.7,246.9,220,261.6,329.6,261.6]};
-function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));if(typeof CLOUD_SYNC_KEYS!=="undefined"&&CLOUD_SYNC_KEYS.has(k)&&!cloudApplying)scheduleCloudSync()}catch(e){}}function load(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}}function shuf(a,r=Math.random){const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[x[i],x[j]]=[x[j],x[i]]}return x}function seeded(s){let x=s>>>0;return()=>{x=(x*1664525+1013904223)>>>0;return x/4294967296}}function todaySeed(){const d=new Date();return Number(`${d.getFullYear()}${String(d.getMonth()+1).padStart(2,"0")}${String(d.getDate()).padStart(2,"0")}`)}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));if(typeof CLOUD_SYNC_KEYS!=="undefined"&&CLOUD_SYNC_KEYS.has(k)&&!cloudApplying)scheduleCloudSync()}catch(e){}}function load(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}}function shuf(a,r=(window.__bbRankedRng||Math.random)){const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[x[i],x[j]]=[x[j],x[i]]}return x}function seeded(s){let x=s>>>0;return()=>{x=(x*1664525+1013904223)>>>0;return x/4294967296}}function todaySeed(){const d=new Date();return Number(`${d.getFullYear()}${String(d.getMonth()+1).padStart(2,"0")}${String(d.getDate()).padStart(2,"0")}`)}
 function profile(){return load("bb_profile",{name:"ผู้เล่น",avatar:"🧸",xp:0})}function level(xp){return Math.floor(xp/500)+1}function hist(){return load("bb_history",[])}function badgeData(){return load("bb_badges",{})}function effDiff(){const o=["easy","normal","hard","expert"],i=o.indexOf(cfg.diff);return cfg.adaptive?o[Math.max(0,Math.min(3,i+adaptiveShift))]:cfg.diff}function dc(){return DIFF[effDiff()]}function qCount(){return cfg.mode==="match"?Math.max(2,Math.floor(dc().n/2)):dc().q}
 function sourcePool(){if(cfg.source==="custom"&&customImages.length>=4)return customImages.map((_,i)=>i);return Array.from({length:20},(_,i)=>i)}
 function content(id){if(cfg.source==="teddy")return `<div class="teddy">${teddySVG(id%20)}</div>`;if(cfg.source==="custom"&&customImages[id])return `<div class="content upload"><img src="${customImages[id]}" alt="ภาพที่อัปโหลด"></div>`;const a=PACKS[cfg.source]||PACKS.animals;return `<div class="content emoji">${a[id%a.length]}</div>`}
@@ -2155,17 +2178,17 @@ const DIFF_MULT={easy:1,normal:1.25,hard:1.5,expert:2};
 function pointsPerCorrect(){return Math.round((MODE_POINTS[cfg.mode]||100)*(DIFF_MULT[effDiff()]||1))}
 function record(ok){if(ok){correct++;combo++;bestCombo=Math.max(bestCombo,combo);score+=pointsPerCorrect();sfx("ok")}else{combo=0;sfx("bad")}updateHUD();saveResume()}
 function surprise(){return}
-function positionAsk(){stopTimer();if(asked.size>=qCount())return finishRound();const a=layout.map((_,i)=>i).filter(i=>!asked.has(i));if(!a.length)return finishRound();targetIndex=a[Math.floor(Math.random()*a.length)];asked.add(targetIndex);pickedIndex=null;state="position_target";renderTarget(targetIndex);showScene("target");setStatus("🧸","ดูรูปเป้าหมาย","จำว่าตัวนี้เคยอยู่ช่องไหน");setMain("พร้อมตอบ",positionAnswer);$("replayBtn").classList.add("hidden");updateHUD();sfx("flip");saveResume()}
+function positionAsk(){stopTimer();if(asked.size>=qCount())return finishRound();const a=layout.map((_,i)=>i).filter(i=>!asked.has(i));if(!a.length)return finishRound();targetIndex=a[Math.floor((window.__bbRankedRng||Math.random)()*a.length)];asked.add(targetIndex);pickedIndex=null;state="position_target";renderTarget(targetIndex);showScene("target");setStatus("🧸","ดูรูปเป้าหมาย","จำว่าตัวนี้เคยอยู่ช่องไหน");setMain("พร้อมตอบ",positionAnswer);$("replayBtn").classList.add("hidden");updateHUD();sfx("flip");saveResume()}
 function positionAnswer(){state="position_answer";showScene("board");renderBoard(true);$("boardTitle").textContent="อยู่หมายเลขไหน?";$("boardSub").textContent=cfg.answer==="voice"&&cfg.style==="team"?"ตอบออกเสียง แล้วกดเฉลยเมื่อพร้อม":"แตะหมายเลขที่คิดว่าถูกต้อง";setStatus(cfg.answer==="voice"&&cfg.style==="team"?"🗣️":"🔢",cfg.answer==="voice"&&cfg.style==="team"?"ตอบออกเสียง":"เลือกตำแหน่ง","ตอบแล้วเปิดเฉลยทั้งกระดาน");if(cfg.answer==="voice"&&cfg.style==="team"){$("voiceBtn").classList.remove("hidden");$("voiceBtn").onclick=()=>positionReveal(true);setMain("เฉลยเลย",()=>positionReveal(true))}else{[...$("board").children].forEach((s,i)=>s.onclick=()=>{pickedIndex=i;[...$("board").children].forEach((x,j)=>x.classList.toggle("selected",j===i));setMain("เฉลย",()=>positionReveal(false));sfx("tap");saveResume()});setMain("เลือกหมายเลขก่อน",()=>{},true)}$("replayBtn").classList.remove("hidden");$("replayBtn").onclick=()=>{renderTarget(targetIndex);showScene("target");setMain("กลับไปตอบ",positionAnswer);sfx("flip")};startTimer(()=>positionReveal(false,true));saveResume()}
 function positionReveal(verbal=false,timeout=false){stopTimer();if(!verbal&&!timeout&&pickedIndex===null)return;state="position_reveal";showScene("board");renderBoard(false);[...$("board").children].forEach((s,i)=>{if(i===targetIndex)s.classList.add("correct");if(!verbal&&pickedIndex!==null&&i===pickedIndex&&i!==targetIndex)s.classList.add("wrong")});if(verbal&&cfg.style==="team")sfx("ok");else record(!timeout&&pickedIndex===targetIndex);$("answer").textContent=`✨ คำตอบคือหมายเลข ${targetIndex+1}`;$("answer").classList.remove("hidden");$("boardTitle").textContent="เฉลย";$("boardSub").textContent="เปิดภาพทั้งหมดให้เห็นตำแหน่งเดิม";setStatus("✅","เฉลยแล้ว",cfg.style==="team"?"เพิ่มคะแนนให้ทีมที่ตอบถูก แล้วไปข้อถัดไป":"ดูคำตอบ แล้วไปข้อถัดไป");$("voiceBtn").classList.add("hidden");surprise();setMain(asked.size>=qCount()?"ดูผลลัพธ์":"คำถามใหม่จากกระดานเดิม",asked.size>=qCount()?finishRound:positionAsk);saveResume()}
 function startMatch(){stopTimer();state="match";showScene("board");const d=dc(),pairs=Math.max(2,Math.floor(d.n/2)),pool=shuf(sourcePool()).slice(0,pairs),deck=shuf(pool.flatMap((id,p)=>[{id,p},{id,p}]));layout=deck.map(x=>x.id);baseLayout=[...layout];$("board").innerHTML="";$("board").className="board";$("board").style.setProperty("--cols",d.cols);matchDone=0;matchFirst=null;matchLock=false;asked=new Set();$("boardTitle").textContent="จับคู่ให้ครบ";$("boardSub").textContent="เปิดได้ครั้งละ 2 ใบ และจำตำแหน่งที่เคยเปิด";setStatus("🧩","จับคู่ภาพ","ใช้ความจำตามหาคู่เหมือน");deck.forEach(it=>{const s=document.createElement("div");s.className="slot numberBoard";s.innerHTML=`<div class="content">${content(it.id)}</div><div class="num">?</div>`;s.onclick=()=>{if(matchLock||s.classList.contains("correct")||!s.classList.contains("numberBoard"))return;s.classList.remove("numberBoard");sfx("flip");if(!matchFirst){matchFirst={s,it};return}matchLock=true;if(matchFirst.it.p===it.p){matchFirst.s.classList.add("correct");s.classList.add("correct");matchDone++;asked.add(matchDone);record(true);matchFirst=null;matchLock=false;if(matchDone===pairs)setTimeout(finishRound,500)}else{record(false);setTimeout(()=>{matchFirst.s.classList.add("numberBoard");s.classList.add("numberBoard");matchFirst=null;matchLock=false},600)}};$("board").appendChild(s)});$("hintBtn").classList.add("hidden");setMain("เริ่มจับคู่ใหม่",()=>startRound());updateHUD();saveResume()}
-function missingHide(){stopTimer();const i=Math.floor(Math.random()*layout.length);missingId=layout[i];const remain=layout.filter((_,j)=>j!==i);state="missing_choice";$("board").innerHTML="";$("board").className="board";$("board").style.setProperty("--cols",dc().cols);remain.forEach(id=>{const s=document.createElement("div");s.className="slot";s.innerHTML=`<div class="content">${content(id)}</div><div class="num"></div>`;$("board").appendChild(s)});$("boardTitle").textContent="ตัวไหนหายไป?";$("boardSub").textContent="สังเกตว่ารายการไหนไม่อยู่บนกระดานแล้ว";setStatus("❓","ตัวไหนหายไป?","เมื่อพร้อมแล้ว ดูตัวเลือก");setMain("ดูตัวเลือก",missingChoices);saveResume()}
+function missingHide(){stopTimer();const i=Math.floor((window.__bbRankedRng||Math.random)()*layout.length);missingId=layout[i];const remain=layout.filter((_,j)=>j!==i);state="missing_choice";$("board").innerHTML="";$("board").className="board";$("board").style.setProperty("--cols",dc().cols);remain.forEach(id=>{const s=document.createElement("div");s.className="slot";s.innerHTML=`<div class="content">${content(id)}</div><div class="num"></div>`;$("board").appendChild(s)});$("boardTitle").textContent="ตัวไหนหายไป?";$("boardSub").textContent="สังเกตว่ารายการไหนไม่อยู่บนกระดานแล้ว";setStatus("❓","ตัวไหนหายไป?","เมื่อพร้อมแล้ว ดูตัวเลือก");setMain("ดูตัวเลือก",missingChoices);saveResume()}
 function missingChoices(){showScene("choice");$("choiceTitle").textContent="ตัวไหนหายไป?";$("choiceSub").textContent="เลือกคำตอบที่ถูกต้อง";const pool=sourcePool().filter(x=>x!==missingId),choices=shuf([missingId,...shuf(pool).slice(0,dc().choices-1)]);$("choiceGrid").innerHTML="";$("choiceGrid").style.gridTemplateColumns=`repeat(${Math.min(3,choices.length)},1fr)`;choices.forEach(id=>{const b=document.createElement("button");b.className="choice";b.innerHTML=`<div class="content">${content(id)}</div>`;b.onclick=()=>{[...$("choiceGrid").children].forEach(x=>x.disabled=true);const ok=id===missingId;if(ok)b.classList.add("correct");else{b.classList.add("wrong");[...$("choiceGrid").children].forEach((x,j)=>{if(choices[j]===missingId)x.classList.add("correct")})}asked.add(asked.size+1);record(ok);surprise();setMain(asked.size>=qCount()?"ดูผลลัพธ์":"ข้อต่อไป",asked.size>=qCount()?finishRound:()=>{layout=shuf(baseLayout);baseLayout=[...layout];startMode()})};$("choiceGrid").appendChild(b)});setMain("เลือกคำตอบก่อน",()=>{},true);startTimer(()=>{asked.add(asked.size+1);record(false);setMain(asked.size>=qCount()?"ดูผลลัพธ์":"ข้อต่อไป",asked.size>=qCount()?finishRound:()=>{layout=shuf(baseLayout);baseLayout=[...layout];startMode()})});saveResume()}
-function swapNow(){let a=Math.floor(Math.random()*layout.length),b=Math.floor(Math.random()*layout.length);while(b===a)b=Math.floor(Math.random()*layout.length);swapPair=[a,b];[layout[a],layout[b]]=[layout[b],layout[a]];swapPicks=[];state="swap_pick";renderBoard();$("boardTitle").textContent="สองช่องสลับที่กัน";$("boardSub").textContent="แตะสองช่องที่คิดว่าถูกสลับ";setStatus("🔄","หา 2 ช่องที่เปลี่ยน","เลือกให้ครบสองตำแหน่ง");[...$("board").children].forEach((s,i)=>s.onclick=()=>{if(swapPicks.includes(i)){swapPicks=swapPicks.filter(x=>x!==i);s.classList.remove("selected")}else if(swapPicks.length<2){swapPicks.push(i);s.classList.add("selected");sfx("tap")}setMain(swapPicks.length===2?"เฉลย":`เลือกอีก ${2-swapPicks.length} ช่อง`,swapReveal,swapPicks.length!==2)});setMain("เลือก 2 ช่อง",swapReveal,true);startTimer(()=>swapReveal(true));saveResume()}
+function swapNow(){let a=Math.floor((window.__bbRankedRng||Math.random)()*layout.length),b=Math.floor((window.__bbRankedRng||Math.random)()*layout.length);while(b===a)b=Math.floor((window.__bbRankedRng||Math.random)()*layout.length);swapPair=[a,b];[layout[a],layout[b]]=[layout[b],layout[a]];swapPicks=[];state="swap_pick";renderBoard();$("boardTitle").textContent="สองช่องสลับที่กัน";$("boardSub").textContent="แตะสองช่องที่คิดว่าถูกสลับ";setStatus("🔄","หา 2 ช่องที่เปลี่ยน","เลือกให้ครบสองตำแหน่ง");[...$("board").children].forEach((s,i)=>s.onclick=()=>{if(swapPicks.includes(i)){swapPicks=swapPicks.filter(x=>x!==i);s.classList.remove("selected")}else if(swapPicks.length<2){swapPicks.push(i);s.classList.add("selected");sfx("tap")}setMain(swapPicks.length===2?"เฉลย":`เลือกอีก ${2-swapPicks.length} ช่อง`,swapReveal,swapPicks.length!==2)});setMain("เลือก 2 ช่อง",swapReveal,true);startTimer(()=>swapReveal(true));saveResume()}
 function swapReveal(timeout=false){stopTimer();[...$("board").children].forEach((s,i)=>{s.classList.remove("selected");if(swapPair.includes(i))s.classList.add("correct");if(swapPicks.includes(i)&&!swapPair.includes(i))s.classList.add("wrong")});const ok=!timeout&&swapPicks.length===2&&swapPicks.every(x=>swapPair.includes(x));asked.add(asked.size+1);record(ok);$("answer").textContent=`✨ ช่องที่สลับคือ ${swapPair[0]+1} และ ${swapPair[1]+1}`;$("answer").classList.remove("hidden");setStatus("✅","เฉลยแล้ว","ตำแหน่งที่ถูกถูกไฮไลต์แล้ว");surprise();setMain(asked.size>=qCount()?"ดูผลลัพธ์":"ข้อต่อไป",asked.size>=qCount()?finishRound:()=>{layout=shuf(baseLayout);baseLayout=[...layout];startMode()});saveResume()}
-function changeNow(){changeIndex=Math.floor(Math.random()*layout.length);const pool=sourcePool().filter(x=>x!==layout[changeIndex]);changeAlt=pool[Math.floor(Math.random()*pool.length)];state="change_pick";renderBoard(false,{[changeIndex]:changeAlt});$("boardTitle").textContent="อะไรเปลี่ยนไป?";$("boardSub").textContent="แตะช่องที่ไม่เหมือนตอนจำ";setStatus("🔎","หาความเปลี่ยนแปลง","เลือกเพียงหนึ่งช่อง");pickedIndex=null;[...$("board").children].forEach((s,i)=>s.onclick=()=>{pickedIndex=i;[...$("board").children].forEach((x,j)=>x.classList.toggle("selected",j===i));setMain("เฉลย",changeReveal);sfx("tap")});setMain("เลือกหนึ่งช่อง",changeReveal,true);startTimer(()=>changeReveal(true));saveResume()}
+function changeNow(){changeIndex=Math.floor((window.__bbRankedRng||Math.random)()*layout.length);const pool=sourcePool().filter(x=>x!==layout[changeIndex]);changeAlt=pool[Math.floor((window.__bbRankedRng||Math.random)()*pool.length)];state="change_pick";renderBoard(false,{[changeIndex]:changeAlt});$("boardTitle").textContent="อะไรเปลี่ยนไป?";$("boardSub").textContent="แตะช่องที่ไม่เหมือนตอนจำ";setStatus("🔎","หาความเปลี่ยนแปลง","เลือกเพียงหนึ่งช่อง");pickedIndex=null;[...$("board").children].forEach((s,i)=>s.onclick=()=>{pickedIndex=i;[...$("board").children].forEach((x,j)=>x.classList.toggle("selected",j===i));setMain("เฉลย",changeReveal);sfx("tap")});setMain("เลือกหนึ่งช่อง",changeReveal,true);startTimer(()=>changeReveal(true));saveResume()}
 function changeReveal(timeout=false){stopTimer();renderBoard(false,{[changeIndex]:changeAlt});[...$("board").children].forEach((s,i)=>{if(i===changeIndex)s.classList.add("correct");if(pickedIndex!==null&&i===pickedIndex&&i!==changeIndex)s.classList.add("wrong")});asked.add(asked.size+1);record(!timeout&&pickedIndex===changeIndex);$("answer").textContent=`✨ จุดที่เปลี่ยนคือช่อง ${changeIndex+1}`;$("answer").classList.remove("hidden");setStatus("✅","เฉลยแล้ว","ดูจุดที่เปลี่ยน แล้วไปข้อถัดไป");surprise();setMain(asked.size>=qCount()?"ดูผลลัพธ์":"ข้อต่อไป",asked.size>=qCount()?finishRound:()=>{layout=shuf(baseLayout);baseLayout=[...layout];startMode()});saveResume()}
-function sequenceStart(){if(sequencePlaying)return;sequencePlaying=true;sequencePick=[];sequenceOrder=[];while(sequenceOrder.length<Math.min(dc().seq,layout.length)){const x=Math.floor(Math.random()*layout.length);if(!sequenceOrder.includes(x))sequenceOrder.push(x)}state="sequence_show";showScene("target");setStatus("✨","จำลำดับ",`จำให้ครบ ${sequenceOrder.length} ตัว`);setMain("กำลังแสดง…",()=>{},true);$("hintBtn").classList.add("hidden");let k=0;const speed={easy:1000,normal:820,hard:670,expert:540}[effDiff()];const next=()=>{if(k>=sequenceOrder.length){setTimeout(sequenceAnswer,280);return}renderTarget(sequenceOrder[k]);$("targetLabel").textContent=`ลำดับ ${k+1} / ${sequenceOrder.length}`;sfx("flip");k++;setTimeout(next,speed)};next()}
+function sequenceStart(){if(sequencePlaying)return;sequencePlaying=true;sequencePick=[];sequenceOrder=[];while(sequenceOrder.length<Math.min(dc().seq,layout.length)){const x=Math.floor((window.__bbRankedRng||Math.random)()*layout.length);if(!sequenceOrder.includes(x))sequenceOrder.push(x)}state="sequence_show";showScene("target");setStatus("✨","จำลำดับ",`จำให้ครบ ${sequenceOrder.length} ตัว`);setMain("กำลังแสดง…",()=>{},true);$("hintBtn").classList.add("hidden");let k=0;const speed={easy:1000,normal:820,hard:670,expert:540}[effDiff()];const next=()=>{if(k>=sequenceOrder.length){setTimeout(sequenceAnswer,280);return}renderTarget(sequenceOrder[k]);$("targetLabel").textContent=`ลำดับ ${k+1} / ${sequenceOrder.length}`;sfx("flip");k++;setTimeout(next,speed)};next()}
 function sequenceAnswer(){sequencePlaying=false;state="sequence_answer";showScene("board");renderBoard();$("boardTitle").textContent="แตะตามลำดับเดิม";$("boardSub").textContent="แตะตัวละครหรือคำตามลำดับที่เพิ่งเห็น";setStatus("👆","เรียงลำดับให้ถูก","แตะให้ครบทุกตัว");sequencePick=[];[...$("board").children].forEach((s,i)=>s.onclick=()=>{if(sequencePick.length>=sequenceOrder.length)return;sequencePick.push(i);s.classList.add("selected");sfx("tap");setMain(sequencePick.length===sequenceOrder.length?"ตรวจคำตอบ":`เลือกแล้ว ${sequencePick.length}/${sequenceOrder.length}`,sequenceReveal,sequencePick.length!==sequenceOrder.length)});setMain("เริ่มเลือก",sequenceReveal,true);startTimer(()=>sequenceReveal(true));saveResume()}
 function sequenceReveal(timeout=false){stopTimer();const ok=!timeout&&sequencePick.length===sequenceOrder.length&&sequencePick.every((x,i)=>x===sequenceOrder[i]);asked.add(asked.size+1);record(ok);renderBoard();sequenceOrder.forEach(i=>$("board").children[i]?.classList.add("correct"));$("answer").textContent=`✨ ลำดับที่ถูก: ${sequenceOrder.map(i=>i+1).join(" → ")}`;$("answer").classList.remove("hidden");setStatus("✅","เฉลยลำดับแล้ว","ดูตำแหน่งตามลำดับ แล้วไปข้อถัดไป");surprise();$("hintBtn").classList.remove("hidden");setMain(asked.size>=qCount()?"ดูผลลัพธ์":"ลำดับถัดไป",asked.size>=qCount()?finishRound:startMode);saveResume()}
 function insight(rate){const D={position:["📍","ความจำภาพและตำแหน่ง","การคงข้อมูลภาพ-ตำแหน่งไว้ชั่วคราวและเรียกกลับมาใช้"],match:["🧩","การจำคู่และอัปเดตข้อมูล","การจำสิ่งที่เพิ่งเห็นและอัปเดตตำแหน่งของคู่ภาพ"],missing:["👀","การสังเกตและเปรียบเทียบภาพ","การเก็บภาพรวมไว้แล้วตรวจหาสิ่งที่หายไป"],swap:["🔄","ความจำเชิงพื้นที่และการเปรียบเทียบ","การจำตำแหน่งเดิมและตรวจจับการเปลี่ยนแปลงของตำแหน่ง"],change:["🔎","ความใส่ใจต่อรายละเอียด","การจำรายละเอียดแล้วตรวจจับความเปลี่ยนแปลง"],sequence:["🔢","ความจำลำดับ","การเก็บและเรียกคืนข้อมูลตามลำดับ"]}[cfg.mode];let text,next;if(rate>=90){text=`คุณทำผลงานได้โดดเด่นในโจทย์ ${D[1]} ระดับนี้ ความแม่นยำสูงสะท้อนว่ากลยุทธ์การสังเกตและการเรียกคืนข้อมูลที่ใช้ในเกมมีความสม่ำเสมอมาก`;next=["เพิ่มระดับความยาก","ลองโหมดอื่น","ตั้งเป้าคะแนนรอบใหม่"]}else if(rate>=75){text=`คุณมีพื้นฐานที่แข็งแรงใน ${D[2]} รอบนี้ตอบได้แม่นเป็นส่วนใหญ่ เหมาะกับการเพิ่มความท้าทายทีละขั้นเพื่อให้ใช้ข้อมูลพร้อมกันมากขึ้น`;next=["เล่นระดับเดิมให้คล่อง","เพิ่มจาก 2×2 เป็น 3×3","ลองโหมดที่คะแนนสูงขึ้น"]}else if(rate>=55){text=`รอบนี้เป็นช่วงที่ดีสำหรับสร้างความสม่ำเสมอใน ${D[2]} การเล่นซ้ำด้วยกระดานขนาดพอดีช่วยให้ทดลองวิธีสแกนภาพและจัดกลุ่มข้อมูลที่จำง่ายขึ้น`;next=["เล่นกระดานขนาดเดิม","ใช้ Hint เมื่อจำเป็น","สังเกตทีละแถว"]}else{text=`รอบนี้เหมาะมากสำหรับวางพื้นฐานของ ${D[2]} การเริ่มจาก 2×2 เปิดโอกาสให้ฝึกสังเกตทีละส่วนและสร้างวิธีจำที่เป็นระบบก่อนเพิ่มจำนวนข้อมูล`;next=["เริ่ม 2×2","จำเป็นคู่หรือเป็นแถว","เล่นซ้ำสั้น ๆ หลายรอบ"]}return{title:`${D[0]} จุดเด่น: ${D[1]}`,text,next}}
@@ -2183,24 +2206,31 @@ function finishRound(){
   const measurable=!(cfg.style==="team"&&cfg.mode==="position"&&cfg.answer==="voice");
   const rate=measurable&&asked.size?Math.round(correct/asked.size*100):0;
   const finalคะแนน=cfg.style==="solo"?score:Math.max(...teamคะแนนs.slice(0,cfg.teams));
-  roundXP=cfg.style==="solo"?xpFromScore(finalคะแนน):0;
-  const p=profile();p.xp=(p.xp||0)+roundXP;save("bb_profile",p);renderProfile();
+  const isRanked=!!window.BB_RANKED_ACTIVE;
+  roundXP=isRanked?0:(cfg.style==="solo"?xpFromScore(finalคะแนน):0);
+  if(!isRanked){const p=profile();p.xp=(p.xp||0)+roundXP;save("bb_profile",p);renderProfile();}
   $("resultคะแนน").textContent=finalคะแนน;
   $("resultคะแนนLabel").textContent=cfg.style==="solo"?"คะแนนรอบนี้":"คะแนนทีมสูงสุด";
   $("resultCorrect").textContent=measurable?correct:"—";
   $("resultAcc").textContent=measurable?rate+"%":"ทีม";
   $("resultCombo").textContent=bestCombo;
-  $("resultXP").textContent=cfg.style==="solo"?"+"+roundXP:"0";
-  $("resultText").textContent=cfg.style==="team"?"จบรอบทีมแล้ว! คะแนนทีมใช้สำหรับการแข่งขันในกิจกรรม":rate>=90?"ยอดเยี่ยมมาก! รอบนี้แม่นและสม่ำเสมอ":rate>=75?"ทำได้ดีมาก พร้อมต่อยอดความท้าทาย":"รอบนี้สร้างพื้นฐานได้ดี ลองต่ออีกหนึ่งรอบ";
+  $("resultXP").textContent=isRanked?"รอ RP":(cfg.style==="solo"?"+"+roundXP:"0");
+  $("resultText").textContent=isRanked?"🏆 จบการแข่งขัน Ranked แล้ว • คะแนนรอบนี้กำลังรอระบบคำนวณ RP ในขั้นถัดไป":cfg.style==="team"?"จบรอบทีมแล้ว! คะแนนทีมใช้สำหรับการแข่งขันในกิจกรรม":rate>=90?"ยอดเยี่ยมมาก! รอบนี้แม่นและสม่ำเสมอ":rate>=75?"ทำได้ดีมาก พร้อมต่อยอดความท้าทาย":"รอบนี้สร้างพื้นฐานได้ดี ลองต่ออีกหนึ่งรอบ";
   let ins;
   if(!measurable){
     const mx=Math.max(...teamคะแนนs.slice(0,cfg.teams));
     ins={title:"👥 จุดเด่น: การเล่นร่วมกันและการเรียกคืนข้อมูล",text:`รอบนี้เปิดโอกาสให้สมาชิกช่วยกันสังเกต จำ และเรียกข้อมูลกลับมาใช้ผ่านการตอบออกเสียง คะแนนทีมสูงสุด ${mx} คะแนน โดยโหมดทีมจะไม่เพิ่ม XP ส่วนตัวหรืออันดับ Cloud`,next:["ลองเพิ่มจำนวนภาพ","สลับทีมที่ตอบแต่ละข้อ","เพิ่มระดับความยาก"]};
   }else ins=insight(rate);
   $("insightTitle").textContent=ins.title;$("insightText").textContent=ins.text;$("nexts").innerHTML=ins.next.map(x=>`<span>${x}</span>`).join("");
-  saveHistory(rate,finalคะแนน);checkความสำเร็จs(rate);renderHome();renderStats();renderCollection();
+  if(isRanked){
+    window.bbRankedRoundFinished?.({score:finalคะแนน,correct,total:asked.size,accuracy:rate,bestCombo,mode:cfg.mode,difficulty:effDiff()});
+  }else{
+    saveHistory(rate,finalคะแนน);checkความสำเร็จs(rate);renderHome();renderStats();renderCollection();
+  }
   setStatus("🏁","จบรอบแล้ว","ดูคะแนนและ XP ที่ได้รับ แล้วเลือกความท้าทายถัดไป");
-  setMain("เล่นอีกครั้ง",()=>startRound());$("hintBtn").classList.add("hidden");$("voiceBtn").classList.add("hidden");$("replayBtn").classList.add("hidden");sfx("done")
+  if(isRanked)setMain("กลับห้อง Ranked",()=>window.bbReturnToRankedRoom?.());
+  else setMain("เล่นอีกครั้ง",()=>startRound());
+  $("hintBtn").classList.add("hidden");$("voiceBtn").classList.add("hidden");$("replayBtn").classList.add("hidden");sfx("done")
 }
 function saveHistory(rate,sc){const h=hist();h.push({date:Date.now(),mode:cfg.mode,diff:effDiff(),source:cfg.source,style:cfg.style,rate,score:sc,combo:bestCombo,xp:roundXP});save("bb_history",h.slice(-80));if(cfg.style==="solo")cloudRecordGame(rate,sc)}function unlock(id){const b=badgeData();if(b[id])return;b[id]=Date.now();save("bb_badges",b);const a=ACH.find(x=>x[0]===id);if(a)toast(`🏅 ความสำเร็จ: ${a[2]}`)}function checkความสำเร็จs(rate){const h=hist();unlock("first");if(rate===100)unlock("perfect");if(bestCombo>=5)unlock("combo5");if(bestCombo>=10)unlock("combo10");const ms=new Set(h.map(x=>x.mode));if(ms.size>=4)unlock("explorer");if(ms.size>=6)unlock("allmodes");if(level(profile().xp||0)>=5)unlock("level5");if(level(profile().xp||0)>=10)unlock("level10");if(load("bb_daily_streak",0)>=3)unlock("daily3");if(cfg.source==="custom")unlock("custom");if(rate>=90)unlock("master")}
 function renderProfile(){const p=profile(),lv=level(p.xp||0);$("navName").textContent=p.name||"ผู้เล่น";$("navAvatar").textContent=p.avatar||"🧸";$("profileName").value=p.name||"";$("profileLevel").textContent=lv;$("xpBar").style.width=((p.xp||0)%500/500*100)+"%";$("xpLabel").textContent=`${(p.xp||0)%500} / 500 XP`;$("levelHud").textContent=lv}function renderHome(){const h=hist(),p=profile(),rates=h.map(x=>x.rate).filter(x=>typeof x==="number");$("homeLevel").textContent=level(p.xp||0);$("homeXP").textContent=p.xp||0;$("homeBest").textContent=h.length?Math.max(...h.map(x=>x.score||0)):0;$("homeAcc").textContent=(rates.length?Math.max(...rates):0)+"%";$("homeRounds").textContent=h.length}function renderStats(){const h=hist(),rates=h.map(x=>x.rate).filter(x=>typeof x==="number");$("statRounds").textContent=h.length;$("statBest").textContent=h.length?Math.max(...h.map(x=>x.score||0)):0;$("statAcc").textContent=(rates.length?Math.max(...rates):0)+"%";$("statCombo").textContent=h.length?Math.max(...h.map(x=>x.combo||0)):0;const last=h.filter(x=>typeof x.rate==="number").slice(-10),W=760,H=170,p=25;let svg=`<line x1="${p}" y1="${H-p}" x2="${W-p}" y2="${H-p}" stroke="rgba(136,116,231,.15)"/><line x1="${p}" y1="${p}" x2="${p}" y2="${H-p}" stroke="rgba(136,116,231,.15)"/>`;if(last.length){const pts=last.map((x,i)=>[last.length===1?W/2:p+i*((W-2*p)/(last.length-1)),H-p-(x.rate/100)*(H-2*p)]);svg+=`<polyline points="${pts.map(x=>x.join(",")).join(" ")}" fill="none" stroke="#8874e7" stroke-width="5" stroke-linecap="round"/>`;pts.forEach(q=>svg+=`<circle cx="${q[0]}" cy="${q[1]}" r="6" fill="white" stroke="#f270a7" stroke-width="4"/>`)}$("chartSvg").innerHTML=svg;const b=badgeData();$("badgeGrid").innerHTML="";ACH.forEach(a=>{const d=document.createElement("div");d.className="badge"+(b[a[0]]?"":" lock");d.innerHTML=`<span>${a[1]}</span><div><strong>${a[2]}</strong><small>${a[3]}</small></div>`;$("badgeGrid").appendChild(d)})}function renderCollection(){const lv=level(profile().xp||0);$("collection").innerHTML="";COLLECTION.forEach(([em,n,need])=>{const d=document.createElement("div");d.className="collect"+(lv>=need?"":" lock");d.innerHTML=`<span>${em}</span><div><strong>${n}</strong><small>${lv>=need?"ปลดล็อกแล้ว":`Level ${need}`}</small></div>`;if(lv>=need)d.onclick=()=>{const p=profile();p.avatar=em;save("bb_profile",p);renderProfile();toast(`เลือก ${n} แล้ว`)};$("collection").appendChild(d)})}
@@ -2783,7 +2813,7 @@ window.addEventListener("load",()=>{
       if(left<=0){
         stopCountdown();$("#bbCountdownNumber").textContent="GO!";$("#bbCountdownLabel").textContent="เริ่มการแข่งขัน";
         $("#bbCountdownSub").textContent="สนาม Ranked พร้อมแล้ว • ขั้นถัดไปจะเชื่อมโจทย์เดียวกันและการส่งคะแนนเข้า RP";
-        setTimeout(()=>{show("#bbArenaCountdown",false);show("#bbArenaRoom",true);refreshRoom()},1800);
+        setTimeout(()=>{launchRankedGame(match)},650);
         return;
       }
       const sec=Math.ceil(left/1000);
@@ -2821,6 +2851,153 @@ window.addEventListener("load",()=>{
   $("#bbRoomReadyBtn")?.addEventListener("click",toggleReady);
   $("#bbRoomStartBtn")?.addEventListener("click",startMatch);
   $("#bbRoomCopy")?.addEventListener("click",async()=>{const code=currentRoom?.room_code||"";try{await navigator.clipboard.writeText(code);toast("คัดลอกรหัสห้องแล้ว")}catch(e){prompt("คัดลอกรหัสห้อง",code)}});
+
+  // ---------- Ranked actual gameplay ----------
+  let rankedAutoTimer=null, rankedClockTimer=null, activeRankedMatch=null;
+  const coreStartMode=window.startMode||startMode;
+  const corePositionAsk=window.positionAsk||positionAsk;
+  const coreMissingHide=window.missingHide||missingHide;
+  const coreFinishRound=window.finishRound||finishRound;
+
+  function clearRankedAuto(){
+    if(rankedAutoTimer){clearTimeout(rankedAutoTimer);rankedAutoTimer=null}
+    if(rankedClockTimer){clearInterval(rankedClockTimer);rankedClockTimer=null}
+  }
+  function rankedClock(seconds,label,onDone){
+    if(!window.BB_RANKED_ACTIVE)return;
+    clearRankedAuto();
+    const end=Date.now()+Math.max(1,Number(seconds)||1)*1000;
+    const labelEl=document.getElementById("bbRankedGameClockLabel"),clock=document.getElementById("bbRankedGameClock");
+    if(labelEl)labelEl.textContent=label;
+    const tick=()=>{
+      const left=Math.max(0,end-Date.now());
+      if(clock)clock.textContent=(left/1000).toFixed(left<10000?1:0);
+      if(left<=0){clearRankedAuto();onDone?.()}
+    };
+    tick();rankedClockTimer=setInterval(tick,100);
+  }
+
+  // Automatic memorization timing for Ranked. Casual mode is unchanged.
+  startMode=function(){
+    coreStartMode();
+    if(!window.BB_RANKED_ACTIVE||!activeRankedMatch)return;
+    document.getElementById("hintBtn")?.classList.add("hidden");
+    document.getElementById("replayBtn")?.classList.add("hidden");
+    const mem=Number(activeRankedMatch.memorize_seconds)||15;
+
+    if(cfg.mode==="position"){
+      rankedClock(mem,"เวลาจำ",()=>positionAsk());
+      setMain("กำลังจับเวลาจำ…",()=>{},true);
+    }else if(cfg.mode==="missing"){
+      rankedClock(mem,"เวลาจำ",()=>missingHide());
+      setMain("กำลังจับเวลาจำ…",()=>{},true);
+    }else if(cfg.mode==="swap"){
+      rankedClock(mem,"เวลาจำ",()=>swapNow());
+      setMain("กำลังจับเวลาจำ…",()=>{},true);
+    }else if(cfg.mode==="change"){
+      rankedClock(mem,"เวลาจำ",()=>changeNow());
+      setMain("กำลังจับเวลาจำ…",()=>{},true);
+    }else if(cfg.mode==="sequence"){
+      rankedClock(2,"เตรียม",()=>sequenceStart());
+      setMain("เริ่มอัตโนมัติ…",()=>{},true);
+    }else if(cfg.mode==="match"){
+      const pairs=Math.max(2,Math.floor(dc().n/2));
+      const total=Math.max(35,Math.min(150,(Number(activeRankedMatch.answer_seconds)||10)*pairs*2.2));
+      rankedClock(total,"เวลารวม",()=>finishRound());
+    }
+  };
+
+  positionAsk=function(){
+    clearRankedAuto();
+    corePositionAsk();
+    if(window.BB_RANKED_ACTIVE&&activeRankedMatch&&state==="position_target"){
+      rankedClock(2,"ดูเป้าหมาย",()=>positionAnswer());
+      setMain("กำลังเปิดคำตอบ…",()=>{},true);
+    }
+  };
+
+  missingHide=function(){
+    clearRankedAuto();
+    coreMissingHide();
+    if(window.BB_RANKED_ACTIVE&&activeRankedMatch&&state==="missing_choice"){
+      rankedClock(1.2,"เตรียมตอบ",()=>missingChoices());
+      setMain("กำลังเปิดตัวเลือก…",()=>{},true);
+    }
+  };
+
+  // Answer timer is controlled by the existing game timer; mirror it in Ranked HUD.
+  const coreStartTimer=window.startTimer||startTimer;
+  startTimer=function(expire){
+    coreStartTimer(expire);
+    if(window.BB_RANKED_ACTIVE&&activeRankedMatch&&cfg.timer){
+      const total=Number(cfg.timer)||10,end=Date.now()+total*1000;
+      if(rankedClockTimer)clearInterval(rankedClockTimer);
+      const label=document.getElementById("bbRankedGameClockLabel"),clock=document.getElementById("bbRankedGameClock");
+      if(label)label.textContent="เวลาตอบ";
+      const t=()=>{const left=Math.max(0,end-Date.now());if(clock)clock.textContent=(left/1000).toFixed(left<10000?1:0);if(left<=0&&rankedClockTimer){clearInterval(rankedClockTimer);rankedClockTimer=null}};
+      t();rankedClockTimer=setInterval(t,100);
+    }
+  };
+
+  async function launchRankedGame(match){
+    if(!match)return;
+    activeRankedMatch=match;
+    window.BB_RANKED_ACTIVE=true;
+    window.__bbRankedMatch=match;
+    window.__bbRankedRng=seeded(Number(match.seed)||1);
+
+    show("#bbArenaCountdown",false);
+    show("#bbArenaRoom",false);
+    $("#bbArena").classList.add("hidden");
+    $("#bbArena").setAttribute("aria-hidden","true");
+    document.body.style.overflow="";
+    document.body.classList.add("bbRankedPlaying");
+
+    const hud=document.getElementById("bbRankedGameHud");
+    if(hud)hud.classList.remove("hidden");
+    const modeText=document.getElementById("bbRankedGameMode");
+    if(modeText)modeText.textContent=`${MODE[match.mode]||match.mode} • ${DIFF[match.difficulty]||match.difficulty}`;
+
+    cfg={
+      ...cfg,
+      style:"solo",
+      mode:match.mode,
+      diff:match.difficulty,
+      source:"teddy",
+      answer:"screen",
+      adaptive:false,
+      combo:false,
+      timer:Number(match.answer_seconds)||10,
+      lives:false,
+      daily:false
+    };
+    updateSummary();
+    startRound(window.__bbRankedRng);
+    document.getElementById("game")?.scrollIntoView({behavior:"auto",block:"start"});
+    toast("⚔️ Ranked เริ่มแล้ว!");
+  }
+
+  window.bbRankedRoundFinished=async result=>{
+    clearRankedAuto();
+    window.__bbPendingRankedResult={...result,match_id:activeRankedMatch?.id||null,room_id:currentRoom?.id||null};
+    // Secure result/RP submission is deliberately the next DB step.
+    toast(`จบ Ranked • ${Number(result.score||0).toLocaleString()} คะแนน`);
+  };
+
+  window.bbReturnToRankedRoom=async()=>{
+    clearRankedAuto();
+    window.BB_RANKED_ACTIVE=false;
+    window.__bbRankedRng=null;
+    document.body.classList.remove("bbRankedPlaying");
+    document.getElementById("bbRankedGameHud")?.classList.add("hidden");
+    $("#bbArena").classList.remove("hidden");
+    $("#bbArena").setAttribute("aria-hidden","false");
+    document.body.style.overflow="hidden";
+    show("#bbArenaCountdown",false);
+    show("#bbArenaLobby",false);
+    show("#bbArenaRoom",true);
+    await refreshRoom();
+  };
 })();
 </script>
 </body>
