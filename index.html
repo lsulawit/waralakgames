@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy v27 — Ranked Realtime Sync</title>
+<title>Brain Buddy v29 — Reveal & Finish Fix</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -1232,6 +1232,26 @@ body.bbRankedWaiting .v17bar{display:none!important}
 }
 @media(max-width:600px){
   .bbRankedGameHud::after{font-size:6px;letter-spacing:.04em}
+}
+
+
+/* ===== Brain Buddy v28 — Host Start Anytime ===== */
+#bbRoomStartBtn:not(:disabled){
+  animation:bbHostStartPulse 1.8s ease-in-out infinite;
+}
+@keyframes bbHostStartPulse{
+  0%,100%{transform:translateY(0);filter:brightness(1)}
+  50%{transform:translateY(-1px);filter:brightness(1.06)}
+}
+
+
+/* ===== Brain Buddy v29 — reveal is always visible ===== */
+body.bbRankedPlaying #answer:not(.hidden){
+  animation:bbRevealPop .22s ease-out both;
+}
+@keyframes bbRevealPop{
+  from{opacity:0;transform:translateY(5px) scale(.985)}
+  to{opacity:1;transform:translateY(0) scale(1)}
 }
 
 </style>
@@ -2464,13 +2484,13 @@ function positionReveal(verbal=false,timeout=false){
   [...$("board").children].forEach((s,i)=>{if(i===targetIndex)s.classList.add("correct");if(!verbal&&pickedIndex!==null&&i===pickedIndex&&i!==targetIndex)s.classList.add("wrong")});
   if(verbal&&cfg.style==="team")sfx("ok");else record(!timeout&&pickedIndex===targetIndex);
   $("answer").textContent=`✨ คำตอบคือหมายเลข ${targetIndex+1}`;$("answer").classList.remove("hidden");
-  $("boardTitle").textContent="เฉลย";$("boardSub").textContent="เปิดภาพทั้งหมดให้เห็นตำแหน่งเดิม";
+  $("boardTitle").textContent="เฉลย";$("boardSub").textContent="เปิดภาพทั้งหมดให้เห็นตำแหน่งเดิม • แสดงอย่างน้อย 2 วินาที";
   setStatus("✅","เฉลยพร้อมกันแล้ว",cfg.style==="team"?"เพิ่มคะแนนให้ทีมที่ตอบถูก แล้วไปข้อถัดไป":"ดูคำตอบ แล้วเกมจะไปข้อต่อไปพร้อมกัน");
   $("voiceBtn").classList.add("hidden");surprise();
   const next=asked.size>=qCount()?finishRound:positionAsk;
   if(window.BB_RANKED_ACTIVE){
     setMain(asked.size>=qCount()?"กำลังสรุปผล…":"ข้อต่อไปใน 2 วินาที…",()=>{},true);
-    rankedClock(2,"ข้อต่อไป",()=>next())
+    rankedRevealHold(2,"ดูเฉลย",()=>next())
   }else setMain(asked.size>=qCount()?"ดูผลลัพธ์":"คำถามใหม่จากกระดานเดิม",next);
   saveResume()
 }
@@ -2494,7 +2514,7 @@ function missingChoices(){
     const next=asked.size>=qCount()?finishRound:()=>{layout=shuf(baseLayout);baseLayout=[...layout];startMode()};
     setStatus("✅","เฉลยพร้อมกันแล้ว","ดูคำตอบ แล้วเกมจะไปข้อต่อไปพร้อมกัน");
     setMain(asked.size>=qCount()?"กำลังสรุปผล…":"ข้อต่อไปใน 2 วินาที…",()=>{},true);
-    rankedClock(2,"ข้อต่อไป",()=>next())
+    rankedRevealHold(2,"ดูเฉลย",()=>next())
   };
 
   choices.forEach(id=>{
@@ -2543,7 +2563,7 @@ function swapReveal(timeout=false){
   $("answer").textContent=`✨ ช่องที่สลับคือ ${swapPair[0]+1} และ ${swapPair[1]+1}`;$("answer").classList.remove("hidden");
   setStatus("✅",window.BB_RANKED_ACTIVE?"เฉลยพร้อมกันแล้ว":"เฉลยแล้ว","ตำแหน่งที่ถูกถูกไฮไลต์แล้ว");surprise();
   const next=asked.size>=qCount()?finishRound:()=>{layout=shuf(baseLayout);baseLayout=[...layout];startMode()};
-  if(window.BB_RANKED_ACTIVE){setMain(asked.size>=qCount()?"กำลังสรุปผล…":"ข้อต่อไปใน 2 วินาที…",()=>{},true);rankedClock(2,"ข้อต่อไป",()=>next())}
+  if(window.BB_RANKED_ACTIVE){setMain(asked.size>=qCount()?"กำลังสรุปผล…":"ข้อต่อไปใน 2 วินาที…",()=>{},true);rankedRevealHold(2,"ดูเฉลย",()=>next())}
   else setMain(asked.size>=qCount()?"ดูผลลัพธ์":"ข้อต่อไป",next);
   saveResume()
 }
@@ -2570,7 +2590,7 @@ function changeReveal(timeout=false){
   $("answer").textContent=`✨ จุดที่เปลี่ยนคือช่อง ${changeIndex+1}`;$("answer").classList.remove("hidden");
   setStatus("✅",window.BB_RANKED_ACTIVE?"เฉลยพร้อมกันแล้ว":"เฉลยแล้ว","ดูจุดที่เปลี่ยน แล้วไปข้อถัดไป");surprise();
   const next=asked.size>=qCount()?finishRound:()=>{layout=shuf(baseLayout);baseLayout=[...layout];startMode()};
-  if(window.BB_RANKED_ACTIVE){setMain(asked.size>=qCount()?"กำลังสรุปผล…":"ข้อต่อไปใน 2 วินาที…",()=>{},true);rankedClock(2,"ข้อต่อไป",()=>next())}
+  if(window.BB_RANKED_ACTIVE){setMain(asked.size>=qCount()?"กำลังสรุปผล…":"ข้อต่อไปใน 2 วินาที…",()=>{},true);rankedRevealHold(2,"ดูเฉลย",()=>next())}
   else setMain(asked.size>=qCount()?"ดูผลลัพธ์":"ข้อต่อไป",next);
   saveResume()
 }
@@ -2599,7 +2619,7 @@ function sequenceReveal(timeout=false){
   $("answer").textContent=`✨ ลำดับที่ถูก: ${sequenceOrder.map(i=>i+1).join(" → ")}`;$("answer").classList.remove("hidden");
   setStatus("✅",window.BB_RANKED_ACTIVE?"เฉลยพร้อมกันแล้ว":"เฉลยลำดับแล้ว","ดูตำแหน่งตามลำดับ แล้วไปข้อถัดไป");surprise();$("hintBtn").classList.remove("hidden");
   const next=asked.size>=qCount()?finishRound:startMode;
-  if(window.BB_RANKED_ACTIVE){setMain(asked.size>=qCount()?"กำลังสรุปผล…":"ข้อต่อไปใน 2 วินาที…",()=>{},true);rankedClock(2,"ข้อต่อไป",()=>next())}
+  if(window.BB_RANKED_ACTIVE){setMain(asked.size>=qCount()?"กำลังสรุปผล…":"ข้อต่อไปใน 2 วินาที…",()=>{},true);rankedRevealHold(2,"ดูเฉลย",()=>next())}
   else setMain(asked.size>=qCount()?"ดูผลลัพธ์":"ลำดับถัดไป",next);
   saveResume()
 }
@@ -2921,7 +2941,7 @@ window.addEventListener("load",()=>{
         <div class="bbRoomPlayers" id="bbRoomPlayers"></div>
 
         <div class="bbRoomBottom">
-          <div class="bbRoomInfo" id="bbRoomInfo">เมื่อทุกคนพร้อม Host จะเริ่มการแข่งขันได้</div>
+          <div class="bbRoomInfo" id="bbRoomInfo">Host เริ่มการแข่งขันได้ทันทีเมื่อมีอย่างน้อย 2 คน • Ready เป็นเพียงสถานะแจ้งความพร้อม</div>
           <div class="bbRoomButtons">
             <button class="bbRoomReady" id="bbRoomReadyBtn">✓ พร้อมเล่น</button>
             <button class="bbRoomStart hidden" id="bbRoomStartBtn">เริ่มการแข่งขัน</button>
@@ -2943,8 +2963,8 @@ window.addEventListener("load",()=>{
         <div class="bbResultsWait" id="bbResultsWait">
           <div class="bbResultsSpinner">🧠</div>
           <span class="bbRankedPill dark">🏁 MATCH FINISHED</span>
-          <h1>รอผู้เล่นทุกคนจบเกม</h1>
-          <p>คุณเล่นจบแล้วและออกจากห้องแข่งขันอัตโนมัติ • ระบบจะประกาศอันดับเมื่อทุกคนส่งผลครบ</p>
+          <h1>จบเกมแล้ว • กำลังสรุปอันดับ</h1>
+          <p>คุณออกจากห้องแข่งขันแล้ว • ถ้าคนอื่นยังไม่จบ ระบบจะรอสูงสุด 1 นาทีแล้วสรุปอันดับ</p>
           <div class="bbResultsProgress"><i id="bbResultsProgressFill"></i></div>
           <b id="bbResultsProgressText">1 / 2 คน เล่นจบแล้ว</b>
           <div class="bbWaitClock">
@@ -3046,13 +3066,14 @@ window.addEventListener("load",()=>{
       room_not_found:"ไม่พบห้องนี้",
       room_not_waiting:"ห้องนี้เริ่มแข่งขันแล้ว",
       already_in_another_room:"คุณอยู่ในห้อง Ranked อื่นอยู่แล้ว",
+      already_in_active_room:"คุณยังอยู่ในห้อง Ranked ที่กำลังเล่นอยู่",
       room_full:"ห้องเต็มแล้ว",
       not_in_room:"คุณไม่ได้อยู่ในห้องนี้",
       not_in_match:"ไม่พบชื่อคุณในแมตช์นี้ • รัน STEP 8 แล้วลองใหม่",
       cannot_leave_after_start:"ออกจากห้องไม่ได้หลังการแข่งขันเริ่ม",
       host_only:"เฉพาะ Host เท่านั้นที่เริ่มเกมได้",
       need_at_least_2_players:"ต้องมีผู้เล่นอย่างน้อย 2 คน",
-      some_players_not_ready:"ยังมีผู้เล่นที่ไม่ได้กดพร้อม"
+      some_players_not_ready:"Host สามารถเริ่มได้โดยไม่ต้องรอ Ready — กรุณารีเฟรชแล้วลองใหม่"
     };
     for(const [k,v] of Object.entries(map))if(m.includes(k))return v;
     return m||"เกิดข้อผิดพลาด กรุณาลองอีกครั้ง";
@@ -3163,7 +3184,7 @@ window.addEventListener("load",()=>{
     const btn=$("#bbCreateSubmit");btn.disabled=true;btn.textContent="กำลังสร้างห้อง…";
     try{
       const c=await getClient();
-      const {data,error}=await c.rpc("bb_ranked_create_room_v27",{
+      const {data,error}=await c.rpc("bb_ranked_create_room_v29",{
         p_room_name:name,p_mode:$("#bbCreateMode").value,p_difficulty:$("#bbCreateDiff").value,p_max_players:max,p_visibility:visibility
       });
       if(error)throw error;
@@ -3211,7 +3232,7 @@ window.addEventListener("load",()=>{
     const n=players.length,max=Number(r.max_players)||100,ready=players.filter(x=>x.is_ready).length;
     $("#bbRoomCount").textContent=`${n}/${max}`;$("#bbRoomProgressFill").style.width=`${Math.min(100,n/max*100)}%`;
     $("#bbRoomReadyCount").textContent=`${ready}/${n} พร้อม`;
-    $("#bbRoomReadyText").textContent=n<2?"ต้องมีอย่างน้อย 2 คน":ready===n?"ทุกคนพร้อมแล้ว":"รอผู้เล่นกดพร้อม";
+    $("#bbRoomReadyText").textContent=n<2?"ต้องมีอย่างน้อย 2 คน":ready===n?"ทุกคนพร้อมแล้ว":`พร้อม ${ready}/${n} • Host เริ่มได้เลย`;
     const host=r.host_id===user.id,me=players.find(x=>x.user_id===user.id);
     $("#bbRoomPlayers").innerHTML=players.map(p=>{
       const pr=p.profile||{},isHost=p.user_id===r.host_id;
@@ -3220,12 +3241,17 @@ window.addEventListener("load",()=>{
     }).join("");
     const rb=$("#bbRoomReadyBtn"),sbBtn=$("#bbRoomStartBtn");
     if(host){
-      rb.classList.add("ready");rb.textContent="👑 Host • พร้อมแล้ว";rb.disabled=true;
-      sbBtn.classList.remove("hidden");sbBtn.disabled=!(n>=2&&ready===n&&r.status==="waiting");
-      $("#bbRoomInfo").textContent=n<2?"แชร์รหัสห้องเพื่อชวนผู้เล่นอีกอย่างน้อย 1 คน":ready!==n?`รออีก ${n-ready} คนกดพร้อม`:"ทุกคนพร้อมแล้ว เริ่มการแข่งขันได้";
+      rb.classList.add("ready");rb.textContent="👑 Host";rb.disabled=true;
+      sbBtn.classList.remove("hidden");sbBtn.disabled=!(n>=2&&r.status==="waiting");
+      sbBtn.textContent=n>=2?"▶ เล่นเลย":"ต้องมี 2 คน";
+      $("#bbRoomInfo").textContent=n<2
+        ?"แชร์รหัสห้องเพื่อชวนผู้เล่นอีกอย่างน้อย 1 คน"
+        :ready===n
+          ?"ทุกคนพร้อมแล้ว • กด “เล่นเลย” ได้ทันที"
+          :`มี ${n} คนในห้อง • ${ready}/${n} พร้อม • Host กด “เล่นเลย” ได้โดยไม่ต้องรอ`;
     }else{
       rb.disabled=r.status!=="waiting";rb.classList.toggle("ready",!!me?.is_ready);rb.textContent=me?.is_ready?"✓ พร้อมแล้ว — แตะเพื่อยกเลิก":"✓ พร้อมเล่น";
-      sbBtn.classList.add("hidden");$("#bbRoomInfo").textContent=me?.is_ready?"รอ Host เริ่มการแข่งขัน":"กด “พร้อมเล่น” เมื่อคุณพร้อม";
+      sbBtn.classList.add("hidden");$("#bbRoomInfo").textContent=me?.is_ready?"พร้อมแล้ว • รอ Host เริ่มการแข่งขัน":"กด “พร้อมเล่น” เพื่อบอก Host ว่าคุณพร้อม • Host สามารถเริ่มได้ทุกเมื่อ";
     }
   }
 
@@ -3262,7 +3288,7 @@ window.addEventListener("load",()=>{
     try{
       const {data,error}=await client.rpc("bb_ranked_start_match",{p_room_id:currentRoom.id});if(error)throw error;
       if(data?.[0])startCountdown(data[0]);
-    }catch(x){toast(errText(x));btn.disabled=false;btn.textContent="เริ่มการแข่งขัน"}
+    }catch(x){toast(errText(x));btn.disabled=false;btn.textContent="▶ เล่นเลย"}
   }
   async function loadLatestMatch(){
     if(!currentRoom?.id||!client)return;
@@ -3372,6 +3398,35 @@ window.addEventListener("load",()=>{
     if(rankedAutoTimer){clearTimeout(rankedAutoTimer);rankedAutoTimer=null}
     if(rankedClockTimer){clearInterval(rankedClockTimer);rankedClockTimer=null}
   }
+  function rankedRevealHold(seconds,label,onDone){
+    // เฉลยต้องมองเห็นจริงอย่างน้อยตามเวลาที่กำหนด
+    // หากเครื่องใด callback มาช้า จะไม่ข้ามหน้าเฉลยทันที
+    clearRankedAuto();
+    const duration=Math.max(.8,Number(seconds)||2)*1000;
+    const end=Math.max(
+      Date.now()+duration,
+      (rankedPhaseCursorMs||Date.now())+duration
+    );
+    rankedPhaseCursorMs=end;
+
+    const labelEl=document.getElementById("bbRankedGameClockLabel");
+    const clock=document.getElementById("bbRankedGameClock");
+    if(labelEl)labelEl.textContent=label||"ดูเฉลย";
+
+    let fired=false;
+    const tick=()=>{
+      const left=Math.max(0,end-Date.now());
+      if(clock)clock.textContent=(left/1000).toFixed(left<10000?1:0);
+      if(left<=0&&!fired){
+        fired=true;
+        clearRankedAuto();
+        onDone?.();
+      }
+    };
+    tick();
+    if(!fired)rankedClockTimer=setInterval(tick,80);
+  }
+
   function rankedClock(seconds,label,onDone){
     if(!window.BB_RANKED_ACTIVE)return;
     clearRankedAuto();
@@ -3422,7 +3477,7 @@ window.addEventListener("load",()=>{
     }else if(cfg.mode==="match"){
       const pairs=Math.max(2,Math.floor(dc().n/2));
       const total=Math.max(35,Math.min(150,(Number(activeRankedMatch.answer_seconds)||10)*pairs*2.2));
-      rankedClock(total,"เวลารวม",()=>finishRound());
+      rankedClock(total,"เวลารวม",()=>rankedMatchRevealAll());
     }
   };
 
@@ -3479,6 +3534,31 @@ window.addEventListener("load",()=>{
     tick();
     if(!fired)timerId=setInterval(tick,80);
   };
+
+  function rankedMatchRevealAll(){
+    if(!(window.BB_RANKED_ACTIVE&&cfg.mode==="match")){
+      finishRound();
+      return;
+    }
+    try{stopTimer()}catch(e){}
+    clearRankedAuto();
+
+    const cards=[...document.querySelectorAll("#board .slot")];
+    cards.forEach(card=>{
+      card.classList.remove("numberBoard","selected","wrong");
+      card.classList.add("correct");
+      card.style.pointerEvents="none";
+    });
+
+    $("#boardTitle").textContent="เฉลยทั้งหมด";
+    $("#boardSub").textContent="หมดเวลาแล้ว • เปิดภาพทุกคู่ให้เห็นก่อนสรุปผล";
+    setStatus("✅","หมดเวลา • เฉลยภาพทั้งหมด","ดูคู่ภาพทั้งหมด แล้วระบบจะสรุปผล");
+    $("#answer").textContent="✨ เฉลยครบทุกภาพ";
+    $("#answer").classList.remove("hidden");
+    setMain("กำลังสรุปผล…",()=>{},true);
+
+    rankedRevealHold(2,"ดูเฉลย",()=>finishRound());
+  }
 
   async function launchRankedGame(match){
     if(!match)return;
@@ -3582,6 +3662,8 @@ window.addEventListener("load",()=>{
       return;
     }
     stopRankedWaitClock();
+    show("#bbCreateBackdrop",false);
+    show("#bbArenaJoinBar",false);
 
     cleanupRankedResultsWatch();
     cleanupRoomChannel();
@@ -3630,6 +3712,7 @@ window.addEventListener("load",()=>{
   }
 
   function showRankedWaitingScreen(){
+    show("#bbCreateBackdrop",false);
     clearRankedAuto();
     try{stopTimer()}catch(e){}
     try{roundStarted=false;roundComplete=true}catch(e){}
