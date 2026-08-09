@@ -4950,6 +4950,201 @@ body.bbRankedPlaying .bbRankedMatchBoard .bbMatchCard.wrong{
   }
 }
 
+
+/* =========================================================
+   Brain Buddy v55 — Guest / Login / Register / Logout
+   ========================================================= */
+
+.bbHomeAuthCard{
+  margin-top:12px;
+  width:min(100%,560px);
+}
+
+.bbHomeAuthGuest,
+.bbHomeAuthMember{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:9px 10px;
+  border-radius:20px;
+  border:1.5px solid rgba(255,255,255,.66);
+  background:rgba(255,255,255,.72);
+  box-shadow:
+    inset 0 3px 5px rgba(255,255,255,.72),
+    0 9px 17px rgba(82,47,111,.10);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+
+.bbAuthStatusDot{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  flex:0 0 12px;
+  background:#b8aabd;
+  box-shadow:0 0 0 5px rgba(184,170,189,.15);
+}
+
+.bbAuthGuestCopy,
+.bbAuthMemberCopy{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  flex:1;
+}
+
+.bbAuthGuestCopy small,
+.bbAuthMemberCopy small{
+  color:#947f9f;
+  font-size:.62rem;
+  font-weight:850;
+}
+
+.bbAuthGuestCopy b,
+.bbAuthMemberCopy b{
+  color:#5e4078;
+  font-size:.94rem;
+  font-weight:1000;
+  line-height:1.15;
+}
+
+.bbAuthMemberCopy em{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  color:#9a879f;
+  font-size:.61rem;
+  font-style:normal;
+}
+
+.bbAuthGuestBtns,
+.bbAuthMemberBtns{
+  display:flex;
+  gap:7px;
+}
+
+.bbAuthGuestBtns button,
+.bbAuthMemberBtns button{
+  appearance:none;
+  -webkit-appearance:none;
+  border:0;
+  border-radius:13px;
+  padding:9px 12px;
+  white-space:nowrap;
+  background:linear-gradient(180deg,#8e72e6,#7054cb);
+  color:#fff;
+  font-size:.72rem;
+  font-weight:950;
+  box-shadow:
+    inset 0 2px 3px rgba(255,255,255,.23),
+    0 6px 10px rgba(81,53,133,.14);
+}
+
+.bbAuthGuestBtns button.register{
+  background:linear-gradient(180deg,#ff87bc,#e861a2);
+}
+
+.bbAuthMemberBtns button{
+  background:#f2eaff;
+  color:#7256a9;
+  box-shadow:none;
+}
+
+.bbAuthMemberBtns button.logout{
+  background:linear-gradient(180deg,#ffedf2,#ffe3ea);
+  color:#b94c70;
+}
+
+.bbAuthMemberIcon{
+  width:39px;
+  height:39px;
+  flex:0 0 39px;
+  position:relative;
+  border-radius:14px;
+  background:linear-gradient(180deg,#ddcfff,#af90ed);
+  box-shadow:inset 0 3px 4px rgba(255,255,255,.55);
+}
+
+.bbAuthMemberIcon::before{
+  content:"";
+  position:absolute;
+  left:13px;
+  top:7px;
+  width:13px;
+  height:13px;
+  border-radius:50%;
+  background:white;
+}
+
+.bbAuthMemberIcon::after{
+  content:"";
+  position:absolute;
+  left:8px;
+  right:8px;
+  bottom:6px;
+  height:14px;
+  border-radius:14px 14px 8px 8px;
+  background:white;
+}
+
+/* Make account modal's two main choices visually obvious. */
+#accountModal .authTabs{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:8px!important;
+  padding:6px!important;
+  border-radius:18px!important;
+  background:#f5effb!important;
+}
+
+#accountModal .authTab{
+  border-radius:13px!important;
+  min-height:44px!important;
+  font-weight:950!important;
+}
+
+#accountModal .authTab.active{
+  color:#fff!important;
+  background:linear-gradient(180deg,#9174ea,#7256ce)!important;
+  box-shadow:0 7px 13px rgba(81,54,132,.15)!important;
+}
+
+#signOutBtn{
+  color:#b34269!important;
+  border-color:#ffd2df!important;
+  background:#fff0f4!important;
+}
+
+/* Guest should never visually look cloud-saved. */
+body.bbGuestMode #cloudDot{
+  background:#b9abbf!important;
+  box-shadow:none!important;
+}
+
+@media(max-width:640px){
+  .bbHomeAuthGuest,
+  .bbHomeAuthMember{
+    align-items:flex-start;
+    flex-wrap:wrap;
+  }
+
+  .bbAuthGuestCopy,
+  .bbAuthMemberCopy{
+    min-width:calc(100% - 34px);
+  }
+
+  .bbAuthGuestBtns,
+  .bbAuthMemberBtns{
+    width:100%;
+  }
+
+  .bbAuthGuestBtns button,
+  .bbAuthMemberBtns button{
+    flex:1;
+    min-height:42px;
+  }
+}
+
 </style>
 
 <script>
@@ -5544,10 +5739,37 @@ try{
           <span class="avatarBear"></span>
           <span class="meta">
             <small>ผู้เล่น</small>
-            <strong id="bbHomePlayerName">Lucky</strong>
+            <strong id="bbHomePlayerName">ผู้เยี่ยมชม</strong>
             <em id="bbHomePlayerRank">Bronze • Lv. 1</em>
           </span>
         </button>
+
+        <div class="bbHomeAuthCard" id="bbHomeAuthCard">
+          <div class="bbHomeAuthGuest" id="bbHomeAuthGuest">
+            <span class="bbAuthStatusDot"></span>
+            <span class="bbAuthGuestCopy">
+              <small>กำลังเล่นแบบ</small>
+              <b>Guest</b>
+            </span>
+            <span class="bbAuthGuestBtns">
+              <button type="button" id="bbV55LoginBtn">เข้าสู่ระบบ</button>
+              <button type="button" class="register" id="bbV55RegisterBtn">สมัครสมาชิก</button>
+            </span>
+          </div>
+
+          <div class="bbHomeAuthMember hidden" id="bbHomeAuthMember">
+            <span class="bbAuthMemberIcon"></span>
+            <span class="bbAuthMemberCopy">
+              <small>เข้าสู่ระบบแล้ว</small>
+              <b id="bbV55MemberName">สมาชิก</b>
+              <em id="bbV55MemberEmail"></em>
+            </span>
+            <span class="bbAuthMemberBtns">
+              <button type="button" id="bbV55AccountBtn">บัญชี</button>
+              <button type="button" class="logout" id="bbV55LogoutBtn">ออกจากระบบ</button>
+            </span>
+          </div>
+        </div>
       </div>
       <div class="bbHeroBrain" aria-hidden="true">
         <div class="brainBody">
@@ -5892,7 +6114,7 @@ try{
       </div>
       <div class="bbSetupPlayerMini">
         <span class="bearMini"></span>
-        <span><b id="bbSetupPlayerName">Lucky</b><small>Saved</small></span>
+        <span><b id="bbSetupPlayerName">ผู้เยี่ยมชม</b><small id="bbSetupAccountState">Guest</small></span>
       </div>
     </div>
 
@@ -6051,7 +6273,7 @@ try{
 <div class="modal hidden" id="accountModal">
   <div class="modalcard" style="width:min(540px,100%)">
     <button class="x" data-close="accountModal">×</button>
-    <h2 id="accountTitle">บัญชี Brain Buddy</h2>
+    <h2 id="accountTitle">เข้าสู่ระบบ / สมัครสมาชิก</h2>
     <p class="lead" id="accountLead">เล่นแบบ ผู้เยี่ยมชม ได้ตามปกติ หรือสมัครสมาชิกเพื่อบันทึก Level, XP, ความสำเร็จ และประวัติไว้บน Cloud</p>
 
     <div id="cloudSetupPanel" class="setupCloud hidden">
@@ -6076,7 +6298,7 @@ try{
       </form>
       <div class="authMessage" id="authMessage"></div>
       <div class="authDivider">หรือ</div>
-      <button class="btn" style="width:100%" id="continueผู้เยี่ยมชมBtn">🎮 เล่นต่อแบบ ผู้เยี่ยมชม</button>
+      <button class="btn" style="width:100%" id="continueผู้เยี่ยมชมBtn">เล่นต่อแบบ Guest</button>
       <div class="authFoot"><strong>ผู้เยี่ยมชม:</strong> ข้อมูลอยู่ในอุปกรณ์นี้ • <strong>สมาชิก:</strong> ซิงก์ความคืบหน้าข้ามอุปกรณ์เมื่อ Cloud เชื่อมแล้ว</div>
     </div>
 
@@ -8583,15 +8805,45 @@ window.addEventListener("load",()=>{
 
   function profileLocal(){try{return JSON.parse(localStorage.getItem("bb_profile")||"{}")}catch(e){return {}}}
   async function syncPlayer(){
-    const p=profileLocal(),navName=($("#navName")?.textContent||"").trim();
-    let name=p.displayName||p.name||navName||"ผู้เยี่ยมชม";if(name==="ผู้เล่น")name="ผู้เยี่ยมชม";
-    const xp=Number(p.xp)||0,best=Number(p.bestScore||p.best_score)||0,level=Math.max(1,Math.floor(xp/500)+1);
+    const p=profileLocal();
+    let logged=false,user=null;
+
+    try{
+      const c=window.__bbSupabase||window.sb;
+      if(c){
+        const {data}=await c.auth.getSession();
+        user=data?.session?.user||null;
+        logged=!!user;
+      }
+    }catch(e){}
+
+    const memberName=
+      user?.user_metadata?.display_name ||
+      user?.user_metadata?.name ||
+      p.displayName ||
+      p.name ||
+      user?.email?.split("@")[0] ||
+      "สมาชิก";
+
+    const name=logged?memberName:"ผู้เยี่ยมชม";
+    const xp=Number(p.xp)||0;
+    const best=Number(p.bestScore||p.best_score)||0;
+    const level=Math.max(1,Math.floor(xp/500)+1);
     const rank=($("#v17Rank")?.textContent||"🌱 Bronze").trim();
-    $("#bbAppPlayerName").textContent=name;$("#bbAppPlayerRank").textContent=`${rank} • Lv. ${level}`;
-    $("#bbAppLevel").textContent=`Lv. ${level}`;$("#bbAppXP").textContent=`${xp.toLocaleString()} XP`;$("#bbAppBest").textContent=best.toLocaleString();
+
+    $("#bbAppPlayerName").textContent=name;
+    $("#bbAppPlayerRank").textContent=logged?`${rank} • Lv. ${level}`:"Guest • เล่นได้ฟรี";
+    $("#bbAppLevel").textContent=`Lv. ${level}`;
+    $("#bbAppXP").textContent=`${xp.toLocaleString()} XP`;
+    $("#bbAppBest").textContent=best.toLocaleString();
+
+    if($("#bbSetupPlayerName"))$("#bbSetupPlayerName").textContent=name;
+    if($("#bbSetupAccountState"))$("#bbSetupAccountState").textContent=logged?"สมาชิก":"Guest";
+
     const avatar=$("#bbAppAvatar"),profileImg=document.querySelector("#navAvatar img");
-    if(profileImg?.src)avatar.innerHTML=`<img src="${profileImg.src}" alt="">`;else avatar.textContent=p.avatar||"🧸";
-    let logged=false;try{const c=window.__bbSupabase||window.sb;if(c){const {data}=await c.auth.getSession();logged=!!data?.session}}catch(e){}
+    if(logged&&profileImg?.src)avatar.innerHTML=`<img src="${profileImg.src}" alt="">`;
+    else avatar.textContent=logged?(p.avatar||"🧸"):"🧸";
+
     $("#bbAppLoginMini").classList.toggle("hidden",logged);
   }
 
@@ -8681,7 +8933,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const syncHomeFancy = () => {
     const byId = (id) => document.getElementById(id);
     const setText = (id, value) => { const el = byId(id); if (el && value != null) el.textContent = value; };
-    const name = byId('bbProfileName')?.textContent?.trim() || byId('bbDisplayName')?.textContent?.trim() || 'Lucky';
+    const name = byId('bbProfileName')?.textContent?.trim() || byId('bbDisplayName')?.textContent?.trim() || 'ผู้เยี่ยมชม';
     const rank = byId('bbRankValue')?.textContent?.trim() || 'Bronze • Lv. 1';
     const lv = byId('bbLevelValue')?.textContent?.trim() || 'Lv. 1';
     const xp = byId('bbXpValue')?.textContent?.trim() || '0 XP';
@@ -9079,6 +9331,242 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   window.addEventListener("bb:auth-changed",window.bbLoadShop);
+})();
+</script>
+
+
+<script>
+(function brainBuddyV55Auth(){
+  const q=s=>document.querySelector(s);
+  let clientCache=null;
+  let syncBusy=false;
+
+  async function client(){
+    if(clientCache)return clientCache;
+    if(window.__bbSupabase){
+      clientCache=window.__bbSupabase;
+      return clientCache;
+    }
+    const cfg=window.BRAIN_BUDDY_SUPABASE||{};
+    if(window.supabase&&cfg.url&&cfg.publishableKey){
+      clientCache=window.supabase.createClient(cfg.url,cfg.publishableKey,{
+        auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}
+      });
+      window.__bbSupabase=clientCache;
+      return clientCache;
+    }
+    return null;
+  }
+
+  function openAuth(tab="login"){
+    const modal=q("#accountModal");
+    if(!modal)return;
+
+    modal.classList.remove("hidden");
+
+    document.querySelectorAll("[data-auth-tab]").forEach(btn=>{
+      btn.classList.toggle("active",btn.dataset.authTab===tab);
+    });
+
+    q("#loginForm")?.classList.toggle("hidden",tab!=="login");
+    q("#signupForm")?.classList.toggle("hidden",tab!=="signup");
+
+    const title=q("#accountTitle");
+    const lead=q("#accountLead");
+
+    if(title){
+      title.textContent=tab==="signup"
+        ?"สมัครสมาชิก Brain Buddy"
+        :"เข้าสู่ระบบ Brain Buddy";
+    }
+
+    if(lead){
+      lead.textContent=tab==="signup"
+        ?"สร้างบัญชีเพื่อเก็บ Brain Coins, XP, คะแนน, แรงก์ และประวัติไว้กับบัญชีของคุณ"
+        :"เข้าสู่ระบบเพื่อใช้ข้อมูลสมาชิก Brain Coins และความคืบหน้าของคุณ";
+    }
+  }
+
+  function setText(id,text){
+    const el=document.getElementById(id);
+    if(el)el.textContent=text;
+  }
+
+  function setGuestUI(){
+    document.body.classList.add("bbGuestMode");
+    document.body.classList.remove("bbMemberMode");
+
+    q("#bbHomeAuthGuest")?.classList.remove("hidden");
+    q("#bbHomeAuthMember")?.classList.add("hidden");
+
+    setText("navName","Guest");
+    setText("cloudMini","ผู้เยี่ยมชม");
+    setText("bbHomePlayerName","Guest");
+    setText("bbHomePlayerRank","ผู้เยี่ยมชม • เล่นได้ฟรี");
+    setText("bbSetupPlayerName","Guest");
+    setText("bbSetupAccountState","ผู้เยี่ยมชม");
+
+    const appName=q("#bbAppPlayerName");
+    if(appName)appName.textContent="Guest";
+    const appRank=q("#bbAppPlayerRank");
+    if(appRank)appRank.textContent="ผู้เยี่ยมชม • เล่นได้ฟรี";
+
+    const dot=q("#cloudDot");
+    if(dot)dot.classList.remove("online","syncing","error");
+  }
+
+  async function memberDisplayName(c,user){
+    let name=
+      user?.user_metadata?.display_name ||
+      user?.user_metadata?.name ||
+      "";
+
+    if(!name){
+      try{
+        const {data}=await c
+          .from("profiles")
+          .select("display_name")
+          .eq("id",user.id)
+          .maybeSingle();
+        name=data?.display_name||"";
+      }catch(e){}
+    }
+
+    return name || user?.email?.split("@")[0] || "สมาชิก";
+  }
+
+  async function setMemberUI(c,user){
+    const name=await memberDisplayName(c,user);
+
+    document.body.classList.remove("bbGuestMode");
+    document.body.classList.add("bbMemberMode");
+
+    q("#bbHomeAuthGuest")?.classList.add("hidden");
+    q("#bbHomeAuthMember")?.classList.remove("hidden");
+
+    setText("bbV55MemberName",name);
+    setText("bbV55MemberEmail",user?.email||"");
+
+    setText("navName",name);
+    setText("cloudMini","เข้าสู่ระบบแล้ว");
+    setText("bbHomePlayerName",name);
+    setText("bbSetupPlayerName",name);
+    setText("bbSetupAccountState","สมาชิก");
+
+    const appName=q("#bbAppPlayerName");
+    if(appName)appName.textContent=name;
+
+    const dot=q("#cloudDot");
+    if(dot)dot.classList.add("online");
+  }
+
+  async function syncAuthUI(){
+    if(syncBusy)return;
+    syncBusy=true;
+    try{
+      const c=await client();
+      if(!c){
+        setGuestUI();
+        return;
+      }
+
+      const {data}=await c.auth.getSession();
+      const user=data?.session?.user||null;
+
+      if(user)await setMemberUI(c,user);
+      else setGuestUI();
+
+      // Shop should immediately reflect whether this is Guest or Member.
+      try{window.bbLoadShop?.()}catch(e){}
+    }catch(err){
+      console.warn("Brain Buddy auth UI:",err);
+      setGuestUI();
+    }finally{
+      syncBusy=false;
+    }
+  }
+
+  async function logout(){
+    const legacy=q("#signOutBtn");
+
+    // Use the existing account handler first because it also resets
+    // Brain Buddy's internal currentUser/cloud state correctly.
+    if(legacy && typeof legacy.onclick==="function"){
+      legacy.click();
+      setTimeout(syncAuthUI,250);
+      return;
+    }
+
+    const c=await client();
+    if(c)await c.auth.signOut({scope:"local"});
+    localStorage.removeItem("bb_account_active");
+    setGuestUI();
+    try{window.bbLoadShop?.()}catch(e){}
+  }
+
+  document.addEventListener("click",e=>{
+    if(e.target.closest("#bbV55LoginBtn")){
+      e.preventDefault();
+      openAuth("login");
+      return;
+    }
+
+    if(e.target.closest("#bbV55RegisterBtn")){
+      e.preventDefault();
+      openAuth("signup");
+      return;
+    }
+
+    if(e.target.closest("#bbV55AccountBtn")){
+      e.preventDefault();
+      const modal=q("#accountModal");
+      if(modal)modal.classList.remove("hidden");
+      return;
+    }
+
+    if(e.target.closest("#bbV55LogoutBtn")){
+      e.preventDefault();
+      logout();
+      return;
+    }
+  },true);
+
+  async function init(){
+    const c=await client();
+
+    if(c){
+      // One-time migration only:
+      // old test sessions are cleared once so v55 starts as Guest.
+      // After the user logs in again, the new session remains persistent.
+      if(!localStorage.getItem("bb_v55_guest_start_migrated")){
+        localStorage.setItem("bb_v55_guest_start_migrated","1");
+        try{
+          await c.auth.signOut({scope:"local"});
+          localStorage.removeItem("bb_account_active");
+        }catch(e){}
+      }
+
+      c.auth.onAuthStateChange(()=>{
+        setTimeout(syncAuthUI,80);
+      });
+    }
+
+    await syncAuthUI();
+
+    // Older UI scripts can repaint cached local names. Reassert the
+    // authenticated identity / Guest state after those paint cycles.
+    setTimeout(syncAuthUI,500);
+    setTimeout(syncAuthUI,1500);
+    setInterval(syncAuthUI,4000);
+  }
+
+  window.bbV55SyncAuthUI=syncAuthUI;
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",init,{once:true});
+  }else{
+    init();
+  }
 })();
 </script>
 
