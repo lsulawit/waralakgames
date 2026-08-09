@@ -2877,6 +2877,318 @@ body.bbArenaOpen [class*="mobileNav"]{
   #bbArena .bbArenaHero p{max-width:100%!important}
 }
 
+
+/* =========================================================
+   Brain Buddy v44 — mobile composition + no white scroll gap
+   ========================================================= */
+
+/* Safari/iOS overscroll must show the theme, never white */
+html{
+  min-height:100%;
+  background:#7553d9!important;
+  overscroll-behavior-y:none;
+}
+body{
+  min-height:100dvh!important;
+  background:
+    radial-gradient(circle at 18% 8%,rgba(117,190,255,.70),transparent 27rem),
+    radial-gradient(circle at 82% 20%,rgba(240,157,235,.42),transparent 24rem),
+    linear-gradient(180deg,#507fd9 0%,#6651d7 34%,#a15ed0 67%,#ef91c5 100%)!important;
+  background-attachment:fixed!important;
+  overscroll-behavior-y:none;
+}
+
+/* Home canvas continues behind all content and beneath the fixed dock */
+body.bbCandyHome .bbAppShell{
+  width:100%!important;
+  max-width:none!important;
+  min-height:100dvh!important;
+  margin:0!important;
+  padding:0!important;
+  background:
+    radial-gradient(circle at 18% 8%,rgba(117,190,255,.60),transparent 27rem),
+    radial-gradient(circle at 82% 20%,rgba(240,157,235,.34),transparent 24rem),
+    linear-gradient(180deg,#507fd9 0%,#6651d7 34%,#a15ed0 67%,#ef91c5 100%)!important;
+}
+
+body.bbCandyHome .bbCandyHomeScreen{
+  width:min(100%,1180px)!important;
+  margin:0 auto!important;
+  min-height:100dvh!important;
+  padding-bottom:calc(135px + env(safe-area-inset-bottom))!important;
+  background:
+    radial-gradient(circle at 50% -6%,rgba(158,218,255,.62),transparent 31rem),
+    radial-gradient(circle at 86% 23%,rgba(255,183,239,.27),transparent 19rem),
+    linear-gradient(180deg,#507fd9 0%,#5e4bd1 36%,#995acb 67%,#ee91c4 100%)!important;
+}
+
+/* Remove any accidental white canvas after the home section */
+body.bbCandyHome main,
+body.bbCandyHome #bbAppShell,
+body.bbCandyHome #bbAppHome{
+  background-color:transparent!important;
+}
+body.bbCandyHome::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-20;
+  pointer-events:none;
+  background:linear-gradient(180deg,#507fd9,#6b4fd3 40%,#a05dd0 68%,#ef91c5);
+}
+
+/* ---------- Mobile top section: logo + controls ---------- */
+@media(max-width:699px){
+  body.bbCandyHome .bbCandyHomeScreen{
+    padding:14px 12px calc(135px + env(safe-area-inset-bottom))!important;
+  }
+
+  .bbHomeTopbar{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:13px!important;
+    align-items:center!important;
+    min-height:0!important;
+    margin-bottom:14px!important;
+    padding:3px 0 13px!important;
+  }
+
+  .bbHomeBrand{
+    width:100%!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    gap:9px!important;
+  }
+
+  .bbHomeBrand .brainMark{
+    width:45px!important;height:45px!important;
+    flex:0 0 45px!important;
+    border-radius:15px!important;
+  }
+
+  .bbHomeBrand h1{
+    font-size:clamp(1.9rem,9vw,2.65rem)!important;
+    gap:5px!important;
+    white-space:nowrap!important;
+  }
+
+  .bbHomeBrand h1 .brandSpark{
+    width:16px!important;height:16px!important;
+    border-radius:5px!important;
+  }
+
+  /* the four buttons no longer stack vertically */
+  .bbHomeActions{
+    width:max-content!important;
+    max-width:100%!important;
+    display:grid!important;
+    grid-template-columns:repeat(4,48px)!important;
+    gap:8px!important;
+    justify-content:start!important;
+    align-items:center!important;
+    padding:7px!important;
+    margin:0!important;
+    border-radius:22px!important;
+    background:linear-gradient(180deg,rgba(107,77,211,.56),rgba(87,67,190,.38))!important;
+    border:1px solid rgba(255,255,255,.25)!important;
+    box-shadow:
+      inset 0 2px 3px rgba(255,255,255,.18),
+      0 10px 23px rgba(35,20,91,.16)!important;
+    backdrop-filter:blur(14px)!important;
+    -webkit-backdrop-filter:blur(14px)!important;
+  }
+
+  .bbHomeIcon{
+    width:48px!important;height:48px!important;
+    min-width:48px!important;
+    border-radius:16px!important;
+    border:1.5px solid rgba(255,255,255,.48)!important;
+    background:
+      radial-gradient(circle at 30% 20%,rgba(255,255,255,.52),transparent 26%),
+      linear-gradient(145deg,#9f74ef,#7358d9)!important;
+    box-shadow:
+      inset 0 3px 4px rgba(255,255,255,.32),
+      inset 0 -7px 10px rgba(52,26,124,.18),
+      0 7px 13px rgba(31,19,82,.19)!important;
+  }
+
+  /* hero starts directly after the controls; no giant empty blue band */
+  .bbHeroCard{
+    margin-top:0!important;
+  }
+}
+
+/* ---------- Candy mobile bottom navigation ---------- */
+.v17dock.bbCandyDock{
+  display:none;
+}
+
+@media(max-width:720px){
+  .v17dock.bbCandyDock{
+    position:fixed!important;
+    left:10px!important;
+    right:10px!important;
+    bottom:calc(8px + env(safe-area-inset-bottom))!important;
+    z-index:1200!important;
+
+    display:grid!important;
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+    gap:4px!important;
+
+    min-height:76px!important;
+    padding:8px 7px!important;
+    border:1px solid rgba(255,255,255,.62)!important;
+    border-radius:25px!important;
+
+    background:
+      linear-gradient(180deg,rgba(246,232,255,.82),rgba(229,215,255,.72))!important;
+    -webkit-backdrop-filter:blur(22px) saturate(1.25)!important;
+    backdrop-filter:blur(22px) saturate(1.25)!important;
+
+    box-shadow:
+      inset 0 2px 2px rgba(255,255,255,.72),
+      inset 0 -5px 10px rgba(94,65,170,.08),
+      0 15px 36px rgba(55,31,111,.28)!important;
+  }
+
+  .v17dock.bbCandyDock button{
+    min-width:0!important;
+    min-height:60px!important;
+    padding:5px 2px!important;
+    border:0!important;
+    border-radius:18px!important;
+    display:flex!important;
+    flex-direction:column!important;
+    justify-content:center!important;
+    align-items:center!important;
+    gap:4px!important;
+    background:transparent!important;
+    color:#5b4778!important;
+    font-size:9px!important;
+    line-height:1.05!important;
+    font-weight:950!important;
+    transition:.18s ease!important;
+  }
+
+  .v17dock.bbCandyDock button span{
+    display:block!important;
+    max-width:100%!important;
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+    white-space:nowrap!important;
+  }
+
+  .v17dock.bbCandyDock button.active{
+    color:#fff!important;
+    background:linear-gradient(145deg,#ef69b1,#8d61e8)!important;
+    box-shadow:
+      inset 0 2px 3px rgba(255,255,255,.34),
+      0 7px 15px rgba(112,56,190,.23)!important;
+  }
+
+  .v17dock.bbCandyDock .dockIcon{
+    position:relative!important;
+    display:block!important;
+    width:29px!important;
+    height:29px!important;
+    margin:0!important;
+    font-size:0!important;
+    flex:0 0 29px!important;
+  }
+
+  /* Home icon */
+  .dockIcon.home::before{
+    content:"";
+    position:absolute;left:5px;top:12px;
+    width:19px;height:14px;border-radius:3px;
+    background:currentColor;
+  }
+  .dockIcon.home::after{
+    content:"";
+    position:absolute;left:5px;top:4px;
+    width:18px;height:18px;
+    background:currentColor;
+    transform:rotate(45deg);
+    border-radius:3px;
+    clip-path:polygon(0 0,100% 0,0 100%);
+  }
+
+  /* Play controller */
+  .dockIcon.play::before{
+    content:"";
+    position:absolute;inset:7px 1px 5px;
+    border-radius:9px 9px 12px 12px;
+    background:currentColor;
+  }
+  .dockIcon.play::after{
+    content:"";
+    position:absolute;left:7px;top:13px;
+    width:5px;height:5px;border-radius:50%;
+    background:#f5eaff;
+    box-shadow:11px -2px 0 #f5eaff,16px 3px 0 #f5eaff;
+  }
+
+  /* Ranked crossed swords */
+  .dockIcon.arena::before,
+  .dockIcon.arena::after{
+    content:"";
+    position:absolute;
+    left:13px;top:1px;
+    width:4px;height:26px;
+    border-radius:4px;
+    background:currentColor;
+    transform:rotate(43deg);
+    transform-origin:center;
+  }
+  .dockIcon.arena::after{transform:rotate(-43deg)}
+
+  /* Trophy */
+  .dockIcon.rank::before{
+    content:"";
+    position:absolute;left:7px;top:3px;
+    width:15px;height:14px;
+    border-radius:2px 2px 8px 8px;
+    background:currentColor;
+    box-shadow:0 13px 0 -5px currentColor,0 18px 0 -3px currentColor;
+  }
+  .dockIcon.rank::after{
+    content:"";
+    position:absolute;left:2px;top:5px;
+    width:25px;height:11px;
+    border:3px solid currentColor;
+    border-top:0;
+    border-radius:0 0 12px 12px;
+    opacity:.8;
+  }
+
+  /* Profile */
+  .dockIcon.profile::before{
+    content:"";
+    position:absolute;left:9px;top:2px;
+    width:11px;height:11px;border-radius:50%;
+    background:currentColor;
+  }
+  .dockIcon.profile::after{
+    content:"";
+    position:absolute;left:4px;bottom:2px;
+    width:21px;height:13px;
+    border-radius:13px 13px 5px 5px;
+    background:currentColor;
+  }
+
+  /* Prevent page content from disappearing under the dock */
+  body:not(.bbArenaOpen) .bbAppShell,
+  body:not(.bbArenaOpen) .game{
+    padding-bottom:calc(105px + env(safe-area-inset-bottom))!important;
+  }
+}
+
+/* Arena must remain above the mobile dock */
+body.bbArenaOpen .v17dock.bbCandyDock{
+  display:none!important;
+}
+
 </style>
 
 <script>
@@ -4581,12 +4893,12 @@ restoreAccess();restoreAudio();renderUploads();renderProfile();renderHome();rend
   </div>
  </div>
 </div></div>
-<div class="v17dock">
- <button data-v17="home"><i>🏠</i>หน้าแรก</button>
- <button data-v17="play"><i>🎮</i>เล่น</button>
- <button data-v17="arena"><i>⚔️</i>Ranked</button>
- <button data-v17="rank"><i>🏆</i>อันดับ</button>
- <button data-v17="profile"><i>👤</i>โปรไฟล์</button>
+<div class="v17dock bbCandyDock" aria-label="เมนูหลัก">
+ <button class="active" data-v17="home"><i class="dockIcon home"></i><span>หน้าแรก</span></button>
+ <button data-v17="play"><i class="dockIcon play"></i><span>เล่น</span></button>
+ <button data-v17="arena"><i class="dockIcon arena"></i><span>สนาม</span></button>
+ <button data-v17="rank"><i class="dockIcon rank"></i><span>อันดับ</span></button>
+ <button data-v17="profile"><i class="dockIcon profile"></i><span>โปรไฟล์</span></button>
 </div>
 
 
@@ -5145,6 +5457,13 @@ window.addEventListener("load",()=>{
   function closeArena(){document.body.classList.remove("bbArenaOpen");
     $("#bbArena").classList.add("hidden");$("#bbArena").setAttribute("aria-hidden","true");document.body.style.overflow="";
     cleanupRoomChannel();cleanupLobbyChannel();stopCountdown();
+    try{
+      const active=document.querySelector(".bbAppScreen.active")?.dataset?.appScreen||"home";
+      document.querySelectorAll(".v17dock [data-v17]").forEach(b=>{
+        const target=(active==="modes"||active==="setup")?"play":"home";
+        b.classList.toggle("active",b.dataset.v17===target);
+      });
+    }catch(e){}
   }
   let bbArenaOpeningPromise=null;
   window.bbOpenRankedArena=function(){
@@ -5923,6 +6242,10 @@ window.addEventListener("load",()=>{
     document.body.classList.toggle("bbCandySelect",next==="modes");
     document.body.classList.toggle("bbCandyHome",next==="home");
     document.body.classList.toggle("bbCandySetup",next==="setup");
+    if(typeof setDockActive==="function"){
+      if(next==="home")setDockActive("home");
+      else if(next==="modes"||next==="setup")setDockActive("play");
+    }
     window.scrollTo({top:0,behavior:"smooth"});syncSetup();
     return true;
   }
@@ -5966,9 +6289,12 @@ window.addEventListener("load",()=>{
     document.body.classList.remove("bbAppPlaying");$("#bbAppGameBack").classList.add("hidden");showScreen("home",false);syncPlayer();
   }
   window.bbReturnToApp=returnToMenu;
-  function openRank(){const modal=$("#leaderboardModal");if(modal){modal.classList.remove("hidden");window.__bbRenderCloudLeaderboard?.()}}
-  function openProfile(){if(typeof openModal==="function")openModal("profileModal");else $("#profileModal")?.classList.remove("hidden")}
-  function openArena(){window.bbOpenRankedArena?.()}
+  function setDockActive(name){
+    document.querySelectorAll(".v17dock [data-v17]").forEach(b=>b.classList.toggle("active",b.dataset.v17===name));
+  }
+  function openRank(){setDockActive("rank");const modal=$("#leaderboardModal");if(modal){modal.classList.remove("hidden");window.__bbRenderCloudLeaderboard?.()}}
+  function openProfile(){setDockActive("profile");if(typeof openModal==="function")openModal("profileModal");else $("#profileModal")?.classList.remove("hidden")}
+  function openArena(){setDockActive("arena");window.bbOpenRankedArena?.()}
 
   document.addEventListener("click",e=>{
     const nav=e.target.closest("[data-v17]");if(!nav)return;
