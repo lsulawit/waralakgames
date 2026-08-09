@@ -964,6 +964,132 @@ body.dark .bbModeCard.active{background:linear-gradient(145deg,#3a2c41,#322b4b)}
 body.dark .bbModeCard small,body.dark .bbModeTop p,body.dark .bbXPHead p,body.dark .bbSelectedSummary,body.dark .bbFormulaNote{color:#c7becd}
 body.dark .bbSelectedSummary b{color:#fff}
 
+
+/* ===== Brain Buddy v21 — Ranked Arena ===== */
+.bbArenaNavBtn{background:linear-gradient(135deg,#34234d,#7757d8)!important;color:#fff!important;border:0!important;box-shadow:0 8px 18px rgba(86,60,151,.18)}
+@media(max-width:600px){.v17dock{grid-template-columns:repeat(5,1fr)!important}.v17dock button{font-size:8px!important}.v17dock i{font-size:18px!important}}
+
+.bbRankedTeaser{
+  width:min(100% - 32px,1240px);margin:18px auto 0;padding:20px 22px;position:relative;overflow:hidden;
+  border-radius:25px;background:linear-gradient(125deg,#2c2138 0%,#49366e 56%,#9a507a 100%);
+  color:#fff;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;
+  box-shadow:0 17px 40px rgba(48,32,65,.17)
+}
+.bbRankedTeaserGlow{position:absolute;width:260px;height:260px;right:-70px;top:-150px;border-radius:50%;background:rgba(255,255,255,.11);filter:blur(2px)}
+.bbRankedTeaserCopy{position:relative}.bbRankedPill{display:inline-flex;align-items:center;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.13);font-size:8px;font-weight:950;letter-spacing:.08em}
+.bbRankedPill.dark{background:#f0ebfa;color:#614b8e}
+.bbRankedTeaser h2{font-size:28px;margin:8px 0 3px}.bbRankedTeaser p{margin:0;color:#e5deeb;font-size:11px;line-height:1.65}
+.bbRankedTeaser p b{color:#fff}.bbRankedMini{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.bbRankedMini span{padding:5px 7px;border-radius:9px;background:rgba(255,255,255,.09);font-size:8px;font-weight:800}
+.bbRankedEnter{position:relative;z-index:2;border:0;border-radius:16px;background:#fff;color:#493660;padding:13px 17px;font-weight:950;cursor:pointer;white-space:nowrap;box-shadow:0 10px 25px rgba(0,0,0,.12)}
+.bbRankedEnter span{margin-left:5px}
+@media(max-width:800px){.bbRankedTeaser{width:min(100% - 24px,1240px);grid-template-columns:1fr}.bbRankedEnter{width:100%}}
+@media(max-width:600px){.bbRankedTeaser{width:min(100% - 18px,1240px);padding:16px;border-radius:20px}.bbRankedTeaser h2{font-size:23px}}
+
+.bbArena{position:fixed;inset:0;z-index:1000;background:#f7f4f9;color:#2f2935;overflow:auto;overscroll-behavior:contain}
+.bbArenaShell{min-height:100%;background:radial-gradient(circle at 7% -10%,#ffe8f2,transparent 28rem),radial-gradient(circle at 95% 0,#ece7ff,transparent 31rem),#f8f6fa}
+.bbArenaHeader{
+  position:sticky;top:0;z-index:20;min-height:72px;padding:10px max(16px,calc((100vw - 1240px)/2));
+  display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(255,255,255,.95);
+  backdrop-filter:blur(16px);border-bottom:1px solid #e9e3ed
+}
+.bbArenaBrand{display:flex;align-items:center;gap:10px}.bbArenaBack{width:43px;height:43px;border-radius:14px;border:1px solid #e5dfe8;background:#fff;font-size:20px;cursor:pointer}
+.bbArenaBrand div{display:flex;flex-direction:column}.bbArenaBrand span{font-size:9px;color:#796e80;font-weight:800}.bbArenaBrand strong{font-size:18px}
+.bbArenaMe{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #e6e0e9;border-radius:17px;padding:6px 9px;box-shadow:0 7px 20px rgba(55,39,66,.05)}
+.bbArenaOnline{font-size:7px;color:#35a97f;font-weight:950}.bbArenaMeAvatar{width:34px;height:34px;border-radius:11px;background:#f5eff9;display:grid;place-items:center;font-size:18px}
+.bbArenaMe div:last-child{display:flex;flex-direction:column}.bbArenaMe small{font-size:8px;color:#716a77}.bbArenaMe b{font-size:10px}
+
+.bbArenaMain{width:min(100% - 32px,1240px);margin:0 auto;padding:24px 0 45px}
+.bbArenaGate{max-width:540px;margin:9vh auto;background:#fff;border:1px solid #e8e2eb;border-radius:28px;padding:34px;text-align:center;box-shadow:0 20px 60px rgba(55,38,68,.10)}
+.bbArenaGateIcon{font-size:52px}.bbArenaGate h2{font-size:27px;margin:9px 0 5px}.bbArenaGate p{font-size:11px;line-height:1.75;color:#746b7a;margin:0 auto 18px;max-width:430px}
+.bbArenaPrimary{border:0;border-radius:15px;padding:12px 17px;background:linear-gradient(135deg,#7055cf,#ed669d);color:#fff;font-weight:950;cursor:pointer;box-shadow:0 9px 22px rgba(113,80,188,.17)}
+.bbArenaPrimary.wide{width:100%;margin-top:4px}
+
+.bbArenaHero{background:linear-gradient(135deg,#2f243b,#5a4383);border-radius:28px;padding:23px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:20px;box-shadow:0 18px 38px rgba(53,36,69,.14)}
+.bbArenaHero h1{font-size:31px;margin:7px 0 3px}.bbArenaHero p{margin:0;color:#ddd5e4;font-size:10px}
+.bbArenaHeroStats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;min-width:340px}
+.bbArenaHeroStats div{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:11px}
+.bbArenaHeroStats small{display:block;color:#d6ccdf;font-size:8px}.bbArenaHeroStats b{display:block;font-size:15px;margin-top:3px}
+.bbArenaActions{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;margin-top:14px}
+.bbArenaAction{min-height:78px;border:1px solid #e7e1ea;background:#fff;border-radius:20px;padding:12px 15px;display:flex;align-items:center;gap:11px;text-align:left;cursor:pointer;box-shadow:0 8px 24px rgba(55,39,67,.05)}
+.bbArenaAction.create{border-color:#ead3df;background:linear-gradient(145deg,#fff,#fff5f9)}.bbArenaAction.join{border-color:#ddd7f0;background:linear-gradient(145deg,#fff,#f8f5ff)}
+.bbArenaAction i{font-style:normal;width:42px;height:42px;border-radius:13px;background:#f4edf6;display:grid;place-items:center;font-size:22px}
+.bbArenaAction span{display:flex;flex-direction:column}.bbArenaAction b{font-size:14px}.bbArenaAction small{font-size:8px;color:#796f80;margin-top:2px}
+.bbArenaRefresh{width:78px;border:1px solid #e7e1ea;background:#fff;border-radius:20px;font-size:24px;cursor:pointer}
+.bbArenaJoinBar{margin-top:10px;background:#fff;border:1px solid #e7e1ea;border-radius:18px;padding:9px;display:grid;grid-template-columns:1fr auto auto;gap:7px}
+.bbArenaJoinBar input{border:0;background:#f8f6fa;border-radius:12px;padding:11px 13px;outline:none;text-transform:uppercase;font-weight:900;letter-spacing:.05em}
+.bbArenaJoinBar button{border:0;border-radius:12px;padding:9px 13px;background:#7055cf;color:#fff;font-weight:900}.bbArenaJoinBar .ghost{background:#f3eff6;color:#625769}
+.bbArenaListHead,.bbRoomPlayersHead{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin:22px 3px 10px}
+.bbArenaListHead h2,.bbRoomPlayersHead h2{font-size:19px;margin:0}.bbArenaListHead p,.bbRoomPlayersHead p{font-size:8px;color:#7b7281;margin:2px 0 0}
+.bbArenaListHead>span,.bbRoomPlayersHead>span{font-size:9px;font-weight:900;color:#6a5a75;background:#eee9f2;padding:6px 9px;border-radius:999px}
+.bbArenaRooms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.bbArenaRoomCard{background:#fff;border:1px solid #e8e2eb;border-radius:21px;padding:14px;box-shadow:0 8px 25px rgba(55,39,67,.045)}
+.bbArenaRoomCardTop{display:flex;justify-content:space-between;gap:9px}.bbArenaRoomCard h3{font-size:15px;margin:0}.bbArenaRoomCard .live{font-size:7px;color:#269c72;font-weight:950;white-space:nowrap}
+.bbArenaHost{font-size:8px;color:#796f7e;margin-top:4px}.bbArenaTags{display:flex;gap:5px;flex-wrap:wrap;margin:10px 0}
+.bbArenaTags span{font-size:8px;font-weight:850;background:#f5f1f7;border-radius:8px;padding:5px 7px;color:#5d5363}
+.bbArenaRoomFooter{display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid #f0ebf2;padding-top:10px}
+.bbArenaPeople{font-size:11px;font-weight:900}.bbArenaJoinBtn{border:0;border-radius:11px;background:#2f2638;color:#fff;padding:8px 11px;font-size:9px;font-weight:950;cursor:pointer}
+.bbArenaJoinBtn:disabled{opacity:.45}.bbArenaEmpty{grid-column:1/-1;min-height:180px;border:1px dashed #dcd5e0;border-radius:22px;background:rgba(255,255,255,.65);display:grid;place-items:center;align-content:center;gap:5px;color:#766c7c}
+.bbArenaEmpty span{font-size:36px}.bbArenaEmpty b{font-size:11px}
+
+.bbRoomTop{background:#fff;border:1px solid #e6e0e9;border-radius:26px;padding:18px;display:flex;justify-content:space-between;gap:20px;box-shadow:0 10px 30px rgba(55,39,67,.05)}
+.bbRoomLeave{border:0;background:transparent;color:#6c6172;padding:0;font-size:9px;font-weight:850;cursor:pointer}.bbRoomLive{display:inline-flex;margin:8px 0 4px;color:#22966d;font-size:8px;font-weight:950}
+.bbRoomTop h1{font-size:28px;margin:0}.bbRoomMeta{font-size:9px;color:#716878;margin-top:5px}
+.bbRoomCodeBox{min-width:180px;background:linear-gradient(145deg,#f6f1fb,#fff4f8);border:1px solid #e7dfe9;border-radius:19px;padding:12px;text-align:center}
+.bbRoomCodeBox small{display:block;font-size:7px;color:#776d7c}.bbRoomCodeBox b{display:block;font-size:19px;letter-spacing:.08em;margin:3px 0}.bbRoomCodeBox button{border:0;background:#fff;border-radius:9px;padding:6px 9px;font-size:8px;font-weight:850}
+.bbRoomProgress{margin-top:10px;background:#fff;border:1px solid #e8e2eb;border-radius:18px;padding:11px 13px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px}
+.bbRoomProgress>div:first-child{display:flex;gap:6px;align-items:center;font-size:8px}.bbRoomProgress>div:first-child b{font-size:12px}
+.bbRoomProgressTrack{height:7px;border-radius:999px;background:#eee9f1;overflow:hidden}.bbRoomProgressTrack i{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#ed679c,#7a61d8);transition:width .25s}
+.bbRoomProgress>span{font-size:8px;color:#746b7b;white-space:nowrap}
+.bbRoomPlayers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.bbPlayerTile{background:#fff;border:1px solid #e7e1ea;border-radius:17px;padding:10px;display:flex;align-items:center;gap:8px;min-width:0}
+.bbPlayerAvatar{width:37px;height:37px;flex:0 0 37px;border-radius:12px;background:#f5eff8;display:grid;place-items:center;font-size:19px;overflow:hidden}.bbPlayerAvatar img{width:100%;height:100%;object-fit:cover}
+.bbPlayerText{min-width:0;flex:1}.bbPlayerText b{display:block;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bbPlayerText small{display:block;font-size:7px;color:#7c7282;margin-top:2px}
+.bbReadyBadge{font-size:7px;font-weight:950;border-radius:999px;padding:5px 6px;background:#f1edf3;color:#7c7181;white-space:nowrap}.bbReadyBadge.yes{background:#e6f8f2;color:#238163}
+.bbRoomBottom{position:sticky;bottom:10px;margin-top:16px;background:rgba(255,255,255,.95);backdrop-filter:blur(14px);border:1px solid #e6e0e9;border-radius:20px;padding:11px 13px;display:flex;justify-content:space-between;align-items:center;gap:12px;box-shadow:0 13px 36px rgba(52,36,64,.10)}
+.bbRoomInfo{font-size:9px;color:#716878}.bbRoomButtons{display:flex;gap:7px}.bbRoomReady,.bbRoomStart{border:0;border-radius:13px;padding:10px 13px;font-weight:950;font-size:10px;cursor:pointer}
+.bbRoomReady{background:#eee9f5;color:#5f526c}.bbRoomReady.ready{background:#e5f8f1;color:#237b60}.bbRoomStart{background:linear-gradient(135deg,#ed679d,#7459d5);color:#fff;box-shadow:0 8px 19px rgba(128,79,160,.18)}.bbRoomStart:disabled{opacity:.4;box-shadow:none}
+
+.bbArenaCountdown{min-height:70vh;display:grid;place-items:center}.bbCountdownCard{width:min(440px,100%);text-align:center;background:#fff;border:1px solid #e7e0e9;border-radius:30px;padding:34px;box-shadow:0 22px 60px rgba(48,32,61,.12)}
+.bbCountdownBear{font-size:64px;margin:14px 0 4px}.bbCountdownCard small{display:block;color:#756b7b;font-size:10px}.bbCountdownCard strong{display:block;font-size:88px;line-height:1;color:#4c396b;margin:6px 0}.bbCountdownCard p{font-size:9px;color:#796f7f}
+
+.bbArenaSheetBackdrop{position:fixed;inset:0;z-index:1030;background:rgba(33,25,39,.58);backdrop-filter:blur(8px);display:grid;place-items:center;padding:15px}
+.bbArenaSheet{position:relative;width:min(560px,100%);max-height:min(90vh,760px);overflow:auto;background:#fff;border-radius:27px;padding:22px;box-shadow:0 25px 75px rgba(26,18,33,.23)}
+.bbArenaSheetX{position:absolute;right:14px;top:14px;width:35px;height:35px;border-radius:11px;border:1px solid #e6e0e9;background:#fff;font-size:20px}
+.bbArenaSheet h2{font-size:26px;margin:8px 0 3px}.bbArenaSheet>p{font-size:9px;color:#766d7c;margin:0 0 15px}
+.bbArenaField{display:grid;gap:5px;margin-bottom:10px}.bbArenaField>span{font-size:9px;font-weight:900;color:#5a5060}
+.bbArenaField input,.bbArenaField select{width:100%;height:45px;border:1px solid #e3dce7;border-radius:13px;background:#fff;padding:0 11px;outline:none;color:#342c3a}
+.bbArenaForm2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.bbPeoplePicker{display:grid;grid-template-columns:45px 1fr 45px;gap:6px}.bbPeoplePicker button{border:1px solid #e4dde7;background:#f7f4f9;border-radius:12px;font-size:18px}.bbPeoplePicker input{text-align:center;font-weight:950}
+.bbPeopleQuick{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin:-3px 0 13px}.bbPeopleQuick button{border:1px solid #e5dfe8;background:#fff;border-radius:10px;padding:7px;font-size:8px;font-weight:850}.bbPeopleQuick button.active{background:#efeaff;border-color:#b9a9ec;color:#5e47a8}
+.bbArenaVisibility{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px}.bbArenaVisibility button{border:1px solid #e6e0e9;background:#fff;border-radius:15px;padding:10px;text-align:left}.bbArenaVisibility button.active{border-color:#a994e5;background:#f5f1ff}
+.bbArenaVisibility b{display:block;font-size:10px}.bbArenaVisibility small{display:block;font-size:7px;color:#786f7d;margin-top:2px;line-height:1.45}
+.bbArenaError{min-height:18px;color:#b34d6d;font-size:9px;font-weight:800}
+.bbArenaToast{position:fixed;z-index:1100;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#302638;color:#fff;border-radius:999px;padding:10px 14px;font-size:9px;font-weight:900;transition:.22s;box-shadow:0 12px 30px rgba(32,23,38,.24)}.bbArenaToast.show{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:900px){
+ .bbArenaHero{display:block}.bbArenaHeroStats{min-width:0;margin-top:13px}
+ .bbArenaRooms{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .bbRoomPlayers{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:650px){
+ .bbArenaHeader{min-height:62px;padding:8px 10px}.bbArenaMain{width:min(100% - 16px,1240px);padding-top:12px}
+ .bbArenaBrand span{display:none}.bbArenaBrand strong{font-size:15px}.bbArenaMe .bbArenaOnline,.bbArenaMe div:last-child{display:none}
+ .bbArenaHero{border-radius:21px;padding:16px}.bbArenaHero h1{font-size:24px}.bbArenaHeroStats{grid-template-columns:repeat(3,1fr);gap:5px}
+ .bbArenaHeroStats div{padding:8px;border-radius:12px}.bbArenaHeroStats b{font-size:12px}
+ .bbArenaActions{grid-template-columns:1fr 1fr}.bbArenaRefresh{width:auto;grid-column:1/-1;height:39px;border-radius:13px}
+ .bbArenaAction{min-height:68px;padding:10px}.bbArenaAction i{width:35px;height:35px;font-size:18px}.bbArenaAction b{font-size:11px}
+ .bbArenaJoinBar{grid-template-columns:1fr auto}.bbArenaJoinBar .ghost{grid-column:1/-1}
+ .bbArenaRooms{grid-template-columns:1fr}
+ .bbRoomTop{display:block;border-radius:20px;padding:14px}.bbRoomTop h1{font-size:23px}.bbRoomCodeBox{margin-top:10px;min-width:0}
+ .bbRoomProgress{grid-template-columns:auto 1fr}.bbRoomProgress>span{grid-column:1/-1}
+ .bbRoomPlayers{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+ .bbRoomBottom{bottom:6px;display:block}.bbRoomButtons{margin-top:8px}.bbRoomReady,.bbRoomStart{flex:1}
+ .bbArenaForm2{grid-template-columns:1fr}.bbArenaSheet{padding:17px;border-radius:22px}
+ .bbArenaVisibility{grid-template-columns:1fr}
+}
+@media(max-width:380px){.bbRoomPlayers{grid-template-columns:1fr}.bbPeopleQuick{grid-template-columns:repeat(5,1fr)}}
+
 </style>
 
 <script>
@@ -1162,6 +1288,7 @@ try{
   <button class="v17b" data-v17="home">🏠 หน้าแรก</button>
   <button class="v17b play" data-v17="play">🎮 เล่นเกม</button>
   <button class="v17b" data-v17="rank">🏆 อันดับผู้เล่น</button>
+  <button class="v17b bbArenaNavBtn" data-v17="arena">⚔️ Ranked Arena</button>
   <button class="v17b" data-v17="profile">👤 โปรไฟล์</button>
  </div>
  <a class="v17b admin" href="/admin">🛠️ แอดมิน</a>
@@ -1234,6 +1361,20 @@ try{
   <button class="btn purple" id="v16CompeteLogin">เริ่มเก็บอันดับ</button>
 </section>
 
+
+
+<section class="bbRankedTeaser" id="bbRankedTeaser">
+  <div class="bbRankedTeaserGlow"></div>
+  <div class="bbRankedTeaserCopy">
+    <span class="bbRankedPill">● REALTIME MULTIPLAYER</span>
+    <h2>⚔️ Ranked Arena</h2>
+    <p>สร้างห้องหรือเข้าร่วมการแข่งขันกับผู้เล่นจริง <b>2–100 คน</b> พร้อมระบบ Ready และห้องอัปเดตแบบสด</p>
+    <div class="bbRankedMini">
+      <span>🏆 แข่งคะแนน</span><span>👥 สูงสุด 100 คน</span><span>⚡ Realtime</span><span>🔐 สมาชิกเท่านั้น</span>
+    </div>
+  </div>
+  <button class="bbRankedEnter" id="bbOpenArena">เข้าสู่ Ranked Arena <span>→</span></button>
+</section>
 
 <section class="bbModeHub" id="bbModeHub">
   <div class="bbModePanel">
@@ -2117,8 +2258,11 @@ restoreAccess();restoreAudio();renderUploads();renderProfile();renderHome();rend
  </div>
 </div></div>
 <div class="v17dock">
- <button data-v17="home"><i>🏠</i>หน้าแรก</button><button data-v17="play"><i>🎮</i>เล่น</button>
- <button data-v17="rank"><i>🏆</i>อันดับ</button><button data-v17="profile"><i>👤</i>โปรไฟล์</button>
+ <button data-v17="home"><i>🏠</i>หน้าแรก</button>
+ <button data-v17="play"><i>🎮</i>เล่น</button>
+ <button data-v17="arena"><i>⚔️</i>Ranked</button>
+ <button data-v17="rank"><i>🏆</i>อันดับ</button>
+ <button data-v17="profile"><i>👤</i>โปรไฟล์</button>
 </div>
 
 
@@ -2240,6 +2384,443 @@ window.addEventListener("load",()=>{
     if(r&&r.cfg&&r.cfg.source!=="teddy"){r.cfg.source="teddy";localStorage.setItem("bb_resume",JSON.stringify(r))}
   }catch(e){}
   sync();
+})();
+</script>
+
+<div class="bbArena hidden" id="bbArena" aria-hidden="true">
+  <div class="bbArenaShell">
+    <header class="bbArenaHeader">
+      <div class="bbArenaBrand">
+        <button class="bbArenaBack" id="bbArenaClose" aria-label="กลับ">←</button>
+        <div>
+          <span>⚔️ Brain Buddy</span>
+          <strong>Ranked Arena</strong>
+        </div>
+      </div>
+      <div class="bbArenaMe">
+        <span class="bbArenaOnline">● LIVE</span>
+        <div class="bbArenaMeAvatar" id="bbArenaMeAvatar">🧸</div>
+        <div><small id="bbArenaMeName">ผู้เล่น</small><b id="bbArenaMeRank">🌱 Bronze • 0 RP</b></div>
+      </div>
+    </header>
+
+    <main class="bbArenaMain">
+      <section class="bbArenaGate hidden" id="bbArenaGate">
+        <div class="bbArenaGateIcon">🔐</div>
+        <h2>เข้าสู่ระบบเพื่อเล่น Ranked</h2>
+        <p>Ranked Arena ผูกห้อง คะแนน และอันดับกับบัญชีสมาชิก เพื่อให้การแข่งขันระหว่างผู้เล่นเป็นระบบเดียวกัน</p>
+        <button class="bbArenaPrimary" id="bbArenaLogin">เข้าสู่ระบบ / สมัครสมาชิก</button>
+      </section>
+
+      <section class="bbArenaLobby hidden" id="bbArenaLobby">
+        <div class="bbArenaHero">
+          <div>
+            <span class="bbRankedPill dark">🏆 COMPETITIVE</span>
+            <h1>ห้องแข่งขันออนไลน์</h1>
+            <p>สร้างห้องของคุณ หรือเข้าห้องที่กำลังรอผู้เล่นได้ทันที</p>
+          </div>
+          <div class="bbArenaHeroStats">
+            <div><small>Ranked Points</small><b id="bbArenaRP">0 RP</b></div>
+            <div><small>การแข่งขัน</small><b id="bbArenaGames">0</b></div>
+            <div><small>ชนะ</small><b id="bbArenaWins">0</b></div>
+          </div>
+        </div>
+
+        <div class="bbArenaActions">
+          <button class="bbArenaAction create" id="bbArenaCreateOpen">
+            <i>＋</i><span><b>สร้างห้อง</b><small>กำหนดเกม ระดับ และจำนวนคน</small></span>
+          </button>
+          <button class="bbArenaAction join" id="bbArenaJoinOpen">
+            <i>🔑</i><span><b>เข้าด้วยรหัส</b><small>มีรหัส BB-XXXXXX จากเพื่อน</small></span>
+          </button>
+          <button class="bbArenaRefresh" id="bbArenaRefresh">↻</button>
+        </div>
+
+        <div class="bbArenaJoinBar hidden" id="bbArenaJoinBar">
+          <input id="bbArenaJoinCode" maxlength="12" autocomplete="off" placeholder="เช่น BB-A1B2C3">
+          <button id="bbArenaJoinSubmit">เข้าห้อง</button>
+          <button class="ghost" id="bbArenaJoinCancel">ยกเลิก</button>
+        </div>
+
+        <div class="bbArenaListHead">
+          <div><h2>🟢 ห้องที่กำลังเปิด</h2><p>จำนวนผู้เล่นจะอัปเดตแบบสดโดยไม่ต้อง Refresh</p></div>
+          <span id="bbArenaLobbyCount">0 ห้อง</span>
+        </div>
+        <div class="bbArenaRooms" id="bbArenaRooms">
+          <div class="bbArenaEmpty"><span>🧸</span><b>กำลังโหลดห้อง…</b></div>
+        </div>
+      </section>
+
+      <section class="bbArenaRoom hidden" id="bbArenaRoom">
+        <div class="bbRoomTop">
+          <div>
+            <button class="bbRoomLeave" id="bbArenaLeave">← ออกจากห้อง</button>
+            <span class="bbRoomLive">● LIVE ROOM</span>
+            <h1 id="bbRoomName">ห้องแข่งขัน</h1>
+            <div class="bbRoomMeta" id="bbRoomMeta"></div>
+          </div>
+          <div class="bbRoomCodeBox">
+            <small>รหัสห้อง</small>
+            <b id="bbRoomCode">BB------</b>
+            <button id="bbRoomCopy">คัดลอก</button>
+          </div>
+        </div>
+
+        <div class="bbRoomProgress">
+          <div><span>ผู้เล่น</span><b id="bbRoomCount">1/100</b></div>
+          <div class="bbRoomProgressTrack"><i id="bbRoomProgressFill"></i></div>
+          <span id="bbRoomReadyText">รอผู้เล่นกดพร้อม</span>
+        </div>
+
+        <div class="bbRoomPlayersHead">
+          <div><h2>👥 ผู้เล่นในห้อง</h2><p>สถานะ Ready เปลี่ยนแบบ Realtime</p></div>
+          <span id="bbRoomReadyCount">0/0 พร้อม</span>
+        </div>
+        <div class="bbRoomPlayers" id="bbRoomPlayers"></div>
+
+        <div class="bbRoomBottom">
+          <div class="bbRoomInfo" id="bbRoomInfo">เมื่อทุกคนพร้อม Host จะเริ่มการแข่งขันได้</div>
+          <div class="bbRoomButtons">
+            <button class="bbRoomReady" id="bbRoomReadyBtn">✓ พร้อมเล่น</button>
+            <button class="bbRoomStart hidden" id="bbRoomStartBtn">เริ่มการแข่งขัน</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="bbArenaCountdown hidden" id="bbArenaCountdown">
+        <div class="bbCountdownCard">
+          <span class="bbRankedPill dark">⚔️ RANKED MATCH</span>
+          <div class="bbCountdownBear">🧸</div>
+          <small id="bbCountdownLabel">เตรียมตัวให้พร้อม</small>
+          <strong id="bbCountdownNumber">3</strong>
+          <p id="bbCountdownSub">การแข่งขันจะเริ่มพร้อมกันทุกเครื่อง</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="bbArenaSheetBackdrop hidden" id="bbCreateBackdrop">
+    <div class="bbArenaSheet">
+      <button class="bbArenaSheetX" id="bbCreateClose">×</button>
+      <span class="bbRankedPill dark">＋ CREATE ROOM</span>
+      <h2>สร้างห้องแข่งขัน</h2>
+      <p>ตั้งค่าห้อง Ranked ของคุณ ผู้เล่นสามารถเข้าร่วมได้สูงสุด 100 คน</p>
+
+      <label class="bbArenaField"><span>ชื่อห้อง</span><input id="bbCreateName" maxlength="40" placeholder="เช่น ห้อง Lucky Challenge"></label>
+      <div class="bbArenaForm2">
+        <label class="bbArenaField"><span>เกม</span>
+          <select id="bbCreateMode">
+            <option value="position">📍 จำตำแหน่ง</option>
+            <option value="match">🧩 จับคู่</option>
+            <option value="missing">👀 ตัวไหนหาย</option>
+            <option value="swap">🔄 สลับที่</option>
+            <option value="change">🔎 อะไรเปลี่ยน</option>
+            <option value="sequence">🔢 จำลำดับ</option>
+          </select>
+        </label>
+        <label class="bbArenaField"><span>ระดับ</span>
+          <select id="bbCreateDiff">
+            <option value="easy">ง่าย 2×2</option>
+            <option value="normal" selected>ปานกลาง 3×3</option>
+            <option value="hard">ยาก 4×4</option>
+            <option value="expert">Expert</option>
+          </select>
+        </label>
+      </div>
+
+      <label class="bbArenaField"><span>จำนวนผู้เล่นสูงสุด</span>
+        <div class="bbPeoplePicker">
+          <button type="button" id="bbPeopleMinus">−</button>
+          <input type="number" id="bbCreateMax" min="2" max="100" value="20">
+          <button type="button" id="bbPeoplePlus">＋</button>
+        </div>
+      </label>
+      <div class="bbPeopleQuick">
+        <button data-max="10">10</button><button data-max="20" class="active">20</button>
+        <button data-max="30">30</button><button data-max="50">50</button><button data-max="100">100</button>
+      </div>
+
+      <div class="bbArenaVisibility">
+        <button data-vis="public" class="active"><b>🌐 สาธารณะ</b><small>ขึ้นใน Lobby ให้คนกดเข้าร่วมได้</small></button>
+        <button data-vis="private"><b>🔒 มีรหัส</b><small>เข้าได้จากรหัสห้องเท่านั้น</small></button>
+      </div>
+
+      <div class="bbArenaError" id="bbCreateError"></div>
+      <button class="bbArenaPrimary wide" id="bbCreateSubmit">สร้างห้อง Ranked</button>
+    </div>
+  </div>
+
+  <div class="bbArenaToast" id="bbArenaToast"></div>
+</div>
+
+<script>
+(function brainBuddyRankedArenaV21(){
+  const $=s=>document.querySelector(s);
+  const MODE={position:"📍 จำตำแหน่ง",match:"🧩 จับคู่",missing:"👀 ตัวไหนหาย",swap:"🔄 สลับที่",change:"🔎 อะไรเปลี่ยน",sequence:"🔢 จำลำดับ"};
+  const DIFF={easy:"ง่าย 2×2",normal:"ปานกลาง 3×3",hard:"ยาก 4×4",expert:"Expert"};
+  let client=null,user=null,profile=null,currentRoom=null,players=[],roomChannel=null,lobbyChannel=null,countdownTimer=null,visibility="public",lobbyRefreshTimer=null;
+
+  function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+  function show(id,on=true){const e=$(id);if(e)e.classList.toggle("hidden",!on)}
+  function toast(t){const e=$("#bbArenaToast");if(!e)return;e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),1800)}
+  function errText(e){
+    const m=String(e?.message||e||"");
+    const map={
+      authentication_required:"กรุณาเข้าสู่ระบบก่อน",
+      already_hosting_room:"คุณมีห้อง Ranked ที่กำลังเปิดอยู่แล้ว",
+      room_name_required:"กรุณาตั้งชื่อห้อง",
+      room_name_too_long:"ชื่อห้องยาวเกินไป",
+      invalid_max_players:"จำนวนผู้เล่นต้องอยู่ระหว่าง 2–100 คน",
+      room_not_found:"ไม่พบห้องนี้",
+      room_not_waiting:"ห้องนี้เริ่มแข่งขันแล้ว",
+      already_in_another_room:"คุณอยู่ในห้อง Ranked อื่นอยู่แล้ว",
+      room_full:"ห้องเต็มแล้ว",
+      not_in_room:"คุณไม่ได้อยู่ในห้องนี้",
+      cannot_leave_after_start:"ออกจากห้องไม่ได้หลังการแข่งขันเริ่ม",
+      host_only:"เฉพาะ Host เท่านั้นที่เริ่มเกมได้",
+      need_at_least_2_players:"ต้องมีผู้เล่นอย่างน้อย 2 คน",
+      some_players_not_ready:"ยังมีผู้เล่นที่ไม่ได้กดพร้อม"
+    };
+    for(const [k,v] of Object.entries(map))if(m.includes(k))return v;
+    return m||"เกิดข้อผิดพลาด กรุณาลองอีกครั้ง";
+  }
+  async function getClient(){
+    if(client)return client;
+    try{if(typeof sb!=="undefined"&&sb)client=sb}catch(e){}
+    if(!client&&window.__bbSupabase)client=window.__bbSupabase;
+    if(!client){
+      const c=window.BRAIN_BUDDY_SUPABASE||{};
+      if(window.supabase&&c.url&&c.publishableKey)client=window.supabase.createClient(c.url,c.publishableKey);
+    }
+    return client;
+  }
+  async function getAuth(){
+    const c=await getClient();if(!c)return null;
+    const {data,error}=await c.auth.getUser();
+    if(error||!data?.user){user=null;profile=null;return null}
+    user=data.user;
+    const pr=await c.from("profiles").select("id,display_name,avatar,avatar_url,ranked_points,ranked_games,ranked_wins,ranked_tier").eq("id",user.id).maybeSingle();
+    profile=pr.data||{id:user.id,display_name:user.email?.split("@")[0]||"ผู้เล่น",avatar:"🧸",ranked_points:0,ranked_games:0,ranked_wins:0,ranked_tier:"Bronze"};
+    return user;
+  }
+  function renderMe(){
+    const p=profile||{};
+    $("#bbArenaMeName").textContent=p.display_name||"ผู้เล่น";
+    $("#bbArenaMeRank").textContent=`${rankEmoji(p.ranked_tier)} ${p.ranked_tier||"Bronze"} • ${Number(p.ranked_points||0).toLocaleString()} RP`;
+    $("#bbArenaRP").textContent=`${Number(p.ranked_points||0).toLocaleString()} RP`;
+    $("#bbArenaGames").textContent=Number(p.ranked_games||0).toLocaleString();
+    $("#bbArenaWins").textContent=Number(p.ranked_wins||0).toLocaleString();
+    const a=$("#bbArenaMeAvatar");
+    if(p.avatar_url)a.innerHTML=`<img src="${esc(p.avatar_url)}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">`;
+    else a.textContent=p.avatar||"🧸";
+  }
+  function rankEmoji(r){return ({Bronze:"🌱",Silver:"✨",Gold:"🏆",Platinum:"🌌",Diamond:"💎",Master:"👑"})[r]||"🌱"}
+
+  async function openArena(){
+    const arena=$("#bbArena");arena.classList.remove("hidden");arena.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
+    await getAuth();
+    if(!user){show("#bbArenaGate",true);show("#bbArenaLobby",false);show("#bbArenaRoom",false);show("#bbArenaCountdown",false);return}
+    renderMe();show("#bbArenaGate",false);
+    const restored=await restoreRoom();
+    if(!restored){show("#bbArenaLobby",true);show("#bbArenaRoom",false);show("#bbArenaCountdown",false);await loadLobby();subscribeLobby()}
+  }
+  function closeArena(){
+    $("#bbArena").classList.add("hidden");$("#bbArena").setAttribute("aria-hidden","true");document.body.style.overflow="";
+    cleanupRoomChannel();cleanupLobbyChannel();stopCountdown();
+  }
+  window.bbOpenRankedArena=openArena;
+
+  async function restoreRoom(){
+    const c=await getClient();if(!c||!user)return false;
+    const {data,error}=await c.from("ranked_room_players").select("room_id,user_id,seat,is_ready,joined_at").eq("user_id",user.id).limit(10);
+    if(error||!data?.length)return false;
+    for(const m of data){
+      const q=await c.from("ranked_rooms").select("*").eq("id",m.room_id).in("status",["waiting","countdown","playing"]).maybeSingle();
+      if(q.data){await enterRoom(q.data.id);return true}
+    }
+    return false;
+  }
+
+  function subscribeLobby(){
+    if(lobbyChannel||!client)return;
+    lobbyChannel=client.channel("bb-ranked-lobby-"+Math.random().toString(36).slice(2))
+      .on("postgres_changes",{event:"*",schema:"public",table:"ranked_rooms"},()=>scheduleLobby())
+      .subscribe();
+  }
+  function cleanupLobbyChannel(){if(lobbyChannel&&client){client.removeChannel(lobbyChannel);lobbyChannel=null}}
+  function scheduleLobby(){clearTimeout(lobbyRefreshTimer);lobbyRefreshTimer=setTimeout(loadLobby,180)}
+  async function loadLobby(){
+    const c=await getClient();if(!c||!user)return;
+    const {data,error}=await c.rpc("bb_ranked_lobby");
+    if(error){renderLobbyError(errText(error));return}
+    const rooms=data||[];
+    $("#bbArenaLobbyCount").textContent=`${rooms.length} ห้อง`;
+    const box=$("#bbArenaRooms");
+    if(!rooms.length){box.innerHTML='<div class="bbArenaEmpty"><span>🧸</span><b>ยังไม่มีห้องเปิดอยู่</b><small>สร้างห้องแรกแล้วชวนเพื่อนมาแข่งขันได้เลย</small></div>';return}
+    box.innerHTML=rooms.map(r=>{
+      const count=Number(r.player_count||0),max=Number(r.max_players||0),full=count>=max;
+      return `<article class="bbArenaRoomCard">
+        <div class="bbArenaRoomCardTop"><div><h3>${esc(r.room_name)}</h3><div class="bbArenaHost">Host: ${esc(r.host_name)} • ${rankEmoji(r.host_rank)} ${esc(r.host_rank||"Bronze")} ${Number(r.host_rp||0).toLocaleString()} RP</div></div><span class="live">● WAITING</span></div>
+        <div class="bbArenaTags"><span>${esc(MODE[r.mode]||r.mode)}</span><span>${esc(DIFF[r.difficulty]||r.difficulty)}</span><span>🏅 Ranked</span></div>
+        <div class="bbArenaRoomFooter"><span class="bbArenaPeople">👥 ${count}/${max} คน</span><button class="bbArenaJoinBtn" data-join-code="${esc(r.room_code)}" ${full?"disabled":""}>${full?"ห้องเต็ม":"เข้าร่วม"}</button></div>
+      </article>`;
+    }).join("");
+  }
+  function renderLobbyError(t){$("#bbArenaRooms").innerHTML=`<div class="bbArenaEmpty"><span>⚠️</span><b>${esc(t)}</b><small>ลองกด Refresh อีกครั้ง</small></div>`}
+
+  async function createRoom(){
+    const e=$("#bbCreateError");e.textContent="";
+    const name=$("#bbCreateName").value.trim();
+    const max=Math.max(2,Math.min(100,Number($("#bbCreateMax").value)||20));
+    const btn=$("#bbCreateSubmit");btn.disabled=true;btn.textContent="กำลังสร้างห้อง…";
+    try{
+      const c=await getClient();
+      const {data,error}=await c.rpc("bb_ranked_create_room",{
+        p_room_name:name,p_mode:$("#bbCreateMode").value,p_difficulty:$("#bbCreateDiff").value,p_max_players:max,p_visibility:visibility
+      });
+      if(error)throw error;
+      const roomId=data?.[0]?.room_id;if(!roomId)throw new Error("สร้างห้องไม่สำเร็จ");
+      show("#bbCreateBackdrop",false);await enterRoom(roomId);toast("สร้างห้องแล้ว");
+    }catch(x){e.textContent=errText(x)}
+    finally{btn.disabled=false;btn.textContent="สร้างห้อง Ranked"}
+  }
+
+  async function joinByCode(code){
+    code=String(code||"").trim().toUpperCase();if(!code){toast("กรุณาใส่รหัสห้อง");return}
+    try{
+      const c=await getClient();const {data,error}=await c.rpc("bb_ranked_join_room",{p_room_code:code});if(error)throw error;
+      const roomId=data?.[0]?.room_id;if(!roomId)throw new Error("เข้าห้องไม่สำเร็จ");
+      show("#bbArenaJoinBar",false);$("#bbArenaJoinCode").value="";await enterRoom(roomId);toast("เข้าห้องแล้ว");
+    }catch(x){toast(errText(x))}
+  }
+
+  async function enterRoom(roomId){
+    cleanupLobbyChannel();currentRoom={id:roomId};
+    show("#bbArenaLobby",false);show("#bbArenaGate",false);show("#bbArenaRoom",true);show("#bbArenaCountdown",false);
+    await refreshRoom();subscribeRoom();
+  }
+  async function refreshRoom(){
+    if(!currentRoom?.id||!client)return;
+    const rq=await client.from("ranked_rooms").select("*").eq("id",currentRoom.id).maybeSingle();
+    if(rq.error||!rq.data){toast("ห้องถูกปิดแล้ว");currentRoom=null;cleanupRoomChannel();show("#bbArenaRoom",false);show("#bbArenaLobby",true);await loadLobby();subscribeLobby();return}
+    currentRoom=rq.data;
+    const pq=await client.from("ranked_room_players").select("room_id,user_id,seat,is_ready,joined_at").eq("room_id",currentRoom.id).order("seat");
+    if(pq.error){toast(errText(pq.error));return}
+    const raw=pq.data||[],ids=raw.map(x=>x.user_id);
+    let profs=[];
+    if(ids.length){const pr=await client.from("profiles").select("id,display_name,avatar,avatar_url,ranked_tier,ranked_points").in("id",ids);profs=pr.data||[]}
+    const map=new Map(profs.map(p=>[p.id,p]));
+    players=raw.map(x=>({...x,profile:map.get(x.user_id)||{display_name:"ผู้เล่น",avatar:"🧸",ranked_tier:"Bronze",ranked_points:0}}));
+    renderRoom();
+    if(currentRoom.status==="countdown"||currentRoom.status==="playing")await loadLatestMatch();
+  }
+  function renderRoom(){
+    const r=currentRoom;if(!r)return;
+    $("#bbRoomName").textContent=r.room_name;
+    $("#bbRoomCode").textContent=r.room_code;
+    $("#bbRoomMeta").textContent=`${MODE[r.mode]||r.mode} • ${DIFF[r.difficulty]||r.difficulty} • ${r.visibility==="private"?"🔒 ห้องมีรหัส":"🌐 ห้องสาธารณะ"} • สูงสุด ${r.max_players} คน`;
+    const n=players.length,max=Number(r.max_players)||100,ready=players.filter(x=>x.is_ready).length;
+    $("#bbRoomCount").textContent=`${n}/${max}`;$("#bbRoomProgressFill").style.width=`${Math.min(100,n/max*100)}%`;
+    $("#bbRoomReadyCount").textContent=`${ready}/${n} พร้อม`;
+    $("#bbRoomReadyText").textContent=n<2?"ต้องมีอย่างน้อย 2 คน":ready===n?"ทุกคนพร้อมแล้ว":"รอผู้เล่นกดพร้อม";
+    const host=r.host_id===user.id,me=players.find(x=>x.user_id===user.id);
+    $("#bbRoomPlayers").innerHTML=players.map(p=>{
+      const pr=p.profile||{},isHost=p.user_id===r.host_id;
+      const av=pr.avatar_url?`<img src="${esc(pr.avatar_url)}" alt="">`:esc(pr.avatar||"🧸");
+      return `<div class="bbPlayerTile"><div class="bbPlayerAvatar">${av}</div><div class="bbPlayerText"><b>${esc(pr.display_name||"ผู้เล่น")}${isHost?" 👑":""}${p.user_id===user.id?" • คุณ":""}</b><small>${rankEmoji(pr.ranked_tier)} ${esc(pr.ranked_tier||"Bronze")} • ${Number(pr.ranked_points||0).toLocaleString()} RP</small></div><span class="bbReadyBadge ${p.is_ready?"yes":""}">${p.is_ready?"✓ พร้อม":"รอ"}</span></div>`;
+    }).join("");
+    const rb=$("#bbRoomReadyBtn"),sbBtn=$("#bbRoomStartBtn");
+    if(host){
+      rb.classList.add("ready");rb.textContent="👑 Host • พร้อมแล้ว";rb.disabled=true;
+      sbBtn.classList.remove("hidden");sbBtn.disabled=!(n>=2&&ready===n&&r.status==="waiting");
+      $("#bbRoomInfo").textContent=n<2?"แชร์รหัสห้องเพื่อชวนผู้เล่นอีกอย่างน้อย 1 คน":ready!==n?`รออีก ${n-ready} คนกดพร้อม`:"ทุกคนพร้อมแล้ว เริ่มการแข่งขันได้";
+    }else{
+      rb.disabled=r.status!=="waiting";rb.classList.toggle("ready",!!me?.is_ready);rb.textContent=me?.is_ready?"✓ พร้อมแล้ว — แตะเพื่อยกเลิก":"✓ พร้อมเล่น";
+      sbBtn.classList.add("hidden");$("#bbRoomInfo").textContent=me?.is_ready?"รอ Host เริ่มการแข่งขัน":"กด “พร้อมเล่น” เมื่อคุณพร้อม";
+    }
+  }
+
+  function subscribeRoom(){
+    cleanupRoomChannel();if(!client||!currentRoom?.id)return;
+    const id=currentRoom.id;
+    roomChannel=client.channel("bb-ranked-room-"+id+"-"+Math.random().toString(36).slice(2))
+      .on("postgres_changes",{event:"*",schema:"public",table:"ranked_rooms",filter:`id=eq.${id}`},()=>refreshRoom())
+      .on("postgres_changes",{event:"*",schema:"public",table:"ranked_room_players",filter:`room_id=eq.${id}`},()=>refreshRoom())
+      .on("postgres_changes",{event:"*",schema:"public",table:"ranked_matches",filter:`room_id=eq.${id}`},()=>loadLatestMatch())
+      .subscribe();
+  }
+  function cleanupRoomChannel(){if(roomChannel&&client){client.removeChannel(roomChannel);roomChannel=null}}
+  async function leaveRoom(){
+    if(!currentRoom?.id)return;
+    if(!confirm(currentRoom.host_id===user.id?"คุณเป็น Host การออกจะปิดห้องนี้ ต้องการออกหรือไม่?":"ออกจากห้องนี้?"))return;
+    try{const {error}=await client.rpc("bb_ranked_leave_room",{p_room_id:currentRoom.id});if(error)throw error}
+    catch(x){toast(errText(x));return}
+    cleanupRoomChannel();stopCountdown();currentRoom=null;players=[];show("#bbArenaRoom",false);show("#bbArenaCountdown",false);show("#bbArenaLobby",true);await loadLobby();subscribeLobby();toast("ออกจากห้องแล้ว");
+  }
+  async function toggleReady(){
+    const me=players.find(x=>x.user_id===user.id);if(!me||currentRoom.host_id===user.id)return;
+    try{const {error}=await client.rpc("bb_ranked_set_ready",{p_room_id:currentRoom.id,p_ready:!me.is_ready});if(error)throw error;await refreshRoom()}
+    catch(x){toast(errText(x))}
+  }
+  async function startMatch(){
+    const btn=$("#bbRoomStartBtn");btn.disabled=true;btn.textContent="กำลังเริ่ม…";
+    try{
+      const {data,error}=await client.rpc("bb_ranked_start_match",{p_room_id:currentRoom.id});if(error)throw error;
+      if(data?.[0])startCountdown(data[0]);
+    }catch(x){toast(errText(x));btn.disabled=false;btn.textContent="เริ่มการแข่งขัน"}
+  }
+  async function loadLatestMatch(){
+    if(!currentRoom?.id||!client)return;
+    const {data}=await client.from("ranked_matches").select("*").eq("room_id",currentRoom.id).order("created_at",{ascending:false}).limit(1).maybeSingle();
+    if(data&&(data.status==="countdown"||data.status==="playing"))startCountdown(data);
+  }
+  function stopCountdown(){if(countdownTimer){clearInterval(countdownTimer);countdownTimer=null}}
+  function startCountdown(match){
+    stopCountdown();show("#bbArenaRoom",false);show("#bbArenaLobby",false);show("#bbArenaCountdown",true);
+    const startMs=new Date(match.started_at).getTime();
+    const tick=()=>{
+      const left=startMs-Date.now();
+      if(left<=0){
+        stopCountdown();$("#bbCountdownNumber").textContent="GO!";$("#bbCountdownLabel").textContent="เริ่มการแข่งขัน";
+        $("#bbCountdownSub").textContent="สนาม Ranked พร้อมแล้ว • ขั้นถัดไปจะเชื่อมโจทย์เดียวกันและการส่งคะแนนเข้า RP";
+        setTimeout(()=>{show("#bbArenaCountdown",false);show("#bbArenaRoom",true);refreshRoom()},1800);
+        return;
+      }
+      const sec=Math.ceil(left/1000);
+      $("#bbCountdownNumber").textContent=sec>3?"•":String(sec);
+      $("#bbCountdownLabel").textContent=sec>3?"เตรียมตัวให้พร้อม":"เริ่มใน";
+      $("#bbCountdownSub").textContent=`${MODE[match.mode]||match.mode} • ${DIFF[match.difficulty]||match.difficulty}`;
+    };
+    tick();countdownTimer=setInterval(tick,120);
+  }
+
+  function people(v){v=Math.max(2,Math.min(100,Number(v)||20));$("#bbCreateMax").value=v;document.querySelectorAll("[data-max]").forEach(b=>b.classList.toggle("active",Number(b.dataset.max)===v));}
+  document.addEventListener("click",e=>{
+    const arena=e.target.closest('[data-v17="arena"]');if(arena){e.preventDefault();openArena();return}
+    const join=e.target.closest("[data-join-code]");if(join){joinByCode(join.dataset.joinCode);return}
+    const mx=e.target.closest("[data-max]");if(mx){people(mx.dataset.max);return}
+    const vis=e.target.closest("[data-vis]");if(vis){visibility=vis.dataset.vis;document.querySelectorAll("[data-vis]").forEach(b=>b.classList.toggle("active",b===vis));return}
+  });
+  $("#bbOpenArena")?.addEventListener("click",openArena);
+  $("#bbArenaClose")?.addEventListener("click",closeArena);
+  $("#bbArenaLogin")?.addEventListener("click",()=>{closeArena();document.getElementById("v16LoginBtn")?.click()});
+  $("#bbArenaRefresh")?.addEventListener("click",loadLobby);
+  $("#bbArenaCreateOpen")?.addEventListener("click",()=>{const n=profile?.display_name||"ผู้เล่น";$("#bbCreateName").value=`ห้อง ${n}`;$("#bbCreateError").textContent="";show("#bbCreateBackdrop",true)});
+  $("#bbCreateClose")?.addEventListener("click",()=>show("#bbCreateBackdrop",false));
+  $("#bbCreateBackdrop")?.addEventListener("click",e=>{if(e.target.id==="bbCreateBackdrop")show("#bbCreateBackdrop",false)});
+  $("#bbCreateSubmit")?.addEventListener("click",createRoom);
+  $("#bbPeopleMinus")?.addEventListener("click",()=>people(Number($("#bbCreateMax").value)-1));
+  $("#bbPeoplePlus")?.addEventListener("click",()=>people(Number($("#bbCreateMax").value)+1));
+  $("#bbCreateMax")?.addEventListener("change",e=>people(e.target.value));
+  $("#bbArenaJoinOpen")?.addEventListener("click",()=>{show("#bbArenaJoinBar",true);setTimeout(()=>$("#bbArenaJoinCode")?.focus(),80)});
+  $("#bbArenaJoinCancel")?.addEventListener("click",()=>show("#bbArenaJoinBar",false));
+  $("#bbArenaJoinSubmit")?.addEventListener("click",()=>joinByCode($("#bbArenaJoinCode").value));
+  $("#bbArenaJoinCode")?.addEventListener("keydown",e=>{if(e.key==="Enter")joinByCode(e.target.value)});
+  $("#bbArenaJoinCode")?.addEventListener("input",e=>{e.target.value=e.target.value.toUpperCase().replace(/[^A-Z0-9-]/g,"")});
+  $("#bbArenaLeave")?.addEventListener("click",leaveRoom);
+  $("#bbRoomReadyBtn")?.addEventListener("click",toggleReady);
+  $("#bbRoomStartBtn")?.addEventListener("click",startMatch);
+  $("#bbRoomCopy")?.addEventListener("click",async()=>{const code=currentRoom?.room_code||"";try{await navigator.clipboard.writeText(code);toast("คัดลอกรหัสห้องแล้ว")}catch(e){prompt("คัดลอกรหัสห้อง",code)}});
 })();
 </script>
 </body>
