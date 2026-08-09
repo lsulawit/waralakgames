@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy v29 — Reveal & Finish Fix</title>
+<title>Brain Buddy v30 — Guaranteed Ranked Reveal</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -1254,6 +1254,14 @@ body.bbRankedPlaying #answer:not(.hidden){
   to{opacity:1;transform:translateY(0) scale(1)}
 }
 
+
+/* ===== Brain Buddy v30 — guaranteed Ranked reveal ===== */
+body.bbRankedPlaying #bbRankedGameClockLabel::after{
+  content:" • AUTO REVEAL";
+  opacity:.58;
+  font-size:.72em;
+}
+
 </style>
 
 <script>
@@ -2445,6 +2453,12 @@ function pointsPerCorrect(){return Math.round((MODE_POINTS[cfg.mode]||100)*(DIFF
 function record(ok){if(ok){correct++;combo++;bestCombo=Math.max(bestCombo,combo);score+=pointsPerCorrect();sfx("ok")}else{combo=0;sfx("bad")}updateHUD();saveResume()}
 function surprise(){return}
 function positionAsk(){stopTimer();if(asked.size>=qCount())return finishRound();const a=layout.map((_,i)=>i).filter(i=>!asked.has(i));if(!a.length)return finishRound();targetIndex=a[Math.floor((window.__bbRankedRng||Math.random)()*a.length)];asked.add(targetIndex);pickedIndex=null;state="position_target";renderTarget(targetIndex);showScene("target");setStatus("🧸","ดูรูปเป้าหมาย","จำว่าตัวนี้เคยอยู่ช่องไหน");setMain("พร้อมตอบ",positionAnswer);$("replayBtn").classList.add("hidden");updateHUD();sfx("flip");saveResume()}
+function bbAnswerTimer(expire){
+  if(window.BB_RANKED_ACTIVE && typeof window.bbRankedAnswerTimer==="function"){
+    return window.bbRankedAnswerTimer(expire);
+  }
+  return startTimer(expire);
+}
 function positionAnswer(){
   state="position_answer";showScene("board");renderBoard(true);
   $("boardTitle").textContent="อยู่หมายเลขไหน?";
@@ -2473,7 +2487,7 @@ function positionAnswer(){
     $("replayBtn").onclick=()=>{renderTarget(targetIndex);showScene("target");setMain("กลับไปตอบ",positionAnswer);sfx("flip")}
   }
 
-  startTimer(()=>positionReveal(false,window.BB_RANKED_ACTIVE?pickedIndex===null:true));
+  bbAnswerTimer(()=>positionReveal(false,window.BB_RANKED_ACTIVE?pickedIndex===null:true));
   saveResume()
 }
 function positionReveal(verbal=false,timeout=false){
@@ -2535,7 +2549,7 @@ function missingChoices(){
     $("choiceGrid").appendChild(b)
   });
   setMain("เลือกคำตอบก่อน",()=>{},true);
-  if(window.BB_RANKED_ACTIVE)startTimer(finishChoice);
+  if(window.BB_RANKED_ACTIVE)bbAnswerTimer(finishChoice);
   else startTimer(()=>{asked.add(asked.size+1);record(false);setMain(asked.size>=qCount()?"ดูผลลัพธ์":"ข้อต่อไป",asked.size>=qCount()?finishRound:()=>{layout=shuf(baseLayout);baseLayout=[...layout];startMode()})});
   saveResume()
 }
@@ -2553,7 +2567,7 @@ function swapNow(){
     }else setMain(swapPicks.length===2?"เฉลย":`เลือกอีก ${2-swapPicks.length} ช่อง`,swapReveal,swapPicks.length!==2)
   });
   setMain("เลือก 2 ช่อง",()=>{},true);
-  startTimer(()=>swapReveal(window.BB_RANKED_ACTIVE?false:true));saveResume()
+  bbAnswerTimer(()=>swapReveal(window.BB_RANKED_ACTIVE?false:true));saveResume()
 }
 function swapReveal(timeout=false){
   if(window.BB_RANKED_ACTIVE&&timerId)return;
@@ -2580,7 +2594,7 @@ function changeNow(){
     sfx("tap")
   });
   setMain("เลือกหนึ่งช่อง",()=>{},true);
-  startTimer(()=>changeReveal(window.BB_RANKED_ACTIVE?false:true));saveResume()
+  bbAnswerTimer(()=>changeReveal(window.BB_RANKED_ACTIVE?false:true));saveResume()
 }
 function changeReveal(timeout=false){
   if(window.BB_RANKED_ACTIVE&&timerId)return;
@@ -2609,7 +2623,7 @@ function sequenceAnswer(){
     else setMain(sequencePick.length===sequenceOrder.length?"ตรวจคำตอบ":`เลือกแล้ว ${sequencePick.length}/${sequenceOrder.length}`,sequenceReveal,sequencePick.length!==sequenceOrder.length)
   });
   setMain("เริ่มเลือก",()=>{},true);
-  startTimer(()=>sequenceReveal(window.BB_RANKED_ACTIVE?false:true));saveResume()
+  bbAnswerTimer(()=>sequenceReveal(window.BB_RANKED_ACTIVE?false:true));saveResume()
 }
 function sequenceReveal(timeout=false){
   if(window.BB_RANKED_ACTIVE&&timerId)return;
@@ -3371,6 +3385,7 @@ window.addEventListener("load",()=>{
 
   // ---------- Ranked actual gameplay ----------
   let rankedAutoTimer=null, rankedClockTimer=null, activeRankedMatch=null;
+  let rankedAnswerInterval=null, rankedAnswerTimeout=null, rankedAnswerToken=0;
   let rankedPhaseCursorMs=0;
 
   function rankedResetTimeline(match){
@@ -3394,9 +3409,16 @@ window.addEventListener("load",()=>{
   const coreMissingHide=window.missingHide||missingHide;
   const coreFinishRound=window.finishRound||finishRound;
 
+  function clearRankedAnswerClock(){
+    rankedAnswerToken++;
+    if(rankedAnswerInterval){clearInterval(rankedAnswerInterval);rankedAnswerInterval=null}
+    if(rankedAnswerTimeout){clearTimeout(rankedAnswerTimeout);rankedAnswerTimeout=null}
+  }
+
   function clearRankedAuto(){
     if(rankedAutoTimer){clearTimeout(rankedAutoTimer);rankedAutoTimer=null}
     if(rankedClockTimer){clearInterval(rankedClockTimer);rankedClockTimer=null}
+    clearRankedAnswerClock();
   }
   function rankedRevealHold(seconds,label,onDone){
     // เฉลยต้องมองเห็นจริงอย่างน้อยตามเวลาที่กำหนด
@@ -3499,40 +3521,83 @@ window.addEventListener("load",()=>{
     }
   };
 
-  // Ranked ใช้ deadline เดียวจาก Server timeline ไม่เริ่มนับใหม่ตามเครื่องของใคร
-  const coreStartTimer=window.startTimer||startTimer;
-  startTimer=function(expire){
-    if(!(window.BB_RANKED_ACTIVE&&activeRankedMatch&&cfg.timer)){
-      return coreStartTimer(expire);
+  // Ranked answer clock:
+  // ใช้ทั้ง interval + backup timeout เพื่อให้ iOS/Safari ถึง 0 แล้วเฉลยแน่นอน
+  // และยังยึด deadline จาก server timeline เดียวกัน
+  window.bbRankedAnswerTimer=function(expire){
+    if(!(window.BB_RANKED_ACTIVE&&activeRankedMatch)){
+      return startTimer(expire);
     }
 
-    stopTimer();
-    const seconds=Math.max(.05,Number(cfg.timer)||10);
-    const slot=rankedReservePhase(seconds);
-    const end=slot.end,total=Math.max(1,slot.total);
-    timerEnd=end;
+    clearRankedAnswerClock();
+    try{stopTimer()}catch(e){}
 
-    $("timer").classList.remove("hidden");
-    const label=document.getElementById("bbRankedGameClockLabel"),clock=document.getElementById("bbRankedGameClock");
+    const seconds=Math.max(.05,Number(activeRankedMatch.answer_seconds)||Number(cfg.timer)||10);
+    const slot=rankedReservePhase(seconds);
+    const end=slot.end;
+    const total=Math.max(1,slot.total);
+    const myToken=++rankedAnswerToken;
+
+    const timerBox=document.getElementById("timer");
+    const timerFill=document.getElementById("timerFill");
+    const label=document.getElementById("bbRankedGameClockLabel");
+    const clock=document.getElementById("bbRankedGameClock");
+
+    if(timerBox)timerBox.classList.remove("hidden");
     if(label)label.textContent="เวลาตอบ";
 
     let fired=false;
-    const tick=()=>{
-      const left=Math.max(0,end-Date.now());
-      $("timerFill").style.width=(left/total*100)+"%";
-      if(clock)clock.textContent=(left/1000).toFixed(left<10000?1:0);
 
-      if(left<=0&&!fired){
-        fired=true;
-        if(timerId){clearInterval(timerId);timerId=null}
-        $("timer").classList.add("hidden");
-        $("timerFill").style.width="100%";
-        expire?.()
+    const fire=()=>{
+      if(fired || myToken!==rankedAnswerToken)return;
+      fired=true;
+
+      if(rankedAnswerInterval){
+        clearInterval(rankedAnswerInterval);
+        rankedAnswerInterval=null;
       }
+      if(rankedAnswerTimeout){
+        clearTimeout(rankedAnswerTimeout);
+        rankedAnswerTimeout=null;
+      }
+
+      if(timerBox)timerBox.classList.add("hidden");
+      if(timerFill)timerFill.style.width="100%";
+      if(clock)clock.textContent="0.0";
+
+      // ให้ reveal function เห็นว่า timer จบแล้วจริง
+      timerId=null;
+
+      // เรียกเฉลยใน animation frame ถัดไป
+      requestAnimationFrame(()=>{
+        if(myToken!==rankedAnswerToken)return;
+        try{expire?.()}catch(err){
+          console.error("Ranked reveal error",err);
+          toast("เกิดข้อผิดพลาดตอนเฉลย • ลองรีเฟรชแล้วทดสอบอีกครั้ง");
+        }
+      });
+    };
+
+    const tick=()=>{
+      if(fired || myToken!==rankedAnswerToken)return;
+      const left=Math.max(0,end-Date.now());
+      if(timerFill)timerFill.style.width=(left/total*100)+"%";
+      if(clock)clock.textContent=(left/1000).toFixed(left<10000?1:0);
+      if(left<=0)fire();
     };
 
     tick();
-    if(!fired)timerId=setInterval(tick,80);
+
+    if(!fired){
+      rankedAnswerInterval=setInterval(tick,50);
+
+      // backup timeout สำคัญสำหรับ Safari/iPad:
+      // ต่อให้ interval พลาดจังหวะ 0 ระบบก็ยังบังคับเฉลย
+      rankedAnswerTimeout=setTimeout(
+        fire,
+        Math.max(0,end-Date.now())+80
+      );
+    }
   };
 
   function rankedMatchRevealAll(){
