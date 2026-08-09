@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy v39 — Ranked + Game Visual Pack</title>
+<title>Brain Buddy v40 — Ranked + Game Reference Match</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -2327,6 +2327,331 @@ body:has(#bbArena:not(.hidden)){
   #bbArena .bbArenaRoomsWrap{width:calc(100% - 18px)!important}
 }
 
+
+/* =========================================================
+   Brain Buddy v40 — Exact-class visual pass
+   Focus: Ranked Arena + Game board from supplied references.
+   ========================================================= */
+
+/* ---------- Ranked Arena ---------- */
+#bbArena{
+  background:
+    radial-gradient(circle at 50% 0%,rgba(255,255,255,.98),transparent 32rem),
+    linear-gradient(180deg,#fff9fc 0%,#f4edff 48%,#eaf5ff 100%)!important;
+}
+#bbArena .bbArenaShell{
+  min-height:100dvh!important;
+  background:transparent!important;
+}
+#bbArena .bbArenaHeader{
+  position:sticky!important;top:0;z-index:50;
+  min-height:92px!important;
+  padding:14px 26px!important;
+  background:rgba(255,255,255,.84)!important;
+  backdrop-filter:blur(20px)!important;
+  border-bottom:1px solid rgba(136,110,170,.12)!important;
+  box-shadow:0 10px 28px rgba(66,43,97,.06)!important;
+}
+#bbArena .bbArenaBrand{gap:14px!important}
+#bbArena .bbArenaBack{
+  width:58px!important;height:58px!important;border-radius:20px!important;
+  background:linear-gradient(145deg,#fff,#f5efff)!important;
+  border:1px solid rgba(135,105,166,.14)!important;
+  color:#6742b1!important;font-size:30px!important;
+  box-shadow:inset 0 3px 4px rgba(255,255,255,.8),0 10px 20px rgba(72,49,104,.08)!important;
+}
+#bbArena .bbArenaBrand span{font-size:11px!important;color:#7a6990!important;font-weight:900!important}
+#bbArena .bbArenaBrand strong{font-size:28px!important;color:#322346!important;letter-spacing:-.03em!important}
+#bbArena .bbArenaMe{
+  border-radius:25px!important;
+  padding:9px 14px!important;
+  background:rgba(255,255,255,.93)!important;
+  border:1px solid rgba(132,103,161,.13)!important;
+  box-shadow:0 10px 22px rgba(74,48,102,.08)!important
+}
+#bbArena .bbArenaOnline{color:#30b867!important;font-size:10px!important}
+#bbArena .bbArenaMeAvatar{
+  width:46px!important;height:46px!important;border-radius:15px!important;
+  background:linear-gradient(145deg,#ffe4f3,#ffd0e8)!important;
+}
+
+#bbArena .bbArenaMain{padding:0 0 100px!important}
+#bbArena .bbArenaLobby{padding-top:1px!important}
+
+#bbArena .bbArenaHero{
+  position:relative!important;
+  width:min(1180px,calc(100% - 36px))!important;
+  min-height:385px!important;
+  margin:22px auto 20px!important;
+  padding:32px!important;
+  border-radius:38px!important;
+  border:2px solid rgba(255,255,255,.55)!important;
+  overflow:hidden!important;
+  background:
+    radial-gradient(circle at 75% 32%,rgba(255,191,237,.65),transparent 15rem),
+    radial-gradient(circle at 88% 20%,rgba(196,160,255,.36),transparent 18rem),
+    linear-gradient(135deg,#3d238f 0%,#6738b7 42%,#9c48c7 68%,#ec70b5 100%)!important;
+  box-shadow:
+    inset 0 5px 8px rgba(255,255,255,.20),
+    inset 0 -16px 24px rgba(51,19,105,.20),
+    0 24px 42px rgba(69,38,117,.22)!important;
+}
+#bbArena .bbArenaHero>div:first-child{position:relative;z-index:3;max-width:63%}
+#bbArena .bbRankedPill{
+  display:inline-flex!important;align-items:center!important;
+  padding:9px 15px!important;border-radius:999px!important;
+  background:rgba(131,84,221,.48)!important;
+  border:1px solid rgba(255,255,255,.20)!important;
+  color:#fff!important;font-size:11px!important;font-weight:1000!important
+}
+#bbArena .bbArenaHero h1{
+  margin:18px 0 9px!important;
+  color:#fff!important;
+  font-size:clamp(3rem,6vw,5.4rem)!important;
+  line-height:.95!important;letter-spacing:-.055em!important;
+  text-shadow:0 8px 22px rgba(45,17,94,.25)!important;
+}
+#bbArena .bbArenaHero p{
+  margin:0!important;color:#f7edff!important;
+  font-size:1.05rem!important;line-height:1.55!important
+}
+#bbArena .bbArenaHero::before{
+  content:"";
+  position:absolute;right:60px;top:45px;width:260px;height:205px;
+  border-radius:48% 52% 48% 52%/52% 48% 52% 48%;
+  background:
+    radial-gradient(circle at 28% 20%,rgba(255,255,255,.85),transparent 13%),
+    linear-gradient(145deg,#ffd4e9,#ff9fcf 43%,#ef68b2 70%,#cb499a);
+  box-shadow:
+    inset 0 11px 15px rgba(255,255,255,.55),
+    inset 0 -22px 26px rgba(130,39,111,.22),
+    0 21px 31px rgba(48,18,91,.30),
+    0 0 34px rgba(255,155,220,.44);
+  transform:rotate(-3deg)
+}
+#bbArena .bbArenaHero::after{
+  content:"";
+  position:absolute;right:105px;top:112px;width:95px;height:60px;
+  border-radius:0 0 50px 50px;background:#702553;
+  box-shadow:-50px -9px 0 -35px #211328,49px -9px 0 -35px #211328;
+}
+
+#bbArena .bbArenaHeroStats{
+  position:absolute!important;left:28px;right:28px;bottom:25px;z-index:4;
+  display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:14px!important;
+}
+#bbArena .bbArenaHeroStats>div{
+  min-height:92px!important;
+  padding:17px 20px!important;
+  border-radius:24px!important;
+  color:#fff!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,.09))!important;
+  border:1px solid rgba(255,255,255,.21)!important;
+  box-shadow:inset 0 3px 4px rgba(255,255,255,.15),0 10px 20px rgba(46,17,92,.10)!important;
+  backdrop-filter:blur(8px)!important;
+}
+#bbArena .bbArenaHeroStats small{color:#f3eaff!important;font-size:11px!important}
+#bbArena .bbArenaHeroStats b{display:block;margin-top:5px;font-size:27px!important;color:#fff!important}
+
+#bbArena .bbArenaActions{
+  width:min(1180px,calc(100% - 36px))!important;
+  margin:0 auto 30px!important;
+  display:grid!important;grid-template-columns:1.25fr 1fr 120px!important;gap:14px!important
+}
+#bbArena .bbArenaAction,
+#bbArena .bbArenaRefresh{
+  min-height:150px!important;
+  border-radius:30px!important;
+  border:2px solid rgba(255,255,255,.75)!important;
+  box-shadow:inset 0 4px 6px rgba(255,255,255,.52),0 15px 28px rgba(71,47,102,.13)!important
+}
+#bbArena .bbArenaAction{
+  padding:20px 22px!important;display:flex!important;align-items:center!important;gap:18px!important;text-align:left!important
+}
+#bbArena .bbArenaAction.create{background:linear-gradient(145deg,#ffe7f3,#ffc3e2 48%,#f7a7d3)!important}
+#bbArena .bbArenaAction.join{background:linear-gradient(145deg,#edf6ff,#dceaff 48%,#c9dbff)!important}
+#bbArena .bbArenaAction i{
+  width:78px!important;height:78px!important;border-radius:24px!important;
+  display:grid!important;place-items:center!important;
+  background:rgba(255,255,255,.53)!important;
+  font-style:normal!important;font-size:0!important;
+  box-shadow:inset 0 4px 6px rgba(255,255,255,.72),0 10px 18px rgba(74,49,106,.12)!important
+}
+#bbArena .bbArenaAction.create i::before{content:"+";font-size:50px;color:#7d3fc2;font-weight:700}
+#bbArena .bbArenaAction.join i::before{
+  content:"";width:33px;height:33px;border-radius:50%;border:11px solid #ffc93f;box-shadow:24px 18px 0 -13px #bf8213
+}
+#bbArena .bbArenaAction b{font-size:24px!important;letter-spacing:-.02em!important}
+#bbArena .bbArenaAction small{display:block;margin-top:4px;font-size:12px!important;color:#6d5c78!important}
+#bbArena .bbArenaRefresh{
+  background:linear-gradient(145deg,#f2f4ff,#dfe4ff)!important;
+  color:#3f74d3!important;font-size:0!important
+}
+#bbArena .bbArenaRefresh::before{content:"↻";font-size:48px;font-weight:900}
+
+#bbArena .bbArenaListHead{
+  width:min(1180px,calc(100% - 36px))!important;
+  margin:0 auto 12px!important;
+  align-items:end!important
+}
+#bbArena .bbArenaListHead h2{font-size:2rem!important;color:#38274f!important}
+#bbArena .bbArenaListHead p{color:#776a80!important}
+#bbArena .bbArenaListHead>span{
+  padding:9px 14px!important;border-radius:999px!important;background:#f6e7ff!important;color:#7b48a9!important;font-weight:900!important
+}
+#bbArena .bbArenaRooms{
+  width:min(1180px,calc(100% - 36px))!important;
+  margin:0 auto!important;
+}
+#bbArena .bbArenaEmpty{
+  min-height:350px!important;
+  border-radius:36px!important;
+  border:2px dashed rgba(164,118,190,.28)!important;
+  background:
+    radial-gradient(circle at 50% 25%,rgba(255,255,255,.96),transparent 12rem),
+    linear-gradient(180deg,rgba(255,255,255,.78),rgba(255,244,251,.88))!important;
+  box-shadow:inset 0 4px 7px rgba(255,255,255,.8),0 18px 32px rgba(82,56,106,.08)!important
+}
+#bbArena .bbArenaEmpty span{font-size:0!important}
+#bbArena .bbArenaEmpty span::before{
+  content:"";display:block;width:92px;height:72px;margin:0 auto 14px;
+  border-radius:48% 52% 46% 54%;
+  background:linear-gradient(145deg,#d3a46f,#a66e42);
+  box-shadow:inset 0 8px 9px rgba(255,255,255,.24),0 10px 18px rgba(79,44,38,.16)
+}
+#bbArena .bbArenaEmpty b{font-size:22px!important;color:#5b3d79!important}
+
+/* ---------- Main game reference match ---------- */
+.bbCandyGameScreen{
+  position:relative!important;
+  min-height:100dvh!important;
+  padding:24px 14px 38px!important;
+  background:
+    radial-gradient(circle at 50% 5%,rgba(181,169,255,.28),transparent 26rem),
+    linear-gradient(180deg,#6d5be8 0%,#9b76f2 23%,#e592dc 52%,#f7b0d8 71%,#fef8fc 100%)!important
+}
+.bbCandyGameScreen .gameCard{
+  width:min(1160px,calc(100% - 18px))!important;
+  margin:0 auto!important;
+  border-radius:38px!important;
+  border:2px solid rgba(255,255,255,.70)!important;
+  background:rgba(255,255,255,.93)!important;
+  box-shadow:0 26px 48px rgba(61,35,102,.20),inset 0 3px 0 rgba(255,255,255,.90)!important
+}
+.bbCandyGameScreen .gameTop{
+  background:linear-gradient(180deg,rgba(255,255,255,.97),rgba(255,251,254,.97))!important;
+  border-bottom:1px solid rgba(210,191,215,.38)!important;
+  border-radius:36px 36px 0 0!important
+}
+.bbCandyGameScreen .statusIcon{
+  background:linear-gradient(145deg,#fff4cf,#ffe0a1)!important;
+  border:1px solid rgba(232,193,96,.22)!important
+}
+.bbCandyGameScreen .stage{padding:20px!important}
+.bbCandyGameScreen .scene{
+  position:relative!important;
+  min-height:640px!important;
+  border-radius:34px!important;
+  background:
+    radial-gradient(circle at 50% 7%,rgba(255,255,255,.96),transparent 18rem),
+    linear-gradient(180deg,#f5f0ff 0%,#fff2fa 52%,#fff 100%)!important;
+  border:1px solid rgba(223,198,220,.45)!important;
+  overflow:hidden!important
+}
+.bbCandyGameScreen .scene::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 8% 22%,rgba(255,218,235,.48),transparent 9rem),
+    radial-gradient(circle at 91% 20%,rgba(205,219,255,.46),transparent 10rem),
+    radial-gradient(circle at 50% 100%,rgba(235,210,255,.36),transparent 14rem)
+}
+.bbCandyGameScreen .sceneTitle{position:relative;z-index:2;padding-top:4px!important}
+.bbCandyGameScreen .sceneTitle h2{
+  font-size:clamp(2.5rem,5vw,4.1rem)!important;
+  color:#6330a7!important;
+  letter-spacing:-.04em!important;
+  text-shadow:0 3px 0 rgba(255,255,255,.85)!important
+}
+.bbCandyGameScreen .sceneTitle p{color:#66596f!important;font-size:13px!important}
+.bbCandyGameScreen .board{
+  position:relative;z-index:2;
+  max-width:980px!important;
+  margin:20px auto 0!important;
+  gap:14px!important
+}
+.bbCandyGameScreen .slot{
+  border-radius:26px!important;
+  background:linear-gradient(180deg,#fff,#fffafd)!important;
+  border:1px solid rgba(219,198,216,.58)!important;
+  box-shadow:
+    inset 0 3px 5px rgba(255,255,255,.78),
+    0 12px 20px rgba(81,52,97,.08)!important;
+  overflow:hidden!important
+}
+.bbCandyGameScreen .slot img{
+  width:100%!important;height:100%!important;object-fit:contain!important;
+  padding:7px!important;box-sizing:border-box!important
+}
+.bbCandyGameScreen .dock{
+  margin:16px 18px 10px!important;padding:10px!important;
+  border-radius:28px!important;background:rgba(255,255,255,.96)!important;
+  border:1px solid rgba(213,195,218,.45)!important;
+  box-shadow:0 10px 22px rgba(76,51,94,.08)!important
+}
+.bbCandyGameScreen .dock .main{
+  min-height:62px!important;
+  border-radius:21px!important;
+  background:linear-gradient(135deg,#f45fae,#ef76b5 52%,#dd56b6)!important;
+  color:#fff!important;font-size:22px!important;font-weight:1000!important;
+  box-shadow:inset 0 4px 6px rgba(255,255,255,.28),0 12px 20px rgba(170,60,134,.19)!important
+}
+.bbCandyGameScreen .dock .secondary{
+  border-radius:20px!important;background:#fff!important
+}
+
+/* ---------- iPad ---------- */
+@media (min-width:700px) and (max-width:1100px){
+  #bbArena .bbArenaHeader{padding:12px 18px!important}
+  #bbArena .bbArenaHero{
+    width:calc(100% - 28px)!important;min-height:360px!important;padding:26px!important
+  }
+  #bbArena .bbArenaHero::before{right:35px;width:225px;height:180px}
+  #bbArena .bbArenaHero::after{right:77px;top:106px}
+  #bbArena .bbArenaHero>div:first-child{max-width:62%!important}
+  #bbArena .bbArenaHero h1{font-size:4.2rem!important}
+  #bbArena .bbArenaHeroStats{left:22px;right:22px}
+  #bbArena .bbArenaActions,
+  #bbArena .bbArenaListHead,
+  #bbArena .bbArenaRooms{width:calc(100% - 28px)!important}
+  #bbArena .bbArenaActions{grid-template-columns:1.25fr 1fr 100px!important}
+  .bbCandyGameScreen .scene{min-height:590px!important}
+  .bbCandyGameScreen .slot{min-height:128px!important}
+}
+
+/* ---------- Phones ---------- */
+@media(max-width:699px){
+  #bbArena .bbArenaHeader{padding:10px 12px!important}
+  #bbArena .bbArenaHero{
+    width:calc(100% - 18px)!important;min-height:500px!important;padding:20px!important
+  }
+  #bbArena .bbArenaHero>div:first-child{max-width:100%!important}
+  #bbArena .bbArenaHero h1{font-size:3rem!important}
+  #bbArena .bbArenaHero p{max-width:100%!important}
+  #bbArena .bbArenaHero::before{width:170px;height:135px;right:20px;top:190px}
+  #bbArena .bbArenaHero::after{right:51px;top:233px}
+  #bbArena .bbArenaHeroStats{
+    position:absolute!important;left:16px!important;right:16px!important;bottom:18px!important;
+    grid-template-columns:1fr!important;gap:7px!important
+  }
+  #bbArena .bbArenaHeroStats>div{min-height:62px!important;padding:11px 14px!important}
+  #bbArena .bbArenaActions{width:calc(100% - 18px)!important;grid-template-columns:1fr!important}
+  #bbArena .bbArenaRefresh{min-height:80px!important}
+  #bbArena .bbArenaListHead,#bbArena .bbArenaRooms{width:calc(100% - 18px)!important}
+  .bbCandyGameScreen{padding:10px 5px 26px!important}
+  .bbCandyGameScreen .scene{min-height:520px!important;padding:12px!important}
+  .bbCandyGameScreen .sceneTitle h2{font-size:2.4rem!important}
+}
+
 </style>
 
 <script>
@@ -4449,7 +4774,7 @@ window.addEventListener("load",()=>{
     $("#bbArena").classList.add("hidden");$("#bbArena").setAttribute("aria-hidden","true");document.body.style.overflow="";
     cleanupRoomChannel();cleanupLobbyChannel();stopCountdown();
   }
-  window.bbOpenRankedArena=openArena;
+  window.bbOpenRankedArena=async function(){document.body.classList.add("bbArenaOpen");return openArena();};
 
   async function restoreRoom(){
     const c=await getClient();if(!c||!user)return false;
