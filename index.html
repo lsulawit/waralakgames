@@ -2983,7 +2983,7 @@ body.bbCandyHome::after{
     width:max-content!important;
     max-width:100%!important;
     display:grid!important;
-    grid-template-columns:repeat(4,48px)!important;
+    grid-template-columns:repeat(3,48px)!important;
     gap:8px!important;
     justify-content:start!important;
     align-items:center!important;
@@ -3189,6 +3189,247 @@ body.bbArenaOpen .v17dock.bbCandyDock{
   display:none!important;
 }
 
+
+/* =========================================================
+   Brain Buddy v45 — candy desktop navigation / no Admin UI
+   ========================================================= */
+
+/* Main desktop/tablet top bar becomes part of the visual system */
+.v17bar.bbCandyDesktopNav{
+  position:sticky!important;
+  top:0!important;
+  z-index:1200!important;
+  border-bottom:1px solid rgba(255,255,255,.54)!important;
+  background:
+    linear-gradient(90deg,
+      rgba(255,239,249,.94) 0%,
+      rgba(240,232,255,.94) 48%,
+      rgba(226,239,255,.94) 100%)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(1.18)!important;
+  backdrop-filter:blur(22px) saturate(1.18)!important;
+  box-shadow:
+    inset 0 -1px 0 rgba(151,112,195,.08),
+    0 10px 30px rgba(86,54,121,.09)!important;
+}
+
+.v17bar.bbCandyDesktopNav .v17barin{
+  width:min(100% - 34px,1440px)!important;
+  max-width:1440px!important;
+  min-height:82px!important;
+  padding:10px 0!important;
+  display:grid!important;
+  grid-template-columns:auto minmax(0,1fr)!important;
+  align-items:center!important;
+  gap:30px!important;
+}
+
+/* Brand */
+.bbNavBrand{
+  min-width:max-content!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:10px!important;
+  color:inherit!important;
+}
+
+.bbNavBrain{
+  width:44px;height:40px;
+  position:relative;
+  display:block;
+  border-radius:47% 53% 45% 55%;
+  background:
+    radial-gradient(circle at 28% 23%,rgba(255,255,255,.78),transparent 15%),
+    linear-gradient(145deg,#ffcde4,#ff88bd 54%,#d94a98);
+  border:1px solid rgba(255,205,230,.9);
+  box-shadow:
+    inset 5px 6px 7px rgba(255,255,255,.42),
+    inset -7px -8px 10px rgba(141,44,113,.18),
+    0 7px 12px rgba(102,48,104,.18);
+}
+.bbNavBrain::before,
+.bbNavBrain::after{
+  content:"";
+  position:absolute;
+  width:19px;height:22px;
+  top:8px;border-radius:50%;
+  border-top:3px solid rgba(166,54,130,.44);
+}
+.bbNavBrain::before{left:4px;transform:rotate(-15deg)}
+.bbNavBrain::after{right:4px;transform:rotate(15deg)}
+
+.bbNavBrand strong{
+  display:flex!important;
+  align-items:center!important;
+  gap:6px!important;
+  font-family:"Arial Rounded MT Bold","SF Pro Rounded","Noto Sans Thai",system-ui,sans-serif!important;
+  font-size:27px!important;
+  line-height:1!important;
+  letter-spacing:-.045em!important;
+}
+.bbNavBrand strong i{
+  font-style:normal!important;
+  color:#f05f9f!important;
+  text-shadow:0 3px 0 rgba(178,56,119,.15);
+}
+.bbNavBrand strong b{
+  color:#39bde8!important;
+  text-shadow:0 3px 0 rgba(36,125,183,.14);
+}
+.bbNavSpark{
+  width:14px;height:14px;
+  margin-left:1px;
+  transform:rotate(45deg);
+  border-radius:4px;
+  background:linear-gradient(145deg,#fffbd8,#ffd649);
+  box-shadow:0 0 11px rgba(255,224,91,.55);
+}
+
+/* Nav group */
+.v17bar.bbCandyDesktopNav .v17tabs{
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  gap:10px!important;
+  min-width:0!important;
+}
+
+.v17bar.bbCandyDesktopNav .v17b{
+  min-height:52px!important;
+  padding:0 19px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:9px!important;
+  border-radius:18px!important;
+  border:1px solid rgba(135,104,166,.13)!important;
+  color:#493a60!important;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.94),rgba(250,246,255,.87))!important;
+  box-shadow:
+    inset 0 2px 2px rgba(255,255,255,.9),
+    0 7px 16px rgba(86,55,113,.07)!important;
+  font-size:13px!important;
+  font-weight:950!important;
+  text-decoration:none!important;
+  white-space:nowrap!important;
+}
+
+.v17bar.bbCandyDesktopNav .v17b.play{
+  color:#fff!important;
+  border-color:rgba(255,255,255,.30)!important;
+  background:linear-gradient(145deg,#f66cad,#ee79b9)!important;
+  box-shadow:
+    inset 0 2px 3px rgba(255,255,255,.30),
+    0 10px 20px rgba(223,82,154,.20)!important;
+}
+.v17bar.bbCandyDesktopNav .v17b.rank{
+  color:#79530f!important;
+  background:linear-gradient(145deg,#fff8de,#ffe79f)!important;
+}
+.v17bar.bbCandyDesktopNav .v17b.arena{
+  color:#fff!important;
+  border-color:rgba(255,255,255,.23)!important;
+  background:linear-gradient(145deg,#6840b9,#7855dc)!important;
+  box-shadow:
+    inset 0 2px 3px rgba(255,255,255,.22),
+    0 10px 20px rgba(91,55,168,.21)!important;
+}
+.v17bar.bbCandyDesktopNav .v17b.profile{
+  background:linear-gradient(145deg,#f7f4ff,#edf3ff)!important;
+}
+
+.v17bar.bbCandyDesktopNav .v17b:hover{
+  transform:translateY(-2px)!important;
+  filter:brightness(1.02);
+}
+
+/* CSS-drawn navigation icons */
+.bbNavIcon{
+  position:relative!important;
+  display:block!important;
+  flex:0 0 22px!important;
+  width:22px!important;
+  height:22px!important;
+  margin:0!important;
+  font-size:0!important;
+  color:currentColor!important;
+  font-style:normal!important;
+}
+
+.bbNavIcon.home::before{
+  content:"";position:absolute;left:4px;top:9px;width:15px;height:12px;border-radius:2px;background:currentColor
+}
+.bbNavIcon.home::after{
+  content:"";position:absolute;left:4px;top:3px;width:14px;height:14px;transform:rotate(45deg);border-radius:2px;background:currentColor;clip-path:polygon(0 0,100% 0,0 100%)
+}
+
+.bbNavIcon.play::before{
+  content:"";position:absolute;inset:5px 0 3px;border-radius:8px 8px 10px 10px;background:currentColor
+}
+.bbNavIcon.play::after{
+  content:"";position:absolute;left:5px;top:10px;width:4px;height:4px;border-radius:50%;background:#fceefa;
+  box-shadow:9px -2px 0 #fceefa,13px 3px 0 #fceefa
+}
+
+.bbNavIcon.arena::before,
+.bbNavIcon.arena::after{
+  content:"";position:absolute;left:9px;top:0;width:3px;height:22px;border-radius:3px;background:currentColor;transform:rotate(43deg)
+}
+.bbNavIcon.arena::after{transform:rotate(-43deg)}
+
+.bbNavIcon.rank::before{
+  content:"";position:absolute;left:6px;top:2px;width:11px;height:11px;border-radius:2px 2px 6px 6px;background:currentColor;
+  box-shadow:0 10px 0 -4px currentColor,0 15px 0 -2px currentColor
+}
+.bbNavIcon.rank::after{
+  content:"";position:absolute;left:1px;top:4px;width:20px;height:9px;border:2px solid currentColor;border-top:0;border-radius:0 0 10px 10px;opacity:.78
+}
+
+.bbNavIcon.profile::before{
+  content:"";position:absolute;left:7px;top:1px;width:9px;height:9px;border-radius:50%;background:currentColor
+}
+.bbNavIcon.profile::after{
+  content:"";position:absolute;left:3px;bottom:1px;width:17px;height:10px;border-radius:10px 10px 4px 4px;background:currentColor
+}
+
+/* There is intentionally no Admin button in the public UI.
+   /admin remains available only by entering the URL directly. */
+.v17b.admin,
+#bbHomeAdmin,
+#bbSetupAdmin{
+  display:none!important;
+}
+
+/* Tablet width: keep it tidy */
+@media(max-width:1050px) and (min-width:821px){
+  .v17bar.bbCandyDesktopNav .v17barin{
+    width:min(100% - 24px,1240px)!important;
+    gap:18px!important;
+  }
+  .bbNavBrand strong{font-size:23px!important}
+  .bbNavBrain{width:39px;height:36px}
+  .v17bar.bbCandyDesktopNav .v17tabs{gap:7px!important}
+  .v17bar.bbCandyDesktopNav .v17b{
+    min-height:48px!important;
+    padding:0 13px!important;
+    font-size:11px!important;
+    gap:7px!important;
+  }
+  .bbNavIcon{width:19px!important;height:19px!important;flex-basis:19px!important}
+}
+
+/* On mobile, the separate candy bottom dock is used instead. */
+@media(max-width:820px){
+  .v17bar.bbCandyDesktopNav .v17tabs{display:none!important}
+  .v17bar.bbCandyDesktopNav .v17barin{
+    grid-template-columns:1fr!important;
+    min-height:62px!important;
+    width:min(100% - 20px,1240px)!important;
+  }
+  .bbNavBrand strong{font-size:20px!important}
+  .bbNavBrain{width:35px;height:33px}
+}
+
 </style>
 
 <script>
@@ -3381,16 +3622,19 @@ try{
 </head>
 <body>
 
-<nav class="v17bar"><div class="v17barin">
- <div class="v17brand">🧠 Brain Buddy</div>
- <div class="v17tabs">
-  <button class="v17b" data-v17="home">🏠 หน้าแรก</button>
-  <button class="v17b play" data-v17="play">🎮 เล่นเกม</button>
-  <button class="v17b" data-v17="rank">🏆 อันดับผู้เล่น</button>
-  <button class="v17b bbArenaNavBtn" data-v17="arena">⚔️ สนามจัดอันดับ</button>
-  <button class="v17b" data-v17="profile">👤 โปรไฟล์</button>
+<nav class="v17bar bbCandyDesktopNav"><div class="v17barin">
+ <div class="v17brand bbNavBrand">
+   <span class="bbNavBrain" aria-hidden="true"></span>
+   <strong><i>Brain</i> <b>Buddy</b></strong>
+   <span class="bbNavSpark" aria-hidden="true"></span>
  </div>
- <a class="v17b admin" href="/admin">🛠️ แอดมิน</a>
+ <div class="v17tabs">
+  <button class="v17b" data-v17="home"><i class="bbNavIcon home"></i><span>หน้าแรก</span></button>
+  <button class="v17b play" data-v17="play"><i class="bbNavIcon play"></i><span>เล่นเกม</span></button>
+  <button class="v17b rank" data-v17="rank"><i class="bbNavIcon rank"></i><span>อันดับผู้เล่น</span></button>
+  <button class="v17b bbArenaNavBtn arena" data-v17="arena"><i class="bbNavIcon arena"></i><span>สนามจัดอันดับ</span></button>
+  <button class="v17b profile" data-v17="profile"><i class="bbNavIcon profile"></i><span>โปรไฟล์</span></button>
+ </div>
 </div></nav>
 <section class="bbPlayerStatus" aria-label="สถานะผู้เล่น">
   <div class="bbPlayerStatusInner">
@@ -3605,7 +3849,7 @@ try{
         <button class="bbHomeIcon" data-app-action="profile" aria-label="โปรไฟล์"><span class="miniBear"></span></button>
         <button class="bbHomeIcon homeMusicIcon" id="bbHomeMusic" aria-label="เปิดปิดเพลง"><span></span></button>
         <button class="bbHomeIcon homeMoonIcon" id="bbHomeTheme" aria-label="เปลี่ยนธีม"><span></span></button>
-        <button class="bbHomeIcon homeToolsIcon" id="bbHomeAdmin" aria-label="แอดมิน"><span></span></button>
+        
       </div>
     </header>
 
@@ -3832,7 +4076,7 @@ try{
         <button data-app-action="arena">สนามจัดอันดับ</button>
         <button data-app-action="profile">โปรไฟล์</button>
       </nav>
-      <button class="bbSetupAdmin" id="bbSetupAdmin">แอดมิน</button>
+      
     </header>
 
     <div class="bbSetupHero">
@@ -6317,8 +6561,6 @@ window.addEventListener("load",()=>{
   $("#bbCandyTheme")?.addEventListener("click",()=>$("#themeBtn")?.click());
   $("#bbHomeMusic")?.addEventListener("click",()=>$("#musicBtn")?.click());
   $("#bbHomeTheme")?.addEventListener("click",()=>$("#themeBtn")?.click());
-  $("#bbHomeAdmin")?.addEventListener("click",()=>{ window.location.href="/admin"; });
-  $("#bbSetupAdmin")?.addEventListener("click",()=>{ window.location.href="/admin"; });
 
   $("#bbAppStartBtn")?.addEventListener("click",startNormalGame);
   $("#bbAppGameBack")?.addEventListener("click",()=>returnToMenu(false));
