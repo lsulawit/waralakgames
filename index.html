@@ -6282,6 +6282,301 @@ body.bbHeroUsesBear.bbHeroBearHasImage #bbEquippedHeroCharacterImg{
   .bbInventoryAction{min-height:44px}
 }
 
+
+/* =========================================================
+   Brain Buddy v63 — Brain Coins Top Up / Order page
+   ========================================================= */
+
+.bbShopWalletTopup,
+.bbInventoryWalletTopup{
+  border:0;
+  cursor:pointer;
+}
+.bbShopWalletText,
+.bbInventoryWalletText{
+  display:flex;
+  flex-direction:column;
+  text-align:left;
+}
+.bbShopWalletPlus,
+.bbInventoryWalletTopup .plus{
+  display:grid;
+  place-items:center;
+  width:26px;height:26px;
+  border-radius:9px;
+  background:#f1e7ff;
+  color:#7859b6;
+  font-size:1.1rem;
+  font-weight:1000;
+}
+
+.bbTopupScreen{
+  min-height:100dvh;
+  position:relative;
+  overflow:hidden;
+  padding:18px 16px 110px;
+  background:
+    radial-gradient(circle at 8% 5%,rgba(156,235,255,.96),transparent 27%),
+    radial-gradient(circle at 92% 7%,rgba(255,193,224,.94),transparent 29%),
+    linear-gradient(180deg,#7664df 0%,#9871e1 38%,#da8ed6 68%,#ffc1bf 100%);
+}
+.bbTopupSky{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.bbTopupSky .bubble{
+  position:absolute;border-radius:50%;
+  background:radial-gradient(circle at 28% 25%,#fff,rgba(255,255,255,.18) 34%,rgba(119,207,255,.52) 70%);
+  box-shadow:0 12px 23px rgba(51,29,108,.15)
+}
+.bbTopupSky .bubble.b1{width:28px;height:28px;left:5%;top:190px}
+.bbTopupSky .bubble.b2{width:18px;height:18px;right:8%;top:250px}
+.bbTopupSky .bubble.b3{width:34px;height:34px;right:19%;bottom:155px}
+.bbTopupSky .star{
+  position:absolute;width:12px;height:12px;border-radius:4px;transform:rotate(45deg);
+  background:linear-gradient(145deg,#fff8b5,#ffd448);box-shadow:0 0 13px rgba(255,240,120,.95)
+}
+.bbTopupSky .star.s1{left:21%;top:90px}.bbTopupSky .star.s2{right:19%;top:135px}.bbTopupSky .star.s3{left:10%;bottom:220px}
+
+.bbTopupTop,.bbTopupHero,.bbTopupGuest,.bbTopupBody{
+  position:relative;z-index:2;max-width:1180px;margin-left:auto;margin-right:auto
+}
+.bbTopupTop{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.bbTopupBack{
+  width:52px;height:52px;border:0;border-radius:17px;display:grid;place-items:center;
+  color:#7658c7;background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(244,233,255,.94));
+  box-shadow:inset 0 3px 5px #fff,0 10px 18px rgba(48,25,102,.18)
+}
+.bbTopupBack svg{width:25px;height:25px}
+.bbTopupBrand{display:flex;align-items:center;gap:10px;flex:1;color:#fff}
+.bbTopupBrand small{display:block;font-size:.66rem;letter-spacing:.13em;font-weight:1000;opacity:.8}
+.bbTopupBrand h2{margin:1px 0 0;font-size:1.75rem;line-height:1;font-weight:1000}
+.bbTopupCoinBrand{
+  width:49px;height:49px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(145deg,#fff6a7,#ffc33b);
+  border:3px solid rgba(255,255,255,.7);color:#a96b08;font-weight:1000;
+  box-shadow:inset 0 4px 5px rgba(255,255,255,.73),0 8px 14px rgba(83,50,11,.16)
+}
+.bbTopupCurrentWallet{
+  padding:9px 14px;border-radius:19px;text-align:right;
+  background:rgba(255,255,255,.9);
+  box-shadow:inset 0 3px 5px #fff,0 10px 18px rgba(48,25,102,.15)
+}
+.bbTopupCurrentWallet small{display:block;color:#8e7998;font-size:.63rem;font-weight:850}
+.bbTopupCurrentWallet strong{color:#62427e;font-size:1rem;font-weight:1000}
+
+.bbTopupHero{
+  display:grid;grid-template-columns:1fr .45fr;align-items:center;gap:18px;
+  padding:25px 28px;border-radius:33px;color:#fff;
+  border:2px solid rgba(255,255,255,.4);
+  background:linear-gradient(135deg,rgba(103,78,218,.91),rgba(177,100,219,.87) 55%,rgba(251,137,191,.86));
+  box-shadow:inset 0 5px 7px rgba(255,255,255,.28),0 17px 29px rgba(43,23,96,.22)
+}
+.bbTopupHero .pill{
+  display:inline-flex;padding:6px 11px;border-radius:999px;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);
+  color:#fff4bd;font-size:.66rem;font-weight:1000;letter-spacing:.11em
+}
+.bbTopupHero h1{margin:9px 0 7px;font-size:clamp(2rem,4vw,3rem);line-height:1;font-weight:1000}
+.bbTopupHero p{margin:0;max-width:720px;color:#f7eaff;font-weight:650}
+.bbTopupHeroCoins{position:relative;min-height:180px}
+.bbTopupHeroCoins .coin{
+  position:absolute;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(145deg,#fff8a7,#ffc53a);border:4px solid rgba(255,255,255,.62);
+  color:#a66a08;font-weight:1000;
+  box-shadow:inset 0 6px 7px rgba(255,255,255,.67),0 15px 23px rgba(87,51,10,.2)
+}
+.bbTopupHeroCoins .c1{width:104px;height:104px;right:45px;top:32px;font-size:2rem;transform:rotate(8deg)}
+.bbTopupHeroCoins .c2{width:69px;height:69px;right:5px;top:5px;transform:rotate(-10deg)}
+.bbTopupHeroCoins .c3{width:57px;height:57px;right:6px;bottom:4px;transform:rotate(13deg)}
+.bbTopupHeroCoins .shine{
+  position:absolute;width:13px;height:13px;border-radius:4px;transform:rotate(45deg);
+  background:#fff7ac;box-shadow:0 0 13px rgba(255,242,126,.94)
+}
+.bbTopupHeroCoins .sh1{left:22px;top:30px}.bbTopupHeroCoins .sh2{left:52px;bottom:20px}
+
+.bbTopupGuest{
+  margin-top:14px;padding:14px 16px;border-radius:24px;
+  display:flex;align-items:center;gap:13px;background:rgba(255,255,255,.92);
+  box-shadow:0 12px 20px rgba(43,24,92,.15)
+}
+.bbTopupGuest .icon{
+  width:50px;height:50px;border-radius:17px;position:relative;
+  background:linear-gradient(180deg,#d7c9ff,#ac8aeb)
+}
+.bbTopupGuest .icon::before{
+  content:"";position:absolute;left:16px;top:8px;width:18px;height:18px;border-radius:50%;background:#fff
+}
+.bbTopupGuest .icon::after{
+  content:"";position:absolute;left:10px;right:10px;bottom:7px;height:19px;border-radius:17px 17px 9px 9px;background:#fff
+}
+.bbTopupGuest>div:nth-child(2){flex:1}
+.bbTopupGuest strong{color:#5d4075;font-weight:1000}
+.bbTopupGuest p{margin:2px 0 0;color:#8c7895;font-size:.82rem}
+.bbTopupGuest button{
+  border:0;border-radius:16px;padding:11px 16px;color:#fff;font-weight:950;
+  background:linear-gradient(180deg,#9879ea,#7457cf)
+}
+
+.bbTopupBody{
+  margin-top:14px;padding:18px;border-radius:30px;
+  background:rgba(255,255,255,.91);border:2px solid rgba(255,255,255,.67);
+  box-shadow:0 18px 28px rgba(43,24,92,.17);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)
+}
+.bbTopupSectionHead,.bbTopupOrderHead{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px
+}
+.bbTopupSectionHead small,.bbTopupOrderHead small{
+  display:block;color:#a16ba1;font-size:.66rem;letter-spacing:.12em;font-weight:1000
+}
+.bbTopupSectionHead h3,.bbTopupOrderHead h3{
+  margin:2px 0 0;color:#5d4074;font-size:1.4rem;font-weight:1000
+}
+.bbTopupSafeLabel{
+  padding:7px 11px;border-radius:999px;background:#eafff4;color:#3e8064;font-size:.68rem;font-weight:950
+}
+
+.bbTopupPackages{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px
+}
+.bbTopupLoading{
+  grid-column:1/-1;padding:30px 18px;border-radius:22px;text-align:center;
+  color:#8a7793;background:#faf7fc;font-weight:850
+}
+.bbCoinPackage{
+  min-width:0;position:relative;overflow:hidden;padding:15px;border-radius:25px;
+  border:1px solid #eee2f0;background:linear-gradient(180deg,#fff,#fff8fc);
+  box-shadow:0 10px 18px rgba(81,51,101,.08)
+}
+.bbCoinPackage.popular{
+  border-color:rgba(146,103,225,.28);
+  box-shadow:0 0 0 4px rgba(149,110,227,.08),0 12px 20px rgba(81,51,101,.1)
+}
+.bbCoinPackage.best{
+  background:linear-gradient(155deg,#fff9d8,#fff1bf 48%,#ffe4ef);
+  border-color:rgba(234,176,70,.28)
+}
+.bbCoinPackageBadge{
+  position:absolute;right:10px;top:10px;padding:5px 8px;border-radius:999px;
+  color:#fff;background:linear-gradient(180deg,#f08ab8,#d85f9b);font-size:.6rem;font-weight:1000
+}
+.bbCoinPackage.best .bbCoinPackageBadge{background:linear-gradient(180deg,#f4bf45,#d79a20)}
+.bbCoinPackageArt{
+  height:90px;position:relative;display:grid;place-items:center
+}
+.bbCoinPackageArt .mainCoin{
+  width:74px;height:74px;border-radius:50%;display:grid;place-items:center;
+  color:#a56808;font-size:1.45rem;font-weight:1000;
+  background:linear-gradient(145deg,#fff7a4,#ffc138);
+  border:4px solid rgba(255,255,255,.72);
+  box-shadow:inset 0 5px 6px rgba(255,255,255,.72),0 9px 15px rgba(119,71,12,.17)
+}
+.bbCoinPackage h4{margin:5px 0 1px;color:#5e4275;font-size:1.05rem;font-weight:1000}
+.bbCoinPackage .coins{color:#7756b0;font-size:1.45rem;font-weight:1000}
+.bbCoinPackage .bonus{min-height:1.4em;color:#3e9871;font-size:.72rem;font-weight:900}
+.bbCoinPackage .price{
+  margin:9px 0 10px;padding-top:9px;border-top:1px solid #efe7f1;
+  display:flex;align-items:baseline;gap:4px;color:#5d4272
+}
+.bbCoinPackage .price strong{font-size:1.5rem;font-weight:1000}
+.bbCoinPackage .price span{font-size:.75rem;font-weight:850}
+.bbCoinPackage button{
+  width:100%;min-height:44px;border:0;border-radius:15px;color:#fff;font-weight:1000;
+  background:linear-gradient(180deg,#9979e9,#7457cf);
+  box-shadow:inset 0 3px 4px rgba(255,255,255,.24),0 7px 12px rgba(79,51,129,.14)
+}
+
+.bbTopupOrderPanel{
+  margin-top:18px;padding-top:16px;border-top:1px solid #eee5f1
+}
+.bbTopupOrderHead button{
+  border:0;border-radius:13px;padding:8px 11px;background:#f3ebfa;color:#765c9f;font-weight:900
+}
+.bbTopupOrders{display:grid;gap:8px}
+.bbTopupOrderRow{
+  display:grid;grid-template-columns:1.2fr .75fr .75fr auto;align-items:center;gap:9px;
+  padding:10px 12px;border-radius:17px;background:#faf7fc;border:1px solid #f0e8f2
+}
+.bbTopupOrderRow .name{min-width:0}
+.bbTopupOrderRow .name strong{
+  display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#5e4472;font-size:.82rem
+}
+.bbTopupOrderRow .name small{display:block;color:#99879e;font-size:.6rem}
+.bbTopupOrderRow .coins,.bbTopupOrderRow .price{color:#70578c;font-size:.75rem;font-weight:900}
+.bbTopupOrderStatus{
+  padding:5px 8px;border-radius:999px;white-space:nowrap;font-size:.62rem;font-weight:1000
+}
+.bbTopupOrderStatus.pending{background:#fff2c9;color:#a47412}
+.bbTopupOrderStatus.paid{background:#dcfff0;color:#337b5d}
+.bbTopupOrderStatus.failed,.bbTopupOrderStatus.cancelled{background:#ffe7ed;color:#a84b6a}
+.bbTopupOrderStatus.refunded{background:#eaf0ff;color:#586fa6}
+
+.bbTopupOrderModal{
+  position:fixed;inset:0;z-index:9000;display:grid;place-items:center;padding:16px;
+  background:rgba(48,30,70,.44);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)
+}
+.bbTopupOrderModal.hidden{display:none!important}
+.bbTopupOrderCard{
+  width:min(94vw,480px);padding:22px;border-radius:28px;text-align:center;
+  background:linear-gradient(180deg,#fff,#fff9fc);
+  box-shadow:0 24px 55px rgba(40,23,66,.3)
+}
+.bbTopupOrderSuccess{
+  width:58px;height:58px;margin:0 auto 8px;border-radius:50%;display:grid;place-items:center;
+  color:#fff;font-size:1.5rem;font-weight:1000;background:linear-gradient(180deg,#6fd5a9,#45ae83);
+  box-shadow:0 9px 16px rgba(66,164,125,.2)
+}
+.bbTopupOrderCard>small{color:#9b78a3;font-size:.66rem;letter-spacing:.12em;font-weight:1000}
+.bbTopupOrderCard h3{margin:4px 0;color:#5d4074;font-size:1.45rem;font-weight:1000}
+.bbTopupOrderCard>p{margin:0 auto 13px;max-width:390px;color:#8b7892;font-size:.82rem}
+.bbTopupOrderSummary{display:grid;grid-template-columns:1fr 1fr;gap:7px;text-align:left}
+.bbTopupOrderSummary>div{padding:10px;border-radius:14px;background:#f8f3fa}
+.bbTopupOrderSummary span{display:block;color:#9a879f;font-size:.62rem;font-weight:800}
+.bbTopupOrderSummary strong{display:block;color:#604677;font-size:.83rem;font-weight:1000}
+.bbTopupOrderSummary strong.pending{color:#a37210}
+.bbTopupOrderId{
+  margin-top:9px;padding:9px 10px;border-radius:14px;background:#f3eff8
+}
+.bbTopupOrderId small{display:block;color:#9c88a3;font-size:.58rem;font-weight:850}
+.bbTopupOrderId code{display:block;overflow-wrap:anywhere;color:#684d7d;font-size:.66rem}
+.bbTopupOrderCard>button{
+  width:100%;margin-top:12px;min-height:45px;border:0;border-radius:15px;
+  color:#fff;background:linear-gradient(180deg,#9979e9,#7457cf);font-weight:1000
+}
+
+.bbTopupToast{
+  position:fixed;left:50%;bottom:90px;z-index:9200;transform:translateX(-50%);
+  min-width:220px;max-width:min(90vw,480px);padding:12px 16px;border-radius:17px;
+  color:#fff;background:rgba(69,47,90,.95);text-align:center;font-weight:850;
+  box-shadow:0 12px 24px rgba(41,23,72,.27)
+}
+
+@media(max-width:800px){
+  .bbTopupPackages{grid-template-columns:1fr}
+  .bbTopupHero{grid-template-columns:1fr .35fr}
+}
+@media(max-width:640px){
+  .bbTopupScreen{padding:12px 10px 105px}
+  .bbTopupBack{width:44px;height:44px;border-radius:14px}
+  .bbTopupBrand h2{font-size:1.25rem}
+  .bbTopupCoinBrand{width:42px;height:42px}
+  .bbTopupCurrentWallet{padding:7px 9px;border-radius:15px}
+  .bbTopupCurrentWallet small{font-size:.56rem}
+  .bbTopupCurrentWallet strong{font-size:.83rem}
+  .bbTopupHero{grid-template-columns:1fr;padding:18px;border-radius:26px}
+  .bbTopupHeroCoins{display:none}
+  .bbTopupHero h1{font-size:1.85rem}
+  .bbTopupHero p{font-size:.78rem}
+  .bbTopupGuest{align-items:flex-start;flex-wrap:wrap}
+  .bbTopupGuest>div:nth-child(2){min-width:calc(100% - 70px)}
+  .bbTopupGuest button{width:100%}
+  .bbTopupBody{padding:10px;border-radius:24px}
+  .bbTopupSectionHead{align-items:flex-start;flex-direction:column}
+  .bbTopupOrderRow{
+    grid-template-columns:1fr auto;
+  }
+  .bbTopupOrderRow .coins,.bbTopupOrderRow .price{font-size:.69rem}
+  .bbTopupOrderSummary{grid-template-columns:1fr}
+}
+
 </style>
 
 <script>
@@ -6956,7 +7251,7 @@ try{
             <small>BRAIN COINS</small>
             <strong id="bbHomeCoinBalance">—</strong>
           </span>
-          <button type="button" class="bbHomeWalletShopBtn" data-app-go="shop">ร้านค้า</button>
+          <button type="button" class="bbHomeWalletShopBtn" data-app-go="topup">เติม Coins</button>
         </div>
 
         <div class="bbHomeCollectionHead">
@@ -7085,6 +7380,112 @@ try{
 
 
 
+
+<section class="bbAppScreen bbTopupScreen" id="bbAppTopup" data-app-screen="topup">
+  <div class="bbTopupSky" aria-hidden="true">
+    <i class="bubble b1"></i><i class="bubble b2"></i><i class="bubble b3"></i>
+    <i class="star s1"></i><i class="star s2"></i><i class="star s3"></i>
+  </div>
+
+  <header class="bbTopupTop">
+    <button class="bbTopupBack" type="button" data-app-go="home" aria-label="กลับหน้าหลัก">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M38 14 20 32l18 18" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <div class="bbTopupBrand">
+      <span class="bbTopupCoinBrand">B</span>
+      <div>
+        <small>BRAIN BUDDY</small>
+        <h2>เติม Brain Coins</h2>
+      </div>
+    </div>
+
+    <div class="bbTopupCurrentWallet">
+      <small>ยอดของคุณ</small>
+      <strong><span id="bbTopupBalance">—</span> Coins</strong>
+    </div>
+  </header>
+
+  <section class="bbTopupHero">
+    <div class="copy">
+      <span class="pill">COIN STORE</span>
+      <h1>เลือกแพ็กเกจ Brain Coins</h1>
+      <p>ขั้นนี้เป็นระบบ Order สำหรับทดสอบเท่านั้น ยังไม่มีการตัดเงินจริง และ Coins จะยังไม่ถูกเพิ่มจนกว่าจะมีระบบยืนยันการชำระเงิน</p>
+    </div>
+
+    <div class="bbTopupHeroCoins" aria-hidden="true">
+      <span class="coin c1">B</span>
+      <span class="coin c2">B</span>
+      <span class="coin c3">B</span>
+      <span class="shine sh1"></span>
+      <span class="shine sh2"></span>
+    </div>
+  </section>
+
+  <section class="bbTopupGuest hidden" id="bbTopupGuest">
+    <div class="icon"></div>
+    <div>
+      <strong>เข้าสู่ระบบก่อนเติม Brain Coins</strong>
+      <p>คำสั่งซื้อและยอด Coins จะผูกกับบัญชีสมาชิกของคุณ</p>
+    </div>
+    <button type="button" id="bbTopupLoginBtn">เข้าสู่ระบบ</button>
+  </section>
+
+  <section class="bbTopupBody" id="bbTopupBody">
+    <div class="bbTopupSectionHead">
+      <div>
+        <small>SELECT PACKAGE</small>
+        <h3>แพ็กเกจเติม Coins</h3>
+      </div>
+      <span class="bbTopupSafeLabel">Order ก่อน • Coins ทีหลัง</span>
+    </div>
+
+    <div class="bbTopupPackages" id="bbTopupPackages">
+      <div class="bbTopupLoading">กำลังโหลดแพ็กเกจ…</div>
+    </div>
+
+    <div class="bbTopupOrderPanel">
+      <div class="bbTopupOrderHead">
+        <div>
+          <small>RECENT ORDERS</small>
+          <h3>คำสั่งซื้อล่าสุด</h3>
+        </div>
+        <button type="button" id="bbTopupRefresh">รีเฟรช</button>
+      </div>
+      <div id="bbTopupOrders" class="bbTopupOrders">
+        <div class="bbTopupLoading">กำลังโหลด Order…</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="bbTopupOrderModal hidden" id="bbTopupOrderModal" role="dialog" aria-modal="true" aria-labelledby="bbTopupOrderTitle">
+    <div class="bbTopupOrderCard">
+      <div class="bbTopupOrderSuccess">✓</div>
+      <small>ORDER CREATED</small>
+      <h3 id="bbTopupOrderTitle">สร้าง Order แล้ว</h3>
+      <p>ยังไม่มีการชำระเงินจริง และยังไม่เพิ่ม Brain Coins ในขั้นนี้</p>
+
+      <div class="bbTopupOrderSummary">
+        <div><span>แพ็กเกจ</span><strong id="bbTopupOrderPackage">—</strong></div>
+        <div><span>Coins ที่จะได้รับ</span><strong id="bbTopupOrderCoins">—</strong></div>
+        <div><span>ราคา</span><strong id="bbTopupOrderPrice">—</strong></div>
+        <div><span>สถานะ</span><strong class="pending">รอชำระเงิน</strong></div>
+      </div>
+
+      <div class="bbTopupOrderId">
+        <small>ORDER ID</small>
+        <code id="bbTopupOrderId">—</code>
+      </div>
+
+      <button type="button" id="bbTopupOrderClose">เรียบร้อย</button>
+    </div>
+  </div>
+
+  <div class="bbTopupToast hidden" id="bbTopupToast"></div>
+</section>
+
 <section class="bbAppScreen bbInventoryScreen" id="bbAppInventory" data-app-screen="inventory">
   <div class="bbInventorySky" aria-hidden="true">
     <i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i>
@@ -7106,13 +7507,14 @@ try{
       </div>
     </div>
 
-    <div class="bbInventoryWallet">
+    <button class="bbInventoryWallet bbInventoryWalletTopup" type="button" data-app-go="topup">
       <span class="coin">B</span>
-      <div>
+      <span class="bbInventoryWalletText">
         <small>Brain Coins</small>
         <strong id="bbInventoryBalance">—</strong>
-      </div>
-    </div>
+      </span>
+      <span class="plus">+</span>
+    </button>
   </header>
 
   <section class="bbInventoryHero">
@@ -7183,13 +7585,14 @@ try{
       </div>
     </div>
 
-    <div class="bbShopWallet">
+    <button class="bbShopWallet bbShopWalletTopup" type="button" data-app-go="topup">
       <span class="bbCoinGlyph" aria-hidden="true">B</span>
-      <div>
+      <span class="bbShopWalletText">
         <small>Brain Coins</small>
         <strong id="bbShopBalance">—</strong>
-      </div>
-    </div>
+      </span>
+      <span class="bbShopWalletPlus">+</span>
+    </button>
   </header>
 
   <section class="bbShopHero">
@@ -10083,10 +10486,11 @@ window.addEventListener("load",()=>{
     if(typeof setDockActive==="function"){
       if(next==="home")setDockActive("home");
       else if(next==="modes"||next==="setup")setDockActive("play");
-      else if(next==="shop"||next==="inventory")setDockActive("shop");
+      else if(next==="shop"||next==="inventory"||next==="topup")setDockActive("shop");
     }
     if(next==="shop")window.bbLoadShop?.();
     if(next==="inventory")window.bbLoadInventory?.();
+    if(next==="topup")window.bbLoadTopup?.();
     window.scrollTo({top:0,behavior:"smooth"});syncSetup();
     return true;
   }
@@ -11595,6 +11999,256 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener("bb:auth-changed",()=>{
     setTimeout(loadInventory,120);
+  });
+})();
+</script>
+
+
+<script>
+(function brainBuddyV63Topup(){
+  const q=s=>document.querySelector(s);
+  let busy=false;
+
+  function client(){
+    if(window.__bbSupabase)return window.__bbSupabase;
+    const cfg=window.BRAIN_BUDDY_SUPABASE||{};
+    if(window.supabase&&cfg.url&&cfg.publishableKey){
+      window.__bbSupabase=window.supabase.createClient(cfg.url,cfg.publishableKey);
+      return window.__bbSupabase;
+    }
+    return null;
+  }
+
+  function esc(v){
+    return String(v??"").replace(/[&<>"']/g,m=>({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    }[m]));
+  }
+
+  function toast(msg){
+    const t=q("#bbTopupToast");
+    if(!t)return;
+    t.textContent=msg;
+    t.classList.remove("hidden");
+    clearTimeout(t.__timer);
+    t.__timer=setTimeout(()=>t.classList.add("hidden"),2200);
+  }
+
+  function statusThai(status){
+    return {
+      pending:"รอชำระเงิน",
+      paid:"ชำระแล้ว",
+      failed:"ไม่สำเร็จ",
+      cancelled:"ยกเลิก",
+      refunded:"คืนเงิน"
+    }[status]||status;
+  }
+
+  async function loadOrders(c,userId){
+    const host=q("#bbTopupOrders");
+    if(!host)return;
+
+    const {data,error}=await c
+      .from("bb_coin_orders")
+      .select("id,package_name,total_coins,price_thb,status,created_at")
+      .eq("user_id",userId)
+      .order("created_at",{ascending:false})
+      .limit(5);
+
+    if(error)throw error;
+
+    if(!data?.length){
+      host.innerHTML='<div class="bbTopupLoading">ยังไม่มีคำสั่งซื้อ</div>';
+      return;
+    }
+
+    host.innerHTML=data.map(order=>{
+      const date=new Date(order.created_at);
+      const d=isNaN(date)?"":
+        date.toLocaleString("th-TH",{dateStyle:"short",timeStyle:"short"});
+
+      return `
+        <div class="bbTopupOrderRow">
+          <div class="name">
+            <strong>${esc(order.package_name)}</strong>
+            <small>${esc(d)} • ${esc(String(order.id).slice(0,8))}…</small>
+          </div>
+          <div class="coins">${Number(order.total_coins||0).toLocaleString()} Coins</div>
+          <div class="price">${Number(order.price_thb||0).toLocaleString()} บาท</div>
+          <span class="bbTopupOrderStatus ${esc(order.status)}">${esc(statusThai(order.status))}</span>
+        </div>
+      `;
+    }).join("");
+  }
+
+  async function loadTopup(){
+    if(busy)return;
+    busy=true;
+
+    const packages=q("#bbTopupPackages");
+    const body=q("#bbTopupBody");
+    const guest=q("#bbTopupGuest");
+
+    if(packages)packages.innerHTML='<div class="bbTopupLoading">กำลังโหลดแพ็กเกจ…</div>';
+
+    try{
+      const c=client();
+      if(!c)throw new Error("ยังเชื่อมต่อ Cloud ไม่สำเร็จ");
+
+      const {data:sessionData}=await c.auth.getSession();
+      const user=sessionData?.session?.user;
+
+      if(!user){
+        guest?.classList.remove("hidden");
+        body?.classList.add("hidden");
+        q("#bbTopupBalance").textContent="—";
+        return;
+      }
+
+      guest?.classList.add("hidden");
+      body?.classList.remove("hidden");
+
+      const [walletRes,packageRes]=await Promise.all([
+        c.from("bb_wallets")
+          .select("coin_balance")
+          .eq("user_id",user.id)
+          .maybeSingle(),
+
+        c.from("bb_coin_packages")
+          .select("id,package_code,name,coins,bonus_coins,price_thb,sort_order")
+          .eq("is_active",true)
+          .order("sort_order",{ascending:true})
+          .order("id",{ascending:true})
+      ]);
+
+      if(walletRes.error)throw walletRes.error;
+      if(packageRes.error)throw packageRes.error;
+
+      q("#bbTopupBalance").textContent=(Number(walletRes.data?.coin_balance)||0).toLocaleString();
+
+      const rows=packageRes.data||[];
+
+      if(!rows.length){
+        packages.innerHTML='<div class="bbTopupLoading">ยังไม่มีแพ็กเกจเติม Coins</div>';
+      }else{
+        packages.innerHTML=rows.map((pkg,index)=>{
+          const total=Number(pkg.coins||0)+Number(pkg.bonus_coins||0);
+          const cls=index===1?"popular":index===2?"best":"";
+          const badge=index===1?"POPULAR":index===2?"BEST VALUE":"";
+          return `
+            <article class="bbCoinPackage ${cls}">
+              ${badge?`<span class="bbCoinPackageBadge">${badge}</span>`:""}
+              <div class="bbCoinPackageArt">
+                <span class="mainCoin">B</span>
+              </div>
+              <h4>${esc(pkg.name)}</h4>
+              <div class="coins">${total.toLocaleString()} Coins</div>
+              <div class="bonus">${
+                Number(pkg.bonus_coins)>0
+                  ? `รวมโบนัส +${Number(pkg.bonus_coins).toLocaleString()} Coins`
+                  : "แพ็กเกจมาตรฐาน"
+              }</div>
+              <div class="price">
+                <strong>${Number(pkg.price_thb).toLocaleString()}</strong>
+                <span>บาท</span>
+              </div>
+              <button type="button" data-topup-package="${Number(pkg.id)}">สร้าง Order</button>
+            </article>
+          `;
+        }).join("");
+      }
+
+      await loadOrders(c,user.id);
+
+    }catch(err){
+      console.error("Brain Buddy topup:",err);
+      if(packages){
+        packages.innerHTML=`
+          <div class="bbTopupLoading">
+            โหลดระบบเติม Coins ไม่สำเร็จ<br>
+            <small>${esc(err?.message||"กรุณาลองใหม่")}</small>
+          </div>
+        `;
+      }
+    }finally{
+      busy=false;
+    }
+  }
+
+  async function createOrder(packageId,button){
+    const c=client();
+    if(!c||!packageId)return;
+
+    const original=button?.textContent||"สร้าง Order";
+    if(button){
+      button.disabled=true;
+      button.textContent="กำลังสร้าง…";
+    }
+
+    try{
+      const {data,error}=await c.rpc("bb_create_coin_order",{p_package_id:Number(packageId)});
+      if(error)throw error;
+
+      const result=Array.isArray(data)?data[0]:data;
+
+      q("#bbTopupOrderPackage").textContent=result?.package_name||"—";
+      q("#bbTopupOrderCoins").textContent=`${Number(result?.total_coins||0).toLocaleString()} Coins`;
+      q("#bbTopupOrderPrice").textContent=`${Number(result?.price_thb||0).toLocaleString()} บาท`;
+      q("#bbTopupOrderId").textContent=result?.order_id||"—";
+
+      q("#bbTopupOrderModal")?.classList.remove("hidden");
+
+      const {data:sessionData}=await c.auth.getSession();
+      const user=sessionData?.session?.user;
+      if(user)await loadOrders(c,user.id);
+
+    }catch(err){
+      console.error("Create Brain Coin order:",err);
+      toast(String(err?.message||"สร้าง Order ไม่สำเร็จ"));
+    }finally{
+      if(button){
+        button.disabled=false;
+        button.textContent=original;
+      }
+    }
+  }
+
+  document.addEventListener("click",e=>{
+    const pkg=e.target.closest("[data-topup-package]");
+    if(pkg){
+      e.preventDefault();
+      createOrder(Number(pkg.dataset.topupPackage),pkg);
+      return;
+    }
+
+    if(e.target.closest("#bbTopupRefresh")){
+      e.preventDefault();
+      loadTopup();
+      return;
+    }
+
+    if(e.target.closest("#bbTopupOrderClose")){
+      e.preventDefault();
+      q("#bbTopupOrderModal")?.classList.add("hidden");
+      return;
+    }
+
+    if(e.target.id==="bbTopupOrderModal"){
+      q("#bbTopupOrderModal")?.classList.add("hidden");
+      return;
+    }
+
+    if(e.target.closest("#bbTopupLoginBtn")){
+      e.preventDefault();
+      if(typeof openModal==="function")openModal("accountModal");
+      else q("#accountModal")?.classList.remove("hidden");
+    }
+  },true);
+
+  window.bbLoadTopup=loadTopup;
+
+  window.addEventListener("bb:auth-changed",()=>{
+    setTimeout(loadTopup,120);
   });
 })();
 </script>
