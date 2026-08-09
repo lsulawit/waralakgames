@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy — Member Cloud v9</title>
+<title>Brain Buddy v18 — Member Cloud v9</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -767,6 +767,69 @@ body.dark .v17bar,body.dark .v17dock{background:rgba(28,23,38,.97);border-color:
 body.dark .v17brand{color:#fff}body.dark .v17b,body.dark .v17stat{background:#29223a;color:#fff;border-color:rgba(255,255,255,.1)}
 body.dark .v17stat b{color:#fff}body.dark .v17stat small{color:#c8bfd0}
 
+
+/* v18 Cloud Admin assets */
+.v17b{text-decoration:none}
+.teddy .bbCloudBear,.heroBear .bbCloudBear,.target-card .bbCloudBear{
+  width:100%;height:100%;object-fit:contain;display:block;
+  filter:drop-shadow(0 8px 8px rgba(76,53,88,.15));
+}
+.v17b.admin{white-space:nowrap}
+
+/* ===== Brain Buddy v19 — Balanced UI ===== */
+:root{--bb19-border:#ebe6ef;--bb19-text:#2e2933;--bb19-muted:#77707e;--bb19-shadow:0 8px 28px rgba(62,44,76,.07)}
+.v17bar{position:sticky!important;top:0;z-index:120!important;background:rgba(255,255,255,.97)!important;border-bottom:1px solid var(--bb19-border)!important;box-shadow:0 5px 20px rgba(58,42,70,.045)}
+.v17barin{width:min(100% - 32px,1240px)!important;max-width:1240px!important;min-height:76px;padding:10px 0!important;gap:16px!important}
+.v17brand{min-width:max-content;display:flex;align-items:center;font-size:21px!important;letter-spacing:-.02em}
+.v17tabs{flex:1;display:flex;justify-content:center;align-items:center;gap:8px!important}
+.v17b{min-height:46px;display:inline-flex;align-items:center;justify-content:center;padding:0 17px!important;border-radius:16px!important;font-size:14px;white-space:nowrap;transition:.18s ease}
+.v17b:hover{transform:translateY(-1px);box-shadow:0 7px 18px rgba(64,45,77,.07)}
+.v17b.play{box-shadow:0 8px 18px rgba(239,101,159,.20)}
+.v17b.admin{min-width:max-content;background:#fff8e7!important;border-color:#f0dca6!important}
+.bb19Tools{display:flex;align-items:center;gap:7px;min-width:max-content}
+.bb19Tools .profilemini{min-height:46px!important;border-radius:16px!important;padding:5px 9px!important}
+.bb19Tools .icon{width:46px!important;height:46px!important;border-radius:16px!important}
+.topbar{display:none!important}
+
+.bbPlayerStatus{background:linear-gradient(90deg,rgba(255,238,247,.72),rgba(246,241,255,.72));border-bottom:1px solid rgba(235,230,239,.82)}
+.bbPlayerStatusInner{width:min(100% - 32px,1240px);margin:0 auto;padding:14px 0}
+.v17hud{width:100%!important;max-width:none!important;margin:0!important;padding:0!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important;align-items:stretch}
+.v17stat{min-width:0;min-height:86px;padding:13px 16px!important;display:flex!important;align-items:center;gap:12px;background:rgba(255,255,255,.96)!important;border:1px solid var(--bb19-border)!important;border-radius:21px!important;box-shadow:var(--bb19-shadow)!important;overflow:hidden}
+.bbStatIcon{flex:0 0 44px;width:44px;height:44px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(145deg,#fff2f8,#f2edff);font-size:21px}
+.bbStatCopy{display:flex;min-width:0;flex:1;flex-direction:column;justify-content:center;gap:3px}
+.v17stat small{display:block!important;margin:0!important;color:var(--bb19-muted)!important;font-size:11px!important;line-height:1.25;font-weight:750!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v17stat b{display:block!important;margin:0!important;color:var(--bb19-text)!important;font-size:19px!important;line-height:1.22!important;font-weight:900!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shell{width:min(100% - 32px,1240px)!important}.hero{padding-top:20px!important}
+
+@media(max-width:1050px){
+ .v17barin,.bbPlayerStatusInner,.shell{width:min(100% - 24px,1240px)!important}
+ .v17barin{min-height:70px;gap:10px!important}.v17brand{font-size:18px!important}
+ .v17tabs{gap:6px!important}.v17b{min-height:43px;padding:0 12px!important;font-size:12px}
+ .v17b.admin{font-size:0;padding:0 12px!important}.v17b.admin::after{content:"🛠️";font-size:19px}
+ .bb19Tools .profilemini{min-height:43px!important}.bb19Tools .icon{width:43px!important;height:43px!important}
+ .v17hud{gap:9px!important}.v17stat{min-height:80px;padding:11px 12px!important;gap:9px}
+ .bbStatIcon{flex-basis:39px;width:39px;height:39px;font-size:18px}.v17stat b{font-size:17px!important}
+}
+@media(max-width:820px){
+ .v17tabs{display:none!important}.v17barin{justify-content:space-between}.v17brand{flex:1}
+ .bbPlayerStatusInner{padding:10px 0}.v17hud{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+ .v17stat{min-height:74px}.bb19Tools .profilemini span{display:none}
+}
+@media(max-width:600px){
+ body{padding-bottom:76px!important}.v17barin,.bbPlayerStatusInner,.shell{width:min(100% - 18px,1240px)!important}
+ .v17barin{min-height:60px;padding:7px 0!important}.v17brand{font-size:16px!important}.v17b.admin{min-height:40px}
+ .bb19Tools{gap:5px}.bb19Tools .profilemini{min-height:40px!important;width:43px;justify-content:center}
+ .bb19Tools .icon{width:40px!important;height:40px!important;border-radius:13px!important}.bb19Tools #musicBtn,.bb19Tools #fullBtn{display:none!important}
+ .bbPlayerStatusInner{padding:8px 0 10px}.v17hud{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important}
+ .v17stat{min-height:68px;padding:9px 10px!important;gap:8px;border-radius:17px!important}.bbStatIcon{flex-basis:34px;width:34px;height:34px;border-radius:11px;font-size:16px}
+ .v17stat small{font-size:9px!important}.v17stat b{font-size:14px!important}.hero{padding-top:12px!important}
+}
+@media(max-width:370px){.bbStatIcon{display:none}.v17stat{justify-content:center;text-align:center}.bbStatCopy{align-items:center}}
+body.dark .bbPlayerStatus{background:linear-gradient(90deg,#211b2b,#282038)}
+body.dark .v17stat{background:#2b2438!important;border-color:rgba(255,255,255,.10)!important}
+body.dark .bbStatIcon{background:rgba(255,255,255,.08)}body.dark .v17stat small{color:#c9c1d1!important}body.dark .v17stat b{color:#fff!important}
+body.dark .v17bar{background:rgba(26,22,34,.97)!important}
+
 </style>
 
 <script>
@@ -923,23 +986,35 @@ try{
 })();
 
 
+
 (function(){
- const $=(s,r=document)=>r.querySelector(s), KEY="bb_mascot_v17"; let pending=null;
+ const $=(s,r=document)=>r.querySelector(s);
  function prof(){try{return JSON.parse(localStorage.getItem("bb_profile")||"{}")}catch(e){return {}}}
- function hud(){const p=prof(),xp=+p.xp||0,best=+(p.bestScore||p.best_score)||0,power=best+xp*2;let rank="🌱 Bronze";if(power>=20000)rank="💎 Diamond";else if(power>=12000)rank="🌌 Platinum";else if(power>=7000)rank="🏆 Gold";else if(power>=3500)rank="✨ Silver";
-  if($("#v17Level"))$("#v17Level").textContent="Lv. "+Math.max(1,Math.floor(xp/500)+1);if($("#v17Rank"))$("#v17Rank").textContent=rank;if($("#v17Best"))$("#v17Best").textContent=best.toLocaleString();if($("#v17Xp"))$("#v17Xp").textContent=xp.toLocaleString()+" XP";}
- function mascot(x){if(!x)return;document.querySelectorAll(".heroBear").forEach(el=>{el.style.backgroundImage=`url("${x}")`;el.style.backgroundSize="contain";el.style.backgroundPosition="center";el.style.backgroundRepeat="no-repeat"});if($("#v17Preview"))$("#v17Preview").innerHTML=`<img src="${x}" alt="มาสคอต">`}
- function rank(){const m=$("#leaderboardModal");if(m){m.classList.remove("hidden");window.__bbRenderCloudLeaderboard?.()}else $("#leaderboardSpotlight")?.scrollIntoView({behavior:"smooth"})}
+ function hud(){
+   const p=prof(),xp=+p.xp||0,best=+(p.bestScore||p.best_score)||0,power=best+xp*2;
+   let rank="🌱 Bronze";
+   if(power>=20000)rank="💎 Diamond";else if(power>=12000)rank="🌌 Platinum";else if(power>=7000)rank="🏆 Gold";else if(power>=3500)rank="✨ Silver";
+   if($("#v17Level"))$("#v17Level").textContent="Lv. "+Math.max(1,Math.floor(xp/500)+1);
+   if($("#v17Rank"))$("#v17Rank").textContent=rank;
+   if($("#v17Best"))$("#v17Best").textContent=best.toLocaleString();
+   if($("#v17Xp"))$("#v17Xp").textContent=xp.toLocaleString()+" XP";
+ }
+ function rank(){
+   const m=$("#leaderboardModal");
+   if(m){m.classList.remove("hidden");window.__bbRenderCloudLeaderboard?.()}
+   else $("#leaderboardSpotlight")?.scrollIntoView({behavior:"smooth"});
+ }
  function profile(){($("#profileBtn")||Array.from(document.querySelectorAll("button")).find(b=>/โปรไฟล์/.test(b.textContent||"")))?.click()}
  function play(){($("#quickPlay")||Array.from(document.querySelectorAll("button")).find(b=>/เล่นด่วน/.test(b.textContent||"")))?.click()}
- document.addEventListener("click",e=>{const b=e.target.closest("[data-v17]");if(!b)return;const a=b.dataset.v17;if(a==="home")$("#home")?.scrollIntoView({behavior:"smooth"});if(a==="play")play();if(a==="rank")rank();if(a==="profile")profile()});
- window.addEventListener("load",()=>{hud();const saved=localStorage.getItem(KEY);if(saved)mascot(saved);
-  $("#v17Admin")?.addEventListener("click",()=>$("#v17AdminModal")?.classList.remove("hidden"));
-  $("#v17AdminClose")?.addEventListener("click",()=>$("#v17AdminModal")?.classList.add("hidden"));
-  $("#v17BearFile")?.addEventListener("change",e=>{const f=e.target.files?.[0];if(!f)return;const r=new FileReader();r.onload=()=>{pending=r.result;mascot(pending)};r.readAsDataURL(f)});
-  $("#v17SaveBear")?.addEventListener("click",()=>{if(pending){localStorage.setItem(KEY,pending);mascot(pending);alert("บันทึกรูปมาสคอตแล้ว")}});
-  $("#v17ResetBear")?.addEventListener("click",()=>{localStorage.removeItem(KEY);location.reload()});setInterval(hud,2500);
+ document.addEventListener("click",e=>{
+   const b=e.target.closest("[data-v17]");if(!b)return;
+   const a=b.dataset.v17;
+   if(a==="home")$("#home")?.scrollIntoView({behavior:"smooth"});
+   if(a==="play")play();
+   if(a==="rank")rank();
+   if(a==="profile")profile();
  });
+ window.addEventListener("load",()=>{hud();setInterval(hud,2500)});
 })();
 
 </script>
@@ -951,18 +1026,22 @@ try{
  <div class="v17brand">🧠 Brain Buddy</div>
  <div class="v17tabs">
   <button class="v17b" data-v17="home">🏠 หน้าแรก</button>
-  <button class="v17b play" data-v17="play">🎮 เล่น</button>
-  <button class="v17b" data-v17="rank">🏆 อันดับ</button>
+  <button class="v17b play" data-v17="play">🎮 เล่นเกม</button>
+  <button class="v17b" data-v17="rank">🏆 อันดับผู้เล่น</button>
   <button class="v17b" data-v17="profile">👤 โปรไฟล์</button>
  </div>
- <button class="v17b admin" id="v17Admin">🛠️ แอดมิน</button>
+ <a class="v17b admin" href="/admin">🛠️ แอดมิน</a>
 </div></nav>
-<div class="v17hud">
- <div class="v17stat"><small>ระดับของฉัน</small><b id="v17Level">Lv. 1</b></div>
- <div class="v17stat"><small>แรงก์</small><b id="v17Rank">🌱 Bronze</b></div>
- <div class="v17stat"><small>คะแนนสูงสุด</small><b id="v17Best">0</b></div>
- <div class="v17stat"><small>XP</small><b id="v17Xp">0 XP</b></div>
-</div>
+<section class="bbPlayerStatus" aria-label="สถานะผู้เล่น">
+  <div class="bbPlayerStatusInner">
+    <div class="v17hud">
+      <div class="v17stat"><span class="bbStatIcon">🎯</span><span class="bbStatCopy"><small>ระดับของฉัน</small><b id="v17Level">Lv. 1</b></span></div>
+      <div class="v17stat"><span class="bbStatIcon">🏅</span><span class="bbStatCopy"><small>แรงก์</small><b id="v17Rank">🌱 Bronze</b></span></div>
+      <div class="v17stat"><span class="bbStatIcon">🏆</span><span class="bbStatCopy"><small>คะแนนสูงสุด</small><b id="v17Best">0</b></span></div>
+      <div class="v17stat"><span class="bbStatIcon">⭐</span><span class="bbStatCopy"><small>XP สะสม</small><b id="v17Xp">0 XP</b></span></div>
+    </div>
+  </div>
+</section>
 
 <header class="topbar"><div class="shell nav"><div class="brand" id="brand"><div class="logo" id="logo">🧠</div><span>Brain Buddy</span></div><div class="navright"><button class="profilemini accountBtn" id="accountBtn" type="button"><div class="miniavatar" id="navAvatar">🧸</div><span class="accountText"><b id="navName">ผู้เล่น</b><small id="cloudMini">ผู้เยี่ยมชม</small></span><i class="cloudDot" id="cloudDot"></i></button><button class="icon" id="musicBtn">🎵</button><button class="icon" id="themeBtn">🌙</button><button class="icon" id="fullBtn">⛶</button><div class="menubox"><button class="icon" id="menuBtn">☰</button><div class="popover hidden" id="popover"><button id="v16MenuLeaderboard">🏆 ตารางจัดอันดับ</button><button data-open="profileModal">👤 โปรไฟล์ & Level</button><button data-open="statsModal">📊 สถิติ & ความสำเร็จ</button><button data-open="collectionModal">🧸 คอลเลกชันตัวละคร</button><button data-open="audioModal">🎧 เพลง & เสียง</button><button data-open="accessModal">Aa การมองเห็น</button><button data-open="helpModal">? วิธีเล่น</button><button data-open="researchModal">🧠 หลักการ & งานวิจัย</button><button id="presenterBtn">🖥️ โหมดนำเกม</button></div></div></div></div></header>
 
@@ -1544,6 +1623,10 @@ const palettes=[
 const accessories=["heart","bow","crown","star","flower","glasses","balloon","gift","honey","ribbon","moon","apple","rainbow","butterfly","cookie","book","heart2","bow2","star2","flower2"];
 
 function teddySVG(i){
+  const bbCloud = window.BB_CLOUD_BEAR_ASSETS && window.BB_CLOUD_BEAR_ASSETS[i];
+  if(bbCloud){
+    return `<img class="bbCloudBear" src="${bbCloud}" alt="หมี Brain Buddy ${i+1}">`;
+  }
   const [dark,mid,light]=palettes[i%palettes.length],acc=accessories[i%accessories.length],id="x"+i+"_"+Math.floor(Math.random()*999999);
   const A={
     heart:`<path d="M76 112 C60 96 33 111 39 134 C43 151 62 160 76 172 C90 160 109 151 113 134 C119 111 92 96 76 112Z" fill="#ff6f9d" stroke="#d95782" stroke-width="4"/>`,
@@ -1757,5 +1840,55 @@ restoreAccess();restoreAudio();renderUploads();renderProfile();renderHome();rend
  <button data-v17="rank"><i>🏆</i>อันดับ</button><button data-v17="profile"><i>👤</i>โปรไฟล์</button>
 </div>
 
+
+<script>
+window.BB_CLOUD_BEAR_ASSETS = window.BB_CLOUD_BEAR_ASSETS || {};
+
+async function bbGetAssetClient(){
+  if(window.__bbSupabase) return window.__bbSupabase;
+  if(window.sb) return window.sb;
+  const c=window.BRAIN_BUDDY_SUPABASE||{};
+  if(window.supabase&&c.url&&c.publishableKey){
+    window.__bbSupabase=window.supabase.createClient(c.url,c.publishableKey);
+    return window.__bbSupabase;
+  }
+  return null;
+}
+async function bbLoadCloudBearAssets(){
+  try{
+    const c=await bbGetAssetClient(); if(!c)return;
+    const {data,error}=await c.from("bb_game_assets").select("slot,image_data");
+    if(error){console.warn("Brain Buddy assets:",error.message);return}
+    const next={};
+    (data||[]).forEach(row=>{if(row.image_data)next[Number(row.slot)]=row.image_data});
+    window.BB_CLOUD_BEAR_ASSETS=next;
+    const hero=document.getElementById("heroBear");
+    if(hero&&typeof teddySVG==="function")hero.innerHTML=teddySVG(2);
+  }catch(e){console.warn("Brain Buddy asset load:",e)}
+}
+window.__bbReloadBearAssets=bbLoadCloudBearAssets;
+window.addEventListener("load",()=>{
+  setTimeout(bbLoadCloudBearAssets,250);
+  setTimeout(bbLoadCloudBearAssets,1500);
+  setInterval(bbLoadCloudBearAssets,45000);
+});
+</script>
+
+<script>
+(function brainBuddyV19Layout(){
+ function combineHeader(){
+   const bar=document.querySelector(".v17barin");
+   const navright=document.querySelector(".topbar .navright");
+   if(!bar||!navright||document.querySelector(".bb19Tools")) return;
+   const tools=document.createElement("div");
+   tools.className="bb19Tools";
+   while(navright.firstChild) tools.appendChild(navright.firstChild);
+   const admin=bar.querySelector(".v17b.admin");
+   if(admin) bar.insertBefore(tools,admin); else bar.appendChild(tools);
+ }
+ if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",combineHeader);
+ else combineHeader();
+})();
+</script>
 </body>
 </html>
