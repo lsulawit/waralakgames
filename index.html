@@ -3430,6 +3430,461 @@ body.bbArenaOpen .v17dock.bbCandyDock{
   .bbNavBrain{width:35px;height:33px}
 }
 
+
+/* =========================================================
+   Brain Buddy v46 — Home TOP 10 + real Ranked brain mascot
+   ========================================================= */
+
+/* ---------- HOME TOP 10 ---------- */
+.bbHomeTop10{
+  grid-column:1/-1;
+  position:relative;
+  z-index:2;
+  border:2px solid rgba(255,255,255,.52);
+  border-radius:32px;
+  padding:18px;
+  background:
+    radial-gradient(circle at 90% 0%,rgba(255,255,255,.48),transparent 15rem),
+    linear-gradient(145deg,#ffe895 0%,#ffd75f 46%,#ffc84f 100%);
+  box-shadow:
+    inset 0 4px 6px rgba(255,255,255,.52),
+    inset 0 -12px 17px rgba(163,99,11,.12),
+    0 15px 25px rgba(63,30,92,.22);
+  color:#65410a;
+}
+
+.bbHomeTop10Head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:13px;
+}
+
+.bbHomeTop10TitleWrap{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.bbHomeTop10Cup{
+  position:relative;
+  width:64px;height:58px;
+  flex:0 0 64px;
+  border-radius:7px 7px 25px 25px;
+  background:linear-gradient(180deg,#fff27b,#e89b12);
+  box-shadow:
+    inset 0 5px 6px rgba(255,255,255,.55),
+    0 9px 14px rgba(127,77,8,.18);
+}
+.bbHomeTop10Cup::before,
+.bbHomeTop10Cup::after{
+  content:"";
+  position:absolute;
+  top:7px;
+  width:21px;height:27px;
+  border:6px solid #e59b14;
+  border-radius:50%;
+  z-index:-1;
+}
+.bbHomeTop10Cup::before{left:-16px}
+.bbHomeTop10Cup::after{right:-16px}
+.bbHomeTop10Cup + div small{
+  display:block;
+  font-size:10px;
+  font-weight:950;
+  opacity:.75;
+}
+.bbHomeTop10Cup + div h3{
+  margin:0;
+  font-size:30px;
+  line-height:1;
+  letter-spacing:-.04em;
+  color:#754900;
+}
+.bbHomeTop10Cup + div p{
+  margin:4px 0 0;
+  font-size:11px;
+  font-weight:800;
+  opacity:.76;
+}
+
+.bbHomeTop10All{
+  min-height:44px;
+  border:1px solid rgba(133,78,4,.12);
+  border-radius:16px;
+  padding:0 15px;
+  background:rgba(255,255,255,.40);
+  color:#744b08;
+  font-size:11px;
+  font-weight:950;
+  box-shadow:inset 0 2px 3px rgba(255,255,255,.60);
+}
+
+.bbHomeTop10List{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+}
+
+.bbHomeTop10Loading,
+.bbHomeTop10Empty{
+  grid-column:1/-1;
+  min-height:90px;
+  border-radius:20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,.42);
+  font-size:11px;
+  font-weight:850;
+}
+.bbHomeTop10Empty span{font-size:9px;opacity:.72;margin-top:3px}
+
+.bbHomeTop10Row{
+  min-width:0;
+  min-height:64px;
+  padding:8px 10px;
+  display:grid;
+  grid-template-columns:35px 44px minmax(0,1fr) auto;
+  align-items:center;
+  gap:8px;
+  border:1px solid rgba(123,75,9,.10);
+  border-radius:19px;
+  background:rgba(255,255,255,.53);
+  color:#5c421d;
+  text-align:left;
+  box-shadow:
+    inset 0 2px 3px rgba(255,255,255,.68),
+    0 6px 11px rgba(111,67,10,.06);
+}
+.bbHomeTop10Row.pos-1{
+  background:linear-gradient(145deg,rgba(255,255,255,.78),rgba(255,244,189,.74));
+  border-color:rgba(186,115,0,.25);
+}
+.bbHomeTop10Row.pos-2{background:linear-gradient(145deg,rgba(255,255,255,.67),rgba(247,241,249,.65))}
+.bbHomeTop10Row.pos-3{background:linear-gradient(145deg,rgba(255,255,255,.67),rgba(255,229,201,.58))}
+
+.bbHomeTop10Pos{
+  width:32px;height:32px;
+  display:grid;
+  place-items:center;
+  border-radius:11px;
+  background:rgba(255,255,255,.55);
+  font-size:15px;
+  font-weight:1000;
+  color:#8f5a09;
+}
+.pos-1 .bbHomeTop10Pos{
+  color:#8a5300;
+  background:linear-gradient(145deg,#fff8b6,#ffc941);
+  box-shadow:0 5px 9px rgba(154,90,0,.14);
+}
+
+.bbHomeTop10Avatar{
+  width:42px;height:42px;
+  display:grid;
+  place-items:center;
+  border-radius:14px;
+  overflow:hidden;
+  background:linear-gradient(145deg,#ffe5f2,#f4e9ff);
+}
+.bbHomeTop10Avatar img{width:100%;height:100%;object-fit:cover}
+.bbHomeTop10Bear{
+  position:relative;
+  width:25px;height:27px;
+  border-radius:48% 48% 44% 44%;
+  background:linear-gradient(180deg,#ddb17e,#9b663f);
+}
+.bbHomeTop10Bear::before,
+.bbHomeTop10Bear::after{
+  content:"";
+  position:absolute;
+  top:-4px;
+  width:10px;height:10px;
+  border-radius:50%;
+  background:inherit;
+}
+.bbHomeTop10Bear::before{left:1px}
+.bbHomeTop10Bear::after{right:1px}
+
+.bbHomeTop10Name{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+}
+.bbHomeTop10Name b{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:12px;
+}
+.bbHomeTop10Name small{
+  margin-top:2px;
+  font-size:8px;
+  opacity:.68;
+  white-space:nowrap;
+}
+
+.bbHomeTop10Score{
+  text-align:right;
+  display:flex;
+  flex-direction:column;
+}
+.bbHomeTop10Score b{
+  font-size:16px;
+  color:#8f5600;
+}
+.bbHomeTop10Score small{
+  font-size:7px;
+  font-weight:850;
+  opacity:.66;
+}
+
+/* ---------- RANKED MASCOT ---------- */
+/* Kill previous pseudo-character completely */
+#bbArena .bbArenaHero::before,
+#bbArena .bbArenaHero::after{
+  display:none!important;
+  content:none!important;
+}
+
+#bbArena .bbArenaHero{
+  position:relative!important;
+}
+
+#bbArena .bbArenaHeroCopy{
+  position:relative;
+  z-index:5;
+  max-width:58%;
+}
+
+#bbArena .bbRankedMascot{
+  position:absolute;
+  z-index:4;
+  right:38px;
+  top:32px;
+  width:310px;
+  height:245px;
+  display:grid;
+  place-items:center;
+  pointer-events:none;
+}
+
+.bbRMHalo{
+  position:absolute;
+  width:290px;height:210px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle,rgba(255,217,245,.88) 0%,rgba(255,140,218,.38) 45%,transparent 72%);
+  filter:blur(2px);
+}
+
+.bbRMBrain{
+  position:relative;
+  width:218px;height:164px;
+  transform:rotate(-3deg);
+  filter:drop-shadow(0 20px 18px rgba(47,17,91,.27));
+}
+
+.bbRMBrain .lobe{
+  position:absolute;
+  display:block;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 31% 24%,rgba(255,255,255,.78),transparent 17%),
+    linear-gradient(145deg,#ffd5e9 0%,#ff9fcd 47%,#ed65af 74%,#c74697 100%);
+  border:2px solid rgba(255,211,235,.68);
+  box-shadow:
+    inset 6px 7px 9px rgba(255,255,255,.33),
+    inset -8px -9px 11px rgba(129,36,108,.16);
+}
+.bbRMBrain .l1{width:89px;height:85px;left:17px;top:9px}
+.bbRMBrain .l2{width:88px;height:89px;left:70px;top:1px}
+.bbRMBrain .l3{width:78px;height:79px;right:5px;top:18px}
+.bbRMBrain .l4{width:91px;height:79px;left:7px;bottom:10px}
+.bbRMBrain .l5{width:89px;height:82px;left:69px;bottom:0}
+.bbRMBrain .l6{width:72px;height:70px;right:7px;bottom:8px}
+
+.bbRMBrain::before{
+  content:"";
+  position:absolute;
+  z-index:2;
+  left:21px;right:15px;top:18px;bottom:12px;
+  border-radius:45%;
+  background:
+    radial-gradient(ellipse at 27% 30%,transparent 0 17px,rgba(174,51,132,.34) 18px 21px,transparent 22px),
+    radial-gradient(ellipse at 58% 22%,transparent 0 18px,rgba(174,51,132,.30) 19px 22px,transparent 23px),
+    radial-gradient(ellipse at 73% 58%,transparent 0 17px,rgba(174,51,132,.28) 18px 21px,transparent 22px),
+    radial-gradient(ellipse at 37% 70%,transparent 0 16px,rgba(174,51,132,.30) 17px 20px,transparent 21px);
+  opacity:.85;
+}
+
+.rmEye{
+  position:absolute;
+  z-index:10;
+  top:78px;
+  width:21px;height:27px;
+  border-radius:50%;
+  background:#2a142c;
+  box-shadow:inset 5px 4px 0 rgba(255,255,255,.87);
+}
+.rmEye.left{left:72px}
+.rmEye.right{right:58px}
+.rmEye.right::after{
+  content:"";
+  position:absolute;
+  left:-3px;top:10px;
+  width:27px;height:5px;
+  border-radius:999px;
+  background:#2a142c;
+  transform:rotate(-17deg);
+}
+
+.rmCheek{
+  position:absolute;
+  z-index:10;
+  top:108px;
+  width:26px;height:13px;
+  border-radius:50%;
+  background:rgba(247,82,137,.61);
+  filter:blur(.2px);
+}
+.rmCheek.left{left:47px}
+.rmCheek.right{right:35px}
+
+.rmMouth{
+  position:absolute;
+  z-index:10;
+  left:50%;
+  bottom:23px;
+  width:42px;height:28px;
+  transform:translateX(-43%);
+  border-radius:6px 6px 28px 28px;
+  background:#722453;
+  border:2px solid rgba(111,28,76,.55);
+  box-shadow:inset 0 8px 0 rgba(248,94,156,.74);
+}
+
+.rmArm{
+  position:absolute;
+  z-index:8;
+  width:37px;height:80px;
+  border-radius:22px;
+  background:linear-gradient(180deg,#ffc1dd,#ef72b6);
+  box-shadow:inset 5px 6px 7px rgba(255,255,255,.32);
+}
+.rmArm.left{left:-4px;top:71px;transform:rotate(24deg)}
+.rmArm.right{right:-8px;top:22px;transform:rotate(-33deg)}
+.rmArm i{
+  position:absolute;
+  width:28px;height:31px;
+  top:-10px;left:4px;
+  border-radius:50%;
+  background:inherit;
+}
+.rmArm.right i::before,
+.rmArm.right i::after{
+  content:"";
+  position:absolute;
+  width:9px;height:23px;
+  top:-14px;
+  border-radius:7px;
+  background:#f38ac2;
+}
+.rmArm.right i::before{left:5px;transform:rotate(-6deg)}
+.rmArm.right i::after{right:4px;transform:rotate(9deg)}
+
+.rmCape{
+  position:absolute;
+  z-index:1;
+  left:42px;right:25px;
+  bottom:-26px;
+  height:64px;
+  border-radius:50% 50% 45% 45%;
+  background:linear-gradient(180deg,#7153dd,#4937a0);
+  clip-path:polygon(8% 0,91% 0,100% 100%,53% 77%,3% 100%);
+  opacity:.96;
+}
+.rmStar{
+  position:absolute;
+  z-index:11;
+  left:49%;bottom:-4px;
+  width:24px;height:24px;
+  transform:translateX(-50%) rotate(45deg);
+  border-radius:6px;
+  background:linear-gradient(145deg,#fff9b5,#ffc833);
+  box-shadow:0 0 13px rgba(255,236,126,.87);
+}
+
+.rmSpark{
+  position:absolute;
+  width:14px;height:14px;
+  transform:rotate(45deg);
+  border-radius:4px;
+  background:linear-gradient(145deg,#fffed4,#ffd746);
+  box-shadow:0 0 14px rgba(255,242,150,.96);
+}
+.rmSpark.s1{left:14px;top:45px}
+.rmSpark.s2{right:9px;top:24px;width:19px;height:19px}
+.rmSpark.s3{right:35px;bottom:18px;width:10px;height:10px}
+
+/* make Ranked hero stats sit cleanly under the copy/art */
+#bbArena .bbArenaHeroStats{
+  z-index:6!important;
+}
+
+/* ---------- responsive ---------- */
+@media(max-width:900px){
+  .bbHomeTop10List{grid-template-columns:1fr}
+  #bbArena .bbArenaHeroCopy{max-width:57%}
+  #bbArena .bbRankedMascot{
+    right:18px;
+    top:34px;
+    transform:scale(.82);
+    transform-origin:top right;
+  }
+}
+
+@media(max-width:699px){
+  .bbHomeTop10{
+    padding:14px;
+    border-radius:26px;
+  }
+  .bbHomeTop10Head{align-items:flex-start}
+  .bbHomeTop10Cup{width:50px;height:47px;flex-basis:50px}
+  .bbHomeTop10Cup + div h3{font-size:24px}
+  .bbHomeTop10All{padding:0 11px;min-height:38px;font-size:9px}
+  .bbHomeTop10List{grid-template-columns:1fr;gap:7px}
+  .bbHomeTop10Row{
+    grid-template-columns:31px 39px minmax(0,1fr) auto;
+    min-height:58px;
+    padding:7px 8px;
+  }
+  .bbHomeTop10Avatar{width:38px;height:38px}
+  .bbHomeTop10Name b{font-size:11px}
+  .bbHomeTop10Score b{font-size:14px}
+
+  #bbArena .bbArenaHero{
+    min-height:545px!important;
+  }
+  #bbArena .bbArenaHeroCopy{
+    max-width:100%!important;
+  }
+  #bbArena .bbRankedMascot{
+    width:260px;
+    height:205px;
+    right:50%;
+    top:195px;
+    transform:translateX(50%) scale(.74);
+    transform-origin:center top;
+  }
+  #bbArena .bbArenaHeroStats{
+    bottom:17px!important;
+  }
+}
+
 </style>
 
 <script>
@@ -3491,19 +3946,59 @@ try{
     </div>`;
   }
 
-  async function renderTop(){
-    const box=document.getElementById("v16TopList");
+  async function renderHomeTop10(rows){
+    const box=document.getElementById("bbHomeTop10List");
     if(!box)return;
-    const rows=await getLeaderboard(3);
-    if(!rows.length){
-      box.innerHTML=`<div class="v16TopRow">
-        <div class="v16TopPos">1</div><div class="v16TopAvatar">🏆</div>
-        <div class="v16TopName"><b>ยังไม่มีอันดับ</b><span>สมัครสมาชิกแล้วเป็นคนแรกได้เลย</span></div>
-        <div class="v16TopScore"><b>0</b><span>คะแนน</span></div>
+
+    const list=Array.isArray(rows)?rows:await getLeaderboard(10);
+    if(!list.length){
+      box.innerHTML=`<div class="bbHomeTop10Empty">
+        <b>ยังไม่มีผู้เล่นในอันดับ</b>
+        <span>เล่นเกมจบรอบแรก แล้วอันดับจะขึ้นที่นี่</span>
       </div>`;
       return;
     }
-    box.innerHTML=rows.map(topRow).join("");
+
+    const safe=(v)=>String(v??"").replace(/[&<>"']/g,m=>({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    })[m]);
+
+    box.innerHTML=list.slice(0,10).map((u,i)=>{
+      const avatar=u.avatar_url
+        ? `<img src="${safe(u.avatar_url)}" alt="">`
+        : `<span class="bbHomeTop10Bear"></span>`;
+      const pos=i+1;
+      const tier=safe(u.rank_tier||"Bronze");
+      return `<button class="bbHomeTop10Row pos-${pos}" data-app-action="rank">
+        <span class="bbHomeTop10Pos">${pos}</span>
+        <span class="bbHomeTop10Avatar">${avatar}</span>
+        <span class="bbHomeTop10Name">
+          <b>${safe(u.display_name||"ผู้เล่น")}</b>
+          <small>${tier} • ${Number(u.xp||0).toLocaleString()} XP</small>
+        </span>
+        <span class="bbHomeTop10Score">
+          <b>${Number(u.best_score||0).toLocaleString()}</b>
+          <small>คะแนน</small>
+        </span>
+      </button>`;
+    }).join("");
+  }
+
+  async function renderTop(){
+    const rows=await getLeaderboard(10);
+    const box=document.getElementById("v16TopList");
+    if(box){
+      if(!rows.length){
+        box.innerHTML=`<div class="v16TopRow">
+          <div class="v16TopPos">1</div><div class="v16TopAvatar">—</div>
+          <div class="v16TopName"><b>ยังไม่มีอันดับ</b><span>สมัครสมาชิกแล้วเป็นคนแรกได้เลย</span></div>
+          <div class="v16TopScore"><b>0</b><span>คะแนน</span></div>
+        </div>`;
+      }else{
+        box.innerHTML=rows.slice(0,3).map(topRow).join("");
+      }
+    }
+    await renderHomeTop10(rows);
   }
 
   async function renderFull(){
@@ -3552,6 +4047,7 @@ try{
   }
 
   window.__bbRenderCloudLeaderboard=async()=>{await renderTop();await renderFull()};
+  window.__bbRenderHomeTop10=renderHomeTop10;
 
   window.addEventListener("load",()=>{
     setTimeout(renderTop,600);
@@ -3902,15 +4398,22 @@ try{
         <span class="go">➜</span>
       </button>
 
-      <button class="bbWideCard leaderboard" data-app-action="rank">
-        <span class="icon trophy"></span>
-        <span class="copy">
-          <small>อันดับผู้เล่น</small>
-          <b>Leaderboard</b>
-          <em>ดูคะแนนและอันดับสมาชิก</em>
-        </span>
-        <span class="go circle">➜</span>
-      </button>
+      <section class="bbHomeTop10" aria-labelledby="bbHomeTop10Title">
+        <div class="bbHomeTop10Head">
+          <div class="bbHomeTop10TitleWrap">
+            <span class="bbHomeTop10Cup" aria-hidden="true"></span>
+            <div>
+              <small>อันดับผู้เล่น</small>
+              <h3 id="bbHomeTop10Title">TOP 10</h3>
+              <p>ผู้เล่นที่มีคะแนนสูงสุดตอนนี้</p>
+            </div>
+          </div>
+          <button class="bbHomeTop10All" data-app-action="rank">ดูทั้งหมด →</button>
+        </div>
+        <div class="bbHomeTop10List" id="bbHomeTop10List" aria-live="polite">
+          <div class="bbHomeTop10Loading">กำลังโหลดอันดับ…</div>
+        </div>
+      </section>
     </div>
 
     <div class="bbStatsRow">
@@ -5294,11 +5797,28 @@ window.addEventListener("load",()=>{
 
       <section class="bbArenaLobby hidden" id="bbArenaLobby">
         <div class="bbArenaHero">
-          <div>
-            <span class="bbRankedPill dark">🏆 โหมดแข่งขัน</span>
+          <div class="bbArenaHeroCopy">
+            <span class="bbRankedPill dark">โหมดแข่งขัน</span>
             <h1>สนามแข่งขันออนไลน์</h1>
             <p>สร้างห้องของคุณ หรือเข้าห้องที่กำลังรอผู้เล่นได้ทันที</p>
           </div>
+
+          <div class="bbRankedMascot" aria-hidden="true">
+            <span class="bbRMHalo"></span>
+            <div class="bbRMBrain">
+              <i class="lobe l1"></i><i class="lobe l2"></i><i class="lobe l3"></i>
+              <i class="lobe l4"></i><i class="lobe l5"></i><i class="lobe l6"></i>
+              <span class="rmEye left"></span><span class="rmEye right"></span>
+              <span class="rmCheek left"></span><span class="rmCheek right"></span>
+              <span class="rmMouth"></span>
+              <span class="rmArm left"><i></i></span>
+              <span class="rmArm right"><i></i></span>
+              <span class="rmCape"></span>
+              <span class="rmStar"></span>
+            </div>
+            <i class="rmSpark s1"></i><i class="rmSpark s2"></i><i class="rmSpark s3"></i>
+          </div>
+
           <div class="bbArenaHeroStats">
             <div><small>คะแนนจัดอันดับ</small><b id="bbArenaRP">0 RP</b></div>
             <div><small>การแข่งขัน</small><b id="bbArenaGames">0</b></div>
