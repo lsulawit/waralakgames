@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
 <title>Brain Buddy — Member Cloud v9</title>
 <style>
@@ -54,6 +57,211 @@ body.dark .quickTeamChip.active{color:#ddd4ff}
 .authFoot{font-size:9px;color:var(--muted);line-height:1.55;margin-top:10px}.authFoot strong{color:var(--ink)}
 .migrateBox{padding:12px;border:1px dashed rgba(136,116,231,.28);border-radius:16px;background:rgba(136,116,231,.05)}.migrateBox strong{display:block;font-size:11px}.migrateBox p{font-size:9px;line-height:1.55;color:var(--muted);margin:3px 0 8px}
 @media(max-width:720px){.accountText{display:none}.profilemini.accountBtn{padding:6px}.cloudDot{position:absolute;margin:27px 0 0 28px}.memberActions{grid-template-columns:1fr}}
+
+
+/* ===== Brain Buddy v10 polish ===== */
+:root{
+  --hero-grad: radial-gradient(circle at 20% 15%, rgba(255,255,255,.9), transparent 35%),
+               radial-gradient(circle at 85% 25%, rgba(255,255,255,.55), transparent 18%),
+               linear-gradient(135deg,#ffe3f1 0%, #f8f1ff 45%, #e5f6ff 100%);
+  --modal-grad: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.90));
+  --glass-border: rgba(255,255,255,.65);
+}
+body{
+  font-family:"Noto Sans Thai","Nunito",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif !important;
+}
+body::before{
+  content:"";
+  position:fixed;inset:0;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255,182,213,.32), transparent 22%),
+    radial-gradient(circle at 88% 18%, rgba(184,168,255,.24), transparent 18%),
+    radial-gradient(circle at 82% 82%, rgba(171,234,255,.20), transparent 20%),
+    linear-gradient(180deg,#fffafd,#f8f6ff 55%,#f7fcff);
+  z-index:-2;
+}
+body.dark::before{
+  background:
+    radial-gradient(circle at 15% 15%, rgba(255,141,197,.12), transparent 24%),
+    radial-gradient(circle at 85% 15%, rgba(153,133,255,.12), transparent 18%),
+    linear-gradient(180deg,#18161f,#12101a 55%,#111722);
+}
+.hero,.shell,.panel,.card{
+  backdrop-filter: blur(14px);
+}
+.hero{
+  background:var(--hero-grad)!important;
+  border:1px solid rgba(255,255,255,.68)!important;
+  box-shadow:0 28px 70px rgba(86,64,108,.12)!important;
+  overflow:hidden;
+}
+.hero::after{
+  content:"";
+  position:absolute;right:-30px;top:-30px;width:190px;height:190px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.7),rgba(255,255,255,0));
+  filter:blur(6px);pointer-events:none;
+}
+.hero h1,.heroTitle,.headline{
+  letter-spacing:-0.03em!important;
+  line-height:1.08!important;
+}
+.hero .subtitle,.hero p{
+  max-width:680px;
+  line-height:1.75!important;
+  color:#6f6777!important;
+}
+body.dark .hero .subtitle,body.dark .hero p{color:#c9c4d6!important;}
+/* Better chips/buttons */
+button,.btn,.chip,.tab{
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+button:hover,.btn:hover,.chip:hover{
+  transform:translateY(-1px);
+  box-shadow:0 10px 24px rgba(124,93,170,.12);
+}
+/* Auth modal makeover */
+.authOverlay,.modalOverlay{
+  background:rgba(29,20,38,.32)!important;
+  backdrop-filter:blur(8px)!important;
+}
+.authCard,.authModal,.memberModal{
+  width:min(960px,calc(100vw - 32px))!important;
+  max-width:960px!important;
+  border-radius:32px!important;
+  background:var(--modal-grad)!important;
+  border:1px solid var(--glass-border)!important;
+  box-shadow:0 35px 90px rgba(52,36,66,.24)!important;
+  overflow:hidden!important;
+}
+.authCard .close,.authModal .close,.memberModal .close{
+  top:16px!important;left:16px!important;
+  width:46px!important;height:46px!important;border-radius:16px!important;
+  background:rgba(255,255,255,.86)!important;border:1px solid rgba(90,70,110,.08)!important;
+}
+.authCard .close:hover,.authModal .close:hover,.memberModal .close:hover{transform:translateY(-1px) scale(1.02);}
+.authBody,.authInner{
+  display:grid!important;
+  grid-template-columns:1.05fr .95fr!important;
+  gap:0!important;
+  min-height:620px!important;
+}
+@media(max-width:880px){
+  .authBody,.authInner{grid-template-columns:1fr!important;min-height:auto!important;}
+}
+.authLeft{
+  padding:38px 34px 34px!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.88),rgba(255,255,255,.76))!important;
+}
+.authRight{
+  position:relative;
+  padding:30px!important;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(255,255,255,.55), transparent 22%),
+    linear-gradient(135deg,#ffd8eb 0%,#efe5ff 55%,#dff5ff 100%)!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+}
+.authRight::before{
+  content:"";
+  position:absolute;inset:24px;
+  border-radius:28px;
+  background:rgba(255,255,255,.38);
+  border:1px solid rgba(255,255,255,.42);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.45);
+}
+.authMascot{
+  position:relative;z-index:1;width:min(320px,70vw);
+  filter:drop-shadow(0 26px 30px rgba(86,61,117,.22));
+  animation:floaty 4.5s ease-in-out infinite;
+  transform-style:preserve-3d;
+}
+.authBadge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 14px;border-radius:999px;
+  background:rgba(255,255,255,.9);
+  border:1px solid rgba(120,95,155,.12);
+  color:#5c4c71;font-weight:800;font-size:13px;margin-bottom:12px;
+  box-shadow:0 8px 22px rgba(108,82,135,.08);
+}
+.authTitle{
+  font-size:44px!important;line-height:1.08!important;letter-spacing:-.03em!important;
+  margin:4px 0 10px!important;
+}
+.authDesc{
+  color:#6f6777!important;line-height:1.7!important;font-size:15px!important;
+  margin-bottom:18px!important;
+}
+.authTabs{
+  display:grid!important;grid-template-columns:1fr 1fr!important;
+  padding:6px!important;border-radius:18px!important;
+  background:#f8f4fc!important;border:1px solid rgba(118,96,146,.10)!important;
+  gap:8px!important;margin:18px 0 20px!important;
+}
+.authTab{
+  border-radius:14px!important;padding:14px 12px!important;font-weight:800!important;
+  background:transparent!important;color:#6a6074!important;border:none!important;
+}
+.authTab.active{
+  background:linear-gradient(135deg,#f48ab7,#ae90ff)!important;color:#fff!important;
+  box-shadow:0 10px 24px rgba(169,117,209,.22)!important;
+}
+.authField label{
+  font-size:13px!important;color:#6a6174!important;font-weight:800!important;margin-bottom:8px!important;display:block;
+}
+.authField input{
+  width:100%!important;height:56px!important;border-radius:18px!important;
+  border:1px solid rgba(124,101,151,.14)!important;background:rgba(255,255,255,.92)!important;
+  padding:0 18px!important;font-size:16px!important;outline:none!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.65);
+}
+.authField input:focus{
+  border-color:#c38cff!important;box-shadow:0 0 0 4px rgba(194,140,255,.14)!important;
+}
+.authPrimary{
+  height:58px!important;border:none!important;border-radius:18px!important;
+  background:linear-gradient(135deg,#ff6fae,#b089ff)!important;color:#fff!important;
+  font-weight:900!important;font-size:19px!important;
+  box-shadow:0 16px 28px rgba(220,112,176,.28)!important;
+}
+.authSecondary{
+  height:54px!important;border-radius:18px!important;
+  border:1px solid rgba(121,99,147,.10)!important;background:rgba(255,255,255,.92)!important;
+  font-weight:800!important;color:#4d4457!important;
+}
+.authHint{
+  display:flex;gap:10px;align-items:flex-start;
+  font-size:12px;line-height:1.6;color:#7d7487;margin-top:12px;
+}
+.authBullets{
+  position:relative;z-index:1;
+  display:grid;gap:10px;margin-top:18px;
+}
+.authBullet{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.68);
+  border:1px solid rgba(255,255,255,.50);
+  box-shadow:0 12px 24px rgba(109,89,137,.08);
+}
+.authBullet b{display:block;font-size:14px;color:#44354e}
+.authBullet span{font-size:12px;color:#6f6777;line-height:1.5}
+body.dark .authCard,body.dark .authModal,body.dark .memberModal{
+  background:linear-gradient(180deg,rgba(27,23,36,.96),rgba(19,17,29,.95))!important;
+  border-color:rgba(255,255,255,.08)!important;
+}
+body.dark .authLeft{background:linear-gradient(180deg,rgba(28,24,39,.82),rgba(18,16,26,.74))!important;}
+body.dark .authRight{
+  background:linear-gradient(135deg,#38283a 0%,#2a2443 55%,#1c2a35 100%)!important;
+}
+body.dark .authRight::before{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08);}
+body.dark .authBadge{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.08);color:#d8d1e8}
+body.dark .authDesc,body.dark .authBullet span{color:#b9b1c8!important;}
+body.dark .authField label{color:#cfc7dc!important;}
+body.dark .authField input{background:rgba(255,255,255,.05)!important;border-color:rgba(255,255,255,.10)!important;color:#fff!important;}
+body.dark .authSecondary{background:rgba(255,255,255,.05)!important;border-color:rgba(255,255,255,.08)!important;color:#f3eef9!important;}
+body.dark .authBullet{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.08);}
+@keyframes floaty{
+  0%,100%{transform:translateY(0) rotateX(0deg);}
+  50%{transform:translateY(-10px) rotateX(3deg);}
+}
 
 </style>
 </head>
@@ -151,7 +359,133 @@ body.dark .quickTeamChip.active{color:#ddd4ff}
 </div>
 
 <div class="starfall" id="starfall"></div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+(function enhanceAuthUI(){
+  const boot = () => {
+    const modal = document.querySelector('.authCard,.authModal,.memberModal');
+    if(!modal || modal.dataset.enhanced === '1') return;
+    modal.dataset.enhanced = '1';
+
+    // detect close button
+    const closeBtn = modal.querySelector('button[aria-label], .close, .x, .btnClose') || modal.querySelector('button');
+    if(closeBtn) closeBtn.classList.add('close');
+
+    // find tab buttons
+    const tabBtns = Array.from(modal.querySelectorAll('button')).filter(b => /เข้าสู่ระบบ|สมัครสมาชิก/.test((b.textContent||'').trim()));
+    let tabWrap = null;
+    if(tabBtns.length >= 2){
+      tabWrap = document.createElement('div');
+      tabWrap.className = 'authTabs';
+      tabBtns.slice(0,2).forEach((b,i)=>{
+        b.classList.add('authTab');
+        if(i===0) b.classList.add('active');
+        const observer = new MutationObserver(()=>{
+          tabBtns.forEach(x=>x.classList.remove('active'));
+          if(/gradient|255, 255, 255/.test((x=>x.getAttribute('style')||'')(b)) || b.getAttribute('aria-selected')==='true') b.classList.add('active');
+        });
+        observer.observe(b,{attributes:true,attributeFilter:['class','style','aria-selected']});
+        tabWrap.appendChild(b);
+      });
+    }
+
+    // collect fields and main actions
+    const emailInput = modal.querySelector('input[type="email"], input[placeholder*="@"]');
+    const passInput = modal.querySelector('input[type="password"]');
+    const textInputs = Array.from(modal.querySelectorAll('input')).filter(i => i.type !== 'hidden');
+    textInputs.forEach(inp=>{
+      const wrap = document.createElement('div');
+      wrap.className = 'authField';
+      const label = document.createElement('label');
+      let txt = 'ข้อมูล';
+      const ph=(inp.getAttribute('placeholder')||'').toLowerCase();
+      if(inp.type==='email' || ph.includes('@')) txt='อีเมล';
+      else if(inp.type==='password') txt='รหัสผ่าน';
+      else if(ph.includes('name') || /ชื่อ/.test(ph)) txt='ชื่อที่แสดง';
+      else if(/confirm|ยืนยัน/.test(ph)) txt='ยืนยันรหัสผ่าน';
+      label.textContent = txt;
+      inp.parentNode.insertBefore(wrap, inp);
+      wrap.appendChild(label);
+      wrap.appendChild(inp);
+    });
+
+    const primaryBtn = Array.from(modal.querySelectorAll('button')).find(b=>/เข้าสู่ระบบ|สมัครสมาชิก|สร้างบัญชี|ยืนยัน/.test((b.textContent||'').trim()) && !/Guest|ลืมรหัสผ่าน/.test(b.textContent));
+    const guestBtn = Array.from(modal.querySelectorAll('button')).find(b=>/Guest/.test((b.textContent||'')));
+    const forgotBtn = Array.from(modal.querySelectorAll('button')).find(b=>/ลืมรหัสผ่าน/.test((b.textContent||'')));
+
+    if(primaryBtn) primaryBtn.classList.add('authPrimary');
+    if(guestBtn) guestBtn.classList.add('authSecondary');
+    if(forgotBtn) forgotBtn.classList.add('authSecondary');
+
+    const currentChildren = Array.from(modal.children);
+    const left = document.createElement('div');
+    left.className = 'authLeft';
+    const right = document.createElement('div');
+    right.className = 'authRight';
+    const inner = document.createElement('div');
+    inner.className = 'authBody';
+
+    const badge = document.createElement('div');
+    badge.className = 'authBadge';
+    badge.innerHTML = '✨ Cloud Sync พร้อมใช้งาน';
+
+    const title = document.createElement('div');
+    title.className = 'authTitle';
+    title.textContent = 'บัญชี Brain Buddy';
+
+    const desc = document.createElement('div');
+    desc.className = 'authDesc';
+    desc.textContent = 'ล็อกอินเพื่อเก็บ Level, XP, Achievement และประวัติการเล่นไว้บน Cloud ใช้ต่อได้ทุกเครื่อง หรือจะเริ่มเล่นแบบ Guest ก่อนก็ได้';
+
+    // preserve tabs if found
+    left.appendChild(badge);
+    left.appendChild(title);
+    left.appendChild(desc);
+    if(tabWrap) left.appendChild(tabWrap);
+
+    // move all form-ish nodes except the close button into left
+    currentChildren.forEach(ch=>{
+      if(ch===closeBtn) return;
+      if(ch.classList && (ch.classList.contains('authBody') || ch.classList.contains('authLeft') || ch.classList.contains('authRight'))) return;
+      left.appendChild(ch);
+    });
+
+    const hint = document.createElement('div');
+    hint.className = 'authHint';
+    hint.innerHTML = '<span>🔒</span><span>สมาชิกจะซิงก์ความคืบหน้าอัตโนมัติ ส่วน Guest จะเก็บข้อมูลไว้ในเครื่องนี้เท่านั้น</span>';
+    left.appendChild(hint);
+
+    right.innerHTML = `
+      <div class="authBullets">
+        <img class="authMascot" alt="Brain Buddy Bear" src="data:image/svg+xml;utf8,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 360'><defs><radialGradient id='g1' cx='35%' cy='28%' r='70%'><stop offset='0%' stop-color='#ffd9c5'/><stop offset='58%' stop-color='#d7a27a'/><stop offset='100%' stop-color='#b77a57'/></radialGradient><radialGradient id='g2' cx='50%' cy='35%' r='60%'><stop offset='0%' stop-color='#fffaf2'/><stop offset='100%' stop-color='#efe4d5'/></radialGradient></defs><ellipse cx='160' cy='330' rx='88' ry='18' fill='rgba(109,81,145,.12)'/><circle cx='95' cy='92' r='40' fill='url(#g1)'/><circle cx='225' cy='92' r='40' fill='url(#g1)'/><circle cx='160' cy='148' r='108' fill='url(#g1)'/><ellipse cx='160' cy='190' rx='62' ry='70' fill='url(#g2)'/><ellipse cx='117' cy='286' rx='34' ry='46' fill='url(#g1)'/><ellipse cx='203' cy='286' rx='34' ry='46' fill='url(#g1)'/><ellipse cx='70' cy='216' rx='34' ry='58' fill='url(#g1)' transform='rotate(16 70 216)'/><ellipse cx='250' cy='216' rx='34' ry='58' fill='url(#g1)' transform='rotate(-16 250 216)'/><circle cx='125' cy='145' r='10' fill='#2d2430'/><circle cx='195' cy='145' r='10' fill='#2d2430'/><ellipse cx='160' cy='176' rx='20' ry='16' fill='#4b3733'/><path d='M140 198 Q160 216 180 198' stroke='#4b3733' stroke-width='5' stroke-linecap='round' fill='none'/><path d='M96 54 L160 22 L224 54 L212 80 H108 Z' fill='#ffd95d' stroke='#ccac31' stroke-width='5'/><circle cx='160' cy='48' r='8' fill='#ff7fb2'/></svg>`) }" />
+        <div class="authBullet"><div>☁️</div><div><b>Cloud Save</b><span>คะแนนและความคืบหน้าไม่หายเมื่อเปลี่ยนเครื่อง</span></div></div>
+        <div class="authBullet"><div>🏆</div><div><b>Achievement</b><span>เก็บถ้วยรางวัล, streak และสถิติสะสมแบบอัตโนมัติ</span></div></div>
+        <div class="authBullet"><div>🎮</div><div><b>เริ่มได้ทันที</b><span>ยังไม่พร้อมสมัคร? เล่นแบบ Guest ก่อนได้ แล้วค่อยย้ายข้อมูลทีหลัง</span></div></div>
+      </div>`;
+
+    if(closeBtn) modal.prepend(closeBtn);
+    inner.appendChild(left); inner.appendChild(right);
+    modal.appendChild(inner);
+
+    // hide any duplicate helper headline from original modal if too plain
+    const dupes = Array.from(left.querySelectorAll('h1,h2,h3,p')).filter(el => /บัญชี Brain Buddy/.test(el.textContent||''));
+    dupes.forEach((el,idx)=>{ if(idx>0) el.style.display='none'; });
+
+    // mark active tab on click
+    left.addEventListener('click', e=>{
+      const b=e.target.closest('.authTab');
+      if(!b) return;
+      left.querySelectorAll('.authTab').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+    });
+  };
+
+  const mo = new MutationObserver(()=>boot());
+  mo.observe(document.documentElement,{childList:true,subtree:true});
+  window.addEventListener('load',()=>setTimeout(boot,700));
+  setTimeout(boot,1200);
+})();
+
+</script>
 <script>
 // Brain Buddy Cloud connection — public browser credentials only.
 window.BRAIN_BUDDY_SUPABASE = {
