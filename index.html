@@ -5518,6 +5518,458 @@ body.bbCosEffectSparkle.bbRankedPlaying .gameCard::before{
   display:none!important;
 }
 
+
+/* =========================================================
+   Brain Buddy v61 — Home Wallet + Collection + Hero Character
+   ========================================================= */
+
+.bbHomeInventoryPanel{
+  position:relative;
+  z-index:2;
+  margin-top:14px;
+  padding:14px;
+  border-radius:30px;
+  border:2px solid rgba(255,255,255,.46);
+  background:linear-gradient(145deg,rgba(255,255,255,.90),rgba(255,239,249,.82));
+  box-shadow:
+    inset 0 4px 6px rgba(255,255,255,.76),
+    0 14px 24px rgba(44,24,94,.18);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
+
+.bbHomeInventoryTop{
+  display:grid;
+  grid-template-columns:minmax(280px,.8fr) 1.2fr;
+  gap:12px;
+  align-items:stretch;
+}
+
+.bbHomeWalletBox{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  min-height:78px;
+  padding:12px 14px;
+  border-radius:22px;
+  background:linear-gradient(135deg,#fff3a7,#ffd588 48%,#ffb8d4);
+  box-shadow:
+    inset 0 4px 6px rgba(255,255,255,.66),
+    0 9px 16px rgba(104,63,81,.10);
+}
+
+.bbHomeCoinIcon{
+  width:48px;
+  height:48px;
+  flex:0 0 48px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:#a66708;
+  font-size:1.05rem;
+  font-weight:1000;
+  background:linear-gradient(145deg,#fff8a9,#ffc63b);
+  border:3px solid rgba(255,255,255,.62);
+  box-shadow:
+    inset 0 4px 5px rgba(255,255,255,.70),
+    0 7px 12px rgba(128,75,12,.17);
+}
+
+.bbHomeWalletCopy{
+  display:flex;
+  flex-direction:column;
+  flex:1;
+  min-width:0;
+}
+.bbHomeWalletCopy small{
+  color:#a26c51;
+  font-size:.68rem;
+  letter-spacing:.12em;
+  font-weight:1000;
+}
+.bbHomeWalletCopy strong{
+  color:#643c72;
+  font-size:1.65rem;
+  line-height:1.05;
+  font-weight:1000;
+}
+
+.bbHomeWalletShopBtn{
+  border:0;
+  border-radius:16px;
+  padding:10px 13px;
+  color:#fff;
+  background:linear-gradient(180deg,#9b7ded,#7558d0);
+  font-weight:950;
+}
+
+.bbHomeCollectionHead{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  min-height:78px;
+  padding:12px 14px;
+  border-radius:22px;
+  background:linear-gradient(145deg,#f2eaff,#e9f4ff);
+}
+.bbHomeCollectionHead>div{
+  display:flex;
+  flex-direction:column;
+}
+.bbHomeCollectionHead small{
+  color:#a26da3;
+  font-size:.66rem;
+  letter-spacing:.12em;
+  font-weight:1000;
+}
+.bbHomeCollectionHead strong{
+  color:#5d4075;
+  font-size:1.2rem;
+  font-weight:1000;
+}
+.bbHomeCollectionHead span{
+  color:#917c9e;
+  font-size:.76rem;
+  font-weight:800;
+}
+.bbHomeCollectionHead button{
+  border:0;
+  border-radius:15px;
+  padding:10px 12px;
+  color:#7257ab;
+  background:rgba(255,255,255,.76);
+  font-weight:900;
+}
+
+.bbHomeCollectionGrid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:9px;
+  margin-top:10px;
+}
+
+.bbHomeCollectionSlot{
+  min-width:0;
+  min-height:74px;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:9px;
+  border:1px solid #eee3f2;
+  border-radius:19px;
+  text-align:left;
+  background:rgba(255,255,255,.78);
+  color:#5d4570;
+}
+
+.bbHomeCollectionSlot .art{
+  width:48px;
+  height:48px;
+  flex:0 0 48px;
+  position:relative;
+  border-radius:15px;
+  background:linear-gradient(145deg,#eef7ff,#ffeaf5);
+  box-shadow:inset 0 3px 4px rgba(255,255,255,.75);
+  overflow:hidden;
+}
+
+.bbHomeCollectionSlot .art.bear::before{
+  content:"";
+  position:absolute;
+  inset:11px 12px 6px;
+  border-radius:48% 48% 44% 44%;
+  background:linear-gradient(180deg,#e8bb8b,#aa704c);
+  box-shadow:-11px -6px 0 -6px #c4865b,11px -6px 0 -6px #c4865b;
+}
+.bbHomeCollectionSlot .art.theme::before{
+  content:"";
+  position:absolute;
+  inset:8px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#88dcff,#a68cff 48%,#ff98c7 74%,#ffe074);
+}
+.bbHomeCollectionSlot .art.frame::before{
+  content:"";
+  position:absolute;
+  inset:6px;
+  border-radius:50%;
+  border:6px solid #ffcc55;
+  box-shadow:0 0 0 4px #ff8fbd;
+}
+.bbHomeCollectionSlot .art.effect::before,
+.bbHomeCollectionSlot .art.effect::after{
+  content:"";
+  position:absolute;
+  left:20px;
+  top:7px;
+  width:9px;
+  height:34px;
+  border-radius:6px;
+  background:linear-gradient(180deg,#fff7a1,#ff77b8);
+  transform:rotate(45deg);
+}
+.bbHomeCollectionSlot .art.effect::after{transform:rotate(-45deg)}
+
+.bbHomeCollectionSlot .copy{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+.bbHomeCollectionSlot .copy small{
+  color:#927e9d;
+  font-size:.62rem;
+  font-weight:850;
+}
+.bbHomeCollectionSlot .copy b{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  color:#604677;
+  font-size:.78rem;
+  font-weight:1000;
+}
+
+.bbHomeCollectionSlot.equipped{
+  border-color:rgba(110,201,156,.32);
+  background:linear-gradient(145deg,#edfff5,#f7fffc);
+}
+.bbHomeCollectionSlot.equipped .copy b{
+  color:#347a5c;
+}
+
+/* --- Actual equipped character on the right side of Home --- */
+.bbEquippedHeroCharacter{
+  position:relative;
+  width:270px;
+  height:230px;
+  display:grid;
+  place-items:center;
+  filter:drop-shadow(0 20px 22px rgba(44,21,96,.25));
+}
+.bbEquippedHeroCharacter img{
+  display:none;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+body.bbHeroUsesBear #bbDefaultHeroMascot{
+  display:none!important;
+}
+body.bbHeroUsesBear #bbEquippedHeroCharacter{
+  display:grid!important;
+}
+
+body.bbHeroUsesBear.bbHeroBearHasImage #bbPinkBuddy3D{
+  display:none!important;
+}
+body.bbHeroUsesBear.bbHeroBearHasImage #bbEquippedHeroCharacterImg{
+  display:block!important;
+}
+
+/* CSS Pink Buddy fallback when shop item has no image_url yet */
+.bbPinkBuddy3D{
+  width:215px;
+  height:215px;
+  position:relative;
+}
+
+.bbPinkBuddy3D .ear{
+  position:absolute;
+  top:19px;
+  width:61px;
+  height:61px;
+  border-radius:50%;
+  background:linear-gradient(145deg,#ffc4dd,#ed74ad);
+  box-shadow:
+    inset 8px 8px 10px rgba(255,255,255,.42),
+    inset -7px -9px 10px rgba(172,54,113,.18);
+}
+.bbPinkBuddy3D .ear.left{left:24px}
+.bbPinkBuddy3D .ear.right{right:24px}
+
+.bbPinkBuddy3D .head{
+  position:absolute;
+  left:43px;
+  top:29px;
+  width:130px;
+  height:118px;
+  border-radius:48% 48% 45% 45%;
+  background:linear-gradient(145deg,#ffd4e7,#f58dbb 58%,#dd5e9b);
+  box-shadow:
+    inset 12px 10px 12px rgba(255,255,255,.43),
+    inset -10px -13px 14px rgba(151,45,99,.16);
+  z-index:4;
+}
+.bbPinkBuddy3D .head .eye{
+  position:absolute;
+  top:48px;
+  width:13px;
+  height:16px;
+  border-radius:50%;
+  background:#2b2230;
+  box-shadow:inset 3px 3px 0 rgba(255,255,255,.55);
+}
+.bbPinkBuddy3D .head .eye.left{left:36px}
+.bbPinkBuddy3D .head .eye.right{right:36px}
+.bbPinkBuddy3D .head .muzzle{
+  position:absolute;
+  left:41px;
+  top:65px;
+  width:49px;
+  height:35px;
+  border-radius:50%;
+  background:#fff0e9;
+}
+.bbPinkBuddy3D .head .nose{
+  position:absolute;
+  left:57px;
+  top:69px;
+  width:18px;
+  height:13px;
+  border-radius:50% 50% 55% 55%;
+  background:#40303b;
+  z-index:2;
+}
+.bbPinkBuddy3D .head .mouth{
+  position:absolute;
+  left:58px;
+  top:81px;
+  width:17px;
+  height:9px;
+  border-bottom:3px solid #5d384a;
+  border-radius:0 0 15px 15px;
+  z-index:2;
+}
+.bbPinkBuddy3D .head .blush{
+  position:absolute;
+  top:72px;
+  width:19px;
+  height:10px;
+  border-radius:50%;
+  background:rgba(255,108,154,.45);
+}
+.bbPinkBuddy3D .head .blush.left{left:15px}
+.bbPinkBuddy3D .head .blush.right{right:15px}
+
+.bbPinkBuddy3D .body{
+  position:absolute;
+  left:57px;
+  top:117px;
+  width:101px;
+  height:82px;
+  border-radius:48% 48% 42% 42%;
+  background:linear-gradient(145deg,#f9aed0,#df679f);
+  box-shadow:
+    inset 9px 8px 10px rgba(255,255,255,.32),
+    inset -8px -10px 11px rgba(140,39,87,.12);
+  z-index:2;
+}
+
+.bbPinkBuddy3D .arm,
+.bbPinkBuddy3D .leg{
+  position:absolute;
+  background:linear-gradient(145deg,#f7a6c9,#d96198);
+  box-shadow:inset 5px 5px 7px rgba(255,255,255,.26);
+}
+.bbPinkBuddy3D .arm{
+  top:124px;
+  width:43px;
+  height:67px;
+  border-radius:28px;
+  z-index:1;
+}
+.bbPinkBuddy3D .arm.left{left:31px;transform:rotate(15deg)}
+.bbPinkBuddy3D .arm.right{right:31px;transform:rotate(-15deg)}
+.bbPinkBuddy3D .leg{
+  bottom:3px;
+  width:55px;
+  height:44px;
+  border-radius:50%;
+  z-index:3;
+}
+.bbPinkBuddy3D .leg.left{left:44px}
+.bbPinkBuddy3D .leg.right{right:44px}
+
+.bbPinkBuddy3D .heart{
+  position:absolute;
+  left:87px;
+  top:142px;
+  width:42px;
+  height:38px;
+  transform:rotate(45deg);
+  border-radius:10px 0 12px 0;
+  background:linear-gradient(145deg,#8e72f0,#6f51d3);
+  z-index:5;
+  box-shadow:inset 4px 4px 5px rgba(255,255,255,.32),0 6px 10px rgba(69,40,120,.18);
+}
+.bbPinkBuddy3D .heart::before,
+.bbPinkBuddy3D .heart::after{
+  content:"";
+  position:absolute;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:inherit;
+}
+.bbPinkBuddy3D .heart::before{left:-21px;top:0}
+.bbPinkBuddy3D .heart::after{left:0;top:-21px}
+
+@media(max-width:900px){
+  .bbHomeInventoryTop{
+    grid-template-columns:1fr;
+  }
+  .bbHomeCollectionGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .bbEquippedHeroCharacter{
+    width:230px;
+    height:205px;
+  }
+  .bbPinkBuddy3D{
+    transform:scale(.88);
+  }
+}
+
+@media(max-width:640px){
+  .bbHomeInventoryPanel{
+    margin-top:10px;
+    padding:10px;
+    border-radius:24px;
+  }
+  .bbHomeWalletBox,
+  .bbHomeCollectionHead{
+    min-height:68px;
+    padding:10px;
+    border-radius:18px;
+  }
+  .bbHomeWalletCopy strong{font-size:1.35rem}
+  .bbHomeCollectionGrid{
+    grid-template-columns:1fr 1fr;
+    gap:6px;
+  }
+  .bbHomeCollectionSlot{
+    min-height:64px;
+    padding:7px;
+    border-radius:16px;
+  }
+  .bbHomeCollectionSlot .art{
+    width:42px;
+    height:42px;
+    flex-basis:42px;
+    border-radius:13px;
+  }
+  .bbHomeCollectionSlot .copy b{font-size:.7rem}
+  .bbEquippedHeroCharacter{
+    width:205px;
+    height:185px;
+  }
+  .bbPinkBuddy3D{
+    transform:scale(.78);
+  }
+}
+
 </style>
 
 <script>
@@ -6148,7 +6600,7 @@ try{
         </div>
       </div>
       <div class="bbHeroBrain" aria-hidden="true">
-        <div class="brainBody">
+        <div class="brainBody" id="bbDefaultHeroMascot">
           <span class="eye left"></span>
           <span class="eye right"></span>
           <span class="blush b1"></span>
@@ -6156,7 +6608,72 @@ try{
           <span class="mouth"></span>
           <span class="hand"></span>
         </div>
+
+        <div class="bbEquippedHeroCharacter hidden" id="bbEquippedHeroCharacter">
+          <img id="bbEquippedHeroCharacterImg" alt="">
+          <div class="bbPinkBuddy3D" id="bbPinkBuddy3D">
+            <span class="ear left"></span>
+            <span class="ear right"></span>
+            <span class="head">
+              <i class="eye left"></i>
+              <i class="eye right"></i>
+              <i class="muzzle"></i>
+              <i class="nose"></i>
+              <i class="mouth"></i>
+              <i class="blush left"></i>
+              <i class="blush right"></i>
+            </span>
+            <span class="body"></span>
+            <span class="arm left"></span>
+            <span class="arm right"></span>
+            <span class="leg left"></span>
+            <span class="leg right"></span>
+            <span class="heart"></span>
+          </div>
+        </div>
+
         <i class="spark a"></i><i class="spark b"></i><i class="spark c"></i>
+      </div>
+    </section>
+
+    <section class="bbHomeInventoryPanel" id="bbHomeInventoryPanel">
+      <div class="bbHomeInventoryTop">
+        <div class="bbHomeWalletBox">
+          <span class="bbHomeCoinIcon">B</span>
+          <span class="bbHomeWalletCopy">
+            <small>BRAIN COINS</small>
+            <strong id="bbHomeCoinBalance">—</strong>
+          </span>
+          <button type="button" class="bbHomeWalletShopBtn" data-app-go="shop">ร้านค้า</button>
+        </div>
+
+        <div class="bbHomeCollectionHead">
+          <div>
+            <small>MY COLLECTION</small>
+            <strong>คลังของฉัน</strong>
+            <span id="bbHomeOwnedCount">0 ชิ้น</span>
+          </div>
+          <button type="button" data-app-go="shop">จัดการคลัง →</button>
+        </div>
+      </div>
+
+      <div class="bbHomeCollectionGrid" id="bbHomeCollectionGrid">
+        <button type="button" class="bbHomeCollectionSlot" data-app-go="shop" data-home-cosmetic-type="bear">
+          <span class="art bear"></span>
+          <span class="copy"><small>หมี</small><b>ยังไม่ได้ใช้</b></span>
+        </button>
+        <button type="button" class="bbHomeCollectionSlot" data-app-go="shop" data-home-cosmetic-type="theme">
+          <span class="art theme"></span>
+          <span class="copy"><small>ธีม</small><b>ยังไม่ได้ใช้</b></span>
+        </button>
+        <button type="button" class="bbHomeCollectionSlot" data-app-go="shop" data-home-cosmetic-type="frame">
+          <span class="art frame"></span>
+          <span class="copy"><small>กรอบ</small><b>ยังไม่ได้ใช้</b></span>
+        </button>
+        <button type="button" class="bbHomeCollectionSlot" data-app-go="shop" data-home-cosmetic-type="effect">
+          <span class="art effect"></span>
+          <span class="copy"><small>เอฟเฟกต์</small><b>ยังไม่ได้ใช้</b></span>
+        </button>
       </div>
     </section>
 
@@ -9546,6 +10063,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loadShop(),
         refreshStarterReward()
       ]);
+      try{await window.bbLoadHomeInventory?.()}catch(e){}
     }catch(err){
       console.error("Claim starter coins:",err);
       shopToast(String(err?.message||"รับ Brain Coins ไม่สำเร็จ"));
@@ -9694,6 +10212,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       await loadShop();
       try{await window.bbApplyEquippedCosmetics?.()}catch(e){}
+      try{await window.bbLoadHomeInventory?.()}catch(e){}
     }catch(err){
       console.error("Brain Buddy Shop unequip:",err);
       shopToast(String(err?.message||"ถอดสินค้าไม่สำเร็จ"));
@@ -9733,6 +10252,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       await loadShop();
       try{await window.bbApplyEquippedCosmetics?.()}catch(e){}
+      try{await window.bbLoadHomeInventory?.()}catch(e){}
     }catch(err){
       console.error("Brain Buddy Shop equip:",err);
       shopToast(String(err?.message||"ใช้งานสินค้าไม่สำเร็จ"));
@@ -9763,6 +10283,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const result=Array.isArray(data)?data[0]:data;
       shopToast(`ซื้อ ${result?.item_name||"สินค้า"} สำเร็จ`);
       await loadShop();
+      try{await window.bbLoadHomeInventory?.()}catch(e){}
     }catch(err){
       console.error("Brain Buddy Shop buy:",err);
       const msg=String(err?.message||"ซื้อสินค้าไม่สำเร็จ");
@@ -10226,6 +10747,187 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   setTimeout(applyEquippedCosmetics,1600);
+})();
+</script>
+
+
+<script>
+(function brainBuddyV61HomeInventory(){
+  const q=s=>document.querySelector(s);
+  let busy=false;
+
+  function client(){
+    if(window.__bbSupabase)return window.__bbSupabase;
+    const cfg=window.BRAIN_BUDDY_SUPABASE||{};
+    if(window.supabase&&cfg.url&&cfg.publishableKey){
+      window.__bbSupabase=window.supabase.createClient(cfg.url,cfg.publishableKey);
+      return window.__bbSupabase;
+    }
+    return null;
+  }
+
+  function setGuestHomeInventory(){
+    const balance=q("#bbHomeCoinBalance");
+    const count=q("#bbHomeOwnedCount");
+    if(balance)balance.textContent="—";
+    if(count)count.textContent="เข้าสู่ระบบเพื่อดูคลัง";
+
+    document.querySelectorAll("[data-home-cosmetic-type]").forEach(slot=>{
+      slot.classList.remove("equipped");
+      const b=slot.querySelector(".copy b");
+      if(b)b.textContent="ยังไม่ได้ใช้";
+    });
+
+    document.body.classList.remove("bbHeroUsesBear","bbHeroBearHasImage");
+
+    const hero=q("#bbEquippedHeroCharacter");
+    if(hero)hero.classList.add("hidden");
+
+    const img=q("#bbEquippedHeroCharacterImg");
+    if(img){
+      img.removeAttribute("src");
+      img.alt="";
+    }
+  }
+
+  async function loadHomeInventory(){
+    if(busy)return;
+    busy=true;
+
+    try{
+      const c=client();
+      if(!c){
+        setGuestHomeInventory();
+        return;
+      }
+
+      const {data:sessionData}=await c.auth.getSession();
+      const user=sessionData?.session?.user;
+
+      if(!user){
+        setGuestHomeInventory();
+        return;
+      }
+
+      const [walletRes, ownedRes, equippedRes]=await Promise.all([
+        c.from("bb_wallets")
+          .select("coin_balance")
+          .eq("user_id",user.id)
+          .maybeSingle(),
+
+        c.from("bb_user_items")
+          .select("item_id")
+          .eq("user_id",user.id),
+
+        c.from("bb_equipped_items")
+          .select("item_type,item_id")
+          .eq("user_id",user.id)
+      ]);
+
+      if(walletRes.error)throw walletRes.error;
+      if(ownedRes.error)throw ownedRes.error;
+      if(equippedRes.error)throw equippedRes.error;
+
+      const balance=Number(walletRes.data?.coin_balance)||0;
+      const owned=(ownedRes.data||[]);
+      const equipped=(equippedRes.data||[]);
+
+      const balEl=q("#bbHomeCoinBalance");
+      const countEl=q("#bbHomeOwnedCount");
+      if(balEl)balEl.textContent=balance.toLocaleString();
+      if(countEl)countEl.textContent=`${owned.length.toLocaleString()} ชิ้น`;
+
+      const eqIds=equipped.map(x=>Number(x.item_id)).filter(Boolean);
+      let itemMap=new Map();
+
+      if(eqIds.length){
+        const {data:items,error:itemErr}=await c
+          .from("bb_shop_items")
+          .select("id,item_type,name,item_code,image_url")
+          .in("id",eqIds);
+
+        if(itemErr)throw itemErr;
+        itemMap=new Map((items||[]).map(x=>[Number(x.id),x]));
+      }
+
+      document.querySelectorAll("[data-home-cosmetic-type]").forEach(slot=>{
+        const type=slot.dataset.homeCosmeticType;
+        const eq=equipped.find(x=>String(x.item_type)===String(type));
+        const item=eq?itemMap.get(Number(eq.item_id)):null;
+        const nameEl=slot.querySelector(".copy b");
+
+        slot.classList.toggle("equipped",!!item);
+        if(nameEl)nameEl.textContent=item?.name||"ยังไม่ได้ใช้";
+      });
+
+      // Hero mascot: an equipped bear should replace the pink brain mascot.
+      const bearEq=equipped.find(x=>x.item_type==="bear");
+      const bear=bearEq?itemMap.get(Number(bearEq.item_id)):null;
+
+      const hero=q("#bbEquippedHeroCharacter");
+      const heroImg=q("#bbEquippedHeroCharacterImg");
+
+      if(bear){
+        document.body.classList.add("bbHeroUsesBear");
+        hero?.classList.remove("hidden");
+
+        if(bear.image_url){
+          document.body.classList.add("bbHeroBearHasImage");
+          if(heroImg){
+            heroImg.src=bear.image_url;
+            heroImg.alt=bear.name||"Buddy";
+          }
+        }else{
+          document.body.classList.remove("bbHeroBearHasImage");
+          if(heroImg){
+            heroImg.removeAttribute("src");
+            heroImg.alt="";
+          }
+        }
+      }else{
+        document.body.classList.remove("bbHeroUsesBear","bbHeroBearHasImage");
+        hero?.classList.add("hidden");
+        if(heroImg){
+          heroImg.removeAttribute("src");
+          heroImg.alt="";
+        }
+      }
+
+    }catch(err){
+      console.warn("Brain Buddy Home inventory:",err);
+    }finally{
+      busy=false;
+    }
+  }
+
+  window.bbLoadHomeInventory=loadHomeInventory;
+
+  // Sync after shop equip / unequip / purchase interactions.
+  document.addEventListener("click",e=>{
+    if(
+      e.target.closest("[data-shop-equip]") ||
+      e.target.closest("[data-shop-unequip]") ||
+      e.target.closest("[data-shop-buy]") ||
+      e.target.closest("#bbClaimStarterCoins")
+    ){
+      setTimeout(loadHomeInventory,450);
+      setTimeout(loadHomeInventory,1100);
+    }
+  });
+
+  window.addEventListener("bb:auth-changed",()=>{
+    setTimeout(loadHomeInventory,120);
+  });
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",()=>{
+      setTimeout(loadHomeInventory,500);
+    },{once:true});
+  }else{
+    setTimeout(loadHomeInventory,500);
+  }
+
+  setTimeout(loadHomeInventory,1600);
 })();
 </script>
 
