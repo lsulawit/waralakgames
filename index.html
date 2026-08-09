@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy v42 — Ranked Arena Fixed Overlay</title>
+<title>Brain Buddy v43 — Thai สนามจัดอันดับ Polish</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -965,7 +965,7 @@ body.dark .bbModeCard small,body.dark .bbModeTop p,body.dark .bbXPHead p,body.da
 body.dark .bbSelectedSummary b{color:#fff}
 
 
-/* ===== Brain Buddy v21 — Ranked Arena ===== */
+/* ===== Brain Buddy v21 — สนามจัดอันดับ ===== */
 .bbArenaNavBtn{background:linear-gradient(135deg,#34234d,#7757d8)!important;color:#fff!important;border:0!important;box-shadow:0 8px 18px rgba(86,60,151,.18)}
 @media(max-width:600px){.v17dock{grid-template-columns:repeat(5,1fr)!important}.v17dock button{font-size:8px!important}.v17dock i{font-size:18px!important}}
 
@@ -2030,10 +2030,10 @@ body.bbCandySetup .bbAppStyleGrid button > span:not(.peopleIcon){
 
 
 /* =========================================================
-   Brain Buddy v39 — finish Ranked Arena + Game screen visuals
+   Brain Buddy v39 — finish สนามจัดอันดับ + Game screen visuals
    ========================================================= */
 
-/* Ranked Arena full visual treatment */
+/* สนามจัดอันดับ full visual treatment */
 body.bbArenaOpen,
 body:has(#bbArena:not(.hidden)){
   background:
@@ -2330,10 +2330,10 @@ body:has(#bbArena:not(.hidden)){
 
 /* =========================================================
    Brain Buddy v40 — Exact-class visual pass
-   Focus: Ranked Arena + Game board from supplied references.
+   Focus: สนามจัดอันดับ + Game board from supplied references.
    ========================================================= */
 
-/* ---------- Ranked Arena ---------- */
+/* ---------- สนามจัดอันดับ ---------- */
 #bbArena{
   background:
     radial-gradient(circle at 50% 0%,rgba(255,255,255,.98),transparent 32rem),
@@ -2653,7 +2653,7 @@ body:has(#bbArena:not(.hidden)){
 }
 
 
-/* ===== Brain Buddy v41 — Ranked Arena opening safety ===== */
+/* ===== Brain Buddy v41 — สนามจัดอันดับ opening safety ===== */
 #bbArena .bbArenaOpening{
   animation:bbArenaOpeningPulse 1.25s ease-in-out infinite;
 }
@@ -2670,7 +2670,7 @@ body:has(#bbArena:not(.hidden)){
 
 
 /* =========================================================
-   Brain Buddy v42 — CRITICAL Ranked Arena overlay fix
+   Brain Buddy v42 — CRITICAL สนามจัดอันดับ overlay fix
    ========================================================= */
 #bbArena{
   position:fixed!important;
@@ -2727,6 +2727,154 @@ body.bbArenaOpen .bbMobileNav,
 body.bbArenaOpen [class*="mobileNav"]{
   visibility:hidden!important;
   pointer-events:none!important;
+}
+
+
+/* =========================================================
+   Brain Buddy v43 — Thai Ranked Arena polish
+   ========================================================= */
+
+#bbArena .bbArenaHeader{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.96),rgba(251,247,255,.92))!important;
+  border-bottom:1px solid rgba(135,105,166,.11)!important;
+}
+
+#bbArena .bbArenaBrand strong{
+  font-size:30px!important;
+  color:#3b2659!important;
+  letter-spacing:-.04em!important;
+}
+#bbArena .bbArenaBrand span{
+  color:#8d72ae!important;
+  letter-spacing:.02em!important;
+}
+
+#bbArena .bbArenaHero{
+  min-height:405px!important;
+  background:
+    radial-gradient(circle at 79% 23%,rgba(255,205,240,.78),transparent 15rem),
+    radial-gradient(circle at 93% 45%,rgba(255,255,255,.18),transparent 10rem),
+    linear-gradient(135deg,#4a269f 0%,#6e3bbd 42%,#a64bcc 70%,#ef73b8 100%)!important;
+}
+
+/* Replace the simple pink blob with a cuter brain mascot made from layered shapes */
+#bbArena .bbArenaHero::before{
+  width:250px!important;
+  height:205px!important;
+  right:58px!important;
+  top:46px!important;
+  border-radius:47% 53% 48% 52% / 52% 48% 54% 46%!important;
+  background:
+    radial-gradient(circle at 28% 22%,rgba(255,255,255,.85),transparent 14%),
+    radial-gradient(circle at 33% 44%,rgba(222,80,163,.52) 0 8%,transparent 9%),
+    radial-gradient(circle at 63% 35%,rgba(222,80,163,.48) 0 8%,transparent 9%),
+    radial-gradient(circle at 53% 66%,rgba(222,80,163,.42) 0 7%,transparent 8%),
+    linear-gradient(145deg,#ffd4e9 0%,#ff9fcd 43%,#ef69b4 72%,#c64a99 100%)!important;
+  border:2px solid rgba(255,218,239,.75)!important;
+  box-shadow:
+    inset 12px 13px 18px rgba(255,255,255,.42),
+    inset -18px -20px 24px rgba(128,35,106,.20),
+    0 24px 34px rgba(49,18,94,.30),
+    0 0 34px rgba(255,153,221,.42)!important;
+}
+
+#bbArena .bbArenaHero::after{
+  right:101px!important;
+  top:112px!important;
+  width:105px!important;
+  height:72px!important;
+  border-radius:10px 10px 50px 50px!important;
+  background:
+    radial-gradient(circle at 22% 20%,#fff 0 4%,transparent 5%),
+    #702754!important;
+  box-shadow:
+    -53px -8px 0 -36px #25142c,
+    53px -8px 0 -36px #25142c!important;
+}
+
+#bbArena .bbRankedPill{
+  background:linear-gradient(145deg,rgba(169,105,243,.55),rgba(112,64,191,.42))!important;
+  border-color:rgba(255,255,255,.28)!important;
+  box-shadow:inset 0 2px 3px rgba(255,255,255,.18)!important;
+}
+
+#bbArena .bbArenaHero h1{
+  max-width:62%!important;
+  font-size:clamp(3.1rem,6vw,5.2rem)!important;
+}
+#bbArena .bbArenaHero p{
+  max-width:58%!important;
+  font-size:1.05rem!important;
+}
+
+#bbArena .bbArenaHeroStats>div{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.20),rgba(255,255,255,.10))!important;
+  border-color:rgba(255,255,255,.26)!important;
+}
+
+#bbArena .bbArenaAction{
+  position:relative!important;
+  overflow:hidden!important;
+}
+#bbArena .bbArenaAction::after{
+  content:"";
+  position:absolute;
+  right:-30px;
+  bottom:-42px;
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  background:rgba(255,255,255,.24);
+}
+#bbArena .bbArenaAction.create{
+  background:linear-gradient(145deg,#ffe7f3,#ffc8e5 48%,#f5a6d1)!important;
+}
+#bbArena .bbArenaAction.join{
+  background:linear-gradient(145deg,#eef7ff,#dceaff 48%,#c7dcff)!important;
+}
+#bbArena .bbArenaAction b{
+  font-size:25px!important;
+  color:#3d2a58!important;
+}
+#bbArena .bbArenaAction.join b{
+  color:#2770c7!important;
+}
+
+#bbArena .bbArenaRefresh{
+  background:linear-gradient(145deg,#f2f5ff,#dbe2ff 55%,#c9d4ff)!important;
+}
+
+#bbArena .bbArenaListHead h2{
+  letter-spacing:-.04em!important;
+}
+
+#bbArena .bbArenaEmpty{
+  background:
+    radial-gradient(circle at 50% 18%,rgba(255,255,255,.98),transparent 12rem),
+    radial-gradient(circle at 15% 95%,rgba(255,186,222,.34),transparent 13rem),
+    radial-gradient(circle at 90% 90%,rgba(144,113,244,.35),transparent 14rem),
+    linear-gradient(180deg,#fffafd,#fff4fb)!important;
+}
+#bbArena .bbArenaEmpty span::before{
+  width:104px!important;
+  height:86px!important;
+  background:
+    radial-gradient(circle at 30% 25%,rgba(255,255,255,.45),transparent 16%),
+    linear-gradient(145deg,#d4a06a,#a96d3f)!important;
+  border-radius:48% 52% 46% 54%!important;
+}
+
+@media (min-width:700px) and (max-width:1100px){
+  #bbArena .bbArenaHero h1{max-width:60%!important}
+  #bbArena .bbArenaHero p{max-width:58%!important}
+}
+
+@media(max-width:699px){
+  #bbArena .bbArenaBrand strong{font-size:24px!important}
+  #bbArena .bbArenaHero h1{max-width:100%!important}
+  #bbArena .bbArenaHero p{max-width:100%!important}
 }
 
 </style>
@@ -2927,7 +3075,7 @@ try{
   <button class="v17b" data-v17="home">🏠 หน้าแรก</button>
   <button class="v17b play" data-v17="play">🎮 เล่นเกม</button>
   <button class="v17b" data-v17="rank">🏆 อันดับผู้เล่น</button>
-  <button class="v17b bbArenaNavBtn" data-v17="arena">⚔️ Ranked Arena</button>
+  <button class="v17b bbArenaNavBtn" data-v17="arena">⚔️ สนามจัดอันดับ</button>
   <button class="v17b" data-v17="profile">👤 โปรไฟล์</button>
  </div>
  <a class="v17b admin" href="/admin">🛠️ แอดมิน</a>
@@ -3006,13 +3154,13 @@ try{
   <div class="bbRankedTeaserGlow"></div>
   <div class="bbRankedTeaserCopy">
     <span class="bbRankedPill">● REALTIME MULTIPLAYER</span>
-    <h2>⚔️ Ranked Arena</h2>
+    <h2>⚔️ สนามจัดอันดับ</h2>
     <p>สร้างห้องหรือเข้าร่วมการแข่งขันกับผู้เล่นจริง <b>2–100 คน</b> พร้อมระบบ Ready และห้องอัปเดตแบบสด</p>
     <div class="bbRankedMini">
       <span>🏆 แข่งคะแนน</span><span>👥 สูงสุด 100 คน</span><span>⚡ Realtime</span><span>🔐 สมาชิกเท่านั้น</span>
     </div>
   </div>
-  <button class="bbRankedEnter" id="bbOpenArena">เข้าสู่ Ranked Arena <span>→</span></button>
+  <button class="bbRankedEnter" id="bbOpenArena">เข้าสู่ สนามจัดอันดับ <span>→</span></button>
 </section>
 
 <section class="bbModeHub" id="bbModeHub">
@@ -3192,7 +3340,7 @@ try{
         <span class="icon swords"></span>
         <span class="copy">
           <small>แข่งขันออนไลน์</small>
-          <b>Ranked Arena</b>
+          <b>สนามจัดอันดับ</b>
           <em>สร้างห้อง • 2–100 คน • แข่งคะแนน</em>
         </span>
         <span class="go">➜</span>
@@ -3278,7 +3426,7 @@ try{
         <button class="bbCandyControl" id="bbCandyTheme" aria-label="เปลี่ยนธีม">
           <svg viewBox="0 0 64 64"><path d="M44 46c-15 4-29-7-29-22 0-5 2-10 5-14 1-1 3 0 3 2-1 11 8 20 19 20 4 0 8-1 11-4 2-1 4 1 3 3-3 7-7 12-12 15Z" fill="currentColor"/></svg>
         </button>
-        <button class="bbCandyControl" data-app-action="arena" aria-label="Ranked Arena">
+        <button class="bbCandyControl" data-app-action="arena" aria-label="สนามจัดอันดับ">
           <svg viewBox="0 0 64 64"><path d="M18 12 44 44M46 12 20 44" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/><path d="m13 10 9 3-6 6-3-9Zm38 0-9 3 6 6 3-9ZM15 50l8-8M49 50l-8-8" fill="currentColor"/></svg>
         </button>
       </div>
@@ -3369,7 +3517,7 @@ try{
         <button data-app-go="home">หน้าหลัก</button>
         <button data-app-go="modes" class="active">เล่นเกม</button>
         <button data-app-action="rank">อันดับผู้เล่น</button>
-        <button data-app-action="arena">Ranked Arena</button>
+        <button data-app-action="arena">สนามจัดอันดับ</button>
         <button data-app-action="profile">โปรไฟล์</button>
       </nav>
       <button class="bbSetupAdmin" id="bbSetupAdmin">แอดมิน</button>
@@ -4570,7 +4718,7 @@ window.addEventListener("load",()=>{
         <button class="bbArenaBack" id="bbArenaClose" aria-label="กลับ">←</button>
         <div>
           <span>⚔️ Brain Buddy</span>
-          <strong>Ranked Arena</strong>
+          <strong>สนามจัดอันดับ</strong>
         </div>
       </div>
       <div class="bbArenaMe">
@@ -4583,20 +4731,20 @@ window.addEventListener("load",()=>{
     <main class="bbArenaMain">
       <section class="bbArenaGate hidden" id="bbArenaGate">
         <div class="bbArenaGateIcon">🔐</div>
-        <h2>เข้าสู่ระบบเพื่อเล่น Ranked</h2>
-        <p>Ranked Arena ผูกห้อง คะแนน และอันดับกับบัญชีสมาชิก เพื่อให้การแข่งขันระหว่างผู้เล่นเป็นระบบเดียวกัน</p>
+        <h2>เข้าสู่ระบบเพื่อเล่นสนามจัดอันดับ</h2>
+        <p>สนามจัดอันดับ ผูกห้อง คะแนน และอันดับกับบัญชีสมาชิก เพื่อให้การแข่งขันระหว่างผู้เล่นเป็นระบบเดียวกัน</p>
         <button class="bbArenaPrimary" id="bbArenaLogin">เข้าสู่ระบบ / สมัครสมาชิก</button>
       </section>
 
       <section class="bbArenaLobby hidden" id="bbArenaLobby">
         <div class="bbArenaHero">
           <div>
-            <span class="bbRankedPill dark">🏆 COMPETITIVE</span>
-            <h1>ห้องแข่งขันออนไลน์</h1>
+            <span class="bbRankedPill dark">🏆 โหมดแข่งขัน</span>
+            <h1>สนามแข่งขันออนไลน์</h1>
             <p>สร้างห้องของคุณ หรือเข้าห้องที่กำลังรอผู้เล่นได้ทันที</p>
           </div>
           <div class="bbArenaHeroStats">
-            <div><small>Ranked Points</small><b id="bbArenaRP">0 RP</b></div>
+            <div><small>คะแนนจัดอันดับ</small><b id="bbArenaRP">0 RP</b></div>
             <div><small>การแข่งขัน</small><b id="bbArenaGames">0</b></div>
             <div><small>ชนะ</small><b id="bbArenaWins">0</b></div>
           </div>
@@ -4830,7 +4978,7 @@ window.addEventListener("load",()=>{
     const arena=$("#bbArena");
     if(!arena){
       document.body.classList.remove("bbArenaOpen");
-      console.error("Ranked Arena element not found");
+      console.error("สนามจัดอันดับ element not found");
       return;
     }
 
@@ -4850,8 +4998,8 @@ window.addEventListener("load",()=>{
       roomsBox.innerHTML=`
         <div class="bbArenaEmpty bbArenaOpening">
           <span></span>
-          <b>กำลังเปิด Ranked Arena…</b>
-          <small>กำลังเชื่อมต่อระบบแข่งขัน</small>
+          <b>กำลังเปิด สนามจัดอันดับ…</b>
+          <small>กำลังเชื่อมต่อสนามแข่งขัน</small>
         </div>`;
     }
 
@@ -4873,7 +5021,7 @@ window.addEventListener("load",()=>{
           roomsBox.innerHTML=`
             <div class="bbArenaEmpty">
               <span></span>
-              <b>เชื่อมต่อ Ranked Arena ไม่สำเร็จ</b>
+              <b>เชื่อมต่อ สนามจัดอันดับ ไม่สำเร็จ</b>
               <small>กด Refresh เพื่อลองใหม่ได้ทันที</small>
             </div>`;
         }
@@ -4967,14 +5115,14 @@ window.addEventListener("load",()=>{
           ]);
         }catch(e){
           console.warn("Ranked lobby load failed",e);
-          renderLobbyError("โหลดห้อง Ranked ไม่สำเร็จ • กด Refresh เพื่อลองใหม่");
+          renderLobbyError("โหลดห้องแข่งขันไม่สำเร็จ • กด Refresh เพื่อลองใหม่");
         }
 
         subscribeLobby();
       }
 
     }catch(error){
-      console.error("Ranked Arena open error",error);
+      console.error("สนามจัดอันดับ open error",error);
 
       // สำคัญ: Error ใด ๆ ก็ยังต้องเห็น Arena และกดกลับได้
       show("#bbArenaGate",false);
@@ -4987,7 +5135,7 @@ window.addEventListener("load",()=>{
         roomsBox.innerHTML=`
           <div class="bbArenaEmpty">
             <span></span>
-            <b>Ranked Arena เปิดได้ แต่โหลดข้อมูลไม่สำเร็จ</b>
+            <b>สนามจัดอันดับ เปิดได้ แต่โหลดข้อมูลไม่สำเร็จ</b>
             <small>กด Refresh เพื่อลองเชื่อมต่ออีกครั้ง</small>
           </div>`;
       }
@@ -5909,7 +6057,7 @@ document.addEventListener('DOMContentLoaded', () => {
           window.bbOpenRankedArena();
         }
       }catch(err){
-        console.error("Ranked Arena opener:",err);
+        console.error("สนามจัดอันดับ opener:",err);
       }
     },0);
   },true);
