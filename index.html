@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy v18 — Member Cloud v9</title>
+<title>Brain Buddy v23 — App Style</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -1113,6 +1113,61 @@ body.bbRankedPlaying #hintBtn,body.bbRankedPlaying #replayBtn{display:none!impor
  .bbRankedGameHud b{font-size:10px}.bbRankedGameClock strong{font-size:14px}
 }
 
+
+/* ===== Brain Buddy v23 — App Style / Less Scrolling ===== */
+.bbPlayerStatus,#home,.v16CompeteStrip,#bbRankedTeaser,#bbModeHub,.homeGrid,.shell.pills{display:none!important}
+.v17bar{position:sticky!important;top:0!important}.v17barin{min-height:68px!important}
+.bb19Tools #fullBtn,.bb19Tools #menuBtn,.bb19Tools #settingsBtn{display:none!important}.v17b{min-height:42px!important}
+.bbAppShell{width:min(100% - 28px,1180px);margin:0 auto;min-height:calc(100dvh - 70px);padding:18px 0 32px}
+.bbAppScreen{display:none;min-height:calc(100dvh - 120px);animation:bbAppIn .24s ease both}.bbAppScreen.active{display:block}
+@keyframes bbAppIn{from{opacity:0;transform:translateY(8px) scale(.995)}to{opacity:1;transform:none}}
+
+.bbAppHomeHero{min-height:150px;padding:22px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;border-radius:28px;background:radial-gradient(circle at 90% 10%,rgba(255,255,255,.22),transparent 220px),linear-gradient(130deg,#30243c,#59417f 60%,#a75c84);color:#fff;box-shadow:0 18px 46px rgba(54,37,68,.15)}
+.bbAppEyebrow{display:inline-flex;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.12);font-size:8px;font-weight:950;letter-spacing:.08em}
+.bbAppWelcome h1{margin:8px 0 3px;font-size:clamp(27px,4vw,41px);line-height:1.15}.bbAppWelcome p{margin:0;color:#e5dce9;font-size:10px;line-height:1.65}
+.bbAppPlayerCard{min-width:245px;display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:9px;padding:10px;border-radius:18px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.13);backdrop-filter:blur(8px)}
+.bbAppAvatar{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:rgba(255,255,255,.16);font-size:25px;overflow:hidden}.bbAppAvatar img{width:100%;height:100%;object-fit:cover}
+.bbAppPlayerCopy{display:flex;flex-direction:column;min-width:0}.bbAppPlayerCopy small{font-size:7px;color:#dfd6e4}.bbAppPlayerCopy b{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bbAppPlayerCopy span{font-size:8px;color:#e7deec;margin-top:1px}
+.bbAppLoginMini{border:0;border-radius:11px;background:#fff;color:#514061;padding:8px 9px;font-size:8px;font-weight:900}
+
+.bbAppMainActions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin-top:13px}
+.bbAppActionCard{min-height:150px;padding:16px;border:1px solid #e8e2eb;border-radius:23px;background:#fff;display:grid;grid-template-columns:auto 1fr auto;gap:11px;align-items:center;text-align:left;color:#322b38;cursor:pointer;box-shadow:0 9px 27px rgba(58,41,70,.055);transition:.18s ease}
+.bbAppActionCard:hover{transform:translateY(-2px);box-shadow:0 13px 30px rgba(58,41,70,.09)}.bbAppActionCard.play{background:linear-gradient(145deg,#fff,#fff4f9);border-color:#ecd7e1}.bbAppActionCard.ranked{background:linear-gradient(145deg,#fff,#f3efff);border-color:#ddd4f1}.bbAppActionCard.leaderboard{background:linear-gradient(145deg,#fff,#fff9e9);border-color:#efe1b8}
+.bbAppActionIcon{width:54px;height:54px;border-radius:17px;display:grid;place-items:center;font-size:29px;background:#f7f2f8}.bbAppActionCard.play .bbAppActionIcon{background:#ffe9f2}.bbAppActionCard.ranked .bbAppActionIcon{background:#ece7ff}.bbAppActionCard.leaderboard .bbAppActionIcon{background:#fff3cf}
+.bbAppActionText{display:flex;flex-direction:column;min-width:0}.bbAppActionText small{font-size:8px;color:#817684;font-weight:800}.bbAppActionText strong{font-size:19px;line-height:1.15;margin-top:2px}.bbAppActionText em{font-size:8px;color:#827884;font-style:normal;margin-top:4px;line-height:1.4}.bbAppActionCard>i{font-style:normal;font-size:20px;color:#83768a}
+.bbAppHomeStats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}.bbAppHomeStats>div,.bbAppHomeStats>button{min-height:66px;padding:10px 12px;border:1px solid #e9e3ec;border-radius:17px;background:#fff;text-align:left;color:#352e3b}.bbAppHomeStats small{display:block;font-size:8px;color:#7b7280}.bbAppHomeStats b{display:block;font-size:14px;margin-top:3px}.bbAppHomeStats>button{cursor:pointer;background:#f8f5fb}
+
+.bbAppScreenHead{min-height:64px;display:grid;grid-template-columns:48px 1fr auto;gap:10px;align-items:center;margin-bottom:12px}.bbAppBack{width:44px;height:44px;border:1px solid #e6dfe9;background:#fff;border-radius:14px;font-size:20px;color:#554a5d;cursor:pointer}.bbAppScreenHead small{display:block;color:#847a89;font-size:8px;font-weight:800}.bbAppScreenHead h2{margin:1px 0 0;font-size:25px}.bbAppInfoBtn,.bbAppStepDone{border:1px solid #e5dfe8;background:#fff;border-radius:12px;padding:8px 10px;color:#665773;font-size:9px;font-weight:900}
+
+.bbAppModeGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.bbAppModeCard{min-height:145px;border:1px solid #e6e0e9;border-radius:21px;background:#fff;padding:15px;color:#352e3a;text-align:left;cursor:pointer;display:flex;flex-direction:column;box-shadow:0 8px 24px rgba(57,40,68,.045);transition:.18s ease}.bbAppModeCard:hover{transform:translateY(-2px);border-color:#cbbde7;box-shadow:0 12px 26px rgba(57,40,68,.08)}.bbAppModeCard>span{font-size:29px}.bbAppModeCard>b{font-size:15px;margin-top:7px}.bbAppModeCard>small{font-size:8px;color:#7c7281;margin-top:3px;line-height:1.45}.bbAppModeCard>em{margin-top:auto;align-self:flex-start;padding:5px 7px;border-radius:999px;background:#f3eef7;color:#65566f;font-size:7px;font-style:normal;font-weight:900}
+
+.bbAppSetupCard{width:min(860px,100%);margin:0 auto;background:#fff;border:1px solid #e6e0e9;border-radius:25px;padding:18px;box-shadow:0 12px 34px rgba(58,40,70,.065)}.bbAppSetupBlock+.bbAppSetupBlock{margin-top:15px;padding-top:15px;border-top:1px solid #eee8f0}.bbAppSetupLabel{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:9px}.bbAppSetupLabel b{font-size:12px}.bbAppSetupLabel small{font-size:8px;color:#807684}
+.bbAppDifficultyGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.bbAppDifficultyGrid button{min-height:76px;border:1px solid #e5dfe8;border-radius:16px;background:#fff;color:#4a414f;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer}.bbAppDifficultyGrid button.active{border-color:#ae9ae5;background:#f2edff;color:#5944a1;box-shadow:0 7px 17px rgba(101,77,173,.08)}.bbAppDifficultyGrid b{font-size:11px}.bbAppDifficultyGrid small{font-size:8px;margin-top:2px}.bbAppDifficultyGrid em{font-size:7px;font-style:normal;margin-top:4px;font-weight:900}
+.bbAppStyleGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.bbAppStyleGrid button{min-height:76px;border:1px solid #e5dfe8;border-radius:16px;background:#fff;display:grid;grid-template-columns:36px 1fr;text-align:left;align-items:center;padding:10px;color:#4c424f}.bbAppStyleGrid button.active{border-color:#eb9fbd;background:#fff2f7}.bbAppStyleGrid button:disabled{opacity:.4;cursor:not-allowed}.bbAppStyleGrid span{font-size:23px;grid-row:1/3}.bbAppStyleGrid b{font-size:11px}.bbAppStyleGrid small{font-size:7px;color:#7f7483}
+.bbAppTeamPicker{margin-top:9px;padding:9px;border-radius:14px;background:#f8f5fa}.bbAppTeamPicker>small{font-size:8px;color:#7c7281}.bbAppTeamPicker>div{display:flex;gap:5px;margin-top:5px}.bbAppTeamPicker button{width:38px;height:34px;border:1px solid #e3dce7;border-radius:10px;background:#fff;font-size:9px;font-weight:900}.bbAppTeamPicker button.active{background:#6f56c6;color:#fff;border-color:#6f56c6}
+.bbAppSetupSummary{margin-top:16px;padding-top:15px;border-top:1px solid #eee8f0;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}.bbAppSetupSummary small{display:block;font-size:8px;color:#7f7583}.bbAppSetupSummary b{display:block;font-size:13px;margin-top:2px}.bbAppSetupSummary span{display:block;font-size:8px;color:#807684;margin-top:2px}.bbAppStartBtn{min-width:160px;border:0;border-radius:15px;padding:13px 16px;background:linear-gradient(135deg,#ed659d,#765bd5);color:#fff;font-weight:950;box-shadow:0 9px 23px rgba(121,77,165,.18)}
+
+.bbAppInfoGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.bbAppInfoCard{background:#fff;border:1px solid #e7e1ea;border-radius:22px;padding:16px;box-shadow:0 9px 25px rgba(56,39,67,.045)}.bbAppInfoCard h3{margin:0 0 10px;font-size:16px}.bbAppInfoRows{display:grid;grid-template-columns:1fr 1fr;gap:6px}.bbAppInfoRows>div{display:flex;justify-content:space-between;gap:8px;background:#f9f7fa;border-radius:11px;padding:8px 9px;font-size:8px}.bbAppInfoRows b{font-size:9px}.bbAppInfoRows.xp b{color:#6e55bd}.bbAppInfoCard p{margin:9px 0 0;color:#7c7280;font-size:8px;line-height:1.6}
+
+#game{display:none!important}body.bbAppPlaying #game,body.bbRankedPlaying #game{display:block!important}body.bbAppPlaying #bbAppShell,body.bbRankedPlaying #bbAppShell{display:none!important}body.bbAppPlaying .v17bar{display:none!important}
+.bbAppGameBack{position:fixed;top:max(10px,env(safe-area-inset-top));left:10px;z-index:250;border:1px solid #e5dfe8;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-radius:13px;padding:9px 11px;color:#55495d;font-size:9px;font-weight:900;box-shadow:0 8px 24px rgba(48,34,57,.09)}body.bbAppPlaying .bbAppGameBack{display:block!important}body.bbRankedPlaying .bbAppGameBack{display:none!important}
+#leaderboardModal,#profileModal{z-index:900!important}#leaderboardModal .modalcard,#profileModal .modalcard{width:min(920px,calc(100% - 24px))!important;max-height:calc(100dvh - 28px)!important;border-radius:26px!important}
+
+body.dark .bbAppActionCard,body.dark .bbAppHomeStats>div,body.dark .bbAppHomeStats>button,body.dark .bbAppModeCard,body.dark .bbAppSetupCard,body.dark .bbAppDifficultyGrid button,body.dark .bbAppStyleGrid button,body.dark .bbAppInfoCard,body.dark .bbAppBack{background:#2c2539;color:#fff;border-color:rgba(255,255,255,.09)}body.dark .bbAppModeCard>small,body.dark .bbAppInfoCard p,body.dark .bbAppSetupLabel small,body.dark .bbAppSetupSummary span{color:#c8bfcd}body.dark .bbAppInfoRows>div,body.dark .bbAppTeamPicker{background:#342c42}
+
+@media(max-width:850px){.bbAppShell{width:min(100% - 20px,1180px);padding-top:12px}.bbAppHomeHero{grid-template-columns:1fr;padding:18px;min-height:0}.bbAppPlayerCard{min-width:0;width:100%}.bbAppMainActions{grid-template-columns:1fr 1fr}.bbAppActionCard.leaderboard{grid-column:1/-1;min-height:108px}.bbAppModeGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.bbAppInfoGrid{grid-template-columns:1fr}}
+@media(max-width:600px){
+ .v17barin{width:min(100% - 16px,1240px)!important;min-height:58px!important}.v17brand{font-size:15px!important}.v17tabs{display:none!important}.bb19Tools #musicBtn{display:none!important}.v17b.admin{width:39px;min-width:39px!important;padding:0!important;font-size:0!important}.v17b.admin::after{content:"🛠️";font-size:17px}
+ .bbAppShell{width:min(100% - 14px,1180px);min-height:calc(100dvh - 132px);padding:8px 0 84px}.bbAppScreen{min-height:auto}.bbAppHomeHero{padding:14px;border-radius:20px;gap:11px}.bbAppWelcome h1{font-size:24px;margin-top:6px}.bbAppWelcome p{font-size:8px}.bbAppPlayerCard{grid-template-columns:42px 1fr auto;padding:8px;border-radius:15px}.bbAppAvatar{width:42px;height:42px;border-radius:12px;font-size:21px}
+ .bbAppMainActions{grid-template-columns:1fr;gap:7px;margin-top:8px}.bbAppActionCard,.bbAppActionCard.leaderboard{grid-column:auto;min-height:82px;padding:10px 11px;border-radius:17px}.bbAppActionIcon{width:43px;height:43px;border-radius:13px;font-size:23px}.bbAppActionText strong{font-size:15px}.bbAppActionText em{font-size:7px}
+ .bbAppHomeStats{grid-template-columns:repeat(4,1fr);gap:5px;margin-top:7px}.bbAppHomeStats>div,.bbAppHomeStats>button{min-height:53px;padding:7px;border-radius:13px}.bbAppHomeStats small{font-size:6px}.bbAppHomeStats b{font-size:10px}
+ .bbAppScreenHead{min-height:52px;grid-template-columns:40px 1fr auto;margin-bottom:7px}.bbAppBack{width:38px;height:38px;border-radius:12px;font-size:18px}.bbAppScreenHead h2{font-size:20px}
+ .bbAppModeGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.bbAppModeCard{min-height:116px;padding:11px;border-radius:17px}.bbAppModeCard>span{font-size:23px}.bbAppModeCard>b{font-size:12px;margin-top:4px}.bbAppModeCard>small{font-size:7px}.bbAppModeCard>em{font-size:6px}
+ .bbAppSetupCard{padding:12px;border-radius:19px}.bbAppDifficultyGrid{grid-template-columns:repeat(2,1fr);gap:5px}.bbAppDifficultyGrid button{min-height:58px;border-radius:13px}.bbAppStyleGrid button{min-height:62px;border-radius:13px}.bbAppSetupSummary{grid-template-columns:1fr;margin-top:11px;padding-top:10px}.bbAppStartBtn{width:100%;min-width:0}
+ .bbAppInfoGrid{gap:7px}.bbAppInfoCard{padding:12px;border-radius:18px}.bbAppInfoRows{grid-template-columns:1fr 1fr}
+}
+@media(max-width:370px){.bbAppHomeStats{grid-template-columns:1fr 1fr}.bbAppInfoRows{grid-template-columns:1fr}}
+
 </style>
 
 <script>
@@ -1511,6 +1566,124 @@ try{
 
 <section class="shell homeGrid"><div class="panel"><div class="panelHead"><h2>เลือกเล่นแบบรวดเร็ว</h2><p>เลือกเกมได้จากหน้าเดียว</p></div><div class="quickGrid"><button class="quick" id="soloQuick"><span>👤</span><strong>เล่นคนเดียว</strong><small>2×2 • จำตำแหน่ง • คะแนนอัตโนมัติ</small></button><div class="quick teamQuickCard"><span class="quickIcon">👥</span><strong>เล่นเป็นทีม</strong><small>เลือกจำนวนทีมได้ทันที • ตอบออกเสียง • เพิ่มคะแนนเอง</small><div class="quickTeamPicker" id="quickTeamPicker"><button class="quickTeamChip active" data-quick-team="2">2 ทีม</button><button class="quickTeamChip" data-quick-team="3">3 ทีม</button><button class="quickTeamChip" data-quick-team="4">4 ทีม</button><button class="quickTeamChip" data-quick-team="5">5 ทีม</button><button class="quickTeamChip" data-quick-team="6">6 ทีม</button></div><button class="quickTeamStart" id="teamQuick">เริ่มแบบ 2 ทีม →</button></div></div></div><div class="daily"><span class="dailyTag">📅 ภารกิจประจำวัน</span><h3 id="dailyTitle">ภารกิจวันนี้</h3><p id="dailyText">โจทย์ประจำวันเลือกโหมดและระดับให้อัตโนมัติ</p><button class="btn purple" id="dailyBtn">เล่นภารกิจวันนี้</button><div style="font-size:10px;color:var(--muted);margin-top:9px">🔥 เล่นต่อเนื่อง <b id="dailyStreak">0</b> วัน</div></div><div class="metricsPanel"><div class="metricGrid"><div class="metric"><b id="homeLevel">1</b><span>ระดับ</span></div><div class="metric"><b id="homeXP">0</b><span>XP</span></div><div class="metric"><b id="homeBest">0</b><span>คะแนนสูงสุด</span></div><div class="metric"><b id="homeAcc">0%</b><span>ความแม่นยำสูงสุด</span></div><div class="metric"><b id="homeRounds">0</b><span>รอบที่เล่น</span></div></div></div></section>
 <div class="shell pills"><span class="chip">โหมด <strong id="pillMode">จำตำแหน่ง</strong></span><span class="chip">ระดับ <strong id="pillDiff">ง่าย • 2×2</strong></span><span class="chip">ผู้เล่น <strong id="pillStyle">คนเดียว</strong></span><span class="chip">เนื้อหา <strong id="pillSource">Teddy</strong></span></div>
+
+<main class="bbAppShell" id="bbAppShell">
+  <section class="bbAppScreen active" id="bbAppHome" data-app-screen="home">
+    <div class="bbAppHomeHero">
+      <div class="bbAppWelcome">
+        <span class="bbAppEyebrow">🧠 BRAIN BUDDY</span>
+        <h1>วันนี้อยากเล่นแบบไหน?</h1>
+        <p>เลือกสิ่งที่ต้องการแล้วไปต่อได้เลย ไม่ต้องเลื่อนหาตัวเลือกยาว ๆ</p>
+      </div>
+      <div class="bbAppPlayerCard">
+        <div class="bbAppAvatar" id="bbAppAvatar">🧸</div>
+        <div class="bbAppPlayerCopy"><small>ผู้เล่น</small><b id="bbAppPlayerName">ผู้เยี่ยมชม</b><span id="bbAppPlayerRank">🌱 Bronze • Lv. 1</span></div>
+        <button class="bbAppLoginMini" id="bbAppLoginMini">เข้าสู่ระบบ</button>
+      </div>
+    </div>
+
+    <div class="bbAppMainActions">
+      <button class="bbAppActionCard play" data-app-go="modes">
+        <span class="bbAppActionIcon">🎮</span><span class="bbAppActionText"><small>เล่นแบบปกติ</small><strong>เล่นเกม</strong><em>เลือก 1 ใน 6 เกม • สะสม XP</em></span><i>→</i>
+      </button>
+      <button class="bbAppActionCard ranked" data-app-action="arena">
+        <span class="bbAppActionIcon">⚔️</span><span class="bbAppActionText"><small>แข่งขันออนไลน์</small><strong>Ranked Arena</strong><em>สร้างห้อง • 2–100 คน • แข่งคะแนน</em></span><i>→</i>
+      </button>
+      <button class="bbAppActionCard leaderboard" data-app-action="rank">
+        <span class="bbAppActionIcon">🏆</span><span class="bbAppActionText"><small>อันดับผู้เล่น</small><strong>Leaderboard</strong><em>ดูคะแนนและอันดับสมาชิก</em></span><i>→</i>
+      </button>
+    </div>
+
+    <div class="bbAppHomeStats">
+      <div><small>ระดับ</small><b id="bbAppLevel">Lv. 1</b></div>
+      <div><small>XP</small><b id="bbAppXP">0 XP</b></div>
+      <div><small>คะแนนสูงสุด</small><b id="bbAppBest">0</b></div>
+      <button data-app-go="scoreinfo"><small>ระบบคะแนน</small><b>ดูวิธีคิด →</b></button>
+    </div>
+  </section>
+
+  <section class="bbAppScreen" id="bbAppModes" data-app-screen="modes">
+    <div class="bbAppScreenHead">
+      <button class="bbAppBack" data-app-go="home">←</button>
+      <div><small>ขั้นที่ 1 จาก 2</small><h2>เลือกเกม</h2></div>
+      <button class="bbAppInfoBtn" data-app-go="scoreinfo">⭐ คะแนน</button>
+    </div>
+    <div class="bbAppModeGrid">
+      <button class="bbAppModeCard" data-app-mode="position"><span>📍</span><b>จำตำแหน่ง</b><small>จำว่าหมีอยู่ช่องไหน</small><em>100 แต้ม/ข้อ</em></button>
+      <button class="bbAppModeCard" data-app-mode="match"><span>🧩</span><b>จับคู่</b><small>เปิดหมีให้เจอคู่เหมือนกัน</small><em>80 แต้ม/คู่</em></button>
+      <button class="bbAppModeCard" data-app-mode="missing"><span>👀</span><b>ตัวไหนหาย</b><small>หาว่าหมีตัวไหนหายไป</small><em>120 แต้ม/ข้อ</em></button>
+      <button class="bbAppModeCard" data-app-mode="swap"><span>🔄</span><b>สลับที่</b><small>หาตำแหน่งที่ถูกสลับ</small><em>150 แต้ม/ข้อ</em></button>
+      <button class="bbAppModeCard" data-app-mode="change"><span>🔎</span><b>อะไรเปลี่ยน</b><small>สังเกตสิ่งที่เปลี่ยนจากเดิม</small><em>130 แต้ม/ข้อ</em></button>
+      <button class="bbAppModeCard" data-app-mode="sequence"><span>🔢</span><b>จำลำดับ</b><small>จำและตอบตามลำดับ</small><em>160 แต้ม/ข้อ</em></button>
+    </div>
+  </section>
+
+  <section class="bbAppScreen" id="bbAppSetup" data-app-screen="setup">
+    <div class="bbAppScreenHead">
+      <button class="bbAppBack" data-app-go="modes">←</button>
+      <div><small>ขั้นที่ 2 จาก 2</small><h2 id="bbSetupTitle">📍 จำตำแหน่ง</h2></div>
+      <span class="bbAppStepDone">พร้อมเริ่ม</span>
+    </div>
+
+    <div class="bbAppSetupCard">
+      <div class="bbAppSetupBlock">
+        <div class="bbAppSetupLabel"><b>🌱 เลือกระดับ</b><small>ยิ่งยาก คะแนนยิ่งสูง</small></div>
+        <div class="bbAppDifficultyGrid">
+          <button class="active" data-app-diff="easy"><b>ง่าย</b><small>2×2</small><em>×1.0</em></button>
+          <button data-app-diff="normal"><b>ปานกลาง</b><small>3×3</small><em>×1.25</em></button>
+          <button data-app-diff="hard"><b>ยาก</b><small>4×4</small><em>×1.5</em></button>
+          <button data-app-diff="expert"><b>Expert</b><small>ท้าทาย</small><em>×2.0</em></button>
+        </div>
+      </div>
+
+      <div class="bbAppSetupBlock">
+        <div class="bbAppSetupLabel"><b>👤 รูปแบบการเล่น</b><small id="bbAppStyleNote">คนเดียวสะสม XP ได้</small></div>
+        <div class="bbAppStyleGrid">
+          <button class="active" data-app-style="solo"><span>👤</span><b>คนเดียว</b><small>เก็บคะแนนและ XP</small></button>
+          <button data-app-style="team" id="bbAppTeamChoice"><span>👥</span><b>เล่นเป็นทีม</b><small>สำหรับจำตำแหน่ง</small></button>
+        </div>
+        <div class="bbAppTeamPicker hidden" id="bbAppTeamPicker">
+          <small>จำนวนทีม</small>
+          <div><button class="active" data-app-teams="2">2</button><button data-app-teams="3">3</button><button data-app-teams="4">4</button><button data-app-teams="5">5</button><button data-app-teams="6">6</button></div>
+        </div>
+      </div>
+
+      <div class="bbAppSetupSummary">
+        <div><small>เกมที่เลือก</small><b id="bbSetupSummary">📍 จำตำแหน่ง • ง่าย 2×2</b><span id="bbSetupSummary2">คนเดียว • หมี Brain Buddy</span></div>
+        <button class="bbAppStartBtn" id="bbAppStartBtn">เริ่มเกม →</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="bbAppScreen" id="bbAppScoreInfo" data-app-screen="scoreinfo">
+    <div class="bbAppScreenHead">
+      <button class="bbAppBack" data-app-back>←</button>
+      <div><small>ข้อมูลเกม</small><h2>⭐ คะแนนและ XP</h2></div><span></span>
+    </div>
+    <div class="bbAppInfoGrid">
+      <div class="bbAppInfoCard">
+        <h3>🎯 คะแนนพื้นฐาน</h3>
+        <div class="bbAppInfoRows">
+          <div><span>📍 จำตำแหน่ง</span><b>100</b></div><div><span>🧩 จับคู่</span><b>80</b></div>
+          <div><span>👀 ตัวไหนหาย</span><b>120</b></div><div><span>🔄 สลับที่</span><b>150</b></div>
+          <div><span>🔎 อะไรเปลี่ยน</span><b>130</b></div><div><span>🔢 จำลำดับ</span><b>160</b></div>
+        </div>
+        <p>คะแนนที่ได้ = คะแนนพื้นฐาน × ระดับความยาก</p>
+      </div>
+      <div class="bbAppInfoCard">
+        <h3>⭐ คะแนน → XP</h3>
+        <div class="bbAppInfoRows xp">
+          <div><span>0–399</span><b>+50 XP</b></div><div><span>400–799</span><b>+100 XP</b></div>
+          <div><span>800–1,199</span><b>+150 XP</b></div><div><span>1,200–1,799</span><b>+220 XP</b></div>
+          <div><span>1,800–2,499</span><b>+300 XP</b></div><div><span>2,500+</span><b>+400 XP</b></div>
+        </div>
+        <p>ทุก 500 XP = เพิ่ม 1 Level • Ranked ใช้ RP แยกจาก XP</p>
+      </div>
+    </div>
+  </section>
+</main>
+<button class="bbAppGameBack hidden" id="bbAppGameBack">← เมนูเกม</button>
+
 <section class="game" id="game"><div class="shell"><div class="gameCard"><div class="gameTop"><div class="status"><div class="statusIcon" id="statusIcon">👀</div><div><b id="statusTitle">พร้อมเริ่มเล่น</b><span id="statusText">กด เล่นด่วน หรือเริ่มรอบใหม่ได้เลย</span></div></div><div class="hudrow"><div class="hud"><span>PROGRESS</span><b id="progress">0 / 4</b></div><div class="hud"><span>COMBO</span><b id="combo">0</b></div><div class="hud"><span>SCORE</span><b id="score">0</b></div><div class="hud"><span>ระดับ</span><b id="levelHud">1</b></div><div class="hud hidden" id="livesHud"><span>LIVES</span><b id="lives">♥♥♥</b></div></div></div><div class="timer hidden" id="timer"><i id="timerFill"></i></div><div class="stage"><div class="scene active" id="boardScene"><div class="sceneTitle"><h2 id="boardTitle">พร้อมเริ่ม</h2><p id="boardSub">เลือกโหมดและระดับจากหน้าแรกได้ตลอด</p></div><div class="answer hidden" id="answer"></div><div class="board" id="board"></div></div><div class="scene" id="targetScene"><div class="targetWrap"><div class="targetCard" id="targetCard"></div><div class="targetLabel" id="targetLabel">ตัวนี้อยู่หมายเลขอะไร?</div></div></div><div class="scene" id="choiceScene"><div class="sceneTitle"><h2 id="choiceTitle">เลือกคำตอบ</h2><p id="choiceSub">เลือกคำตอบที่ถูกต้อง</p></div><div class="choiceGrid" id="choiceGrid"></div></div><div class="scene" id="resultScene"><div class="resultWrap"><div class="resultCard"><h2>จบรอบแล้ว! 🎉</h2><p id="resultText">มาดูผลของรอบนี้กัน</p><div class="bigคะแนน" id="resultคะแนน">0</div><div style="font-size:9px;color:var(--muted)" id="resultคะแนนLabel">คะแนน</div><div class="resultMetrics"><div class="resultMetric"><b id="resultCorrect">0</b><span>ตอบถูก</span></div><div class="resultMetric"><b id="resultAcc">0%</b><span>ความแม่นยำ</span></div><div class="resultMetric"><b id="resultCombo">0</b><span>Best Combo</span></div><div class="resultMetric"><b id="resultXP">+0</b><span>XP</span></div></div><div class="insight"><strong id="insightTitle">🧠 จุดเด่นจากรอบนี้</strong><p id="insightText"></p><div class="nexts" id="nexts"></div><p style="font-size:9px;margin-top:9px">คำแนะนำอิงแนวคิด working memory, attention, visuospatial processing และงานวิจัยด้าน cognitive training ที่สรุปไว้ในเมนู “หลักการ & งานวิจัย”</p></div><div class="resultActions"><button class="btn primary" id="againBtn">เล่นอีกครั้ง</button><button class="btn" id="saveBtn">🖼️ บันทึกผล</button><button class="btn" id="shareBtn">↗ แชร์</button><button class="btn" id="resultSettings">เปลี่ยนเกม</button></div></div></div></div></div><div class="teamBar hidden" id="teamBar"></div><div class="dock"><button class="secondary" id="homeBtn">⌂</button><button class="main" id="main">เริ่มรอบใหม่</button><button class="secondary hidden" id="hintBtn">💡 <span id="hintNum">3</span></button><button class="secondary hidden" id="voiceBtn">🗣️ เฉลย</button><button class="secondary hidden" id="replayBtn">↺ ดูโจทย์</button><button class="secondary" id="settingsBtn">⚙️</button></div><div class="hintline" id="hintline">ไม่มีการจับเวลาโดยค่าเริ่มต้น คุณเป็นคนกำหนดจังหวะเอง</div></div></div></section>
 <!-- ปรับเกมเอง -->
 <div class="modal hidden" id="customModal"><div class="modalCard wide"><button class="close" data-close="customModal">×</button><h2>ปรับเกมเอง</h2><p class="lead">เลือกได้ละเอียด แต่ค่าเริ่มต้นยังคงง่าย ถ้าไม่อยากตั้งค่าให้ใช้ เล่นด่วน ได้เสมอ</p><div class="settingGrid">
@@ -2998,6 +3171,86 @@ window.addEventListener("load",()=>{
     show("#bbArenaRoom",true);
     await refreshRoom();
   };
+})();
+</script>
+<script>
+(function brainBuddyV23AppStyle(){
+  const $=s=>document.querySelector(s);
+  const MODE={position:{name:"📍 จำตำแหน่ง",team:true},match:{name:"🧩 จับคู่"},missing:{name:"👀 ตัวไหนหาย"},swap:{name:"🔄 สลับที่"},change:{name:"🔎 อะไรเปลี่ยน"},sequence:{name:"🔢 จำลำดับ"}};
+  const DIFF={easy:{name:"ง่าย 2×2"},normal:{name:"ปานกลาง 3×3"},hard:{name:"ยาก 4×4"},expert:{name:"Expert"}};
+  let screen="home",previous="home",selectedMode="position",selectedDiff="easy",selectedStyle="solo",selectedTeams=2;
+
+  function showScreen(next,push=true){
+    if(push&&screen!==next)previous=screen;
+    screen=next;
+    document.querySelectorAll(".bbAppScreen").forEach(s=>s.classList.toggle("active",s.dataset.appScreen===next));
+    window.scrollTo({top:0,behavior:"smooth"});syncSetup();
+  }
+  window.bbAppShowScreen=showScreen;
+
+  function profileLocal(){try{return JSON.parse(localStorage.getItem("bb_profile")||"{}")}catch(e){return {}}}
+  async function syncPlayer(){
+    const p=profileLocal(),navName=($("#navName")?.textContent||"").trim();
+    let name=p.displayName||p.name||navName||"ผู้เยี่ยมชม";if(name==="ผู้เล่น")name="ผู้เยี่ยมชม";
+    const xp=Number(p.xp)||0,best=Number(p.bestScore||p.best_score)||0,level=Math.max(1,Math.floor(xp/500)+1);
+    const rank=($("#v17Rank")?.textContent||"🌱 Bronze").trim();
+    $("#bbAppPlayerName").textContent=name;$("#bbAppPlayerRank").textContent=`${rank} • Lv. ${level}`;
+    $("#bbAppLevel").textContent=`Lv. ${level}`;$("#bbAppXP").textContent=`${xp.toLocaleString()} XP`;$("#bbAppBest").textContent=best.toLocaleString();
+    const avatar=$("#bbAppAvatar"),profileImg=document.querySelector("#navAvatar img");
+    if(profileImg?.src)avatar.innerHTML=`<img src="${profileImg.src}" alt="">`;else avatar.textContent=p.avatar||"🧸";
+    let logged=false;try{const c=window.__bbSupabase||window.sb;if(c){const {data}=await c.auth.getSession();logged=!!data?.session}}catch(e){}
+    $("#bbAppLoginMini").classList.toggle("hidden",logged);
+  }
+
+  function syncSetup(){
+    const mode=MODE[selectedMode]||MODE.position;
+    $("#bbSetupTitle").textContent=mode.name;$("#bbSetupSummary").textContent=`${mode.name} • ${DIFF[selectedDiff].name}`;
+    $("#bbSetupSummary2").textContent=`${selectedStyle==="solo"?"คนเดียว":selectedTeams+" ทีม"} • หมี Brain Buddy`;
+    document.querySelectorAll("[data-app-diff]").forEach(b=>b.classList.toggle("active",b.dataset.appDiff===selectedDiff));
+    document.querySelectorAll("[data-app-style]").forEach(b=>b.classList.toggle("active",b.dataset.appStyle===selectedStyle));
+    document.querySelectorAll("[data-app-teams]").forEach(b=>b.classList.toggle("active",Number(b.dataset.appTeams)===selectedTeams));
+    const teamBtn=$("#bbAppTeamChoice"),teamPicker=$("#bbAppTeamPicker"),note=$("#bbAppStyleNote"),canTeam=!!mode.team;
+    teamBtn.disabled=!canTeam;if(!canTeam&&selectedStyle==="team")selectedStyle="solo";
+    teamPicker.classList.toggle("hidden",selectedStyle!=="team");
+    note.textContent=canTeam?"คนเดียวสะสม XP • ทีมใช้สำหรับกิจกรรม":"โหมดนี้เล่นคนเดียวเพื่อเก็บคะแนนและ XP";
+  }
+
+  function chooseMode(mode){selectedMode=mode;if(!(MODE[mode]||{}).team)selectedStyle="solo";showScreen("setup")}
+  function startNormalGame(){
+    cfg={...cfg,style:selectedStyle,mode:selectedMode,diff:selectedDiff,source:"teddy",teams:selectedTeams,answer:selectedStyle==="team"?"voice":"screen",adaptive:false,combo:false,timer:0,lives:false,daily:false};
+    updateSummary();document.body.classList.add("bbAppPlaying");$("#bbAppGameBack").classList.remove("hidden");startRound();
+  }
+  function returnToMenu(force=false){
+    if(!force&&typeof roundStarted!=="undefined"&&roundStarted&&!roundComplete){if(!confirm("ออกจากเกมรอบนี้และกลับเมนู?"))return}
+    try{stopTimer()}catch(e){}
+    document.body.classList.remove("bbAppPlaying");$("#bbAppGameBack").classList.add("hidden");showScreen("home",false);syncPlayer();
+  }
+  window.bbReturnToApp=returnToMenu;
+  function openRank(){const modal=$("#leaderboardModal");if(modal){modal.classList.remove("hidden");window.__bbRenderCloudLeaderboard?.()}}
+  function openProfile(){if(typeof openModal==="function")openModal("profileModal");else $("#profileModal")?.classList.remove("hidden")}
+  function openArena(){window.bbOpenRankedArena?.()}
+
+  document.addEventListener("click",e=>{
+    const nav=e.target.closest("[data-v17]");if(!nav)return;
+    const action=nav.dataset.v17;if(!["home","play","arena","rank","profile"].includes(action))return;
+    e.preventDefault();e.stopImmediatePropagation();
+    if(action==="home")showScreen("home");if(action==="play")showScreen("modes");if(action==="arena")openArena();if(action==="rank")openRank();if(action==="profile")openProfile();
+  },true);
+
+  document.addEventListener("click",e=>{
+    const go=e.target.closest("[data-app-go]");if(go){showScreen(go.dataset.appGo);return}
+    const mode=e.target.closest("[data-app-mode]");if(mode){chooseMode(mode.dataset.appMode);return}
+    const diff=e.target.closest("[data-app-diff]");if(diff){selectedDiff=diff.dataset.appDiff;syncSetup();return}
+    const style=e.target.closest("[data-app-style]");if(style&&!style.disabled){selectedStyle=style.dataset.appStyle;syncSetup();return}
+    const teams=e.target.closest("[data-app-teams]");if(teams){selectedTeams=Number(teams.dataset.appTeams)||2;syncSetup();return}
+    const act=e.target.closest("[data-app-action]");if(act){if(act.dataset.appAction==="arena")openArena();if(act.dataset.appAction==="rank")openRank();if(act.dataset.appAction==="profile")openProfile();return}
+    if(e.target.closest("[data-app-back]"))showScreen(previous||"home",false);
+  });
+
+  $("#bbAppStartBtn")?.addEventListener("click",startNormalGame);
+  $("#bbAppGameBack")?.addEventListener("click",()=>returnToMenu(false));
+  $("#bbAppLoginMini")?.addEventListener("click",()=>{$("#v16LoginBtn")?.click();if(!$("#v16LoginBtn")&&typeof openModal==="function")openModal("accountModal")});
+  window.addEventListener("load",()=>{showScreen("home",false);syncSetup();syncPlayer();setInterval(syncPlayer,3000)});
 })();
 </script>
 </body>
