@@ -5970,6 +5970,318 @@ body.bbHeroUsesBear.bbHeroBearHasImage #bbEquippedHeroCharacterImg{
   }
 }
 
+
+/* =========================================================
+   Brain Buddy v62 — Dedicated "คลังของฉัน" screen
+   ========================================================= */
+
+.bbInventoryScreen{
+  min-height:100dvh;
+  position:relative;
+  overflow:hidden;
+  padding:18px 16px 110px;
+  background:
+    radial-gradient(circle at 7% 4%,rgba(156,232,255,.95),transparent 27%),
+    radial-gradient(circle at 92% 8%,rgba(255,186,223,.90),transparent 28%),
+    linear-gradient(180deg,#7864df 0%,#9b70e1 38%,#d98bd5 68%,#ffc3c9 100%);
+}
+
+.bbInventorySky{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.bbInventorySky .orb{
+  position:absolute;border-radius:50%;
+  background:radial-gradient(circle at 28% 25%,#fff,rgba(255,255,255,.2) 34%,rgba(127,205,255,.48) 70%);
+  box-shadow:0 14px 25px rgba(54,32,112,.16);
+}
+.bbInventorySky .orb.o1{width:28px;height:28px;left:5%;top:180px}
+.bbInventorySky .orb.o2{width:18px;height:18px;right:8%;top:260px}
+.bbInventorySky .orb.o3{width:35px;height:35px;right:18%;bottom:140px}
+.bbInventorySky .spark{
+  position:absolute;width:12px;height:12px;border-radius:4px;transform:rotate(45deg);
+  background:linear-gradient(145deg,#fff6b0,#ffd44c);
+  box-shadow:0 0 13px rgba(255,240,120,.95);
+}
+.bbInventorySky .spark.s1{left:22%;top:90px}
+.bbInventorySky .spark.s2{right:20%;top:130px}
+.bbInventorySky .spark.s3{left:10%;bottom:210px}
+
+.bbInventoryTop,
+.bbInventoryHero,
+.bbInventoryGuest,
+.bbInventoryBody{
+  position:relative;
+  z-index:2;
+  max-width:1180px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.bbInventoryTop{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:14px;
+}
+.bbInventoryBack{
+  width:52px;height:52px;border:0;border-radius:17px;display:grid;place-items:center;
+  color:#7658c7;
+  background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(244,233,255,.94));
+  box-shadow:inset 0 3px 5px #fff,0 10px 18px rgba(48,25,102,.18);
+}
+.bbInventoryBack svg{width:25px;height:25px}
+.bbInventoryBrand{
+  display:flex;align-items:center;gap:10px;flex:1;color:#fff;
+}
+.bbInventoryBrand small{
+  display:block;font-size:.66rem;letter-spacing:.13em;font-weight:1000;opacity:.8
+}
+.bbInventoryBrand h2{
+  margin:1px 0 0;font-size:1.8rem;line-height:1;font-weight:1000
+}
+
+.bbInventoryChest{
+  width:49px;height:44px;position:relative;border-radius:12px 12px 16px 16px;
+  background:linear-gradient(180deg,#ffb6d3,#ed6ba8);
+  box-shadow:inset 0 4px 5px rgba(255,255,255,.55),0 8px 14px rgba(58,28,107,.18)
+}
+.bbInventoryChest::before{
+  content:"";position:absolute;left:-3px;right:-3px;top:-8px;height:18px;border-radius:10px;
+  background:linear-gradient(180deg,#ffe68f,#ffbb61);
+}
+.bbInventoryChest::after{
+  content:"";position:absolute;left:20px;top:12px;width:10px;height:14px;border-radius:4px;
+  background:#fff5b5;
+}
+
+.bbInventoryWallet{
+  display:flex;align-items:center;gap:9px;padding:9px 14px;border-radius:20px;
+  background:rgba(255,255,255,.9);
+  box-shadow:inset 0 3px 5px #fff,0 10px 18px rgba(48,25,102,.15)
+}
+.bbInventoryWallet .coin{
+  width:37px;height:37px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(145deg,#fff6a8,#ffc33a);
+  color:#a76b0a;font-weight:1000;
+  box-shadow:inset 0 3px 4px #fff9cc,0 6px 11px rgba(115,71,13,.16)
+}
+.bbInventoryWallet div{display:flex;flex-direction:column}
+.bbInventoryWallet small{font-size:.65rem;color:#8d7997;font-weight:850}
+.bbInventoryWallet strong{font-size:1.15rem;color:#60407d;font-weight:1000}
+
+.bbInventoryHero{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:18px;
+  padding:24px 27px;
+  border-radius:32px;
+  color:#fff;
+  border:2px solid rgba(255,255,255,.4);
+  background:linear-gradient(135deg,rgba(102,79,215,.9),rgba(175,102,219,.86) 55%,rgba(249,137,193,.86));
+  box-shadow:inset 0 5px 7px rgba(255,255,255,.28),0 17px 28px rgba(43,23,96,.22)
+}
+.bbInventoryHero .pill{
+  display:inline-flex;padding:6px 11px;border-radius:999px;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.26);
+  color:#fff6c6;font-size:.66rem;font-weight:1000;letter-spacing:.11em
+}
+.bbInventoryHero h1{
+  margin:8px 0 5px;font-size:clamp(2rem,4vw,3rem);line-height:1;font-weight:1000
+}
+.bbInventoryHero p{margin:0;max-width:690px;color:#f7eaff;font-weight:650}
+
+.bbInventoryStats{display:flex;gap:10px}
+.bbInventoryStats>div{
+  min-width:105px;padding:12px;border-radius:20px;text-align:center;
+  background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.22)
+}
+.bbInventoryStats small,.bbInventoryStats span{display:block;font-size:.65rem;font-weight:800;opacity:.86}
+.bbInventoryStats strong{display:block;font-size:1.65rem;line-height:1.1;font-weight:1000}
+
+.bbInventoryGuest{
+  margin-top:14px;padding:14px 16px;border-radius:24px;
+  display:flex;align-items:center;gap:13px;
+  background:rgba(255,255,255,.92);box-shadow:0 12px 20px rgba(43,24,92,.15)
+}
+.bbInventoryGuest .icon{
+  width:50px;height:50px;border-radius:17px;position:relative;
+  background:linear-gradient(180deg,#d8caff,#ad8beb)
+}
+.bbInventoryGuest .icon::before{
+  content:"";position:absolute;left:16px;top:8px;width:18px;height:18px;border-radius:50%;background:#fff
+}
+.bbInventoryGuest .icon::after{
+  content:"";position:absolute;left:10px;right:10px;bottom:7px;height:19px;border-radius:17px 17px 9px 9px;background:#fff
+}
+.bbInventoryGuest>div:nth-child(2){flex:1}
+.bbInventoryGuest strong{color:#5d4075;font-weight:1000}
+.bbInventoryGuest p{margin:2px 0 0;color:#8c7895;font-size:.82rem}
+.bbInventoryGuest button{
+  border:0;border-radius:16px;padding:11px 16px;color:#fff;font-weight:950;
+  background:linear-gradient(180deg,#9879ea,#7457cf)
+}
+
+.bbInventoryBody{
+  margin-top:14px;
+  padding:17px;
+  border-radius:30px;
+  background:rgba(255,255,255,.9);
+  border:2px solid rgba(255,255,255,.66);
+  box-shadow:0 18px 28px rgba(43,24,92,.17);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
+.bbInventoryToolbar{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px
+}
+.bbInventoryTabs{
+  display:flex;gap:7px;overflow-x:auto;padding:2px;scrollbar-width:none
+}
+.bbInventoryTabs::-webkit-scrollbar{display:none}
+.bbInventoryTabs button{
+  border:0;border-radius:999px;padding:9px 13px;white-space:nowrap;
+  color:#765e86;background:#f5eff8;font-weight:900
+}
+.bbInventoryTabs button.active{
+  color:#fff;background:linear-gradient(180deg,#9576e9,#7356ce);
+  box-shadow:0 6px 11px rgba(81,54,132,.15)
+}
+.bbInventoryGoShop{
+  border:0;border-radius:15px;padding:10px 13px;white-space:nowrap;
+  color:#9b5577;background:#ffeaf2;font-weight:950
+}
+
+.bbInventoryGrid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+}
+.bbInventoryLoading,
+.bbInventoryEmpty{
+  grid-column:1/-1;
+  padding:34px 18px;
+  border-radius:23px;
+  text-align:center;
+  color:#887691;
+  background:#faf7fc;
+  font-weight:850;
+}
+.bbInventoryEmpty strong{display:block;color:#614677;font-size:1.05rem;margin-bottom:5px}
+.bbInventoryEmpty button{
+  margin-top:10px;border:0;border-radius:14px;padding:10px 14px;
+  background:linear-gradient(180deg,#9879e9,#7457cf);color:#fff;font-weight:950
+}
+
+.bbInventoryItem{
+  min-width:0;
+  padding:9px;
+  border-radius:24px;
+  background:linear-gradient(180deg,#fff,#fffafd);
+  border:1px solid #eee4f1;
+  box-shadow:0 9px 17px rgba(82,53,101,.08);
+}
+.bbInventoryItem.equipped{
+  border-color:rgba(82,197,146,.30);
+  box-shadow:0 0 0 3px rgba(91,203,153,.08),0 10px 18px rgba(74,117,94,.09)
+}
+.bbInventoryItemArt{
+  position:relative;
+  aspect-ratio:1.15/1;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  border-radius:19px;
+  background:linear-gradient(145deg,#ecf7ff,#ffeaf4);
+}
+.bbInventoryItemArt img{
+  width:100%;height:100%;object-fit:contain;padding:5px
+}
+.bbInventoryItemArt .fallback{
+  position:relative;width:76px;height:76px
+}
+.bbInventoryItemArt .fallback.bear::before{
+  content:"";position:absolute;inset:12px 14px 5px;border-radius:46% 46% 44% 44%;
+  background:linear-gradient(180deg,#e6bb88,#a96e49);
+  box-shadow:-18px -9px 0 -9px #c58a5b,18px -9px 0 -9px #c58a5b
+}
+.bbInventoryItemArt .fallback.theme::before{
+  content:"";position:absolute;inset:8px;border-radius:20px;
+  background:linear-gradient(135deg,#91ddff,#a88cff 48%,#ff9aca 75%,#ffe07a)
+}
+.bbInventoryItemArt .fallback.frame::before{
+  content:"";position:absolute;inset:5px;border-radius:50%;
+  border:10px solid #ffc95e;box-shadow:inset 0 0 0 6px #fff3b1,0 0 0 4px #ff90be
+}
+.bbInventoryItemArt .fallback.effect::before,
+.bbInventoryItemArt .fallback.effect::after{
+  content:"";position:absolute;left:30px;top:8px;width:18px;height:58px;border-radius:7px;
+  background:linear-gradient(180deg,#fff8a4,#ff7cc1);transform:rotate(45deg)
+}
+.bbInventoryItemArt .fallback.effect::after{transform:rotate(-45deg)}
+.bbInventoryType{
+  position:absolute;left:8px;top:8px;padding:5px 8px;border-radius:999px;
+  background:rgba(255,255,255,.9);color:#786187;font-size:.61rem;font-weight:950
+}
+.bbInventoryUsing{
+  position:absolute;right:8px;top:8px;padding:5px 8px;border-radius:999px;
+  background:#dffff0;color:#347d60;font-size:.61rem;font-weight:1000
+}
+
+.bbInventoryItemCopy{padding:10px 3px 2px}
+.bbInventoryItemCopy h4{margin:0;color:#5d4174;font-size:1rem;font-weight:1000}
+.bbInventoryItemCopy p{
+  margin:4px 0 9px;min-height:2.6em;color:#8e7b95;font-size:.73rem;line-height:1.3
+}
+.bbInventoryAction{
+  width:100%;
+  min-height:42px;
+  border:0;
+  border-radius:14px;
+  color:#fff;
+  background:linear-gradient(180deg,#9879e9,#7356ce);
+  font-weight:1000;
+}
+.bbInventoryAction.remove{
+  color:#a24b68;
+  background:linear-gradient(180deg,#fff0f4,#ffe3ea)
+}
+.bbInventoryAction:disabled{opacity:.68}
+
+.bbInventoryToast{
+  position:fixed;left:50%;bottom:90px;z-index:8000;transform:translateX(-50%);
+  max-width:min(90vw,480px);min-width:220px;padding:12px 16px;border-radius:17px;
+  text-align:center;color:#fff;background:rgba(69,47,90,.95);font-weight:850;
+  box-shadow:0 12px 24px rgba(41,23,72,.27)
+}
+
+@media(max-width:900px){
+  .bbInventoryGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:640px){
+  .bbInventoryScreen{padding:12px 10px 105px}
+  .bbInventoryTop{gap:8px}
+  .bbInventoryBack{width:44px;height:44px;border-radius:14px}
+  .bbInventoryBrand h2{font-size:1.3rem}
+  .bbInventoryChest{width:42px;height:38px}
+  .bbInventoryWallet{padding:7px 9px;border-radius:16px}
+  .bbInventoryWallet .coin{width:31px;height:31px}
+  .bbInventoryWallet small{font-size:.57rem}
+  .bbInventoryWallet strong{font-size:.93rem}
+  .bbInventoryHero{grid-template-columns:1fr;padding:18px;border-radius:26px}
+  .bbInventoryHero h1{font-size:1.85rem}
+  .bbInventoryHero p{font-size:.8rem}
+  .bbInventoryStats{width:100%}
+  .bbInventoryStats>div{flex:1;min-width:0;padding:9px}
+  .bbInventoryBody{padding:10px;border-radius:24px}
+  .bbInventoryToolbar{align-items:stretch;flex-direction:column}
+  .bbInventoryGoShop{width:100%}
+  .bbInventoryGrid{gap:8px}
+  .bbInventoryItem{padding:7px;border-radius:19px}
+  .bbInventoryItemArt{border-radius:15px}
+  .bbInventoryItemCopy h4{font-size:.9rem}
+  .bbInventoryItemCopy p{font-size:.67rem}
+  .bbInventoryAction{min-height:44px}
+}
+
 </style>
 
 <script>
@@ -6653,24 +6965,24 @@ try{
             <strong>คลังของฉัน</strong>
             <span id="bbHomeOwnedCount">0 ชิ้น</span>
           </div>
-          <button type="button" data-app-go="shop">จัดการคลัง →</button>
+          <button type="button" data-app-go="inventory">จัดการคลัง →</button>
         </div>
       </div>
 
       <div class="bbHomeCollectionGrid" id="bbHomeCollectionGrid">
-        <button type="button" class="bbHomeCollectionSlot" data-app-go="shop" data-home-cosmetic-type="bear">
+        <button type="button" class="bbHomeCollectionSlot" data-app-go="inventory" data-inventory-open="bear" data-home-cosmetic-type="bear">
           <span class="art bear"></span>
           <span class="copy"><small>หมี</small><b>ยังไม่ได้ใช้</b></span>
         </button>
-        <button type="button" class="bbHomeCollectionSlot" data-app-go="shop" data-home-cosmetic-type="theme">
+        <button type="button" class="bbHomeCollectionSlot" data-app-go="inventory" data-inventory-open="theme" data-home-cosmetic-type="theme">
           <span class="art theme"></span>
           <span class="copy"><small>ธีม</small><b>ยังไม่ได้ใช้</b></span>
         </button>
-        <button type="button" class="bbHomeCollectionSlot" data-app-go="shop" data-home-cosmetic-type="frame">
+        <button type="button" class="bbHomeCollectionSlot" data-app-go="inventory" data-inventory-open="frame" data-home-cosmetic-type="frame">
           <span class="art frame"></span>
           <span class="copy"><small>กรอบ</small><b>ยังไม่ได้ใช้</b></span>
         </button>
-        <button type="button" class="bbHomeCollectionSlot" data-app-go="shop" data-home-cosmetic-type="effect">
+        <button type="button" class="bbHomeCollectionSlot" data-app-go="inventory" data-inventory-open="effect" data-home-cosmetic-type="effect">
           <span class="art effect"></span>
           <span class="copy"><small>เอฟเฟกต์</small><b>ยังไม่ได้ใช้</b></span>
         </button>
@@ -6771,6 +7083,80 @@ try{
     </div>
   </section>
 
+
+
+<section class="bbAppScreen bbInventoryScreen" id="bbAppInventory" data-app-screen="inventory">
+  <div class="bbInventorySky" aria-hidden="true">
+    <i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i>
+    <i class="spark s1"></i><i class="spark s2"></i><i class="spark s3"></i>
+  </div>
+
+  <header class="bbInventoryTop">
+    <button class="bbInventoryBack" type="button" data-app-go="home" aria-label="กลับหน้าหลัก">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M38 14 20 32l18 18" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <div class="bbInventoryBrand">
+      <span class="bbInventoryChest" aria-hidden="true"></span>
+      <div>
+        <small>MY COLLECTION</small>
+        <h2>คลังของฉัน</h2>
+      </div>
+    </div>
+
+    <div class="bbInventoryWallet">
+      <span class="coin">B</span>
+      <div>
+        <small>Brain Coins</small>
+        <strong id="bbInventoryBalance">—</strong>
+      </div>
+    </div>
+  </header>
+
+  <section class="bbInventoryHero">
+    <div>
+      <span class="pill">YOUR COSMETICS</span>
+      <h1>ของที่คุณเป็นเจ้าของ</h1>
+      <p>เลือกใช้หรือถอดหมี ธีม กรอบ และเอฟเฟกต์ได้จากที่นี่ โดยไม่ต้องกลับไปค้นหาในร้านค้า</p>
+    </div>
+
+    <div class="bbInventoryStats">
+      <div><small>มีทั้งหมด</small><strong id="bbInventoryOwnedCount">0</strong><span>ชิ้น</span></div>
+      <div><small>กำลังใช้</small><strong id="bbInventoryEquippedCount">0</strong><span>ชิ้น</span></div>
+    </div>
+  </section>
+
+  <section class="bbInventoryGuest hidden" id="bbInventoryGuest">
+    <div class="icon"></div>
+    <div>
+      <strong>เข้าสู่ระบบเพื่อดูคลังของคุณ</strong>
+      <p>ของที่ซื้อ Brain Coins และของที่กำลังใช้งานจะถูกเก็บไว้กับบัญชี</p>
+    </div>
+    <button type="button" id="bbInventoryLoginBtn">เข้าสู่ระบบ</button>
+  </section>
+
+  <section class="bbInventoryBody" id="bbInventoryBody">
+    <div class="bbInventoryToolbar">
+      <div class="bbInventoryTabs" role="tablist" aria-label="หมวดสินค้าในคลัง">
+        <button class="active" type="button" data-inventory-filter="all">ทั้งหมด</button>
+        <button type="button" data-inventory-filter="bear">หมี</button>
+        <button type="button" data-inventory-filter="theme">ธีม</button>
+        <button type="button" data-inventory-filter="frame">กรอบ</button>
+        <button type="button" data-inventory-filter="effect">เอฟเฟกต์</button>
+      </div>
+
+      <button class="bbInventoryGoShop" type="button" data-app-go="shop">ไปที่ร้านค้า</button>
+    </div>
+
+    <div class="bbInventoryGrid" id="bbInventoryGrid" aria-live="polite">
+      <div class="bbInventoryLoading">กำลังโหลดคลังของคุณ…</div>
+    </div>
+  </section>
+
+  <div class="bbInventoryToast hidden" id="bbInventoryToast"></div>
+</section>
 
 <section class="bbAppScreen bbShopScreen" id="bbAppShop" data-app-screen="shop">
   <div class="bbShopSky" aria-hidden="true">
@@ -9697,9 +10083,10 @@ window.addEventListener("load",()=>{
     if(typeof setDockActive==="function"){
       if(next==="home")setDockActive("home");
       else if(next==="modes"||next==="setup")setDockActive("play");
-      else if(next==="shop")setDockActive("shop");
+      else if(next==="shop"||next==="inventory")setDockActive("shop");
     }
     if(next==="shop")window.bbLoadShop?.();
+    if(next==="inventory")window.bbLoadInventory?.();
     window.scrollTo({top:0,behavior:"smooth"});syncSetup();
     return true;
   }
@@ -10928,6 +11315,287 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   setTimeout(loadHomeInventory,1600);
+})();
+</script>
+
+
+<script>
+(function brainBuddyV62Inventory(){
+  const q=s=>document.querySelector(s);
+  let filter="all";
+  let busy=false;
+  let cache={items:[],equipped:new Map(),balance:0};
+
+  const typeName={bear:"หมี",theme:"ธีม",frame:"กรอบ",effect:"เอฟเฟกต์"};
+
+  function client(){
+    if(window.__bbSupabase)return window.__bbSupabase;
+    const cfg=window.BRAIN_BUDDY_SUPABASE||{};
+    if(window.supabase&&cfg.url&&cfg.publishableKey){
+      window.__bbSupabase=window.supabase.createClient(cfg.url,cfg.publishableKey);
+      return window.__bbSupabase;
+    }
+    return null;
+  }
+
+  function esc(v){
+    return String(v??"").replace(/[&<>"']/g,m=>({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    }[m]));
+  }
+
+  function toast(msg){
+    const t=q("#bbInventoryToast");
+    if(!t)return;
+    t.textContent=msg;
+    t.classList.remove("hidden");
+    clearTimeout(t.__timer);
+    t.__timer=setTimeout(()=>t.classList.add("hidden"),2200);
+  }
+
+  function setFilter(next){
+    filter=["all","bear","theme","frame","effect"].includes(next)?next:"all";
+    document.querySelectorAll("[data-inventory-filter]").forEach(btn=>{
+      btn.classList.toggle("active",btn.dataset.inventoryFilter===filter);
+    });
+    render();
+  }
+
+  function render(){
+    const grid=q("#bbInventoryGrid");
+    if(!grid)return;
+
+    const visible=filter==="all"
+      ? cache.items
+      : cache.items.filter(item=>item.item_type===filter);
+
+    if(!visible.length){
+      grid.innerHTML=`
+        <div class="bbInventoryEmpty">
+          <strong>${cache.items.length?"ยังไม่มีของในหมวดนี้":"คลังของคุณยังว่างอยู่"}</strong>
+          <span>${cache.items.length?"ลองเลือกหมวดอื่นได้เลย":"ไปเลือกรับหรือซื้อของตกแต่งในร้านค้าได้เลย"}</span>
+          ${cache.items.length?"":'<button type="button" data-app-go="shop">ไปที่ร้านค้า</button>'}
+        </div>
+      `;
+      return;
+    }
+
+    grid.innerHTML=visible.map(item=>{
+      const equippedId=cache.equipped.get(item.item_type);
+      const isEquipped=Number(equippedId)===Number(item.id);
+      const art=item.image_url
+        ? `<img src="${esc(item.image_url)}" alt="${esc(item.name)}" loading="lazy">`
+        : `<span class="fallback ${esc(item.item_type)}" aria-hidden="true"></span>`;
+
+      return `
+        <article class="bbInventoryItem ${isEquipped?"equipped":""}">
+          <div class="bbInventoryItemArt">
+            ${art}
+            <span class="bbInventoryType">${esc(typeName[item.item_type]||item.item_type)}</span>
+            ${isEquipped?'<span class="bbInventoryUsing">กำลังใช้ ✓</span>':""}
+          </div>
+
+          <div class="bbInventoryItemCopy">
+            <h4>${esc(item.name)}</h4>
+            <p>${esc(item.description||"ของตกแต่ง Brain Buddy")}</p>
+            <button
+              type="button"
+              class="bbInventoryAction ${isEquipped?"remove":""}"
+              ${isEquipped
+                ? `data-inventory-unequip="${Number(item.id)}"`
+                : `data-inventory-equip="${Number(item.id)}"`
+              }
+            >
+              ${isEquipped?"ถอดออก":"ใช้เลย"}
+            </button>
+          </div>
+        </article>
+      `;
+    }).join("");
+  }
+
+  async function loadInventory(){
+    if(busy)return;
+    busy=true;
+
+    const grid=q("#bbInventoryGrid");
+    const body=q("#bbInventoryBody");
+    const guest=q("#bbInventoryGuest");
+    if(grid)grid.innerHTML='<div class="bbInventoryLoading">กำลังโหลดคลังของคุณ…</div>';
+
+    try{
+      const c=client();
+      if(!c)throw new Error("ยังเชื่อมต่อ Cloud ไม่สำเร็จ");
+
+      const {data:sessionData}=await c.auth.getSession();
+      const user=sessionData?.session?.user;
+
+      if(!user){
+        guest?.classList.remove("hidden");
+        body?.classList.add("hidden");
+        q("#bbInventoryBalance").textContent="—";
+        q("#bbInventoryOwnedCount").textContent="0";
+        q("#bbInventoryEquippedCount").textContent="0";
+        cache={items:[],equipped:new Map(),balance:0};
+        return;
+      }
+
+      guest?.classList.add("hidden");
+      body?.classList.remove("hidden");
+
+      const [walletRes,ownedRes,equippedRes]=await Promise.all([
+        c.from("bb_wallets")
+          .select("coin_balance")
+          .eq("user_id",user.id)
+          .maybeSingle(),
+
+        c.from("bb_user_items")
+          .select("item_id,acquired_at")
+          .eq("user_id",user.id)
+          .order("acquired_at",{ascending:false}),
+
+        c.from("bb_equipped_items")
+          .select("item_type,item_id")
+          .eq("user_id",user.id)
+      ]);
+
+      if(walletRes.error)throw walletRes.error;
+      if(ownedRes.error)throw ownedRes.error;
+      if(equippedRes.error)throw equippedRes.error;
+
+      const ids=(ownedRes.data||[]).map(x=>Number(x.item_id)).filter(Boolean);
+      let shopItems=[];
+
+      if(ids.length){
+        const {data,error}=await c
+          .from("bb_shop_items")
+          .select("id,item_code,item_type,name,description,image_url,sort_order")
+          .in("id",ids);
+
+        if(error)throw error;
+
+        const order=new Map(ids.map((id,index)=>[id,index]));
+        shopItems=(data||[]).sort(
+          (a,b)=>(order.get(Number(a.id))??9999)-(order.get(Number(b.id))??9999)
+        );
+      }
+
+      cache={
+        items:shopItems,
+        equipped:new Map((equippedRes.data||[]).map(x=>[String(x.item_type),Number(x.item_id)])),
+        balance:Number(walletRes.data?.coin_balance)||0
+      };
+
+      q("#bbInventoryBalance").textContent=cache.balance.toLocaleString();
+      q("#bbInventoryOwnedCount").textContent=cache.items.length.toLocaleString();
+      q("#bbInventoryEquippedCount").textContent=cache.equipped.size.toLocaleString();
+
+      render();
+
+    }catch(err){
+      console.error("Brain Buddy Inventory:",err);
+      if(grid){
+        grid.innerHTML=`
+          <div class="bbInventoryEmpty">
+            <strong>โหลดคลังไม่สำเร็จ</strong>
+            <span>${esc(err?.message||"กรุณาลองใหม่")}</span>
+          </div>
+        `;
+      }
+    }finally{
+      busy=false;
+    }
+  }
+
+  async function equip(itemId,button){
+    const c=client();
+    if(!c||!itemId)return;
+
+    const original=button?.textContent||"ใช้เลย";
+    if(button){button.disabled=true;button.textContent="กำลังใช้…"}
+
+    try{
+      const {data,error}=await c.rpc("bb_equip_shop_item",{p_item_id:Number(itemId)});
+      if(error)throw error;
+
+      const result=Array.isArray(data)?data[0]:data;
+      toast(`กำลังใช้ ${result?.item_name||"สินค้า"} ✓`);
+
+      await loadInventory();
+      try{await window.bbApplyEquippedCosmetics?.()}catch(e){}
+      try{await window.bbLoadHomeInventory?.()}catch(e){}
+    }catch(err){
+      console.error("Inventory equip:",err);
+      toast(String(err?.message||"ใช้งานสินค้าไม่สำเร็จ"));
+      if(button){button.disabled=false;button.textContent=original}
+    }
+  }
+
+  async function unequip(itemId,button){
+    const c=client();
+    if(!c||!itemId)return;
+
+    const original=button?.textContent||"ถอดออก";
+    if(button){button.disabled=true;button.textContent="กำลังถอด…"}
+
+    try{
+      const {data,error}=await c.rpc("bb_unequip_shop_item",{p_item_id:Number(itemId)});
+      if(error)throw error;
+
+      const result=Array.isArray(data)?data[0]:data;
+      toast(`ถอด ${result?.item_name||"สินค้า"} แล้ว`);
+
+      await loadInventory();
+      try{await window.bbApplyEquippedCosmetics?.()}catch(e){}
+      try{await window.bbLoadHomeInventory?.()}catch(e){}
+    }catch(err){
+      console.error("Inventory unequip:",err);
+      toast(String(err?.message||"ถอดสินค้าไม่สำเร็จ"));
+      if(button){button.disabled=false;button.textContent=original}
+    }
+  }
+
+  // Home collection slots open the inventory already filtered to that type.
+  document.addEventListener("click",e=>{
+    const open=e.target.closest("[data-inventory-open]");
+    if(open){
+      setFilter(open.dataset.inventoryOpen);
+    }
+
+    const filterBtn=e.target.closest("[data-inventory-filter]");
+    if(filterBtn){
+      e.preventDefault();
+      setFilter(filterBtn.dataset.inventoryFilter);
+      return;
+    }
+
+    const eq=e.target.closest("[data-inventory-equip]");
+    if(eq){
+      e.preventDefault();
+      equip(Number(eq.dataset.inventoryEquip),eq);
+      return;
+    }
+
+    const un=e.target.closest("[data-inventory-unequip]");
+    if(un){
+      e.preventDefault();
+      unequip(Number(un.dataset.inventoryUnequip),un);
+      return;
+    }
+
+    if(e.target.closest("#bbInventoryLoginBtn")){
+      e.preventDefault();
+      if(typeof openModal==="function")openModal("accountModal");
+      else q("#accountModal")?.classList.remove("hidden");
+    }
+  },true);
+
+  window.bbLoadInventory=loadInventory;
+  window.bbInventorySetFilter=setFilter;
+
+  window.addEventListener("bb:auth-changed",()=>{
+    setTimeout(loadInventory,120);
+  });
 })();
 </script>
 
