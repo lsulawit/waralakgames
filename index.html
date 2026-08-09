@@ -439,6 +439,87 @@ body.dark .authField input{
 body.dark .loginGuideCard, body.dark .guideStep{background:rgba(255,255,255,.05)!important;border-color:rgba(255,255,255,.08)!important}
 body.dark .guideBlock h3{color:#f4eefb} body.dark .guideBlock p, body.dark .guideStep span{color:#c7bed4} body.dark .guideStep b{color:#f4eefb}
 
+
+/* ===== v15 readability + hero leaderboard ===== */
+:root{
+  --bb-surface:#fffdfd;
+  --bb-card:#ffffff;
+  --bb-stroke:rgba(104,87,129,.12);
+  --bb-shadow:0 18px 48px rgba(72,48,96,.10);
+  --bb-text:#2f2735;
+  --bb-muted:#6f6877;
+  --bb-pink:#ff72af;
+  --bb-purple:#9b7cff;
+}
+body{color:var(--bb-text)!important}
+.heroMain,.premiumHero{
+  background:linear-gradient(180deg,#fffefe 0%, #fff9fc 65%, #faf6ff 100%)!important;
+  border:1px solid var(--bb-stroke)!important;
+  box-shadow:var(--bb-shadow)!important;
+}
+.authOverlay,.modalOverlay{background:rgba(23,16,31,.58)!important;backdrop-filter:blur(12px)!important}
+.authCard,.authModal,.memberModal{
+  background:#fff!important; opacity:1!important; 
+  border:1px solid rgba(104,87,129,.14)!important;
+  box-shadow:0 32px 84px rgba(31,18,41,.28)!important;
+}
+.authLeft,.authBody,.authInner{opacity:1!important}
+.authField input{background:#fff!important; color:#241d2b!important; border:1.6px solid rgba(104,87,129,.16)!important}
+.authField label{color:#4a4054!important; font-weight:800!important}
+.authDesc{color:#5e5668!important}
+.authHint{background:#f8f6fb!important; color:#544b5f!important}
+.entryGuideHero{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:stretch;
+  margin:22px 0 24px;
+}
+@media(max-width:980px){.entryGuideHero{grid-template-columns:1fr}}
+.heroBlock,.leaderHero{
+  background:#fff;border:1px solid var(--bb-stroke);border-radius:28px;padding:26px;box-shadow:var(--bb-shadow);
+}
+.heroBlock h2{margin:0 0 10px;font-size:34px;line-height:1.15}
+.heroBlock p{margin:0;color:var(--bb-muted);line-height:1.8;font-size:16px}
+.ctaRow{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.ctaBtn{border:none;border-radius:18px;padding:15px 18px;font-weight:900;font-size:17px;cursor:pointer}
+.ctaPrimary{background:linear-gradient(135deg,var(--bb-pink),var(--bb-purple));color:#fff;box-shadow:0 12px 28px rgba(195,115,193,.25)}
+.ctaSecondary{background:#fff;color:#43384d;border:1px solid var(--bb-stroke)}
+.guideMini{display:grid;gap:10px;margin-top:18px}
+.guideMini .item{display:flex;gap:12px;align-items:flex-start;background:#faf8fd;border:1px solid rgba(104,87,129,.08);padding:14px;border-radius:18px}
+.guideMini b{display:block;font-size:15px}
+.guideMini span{color:var(--bb-muted);font-size:13px}
+.leaderHero h3{margin:0;font-size:28px}
+.leaderHero p{margin:8px 0 14px;color:var(--bb-muted)}
+.lbTopList{display:grid;gap:10px}
+.lbTopItem{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:12px;background:#faf8fd;border:1px solid rgba(104,87,129,.08);padding:12px 14px;border-radius:18px}
+.lbTopPos{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-weight:900;background:linear-gradient(135deg,#ffe7f3,#efe4ff);color:#6d4dc7}
+.lbTopUser{display:flex;align-items:center;gap:10px}
+.lbTopAvatar{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;background:#fff;border:1px solid rgba(104,87,129,.08);overflow:hidden}
+.lbTopMeta b{display:block}
+.lbTopMeta span{font-size:12px;color:var(--bb-muted)}
+.lbTopScore{font-weight:900}
+.lbSection{
+  background:#fff;border:1px solid var(--bb-stroke);border-radius:28px;padding:22px;box-shadow:var(--bb-shadow);margin-top:18px;
+}
+.competeBanner{
+  display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+  background:linear-gradient(135deg,#fff3f9,#f3ecff);border:1px solid rgba(169,124,255,.14);
+  border-radius:22px;padding:18px;margin-top:18px;
+}
+.competeBanner b{font-size:20px}
+.competeBanner span{color:var(--bb-muted)}
+.quickStartGrid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px;
+}
+@media(max-width:980px){.quickStartGrid{grid-template-columns:1fr}}
+.qCard{
+  background:#fff;border:1px solid var(--bb-stroke);box-shadow:var(--bb-shadow);border-radius:24px;padding:18px;
+}
+.qCard h4{margin:0 0 8px;font-size:22px}
+.qCard p{margin:0 0 14px;color:var(--bb-muted);line-height:1.7}
+.qCard .sub{font-size:13px;color:var(--bb-muted)}
+body.dark .heroBlock,body.dark .leaderHero,body.dark .lbSection,body.dark .qCard{background:#1c1723!important;border-color:rgba(255,255,255,.08)!important}
+body.dark .heroBlock p,body.dark .leaderHero p,body.dark .qCard p,.dark .guideMini span{color:#c9bfd8!important}
+body.dark .guideMini .item,.dark .lbTopItem,.dark .competeBanner{background:rgba(255,255,255,.05)!important;border-color:rgba(255,255,255,.08)!important}
+
 </style>
 </head>
 <body>
@@ -925,6 +1006,109 @@ body.dark .guideBlock h3{color:#f4eefb} body.dark .guideBlock p, body.dark .guid
   }
   function patchStatPersistence(){ const stats=getJSON(STATS_KEY,{xp:0,bestScore:0,bestCombo:0,games:0,wins:0,total_score:0}); window.__bbSubmitCloudResult=submitCloudResult; setJSON(STATS_KEY, stats); }
   window.addEventListener('load', ()=>{ setTimeout(async()=>{ mountEntryGuide(); patchProfileUploader(); patchStatPersistence(); await syncProfileToCloud(); await renderCloudLeaderboard(); setInterval(syncProfileToCloud,30000); }, 1100); });
+})();
+
+
+(function homepageRefreshV15(){
+  function $(s,r=document){return r.querySelector(s)}
+  function rankEmoji(rank){return ({Diamond:'💎',Platinum:'🌌',Gold:'🏆',Silver:'✨',Bronze:'🌱'})[rank]||'🌱'}
+  async function getTopPlayers(){
+    if(!window.__bbSupabase) return [];
+    const {data} = await window.__bbSupabase.from('leaderboard_view').select('*').limit(5);
+    return data || [];
+  }
+  function openAuth(){ Array.from(document.querySelectorAll('button,a')).find(el=>/บัญชี|เข้าสู่ระบบ|ล็อกอิน|สมัครสมาชิก/i.test(el.textContent||''))?.click(); }
+  function guestPlay(){ Array.from(document.querySelectorAll('button')).find(el=>/ผู้เยี่ยมชม|เล่นต่อแบบผู้เยี่ยมชม/i.test(el.textContent||''))?.click(); }
+  async function mountNewTopSections(){
+    if(document.querySelector('.entryGuideHero')) return;
+    const hero = document.querySelector('.premiumHero,.heroMain') || document.querySelector('main') || document.body;
+    const wrap = document.createElement('section');
+    wrap.className = 'entryGuideHero';
+    const players = await getTopPlayers();
+    const topHtml = players.length ? players.map((u,i)=>{
+      const avatar = u.avatar_url ? `<img src="${u.avatar_url}" style="width:100%;height:100%;object-fit:cover">` : (u.avatar || '🧸');
+      return `<div class="lbTopItem">
+        <div class="lbTopPos">${i+1}</div>
+        <div class="lbTopUser">
+          <div class="lbTopAvatar">${avatar}</div>
+          <div class="lbTopMeta"><b>${u.display_name || 'ผู้เล่น'}</b><span>${rankEmoji(u.rank_tier)} ${u.rank_tier || 'Bronze'}</span></div>
+        </div>
+        <div class="lbTopScore">${u.best_score || 0}</div>
+      </div>`;
+    }).join('') : `<div class="lbTopItem"><div class="lbTopPos">1</div><div class="lbTopUser"><div class="lbTopAvatar">🏆</div><div class="lbTopMeta"><b>ยังไม่มีผู้เล่นอันดับ</b><span>สมัครสมาชิกและเป็นคนแรกบนตาราง</span></div></div><div class="lbTopScore">0</div></div>`;
+
+    wrap.innerHTML = `
+      <div class="heroBlock">
+        <div class="entryTag">✨ เริ่มเล่นได้ทันที</div>
+        <h2>เล่นยังไง? เข้าสู่ระบบตรงไหน? สมัครสมาชิกตรงไหน?</h2>
+        <p>ถ้าต้องการบันทึกคะแนน XP และแรงก์ขึ้นคลาวด์ ให้กด <b>เข้าสู่ระบบ / สมัครสมาชิก</b> ก่อนเล่น ส่วนคนที่อยากลองเล่นก่อน สามารถกด <b>เล่นแบบผู้เยี่ยมชม</b> ได้ทันที</p>
+        <div class="ctaRow">
+          <button class="ctaBtn ctaPrimary" id="bbLoginHero">🔐 เข้าสู่ระบบ / สมัครสมาชิก</button>
+          <button class="ctaBtn ctaSecondary" id="bbGuestHero">🎮 เล่นแบบผู้เยี่ยมชม</button>
+        </div>
+        <div class="guideMini">
+          <div class="item"><div>1️⃣</div><div><b>เข้าสู่ระบบ</b><span>สำหรับสมาชิกที่มีบัญชีแล้ว สามารถเล่นต่อจากเดิม ดูแรงก์ และสะสมคะแนนได้ทันที</span></div></div>
+          <div class="item"><div>2️⃣</div><div><b>สมัครสมาชิก</b><span>สำหรับผู้เล่นใหม่ สร้างบัญชีเพื่อเก็บคะแนน ประวัติการเล่น รูปโปรไฟล์ และอันดับบนคลาวด์</span></div></div>
+          <div class="item"><div>3️⃣</div><div><b>เริ่มแข่งกับคนอื่น</b><span>คะแนนของสมาชิกจะขึ้นบนตารางจัดอันดับ ทำให้คนอื่นเห็นและแข่งกันได้จริง</span></div></div>
+        </div>
+      </div>
+      <div class="leaderHero">
+        <div class="entryTag">🏆 แข่งกับผู้เล่นคนอื่น</div>
+        <h3>อันดับผู้เล่นเด่นตอนนี้</h3>
+        <p>คะแนนจริงจากสมาชิกทุกบัญชี ยิ่งเล่นเก่ง ยิ่งไต่อันดับสูงขึ้น</p>
+        <div class="lbTopList">${topHtml}</div>
+      </div>
+    `;
+    hero.parentNode.insertBefore(wrap, hero.nextSibling);
+    document.getElementById('bbLoginHero')?.addEventListener('click', openAuth);
+    document.getElementById('bbGuestHero')?.addEventListener('click', guestPlay);
+
+    // Quick start section under hero for easier reading
+    if(!document.querySelector('.quickStartGrid')){
+      const qs = document.createElement('section');
+      qs.className = 'lbSection';
+      qs.innerHTML = `
+        <div class="competeBanner">
+          <div><b>อยากให้คนสนใจและอยากแข่ง?</b><br><span>เราแสดงอันดับตั้งแต่ต้นหน้า เพื่อชวนให้ผู้เล่นเข้าสู่ระบบแล้วทำคะแนนแข่งกันทันที</span></div>
+          <button class="ctaBtn ctaPrimary" id="bbCompeteBtn">ดูตารางจัดอันดับสมาชิก</button>
+        </div>
+        <div class="quickStartGrid">
+          <div class="qCard">
+            <h4>เล่นด่วน</h4>
+            <p>เริ่มจากกระดาน 2×2 แบบง่าย เพื่อให้ผู้เล่นเข้าใจเกมทันทีและรู้สึกเล่นสำเร็จเร็ว</p>
+            <div class="sub">เหมาะสำหรับผู้เล่นใหม่</div>
+          </div>
+          <div class="qCard">
+            <h4>สมัครสมาชิก</h4>
+            <p>ปลดล็อกการเก็บคะแนน XP แรงก์ รูปโปรไฟล์ และอันดับผู้เล่นแบบออนไลน์บนคลาวด์</p>
+            <div class="sub">เหมาะสำหรับคนที่อยากสะสมสถิติ</div>
+          </div>
+          <div class="qCard">
+            <h4>โหมดแข่งทีม</h4>
+            <p>เลือกจำนวนทีมได้หลายแบบ เพื่อเล่นในห้องเรียนหรือกับเพื่อน แล้วช่วยกันเก็บคะแนนไต่แรงก์</p>
+            <div class="sub">เหมาะสำหรับกิจกรรมกลุ่ม</div>
+          </div>
+        </div>
+      `;
+      hero.parentNode.insertBefore(qs, wrap.nextSibling);
+      document.getElementById('bbCompeteBtn')?.addEventListener('click', ()=>{
+        document.getElementById('leaderboard')?.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    }
+  }
+
+  // strengthen auth modal opacity if opens
+  const mo = new MutationObserver(()=>{
+    const m = document.querySelector('.authCard,.authModal,.memberModal');
+    if(m){
+      m.style.background = '#ffffff';
+      m.style.opacity = '1';
+      m.style.backdropFilter = 'none';
+    }
+  });
+  mo.observe(document.documentElement,{subtree:true,childList:true});
+
+  window.addEventListener('load', ()=>setTimeout(mountNewTopSections, 1200));
 })();
 
 </script>
