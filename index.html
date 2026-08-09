@@ -4357,6 +4357,107 @@ body.bbAppPlaying .v17dock{
   }
 }
 
+
+/* =========================================================
+   Brain Buddy v52 — Ranked Match gameplay
+   ========================================================= */
+
+body.bbRankedPlaying .bbRankedMatchBoard{
+  width:min(960px,100%)!important;
+  margin:14px auto 0!important;
+  display:grid!important;
+  grid-template-columns:repeat(var(--cols),minmax(0,1fr))!important;
+  gap:10px!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+}
+
+body.bbRankedPlaying .bbRankedMatchBoard .bbMatchCard{
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  min-width:0!important;
+  width:100%!important;
+  aspect-ratio:1/1!important;
+  padding:0!important;
+  border-radius:22px!important;
+  border:2px solid rgba(156,117,202,.15)!important;
+  background:linear-gradient(145deg,#f8e9ff,#ffe6f2)!important;
+  box-shadow:
+    inset 0 4px 5px rgba(255,255,255,.74),
+    0 10px 18px rgba(86,52,111,.09)!important;
+  overflow:hidden!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+}
+
+body.bbRankedPlaying .bbRankedMatchBoard .bbMatchCard.numberBoard .content{
+  opacity:0!important;
+  transform:scale(.9)!important;
+}
+
+body.bbRankedPlaying .bbRankedMatchBoard .bbMatchCard.numberBoard .num{
+  opacity:1!important;
+  display:grid!important;
+  place-items:center!important;
+}
+
+body.bbRankedPlaying .bbRankedMatchBoard .bbMatchCard:not(.numberBoard) .num{
+  opacity:0!important;
+  pointer-events:none!important;
+}
+
+body.bbRankedPlaying .bbRankedMatchBoard .bbMatchCard:not(.numberBoard) .content{
+  opacity:1!important;
+  transform:scale(1)!important;
+}
+
+body.bbRankedPlaying .bbRankedMatchBoard .bbMatchCard.selected{
+  border-color:#8d68ed!important;
+  box-shadow:
+    0 0 0 5px rgba(141,104,237,.18),
+    0 12px 20px rgba(86,51,119,.12)!important;
+}
+
+body.bbRankedPlaying .bbRankedMatchBoard .bbMatchCard.correct{
+  border-color:#61c99e!important;
+  background:linear-gradient(145deg,#ecfff6,#f9fffc)!important;
+}
+
+body.bbRankedPlaying .bbRankedMatchBoard .bbMatchCard.wrong{
+  border-color:#f16f9d!important;
+  animation:bbMatchWrong .24s ease 2;
+}
+
+@keyframes bbMatchWrong{
+  0%,100%{transform:translateX(0)}
+  50%{transform:translateX(4px)}
+}
+
+@media(max-width:699px){
+  body.bbRankedPlaying .bbRankedMatchBoard{
+    gap:5px!important;
+    margin-top:9px!important;
+  }
+
+  body.bbRankedPlaying .bbRankedMatchBoard .bbMatchCard{
+    border-radius:13px!important;
+  }
+
+  body.bbRankedPlaying .bbRankedMatchBoard .bbMatchCard .content{
+    padding:3px!important;
+  }
+
+  body.bbRankedPlaying .bbRankedMatchBoard .bbMatchCard .num{
+    font-size:clamp(20px,7vw,34px)!important;
+  }
+}
+
+@media(min-width:700px) and (max-width:1100px){
+  body.bbRankedPlaying .bbRankedMatchBoard{
+    gap:9px!important;
+  }
+}
+
 </style>
 
 <script>
@@ -7104,6 +7205,168 @@ window.addEventListener("load",()=>{
   const corePositionAsk=window.positionAsk||positionAsk;
   const coreMissingHide=window.missingHide||missingHide;
   const coreFinishRound=window.finishRound||finishRound;
+  const coreStartMatch=window.startMatch||startMatch;
+
+  let rankedMatchFlipTimer=null;
+  let rankedMatchStartedAt=0;
+  let rankedMatchAttempts=0;
+
+  startMatch=function(){
+    if(!(window.BB_RANKED_ACTIVE&&activeRankedMatch&&cfg.mode==="match")){
+      return coreStartMatch();
+    }
+
+    clearRankedAuto();
+    try{stopTimer()}catch(e){}
+
+    state="match";
+    showScene("board");
+
+    const d=dc();
+    const pairs=Math.max(2,Math.floor(d.n/2));
+
+    // Uses the same seeded RNG on every player in this Ranked match.
+    const rng=window.__bbRankedRng||Math.random;
+    const pool=shuf(sourcePool(),rng).slice(0,pairs);
+    const deck=shuf(pool.flatMap((id,p)=>[{id,p},{id,p}]),rng);
+
+    layout=deck.map(x=>x.id);
+    baseLayout=[...layout];
+
+    const board=$("board");
+    board.innerHTML="";
+    board.className="board bbRankedMatchBoard";
+    board.style.setProperty("--cols",d.cols);
+    board.style.pointerEvents="auto";
+    board.style.touchAction="manipulation";
+
+    matchDone=0;
+    matchFirst=null;
+    matchLock=false;
+    asked=new Set();
+    correct=0;
+    score=0;
+    combo=0;
+    bestCombo=0;
+
+    rankedMatchAttempts=0;
+    rankedMatchStartedAt=Date.now();
+    window.__bbRankedMatchElapsedMs=null;
+
+    if(rankedMatchFlipTimer){
+      clearTimeout(rankedMatchFlipTimer);
+      rankedMatchFlipTimer=null;
+    }
+
+    $("boardTitle").textContent="จับคู่ให้ครบ";
+    $("boardSub").textContent="แตะเปิดครั้งละ 2 ใบ • จับคู่ภาพที่เหมือนกันให้ครบก่อนหมดเวลา";
+    setStatus("🧩","จับคู่ภาพ","ทุกคนได้กระดานเดียวกัน • แข่งกันทำคะแนนให้ได้มากที่สุด");
+    $("hintBtn").classList.add("hidden");
+    $("answer").classList.add("hidden");
+
+    const updateMatchProgress=()=>{
+      $("boardTitle").textContent=`จับคู่แล้ว ${matchDone} / ${pairs} คู่`;
+      $("boardSub").textContent=matchDone===pairs
+        ?"จับคู่ครบแล้ว • กำลังสรุปผล"
+        :"แตะเปิดครั้งละ 2 ใบ • จำตำแหน่งของภาพที่เคยเห็น";
+    };
+
+    const completeRankedMatch=()=>{
+      if(state!=="match")return;
+      state="match_complete";
+      matchLock=true;
+      clearRankedAuto();
+
+      window.__bbRankedMatchElapsedMs=Math.max(1,Date.now()-rankedMatchStartedAt);
+
+      [...board.children].forEach(card=>{
+        card.classList.remove("numberBoard","selected","wrong");
+        card.classList.add("correct");
+        card.style.pointerEvents="none";
+      });
+
+      updateMatchProgress();
+      setStatus("✅","จับคู่ครบทุกคู่แล้ว","ระบบกำลังส่งผลการแข่งขัน");
+      setMain("กำลังสรุปผล…",()=>{},true);
+
+      rankedRevealHold(1.2,"จับคู่ครบ",()=>finishRound());
+    };
+
+    deck.forEach((it,index)=>{
+      const s=document.createElement("button");
+      s.type="button";
+      s.className="slot numberBoard bbMatchCard";
+      s.setAttribute("aria-label",`การ์ดใบที่ ${index+1}`);
+      s.innerHTML=`<div class="content">${content(it.id)}</div><div class="num">?</div>`;
+
+      s.onclick=()=>{
+        if(state!=="match"||matchLock)return;
+        if(s.classList.contains("correct")||!s.classList.contains("numberBoard"))return;
+
+        s.classList.remove("numberBoard");
+        s.classList.add("selected");
+        sfx("flip");
+
+        if(!matchFirst){
+          matchFirst={s,it,index};
+          setMain("เปิดอีก 1 ใบเพื่อจับคู่",()=>{},true);
+          return;
+        }
+
+        const first=matchFirst;
+        matchFirst=null;
+        matchLock=true;
+        rankedMatchAttempts++;
+        asked.add(rankedMatchAttempts);
+
+        const isPair=first.it.p===it.p;
+
+        if(isPair){
+          first.s.classList.remove("selected");
+          s.classList.remove("selected");
+          first.s.classList.add("correct");
+          s.classList.add("correct");
+
+          matchDone++;
+          record(true);
+          updateMatchProgress();
+
+          matchLock=false;
+          setMain(matchDone===pairs?"จับคู่ครบแล้ว":"เลือกคู่ถัดไป",()=>{},true);
+
+          if(matchDone===pairs){
+            setTimeout(completeRankedMatch,350);
+          }
+          return;
+        }
+
+        record(false);
+        first.s.classList.add("wrong");
+        s.classList.add("wrong");
+        setMain("ไม่ใช่คู่เดียวกัน • จำตำแหน่งไว้",()=>{},true);
+
+        rankedMatchFlipTimer=setTimeout(()=>{
+          rankedMatchFlipTimer=null;
+          if(state!=="match")return;
+
+          first.s.classList.remove("wrong","selected");
+          s.classList.remove("wrong","selected");
+          if(!first.s.classList.contains("correct"))first.s.classList.add("numberBoard");
+          if(!s.classList.contains("correct"))s.classList.add("numberBoard");
+
+          matchLock=false;
+          setMain("เลือก 2 ใบเพื่อจับคู่",()=>{},true);
+        },650);
+      };
+
+      board.appendChild(s);
+    });
+
+    updateMatchProgress();
+    setMain("เลือก 2 ใบเพื่อจับคู่",()=>{},true);
+    updateHUD();
+    saveResume();
+  };
 
   function clearRankedAnswerClock(){
     rankedAnswerToken++;
@@ -7355,8 +7618,21 @@ window.addEventListener("load",()=>{
       finishRound();
       return;
     }
+
+    state="match_reveal";
+    matchLock=true;
+
+    if(rankedMatchFlipTimer){
+      clearTimeout(rankedMatchFlipTimer);
+      rankedMatchFlipTimer=null;
+    }
+
     try{stopTimer()}catch(e){}
     clearRankedAuto();
+
+    if(rankedMatchStartedAt){
+      window.__bbRankedMatchElapsedMs=Math.max(1,Date.now()-rankedMatchStartedAt);
+    }
 
     const cards=[...document.querySelectorAll("#board .slot")];
     cards.forEach(card=>{
@@ -7365,10 +7641,10 @@ window.addEventListener("load",()=>{
       card.style.pointerEvents="none";
     });
 
-    $("#boardTitle").textContent="เฉลยทั้งหมด";
-    $("#boardSub").textContent="หมดเวลาแล้ว • เปิดภาพทุกคู่ให้เห็นก่อนสรุปผล";
-    setStatus("✅","หมดเวลา • เฉลยภาพทั้งหมด","ดูคู่ภาพทั้งหมด แล้วระบบจะสรุปผล");
-    $("#answer").textContent="✨ เฉลยครบทุกภาพ";
+    $("#boardTitle").textContent=`หมดเวลา • จับคู่ได้ ${matchDone} คู่`;
+    $("#boardSub").textContent="เปิดภาพทุกคู่พร้อมกัน • คะแนนคิดจากคู่ที่จับได้สำเร็จ";
+    setStatus("✅","หมดเวลา • เฉลยภาพทั้งหมด","ทุกคนเห็นเฉลยพร้อมกัน แล้วระบบจะสรุปผล");
+    $("#answer").textContent=`จับคู่สำเร็จ ${matchDone} คู่ • คะแนน ${score}`;
     $("#answer").classList.remove("hidden");
     setMain("กำลังสรุปผล…",()=>{},true);
 
@@ -7610,7 +7886,10 @@ window.addEventListener("load",()=>{
         p_score:Number(result.score)||0,
         p_correct_answers:Number(result.correct)||0,
         p_total_answers:Number(result.total)||0,
-        p_average_answer_ms:null
+        p_average_answer_ms:
+          result.mode==="match" && Number(window.__bbRankedMatchElapsedMs)>0
+            ? Math.round(Number(window.__bbRankedMatchElapsedMs))
+            : null
       });
       if(error)throw error;
       const status=data?.[0]||{};
