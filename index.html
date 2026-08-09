@@ -5277,6 +5277,52 @@ body.bbGuestMode #cloudDot{
   .bbCopyrightCopy small{font-size:.59rem}
 }
 
+
+/* =========================================================
+   Brain Buddy v58 — Make "ใช้เลย" unmistakable
+   ========================================================= */
+
+.bbOwnedStatus{
+  width:100%;
+  margin-top:2px;
+  padding:7px 9px;
+  border-radius:12px;
+  text-align:center;
+  color:#7c6b84;
+  background:#f7f1f8;
+  font-size:.68rem;
+  font-weight:850;
+}
+
+.bbShopEquipPrimary{
+  min-height:44px!important;
+  margin-top:7px!important;
+  color:#fff!important;
+  background:linear-gradient(180deg,#9a7cef,#7457d2)!important;
+  box-shadow:
+    inset 0 3px 4px rgba(255,255,255,.25),
+    0 7px 13px rgba(78,51,130,.17)!important;
+  font-size:.86rem!important;
+  cursor:pointer!important;
+}
+
+.bbShopEquipPrimary.active{
+  color:#34765b!important;
+  background:linear-gradient(180deg,#e8fff3,#d6f7e7)!important;
+  box-shadow:inset 0 2px 4px rgba(255,255,255,.7)!important;
+}
+
+.bbShopEquipPrimary:not([disabled]):active{
+  transform:scale(.98);
+}
+
+@media(max-width:640px){
+  .bbShopEquipPrimary{
+    min-height:46px!important;
+    font-size:.84rem!important;
+  }
+}
+
 </style>
 
 <script>
@@ -9397,22 +9443,21 @@ document.addEventListener('DOMContentLoaded', () => {
               <h4>${esc(item.name)}</h4>
               <p>${esc(item.description||"สินค้า Brain Buddy")}</p>
 
-              <button class="bbShopBuy" data-shop-buy="${Number(item.id)}" ${has?"disabled":""}>
-                ${has
-                  ?"อยู่ในคลังแล้ว"
-                  :`<span class="miniCoin">B</span><span>${Number(item.price_coins||0).toLocaleString()} Coins</span>`
-                }
-              </button>
-
               ${has ? `
+                <div class="bbOwnedStatus">ซื้อแล้ว • อยู่ในคลังของคุณ</div>
                 <button
-                  class="bbShopEquip ${isEquipped?"active":""}"
+                  class="bbShopEquip bbShopEquipPrimary ${isEquipped?"active":""}"
                   data-shop-equip="${Number(item.id)}"
                   ${isEquipped?"disabled":""}
                 >
                   ${isEquipped?"กำลังใช้งาน ✓":"ใช้เลย"}
                 </button>
-              ` : ""}
+              ` : `
+                <button class="bbShopBuy" data-shop-buy="${Number(item.id)}">
+                  <span class="miniCoin">B</span>
+                  <span>${Number(item.price_coins||0).toLocaleString()} Coins</span>
+                </button>
+              `}
             </div>
           </article>
         `;
