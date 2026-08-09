@@ -5494,6 +5494,30 @@ body.bbCosEffectSparkle.bbRankedPlaying .gameCard::before{
   }
 }
 
+
+/* =========================================================
+   Brain Buddy v60 — Equip / Unequip toggle
+   ========================================================= */
+
+.bbShopEquipPrimary.active{
+  color:#a44f6c!important;
+  background:linear-gradient(180deg,#fff0f4,#ffe3eb)!important;
+  border:1px solid rgba(218,91,132,.15)!important;
+  box-shadow:
+    inset 0 2px 4px rgba(255,255,255,.75),
+    0 6px 12px rgba(151,72,103,.08)!important;
+}
+
+.bbShopEquipPrimary.active::before{
+  content:"";
+}
+
+/* v60: status is shown only by the action button.
+   Hide old duplicate equipped badges if stale markup is ever rendered. */
+.bbShopEquipped{
+  display:none!important;
+}
+
 </style>
 
 <script>
@@ -9608,7 +9632,6 @@ document.addEventListener('DOMContentLoaded', () => {
               ${image}
               <span class="bbShopType">${esc(typeName[item.item_type]||item.item_type)}</span>
               ${has?'<span class="bbShopOwned">มีแล้ว</span>':""}
-              ${isEquipped?'<span class="bbShopEquipped">กำลังใช้งาน ✓</span>':""}
             </div>
 
             <div class="bbShopItemCopy">
@@ -9619,10 +9642,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="bbOwnedStatus">ซื้อแล้ว • อยู่ในคลังของคุณ</div>
                 <button
                   class="bbShopEquip bbShopEquipPrimary ${isEquipped?"active":""}"
-                  data-shop-equip="${Number(item.id)}"
-                  ${isEquipped?"disabled":""}
+                  ${isEquipped
+                    ? `data-shop-unequip="${Number(item.id)}"`
+                    : `data-shop-equip="${Number(item.id)}"`
+                  }
                 >
-                  ${isEquipped?"กำลังใช้งาน ✓":"ใช้เลย"}
+                  ${isEquipped?"ถอดออก":"ใช้เลย"}
                 </button>
               ` : `
                 <button class="bbShopBuy" data-shop-buy="${Number(item.id)}">
@@ -9641,6 +9666,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }finally{
       shopBusy=false;
       refreshStarterReward();
+    }
+  }
+
+  async function unequipItem(itemId,button){
+    if(shopBusy||!itemId)return;
+
+    const c=shopClient();
+    if(!c)return shopToast("ยังเชื่อมต่อระบบ Cloud ไม่สำเร็จ");
+
+    const original=button?.innerHTML||"";
+    if(button){
+      button.disabled=true;
+      button.textContent="กำลังถอด…";
+    }
+
+    try{
+      const {data,error}=await c.rpc("bb_unequip_shop_item",{p_item_id:Number(itemId)});
+      if(error)throw error;
+
+      const result=Array.isArray(data)?data[0]:data;
+      shopToast(`ถอด ${result?.item_name||"สินค้า"} แล้ว`);
+
+      try{
+        localStorage.removeItem(`bb_equipped_${result?.item_type||"item"}`);
+      }catch(e){}
+
+      await loadShop();
+      try{await window.bbApplyEquippedCosmetics?.()}catch(e){}
+    }catch(err){
+      console.error("Brain Buddy Shop unequip:",err);
+      shopToast(String(err?.message||"ถอดสินค้าไม่สำเร็จ"));
+
+      if(button){
+        button.disabled=false;
+        button.innerHTML=original;
+      }
     }
   }
 
@@ -9719,6 +9780,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if(e.target.closest("#bbClaimStarterCoins")){
       e.preventDefault();
       claimStarterCoins();
+      return;
+    }
+
+    const unequip=e.target.closest("[data-shop-unequip]");
+    if(unequip){
+      e.preventDefault();
+      unequipItem(Number(unequip.dataset.shopUnequip),unequip);
       return;
     }
 
@@ -10139,7 +10207,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.bbApplyEquippedCosmetics=applyEquippedCosmetics;
 
   document.addEventListener("click",e=>{
-    if(e.target.closest("[data-shop-equip]")){
+    if(e.target.closest("[data-shop-equip]") || e.target.closest("[data-shop-unequip]")){
       setTimeout(applyEquippedCosmetics,500);
       setTimeout(applyEquippedCosmetics,1200);
     }
