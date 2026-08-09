@@ -4779,6 +4779,177 @@ body.bbRankedPlaying .bbRankedMatchBoard .bbMatchCard.wrong{
   .bbShopHomeArt{width:70px;height:70px;flex-basis:70px}
 }
 
+
+/* =========================================================
+   Brain Buddy v54 — Starter 500 Brain Coins Reward
+   ========================================================= */
+
+.bbStarterReward{
+  position:relative;
+  z-index:2;
+  max-width:1180px;
+  margin:14px auto 0;
+  padding:14px 16px;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:14px;
+  border-radius:26px;
+  border:2px solid rgba(255,255,255,.55);
+  background:
+    linear-gradient(135deg,rgba(255,248,193,.96),rgba(255,220,169,.94) 45%,rgba(255,188,220,.95));
+  box-shadow:
+    inset 0 4px 6px rgba(255,255,255,.68),
+    0 14px 22px rgba(53,29,93,.16);
+}
+
+.bbStarterRewardArt{
+  width:74px;
+  height:74px;
+  position:relative;
+  flex:0 0 74px;
+}
+
+.bbStarterRewardArt .gift{
+  position:absolute;
+  left:17px;
+  right:17px;
+  bottom:8px;
+  height:43px;
+  border-radius:12px 12px 16px 16px;
+  background:linear-gradient(180deg,#ff9ac8,#ef69ae);
+  box-shadow:
+    inset 0 4px 5px rgba(255,255,255,.55),
+    0 8px 12px rgba(122,50,102,.18);
+}
+
+.bbStarterRewardArt .gift::before{
+  content:"";
+  position:absolute;
+  left:-6px;
+  right:-6px;
+  top:-9px;
+  height:18px;
+  border-radius:10px;
+  background:linear-gradient(180deg,#ffd86d,#ffb74e);
+  box-shadow:inset 0 3px 4px rgba(255,255,255,.55);
+}
+
+.bbStarterRewardArt .gift::after{
+  content:"";
+  position:absolute;
+  left:17px;
+  top:-9px;
+  width:10px;
+  height:52px;
+  background:linear-gradient(180deg,#9de8ff,#69c8ff);
+}
+
+.bbStarterRewardArt .coin{
+  position:absolute;
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:10px;
+  font-weight:1000;
+  color:#a56a0b;
+  background:linear-gradient(145deg,#fff5a2,#ffc536);
+  box-shadow:
+    inset 0 3px 4px #fff9c7,
+    0 6px 9px rgba(111,67,14,.17);
+}
+
+.bbStarterRewardArt .coin.c1{right:1px;top:3px;transform:rotate(10deg)}
+.bbStarterRewardArt .coin.c2{left:0;bottom:4px;transform:rotate(-9deg)}
+
+.bbStarterRewardArt .spark{
+  position:absolute;
+  width:9px;
+  height:9px;
+  border-radius:3px;
+  transform:rotate(45deg);
+  background:#fff7ad;
+  box-shadow:0 0 10px rgba(255,243,137,.95);
+}
+.bbStarterRewardArt .spark.s1{left:4px;top:8px}
+.bbStarterRewardArt .spark.s2{right:6px;bottom:8px}
+
+.bbStarterRewardCopy small{
+  display:block;
+  margin-bottom:2px;
+  font-size:.67rem;
+  font-weight:1000;
+  letter-spacing:.12em;
+  color:#ba7654;
+}
+
+.bbStarterRewardCopy h3{
+  margin:0;
+  color:#633e74;
+  font-size:1.22rem;
+  font-weight:1000;
+}
+
+.bbStarterRewardCopy p{
+  margin:3px 0 0;
+  color:#85647a;
+  font-size:.82rem;
+}
+
+.bbStarterRewardBtn{
+  border:0;
+  border-radius:18px;
+  padding:12px 18px;
+  min-width:148px;
+  color:#fff;
+  font-weight:1000;
+  background:linear-gradient(180deg,#9a7cef,#765ad3);
+  box-shadow:
+    inset 0 3px 4px rgba(255,255,255,.28),
+    0 8px 14px rgba(85,55,134,.16);
+}
+
+.bbStarterRewardBtn[disabled]{
+  color:#8c7a92;
+  background:#eee8f0;
+  box-shadow:none;
+}
+
+.bbStarterReward.claimed{
+  background:linear-gradient(135deg,rgba(226,255,240,.97),rgba(214,249,255,.96),rgba(237,229,255,.96));
+}
+
+.bbStarterReward.claimed .bbStarterRewardBtn{
+  background:#dfeade;
+  color:#5e8666;
+}
+
+@media(max-width:640px){
+  .bbStarterReward{
+    grid-template-columns:auto 1fr;
+    gap:10px;
+    padding:12px;
+    border-radius:22px;
+  }
+  .bbStarterRewardArt{
+    width:62px;
+    height:62px;
+  }
+  .bbStarterRewardCopy h3{
+    font-size:1rem;
+  }
+  .bbStarterRewardCopy p{
+    font-size:.72rem;
+  }
+  .bbStarterRewardBtn{
+    grid-column:1/-1;
+    width:100%;
+    min-width:0;
+  }
+}
+
 </style>
 
 <script>
@@ -5525,6 +5696,24 @@ try{
         <span class="star b"></span>
       </div>
     </div>
+  </section>
+
+  <section class="bbStarterReward" id="bbStarterReward">
+    <div class="bbStarterRewardArt" aria-hidden="true">
+      <span class="gift"></span>
+      <span class="coin c1">B</span>
+      <span class="coin c2">B</span>
+      <span class="spark s1"></span>
+      <span class="spark s2"></span>
+    </div>
+    <div class="bbStarterRewardCopy">
+      <small>WELCOME BONUS</small>
+      <h3>รับฟรี 500 Brain Coins</h3>
+      <p>โบนัสต้อนรับสำหรับสมาชิก รับได้ 1 ครั้งต่อบัญชี</p>
+    </div>
+    <button class="bbStarterRewardBtn" id="bbClaimStarterCoins">
+      รับ 500 Coins
+    </button>
   </section>
 
   <section class="bbShopLogin hidden" id="bbShopLogin">
@@ -8645,6 +8834,89 @@ document.addEventListener('DOMContentLoaded', () => {
     effect:"เอฟเฟกต์"
   };
 
+  async function refreshStarterReward(){
+    const card=$("#bbStarterReward");
+    const btn=$("#bbClaimStarterCoins");
+    if(!card||!btn)return;
+
+    try{
+      const c=shopClient();
+      if(!c)return;
+
+      const {data:sessionData}=await c.auth.getSession();
+      const user=sessionData?.session?.user;
+
+      if(!user){
+        card.classList.remove("claimed");
+        btn.disabled=false;
+        btn.textContent="เข้าสู่ระบบเพื่อรับ";
+        return;
+      }
+
+      const {data,error}=await c
+        .from("bb_reward_claims")
+        .select("reward_code")
+        .eq("user_id",user.id)
+        .eq("reward_code","starter_500")
+        .maybeSingle();
+
+      if(error)throw error;
+
+      if(data){
+        card.classList.add("claimed");
+        btn.disabled=true;
+        btn.textContent="รับแล้ว ✓";
+      }else{
+        card.classList.remove("claimed");
+        btn.disabled=false;
+        btn.textContent="รับ 500 Coins";
+      }
+    }catch(err){
+      console.warn("Starter reward status:",err);
+    }
+  }
+
+  async function claimStarterCoins(){
+    const c=shopClient();
+    const btn=$("#bbClaimStarterCoins");
+    if(!c||!btn)return;
+
+    const {data:sessionData}=await c.auth.getSession();
+    const user=sessionData?.session?.user;
+
+    if(!user){
+      shopToast("กรุณาเข้าสู่ระบบก่อนรับ Brain Coins");
+      if(typeof openModal==="function")openModal("accountModal");
+      return;
+    }
+
+    btn.disabled=true;
+    btn.textContent="กำลังรับ…";
+
+    try{
+      const {data,error}=await c.rpc("bb_claim_starter_coins");
+      if(error)throw error;
+
+      const result=Array.isArray(data)?data[0]:data;
+
+      if(result?.already_claimed){
+        shopToast("บัญชีนี้รับ Starter Bonus แล้ว");
+      }else{
+        shopToast("รับ 500 Brain Coins สำเร็จ 🎁");
+      }
+
+      await Promise.all([
+        loadShop(),
+        refreshStarterReward()
+      ]);
+    }catch(err){
+      console.error("Claim starter coins:",err);
+      shopToast(String(err?.message||"รับ Brain Coins ไม่สำเร็จ"));
+      btn.disabled=false;
+      btn.textContent="รับ 500 Coins";
+    }
+  }
+
   async function loadShop(){
     if(shopBusy)return;
     const grid=$("#bbShopGrid"), login=$("#bbShopLogin"), body=$("#bbShopBody"), bal=$("#bbShopBalance");
@@ -8735,6 +9007,7 @@ document.addEventListener('DOMContentLoaded', () => {
       grid.innerHTML=`<div class="bbShopEmpty">โหลดร้านค้าไม่สำเร็จ<br><small>${esc(err?.message||"กรุณาลองใหม่")}</small></div>`;
     }finally{
       shopBusy=false;
+      refreshStarterReward();
     }
   }
 
@@ -8771,6 +9044,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   document.addEventListener("click",e=>{
+    if(e.target.closest("#bbClaimStarterCoins")){
+      e.preventDefault();
+      claimStarterCoins();
+      return;
+    }
+
     const buy=e.target.closest("[data-shop-buy]");
     if(buy){
       e.preventDefault();
@@ -8794,9 +9073,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  window.bbLoadShop=loadShop;
+  window.bbLoadShop=async function(){
+    await loadShop();
+    await refreshStarterReward();
+  };
 
-  window.addEventListener("bb:auth-changed",loadShop);
+  window.addEventListener("bb:auth-changed",window.bbLoadShop);
 })();
 </script>
 
