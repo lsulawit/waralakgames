@@ -4133,6 +4133,147 @@ body.bbRankedPlaying #main{
   }
 }
 
+
+/* =========================================================
+   Brain Buddy v50 — PHONE gameplay layout fix
+   ========================================================= */
+
+/* The global mobile navigation is useful in menus, but during a game it
+   covers the board and clashes with Safari's own bottom toolbar. */
+@media(max-width:720px){
+  body.bbRankedPlaying .v17dock.bbCandyDock,
+  body.bbAppPlaying .v17dock.bbCandyDock,
+  body.bbRankedPlaying .v17dock,
+  body.bbAppPlaying .v17dock{
+    display:none!important;
+  }
+
+  /* Remove the extra space that was reserved for the fixed dock. */
+  body.bbRankedPlaying .game,
+  body.bbAppPlaying .game,
+  body.bbRankedPlaying .bbCandyGameScreen,
+  body.bbAppPlaying .bbCandyGameScreen{
+    padding-bottom:calc(20px + env(safe-area-inset-bottom))!important;
+  }
+
+  /* Make the gameplay canvas use the phone width cleanly. */
+  body.bbRankedPlaying .shell,
+  body.bbAppPlaying .shell{
+    width:100%!important;
+    max-width:100%!important;
+    margin:0!important;
+    padding:0 6px!important;
+    box-sizing:border-box!important;
+  }
+
+  body.bbRankedPlaying .gameCard,
+  body.bbAppPlaying .gameCard{
+    width:100%!important;
+    max-width:100%!important;
+    margin:0!important;
+    padding:7px!important;
+    border-radius:22px!important;
+    box-sizing:border-box!important;
+    overflow:hidden!important;
+  }
+
+  body.bbRankedPlaying .stage,
+  body.bbAppPlaying .stage{
+    width:100%!important;
+    max-width:100%!important;
+    min-height:0!important;
+    padding:6px!important;
+    box-sizing:border-box!important;
+    overflow:hidden!important;
+  }
+
+  body.bbRankedPlaying .scene,
+  body.bbAppPlaying .scene{
+    width:100%!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+  }
+
+  body.bbRankedPlaying #board,
+  body.bbAppPlaying #board{
+    width:100%!important;
+    max-width:100%!important;
+    grid-template-columns:repeat(var(--cols),minmax(0,1fr))!important;
+    gap:6px!important;
+    box-sizing:border-box!important;
+  }
+
+  body.bbRankedPlaying #board .slot,
+  body.bbAppPlaying #board .slot{
+    min-width:0!important;
+    width:100%!important;
+    aspect-ratio:1/1!important;
+    border-radius:15px!important;
+  }
+
+  /* Number answers stay readable even on 4x4/5x5. */
+  body.bbRankedPlaying #board.numberBoard .num,
+  body.bbAppPlaying #board.numberBoard .num{
+    font-size:clamp(24px,8vw,42px)!important;
+  }
+
+  body.bbRankedPlaying .sceneTitle,
+  body.bbAppPlaying .sceneTitle{
+    margin:8px 0 10px!important;
+  }
+
+  body.bbRankedPlaying .sceneTitle h2,
+  body.bbAppPlaying .sceneTitle h2{
+    font-size:clamp(28px,9vw,42px)!important;
+    line-height:1.15!important;
+  }
+
+  body.bbRankedPlaying .sceneTitle p,
+  body.bbAppPlaying .sceneTitle p{
+    font-size:11px!important;
+  }
+
+  /* Ranked status bar stays compact and no longer steals too much height. */
+  body.bbRankedPlaying .bbRankedGameHud{
+    width:calc(100% - 12px)!important;
+    margin:7px auto 7px!important;
+    padding:7px 8px!important;
+    border-radius:14px!important;
+    min-height:0!important;
+  }
+
+  /* Keep the bottom game controls above the Safari safe area. */
+  body.bbRankedPlaying .dock,
+  body.bbAppPlaying .dock{
+    position:relative!important;
+    z-index:20!important;
+    margin:9px 4px 4px!important;
+    padding:6px!important;
+    border-radius:18px!important;
+  }
+
+  body.bbRankedPlaying .hintline,
+  body.bbAppPlaying .hintline{
+    padding-bottom:max(8px,env(safe-area-inset-bottom))!important;
+  }
+}
+
+/* Extra narrow phones */
+@media(max-width:430px){
+  body.bbRankedPlaying #board,
+  body.bbAppPlaying #board{
+    gap:4px!important;
+  }
+  body.bbRankedPlaying .stage,
+  body.bbAppPlaying .stage{
+    padding:4px!important;
+  }
+  body.bbRankedPlaying #board .slot,
+  body.bbAppPlaying #board .slot{
+    border-radius:12px!important;
+  }
+}
+
 </style>
 
 <script>
