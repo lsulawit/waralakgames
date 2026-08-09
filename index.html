@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy v32 — Candy Game Select</title>
+<title>Brain Buddy v33 — 3D Vector Game Select</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -1422,6 +1422,130 @@ body.dark.bbCandySelect .bbCandyCopy>small{color:#fff!important}
   .bbCandyTrophy,.bbCandyMiniBrain,.bbCandyMushroom{display:none}
 }
 
+
+/* =========================================================
+   Brain Buddy v33 — emoji-free, deeper 3D vector look
+   ========================================================= */
+body.bbCandySelect .bbCandyStar{
+  width:12px;height:12px;border-radius:3px;background:linear-gradient(145deg,#fff8c8,#ffd94d);
+  box-shadow:0 0 10px rgba(255,245,162,.9),0 0 22px rgba(255,130,226,.5);
+  transform:rotate(45deg);
+}
+body.bbCandySelect .bbCandyStar::after{
+  content:"";position:absolute;inset:3px;border-radius:50%;background:#fff
+}
+.bbCandyGem{position:absolute;width:46px;height:46px;bottom:33px;transform:rotate(45deg);border-radius:12px;background:linear-gradient(145deg,#a6f8ff,#5d66ff 65%,#a74cdc);box-shadow:inset 5px 5px 8px rgba(255,255,255,.45),inset -8px -8px 12px rgba(42,17,112,.28),0 15px 24px rgba(28,14,85,.3)}
+.bbCandyGem.g1{left:6%}.bbCandyGem.g2{right:7%;transform:rotate(45deg) scale(.8)}
+.bbCandyPod{position:absolute;width:120px;height:48px;bottom:0;border-radius:50% 50% 18px 18px;background:linear-gradient(180deg,#8ce9c0,#318a78);box-shadow:inset 0 6px 8px rgba(255,255,255,.24),0 -10px 25px rgba(121,228,192,.2)}
+.bbCandyPod.p1{left:1%}.bbCandyPod.p2{right:1%;width:150px}
+
+.bbCandyBack svg,.bbCandyControl svg{width:27px;height:27px;display:block;margin:auto;filter:drop-shadow(0 3px 3px rgba(31,17,90,.3))}
+.bbCandyBrandMark{width:46px;height:46px;display:block;filter:drop-shadow(0 7px 8px rgba(33,14,83,.28))}
+.bbCandyBrandMark svg{width:100%;height:100%;display:block}
+.bbCandyBrandSpark{width:24px;height:24px;display:inline-block;transform:rotate(45deg);border-radius:7px;background:linear-gradient(145deg,#fffac8,#ffd84a);box-shadow:inset 3px 3px 4px rgba(255,255,255,.7),0 0 16px #fff3a2,0 5px 10px rgba(72,35,103,.22)}
+.bbCandyScore{gap:10px}
+.bbScoreStar{width:22px;height:22px;transform:rotate(45deg);border-radius:6px;background:linear-gradient(145deg,#fffbd5,#ffd03d);box-shadow:inset 3px 3px 3px rgba(255,255,255,.75),0 0 12px rgba(255,237,128,.8)}
+
+.bbCandyMascot3D{height:126px;position:relative;display:grid;place-items:center;perspective:600px}
+.bbMascotHalo{position:absolute;width:170px;height:96px;border-radius:50%;background:radial-gradient(circle,#ffc7ef 0,#f78cdb 38%,rgba(245,116,212,.16) 62%,transparent 74%);filter:blur(2px)}
+.bbMascotBrain{
+  width:108px;height:82px;position:relative;border-radius:48% 52% 44% 56% / 55% 50% 50% 45%;
+  background:
+    radial-gradient(circle at 30% 18%,rgba(255,255,255,.72),transparent 18%),
+    linear-gradient(145deg,#ffcbe5 0%,#ff91c5 42%,#ec62ad 72%,#bd3f92 100%);
+  border:2px solid rgba(255,215,238,.8);
+  box-shadow:inset 9px 9px 12px rgba(255,255,255,.32),inset -12px -13px 18px rgba(132,37,115,.22),0 15px 25px rgba(52,18,105,.35),0 0 25px rgba(255,140,219,.42);
+  animation:bbBrain3DFloat 3s ease-in-out infinite
+}
+.bbMascotBrain::before,.bbMascotBrain::after{
+  content:"";position:absolute;border-radius:50%;
+  background:inherit;border:inherit;box-shadow:inset 6px 6px 9px rgba(255,255,255,.25),inset -8px -8px 12px rgba(132,37,115,.18)
+}
+.bbMascotBrain::before{width:49px;height:48px;left:3px;top:8px}
+.bbMascotBrain::after{width:48px;height:47px;right:3px;top:7px}
+.bbMascotBrain .fold{position:absolute;z-index:3;border:4px solid rgba(172,48,131,.5);border-color:rgba(172,48,131,.5) transparent transparent transparent;border-radius:50%}
+.bbMascotBrain .f1{width:28px;height:19px;left:23px;top:14px;transform:rotate(-15deg)}
+.bbMascotBrain .f2{width:30px;height:21px;right:21px;top:16px;transform:rotate(15deg)}
+.bbMascotBrain .f3{width:23px;height:17px;left:31px;bottom:13px;transform:rotate(170deg)}
+.bbMascotBrain .f4{width:23px;height:18px;right:27px;bottom:11px;transform:rotate(190deg)}
+.bbMascotBrain .eye{position:absolute;z-index:5;width:12px;height:15px;background:#27152d;border-radius:50%;top:42px;box-shadow:inset 3px 2px 0 rgba(255,255,255,.75)}
+.bbMascotBrain .e1{left:34px}.bbMascotBrain .e2{right:34px}
+.bbMascotBrain .mouth{position:absolute;z-index:5;width:28px;height:17px;left:50%;bottom:11px;transform:translateX(-50%);border-radius:5px 5px 16px 16px;background:#5f2146;border:2px solid #8b2c63;box-shadow:inset 0 4px 0 #f37aae}
+.bbCandyMascot3D .spark{position:absolute;width:12px;height:12px;transform:rotate(45deg);background:linear-gradient(145deg,#fffbd1,#ffd63d);border-radius:3px;box-shadow:0 0 12px #fff4a1}
+.bbCandyMascot3D .spark.a{left:16px;top:12px}.bbCandyMascot3D .spark.b{right:20px;top:24px}.bbCandyMascot3D .spark.c{right:42px;bottom:5px}
+@keyframes bbBrain3DFloat{0%,100%{transform:translateY(3px) rotateX(2deg) rotateY(-3deg)}50%{transform:translateY(-8px) rotateX(-2deg) rotateY(4deg)}}
+
+body.bbCandySelect .bbCandyCard{
+  border-width:2px!important;
+  box-shadow:
+    inset 0 3px 0 rgba(255,255,255,.66),
+    inset 0 12px 24px rgba(255,255,255,.12),
+    inset 0 -15px 21px rgba(43,16,85,.24),
+    0 10px 0 color-mix(in srgb,var(--c2) 67%,#4c246f),
+    0 20px 30px rgba(27,14,79,.30)!important;
+}
+body.bbCandySelect .bbCandyCard::before{
+  height:50%;background:linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,.06) 55%,transparent)
+}
+body.bbCandySelect .bbCandyCard::after{
+  content:"";width:10px;height:10px;right:114px;top:21px;transform:rotate(45deg);border-radius:2px;
+  background:#fff6a2;box-shadow:0 0 10px #fff,0 0 18px rgba(255,239,137,.75)
+}
+
+body.bbCandySelect .bbCandyIcon{
+  color:#fff;
+  background:
+    radial-gradient(circle at 30% 22%,rgba(255,255,255,.7),transparent 18%),
+    linear-gradient(145deg,rgba(255,255,255,.31),rgba(41,20,99,.23));
+  box-shadow:
+    inset 0 4px 5px rgba(255,255,255,.58),
+    inset 0 -10px 14px rgba(44,22,101,.22),
+    0 10px 15px rgba(44,18,92,.27);
+  position:relative
+}
+.bbCandyIcon svg{width:70%;height:70%;filter:drop-shadow(0 7px 7px rgba(49,24,82,.28))}
+
+/* Position pin */
+.bbIconPin .pinTop{position:absolute;width:37px;height:37px;border-radius:50%;top:15px;left:50%;transform:translateX(-50%);background:radial-gradient(circle at 30% 25%,#fff 0 8%,#ff869a 18%,#e2214c 58%,#98152d 100%);box-shadow:inset 5px 5px 6px rgba(255,255,255,.35),0 6px 9px rgba(85,14,49,.35)}
+.bbIconPin .pinStem{position:absolute;width:8px;height:39px;left:50%;top:45px;transform:translateX(-50%);border-radius:6px;background:linear-gradient(90deg,#b8b8c7,#f8f9ff 45%,#77788a);box-shadow:2px 4px 5px rgba(39,22,57,.28)}
+.bbIconPin .pinBase{position:absolute;width:42px;height:13px;border-radius:50%;left:50%;bottom:10px;transform:translateX(-50%);background:linear-gradient(180deg,#d9d9e6,#72738a);box-shadow:0 5px 7px rgba(33,19,58,.28)}
+
+/* Puzzle */
+.bbIconPuzzle{color:#7ad010!important}
+.bbIconPuzzle svg{filter:drop-shadow(0 8px 6px rgba(60,103,13,.34))}
+
+/* Eyes */
+.bbIconEyes{display:flex!important;gap:4px!important}
+.bbIconEyes .eyeBall{width:32px;height:49px;border-radius:50%;background:radial-gradient(circle at 33% 22%,#fff 0 42%,#f5f3e8 43% 100%);box-shadow:inset 4px 5px 5px rgba(255,255,255,.8),0 6px 7px rgba(80,52,24,.2);position:relative}
+.bbIconEyes .eyeBall i{position:absolute;width:14px;height:21px;border-radius:50%;background:radial-gradient(circle at 35% 28%,#fff 0 8%,#8a4e05 12% 38%,#2b1708 42% 100%);left:11px;top:16px}
+
+/* Swap */
+.bbIconSwap{color:#f7fbff!important}
+.bbIconSwap svg{filter:drop-shadow(0 7px 7px rgba(28,73,124,.38))}
+
+/* Magnifier */
+.bbIconLens .lens{position:absolute;width:48px;height:48px;border-radius:50%;left:17px;top:13px;border:8px solid #ebeff8;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.9),rgba(201,233,255,.48) 36%,rgba(129,103,223,.28) 100%);box-shadow:inset 4px 5px 7px rgba(255,255,255,.7),0 8px 9px rgba(51,31,94,.28)}
+.bbIconLens .handle{position:absolute;width:16px;height:42px;border-radius:10px;left:58px;top:55px;transform:rotate(42deg);background:linear-gradient(90deg,#27203c,#5f4c7f 46%,#181326);box-shadow:3px 6px 7px rgba(31,20,52,.34)}
+
+/* Grid */
+.bbIconGrid{display:grid!important;grid-template-columns:repeat(2,28px)!important;grid-template-rows:repeat(2,28px)!important;gap:4px!important}
+.bbIconGrid span{display:grid!important;place-items:center;width:28px;height:28px;border-radius:6px;background:linear-gradient(145deg,#31415c,#121b2e);color:#fff;font-size:16px!important;font-weight:1000;box-shadow:inset 2px 2px 3px rgba(255,255,255,.22),inset -3px -3px 5px rgba(0,0,0,.32),0 4px 5px rgba(22,16,55,.25)}
+
+body.bbCandySelect .bbCandyPlay{background:radial-gradient(circle at 34% 26%,rgba(255,255,255,.72),rgba(255,255,255,.24) 28%,rgba(58,25,112,.19) 100%)}
+.bbCandyPlay i{width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:19px solid #fff;margin-left:5px;filter:drop-shadow(0 4px 3px rgba(47,18,81,.32))}
+
+@media(max-width:650px){
+  .bbCandyBrandMark{width:34px;height:34px}
+  .bbCandyBrandSpark{width:17px;height:17px;border-radius:5px}
+  .bbCandyBack svg,.bbCandyControl svg{width:22px;height:22px}
+  .bbMascotBrain{transform:scale(.82)}
+  .bbCandyGem,.bbCandyPod{display:none}
+}
+
+
+/* ===== v34 home candy 3D ===== */
+.bbCandyHomeScreen{min-height:100dvh;padding:18px 14px 42px;background:radial-gradient(circle at top left,#90d5ff 0,#73b6ff 18%,transparent 35%),linear-gradient(180deg,#2a39c7 0%,#5d42d7 48%,#9b5dd6 72%,#f19ac7 100%);overflow:hidden;position:relative}.bbHomeSky .star,.bbHomeSky .bubble{position:absolute}.bbHomeSky .star{width:11px;height:11px;border-radius:3px;transform:rotate(45deg);background:linear-gradient(145deg,#fff8cb,#ffd54f);box-shadow:0 0 12px rgba(255,245,175,.95)}.bbHomeSky .star::after{content:'';position:absolute;inset:3px;border-radius:50%;background:#fff}.bbHomeSky .s1{top:80px;left:26%}.bbHomeSky .s2{top:115px;right:20%}.bbHomeSky .s3{top:250px;left:9%}.bbHomeSky .s4{top:410px;right:9%}.bbHomeSky .bubble{width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff,rgba(255,255,255,.35) 28%,#72dbff 62%,#3d7cff);box-shadow:0 10px 20px rgba(31,20,96,.22)}.bbHomeSky .b1{top:92px;right:38%}.bbHomeSky .b2{top:460px;left:4%}.bbHomeSky .b3{top:690px;right:12%}.bbHomeSky .cloud{position:absolute;height:34px;border-radius:20px;background:rgba(255,232,248,.32);filter:blur(1px)}.bbHomeSky .cloud::before,.bbHomeSky .cloud::after{content:'';position:absolute;border-radius:50%;background:inherit}.bbHomeSky .cloud.c1{right:38px;top:352px;width:124px}.bbHomeSky .cloud.c1::before{width:42px;height:42px;left:18px;top:-16px}.bbHomeSky .cloud.c1::after{width:56px;height:56px;right:14px;top:-24px}.bbHomeSky .cloud.c2{left:20px;bottom:180px;width:145px}.bbHomeSky .cloud.c2::before{width:45px;height:45px;left:16px;top:-14px}.bbHomeSky .cloud.c2::after{width:66px;height:66px;right:18px;top:-28px}.bbHomeTopbar,.bbHeroCard,.bbQuickCard,.bbWideCard,.bbStatBox{position:relative;z-index:2}.bbHomeTopbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.bbHomeBrand{display:flex;align-items:center;gap:10px}.bbHomeBrand .brainMark{width:46px;height:46px;border-radius:16px;background:radial-gradient(circle at 30% 30%,#ffd6ea 0,#ff8cc0 45%,#d64b98 100%);box-shadow:inset 0 4px 5px rgba(255,255,255,.55),0 10px 18px rgba(35,16,89,.28);position:relative}.bbHomeBrand .brainMark::before,.bbHomeBrand .brainMark::after{content:'';position:absolute;background:rgba(170,43,128,.55);border-radius:20px 20px 10px 10px}.bbHomeBrand .brainMark::before{width:14px;height:22px;left:10px;top:11px}.bbHomeBrand .brainMark::after{width:14px;height:22px;right:10px;top:11px}.bbHomeBrand h1{margin:0;font-size:2.1rem;line-height:1;font-weight:1000;letter-spacing:-.04em;background:linear-gradient(180deg,#ffb7cf 10%,#ff87b9 35%,#7ce7ff 36%,#39c0ff 72%,#1952d8 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 5px 0 rgba(0,0,0,.12),0 14px 24px rgba(26,16,91,.22)}.bbHomeBrand h1 span{color:#ffe66c;-webkit-text-fill-color:#ffe66c}.bbHomeActions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.bbHomeIcon{width:58px;height:58px;border-radius:18px;border:2px solid rgba(255,255,255,.4);background:linear-gradient(180deg,rgba(166,108,255,.98),rgba(112,86,232,.98));box-shadow:inset 0 4px 6px rgba(255,255,255,.5),inset 0 -10px 14px rgba(40,19,112,.28),0 10px 16px rgba(23,11,79,.28);color:#fff;font-size:1.8rem;font-weight:900}.miniBear{display:block;width:26px;height:26px;margin:auto;border-radius:50% 50% 46% 46%;background:linear-gradient(180deg,#efc390,#9a633f);position:relative}.miniBear::before,.miniBear::after{content:'';position:absolute;width:10px;height:10px;border-radius:50%;background:inherit;top:-4px}.miniBear::before{left:1px}.miniBear::after{right:1px}.bbHeroCard{display:grid;grid-template-columns:1.2fr .9fr;gap:12px;align-items:center;padding:22px;border-radius:36px;border:2px solid rgba(255,240,255,.45);background:linear-gradient(180deg,rgba(160,86,255,.84),rgba(124,71,230,.82) 55%,rgba(232,122,188,.82));box-shadow:inset 0 4px 6px rgba(255,255,255,.45),inset 0 -14px 18px rgba(56,26,117,.24),0 16px 28px rgba(34,16,90,.28)}.bbHeroText .tag{display:inline-flex;padding:8px 14px;border-radius:999px;background:rgba(123,85,234,.45);color:#f3edff;font-weight:900;font-size:.88rem;border:1px solid rgba(255,255,255,.28);margin-bottom:12px}.bbHeroText h2{margin:0 0 8px;color:#fff;font-size:clamp(2.2rem,5vw,3.4rem);line-height:.95;font-weight:1000;text-shadow:0 5px 16px rgba(23,8,69,.22)}.bbHeroText p{margin:0 0 18px;color:#f7ecff;font-size:1.05rem}.bbPlayerCard{width:100%;display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:28px;border:2px solid rgba(255,255,255,.32);background:linear-gradient(180deg,rgba(193,107,255,.52),rgba(238,128,201,.42));box-shadow:inset 0 3px 5px rgba(255,255,255,.38),0 12px 24px rgba(31,15,85,.15)}.avatarBear{width:84px;height:84px;border-radius:24px;background:linear-gradient(180deg,#ffd3ef,#ff96c6);position:relative;box-shadow:inset 0 4px 6px rgba(255,255,255,.55),0 12px 18px rgba(28,18,82,.2)}.avatarBear::before{content:'';position:absolute;inset:18px 20px 20px 20px;border-radius:50% 50% 44% 44%;background:linear-gradient(180deg,#efc390,#9a633f)}.avatarBear::after{content:'';position:absolute;width:16px;height:16px;border-radius:50%;background:linear-gradient(180deg,#efc390,#9a633f);left:18px;top:18px;box-shadow:32px 0 0 0 #ad734a}.bbPlayerCard .meta{display:flex;flex-direction:column;align-items:flex-start}.bbPlayerCard small{color:#fff;opacity:.9}.bbPlayerCard strong{color:#fff;font-size:2rem;line-height:1.1}.bbPlayerCard em{color:#fff6d1;font-style:normal;font-weight:800}.bbHeroBrain{position:relative;display:grid;place-items:center;min-height:220px}.brainBody{position:relative;width:210px;height:170px;border-radius:45% 55% 50% 50%/48% 48% 52% 52%;background:linear-gradient(180deg,#ffd0e7,#ff9ece 42%,#f067b1 72%,#d64d97 100%);box-shadow:inset 0 7px 10px rgba(255,255,255,.6),inset 0 -18px 22px rgba(144,43,118,.22),0 22px 34px rgba(38,18,96,.32),0 0 28px rgba(255,155,220,.44)}.brainBody::before,.brainBody::after{content:'';position:absolute;width:86px;height:86px;border-radius:50%;background:inherit;top:20px;box-shadow:inherit}.brainBody::before{left:8px}.brainBody::after{right:8px}.brainBody .eye{position:absolute;top:82px;width:18px;height:18px;border-radius:50%;background:#1e1123;box-shadow:inset 3px 3px 0 rgba(255,255,255,.66)}.brainBody .eye.left{left:68px}.brainBody .eye.right{right:63px}.brainBody .eye.right::after{content:'';position:absolute;width:18px;height:4px;background:#1e1123;border-radius:999px;top:7px;left:0;transform:rotate(-25deg)}.brainBody .mouth{position:absolute;left:92px;bottom:34px;width:28px;height:20px;border-radius:0 0 16px 16px;background:#6e2451}.brainBody .blush{position:absolute;top:102px;width:22px;height:14px;border-radius:50%;background:rgba(255,127,163,.7)}.brainBody .b1{left:50px}.brainBody .b2{right:48px}.brainBody .hand{position:absolute;right:-18px;top:48px;width:44px;height:70px;border-radius:24px;background:linear-gradient(180deg,#ffc3e1,#f47fbb);transform:rotate(-18deg)}.brainBody .hand::before,.brainBody .hand::after{content:'';position:absolute;width:12px;height:24px;border-radius:10px;background:inherit;right:6px}.brainBody .hand::before{top:-6px;transform:rotate(12deg)}.brainBody .hand::after{top:12px;box-shadow:-13px -5px 0 0 #f79aca,-25px -4px 0 0 #f8aad1}.bbHeroBrain .spark{position:absolute;width:14px;height:14px;border-radius:4px;transform:rotate(45deg);background:linear-gradient(145deg,#fff8ca,#ffd64a);box-shadow:0 0 14px rgba(255,241,169,.9)}.bbHeroBrain .a{left:14px;top:20px}.bbHeroBrain .b{right:14px;top:34px}.bbHeroBrain .c{left:28px;bottom:36px}.bbHomeGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}.bbQuickCard,.bbWideCard,.bbStatBox{border-radius:32px;border:2px solid rgba(255,255,255,.4);padding:18px;display:flex;align-items:center;gap:16px;color:#fff;box-shadow:inset 0 4px 6px rgba(255,255,255,.5),inset 0 -12px 16px rgba(57,26,114,.22),0 14px 20px rgba(33,16,90,.24)}.bbQuickCard.game{background:linear-gradient(180deg,#ffb3dd,#ff8cc8 50%,#ff77b5)}.bbQuickCard.rank{background:linear-gradient(180deg,#d1ecff,#9dd1ff 45%,#75b5ff);color:#21417d}.bbWideCard.leaderboard{grid-column:1/-1;background:linear-gradient(180deg,#ffe8a8,#ffd666 48%,#ffc94a);color:#7e4d00}.bbQuickCard .copy,.bbWideCard .copy{display:flex;flex-direction:column;align-items:flex-start;text-align:left;flex:1}.bbQuickCard small,.bbWideCard small{font-weight:700;opacity:.9}.bbQuickCard b,.bbWideCard b{font-size:1.15rem;font-weight:1000}.bbQuickCard em,.bbWideCard em{font-style:normal;font-size:.96rem;opacity:.9}.bbQuickCard .go,.bbWideCard .go{display:grid;place-items:center;min-width:58px;height:58px;border-radius:18px;background:rgba(255,255,255,.28);font-size:1.6rem;font-weight:1000;box-shadow:inset 0 4px 5px rgba(255,255,255,.6),0 8px 14px rgba(31,17,86,.18)}.bbWideCard .go.circle{border-radius:999px;background:rgba(255,199,0,.38)}.bbQuickCard .icon,.bbWideCard .icon{width:82px;height:82px;border-radius:24px;background:rgba(255,255,255,.22);position:relative;box-shadow:inset 0 4px 5px rgba(255,255,255,.6),0 10px 14px rgba(33,17,87,.18)}.icon.gamepad::before{content:'';position:absolute;inset:18px 12px 24px;border-radius:22px 22px 28px 28px;background:linear-gradient(180deg,#39333f,#17151d)}.icon.gamepad::after{content:'';position:absolute;left:20px;top:34px;width:14px;height:14px;border-radius:50%;background:#f2bf40;box-shadow:28px 0 0 #7ed44c,39px 9px 0 #2ebcff,39px -9px 0 #ff6484}.icon.swords::before,.icon.swords::after{content:'';position:absolute;width:18px;height:64px;border-radius:10px;background:linear-gradient(180deg,#f6f8ff,#93a4ff);left:31px;top:8px;transform:rotate(45deg)}.icon.swords::after{transform:rotate(-45deg)}.icon.trophy::before{content:'';position:absolute;left:25px;top:18px;width:32px;height:28px;border-radius:0 0 14px 14px;background:linear-gradient(180deg,#ffcf4a,#d88b13)}.icon.trophy::after{content:'';position:absolute;left:35px;top:46px;width:12px;height:20px;background:#d48d16;box-shadow:0 18px 0 10px #ffcf4a}.bbStatsRow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}.bbStatBox{padding:14px 16px;background:rgba(255,255,255,.14);backdrop-filter:blur(8px)}.bbStatBox.pink{background:linear-gradient(180deg,#f0baff,#e8a4ff)}.bbStatBox.green{background:linear-gradient(180deg,#caf9bc,#97e68f)}.bbStatBox.peach{background:linear-gradient(180deg,#ffd1df,#ffbdd0)}.bbStatBox.blue{background:linear-gradient(180deg,#c2e4ff,#9dc5ff)}.statIcon{width:56px;height:56px;border-radius:18px;background:rgba(255,255,255,.42);position:relative;box-shadow:inset 0 4px 5px rgba(255,255,255,.7)}.statIcon.star::before,.statIcon.crown::before,.statIcon.bulb::before,.statIcon.xp::before{content:'';position:absolute;inset:14px}.statIcon.star::before{transform:rotate(45deg);border-radius:8px;background:linear-gradient(145deg,#fff8cb,#ffd84f)}.statIcon.xp::before{border-radius:50%;background:linear-gradient(180deg,#ffd36f,#f5b131)}.statIcon.crown::before{clip-path:polygon(0 72%,10% 35%,28% 60%,46% 26%,64% 60%,82% 34%,100% 72%,100% 100%,0 100%);background:linear-gradient(180deg,#ffdf72,#ff6ca8)}.statIcon.bulb::before{border-radius:50% 50% 42% 42%;background:linear-gradient(180deg,#ffe98a,#ffb73f);box-shadow:0 22px 0 -10px #4d74ff}.bbStatBox .txt{display:flex;flex-direction:column;align-items:flex-start;color:#243}.bbStatBox .txt small{font-weight:800;opacity:.7}.bbStatBox .txt strong{font-size:1.05rem;color:#243;font-weight:1000}.bbStatBox.blue .txt strong{color:#244d9f}.bbHomeFooterMascot{position:absolute;right:10px;bottom:8px;width:132px;height:120px;z-index:1}.chairBrain{position:absolute;right:0;bottom:10px;width:106px;height:78px;border-radius:44px 44px 32px 32px;background:linear-gradient(180deg,#ffcde5,#ff99ca 45%,#f36aad);box-shadow:inset 0 6px 7px rgba(255,255,255,.65),0 12px 24px rgba(34,18,90,.2)}.chairBrain::before{content:'';position:absolute;inset:12px 18px 20px;border-radius:42px;background:linear-gradient(180deg,#ffb6d8,#ff83bc);box-shadow:30px -10px 0 -16px #2a1f61}.chairBrain::after{content:'';position:absolute;right:8px;top:-6px;width:34px;height:24px;border-radius:12px;background:#1f173f;box-shadow:-4px 3px 0 #fff}.drink{position:absolute;left:0;bottom:24px;width:26px;height:40px;border-radius:4px 4px 10px 10px;background:linear-gradient(180deg,#ffd7f2,#ff82c2);box-shadow:inset 0 4px 6px rgba(255,255,255,.6)}.drink::before{content:'';position:absolute;left:10px;top:-14px;width:4px;height:22px;background:#fff;border-radius:3px;transform:rotate(15deg)}.drink::after{content:'';position:absolute;inset:auto 3px 4px 3px;height:18px;border-radius:6px;background:#ffb44f}@media (max-width: 900px){.bbHeroCard{grid-template-columns:1fr}.bbHeroBrain{min-height:160px}.bbStatsRow{grid-template-columns:repeat(2,1fr)}}@media (max-width: 640px){.bbCandyHomeScreen{padding:14px 12px 100px}.bbHomeTopbar{align-items:flex-start}.bbHomeBrand h1{font-size:1.75rem}.bbHomeIcon{width:50px;height:50px;border-radius:16px;font-size:1.3rem}.bbHeroCard{padding:18px;border-radius:30px}.bbHeroText h2{font-size:2.2rem}.bbPlayerCard strong{font-size:1.7rem}.avatarBear{width:70px;height:70px}.bbHomeGrid{grid-template-columns:1fr}.bbQuickCard,.bbWideCard{padding:16px;border-radius:26px}.bbQuickCard .icon,.bbWideCard .icon{width:70px;height:70px;border-radius:20px}.bbStatsRow{grid-template-columns:1fr 1fr}.bbStatBox{padding:12px 14px}.statIcon{width:48px;height:48px;border-radius:15px}.bbHomeFooterMascot{transform:scale(.86);right:-4px;bottom:10px}}
+
 </style>
 
 <script>
@@ -1822,62 +1946,158 @@ try{
 <div class="shell pills"><span class="chip">โหมด <strong id="pillMode">จำตำแหน่ง</strong></span><span class="chip">ระดับ <strong id="pillDiff">ง่าย • 2×2</strong></span><span class="chip">ผู้เล่น <strong id="pillStyle">คนเดียว</strong></span><span class="chip">เนื้อหา <strong id="pillSource">Teddy</strong></span></div>
 
 <main class="bbAppShell" id="bbAppShell">
-  <section class="bbAppScreen active" id="bbAppHome" data-app-screen="home">
-    <div class="bbAppHomeHero">
-      <div class="bbAppWelcome">
-        <span class="bbAppEyebrow">🧠 BRAIN BUDDY</span>
-        <h1>วันนี้อยากเล่นแบบไหน?</h1>
+  <section class="bbAppScreen active bbCandyHomeScreen" id="bbAppHome" data-app-screen="home">
+    <div class="bbHomeSky" aria-hidden="true">
+      <i class="star s1"></i><i class="star s2"></i><i class="star s3"></i><i class="star s4"></i>
+      <i class="bubble b1"></i><i class="bubble b2"></i><i class="bubble b3"></i>
+      <div class="cloud c1"></div><div class="cloud c2"></div>
+    </div>
+
+    <header class="bbHomeTopbar">
+      <div class="bbHomeBrand">
+        <span class="brainMark"></span>
+        <h1>Brain Buddy<span>★</span></h1>
+      </div>
+      <div class="bbHomeActions">
+        <button class="bbHomeIcon" data-app-action="profile" aria-label="โปรไฟล์"><span class="miniBear"></span></button>
+        <button class="bbHomeIcon" id="bbHomeMusic" aria-label="เปิดปิดเพลง">♪</button>
+        <button class="bbHomeIcon" id="bbHomeTheme" aria-label="เปลี่ยนธีม">☾</button>
+        <button class="bbHomeIcon" data-app-go="admin" aria-label="แอดมิน">✕</button>
+      </div>
+    </header>
+
+    <section class="bbHeroCard">
+      <div class="bbHeroText">
+        <div class="tag">BRAIN BUDDY</div>
+        <h2>วันนี้อยากเล่นแบบไหน?</h2>
         <p>เลือกสิ่งที่ต้องการแล้วไปต่อได้เลย ไม่ต้องเลื่อนหาตัวเลือกยาว ๆ</p>
+
+        <button class="bbPlayerCard" data-app-action="profile">
+          <span class="avatarBear"></span>
+          <span class="meta">
+            <small>ผู้เล่น</small>
+            <strong id="bbHomePlayerName">Lucky</strong>
+            <em id="bbHomePlayerRank">Bronze • Lv. 1</em>
+          </span>
+        </button>
       </div>
-      <div class="bbAppPlayerCard">
-        <div class="bbAppAvatar" id="bbAppAvatar">🧸</div>
-        <div class="bbAppPlayerCopy"><small>ผู้เล่น</small><b id="bbAppPlayerName">ผู้เยี่ยมชม</b><span id="bbAppPlayerRank">🌱 Bronze • Lv. 1</span></div>
-        <button class="bbAppLoginMini" id="bbAppLoginMini">เข้าสู่ระบบ</button>
+      <div class="bbHeroBrain" aria-hidden="true">
+        <div class="brainBody">
+          <span class="eye left"></span>
+          <span class="eye right"></span>
+          <span class="blush b1"></span>
+          <span class="blush b2"></span>
+          <span class="mouth"></span>
+          <span class="hand"></span>
+        </div>
+        <i class="spark a"></i><i class="spark b"></i><i class="spark c"></i>
       </div>
+    </section>
+
+    <div class="bbHomeGrid">
+      <button class="bbQuickCard game" data-app-go="modes">
+        <span class="icon gamepad"></span>
+        <span class="copy">
+          <small>เล่นแบบปกติ</small>
+          <b>เล่นเกม</b>
+          <em>เลือก 1 ใน 6 เกม • สะสม XP</em>
+        </span>
+        <span class="go">➜</span>
+      </button>
+
+      <button class="bbQuickCard rank" data-app-action="arena">
+        <span class="icon swords"></span>
+        <span class="copy">
+          <small>แข่งขันออนไลน์</small>
+          <b>Ranked Arena</b>
+          <em>สร้างห้อง • 2–100 คน • แข่งคะแนน</em>
+        </span>
+        <span class="go">➜</span>
+      </button>
+
+      <button class="bbWideCard leaderboard" data-app-go="leaderboard">
+        <span class="icon trophy"></span>
+        <span class="copy">
+          <small>อันดับผู้เล่น</small>
+          <b>Leaderboard</b>
+          <em>ดูคะแนนและอันดับสมาชิก</em>
+        </span>
+        <span class="go circle">➜</span>
+      </button>
     </div>
 
-    <div class="bbAppMainActions">
-      <button class="bbAppActionCard play" data-app-go="modes">
-        <span class="bbAppActionIcon">🎮</span><span class="bbAppActionText"><small>เล่นแบบปกติ</small><strong>เล่นเกม</strong><em>เลือก 1 ใน 6 เกม • สะสม XP</em></span><i>→</i>
+    <div class="bbStatsRow">
+      <button class="bbStatBox pink" data-app-action="profile">
+        <span class="statIcon star"></span>
+        <span class="txt"><small>ระดับ</small><strong id="bbHomeLevel">Lv. 1</strong></span>
       </button>
-      <button class="bbAppActionCard ranked" data-app-action="arena">
-        <span class="bbAppActionIcon">⚔️</span><span class="bbAppActionText"><small>แข่งขันออนไลน์</small><strong>Ranked Arena</strong><em>สร้างห้อง • 2–100 คน • แข่งคะแนน</em></span><i>→</i>
+      <button class="bbStatBox green" data-app-go="scoreinfo">
+        <span class="statIcon xp"></span>
+        <span class="txt"><small>XP</small><strong id="bbHomeXp">0 XP</strong></span>
       </button>
-      <button class="bbAppActionCard leaderboard" data-app-action="rank">
-        <span class="bbAppActionIcon">🏆</span><span class="bbAppActionText"><small>อันดับผู้เล่น</small><strong>Leaderboard</strong><em>ดูคะแนนและอันดับสมาชิก</em></span><i>→</i>
+      <button class="bbStatBox peach" data-app-go="leaderboard">
+        <span class="statIcon crown"></span>
+        <span class="txt"><small>คะแนนสูงสุด</small><strong id="bbHomeBest">0</strong></span>
+      </button>
+      <button class="bbStatBox blue" data-app-go="scoreinfo">
+        <span class="statIcon bulb"></span>
+        <span class="txt"><small>ระบบคะแนน</small><strong>ดูวิธีคิด →</strong></span>
       </button>
     </div>
 
-    <div class="bbAppHomeStats">
-      <div><small>ระดับ</small><b id="bbAppLevel">Lv. 1</b></div>
-      <div><small>XP</small><b id="bbAppXP">0 XP</b></div>
-      <div><small>คะแนนสูงสุด</small><b id="bbAppBest">0</b></div>
-      <button data-app-go="scoreinfo"><small>ระบบคะแนน</small><b>ดูวิธีคิด →</b></button>
+    <div class="bbHomeFooterMascot" aria-hidden="true">
+      <div class="chairBrain"></div>
+      <div class="drink"></div>
     </div>
   </section>
 
-  <section class="bbAppScreen" id="bbAppModes" data-app-screen="modes">
+<section class="bbAppScreen" id="bbAppModes" data-app-screen="modes">
     <div class="bbCandySky" aria-hidden="true">
-      <i class="bbCandyStar s1">✦</i><i class="bbCandyStar s2">★</i><i class="bbCandyStar s3">✦</i>
-      <i class="bbCandyStar s4">★</i><i class="bbCandyStar s5">✧</i><i class="bbCandyStar s6">✦</i>
+      <i class="bbCandyStar s1"></i><i class="bbCandyStar s2"></i><i class="bbCandyStar s3"></i>
+      <i class="bbCandyStar s4"></i><i class="bbCandyStar s5"></i><i class="bbCandyStar s6"></i>
       <div class="bbCandyCloud c1"></div><div class="bbCandyCloud c2"></div>
       <div class="bbCandyHill h1"></div><div class="bbCandyHill h2"></div>
-      <span class="bbCandyMushroom m1">🍄</span><span class="bbCandyMushroom m2">🍄</span>
-      <span class="bbCandyTrophy">🏆</span><span class="bbCandyMiniBrain">🧠😎</span>
+      <div class="bbCandyGem g1"></div><div class="bbCandyGem g2"></div>
+      <div class="bbCandyPod p1"></div><div class="bbCandyPod p2"></div>
     </div>
 
     <header class="bbCandyTop">
-      <button class="bbCandyBack" data-app-go="home" aria-label="กลับหน้าหลัก">←</button>
+      <button class="bbCandyBack" data-app-go="home" aria-label="กลับหน้าหลัก">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M38 14 20 32l18 18" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
       <div class="bbCandyBrand" aria-label="Brain Buddy">
-        <span class="bbCandyBrandBrain">🧠</span>
+        <span class="bbCandyBrandMark" aria-hidden="true">
+          <svg viewBox="0 0 100 100">
+            <defs>
+              <radialGradient id="brainG" cx="35%" cy="25%">
+                <stop offset="0" stop-color="#ffd6ec"/>
+                <stop offset=".55" stop-color="#ff8fc2"/>
+                <stop offset="1" stop-color="#d94c96"/>
+              </radialGradient>
+            </defs>
+            <path d="M35 20c-12 0-21 8-21 19 0 6 3 11 8 15-4 5-5 12-2 18 4 8 14 12 23 9 5 8 16 10 23 5 4-3 7-8 7-13 9-2 15-10 15-20 0-9-6-16-14-19-2-11-12-18-23-16-5-3-10-3-16 2Z" fill="url(#brainG)" stroke="#ffb7da" stroke-width="3"/>
+            <path d="M34 28c-6 5-7 11-3 17M54 24c7 4 9 11 7 17M28 56c8-2 14 2 16 9M57 51c-6 4-7 11-4 17" fill="none" stroke="#c9458a" stroke-width="4" stroke-linecap="round" opacity=".72"/>
+            <ellipse cx="38" cy="28" rx="19" ry="10" fill="rgba(255,255,255,.24)"/>
+          </svg>
+        </span>
         <strong><i>Brain</i> <b>Buddy</b></strong>
-        <span class="bbCandyBrandStar">⭐</span>
+        <span class="bbCandyBrandSpark" aria-hidden="true"></span>
       </div>
+
       <div class="bbCandyControls">
-        <button class="bbCandyControl" data-app-action="profile" aria-label="โปรไฟล์">🧸</button>
-        <button class="bbCandyControl" id="bbCandyMusic" aria-label="เปิดปิดเพลง">🎵</button>
-        <button class="bbCandyControl" id="bbCandyTheme" aria-label="เปลี่ยนธีม">🌙</button>
-        <button class="bbCandyControl" data-app-action="arena" aria-label="Ranked Arena">⚔️</button>
+        <button class="bbCandyControl" data-app-action="profile" aria-label="โปรไฟล์">
+          <svg viewBox="0 0 64 64"><defs><linearGradient id="bearG" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e6b27d"/><stop offset="1" stop-color="#8d5938"/></linearGradient></defs><circle cx="20" cy="20" r="10" fill="url(#bearG)"/><circle cx="44" cy="20" r="10" fill="url(#bearG)"/><circle cx="32" cy="34" r="20" fill="url(#bearG)"/><ellipse cx="32" cy="39" rx="10" ry="8" fill="#f4d6b6"/><circle cx="25" cy="31" r="2.7"/><circle cx="39" cy="31" r="2.7"/><path d="M29 38c2 2 4 2 6 0" fill="none" stroke="#3b261b" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </button>
+        <button class="bbCandyControl" id="bbCandyMusic" aria-label="เปิดปิดเพลง">
+          <svg viewBox="0 0 64 64"><path d="M38 14v30M38 18l16-4v28" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/><ellipse cx="29" cy="46" rx="9" ry="7" fill="currentColor"/><ellipse cx="49" cy="42" rx="9" ry="7" fill="currentColor"/></svg>
+        </button>
+        <button class="bbCandyControl" id="bbCandyTheme" aria-label="เปลี่ยนธีม">
+          <svg viewBox="0 0 64 64"><path d="M44 46c-15 4-29-7-29-22 0-5 2-10 5-14 1-1 3 0 3 2-1 11 8 20 19 20 4 0 8-1 11-4 2-1 4 1 3 3-3 7-7 12-12 15Z" fill="currentColor"/></svg>
+        </button>
+        <button class="bbCandyControl" data-app-action="arena" aria-label="Ranked Arena">
+          <svg viewBox="0 0 64 64"><path d="M18 12 44 44M46 12 20 44" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/><path d="m13 10 9 3-6 6-3-9Zm38 0-9 3 6 6 3-9ZM15 50l8-8M49 50l-8-8" fill="currentColor"/></svg>
+        </button>
       </div>
     </header>
 
@@ -1887,48 +2107,69 @@ try{
         <h2>เลือกเกม</h2>
         <p>เลือกเกมที่อยากเล่น แล้วมาฝึกสมองไปด้วยกัน!</p>
       </div>
-      <div class="bbCandyMascot" aria-hidden="true">
-        <span>🧠</span>
-        <i class="spark a">✦</i><i class="spark b">★</i><i class="spark c">✧</i>
+
+      <div class="bbCandyMascot3D" aria-hidden="true">
+        <div class="bbMascotHalo"></div>
+        <div class="bbMascotBrain">
+          <span class="fold f1"></span><span class="fold f2"></span><span class="fold f3"></span><span class="fold f4"></span>
+          <span class="eye e1"></span><span class="eye e2"></span>
+          <span class="mouth"></span>
+        </div>
+        <i class="spark a"></i><i class="spark b"></i><i class="spark c"></i>
       </div>
-      <button class="bbCandyScore" data-app-go="scoreinfo"><span>⭐</span><b>คะแนน</b></button>
+
+      <button class="bbCandyScore" data-app-go="scoreinfo">
+        <span class="bbScoreStar" aria-hidden="true"></span><b>คะแนน</b>
+      </button>
     </div>
 
     <div class="bbAppModeGrid bbCandyGameGrid">
       <button class="bbAppModeCard bbCandyCard pink" data-app-mode="position">
-        <span class="bbCandyIcon">📍</span>
+        <span class="bbCandyIcon bbIconPin" aria-hidden="true">
+          <span class="pinTop"></span><span class="pinStem"></span><span class="pinBase"></span>
+        </span>
         <span class="bbCandyCopy"><b>จำตำแหน่ง</b><small>จำว่าหมีอยู่ช่องไหน</small><em>100 แต้ม/ข้อ</em></span>
-        <span class="bbCandyPlay">▶</span>
+        <span class="bbCandyPlay" aria-hidden="true"><i></i></span>
       </button>
 
       <button class="bbAppModeCard bbCandyCard green" data-app-mode="match">
-        <span class="bbCandyIcon">🧩</span>
+        <span class="bbCandyIcon bbIconPuzzle" aria-hidden="true">
+          <svg viewBox="0 0 100 100"><path d="M20 28h22c-4-13 17-18 22-5 1 3 0 5-1 7h17v20c12-4 16 15 5 20-4 2-8 1-11-1v15H55c4-13-17-18-22-5-1 2-1 4 0 6H20V62c13 4 18-17 5-22-2-1-4-1-5 0V28Z" fill="currentColor"/></svg>
+        </span>
         <span class="bbCandyCopy"><b>จับคู่</b><small>เปิดหาภาพที่เหมือนกัน</small><em>80 แต้ม/คู่</em></span>
-        <span class="bbCandyPlay">▶</span>
+        <span class="bbCandyPlay" aria-hidden="true"><i></i></span>
       </button>
 
       <button class="bbAppModeCard bbCandyCard yellow" data-app-mode="missing">
-        <span class="bbCandyIcon">👀</span>
+        <span class="bbCandyIcon bbIconEyes" aria-hidden="true">
+          <span class="eyeBall"><i></i></span><span class="eyeBall"><i></i></span>
+        </span>
         <span class="bbCandyCopy"><b>ตัวไหนหาย</b><small>หาว่าตัวไหนหายไป</small><em>120 แต้ม/ข้อ</em></span>
-        <span class="bbCandyPlay">▶</span>
+        <span class="bbCandyPlay" aria-hidden="true"><i></i></span>
       </button>
 
       <button class="bbAppModeCard bbCandyCard blue" data-app-mode="swap">
-        <span class="bbCandyIcon">🔄</span>
+        <span class="bbCandyIcon bbIconSwap" aria-hidden="true">
+          <svg viewBox="0 0 100 100"><path d="M22 42c5-16 19-26 36-26 11 0 22 5 29 13l-9 8c-5-6-12-9-20-9-10 0-20 5-25 14l11 1-20 19-14-24 12 4Zm56 16c-5 16-19 26-36 26-11 0-22-5-29-13l9-8c5 6 12 9 20 9 10 0 20-5 25-14l-11-1 20-19 14 24-12-4Z" fill="currentColor"/></svg>
+        </span>
         <span class="bbCandyCopy"><b>สลับที่</b><small>หาตำแหน่งที่ถูกสลับ</small><em>150 แต้ม/ข้อ</em></span>
-        <span class="bbCandyPlay">▶</span>
+        <span class="bbCandyPlay" aria-hidden="true"><i></i></span>
       </button>
 
       <button class="bbAppModeCard bbCandyCard purple" data-app-mode="change">
-        <span class="bbCandyIcon">🔎</span>
+        <span class="bbCandyIcon bbIconLens" aria-hidden="true">
+          <span class="lens"></span><span class="handle"></span>
+        </span>
         <span class="bbCandyCopy"><b>อะไรเปลี่ยน</b><small>สังเกตสิ่งที่เปลี่ยนจากเดิม</small><em>130 แต้ม/ข้อ</em></span>
-        <span class="bbCandyPlay">▶</span>
+        <span class="bbCandyPlay" aria-hidden="true"><i></i></span>
       </button>
 
       <button class="bbAppModeCard bbCandyCard cyan" data-app-mode="sequence">
-        <span class="bbCandyIcon">🔢</span>
+        <span class="bbCandyIcon bbIconGrid" aria-hidden="true">
+          <span>1</span><span>2</span><span>3</span><span>4</span>
+        </span>
         <span class="bbCandyCopy"><b>จำลำดับ</b><small>จำและตอบตามลำดับ</small><em>160 แต้ม/ข้อ</em></span>
-        <span class="bbCandyPlay">▶</span>
+        <span class="bbCandyPlay" aria-hidden="true"><i></i></span>
       </button>
     </div>
   </section>
@@ -4216,5 +4457,28 @@ window.addEventListener("load",()=>{
   window.addEventListener("load",()=>{showScreen("home",false);syncSetup();syncPlayer();setInterval(syncPlayer,3000)});
 })();
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const syncHomeFancy = () => {
+    const byId = (id) => document.getElementById(id);
+    const setText = (id, value) => { const el = byId(id); if (el && value != null) el.textContent = value; };
+    const name = byId('bbProfileName')?.textContent?.trim() || byId('bbDisplayName')?.textContent?.trim() || 'Lucky';
+    const rank = byId('bbRankValue')?.textContent?.trim() || 'Bronze • Lv. 1';
+    const lv = byId('bbLevelValue')?.textContent?.trim() || 'Lv. 1';
+    const xp = byId('bbXpValue')?.textContent?.trim() || '0 XP';
+    const best = byId('bbBestScoreValue')?.textContent?.trim() || '0';
+    setText('bbHomePlayerName', name);
+    setText('bbHomePlayerRank', rank);
+    setText('bbHomeLevel', lv);
+    setText('bbHomeXp', xp);
+    setText('bbHomeBest', best);
+  };
+  syncHomeFancy();
+  setTimeout(syncHomeFancy, 800);
+  document.addEventListener('click', () => setTimeout(syncHomeFancy, 300));
+});
+</script>
+
 </body>
 </html>
