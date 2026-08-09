@@ -735,6 +735,38 @@ body.dark .daily p{color:#c9c0d0!important}
   .v16LbModalHead{display:block}
 }
 
+
+/* Brain Buddy v17 responsive game shell */
+.v17bar{position:sticky;top:0;z-index:80;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);border-bottom:1px solid #e9e3ef}
+.v17barin{max-width:1180px;margin:auto;padding:10px 14px;display:flex;align-items:center;gap:10px}
+.v17brand{font-weight:950;font-size:18px;color:#292331}.v17tabs{display:flex;gap:7px;justify-content:center;flex:1}
+.v17b{border:1px solid #e9e3ef;background:#fff;color:#433a4b;border-radius:14px;padding:9px 12px;font-weight:850}
+.v17b.play{border:0;color:#fff;background:linear-gradient(135deg,#ef659f,#ff8fbc)}
+.v17b.admin{background:#fff5d9;border-color:#f0d99a;color:#70530b}
+.v17hud{max-width:1180px;margin:12px auto 0;padding:0 14px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.v17stat{background:#fff;border:1px solid #e9e3ef;border-radius:16px;padding:10px 12px;box-shadow:0 7px 20px rgba(57,42,71,.05)}
+.v17stat small{display:block;color:#716979;font-size:9px;font-weight:800}.v17stat b{display:block;color:#292331;font-size:15px;margin-top:2px}
+.v17admincard{width:min(720px,calc(100% - 22px))!important;background:#fff!important;color:#292331!important;border-radius:27px!important;padding:23px!important}
+.v17adminGrid{display:grid;grid-template-columns:220px 1fr;gap:18px;margin-top:17px}
+.v17preview{min-height:220px;border:1px solid #e9e3ef;border-radius:21px;background:linear-gradient(145deg,#ffe8f2,#eee8ff);display:grid;place-items:center;overflow:hidden;font-size:70px}
+.v17preview img{width:100%;height:100%;object-fit:contain}.v17controls{display:grid;gap:11px;align-content:start}
+.v17controls label{font-size:12px;font-weight:900}.v17controls input{width:100%;box-sizing:border-box;border:1px solid #e9e3ef;border-radius:13px;padding:11px}
+.v17note{background:#f8f5fb;border:1px solid #e9e3ef;border-radius:14px;padding:11px;color:#716979;font-size:10px;line-height:1.6}
+.v17actions{display:flex;gap:8px;flex-wrap:wrap}.v17actions button{border:1px solid #e9e3ef;background:#fff;border-radius:13px;padding:10px 12px;font-weight:850}
+.v17actions .save{border:0;color:#fff;background:linear-gradient(135deg,#7358d6,#9a83f2)}
+.v17dock{display:none}
+@media(max-width:900px){.v17tabs{display:none}.v17hud{grid-template-columns:repeat(2,1fr)}.v17adminGrid{grid-template-columns:1fr}.v17preview{min-height:180px}}
+@media(max-width:600px){
+ body{padding-bottom:72px}.v17barin{padding:8px 11px}.v17brand{font-size:16px}.v17hud{padding:0 11px;gap:6px}
+ .v17stat{padding:9px;border-radius:14px}.v17stat b{font-size:13px}
+ .v17dock{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;bottom:0;left:0;right:0;z-index:110;background:rgba(255,255,255,.98);backdrop-filter:blur(14px);border-top:1px solid #e9e3ef;padding:6px 5px max(6px,env(safe-area-inset-bottom))}
+ .v17dock button{border:0;background:transparent;color:#5d5366;font-size:9px;font-weight:850}.v17dock i{display:block;font-style:normal;font-size:20px;margin-bottom:1px}
+ .hero{padding-top:10px!important}.homeGrid{padding-left:11px!important;padding-right:11px!important}
+}
+body.dark .v17bar,body.dark .v17dock{background:rgba(28,23,38,.97);border-color:rgba(255,255,255,.09)}
+body.dark .v17brand{color:#fff}body.dark .v17b,body.dark .v17stat{background:#29223a;color:#fff;border-color:rgba(255,255,255,.1)}
+body.dark .v17stat b{color:#fff}body.dark .v17stat small{color:#c8bfd0}
+
 </style>
 
 <script>
@@ -890,10 +922,48 @@ try{
   });
 })();
 
+
+(function(){
+ const $=(s,r=document)=>r.querySelector(s), KEY="bb_mascot_v17"; let pending=null;
+ function prof(){try{return JSON.parse(localStorage.getItem("bb_profile")||"{}")}catch(e){return {}}}
+ function hud(){const p=prof(),xp=+p.xp||0,best=+(p.bestScore||p.best_score)||0,power=best+xp*2;let rank="🌱 Bronze";if(power>=20000)rank="💎 Diamond";else if(power>=12000)rank="🌌 Platinum";else if(power>=7000)rank="🏆 Gold";else if(power>=3500)rank="✨ Silver";
+  if($("#v17Level"))$("#v17Level").textContent="Lv. "+Math.max(1,Math.floor(xp/500)+1);if($("#v17Rank"))$("#v17Rank").textContent=rank;if($("#v17Best"))$("#v17Best").textContent=best.toLocaleString();if($("#v17Xp"))$("#v17Xp").textContent=xp.toLocaleString()+" XP";}
+ function mascot(x){if(!x)return;document.querySelectorAll(".heroBear").forEach(el=>{el.style.backgroundImage=`url("${x}")`;el.style.backgroundSize="contain";el.style.backgroundPosition="center";el.style.backgroundRepeat="no-repeat"});if($("#v17Preview"))$("#v17Preview").innerHTML=`<img src="${x}" alt="มาสคอต">`}
+ function rank(){const m=$("#leaderboardModal");if(m){m.classList.remove("hidden");window.__bbRenderCloudLeaderboard?.()}else $("#leaderboardSpotlight")?.scrollIntoView({behavior:"smooth"})}
+ function profile(){($("#profileBtn")||Array.from(document.querySelectorAll("button")).find(b=>/โปรไฟล์/.test(b.textContent||"")))?.click()}
+ function play(){($("#quickPlay")||Array.from(document.querySelectorAll("button")).find(b=>/เล่นด่วน/.test(b.textContent||"")))?.click()}
+ document.addEventListener("click",e=>{const b=e.target.closest("[data-v17]");if(!b)return;const a=b.dataset.v17;if(a==="home")$("#home")?.scrollIntoView({behavior:"smooth"});if(a==="play")play();if(a==="rank")rank();if(a==="profile")profile()});
+ window.addEventListener("load",()=>{hud();const saved=localStorage.getItem(KEY);if(saved)mascot(saved);
+  $("#v17Admin")?.addEventListener("click",()=>$("#v17AdminModal")?.classList.remove("hidden"));
+  $("#v17AdminClose")?.addEventListener("click",()=>$("#v17AdminModal")?.classList.add("hidden"));
+  $("#v17BearFile")?.addEventListener("change",e=>{const f=e.target.files?.[0];if(!f)return;const r=new FileReader();r.onload=()=>{pending=r.result;mascot(pending)};r.readAsDataURL(f)});
+  $("#v17SaveBear")?.addEventListener("click",()=>{if(pending){localStorage.setItem(KEY,pending);mascot(pending);alert("บันทึกรูปมาสคอตแล้ว")}});
+  $("#v17ResetBear")?.addEventListener("click",()=>{localStorage.removeItem(KEY);location.reload()});setInterval(hud,2500);
+ });
+})();
+
 </script>
 
 </head>
 <body>
+
+<nav class="v17bar"><div class="v17barin">
+ <div class="v17brand">🧠 Brain Buddy</div>
+ <div class="v17tabs">
+  <button class="v17b" data-v17="home">🏠 หน้าแรก</button>
+  <button class="v17b play" data-v17="play">🎮 เล่น</button>
+  <button class="v17b" data-v17="rank">🏆 อันดับ</button>
+  <button class="v17b" data-v17="profile">👤 โปรไฟล์</button>
+ </div>
+ <button class="v17b admin" id="v17Admin">🛠️ แอดมิน</button>
+</div></nav>
+<div class="v17hud">
+ <div class="v17stat"><small>ระดับของฉัน</small><b id="v17Level">Lv. 1</b></div>
+ <div class="v17stat"><small>แรงก์</small><b id="v17Rank">🌱 Bronze</b></div>
+ <div class="v17stat"><small>คะแนนสูงสุด</small><b id="v17Best">0</b></div>
+ <div class="v17stat"><small>XP</small><b id="v17Xp">0 XP</b></div>
+</div>
+
 <header class="topbar"><div class="shell nav"><div class="brand" id="brand"><div class="logo" id="logo">🧠</div><span>Brain Buddy</span></div><div class="navright"><button class="profilemini accountBtn" id="accountBtn" type="button"><div class="miniavatar" id="navAvatar">🧸</div><span class="accountText"><b id="navName">ผู้เล่น</b><small id="cloudMini">ผู้เยี่ยมชม</small></span><i class="cloudDot" id="cloudDot"></i></button><button class="icon" id="musicBtn">🎵</button><button class="icon" id="themeBtn">🌙</button><button class="icon" id="fullBtn">⛶</button><div class="menubox"><button class="icon" id="menuBtn">☰</button><div class="popover hidden" id="popover"><button id="v16MenuLeaderboard">🏆 ตารางจัดอันดับ</button><button data-open="profileModal">👤 โปรไฟล์ & Level</button><button data-open="statsModal">📊 สถิติ & ความสำเร็จ</button><button data-open="collectionModal">🧸 คอลเลกชันตัวละคร</button><button data-open="audioModal">🎧 เพลง & เสียง</button><button data-open="accessModal">Aa การมองเห็น</button><button data-open="helpModal">? วิธีเล่น</button><button data-open="researchModal">🧠 หลักการ & งานวิจัย</button><button id="presenterBtn">🖥️ โหมดนำเกม</button></div></div></div></div></header>
 
 <section class="hero" id="home">
@@ -1667,5 +1737,25 @@ if(cfg.source==='study')cfg.source='teddy';
 const oldResume=load('bb_resume',null);if(oldResume?.cfg?.source==='study'){oldResume.cfg.source='teddy';save('bb_resume',oldResume)}
 restoreAccess();restoreAudio();renderUploads();renderProfile();renderHome();renderStats();renderCollection();renderDaily();updateSummary();updateHUD();$('heroBear').innerHTML=teddySVG(2);const p=profile(),lv=level(p.xp||0);$('avatarSeg').innerHTML=COLLECTION.filter(x=>lv>=x[2]).map(x=>`<button class="chip ${p.avatar===x[0]?'active':''}" data-avatar="${x[0]}">${x[0]}</button>`).join('');if(load('bb_resume',null))$('resumeBtn').classList.remove('hidden');setMain('เริ่มรอบใหม่',()=>startRound());if(musicEnabled){musicEnabled=false;$('musicToggle').checked=false;updateMusic()}setupSupabase()})();
 </script>
+
+<div class="modal hidden" id="v17AdminModal"><div class="modalcard v17admincard">
+ <button class="x" id="v17AdminClose">×</button>
+ <h2 style="margin:0">🛠️ ศูนย์จัดการ Brain Buddy</h2>
+ <p style="color:#716979">เปลี่ยนรูปตัวหมีหรือมาสคอตของเกมได้จากหน้านี้</p>
+ <div class="v17adminGrid">
+  <div class="v17preview" id="v17Preview">🧸</div>
+  <div class="v17controls">
+   <div><label>รูปมาสคอตใหม่</label><input type="file" id="v17BearFile" accept="image/png,image/jpeg,image/webp"></div>
+   <div class="v17note">แนะนำ PNG/WebP พื้นหลังโปร่งใส ระบบจะแสดงให้เหมาะกับมือถือ iPad และคอมอัตโนมัติ</div>
+   <div class="v17actions"><button class="save" id="v17SaveBear">💾 บันทึก</button><button id="v17ResetBear">↩️ รูปเดิม</button></div>
+   <div class="v17note">เวอร์ชันนี้เก็บรูปที่แอดมินเลือกไว้ในอุปกรณ์นี้ก่อน ระบบ Cloud Admin สามารถต่อกับ Supabase Storage ภายหลังได้โดยไม่กระทบ Leaderboard เดิม</div>
+  </div>
+ </div>
+</div></div>
+<div class="v17dock">
+ <button data-v17="home"><i>🏠</i>หน้าแรก</button><button data-v17="play"><i>🎮</i>เล่น</button>
+ <button data-v17="rank"><i>🏆</i>อันดับ</button><button data-v17="profile"><i>👤</i>โปรไฟล์</button>
+</div>
+
 </body>
 </html>
