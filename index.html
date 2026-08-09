@@ -830,6 +830,140 @@ body.dark .v17stat{background:#2b2438!important;border-color:rgba(255,255,255,.1
 body.dark .bbStatIcon{background:rgba(255,255,255,.08)}body.dark .v17stat small{color:#c9c1d1!important}body.dark .v17stat b{color:#fff!important}
 body.dark .v17bar{background:rgba(26,22,34,.97)!important}
 
+
+/* ===== Brain Buddy v20 — Teddy-only, direct game selection, transparent XP ===== */
+#customPlay,
+#customModal,
+.homeGrid,
+.daily{display:none!important}
+
+/* The old settings gear now behaves as "เลือกเกม" via JS; make it look intentional. */
+#settingsBtn{font-size:0!important}
+#settingsBtn::after{content:"🎮";font-size:20px}
+
+/* Main game chooser */
+.bbModeHub{
+  width:min(100% - 32px,1240px);
+  margin:18px auto 24px;
+  display:grid;
+  gap:14px;
+}
+.bbModePanel,.bbXPPanel{
+  background:#fff;
+  border:1px solid var(--bb19-border,#ebe6ef);
+  border-radius:26px;
+  box-shadow:0 12px 34px rgba(65,45,80,.07);
+}
+.bbModePanel{padding:20px}
+.bbModeTop{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:15px
+}
+.bbModeTop h2{margin:0;font-size:26px;line-height:1.25;color:#2e2933}
+.bbModeTop p{margin:4px 0 0;color:#77707e;font-size:11px;line-height:1.6}
+.bbTeddyOnly{
+  display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;
+  background:#fff1f7;color:#8a3e62;font-size:10px;font-weight:900;white-space:nowrap
+}
+.bbModeGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.bbModeCard{
+  position:relative;min-height:125px;border:1.5px solid #ebe6ef;background:#fff;border-radius:20px;
+  padding:15px;text-align:left;color:#342e39;cursor:pointer;transition:.18s ease;overflow:hidden
+}
+.bbModeCard:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(65,45,80,.08)}
+.bbModeCard.active{
+  border-color:#e96d9f;background:linear-gradient(145deg,#fff6fa,#f6f1ff);
+  box-shadow:0 10px 26px rgba(229,104,157,.13)
+}
+.bbModeIcon{font-size:28px;display:block;margin-bottom:8px}
+.bbModeCard strong{display:block;font-size:15px;line-height:1.25}
+.bbModeCard small{display:block;color:#7b7280;font-size:9px;line-height:1.5;margin-top:4px;padding-right:56px}
+.bbModePts{
+  position:absolute;right:10px;bottom:10px;padding:5px 7px;border-radius:999px;
+  background:#f5f1fa;color:#6b5c78;font-size:8px;font-weight:900
+}
+.bbModeCard.active .bbModePts{background:#f7dce8;color:#93496a}
+
+.bbGameOptions{
+  display:grid;grid-template-columns:1.15fr 1fr;gap:12px;margin-top:14px
+}
+.bbOptionBox{border:1px solid #ebe6ef;border-radius:19px;padding:13px;background:#fcfbfd}
+.bbOptionTitle{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px}
+.bbOptionTitle b{font-size:12px}.bbOptionTitle span{font-size:9px;color:#827989}
+.bbChoiceRow{display:flex;flex-wrap:wrap;gap:7px}
+.bbChoice{
+  border:1px solid #e7e1eb;background:#fff;color:#514759;border-radius:13px;padding:9px 11px;
+  font-size:10px;font-weight:850;cursor:pointer
+}
+.bbChoice.active{border-color:#b8a8ef;background:#f1edff;color:#5943a4}
+.bbTeamCount{margin-top:8px;display:none;gap:6px;flex-wrap:wrap}
+.bbTeamCount.show{display:flex}
+.bbStartRow{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:15px;
+  padding-top:15px;border-top:1px solid #eee8f1
+}
+.bbSelectedSummary{font-size:10px;color:#77707e;line-height:1.55}
+.bbSelectedSummary b{display:block;color:#332c39;font-size:13px;margin-bottom:2px}
+.bbStartGame{
+  border:0;border-radius:16px;padding:13px 20px;background:linear-gradient(135deg,#ef659f,#8d72e3);
+  color:#fff;font-weight:950;font-size:13px;box-shadow:0 10px 24px rgba(229,96,154,.22);cursor:pointer;white-space:nowrap
+}
+
+/* Scoring/XP explanation */
+.bbXPPanel{padding:18px 20px}
+.bbXPHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:13px}
+.bbXPHead h3{margin:0;font-size:21px}.bbXPHead p{margin:3px 0 0;color:#77707e;font-size:10px;line-height:1.6}
+.bbLevelNote{padding:7px 10px;border-radius:999px;background:#eefaf6;color:#34745f;font-size:9px;font-weight:900;white-space:nowrap}
+.bbScoreGuide{display:grid;grid-template-columns:1.2fr .8fr;gap:12px}
+.bbGuideBox{border:1px solid #ebe6ef;border-radius:18px;padding:13px;background:#fcfbfd}
+.bbGuideBox h4{margin:0 0 9px;font-size:12px}
+.bbPointRows{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.bbPointRow{
+  display:flex;justify-content:space-between;align-items:center;gap:6px;
+  padding:8px 9px;border-radius:12px;background:#fff;border:1px solid #eee9f1;font-size:9px
+}
+.bbPointRow b{font-size:10px}
+.bbXPTable{display:grid;gap:5px}
+.bbXPRow{
+  display:flex;justify-content:space-between;gap:8px;padding:7px 9px;border-radius:11px;
+  background:#fff;border:1px solid #eee9f1;font-size:9px
+}
+.bbXPRow strong{color:#7558c6}
+.bbFormulaNote{margin-top:8px;color:#817788;font-size:8px;line-height:1.55}
+.bbNoRandom{
+  display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:6px 8px;border-radius:10px;
+  background:#fff7dc;color:#735d19;font-size:8px;font-weight:800
+}
+
+@media(max-width:900px){
+  .bbModeHub{width:min(100% - 24px,1240px)}
+  .bbModeGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bbGameOptions,.bbScoreGuide{grid-template-columns:1fr}
+  .bbPointRows{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:600px){
+  .bbModeHub{width:min(100% - 18px,1240px);margin-top:12px}
+  .bbModePanel,.bbXPPanel{border-radius:21px}
+  .bbModePanel{padding:14px}.bbXPPanel{padding:14px}
+  .bbModeTop{display:block}.bbTeddyOnly{margin-top:9px}
+  .bbModeTop h2{font-size:22px}
+  .bbModeGrid{grid-template-columns:1fr 1fr;gap:7px}
+  .bbModeCard{min-height:116px;padding:12px;border-radius:17px}
+  .bbModeIcon{font-size:23px;margin-bottom:6px}.bbModeCard strong{font-size:12px}
+  .bbModeCard small{font-size:8px;padding-right:0}.bbModePts{position:static;display:inline-flex;margin-top:7px}
+  .bbGameOptions{gap:8px}.bbOptionBox{padding:11px;border-radius:16px}
+  .bbStartRow{display:block}.bbStartGame{width:100%;margin-top:10px}
+  .bbXPHead{display:block}.bbLevelNote{display:inline-flex;margin-top:7px}
+  .bbPointRows{grid-template-columns:1fr 1fr}
+}
+body.dark .bbModePanel,body.dark .bbXPPanel{background:#2b2438;border-color:rgba(255,255,255,.10)}
+body.dark .bbModeTop h2,body.dark .bbXPHead h3{color:#fff}
+body.dark .bbModeCard,body.dark .bbOptionBox,body.dark .bbGuideBox,body.dark .bbPointRow,body.dark .bbXPRow{
+  background:#30283e;border-color:rgba(255,255,255,.10);color:#fff
+}
+body.dark .bbModeCard.active{background:linear-gradient(145deg,#3a2c41,#322b4b)}
+body.dark .bbModeCard small,body.dark .bbModeTop p,body.dark .bbXPHead p,body.dark .bbSelectedSummary,body.dark .bbFormulaNote{color:#c7becd}
+body.dark .bbSelectedSummary b{color:#fff}
+
 </style>
 
 <script>
@@ -1100,9 +1234,120 @@ try{
   <button class="btn purple" id="v16CompeteLogin">เริ่มเก็บอันดับ</button>
 </section>
 
-<section class="shell homeGrid"><div class="panel"><div class="panelHead"><h2>เลือกเล่นแบบรวดเร็ว</h2><p>ฟังก์ชันเยอะ แต่หน้าเริ่มยังเรียบและกดง่าย</p></div><div class="quickGrid"><button class="quick" id="soloQuick"><span>👤</span><strong>เล่นคนเดียว</strong><small>2×2 • จำตำแหน่ง • คะแนนอัตโนมัติ</small></button><div class="quick teamQuickCard"><span class="quickIcon">👥</span><strong>เล่นเป็นทีม</strong><small>เลือกจำนวนทีมได้ทันที • ตอบออกเสียง • เพิ่มคะแนนเอง</small><div class="quickTeamPicker" id="quickTeamPicker"><button class="quickTeamChip active" data-quick-team="2">2 ทีม</button><button class="quickTeamChip" data-quick-team="3">3 ทีม</button><button class="quickTeamChip" data-quick-team="4">4 ทีม</button><button class="quickTeamChip" data-quick-team="5">5 ทีม</button><button class="quickTeamChip" data-quick-team="6">6 ทีม</button></div><button class="quickTeamStart" id="teamQuick">เริ่มแบบ 2 ทีม →</button></div></div></div><div class="daily"><span class="dailyTag">📅 ภารกิจประจำวัน</span><h3 id="dailyTitle">ภารกิจวันนี้</h3><p id="dailyText">โจทย์ประจำวันเลือกโหมดและระดับให้อัตโนมัติ</p><button class="btn purple" id="dailyBtn">เล่นภารกิจวันนี้</button><div style="font-size:10px;color:var(--muted);margin-top:9px">🔥 เล่นต่อเนื่อง <b id="dailyStreak">0</b> วัน</div></div><div class="metricsPanel"><div class="metricGrid"><div class="metric"><b id="homeLevel">1</b><span>ระดับ</span></div><div class="metric"><b id="homeXP">0</b><span>XP</span></div><div class="metric"><b id="homeBest">0</b><span>คะแนนสูงสุด</span></div><div class="metric"><b id="homeAcc">0%</b><span>ความแม่นยำสูงสุด</span></div><div class="metric"><b id="homeRounds">0</b><span>รอบที่เล่น</span></div></div></div></section>
+
+<section class="bbModeHub" id="bbModeHub">
+  <div class="bbModePanel">
+    <div class="bbModeTop">
+      <div>
+        <h2>🎮 เลือกเกมที่อยากเล่น</h2>
+        <p>เลือกโหมดและระดับได้จากหน้าเดียว ไม่ต้องเปิดหน้าตั้งค่าซับซ้อน</p>
+      </div>
+      <span class="bbTeddyOnly">🧸 ใช้ตัวหมี Brain Buddy เท่านั้น</span>
+    </div>
+
+    <div class="bbModeGrid" id="bbModeGrid">
+      <button class="bbModeCard active" data-bb-mode="position">
+        <span class="bbModeIcon">📍</span><strong>จำตำแหน่ง</strong>
+        <small>จำว่าหมีแต่ละตัวอยู่ช่องไหน</small><span class="bbModePts">100 แต้ม/ข้อ</span>
+      </button>
+      <button class="bbModeCard" data-bb-mode="match">
+        <span class="bbModeIcon">🧩</span><strong>จับคู่</strong>
+        <small>เปิดหมีทีละคู่และจำตำแหน่งที่เคยเห็น</small><span class="bbModePts">80 แต้ม/คู่</span>
+      </button>
+      <button class="bbModeCard" data-bb-mode="missing">
+        <span class="bbModeIcon">👀</span><strong>ตัวไหนหาย</strong>
+        <small>จำภาพรวมแล้วหาว่าหมีตัวไหนหายไป</small><span class="bbModePts">120 แต้ม/ข้อ</span>
+      </button>
+      <button class="bbModeCard" data-bb-mode="swap">
+        <span class="bbModeIcon">🔄</span><strong>สลับที่</strong>
+        <small>หาสองตำแหน่งที่ถูกสลับจากเดิม</small><span class="bbModePts">150 แต้ม/ข้อ</span>
+      </button>
+      <button class="bbModeCard" data-bb-mode="change">
+        <span class="bbModeIcon">🔎</span><strong>อะไรเปลี่ยน</strong>
+        <small>สังเกตและหาจุดที่เปลี่ยนจากภาพเดิม</small><span class="bbModePts">130 แต้ม/ข้อ</span>
+      </button>
+      <button class="bbModeCard" data-bb-mode="sequence">
+        <span class="bbModeIcon">🔢</span><strong>จำลำดับ</strong>
+        <small>จำหมีตามลำดับแล้วเลือกกลับให้ถูกต้อง</small><span class="bbModePts">160 แต้ม/ข้อ</span>
+      </button>
+    </div>
+
+    <div class="bbGameOptions">
+      <div class="bbOptionBox">
+        <div class="bbOptionTitle"><b>🌱 ระดับความยาก</b><span>ระดับสูงได้ตัวคูณคะแนนมากขึ้น</span></div>
+        <div class="bbChoiceRow" id="bbDiffRow">
+          <button class="bbChoice active" data-bb-diff="easy">ง่าย 2×2 • ×1.0</button>
+          <button class="bbChoice" data-bb-diff="normal">ปานกลาง 3×3 • ×1.25</button>
+          <button class="bbChoice" data-bb-diff="hard">ยาก 4×4 • ×1.5</button>
+          <button class="bbChoice" data-bb-diff="expert">Expert • ×2.0</button>
+        </div>
+      </div>
+      <div class="bbOptionBox">
+        <div class="bbOptionTitle"><b>👤 รูปแบบผู้เล่น</b><span id="bbStyleHint">โหมดเดี่ยวเก็บ XP และขึ้นอันดับได้</span></div>
+        <div class="bbChoiceRow" id="bbStyleRow">
+          <button class="bbChoice active" data-bb-style="solo">👤 คนเดียว</button>
+          <button class="bbChoice" data-bb-style="team">👥 เล่นเป็นทีม</button>
+        </div>
+        <div class="bbTeamCount" id="bbTeamCount">
+          <button class="bbChoice active" data-bb-team="2">2 ทีม</button>
+          <button class="bbChoice" data-bb-team="3">3 ทีม</button>
+          <button class="bbChoice" data-bb-team="4">4 ทีม</button>
+          <button class="bbChoice" data-bb-team="5">5 ทีม</button>
+          <button class="bbChoice" data-bb-team="6">6 ทีม</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="bbStartRow">
+      <div class="bbSelectedSummary">
+        <b id="bbSelectedTitle">📍 จำตำแหน่ง • ง่าย 2×2</b>
+        <span id="bbSelectedText">เล่นคนเดียว • หมี Brain Buddy • ไม่มีการจับเวลา</span>
+      </div>
+      <button class="bbStartGame" id="bbStartSelected">เริ่มเกมนี้ →</button>
+    </div>
+  </div>
+
+  <div class="bbXPPanel" id="bbXPGuide">
+    <div class="bbXPHead">
+      <div>
+        <h3>⭐ ระบบคะแนนและ XP</h3>
+        <p>คะแนนขึ้นกับโหมดและระดับความยาก ส่วน XP คำนวณจากคะแนนสุดท้ายอย่างตรงไปตรงมา</p>
+      </div>
+      <span class="bbLevelNote">ทุก 500 XP = +1 Level</span>
+    </div>
+    <div class="bbScoreGuide">
+      <div class="bbGuideBox">
+        <h4>🎯 คะแนนพื้นฐานของแต่ละโหมด</h4>
+        <div class="bbPointRows">
+          <div class="bbPointRow"><span>📍 จำตำแหน่ง</span><b>100</b></div>
+          <div class="bbPointRow"><span>🧩 จับคู่</span><b>80</b></div>
+          <div class="bbPointRow"><span>👀 ตัวไหนหาย</span><b>120</b></div>
+          <div class="bbPointRow"><span>🔄 สลับที่</span><b>150</b></div>
+          <div class="bbPointRow"><span>🔎 อะไรเปลี่ยน</span><b>130</b></div>
+          <div class="bbPointRow"><span>🔢 จำลำดับ</span><b>160</b></div>
+        </div>
+        <div class="bbFormulaNote">คะแนนต่อคำตอบถูก = คะแนนพื้นฐาน × ตัวคูณระดับ (ง่าย ×1.0 / ปานกลาง ×1.25 / ยาก ×1.5 / Expert ×2.0)</div>
+        <span class="bbNoRandom">✓ ไม่มีโบนัสคะแนนแบบสุ่ม จึงเทียบคะแนนกันได้ชัดเจน</span>
+      </div>
+      <div class="bbGuideBox">
+        <h4>⭐ คะแนนรอบนี้ → XP ที่ได้รับ</h4>
+        <div class="bbXPTable">
+          <div class="bbXPRow"><span>0–399 คะแนน</span><strong>+50 XP</strong></div>
+          <div class="bbXPRow"><span>400–799 คะแนน</span><strong>+100 XP</strong></div>
+          <div class="bbXPRow"><span>800–1,199 คะแนน</span><strong>+150 XP</strong></div>
+          <div class="bbXPRow"><span>1,200–1,799 คะแนน</span><strong>+220 XP</strong></div>
+          <div class="bbXPRow"><span>1,800–2,499 คะแนน</span><strong>+300 XP</strong></div>
+          <div class="bbXPRow"><span>2,500+ คะแนน</span><strong>+400 XP</strong></div>
+        </div>
+        <div class="bbFormulaNote">การเล่นแบบทีมใช้สำหรับกิจกรรมในห้อง/แข่งขันเป็นทีม และไม่เพิ่ม XP ส่วนตัวหรือคะแนน Cloud Leaderboard เพื่อป้องกันคะแนนที่เพิ่มด้วยมือกระทบอันดับสมาชิก</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="shell homeGrid"><div class="panel"><div class="panelHead"><h2>เลือกเล่นแบบรวดเร็ว</h2><p>เลือกเกมได้จากหน้าเดียว</p></div><div class="quickGrid"><button class="quick" id="soloQuick"><span>👤</span><strong>เล่นคนเดียว</strong><small>2×2 • จำตำแหน่ง • คะแนนอัตโนมัติ</small></button><div class="quick teamQuickCard"><span class="quickIcon">👥</span><strong>เล่นเป็นทีม</strong><small>เลือกจำนวนทีมได้ทันที • ตอบออกเสียง • เพิ่มคะแนนเอง</small><div class="quickTeamPicker" id="quickTeamPicker"><button class="quickTeamChip active" data-quick-team="2">2 ทีม</button><button class="quickTeamChip" data-quick-team="3">3 ทีม</button><button class="quickTeamChip" data-quick-team="4">4 ทีม</button><button class="quickTeamChip" data-quick-team="5">5 ทีม</button><button class="quickTeamChip" data-quick-team="6">6 ทีม</button></div><button class="quickTeamStart" id="teamQuick">เริ่มแบบ 2 ทีม →</button></div></div></div><div class="daily"><span class="dailyTag">📅 ภารกิจประจำวัน</span><h3 id="dailyTitle">ภารกิจวันนี้</h3><p id="dailyText">โจทย์ประจำวันเลือกโหมดและระดับให้อัตโนมัติ</p><button class="btn purple" id="dailyBtn">เล่นภารกิจวันนี้</button><div style="font-size:10px;color:var(--muted);margin-top:9px">🔥 เล่นต่อเนื่อง <b id="dailyStreak">0</b> วัน</div></div><div class="metricsPanel"><div class="metricGrid"><div class="metric"><b id="homeLevel">1</b><span>ระดับ</span></div><div class="metric"><b id="homeXP">0</b><span>XP</span></div><div class="metric"><b id="homeBest">0</b><span>คะแนนสูงสุด</span></div><div class="metric"><b id="homeAcc">0%</b><span>ความแม่นยำสูงสุด</span></div><div class="metric"><b id="homeRounds">0</b><span>รอบที่เล่น</span></div></div></div></section>
 <div class="shell pills"><span class="chip">โหมด <strong id="pillMode">จำตำแหน่ง</strong></span><span class="chip">ระดับ <strong id="pillDiff">ง่าย • 2×2</strong></span><span class="chip">ผู้เล่น <strong id="pillStyle">คนเดียว</strong></span><span class="chip">เนื้อหา <strong id="pillSource">Teddy</strong></span></div>
-<section class="game" id="game"><div class="shell"><div class="gameCard"><div class="gameTop"><div class="status"><div class="statusIcon" id="statusIcon">👀</div><div><b id="statusTitle">พร้อมเริ่มเล่น</b><span id="statusText">กด เล่นด่วน หรือเริ่มรอบใหม่ได้เลย</span></div></div><div class="hudrow"><div class="hud"><span>PROGRESS</span><b id="progress">0 / 4</b></div><div class="hud"><span>COMBO</span><b id="combo">0</b></div><div class="hud"><span>SCORE</span><b id="score">0</b></div><div class="hud"><span>ระดับ</span><b id="levelHud">1</b></div><div class="hud hidden" id="livesHud"><span>LIVES</span><b id="lives">♥♥♥</b></div></div></div><div class="timer hidden" id="timer"><i id="timerFill"></i></div><div class="stage"><div class="scene active" id="boardScene"><div class="sceneTitle"><h2 id="boardTitle">พร้อมเริ่ม</h2><p id="boardSub">ค่าเริ่มต้นเป็น 2×2 และไม่มีการจับเวลา</p></div><div class="answer hidden" id="answer"></div><div class="board" id="board"></div></div><div class="scene" id="targetScene"><div class="targetWrap"><div class="targetCard" id="targetCard"></div><div class="targetLabel" id="targetLabel">ตัวนี้อยู่หมายเลขอะไร?</div></div></div><div class="scene" id="choiceScene"><div class="sceneTitle"><h2 id="choiceTitle">เลือกคำตอบ</h2><p id="choiceSub">เลือกคำตอบที่ถูกต้อง</p></div><div class="choiceGrid" id="choiceGrid"></div></div><div class="scene" id="resultScene"><div class="resultWrap"><div class="resultCard"><h2>จบรอบแล้ว! 🎉</h2><p id="resultText">มาดูผลของรอบนี้กัน</p><div class="bigคะแนน" id="resultคะแนน">0</div><div style="font-size:9px;color:var(--muted)" id="resultคะแนนLabel">คะแนน</div><div class="resultMetrics"><div class="resultMetric"><b id="resultCorrect">0</b><span>ตอบถูก</span></div><div class="resultMetric"><b id="resultAcc">0%</b><span>ความแม่นยำ</span></div><div class="resultMetric"><b id="resultCombo">0</b><span>Best Combo</span></div><div class="resultMetric"><b id="resultXP">+0</b><span>XP</span></div></div><div class="insight"><strong id="insightTitle">🧠 จุดเด่นจากรอบนี้</strong><p id="insightText"></p><div class="nexts" id="nexts"></div><p style="font-size:9px;margin-top:9px">คำแนะนำอิงแนวคิด working memory, attention, visuospatial processing และงานวิจัยด้าน cognitive training ที่สรุปไว้ในเมนู “หลักการ & งานวิจัย”</p></div><div class="resultActions"><button class="btn primary" id="againBtn">เล่นอีกครั้ง</button><button class="btn" id="saveBtn">🖼️ บันทึกผล</button><button class="btn" id="shareBtn">↗ แชร์</button><button class="btn" id="resultSettings">เปลี่ยนเกม</button></div></div></div></div></div><div class="teamBar hidden" id="teamBar"></div><div class="dock"><button class="secondary" id="homeBtn">⌂</button><button class="main" id="main">เริ่มรอบใหม่</button><button class="secondary hidden" id="hintBtn">💡 <span id="hintNum">3</span></button><button class="secondary hidden" id="voiceBtn">🗣️ เฉลย</button><button class="secondary hidden" id="replayBtn">↺ ดูโจทย์</button><button class="secondary" id="settingsBtn">⚙️</button></div><div class="hintline" id="hintline">ไม่มีการจับเวลาโดยค่าเริ่มต้น คุณเป็นคนกำหนดจังหวะเอง</div></div></div></section>
+<section class="game" id="game"><div class="shell"><div class="gameCard"><div class="gameTop"><div class="status"><div class="statusIcon" id="statusIcon">👀</div><div><b id="statusTitle">พร้อมเริ่มเล่น</b><span id="statusText">กด เล่นด่วน หรือเริ่มรอบใหม่ได้เลย</span></div></div><div class="hudrow"><div class="hud"><span>PROGRESS</span><b id="progress">0 / 4</b></div><div class="hud"><span>COMBO</span><b id="combo">0</b></div><div class="hud"><span>SCORE</span><b id="score">0</b></div><div class="hud"><span>ระดับ</span><b id="levelHud">1</b></div><div class="hud hidden" id="livesHud"><span>LIVES</span><b id="lives">♥♥♥</b></div></div></div><div class="timer hidden" id="timer"><i id="timerFill"></i></div><div class="stage"><div class="scene active" id="boardScene"><div class="sceneTitle"><h2 id="boardTitle">พร้อมเริ่ม</h2><p id="boardSub">เลือกโหมดและระดับจากหน้าแรกได้ตลอด</p></div><div class="answer hidden" id="answer"></div><div class="board" id="board"></div></div><div class="scene" id="targetScene"><div class="targetWrap"><div class="targetCard" id="targetCard"></div><div class="targetLabel" id="targetLabel">ตัวนี้อยู่หมายเลขอะไร?</div></div></div><div class="scene" id="choiceScene"><div class="sceneTitle"><h2 id="choiceTitle">เลือกคำตอบ</h2><p id="choiceSub">เลือกคำตอบที่ถูกต้อง</p></div><div class="choiceGrid" id="choiceGrid"></div></div><div class="scene" id="resultScene"><div class="resultWrap"><div class="resultCard"><h2>จบรอบแล้ว! 🎉</h2><p id="resultText">มาดูผลของรอบนี้กัน</p><div class="bigคะแนน" id="resultคะแนน">0</div><div style="font-size:9px;color:var(--muted)" id="resultคะแนนLabel">คะแนน</div><div class="resultMetrics"><div class="resultMetric"><b id="resultCorrect">0</b><span>ตอบถูก</span></div><div class="resultMetric"><b id="resultAcc">0%</b><span>ความแม่นยำ</span></div><div class="resultMetric"><b id="resultCombo">0</b><span>Best Combo</span></div><div class="resultMetric"><b id="resultXP">+0</b><span>XP</span></div></div><div class="insight"><strong id="insightTitle">🧠 จุดเด่นจากรอบนี้</strong><p id="insightText"></p><div class="nexts" id="nexts"></div><p style="font-size:9px;margin-top:9px">คำแนะนำอิงแนวคิด working memory, attention, visuospatial processing และงานวิจัยด้าน cognitive training ที่สรุปไว้ในเมนู “หลักการ & งานวิจัย”</p></div><div class="resultActions"><button class="btn primary" id="againBtn">เล่นอีกครั้ง</button><button class="btn" id="saveBtn">🖼️ บันทึกผล</button><button class="btn" id="shareBtn">↗ แชร์</button><button class="btn" id="resultSettings">เปลี่ยนเกม</button></div></div></div></div></div><div class="teamBar hidden" id="teamBar"></div><div class="dock"><button class="secondary" id="homeBtn">⌂</button><button class="main" id="main">เริ่มรอบใหม่</button><button class="secondary hidden" id="hintBtn">💡 <span id="hintNum">3</span></button><button class="secondary hidden" id="voiceBtn">🗣️ เฉลย</button><button class="secondary hidden" id="replayBtn">↺ ดูโจทย์</button><button class="secondary" id="settingsBtn">⚙️</button></div><div class="hintline" id="hintline">ไม่มีการจับเวลาโดยค่าเริ่มต้น คุณเป็นคนกำหนดจังหวะเอง</div></div></div></section>
 <!-- ปรับเกมเอง -->
 <div class="modal hidden" id="customModal"><div class="modalCard wide"><button class="close" data-close="customModal">×</button><h2>ปรับเกมเอง</h2><p class="lead">เลือกได้ละเอียด แต่ค่าเริ่มต้นยังคงง่าย ถ้าไม่อยากตั้งค่าให้ใช้ เล่นด่วน ได้เสมอ</p><div class="settingGrid">
 <div class="setting"><h3>👤 รูปแบบผู้เล่น</h3><div class="segment" id="styleSeg"><button class="chip active" data-style="solo">คนเดียว</button><button class="chip" data-style="team">ทีม</button></div></div>
@@ -1738,9 +1983,9 @@ async function setupSupabase(){cloudConfigured=cloudIsConfigured();renderAccount
 const PACKS={animals:["🐰","🐱","🦊","🐼","🐯","🐨","🐶","🐹","🦁","🐸","🐵","🐧","🐷","🐮","🐤","🦄","🐙","🐳","🦋","🐝"],space:["🚀","🪐","🌙","⭐","☄️","🌎","🛰️","👨‍🚀","👽","🌌","🛸","🌞","🌟","🌑","🌕","🛰️","🪐","🚀","⭐","☄️"],food:["🍓","🧁","🍪","🍎","🍯","🍉","🍩","🍒","🍰","🍬","🥐","🍇","🍊","🍑","🥝","🍫","🥨","🍋","🫐","🍦"],fantasy:["👑","🪄","🪽","🌙","✨","🦄","🦋","🔮","🏰","⭐","🧚","🐉","🧜‍♀️","🗝️","💎","🌈","🪞","📜","🛡️","⚜️"]};
 const DIFF={easy:{label:"ง่าย",n:4,cols:2,q:4,seq:3,choices:2},normal:{label:"ปานกลาง",n:9,cols:3,q:6,seq:4,choices:4},hard:{label:"ยาก",n:16,cols:4,q:8,seq:5,choices:4},expert:{label:"Expert",n:20,cols:5,q:10,seq:6,choices:6}};
 const MODES={position:"จำตำแหน่ง",match:"จับคู่",missing:"ตัวไหนหาย",swap:"สลับที่",change:"อะไรเปลี่ยน",sequence:"จำลำดับ"};
-const SOURCES={teddy:"Teddy",animals:"Animals",space:"Space",food:"Food",fantasy:"Fantasy",custom:"รูปของฉัน"};
+const SOURCES={teddy:"หมี Brain Buddy"};
 const COLLECTION=[["🧸","Classic Bear",1],["👑","Royal Bear",2],["🌙","Moon Bear",3],["🚀","Space Bear",4],["🍓","Berry Bear",5],["🌈","Rainbow Bear",6],["🔮","Magic Bear",7],["💎","Crystal Bear",8],["🐼","Panda Buddy",9],["🦄","Dream Buddy",10],["🪽","Sky Buddy",12],["🌟","Memory Star",15]];
-const ACH=[["first","🌟","ก้าวแรก","เล่นจบรอบแรก"],["perfect","👑","Perfect Memory","ความแม่นยำ 100%"],["combo5","🔥","Hot Streak","Combo 5"],["combo10","💥","Unstoppable","Combo 10"],["explorer","🗺️","Explorer","เล่นอย่างน้อย 4 โหมด"],["allmodes","🎮","All Modes","เล่นครบ 6 โหมด"],["level5","⭐","Level 5","ขึ้นถึง Level 5"],["level10","🌠","Level 10","ขึ้นถึง Level 10"],["daily3","📅","Daily 3","Daily streak 3 วัน"],["custom","🖼️","Creator","เล่นด้วยรูปของตัวเอง"],["master","🧠","Memory Master","ความแม่นยำ ≥90%"]];
+const ACH=[["first","🌟","ก้าวแรก","เล่นจบรอบแรก"],["perfect","👑","Perfect Memory","ความแม่นยำ 100%"],["combo5","🔥","Hot Streak","ตอบถูกต่อเนื่อง 5 ครั้ง"],["combo10","💥","Unstoppable","ตอบถูกต่อเนื่อง 10 ครั้ง"],["explorer","🗺️","Explorer","เล่นอย่างน้อย 4 โหมด"],["allmodes","🎮","All Modes","เล่นครบ 6 โหมด"],["level5","⭐","Level 5","ขึ้นถึง Level 5"],["level10","🌠","Level 10","ขึ้นถึง Level 10"],["master","🧠","Memory Master","ความแม่นยำ ≥90%"]];
 const TEAMCOL=["#f270a7","#8874e7","#6fd4b9","#ffd56b","#66b7e8","#f09a62"];
 let cfg={style:"solo",mode:"position",diff:"easy",source:"teddy",teams:2,answer:"screen",adaptive:false,combo:true,timer:0,lives:false,daily:false};
 let draft={...cfg};let teamData=[{name:"ทีม A",emoji:"🩷",color:TEAMCOL[0]},{name:"ทีม B",emoji:"💜",color:TEAMCOL[1]},{name:"ทีม C",emoji:"💚",color:TEAMCOL[2]},{name:"ทีม D",emoji:"💛",color:TEAMCOL[3]},{name:"ทีม E",emoji:"💙",color:TEAMCOL[4]},{name:"ทีม F",emoji:"🧡",color:TEAMCOL[5]}];
@@ -1764,7 +2009,11 @@ function ensureAudio(){if(!audioCtx&&window.AudioContext)audioCtx=new AudioConte
 function musicTick(){if(!musicEnabled)return;ensureAudio();if(!audioCtx)return;const ns=MUSIC[musicTheme]||MUSIC.cozy,n=audioCtx.currentTime,o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);o.type=musicTheme==="night"?"sine":"triangle";o.frequency.value=ns[musicStep++%ns.length];g.gain.setValueAtTime(.025*musicVolume,n);g.gain.exponentialRampToValueAtTime(.001,n+.55);o.start(n);o.stop(n+.55)}function startMusic(){musicEnabled=true;if(!musicLoop){musicTick();musicLoop=setInterval(musicTick,720)}saveAudio();updateMusic()}function stopMusic(){musicEnabled=false;if(musicLoop){clearInterval(musicLoop);musicLoop=null}saveAudio();updateMusic()}function saveAudio(){save("bb_audio",{musicEnabled,sfxEnabled,musicVolume,sfxVolume,musicTheme})}function restoreAudio(){const a=load("bb_audio",{});musicEnabled=!!a.musicEnabled;sfxEnabled=a.sfxEnabled!==false;musicVolume=a.musicVolume??.28;sfxVolume=a.sfxVolume??.55;musicTheme=a.musicTheme||"cozy";$("musicToggle").checked=musicEnabled;$("sfxToggle").checked=sfxEnabled;$("musicVol").value=Math.round(musicVolume*100);$("sfxVol").value=Math.round(sfxVolume*100);$("musicVolText").textContent=Math.round(musicVolume*100)+"%";$("sfxVolText").textContent=Math.round(sfxVolume*100)+"%";syncMusic();updateMusic()}function updateMusic(){$("musicBtn").textContent=musicEnabled?"🎶":"🎵"}function syncMusic(){document.querySelectorAll("[data-music]").forEach(b=>b.classList.toggle("active",b.dataset.music===musicTheme))}
 function applyTheme(mode,remember=true){themeMode=mode;let dark=mode==="dark";if(mode==="auto")dark=window.matchMedia?.("(prefers-color-scheme: dark)").matches;document.body.classList.toggle("dark",dark);$("themeBtn").textContent=dark?"☀️":"🌙";$("themeMeta").content=dark?"#171423":"#fff8fb";document.querySelectorAll("[data-theme]").forEach(b=>b.classList.toggle("active",b.dataset.theme===themeMode));if(remember)save("bb_theme",mode)}function applyMotion(mode,remember=true){motionMode=mode;document.body.classList.toggle("reduced",mode==="reduced");document.body.classList.toggle("off",mode==="off");document.querySelectorAll("[data-motion]").forEach(b=>b.classList.toggle("active",b.dataset.motion===mode));if(remember)save("bb_motion",mode)}function restoreAccess(){applyTheme(load("bb_theme","light"),false);applyMotion(load("bb_motion","full"),false);const l=load("bb_large",false),c=load("bb_contrast",false);$("largeToggle").checked=l;$("contrastToggle").checked=c;document.body.classList.toggle("large",l);document.body.classList.toggle("contrast",c)}
 function startTimer(expire){stopTimer();if(!cfg.timer)return;$("timer").classList.remove("hidden");const total=cfg.timer*1000;timerEnd=Date.now()+total;timerId=setInterval(()=>{const left=Math.max(0,timerEnd-Date.now());$("timerFill").style.width=(left/total*100)+"%";if(left<=0){stopTimer();expire?.()}},100)}function stopTimer(){if(timerId){clearInterval(timerId);timerId=null}$("timer").classList.add("hidden");$("timerFill").style.width="100%"}function loseLife(){if(!cfg.lives)return;lives=Math.max(0,lives-1);updateHUD();if(lives===0)setTimeout(finishRound,420)}function useHint(){if(hints<=0)return;hints--;updateHUD();sfx("hint");if(state==="position_answer"){const wrong=[...$("board").children].filter((_,i)=>i!==targetIndex);shuf(wrong).slice(0,Math.max(1,Math.floor(wrong.length/2))).forEach(x=>{x.style.opacity=.24;x.style.pointerEvents="none"})}else if(state==="swap_pick"&&swapPair.length){$("board").children[swapPair[0]]?.classList.add("selected")}else if(state==="missing_choice"){const cs=[...$("choiceGrid").children].filter(x=>!x.classList.contains("correct"));if(cs.length)cs[0].style.opacity=.25}$("hintline").textContent="Hint ถูกใช้แล้วเพื่อช่วยลดความซับซ้อนของโจทย์";saveResume()}
-function record(ok){if(ok){correct++;combo++;bestCombo=Math.max(bestCombo,combo);score+=100*(cfg.combo?Math.min(5,Math.max(1,combo)):1);adaptiveWins++;adaptiveMisses=0;sfx("ok");if(cfg.adaptive&&adaptiveWins>=3&&adaptiveShift<1){adaptiveShift++;adaptiveWins=0;toast("🔥 เพิ่มความท้าทายขึ้นเล็กน้อย")}}else{combo=0;adaptiveWins=0;adaptiveMisses++;sfx("bad");loseLife();if(cfg.adaptive&&adaptiveMisses>=2&&adaptiveShift>-1){adaptiveShift--;adaptiveMisses=0;toast("🌱 ปรับให้สบายขึ้นเล็กน้อย")}}updateHUD();saveResume()}function surprise(){if(cfg.style!=="solo"||lucky||Math.random()>.14)return;lucky=true;score+=150;sfx("bonus");updateHUD();toast("✨ Lucky Bear! โบนัส +150 คะแนน")}
+const MODE_POINTS={position:100,match:80,missing:120,swap:150,change:130,sequence:160};
+const DIFF_MULT={easy:1,normal:1.25,hard:1.5,expert:2};
+function pointsPerCorrect(){return Math.round((MODE_POINTS[cfg.mode]||100)*(DIFF_MULT[effDiff()]||1))}
+function record(ok){if(ok){correct++;combo++;bestCombo=Math.max(bestCombo,combo);score+=pointsPerCorrect();sfx("ok")}else{combo=0;sfx("bad")}updateHUD();saveResume()}
+function surprise(){return}
 function positionAsk(){stopTimer();if(asked.size>=qCount())return finishRound();const a=layout.map((_,i)=>i).filter(i=>!asked.has(i));if(!a.length)return finishRound();targetIndex=a[Math.floor(Math.random()*a.length)];asked.add(targetIndex);pickedIndex=null;state="position_target";renderTarget(targetIndex);showScene("target");setStatus("🧸","ดูรูปเป้าหมาย","จำว่าตัวนี้เคยอยู่ช่องไหน");setMain("พร้อมตอบ",positionAnswer);$("replayBtn").classList.add("hidden");updateHUD();sfx("flip");saveResume()}
 function positionAnswer(){state="position_answer";showScene("board");renderBoard(true);$("boardTitle").textContent="อยู่หมายเลขไหน?";$("boardSub").textContent=cfg.answer==="voice"&&cfg.style==="team"?"ตอบออกเสียง แล้วกดเฉลยเมื่อพร้อม":"แตะหมายเลขที่คิดว่าถูกต้อง";setStatus(cfg.answer==="voice"&&cfg.style==="team"?"🗣️":"🔢",cfg.answer==="voice"&&cfg.style==="team"?"ตอบออกเสียง":"เลือกตำแหน่ง","ตอบแล้วเปิดเฉลยทั้งกระดาน");if(cfg.answer==="voice"&&cfg.style==="team"){$("voiceBtn").classList.remove("hidden");$("voiceBtn").onclick=()=>positionReveal(true);setMain("เฉลยเลย",()=>positionReveal(true))}else{[...$("board").children].forEach((s,i)=>s.onclick=()=>{pickedIndex=i;[...$("board").children].forEach((x,j)=>x.classList.toggle("selected",j===i));setMain("เฉลย",()=>positionReveal(false));sfx("tap");saveResume()});setMain("เลือกหมายเลขก่อน",()=>{},true)}$("replayBtn").classList.remove("hidden");$("replayBtn").onclick=()=>{renderTarget(targetIndex);showScene("target");setMain("กลับไปตอบ",positionAnswer);sfx("flip")};startTimer(()=>positionReveal(false,true));saveResume()}
 function positionReveal(verbal=false,timeout=false){stopTimer();if(!verbal&&!timeout&&pickedIndex===null)return;state="position_reveal";showScene("board");renderBoard(false);[...$("board").children].forEach((s,i)=>{if(i===targetIndex)s.classList.add("correct");if(!verbal&&pickedIndex!==null&&i===pickedIndex&&i!==targetIndex)s.classList.add("wrong")});if(verbal&&cfg.style==="team")sfx("ok");else record(!timeout&&pickedIndex===targetIndex);$("answer").textContent=`✨ คำตอบคือหมายเลข ${targetIndex+1}`;$("answer").classList.remove("hidden");$("boardTitle").textContent="เฉลย";$("boardSub").textContent="เปิดภาพทั้งหมดให้เห็นตำแหน่งเดิม";setStatus("✅","เฉลยแล้ว",cfg.style==="team"?"เพิ่มคะแนนให้ทีมที่ตอบถูก แล้วไปข้อถัดไป":"ดูคำตอบ แล้วไปข้อถัดไป");$("voiceBtn").classList.add("hidden");surprise();setMain(asked.size>=qCount()?"ดูผลลัพธ์":"คำถามใหม่จากกระดานเดิม",asked.size>=qCount()?finishRound:positionAsk);saveResume()}
@@ -1778,9 +2027,41 @@ function changeReveal(timeout=false){stopTimer();renderBoard(false,{[changeIndex
 function sequenceStart(){if(sequencePlaying)return;sequencePlaying=true;sequencePick=[];sequenceOrder=[];while(sequenceOrder.length<Math.min(dc().seq,layout.length)){const x=Math.floor(Math.random()*layout.length);if(!sequenceOrder.includes(x))sequenceOrder.push(x)}state="sequence_show";showScene("target");setStatus("✨","จำลำดับ",`จำให้ครบ ${sequenceOrder.length} ตัว`);setMain("กำลังแสดง…",()=>{},true);$("hintBtn").classList.add("hidden");let k=0;const speed={easy:1000,normal:820,hard:670,expert:540}[effDiff()];const next=()=>{if(k>=sequenceOrder.length){setTimeout(sequenceAnswer,280);return}renderTarget(sequenceOrder[k]);$("targetLabel").textContent=`ลำดับ ${k+1} / ${sequenceOrder.length}`;sfx("flip");k++;setTimeout(next,speed)};next()}
 function sequenceAnswer(){sequencePlaying=false;state="sequence_answer";showScene("board");renderBoard();$("boardTitle").textContent="แตะตามลำดับเดิม";$("boardSub").textContent="แตะตัวละครหรือคำตามลำดับที่เพิ่งเห็น";setStatus("👆","เรียงลำดับให้ถูก","แตะให้ครบทุกตัว");sequencePick=[];[...$("board").children].forEach((s,i)=>s.onclick=()=>{if(sequencePick.length>=sequenceOrder.length)return;sequencePick.push(i);s.classList.add("selected");sfx("tap");setMain(sequencePick.length===sequenceOrder.length?"ตรวจคำตอบ":`เลือกแล้ว ${sequencePick.length}/${sequenceOrder.length}`,sequenceReveal,sequencePick.length!==sequenceOrder.length)});setMain("เริ่มเลือก",sequenceReveal,true);startTimer(()=>sequenceReveal(true));saveResume()}
 function sequenceReveal(timeout=false){stopTimer();const ok=!timeout&&sequencePick.length===sequenceOrder.length&&sequencePick.every((x,i)=>x===sequenceOrder[i]);asked.add(asked.size+1);record(ok);renderBoard();sequenceOrder.forEach(i=>$("board").children[i]?.classList.add("correct"));$("answer").textContent=`✨ ลำดับที่ถูก: ${sequenceOrder.map(i=>i+1).join(" → ")}`;$("answer").classList.remove("hidden");setStatus("✅","เฉลยลำดับแล้ว","ดูตำแหน่งตามลำดับ แล้วไปข้อถัดไป");surprise();$("hintBtn").classList.remove("hidden");setMain(asked.size>=qCount()?"ดูผลลัพธ์":"ลำดับถัดไป",asked.size>=qCount()?finishRound:startMode);saveResume()}
-function insight(rate){const D={position:["📍","ความจำภาพและตำแหน่ง","การคงข้อมูลภาพ-ตำแหน่งไว้ชั่วคราวและเรียกกลับมาใช้"],match:["🧩","การจำคู่และอัปเดตข้อมูล","การจำสิ่งที่เพิ่งเห็นและอัปเดตตำแหน่งของคู่ภาพ"],missing:["👀","การสังเกตและเปรียบเทียบภาพ","การเก็บภาพรวมไว้แล้วตรวจหาสิ่งที่หายไป"],swap:["🔄","ความจำเชิงพื้นที่และการเปรียบเทียบ","การจำตำแหน่งเดิมและตรวจจับการเปลี่ยนแปลงของตำแหน่ง"],change:["🔎","ความใส่ใจต่อรายละเอียด","การจำรายละเอียดแล้วตรวจจับความเปลี่ยนแปลง"],sequence:["🔢","ความจำลำดับ","การเก็บและเรียกคืนข้อมูลตามลำดับ"]}[cfg.mode];let text,next;if(rate>=90){text=`คุณทำผลงานได้โดดเด่นในโจทย์ ${D[1]} ระดับนี้ ความแม่นยำสูงสะท้อนว่ากลยุทธ์การสังเกตและการเรียกคืนข้อมูลที่ใช้ในเกมมีความสม่ำเสมอมาก`;next=["เพิ่มระดับความยาก","เปิด Adaptive Difficulty","ลองโหมดอื่นที่ใช้ข้อมูลหลายแบบ"]}else if(rate>=75){text=`คุณมีพื้นฐานที่แข็งแรงใน ${D[2]} รอบนี้ตอบได้แม่นเป็นส่วนใหญ่ เหมาะกับการเพิ่มความท้าทายทีละขั้นเพื่อให้ใช้ข้อมูลพร้อมกันมากขึ้น`;next=["เล่นระดับเดิมให้คล่อง","เพิ่มจาก 2×2 เป็น 3×3","ลอง Combo Challenge"]}else if(rate>=55){text=`รอบนี้เป็นช่วงที่ดีสำหรับสร้างความสม่ำเสมอใน ${D[2]} การเล่นซ้ำด้วยกระดานขนาดพอดีช่วยให้ทดลองวิธีสแกนภาพและจัดกลุ่มข้อมูลที่จำง่ายขึ้น`;next=["เล่นกระดานขนาดเดิม","ใช้ Hint เพื่อเรียนรู้กลยุทธ์","สังเกตทีละแถว"]}else{text=`รอบนี้เหมาะมากสำหรับวางพื้นฐานของ ${D[2]} การเริ่มจาก 2×2 เปิดโอกาสให้ฝึกสังเกตทีละส่วนและสร้างวิธีจำที่เป็นระบบก่อนเพิ่มจำนวนข้อมูล`;next=["เริ่ม 2×2","จำเป็นคู่หรือเป็นแถว","เล่นซ้ำสั้น ๆ หลายรอบ"]}return{title:`${D[0]} จุดเด่น: ${D[1]}`,text,next}}
-function xpEarned(rate){return 50+correct*18+Math.min(100,bestCombo*8)+(rate>=90?80:0)+(cfg.daily?100:0)}function finishRound(){stopTimer();roundComplete=true;roundStarted=false;clearResume();showScene("result");const measurable=!(cfg.style==="team"&&cfg.mode==="position"&&cfg.answer==="voice"),rate=measurable&&asked.size?Math.round(correct/asked.size*100):0;roundXP=xpEarned(rate);const p=profile();p.xp=(p.xp||0)+roundXP;save("bb_profile",p);renderProfile();const finalคะแนน=cfg.style==="solo"?score:Math.max(...teamคะแนนs.slice(0,cfg.teams));$("resultคะแนน").textContent=finalคะแนน;$("resultคะแนนLabel").textContent=cfg.style==="solo"?"คะแนนรอบนี้":"คะแนนทีมสูงสุด";$("resultCorrect").textContent=measurable?correct:"—";$("resultAcc").textContent=measurable?rate+"%":"ทีม";$("resultCombo").textContent=bestCombo;$("resultXP").textContent="+"+roundXP;$("resultText").textContent=rate>=90?"ยอดเยี่ยมมาก! รอบนี้แม่นและสม่ำเสมอ":rate>=75?"ทำได้ดีมาก พร้อมต่อยอดความท้าทาย":"รอบนี้สร้างพื้นฐานได้ดี ลองต่ออีกหนึ่งรอบ";let ins;if(!measurable){const mx=Math.max(...teamคะแนนs.slice(0,cfg.teams));ins={title:"👥 จุดเด่น: การเล่นร่วมกันและการเรียกคืนข้อมูล",text:`รอบนี้เปิดโอกาสให้สมาชิกช่วยกันสังเกต จำ และเรียกข้อมูลกลับมาใช้ผ่านการตอบออกเสียง คะแนนทีมสูงสุด ${mx} คะแนนสามารถใช้เป็นเป้าหมายสำหรับรอบถัดไปได้`,next:["ลองเพิ่มจำนวนภาพ","สลับทีมที่ตอบแต่ละข้อ","ใช้ Random Team Picker"]}}else ins=insight(rate);$("insightTitle").textContent=ins.title;$("insightText").textContent=ins.text;$("nexts").innerHTML=ins.next.map(x=>`<span>${x}</span>`).join("");saveHistory(rate,finalคะแนน);checkความสำเร็จs(rate);if(cfg.daily)markDaily();renderHome();renderStats();renderCollection();setStatus("🏁","จบรอบแล้ว","ดูจุดเด่นจากรอบนี้ แล้วเลือกความท้าทายถัดไป");setMain("เล่นอีกครั้ง",()=>startRound());$("hintBtn").classList.add("hidden");$("voiceBtn").classList.add("hidden");$("replayBtn").classList.add("hidden");sfx("done")}
-function saveHistory(rate,sc){const h=hist();h.push({date:Date.now(),mode:cfg.mode,diff:effDiff(),source:cfg.source,style:cfg.style,rate,score:sc,combo:bestCombo,xp:roundXP});save("bb_history",h.slice(-80));cloudRecordGame(rate,sc)}function unlock(id){const b=badgeData();if(b[id])return;b[id]=Date.now();save("bb_badges",b);const a=ACH.find(x=>x[0]===id);if(a)toast(`🏅 ความสำเร็จ: ${a[2]}`)}function checkความสำเร็จs(rate){const h=hist();unlock("first");if(rate===100)unlock("perfect");if(bestCombo>=5)unlock("combo5");if(bestCombo>=10)unlock("combo10");const ms=new Set(h.map(x=>x.mode));if(ms.size>=4)unlock("explorer");if(ms.size>=6)unlock("allmodes");if(level(profile().xp||0)>=5)unlock("level5");if(level(profile().xp||0)>=10)unlock("level10");if(load("bb_daily_streak",0)>=3)unlock("daily3");if(cfg.source==="custom")unlock("custom");if(rate>=90)unlock("master")}
+function insight(rate){const D={position:["📍","ความจำภาพและตำแหน่ง","การคงข้อมูลภาพ-ตำแหน่งไว้ชั่วคราวและเรียกกลับมาใช้"],match:["🧩","การจำคู่และอัปเดตข้อมูล","การจำสิ่งที่เพิ่งเห็นและอัปเดตตำแหน่งของคู่ภาพ"],missing:["👀","การสังเกตและเปรียบเทียบภาพ","การเก็บภาพรวมไว้แล้วตรวจหาสิ่งที่หายไป"],swap:["🔄","ความจำเชิงพื้นที่และการเปรียบเทียบ","การจำตำแหน่งเดิมและตรวจจับการเปลี่ยนแปลงของตำแหน่ง"],change:["🔎","ความใส่ใจต่อรายละเอียด","การจำรายละเอียดแล้วตรวจจับความเปลี่ยนแปลง"],sequence:["🔢","ความจำลำดับ","การเก็บและเรียกคืนข้อมูลตามลำดับ"]}[cfg.mode];let text,next;if(rate>=90){text=`คุณทำผลงานได้โดดเด่นในโจทย์ ${D[1]} ระดับนี้ ความแม่นยำสูงสะท้อนว่ากลยุทธ์การสังเกตและการเรียกคืนข้อมูลที่ใช้ในเกมมีความสม่ำเสมอมาก`;next=["เพิ่มระดับความยาก","ลองโหมดอื่น","ตั้งเป้าคะแนนรอบใหม่"]}else if(rate>=75){text=`คุณมีพื้นฐานที่แข็งแรงใน ${D[2]} รอบนี้ตอบได้แม่นเป็นส่วนใหญ่ เหมาะกับการเพิ่มความท้าทายทีละขั้นเพื่อให้ใช้ข้อมูลพร้อมกันมากขึ้น`;next=["เล่นระดับเดิมให้คล่อง","เพิ่มจาก 2×2 เป็น 3×3","ลองโหมดที่คะแนนสูงขึ้น"]}else if(rate>=55){text=`รอบนี้เป็นช่วงที่ดีสำหรับสร้างความสม่ำเสมอใน ${D[2]} การเล่นซ้ำด้วยกระดานขนาดพอดีช่วยให้ทดลองวิธีสแกนภาพและจัดกลุ่มข้อมูลที่จำง่ายขึ้น`;next=["เล่นกระดานขนาดเดิม","ใช้ Hint เมื่อจำเป็น","สังเกตทีละแถว"]}else{text=`รอบนี้เหมาะมากสำหรับวางพื้นฐานของ ${D[2]} การเริ่มจาก 2×2 เปิดโอกาสให้ฝึกสังเกตทีละส่วนและสร้างวิธีจำที่เป็นระบบก่อนเพิ่มจำนวนข้อมูล`;next=["เริ่ม 2×2","จำเป็นคู่หรือเป็นแถว","เล่นซ้ำสั้น ๆ หลายรอบ"]}return{title:`${D[0]} จุดเด่น: ${D[1]}`,text,next}}
+function xpFromScore(sc){
+  sc=Number(sc)||0;
+  if(sc>=2500)return 400;
+  if(sc>=1800)return 300;
+  if(sc>=1200)return 220;
+  if(sc>=800)return 150;
+  if(sc>=400)return 100;
+  return 50;
+}
+function finishRound(){
+  stopTimer();roundComplete=true;roundStarted=false;clearResume();showScene("result");
+  const measurable=!(cfg.style==="team"&&cfg.mode==="position"&&cfg.answer==="voice");
+  const rate=measurable&&asked.size?Math.round(correct/asked.size*100):0;
+  const finalคะแนน=cfg.style==="solo"?score:Math.max(...teamคะแนนs.slice(0,cfg.teams));
+  roundXP=cfg.style==="solo"?xpFromScore(finalคะแนน):0;
+  const p=profile();p.xp=(p.xp||0)+roundXP;save("bb_profile",p);renderProfile();
+  $("resultคะแนน").textContent=finalคะแนน;
+  $("resultคะแนนLabel").textContent=cfg.style==="solo"?"คะแนนรอบนี้":"คะแนนทีมสูงสุด";
+  $("resultCorrect").textContent=measurable?correct:"—";
+  $("resultAcc").textContent=measurable?rate+"%":"ทีม";
+  $("resultCombo").textContent=bestCombo;
+  $("resultXP").textContent=cfg.style==="solo"?"+"+roundXP:"0";
+  $("resultText").textContent=cfg.style==="team"?"จบรอบทีมแล้ว! คะแนนทีมใช้สำหรับการแข่งขันในกิจกรรม":rate>=90?"ยอดเยี่ยมมาก! รอบนี้แม่นและสม่ำเสมอ":rate>=75?"ทำได้ดีมาก พร้อมต่อยอดความท้าทาย":"รอบนี้สร้างพื้นฐานได้ดี ลองต่ออีกหนึ่งรอบ";
+  let ins;
+  if(!measurable){
+    const mx=Math.max(...teamคะแนนs.slice(0,cfg.teams));
+    ins={title:"👥 จุดเด่น: การเล่นร่วมกันและการเรียกคืนข้อมูล",text:`รอบนี้เปิดโอกาสให้สมาชิกช่วยกันสังเกต จำ และเรียกข้อมูลกลับมาใช้ผ่านการตอบออกเสียง คะแนนทีมสูงสุด ${mx} คะแนน โดยโหมดทีมจะไม่เพิ่ม XP ส่วนตัวหรืออันดับ Cloud`,next:["ลองเพิ่มจำนวนภาพ","สลับทีมที่ตอบแต่ละข้อ","เพิ่มระดับความยาก"]};
+  }else ins=insight(rate);
+  $("insightTitle").textContent=ins.title;$("insightText").textContent=ins.text;$("nexts").innerHTML=ins.next.map(x=>`<span>${x}</span>`).join("");
+  saveHistory(rate,finalคะแนน);checkความสำเร็จs(rate);renderHome();renderStats();renderCollection();
+  setStatus("🏁","จบรอบแล้ว","ดูคะแนนและ XP ที่ได้รับ แล้วเลือกความท้าทายถัดไป");
+  setMain("เล่นอีกครั้ง",()=>startRound());$("hintBtn").classList.add("hidden");$("voiceBtn").classList.add("hidden");$("replayBtn").classList.add("hidden");sfx("done")
+}
+function saveHistory(rate,sc){const h=hist();h.push({date:Date.now(),mode:cfg.mode,diff:effDiff(),source:cfg.source,style:cfg.style,rate,score:sc,combo:bestCombo,xp:roundXP});save("bb_history",h.slice(-80));if(cfg.style==="solo")cloudRecordGame(rate,sc)}function unlock(id){const b=badgeData();if(b[id])return;b[id]=Date.now();save("bb_badges",b);const a=ACH.find(x=>x[0]===id);if(a)toast(`🏅 ความสำเร็จ: ${a[2]}`)}function checkความสำเร็จs(rate){const h=hist();unlock("first");if(rate===100)unlock("perfect");if(bestCombo>=5)unlock("combo5");if(bestCombo>=10)unlock("combo10");const ms=new Set(h.map(x=>x.mode));if(ms.size>=4)unlock("explorer");if(ms.size>=6)unlock("allmodes");if(level(profile().xp||0)>=5)unlock("level5");if(level(profile().xp||0)>=10)unlock("level10");if(load("bb_daily_streak",0)>=3)unlock("daily3");if(cfg.source==="custom")unlock("custom");if(rate>=90)unlock("master")}
 function renderProfile(){const p=profile(),lv=level(p.xp||0);$("navName").textContent=p.name||"ผู้เล่น";$("navAvatar").textContent=p.avatar||"🧸";$("profileName").value=p.name||"";$("profileLevel").textContent=lv;$("xpBar").style.width=((p.xp||0)%500/500*100)+"%";$("xpLabel").textContent=`${(p.xp||0)%500} / 500 XP`;$("levelHud").textContent=lv}function renderHome(){const h=hist(),p=profile(),rates=h.map(x=>x.rate).filter(x=>typeof x==="number");$("homeLevel").textContent=level(p.xp||0);$("homeXP").textContent=p.xp||0;$("homeBest").textContent=h.length?Math.max(...h.map(x=>x.score||0)):0;$("homeAcc").textContent=(rates.length?Math.max(...rates):0)+"%";$("homeRounds").textContent=h.length}function renderStats(){const h=hist(),rates=h.map(x=>x.rate).filter(x=>typeof x==="number");$("statRounds").textContent=h.length;$("statBest").textContent=h.length?Math.max(...h.map(x=>x.score||0)):0;$("statAcc").textContent=(rates.length?Math.max(...rates):0)+"%";$("statCombo").textContent=h.length?Math.max(...h.map(x=>x.combo||0)):0;const last=h.filter(x=>typeof x.rate==="number").slice(-10),W=760,H=170,p=25;let svg=`<line x1="${p}" y1="${H-p}" x2="${W-p}" y2="${H-p}" stroke="rgba(136,116,231,.15)"/><line x1="${p}" y1="${p}" x2="${p}" y2="${H-p}" stroke="rgba(136,116,231,.15)"/>`;if(last.length){const pts=last.map((x,i)=>[last.length===1?W/2:p+i*((W-2*p)/(last.length-1)),H-p-(x.rate/100)*(H-2*p)]);svg+=`<polyline points="${pts.map(x=>x.join(",")).join(" ")}" fill="none" stroke="#8874e7" stroke-width="5" stroke-linecap="round"/>`;pts.forEach(q=>svg+=`<circle cx="${q[0]}" cy="${q[1]}" r="6" fill="white" stroke="#f270a7" stroke-width="4"/>`)}$("chartSvg").innerHTML=svg;const b=badgeData();$("badgeGrid").innerHTML="";ACH.forEach(a=>{const d=document.createElement("div");d.className="badge"+(b[a[0]]?"":" lock");d.innerHTML=`<span>${a[1]}</span><div><strong>${a[2]}</strong><small>${a[3]}</small></div>`;$("badgeGrid").appendChild(d)})}function renderCollection(){const lv=level(profile().xp||0);$("collection").innerHTML="";COLLECTION.forEach(([em,n,need])=>{const d=document.createElement("div");d.className="collect"+(lv>=need?"":" lock");d.innerHTML=`<span>${em}</span><div><strong>${n}</strong><small>${lv>=need?"ปลดล็อกแล้ว":`Level ${need}`}</small></div>`;if(lv>=need)d.onclick=()=>{const p=profile();p.avatar=em;save("bb_profile",p);renderProfile();toast(`เลือก ${n} แล้ว`)};$("collection").appendChild(d)})}
 function dailyCfg(){const r=seeded(todaySeed()),ms=["position","missing","swap","change","sequence"],ds=["easy","normal","normal","hard"],ss=["teddy","animals","space","food","fantasy"];return{mode:ms[Math.floor(r()*ms.length)],diff:ds[Math.floor(r()*ds.length)],source:ss[Math.floor(r()*ss.length)]}}function renderDaily(){const d=dailyCfg();$("dailyTitle").textContent=`${MODES[d.mode]} • ${DIFF[d.diff].label}`;$("dailyText").textContent=`วันนี้ใช้ชุด ${SOURCES[d.source]} และรับโบนัส +100 XP เมื่อจบรอบ`;$("dailyStreak").textContent=load("bb_daily_streak",0)}function startDaily(){const d=dailyCfg();cfg={...cfg,style:"solo",mode:d.mode,diff:d.diff,source:d.source,teams:2,answer:"screen",adaptive:false,combo:true,timer:0,lives:false,daily:true};updateSummary();startRound(seeded(todaySeed()))}function markDaily(){const today=new Date().toISOString().slice(0,10),last=load("bb_daily_last",""),st=load("bb_daily_streak",0);if(last===today)return;const y=new Date(Date.now()-86400000).toISOString().slice(0,10);save("bb_daily_streak",last===y?st+1:1);save("bb_daily_last",today);renderDaily()}
 function syncDraft(){document.querySelectorAll("[data-style]").forEach(b=>b.classList.toggle("active",b.dataset.style===draft.style));document.querySelectorAll("[data-mode]").forEach(b=>b.classList.toggle("active",b.dataset.mode===draft.mode));document.querySelectorAll("[data-diff]").forEach(b=>b.classList.toggle("active",b.dataset.diff===draft.diff));document.querySelectorAll("[data-source]").forEach(b=>b.classList.toggle("active",b.dataset.source===draft.source));document.querySelectorAll("[data-answer]").forEach(b=>b.classList.toggle("active",b.dataset.answer===draft.answer));$("adaptiveToggle").checked=draft.adaptive;$("comboToggle").checked=draft.combo;$("timerSelect").value=draft.timer;$("livesToggle").checked=draft.lives;$("teamCount").value=draft.teams;document.querySelectorAll(".teamSetting").forEach(x=>x.classList.toggle("hidden",draft.style!=="team"));$("answerBox").classList.toggle("hidden",!(draft.style==="team"&&draft.mode==="position"));$("uploadBox").classList.toggle("hidden",draft.source!=="custom");renderTeamEditor()}function openCustom(){draft={...cfg,daily:false};syncDraft();openModal("customModal")}function applyCustom(){draft.adaptive=$("adaptiveToggle").checked;draft.combo=$("comboToggle").checked;draft.timer=Number($("timerSelect").value);draft.lives=$("livesToggle").checked;draft.teams=Math.max(2,Math.min(6,Number($("teamCount").value)));if(draft.source==="custom"&&customImages.length<4){toast("กรุณาอัปโหลดอย่างน้อย 4 รูป");return}cfg={...draft,daily:false};closeModal("customModal");updateSummary();startRound()}function renderTeamEditor(){$("teamEditor").innerHTML="";for(let i=0;i<draft.teams;i++){const t=teamData[i],d=document.createElement("div");d.className="teamEdit";d.innerHTML=`<input type="color" value="${t.color}"><input class="input" value="${t.name}" maxlength="16"><input class="input" value="${t.emoji}" maxlength="2">`;const z=d.querySelectorAll("input");z[0].oninput=()=>t.color=z[0].value;z[1].oninput=()=>t.name=z[1].value||`ทีม ${String.fromCharCode(65+i)}`;z[2].oninput=()=>t.emoji=z[2].value||"⭐";$("teamEditor").appendChild(d)}}function uploads(files){const f=[...files].slice(0,20);Promise.all(f.map(file=>new Promise(res=>{const r=new FileReader();r.onload=()=>compress(r.result,res);r.readAsDataURL(file)}))).then(a=>{customImages=a.filter(Boolean);save("bb_custom",customImages);renderUploads();toast(`เพิ่มรูป ${customImages.length} รูปแล้ว`)})}function compress(src,done){const im=new Image();im.onload=()=>{const c=document.createElement("canvas"),m=360,s=Math.min(1,m/Math.max(im.width,im.height));c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext("2d").drawImage(im,0,0,c.width,c.height);done(c.toDataURL("image/jpeg",.78))};im.onerror=()=>done(null);im.src=src}function renderUploads(){$("uploadPreview").innerHTML="";customImages.forEach(x=>{const i=document.createElement("img");i.src=x;$("uploadPreview").appendChild(i)})}function saveResume(){if(!roundStarted||roundComplete)return;save("bb_resume",{cfg,layout,baseLayout,asked:[...asked],correct,score,combo,bestCombo,lives,hints,state,targetIndex,pickedIndex,missingId,swapPair,swapPicks,changeIndex,changeAlt,teamคะแนนs,adaptiveShift,customImages});$("resumeBtn").classList.remove("hidden")}function clearResume(){localStorage.removeItem("bb_resume");$("resumeBtn").classList.add("hidden")}function restoreResume(){const r=load("bb_resume",null);if(!r)return;cfg={...cfg,...r.cfg};if(cfg.source==="study")cfg.source="teddy";cfg.teams=Math.max(2,Math.min(6,Number(cfg.teams)||2));layout=r.layout||[];baseLayout=r.baseLayout||[];asked=new Set(r.asked||[]);correct=r.correct||0;score=r.score||0;combo=r.combo||0;bestCombo=r.bestCombo||0;lives=r.lives??3;hints=r.hints??3;state=r.state||"idle";targetIndex=r.targetIndex;pickedIndex=r.pickedIndex;missingId=r.missingId;swapPair=r.swapPair||[];swapPicks=r.swapPicks||[];changeIndex=r.changeIndex;changeAlt=r.changeAlt;teamคะแนนs=[...(r.teamคะแนนs||[]),0,0,0,0,0,0].slice(0,6);adaptiveShift=r.adaptiveShift||0;customImages=r.customImages||customImages;roundStarted=true;roundComplete=false;updateSummary();renderTeams();updateHUD();if(state==="position_target"){renderTarget(targetIndex);showScene("target");setMain("พร้อมตอบ",positionAnswer)}else if(state==="position_answer")positionAnswer();else startMode();$("game").scrollIntoView({behavior:"smooth"})}
@@ -1888,6 +2169,77 @@ window.addEventListener("load",()=>{
  }
  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",combineHeader);
  else combineHeader();
+})();
+</script>
+<script>
+(function brainBuddyV20ModeHub(){
+  const modeNames={position:"📍 จำตำแหน่ง",match:"🧩 จับคู่",missing:"👀 ตัวไหนหาย",swap:"🔄 สลับที่",change:"🔎 อะไรเปลี่ยน",sequence:"🔢 จำลำดับ"};
+  const diffNames={easy:"ง่าย 2×2",normal:"ปานกลาง 3×3",hard:"ยาก 4×4",expert:"Expert"};
+  let selectedMode="position",selectedDiff="easy",selectedStyle="solo",selectedTeams=2;
+  const $q=s=>document.querySelector(s);
+
+  function sync(){
+    document.querySelectorAll("[data-bb-mode]").forEach(b=>b.classList.toggle("active",b.dataset.bbMode===selectedMode));
+    document.querySelectorAll("[data-bb-diff]").forEach(b=>b.classList.toggle("active",b.dataset.bbDiff===selectedDiff));
+    document.querySelectorAll("[data-bb-style]").forEach(b=>b.classList.toggle("active",b.dataset.bbStyle===selectedStyle));
+    document.querySelectorAll("[data-bb-team]").forEach(b=>b.classList.toggle("active",Number(b.dataset.bbTeam)===selectedTeams));
+    const teamBox=$q("#bbTeamCount"); if(teamBox)teamBox.classList.toggle("show",selectedStyle==="team");
+    const styleHint=$q("#bbStyleHint");
+    if(styleHint)styleHint.textContent=selectedStyle==="solo"?"โหมดเดี่ยวเก็บ XP และขึ้นอันดับได้":"โหมดทีมไม่เพิ่ม XP/Cloud Rank";
+    if(selectedStyle==="team"&&selectedMode!=="position"){
+      selectedMode="position";
+      document.querySelectorAll("[data-bb-mode]").forEach(b=>b.classList.toggle("active",b.dataset.bbMode==="position"));
+      if(styleHint)styleHint.textContent="โหมดทีมใช้กับ “จำตำแหน่ง” เพื่อให้ตอบออกเสียงและเพิ่มคะแนนทีม";
+    }
+    const t=$q("#bbSelectedTitle"),d=$q("#bbSelectedText");
+    if(t)t.textContent=`${modeNames[selectedMode]} • ${diffNames[selectedDiff]}`;
+    if(d)d.textContent=`${selectedStyle==="solo"?"เล่นคนเดียว":selectedTeams+" ทีม"} • หมี Brain Buddy • ไม่มีการจับเวลา`;
+  }
+
+  document.addEventListener("click",e=>{
+    const m=e.target.closest("[data-bb-mode]");
+    if(m){selectedMode=m.dataset.bbMode;if(selectedStyle==="team"&&selectedMode!=="position")selectedStyle="solo";sync();return}
+    const d=e.target.closest("[data-bb-diff]");
+    if(d){selectedDiff=d.dataset.bbDiff;sync();return}
+    const s=e.target.closest("[data-bb-style]");
+    if(s){selectedStyle=s.dataset.bbStyle;if(selectedStyle==="team"&&selectedMode!=="position")selectedMode="position";sync();return}
+    const tc=e.target.closest("[data-bb-team]");
+    if(tc){selectedTeams=Number(tc.dataset.bbTeam)||2;sync();return}
+  });
+
+  const start=$q("#bbStartSelected");
+  if(start)start.addEventListener("click",()=>{
+    cfg={
+      ...cfg,
+      style:selectedStyle,
+      mode:selectedMode,
+      diff:selectedDiff,
+      source:"teddy",
+      teams:selectedTeams,
+      answer:selectedStyle==="team"?"voice":"screen",
+      adaptive:false,combo:false,timer:0,lives:false,daily:false
+    };
+    updateSummary();startRound();
+  });
+
+  // Existing buttons now route to the simple chooser instead of the removed advanced modal.
+  const goChooser=()=>{
+    const hub=$q("#bbModeHub");if(hub)hub.scrollIntoView({behavior:"smooth",block:"start"});
+  };
+  const settings=$q("#settingsBtn"), resultSettings=$q("#resultSettings");
+  if(settings)settings.onclick=goChooser;
+  if(resultSettings){resultSettings.textContent="เลือกเกมอื่น";resultSettings.onclick=goChooser}
+
+  // Quick play stays the fastest path but is always Teddy-only.
+  const qp=$q("#quickPlay");
+  if(qp)qp.onclick=()=>{cfg={...cfg,style:"solo",mode:"position",diff:"easy",source:"teddy",teams:2,answer:"screen",adaptive:false,combo:false,timer:0,lives:false,daily:false};updateSummary();startRound()};
+
+  // Remove any resumed non-Teddy source from older versions.
+  try{
+    const r=JSON.parse(localStorage.getItem("bb_resume")||"null");
+    if(r&&r.cfg&&r.cfg.source!=="teddy"){r.cfg.source="teddy";localStorage.setItem("bb_resume",JSON.stringify(r))}
+  }catch(e){}
+  sync();
 })();
 </script>
 </body>
