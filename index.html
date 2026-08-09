@@ -4458,6 +4458,327 @@ body.bbRankedPlaying .bbRankedMatchBoard .bbMatchCard.wrong{
   }
 }
 
+
+/* =========================================================
+   Brain Buddy v53 — Brain Coins Shop
+   ========================================================= */
+
+.bbNavIcon.shop{
+  position:relative;
+  width:24px;
+  height:24px;
+}
+.bbNavIcon.shop::before{
+  content:"";
+  position:absolute;
+  left:4px; right:4px; bottom:3px; height:14px;
+  border-radius:5px 5px 7px 7px;
+  background:linear-gradient(180deg,#ffd86f,#ff9dbf);
+  box-shadow:inset 0 3px 3px rgba(255,255,255,.65),0 4px 8px rgba(86,55,123,.15);
+}
+.bbNavIcon.shop::after{
+  content:"";
+  position:absolute;
+  left:8px; top:2px;
+  width:8px; height:8px;
+  border:3px solid #fff;
+  border-bottom:0;
+  border-radius:8px 8px 0 0;
+}
+
+.bbShopHomeCard{
+  grid-column:1/-1;
+  border:2px solid rgba(255,255,255,.42);
+  border-radius:32px;
+  padding:16px 18px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  color:#544071;
+  text-align:left;
+  background:linear-gradient(135deg,#fff1a9 0%,#ffd8a2 48%,#ffb4d4 100%);
+  box-shadow:
+    inset 0 4px 7px rgba(255,255,255,.65),
+    inset 0 -12px 18px rgba(222,106,164,.13),
+    0 14px 22px rgba(34,16,90,.22);
+}
+.bbShopHomeCard .copy{
+  display:flex;flex-direction:column;flex:1;min-width:0;
+}
+.bbShopHomeCard small{font-size:.72rem;font-weight:1000;letter-spacing:.12em;color:#b66b55}
+.bbShopHomeCard b{font-size:1.18rem;font-weight:1000;color:#633c72}
+.bbShopHomeCard em{font-style:normal;font-size:.94rem;color:#835d7a}
+.bbShopHomeCard .go{
+  display:grid;place-items:center;
+  min-width:58px;height:58px;border-radius:18px;
+  background:rgba(255,255,255,.4);
+  font-size:1.6rem;font-weight:1000;color:#704b84;
+  box-shadow:inset 0 4px 5px rgba(255,255,255,.7),0 8px 14px rgba(80,42,102,.12);
+}
+.bbShopHomeArt{width:82px;height:82px;position:relative;flex:0 0 82px}
+.bbShopHomeArt .bagBody{
+  position:absolute;left:14px;right:14px;bottom:7px;height:52px;
+  border-radius:15px 15px 20px 20px;
+  background:linear-gradient(180deg,#ff8fbe,#ef65a8);
+  box-shadow:inset 0 5px 6px rgba(255,255,255,.55),0 10px 14px rgba(121,50,105,.18);
+}
+.bbShopHomeArt .bagHandle{
+  position:absolute;left:27px;top:8px;width:28px;height:26px;
+  border:7px solid #fff1a8;border-bottom:0;border-radius:20px 20px 0 0;
+}
+.bbShopHomeArt .coin{
+  position:absolute;width:25px;height:25px;border-radius:50%;
+  background:linear-gradient(145deg,#fff49a,#ffc93a);
+  box-shadow:inset 0 3px 4px #fff7c8,0 6px 9px rgba(119,75,28,.18);
+}
+.bbShopHomeArt .coin::after{
+  content:"B";position:absolute;inset:0;display:grid;place-items:center;
+  font-size:12px;font-weight:1000;color:#b57315;
+}
+.bbShopHomeArt .coin.c1{right:2px;top:15px;transform:rotate(10deg)}
+.bbShopHomeArt .coin.c2{left:1px;bottom:4px;transform:rotate(-12deg)}
+.bbShopHomeArt .shine{
+  position:absolute;width:10px;height:10px;border-radius:3px;transform:rotate(45deg);
+  background:#fff7c4;box-shadow:0 0 10px #fff6aa;
+}
+.bbShopHomeArt .shine.s1{right:4px;bottom:10px}
+.bbShopHomeArt .shine.s2{left:9px;top:5px}
+
+.bbShopScreen{
+  min-height:100dvh;
+  padding:18px 16px 110px;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 12% 4%,rgba(170,231,255,.95),transparent 24%),
+    radial-gradient(circle at 88% 8%,rgba(255,190,225,.85),transparent 28%),
+    linear-gradient(180deg,#7c65e7 0%,#aa70e5 38%,#ee9ccc 74%,#ffd6b6 100%);
+}
+.bbShopSky{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.bbShopBubble{
+  position:absolute;border-radius:50%;
+  background:radial-gradient(circle at 30% 28%,#fff,rgba(255,255,255,.28) 30%,rgba(119,212,255,.6) 64%,rgba(77,112,225,.45));
+  box-shadow:0 12px 20px rgba(46,28,107,.16)
+}
+.bbShopBubble.b1{width:25px;height:25px;left:6%;top:160px}
+.bbShopBubble.b2{width:17px;height:17px;right:8%;top:240px}
+.bbShopBubble.b3{width:31px;height:31px;right:20%;bottom:180px}
+.bbShopSpark{
+  position:absolute;width:13px;height:13px;border-radius:4px;
+  background:linear-gradient(145deg,#fff8c9,#ffd74d);transform:rotate(45deg);
+  box-shadow:0 0 13px rgba(255,245,174,.9)
+}
+.bbShopSpark.sp1{left:23%;top:95px}.bbShopSpark.sp2{right:22%;top:130px}.bbShopSpark.sp3{left:9%;bottom:230px}
+
+.bbShopTop,.bbShopHero,.bbShopLogin,.bbShopBody{position:relative;z-index:2;max-width:1180px;margin-left:auto;margin-right:auto}
+.bbShopTop{display:flex;align-items:center;gap:13px;margin-bottom:14px}
+.bbShopBack{
+  width:52px;height:52px;border:0;border-radius:17px;display:grid;place-items:center;
+  background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(245,234,255,.92));
+  color:#7557c9;
+  box-shadow:inset 0 3px 5px #fff,0 10px 18px rgba(48,25,102,.18);
+}
+.bbShopBack svg{width:25px;height:25px}
+.bbShopBrand{display:flex;align-items:center;gap:10px;color:#fff;flex:1}
+.bbShopBrand small{font-size:.67rem;letter-spacing:.14em;font-weight:1000;opacity:.8}
+.bbShopBrand h2{margin:1px 0 0;font-size:1.8rem;line-height:1;font-weight:1000}
+.bbShopBagMini{
+  width:48px;height:48px;border-radius:15px;position:relative;
+  background:linear-gradient(180deg,#ffb7d8,#f270ad);
+  box-shadow:inset 0 4px 5px rgba(255,255,255,.6),0 8px 14px rgba(49,23,105,.19)
+}
+.bbShopBagMini::before{
+  content:"";position:absolute;left:14px;top:8px;width:15px;height:14px;
+  border:4px solid #fff5b1;border-bottom:0;border-radius:12px 12px 0 0
+}
+.bbShopWallet{
+  display:flex;align-items:center;gap:9px;
+  padding:9px 14px;border-radius:20px;
+  background:rgba(255,255,255,.88);
+  box-shadow:inset 0 3px 5px #fff,0 10px 18px rgba(48,25,102,.16)
+}
+.bbCoinGlyph{
+  width:37px;height:37px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(145deg,#fff5a6,#ffc43c);
+  border:2px solid rgba(255,255,255,.8);
+  color:#a96b0b;font-weight:1000;
+  box-shadow:inset 0 3px 4px #fff9cf,0 7px 12px rgba(115,72,17,.18)
+}
+.bbShopWallet div{display:flex;flex-direction:column}
+.bbShopWallet small{font-size:.67rem;color:#8b7797;font-weight:850}
+.bbShopWallet strong{font-size:1.15rem;color:#624381;font-weight:1000}
+
+.bbShopHero{
+  display:grid;grid-template-columns:1.25fr .75fr;align-items:center;gap:18px;
+  padding:24px 28px;border-radius:34px;
+  border:2px solid rgba(255,255,255,.4);
+  background:linear-gradient(135deg,rgba(118,75,222,.84),rgba(197,104,218,.78) 58%,rgba(255,151,194,.75));
+  box-shadow:inset 0 5px 7px rgba(255,255,255,.33),0 18px 30px rgba(37,18,91,.24)
+}
+.bbShopPill{
+  display:inline-flex;padding:7px 12px;border-radius:999px;
+  background:rgba(255,255,255,.17);border:1px solid rgba(255,255,255,.28);
+  color:#fff5d3;font-size:.68rem;font-weight:1000;letter-spacing:.1em
+}
+.bbShopHero h1{margin:9px 0 7px;color:#fff;font-size:clamp(2rem,4.2vw,3.25rem);line-height:.98;font-weight:1000}
+.bbShopHero p{margin:0;max-width:650px;color:#f7eaff;font-weight:650}
+.bbShopHeroArt{display:grid;place-items:center;min-height:170px}
+.bbGiftBox{
+  width:150px;height:115px;border-radius:20px;position:relative;
+  background:linear-gradient(180deg,#ffba6d,#ff7db2);
+  box-shadow:inset 0 6px 7px rgba(255,255,255,.55),0 18px 28px rgba(70,31,110,.27)
+}
+.bbGiftBox .lid{
+  position:absolute;left:-9px;right:-9px;top:-18px;height:34px;border-radius:17px;
+  background:linear-gradient(180deg,#ffe28c,#ffab63);
+  box-shadow:inset 0 4px 5px rgba(255,255,255,.62),0 7px 12px rgba(86,40,94,.16)
+}
+.bbGiftBox .ribbon{position:absolute;left:62px;top:-18px;width:27px;height:133px;background:linear-gradient(180deg,#a8edff,#67c9ff)}
+.bbGiftBox .star{
+  position:absolute;width:18px;height:18px;border-radius:5px;transform:rotate(45deg);
+  background:#fff5a9;box-shadow:0 0 14px #fff1a0
+}
+.bbGiftBox .star.a{right:-22px;top:10px}.bbGiftBox .star.b{left:-24px;bottom:15px}
+
+.bbShopLogin{
+  margin-top:14px;padding:14px 16px;border-radius:24px;
+  display:flex;align-items:center;gap:13px;
+  background:rgba(255,255,255,.91);
+  box-shadow:0 12px 20px rgba(43,24,92,.16)
+}
+.bbShopLoginIcon{
+  width:50px;height:50px;border-radius:17px;position:relative;
+  background:linear-gradient(180deg,#c5edff,#94c8ff)
+}
+.bbShopLoginIcon::before{
+  content:"";position:absolute;left:16px;top:9px;width:18px;height:18px;border-radius:50%;background:#fff
+}
+.bbShopLoginIcon::after{
+  content:"";position:absolute;left:10px;right:10px;bottom:7px;height:19px;border-radius:18px 18px 10px 10px;background:#fff
+}
+.bbShopLogin div:nth-child(2){flex:1}
+.bbShopLogin strong{font-size:1rem;color:#5b3d75}
+.bbShopLogin p{margin:2px 0 0;color:#887493;font-size:.82rem}
+.bbShopLogin button{
+  border:0;border-radius:16px;padding:11px 16px;
+  color:#fff;background:linear-gradient(180deg,#9b7bee,#775bd4);font-weight:950
+}
+
+.bbShopBody{
+  margin-top:14px;padding:20px;border-radius:31px;
+  background:rgba(255,255,255,.88);
+  border:2px solid rgba(255,255,255,.7);
+  box-shadow:0 18px 30px rgba(43,24,92,.18);
+  backdrop-filter:blur(14px)
+}
+.bbShopSectionHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.bbShopSectionHead small{font-size:.67rem;font-weight:1000;letter-spacing:.12em;color:#b66e9c}
+.bbShopSectionHead h3{margin:2px 0 0;color:#5b3d75;font-size:1.5rem;font-weight:1000}
+.bbShopRefresh{
+  border:0;border-radius:14px;padding:9px 13px;
+  background:#f4ebff;color:#7659b4;font-weight:900
+}
+.bbShopGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.bbShopLoading,.bbShopEmpty{
+  grid-column:1/-1;padding:30px;text-align:center;border-radius:22px;
+  background:#faf7ff;color:#867790;font-weight:800
+}
+.bbShopItem{
+  min-width:0;border-radius:25px;padding:11px;
+  background:linear-gradient(180deg,#fff,#fff9fc);
+  border:1px solid #efe5f2;
+  box-shadow:0 8px 18px rgba(83,55,102,.08);
+  display:flex;flex-direction:column
+}
+.bbShopItemArt{
+  aspect-ratio:1.16/1;border-radius:20px;position:relative;overflow:hidden;
+  display:grid;place-items:center;
+  background:linear-gradient(145deg,#eaf7ff,#ffeaf5)
+}
+.bbShopItemArt img{width:100%;height:100%;object-fit:contain;padding:6px}
+.bbShopItemArt .fallback{position:relative;width:76px;height:76px}
+.bbShopItemArt .fallback.bear::before{
+  content:"";position:absolute;inset:12px 14px 5px;border-radius:46% 46% 44% 44%;
+  background:linear-gradient(180deg,#e6bb88,#a96e49);
+  box-shadow:-18px -9px 0 -9px #c58a5b,18px -9px 0 -9px #c58a5b
+}
+.bbShopItemArt .fallback.theme::before{
+  content:"";position:absolute;inset:8px;border-radius:20px;
+  background:linear-gradient(135deg,#91ddff,#a88cff 48%,#ff9aca 75%,#ffe07a);
+  box-shadow:inset 0 4px 5px rgba(255,255,255,.6)
+}
+.bbShopItemArt .fallback.frame::before{
+  content:"";position:absolute;inset:5px;border-radius:50%;
+  border:10px solid #ffc95e;box-shadow:inset 0 0 0 6px #fff3b1,0 0 0 4px #ff90be
+}
+.bbShopItemArt .fallback.effect::before,
+.bbShopItemArt .fallback.effect::after{
+  content:"";position:absolute;left:30px;top:8px;width:18px;height:58px;border-radius:7px;
+  background:linear-gradient(180deg,#fff8a4,#ff7cc1);transform:rotate(45deg);
+  box-shadow:0 0 16px rgba(255,202,102,.65)
+}
+.bbShopItemArt .fallback.effect::after{transform:rotate(-45deg)}
+.bbShopType{
+  position:absolute;left:8px;top:8px;padding:5px 8px;border-radius:999px;
+  background:rgba(255,255,255,.88);color:#765b86;font-size:.62rem;font-weight:950
+}
+.bbShopOwned{
+  position:absolute;right:8px;top:8px;padding:5px 8px;border-radius:999px;
+  background:#dffff1;color:#308564;font-size:.62rem;font-weight:950
+}
+.bbShopItemCopy{padding:10px 4px 7px;display:flex;flex-direction:column;flex:1}
+.bbShopItemCopy h4{margin:0;color:#5f4374;font-size:1rem;font-weight:1000}
+.bbShopItemCopy p{margin:5px 0 9px;color:#8c7a94;font-size:.76rem;line-height:1.35;flex:1}
+.bbShopBuy{
+  width:100%;border:0;border-radius:15px;padding:10px 9px;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  background:linear-gradient(180deg,#9a7bef,#7659d3);color:#fff;font-weight:1000;
+  box-shadow:inset 0 3px 4px rgba(255,255,255,.28),0 7px 12px rgba(88,57,137,.14)
+}
+.bbShopBuy .miniCoin{
+  width:21px;height:21px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(145deg,#fff5a1,#ffc43c);color:#9f640a;font-size:9px;font-weight:1000
+}
+.bbShopBuy[disabled]{background:#e7dfeb;color:#9b8da0;box-shadow:none}
+.bbShopToast{
+  position:fixed;left:50%;bottom:90px;z-index:8000;transform:translateX(-50%);
+  min-width:220px;max-width:min(90vw,480px);padding:12px 16px;border-radius:17px;
+  background:rgba(71,48,91,.94);color:#fff;text-align:center;font-weight:850;
+  box-shadow:0 12px 24px rgba(41,23,72,.28)
+}
+
+@media(max-width:900px){
+  .bbShopGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bbShopHero{grid-template-columns:1fr .5fr}
+}
+@media(max-width:640px){
+  .bbShopScreen{padding:12px 10px 105px}
+  .bbShopTop{gap:8px}
+  .bbShopBack{width:44px;height:44px;border-radius:14px}
+  .bbShopBrand h2{font-size:1.35rem}
+  .bbShopBagMini{width:41px;height:41px;border-radius:13px}
+  .bbShopWallet{padding:7px 9px;border-radius:16px}
+  .bbCoinGlyph{width:31px;height:31px}
+  .bbShopWallet small{font-size:.59rem}
+  .bbShopWallet strong{font-size:.95rem}
+  .bbShopHero{grid-template-columns:1fr;padding:19px;border-radius:28px}
+  .bbShopHeroArt{display:none}
+  .bbShopHero h1{font-size:2rem}
+  .bbShopLogin{align-items:flex-start;flex-wrap:wrap}
+  .bbShopLogin div:nth-child(2){min-width:calc(100% - 70px)}
+  .bbShopLogin button{width:100%}
+  .bbShopBody{padding:12px;border-radius:25px}
+  .bbShopGrid{gap:8px}
+  .bbShopItem{padding:7px;border-radius:20px}
+  .bbShopItemArt{border-radius:16px}
+  .bbShopItemCopy{padding:8px 3px 5px}
+  .bbShopItemCopy h4{font-size:.9rem}
+  .bbShopItemCopy p{font-size:.69rem}
+  .bbShopBuy{padding:9px 5px;font-size:.78rem}
+  .bbShopHomeCard{padding:14px;border-radius:26px}
+  .bbShopHomeArt{width:70px;height:70px;flex-basis:70px}
+}
+
 </style>
 
 <script>
@@ -4821,6 +5142,7 @@ try{
   <button class="v17b play" data-v17="play"><i class="bbNavIcon play"></i><span>เล่นเกม</span></button>
   <button class="v17b rank" data-v17="rank"><i class="bbNavIcon rank"></i><span>อันดับผู้เล่น</span></button>
   <button class="v17b bbArenaNavBtn arena" data-v17="arena"><i class="bbNavIcon arena"></i><span>สนามจัดอันดับ</span></button>
+  <button class="v17b shop" data-v17="shop"><i class="bbNavIcon shop"></i><span>ร้านค้า</span></button>
   <button class="v17b profile" data-v17="profile"><i class="bbNavIcon profile"></i><span>โปรไฟล์</span></button>
  </div>
 </div></nav>
@@ -5090,6 +5412,23 @@ try{
         <span class="go">➜</span>
       </button>
 
+      <button class="bbShopHomeCard" data-app-go="shop">
+        <span class="bbShopHomeArt" aria-hidden="true">
+          <span class="bagBody"></span>
+          <span class="bagHandle"></span>
+          <span class="coin c1"></span>
+          <span class="coin c2"></span>
+          <span class="shine s1"></span>
+          <span class="shine s2"></span>
+        </span>
+        <span class="copy">
+          <small>BRAIN COINS</small>
+          <b>ร้านค้า Brain Buddy</b>
+          <em>สะสมเหรียญ • ปลดล็อกหมี ธีม กรอบ และเอฟเฟกต์</em>
+        </span>
+        <span class="go">➜</span>
+      </button>
+
       <section class="bbHomeTop10" aria-labelledby="bbHomeTop10Title">
         <div class="bbHomeTop10Head">
           <div class="bbHomeTop10TitleWrap">
@@ -5136,6 +5475,83 @@ try{
       <div class="drink"></div>
     </div>
   </section>
+
+
+<section class="bbAppScreen bbShopScreen" id="bbAppShop" data-app-screen="shop">
+  <div class="bbShopSky" aria-hidden="true">
+    <i class="bbShopBubble b1"></i>
+    <i class="bbShopBubble b2"></i>
+    <i class="bbShopBubble b3"></i>
+    <i class="bbShopSpark sp1"></i>
+    <i class="bbShopSpark sp2"></i>
+    <i class="bbShopSpark sp3"></i>
+  </div>
+
+  <header class="bbShopTop">
+    <button class="bbShopBack" data-app-go="home" aria-label="กลับหน้าหลัก">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M38 14 20 32l18 18" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <div class="bbShopBrand">
+      <span class="bbShopBagMini" aria-hidden="true"></span>
+      <div>
+        <small>BRAIN BUDDY</small>
+        <h2>ร้านค้า</h2>
+      </div>
+    </div>
+
+    <div class="bbShopWallet">
+      <span class="bbCoinGlyph" aria-hidden="true">B</span>
+      <div>
+        <small>Brain Coins</small>
+        <strong id="bbShopBalance">—</strong>
+      </div>
+    </div>
+  </header>
+
+  <section class="bbShopHero">
+    <div class="bbShopHeroCopy">
+      <span class="bbShopPill">COSMETIC SHOP</span>
+      <h1>แต่ง Brain Buddy<br>ให้เป็นสไตล์ของคุณ</h1>
+      <p>ของในร้านเป็นของตกแต่ง ไม่เพิ่มคะแนนและไม่เพิ่ม RP ในสนามจัดอันดับ</p>
+    </div>
+    <div class="bbShopHeroArt" aria-hidden="true">
+      <div class="bbGiftBox">
+        <span class="lid"></span>
+        <span class="ribbon"></span>
+        <span class="star a"></span>
+        <span class="star b"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="bbShopLogin hidden" id="bbShopLogin">
+    <div class="bbShopLoginIcon" aria-hidden="true"></div>
+    <div>
+      <strong>เข้าสู่ระบบเพื่อเปิดร้านค้า</strong>
+      <p>Brain Coins และสินค้าที่ซื้อจะผูกกับบัญชีของคุณ</p>
+    </div>
+    <button id="bbShopLoginBtn">เข้าสู่ระบบ</button>
+  </section>
+
+  <section class="bbShopBody" id="bbShopBody">
+    <div class="bbShopSectionHead">
+      <div>
+        <small>ITEM COLLECTION</small>
+        <h3>สินค้าทั้งหมด</h3>
+      </div>
+      <button class="bbShopRefresh" id="bbShopRefresh">รีเฟรช</button>
+    </div>
+
+    <div class="bbShopGrid" id="bbShopGrid" aria-live="polite">
+      <div class="bbShopLoading">กำลังโหลดร้านค้า…</div>
+    </div>
+  </section>
+
+  <div class="bbShopToast hidden" id="bbShopToast"></div>
+</section>
 
 <section class="bbAppScreen" id="bbAppModes" data-app-screen="modes">
     <div class="bbCandySky" aria-hidden="true">
@@ -7968,7 +8384,9 @@ window.addEventListener("load",()=>{
     if(typeof setDockActive==="function"){
       if(next==="home")setDockActive("home");
       else if(next==="modes"||next==="setup")setDockActive("play");
+      else if(next==="shop")setDockActive("shop");
     }
+    if(next==="shop")window.bbLoadShop?.();
     window.scrollTo({top:0,behavior:"smooth"});syncSetup();
     return true;
   }
@@ -8042,9 +8460,9 @@ window.addEventListener("load",()=>{
 
   document.addEventListener("click",e=>{
     const nav=e.target.closest("[data-v17]");if(!nav)return;
-    const action=nav.dataset.v17;if(!["home","play","arena","rank","profile"].includes(action))return;
+    const action=nav.dataset.v17;if(!["home","play","arena","rank","shop","profile"].includes(action))return;
     e.preventDefault();e.stopImmediatePropagation();
-    if(action==="home")showScreen("home");if(action==="play")showScreen("modes");if(action==="arena")openArena();if(action==="rank")openRank();if(action==="profile")openProfile();
+    if(action==="home")showScreen("home");if(action==="play")showScreen("modes");if(action==="arena")openArena();if(action==="rank")openRank();if(action==="shop")showScreen("shop");if(action==="profile")openProfile();
   },true);
 
   document.addEventListener("click",e=>{
@@ -8186,6 +8604,199 @@ document.addEventListener('DOMContentLoaded', () => {
   },500);
 
   window.addEventListener("load",syncGameplayDock);
+})();
+</script>
+
+
+<script>
+(function brainBuddyV53Shop(){
+  const $=s=>document.querySelector(s);
+  let shopBusy=false;
+
+  function shopClient(){
+    if(window.__bbSupabase)return window.__bbSupabase;
+    const c=window.BRAIN_BUDDY_SUPABASE||{};
+    if(window.supabase&&c.url&&c.publishableKey){
+      window.__bbSupabase=window.supabase.createClient(c.url,c.publishableKey);
+      return window.__bbSupabase;
+    }
+    return null;
+  }
+
+  function shopToast(message){
+    const t=$("#bbShopToast");
+    if(!t)return;
+    t.textContent=message;
+    t.classList.remove("hidden");
+    clearTimeout(t.__timer);
+    t.__timer=setTimeout(()=>t.classList.add("hidden"),2300);
+  }
+
+  function esc(v){
+    return String(v??"").replace(/[&<>"']/g,m=>({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    }[m]));
+  }
+
+  const typeName={
+    bear:"หมี",
+    theme:"ธีม",
+    frame:"กรอบ",
+    effect:"เอฟเฟกต์"
+  };
+
+  async function loadShop(){
+    if(shopBusy)return;
+    const grid=$("#bbShopGrid"), login=$("#bbShopLogin"), body=$("#bbShopBody"), bal=$("#bbShopBalance");
+    if(!grid||!login||!body||!bal)return;
+
+    shopBusy=true;
+    grid.innerHTML='<div class="bbShopLoading">กำลังโหลดร้านค้า…</div>';
+
+    try{
+      const c=shopClient();
+      if(!c)throw new Error("ยังเชื่อมต่อระบบ Cloud ไม่สำเร็จ");
+
+      const {data:sessionData,error:sessionError}=await c.auth.getSession();
+      if(sessionError)throw sessionError;
+      const user=sessionData?.session?.user;
+
+      if(!user){
+        bal.textContent="—";
+        login.classList.remove("hidden");
+        body.classList.add("hidden");
+        return;
+      }
+
+      login.classList.add("hidden");
+      body.classList.remove("hidden");
+
+      const [walletRes,itemsRes,ownedRes]=await Promise.all([
+        c.from("bb_wallets")
+          .select("coin_balance")
+          .eq("user_id",user.id)
+          .maybeSingle(),
+
+        c.from("bb_shop_items")
+          .select("id,item_code,item_type,name,description,price_coins,image_url,sort_order")
+          .eq("is_active",true)
+          .order("sort_order",{ascending:true})
+          .order("id",{ascending:true}),
+
+        c.from("bb_user_items")
+          .select("item_id")
+          .eq("user_id",user.id)
+      ]);
+
+      if(walletRes.error)throw walletRes.error;
+      if(itemsRes.error)throw itemsRes.error;
+      if(ownedRes.error)throw ownedRes.error;
+
+      const balance=Number(walletRes.data?.coin_balance)||0;
+      bal.textContent=balance.toLocaleString();
+
+      const owned=new Set((ownedRes.data||[]).map(x=>Number(x.item_id)));
+      const items=itemsRes.data||[];
+
+      if(!items.length){
+        grid.innerHTML='<div class="bbShopEmpty">ยังไม่มีสินค้าในร้าน</div>';
+        return;
+      }
+
+      grid.innerHTML=items.map(item=>{
+        const has=owned.has(Number(item.id));
+        const image=item.image_url
+          ? `<img src="${esc(item.image_url)}" alt="${esc(item.name)}" loading="lazy">`
+          : `<span class="fallback ${esc(item.item_type)}" aria-hidden="true"></span>`;
+
+        return `
+          <article class="bbShopItem">
+            <div class="bbShopItemArt">
+              ${image}
+              <span class="bbShopType">${esc(typeName[item.item_type]||item.item_type)}</span>
+              ${has?'<span class="bbShopOwned">มีแล้ว</span>':""}
+            </div>
+            <div class="bbShopItemCopy">
+              <h4>${esc(item.name)}</h4>
+              <p>${esc(item.description||"สินค้า Brain Buddy")}</p>
+              <button class="bbShopBuy" data-shop-buy="${Number(item.id)}" ${has?"disabled":""}>
+                ${has
+                  ?"อยู่ในคลังแล้ว"
+                  :`<span class="miniCoin">B</span><span>${Number(item.price_coins||0).toLocaleString()} Coins</span>`
+                }
+              </button>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+    }catch(err){
+      console.error("Brain Buddy Shop:",err);
+      grid.innerHTML=`<div class="bbShopEmpty">โหลดร้านค้าไม่สำเร็จ<br><small>${esc(err?.message||"กรุณาลองใหม่")}</small></div>`;
+    }finally{
+      shopBusy=false;
+    }
+  }
+
+  async function buyItem(itemId,button){
+    if(shopBusy||!itemId)return;
+
+    const c=shopClient();
+    if(!c)return shopToast("ยังเชื่อมต่อระบบ Cloud ไม่สำเร็จ");
+
+    const original=button?.innerHTML||"";
+    if(button){
+      button.disabled=true;
+      button.textContent="กำลังซื้อ…";
+    }
+
+    try{
+      const {data,error}=await c.rpc("bb_buy_shop_item",{p_item_id:Number(itemId)});
+      if(error)throw error;
+
+      const result=Array.isArray(data)?data[0]:data;
+      shopToast(`ซื้อ ${result?.item_name||"สินค้า"} สำเร็จ`);
+      await loadShop();
+    }catch(err){
+      console.error("Brain Buddy Shop buy:",err);
+      const msg=String(err?.message||"ซื้อสินค้าไม่สำเร็จ");
+      if(/Brain Coins|ไม่เพียงพอ/i.test(msg))shopToast("Brain Coins ไม่เพียงพอ");
+      else if(/มีสินค้านี้แล้ว/i.test(msg))shopToast("คุณมีสินค้านี้แล้ว");
+      else shopToast(msg);
+      if(button){
+        button.disabled=false;
+        button.innerHTML=original;
+      }
+    }
+  }
+
+  document.addEventListener("click",e=>{
+    const buy=e.target.closest("[data-shop-buy]");
+    if(buy){
+      e.preventDefault();
+      buyItem(Number(buy.dataset.shopBuy),buy);
+      return;
+    }
+
+    if(e.target.closest("#bbShopRefresh")){
+      e.preventDefault();
+      loadShop();
+      return;
+    }
+
+    if(e.target.closest("#bbShopLoginBtn")){
+      e.preventDefault();
+      if(typeof openModal==="function"){
+        openModal("accountModal");
+      }else{
+        $("#accountModal")?.classList.remove("hidden");
+      }
+    }
+  });
+
+  window.bbLoadShop=loadShop;
+
+  window.addEventListener("bb:auth-changed",loadShop);
 })();
 </script>
 
