@@ -3885,6 +3885,74 @@ body.bbArenaOpen .v17dock.bbCandyDock{
   }
 }
 
+
+/* =========================================================
+   Brain Buddy v47 — Separate Score and Ranked leaderboards
+   ========================================================= */
+
+.bbHomeRankTabs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  margin:0 0 12px;
+  padding:5px;
+  border-radius:18px;
+  background:rgba(255,255,255,.35);
+  border:1px solid rgba(122,76,11,.09);
+}
+.bbHomeRankTabs button{
+  min-height:39px;
+  border:0;
+  border-radius:14px;
+  background:transparent;
+  color:#75531c;
+  font-size:11px;
+  font-weight:950;
+}
+.bbHomeRankTabs button.active{
+  color:#fff;
+  background:linear-gradient(145deg,#f06ba8,#8a5ce3);
+  box-shadow:
+    inset 0 2px 3px rgba(255,255,255,.25),
+    0 7px 14px rgba(107,57,159,.18);
+}
+
+.bbHomeTop10Score.ranked b{
+  color:#7944c7;
+}
+
+.bbFullRankTabs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  padding:6px;
+  margin:14px 0 4px;
+  border-radius:20px;
+  background:rgba(255,255,255,.52);
+  border:1px solid rgba(139,104,168,.11);
+}
+.bbFullRankTabs button{
+  min-height:45px;
+  border:0;
+  border-radius:15px;
+  background:transparent;
+  color:#625270;
+  font-size:12px;
+  font-weight:950;
+}
+.bbFullRankTabs button.active{
+  color:#fff;
+  background:linear-gradient(145deg,#ef69ab,#7954dc);
+  box-shadow:
+    inset 0 2px 3px rgba(255,255,255,.26),
+    0 8px 16px rgba(94,52,156,.18);
+}
+
+@media(max-width:699px){
+  .bbHomeRankTabs button{font-size:10px;min-height:36px}
+  .bbFullRankTabs button{font-size:10px;min-height:41px}
+}
+
 </style>
 
 <script>
@@ -3926,35 +3994,83 @@ try{
     return null;
   }
 
-  async function getLeaderboard(limit=30){
+  let bbHomeRankMode="score";
+  let bbFullRankMode="score";
+
+  async function getScoreLeaderboard(limit=50){
     const c=await client();
     if(!c)return [];
-    const {data,error}=await c.from("leaderboard_view").select("*").limit(limit);
-    if(error){console.warn("leaderboard_view:",error.message);return []}
+    const {data,error}=await c
+      .from("leaderboard_view")
+      .select("*")
+      .order("best_score",{ascending:false})
+      .order("xp",{ascending:false})
+      .limit(limit);
+    if(error){
+      console.warn("score leaderboard:",error.message);
+      return [];
+    }
     return data||[];
   }
 
-  function topRow(u,i){
+  async function getRankedLeaderboard(limit=50){
+    const c=await client();
+    if(!c)return [];
+    const {data,error}=await c
+      .from("profiles")
+      .select("id,display_name,avatar,avatar_url,ranked_points,ranked_games,ranked_wins,ranked_top3,ranked_tier")
+      .order("ranked_points",{ascending:false})
+      .order("ranked_wins",{ascending:false})
+      .limit(limit);
+    if(error){
+      console.warn("ranked leaderboard:",error.message);
+      return [];
+    }
+    return (data||[]).filter(x=>Number(x.ranked_games||0)>0 || Number(x.ranked_points||0)>0);
+  }
+
+  async function getLeaderboard(limit=50,mode="score"){
+    return mode==="ranked"
+      ? getRankedLeaderboard(limit)
+      : getScoreLeaderboard(limit);
+  }
+
+  function topRow(u,i,mode="score"){
     const avatar=u.avatar_url
       ? `<img src="${u.avatar_url}" alt="">`
-      : (u.avatar||"🧸");
+      : (u.avatar||"—");
+    const value=mode==="ranked" ? Number(u.ranked_points||0) : Number(u.best_score||0);
+    const label=mode==="ranked" ? "RP" : "คะแนน";
+    const tier=mode==="ranked" ? (u.ranked_tier||"Bronze") : (u.rank_tier||"Bronze");
     return `<div class="v16TopRow">
       <div class="v16TopPos">${i+1}</div>
       <div class="v16TopAvatar">${avatar}</div>
-      <div class="v16TopName"><b>${u.display_name||"ผู้เล่น"}</b><span>${rankIcon(u.rank_tier)} ${u.rank_tier||"Bronze"}</span></div>
-      <div class="v16TopScore"><b>${u.best_score||0}</b><span>คะแนน</span></div>
+      <div class="v16TopName"><b>${u.display_name||"ผู้เล่น"}</b><span>${tier}</span></div>
+      <div class="v16TopScore"><b>${value.toLocaleString()}</b><span>${label}</span></div>
     </div>`;
   }
 
-  async function renderHomeTop10(rows){
+  async function renderHomeTop10(rows=null,mode=bbHomeRankMode){
     const box=document.getElementById("bbHomeTop10List");
     if(!box)return;
 
-    const list=Array.isArray(rows)?rows:await getLeaderboard(10);
+    const desc=document.getElementById("bbHomeTop10Desc");
+    if(desc){
+      desc.textContent=mode==="ranked"
+        ? "จัดอันดับจากคะแนนแรงค์ RP"
+        : "จัดอันดับจากคะแนนเกมสูงสุด";
+    }
+
+    document.querySelectorAll("[data-home-rank-mode]").forEach(b=>{
+      b.classList.toggle("active",b.dataset.homeRankMode===mode);
+    });
+
+    const list=Array.isArray(rows)?rows:await getLeaderboard(10,mode);
+
     if(!list.length){
       box.innerHTML=`<div class="bbHomeTop10Empty">
-        <b>ยังไม่มีผู้เล่นในอันดับ</b>
-        <span>เล่นเกมจบรอบแรก แล้วอันดับจะขึ้นที่นี่</span>
+        <b>${mode==="ranked"?"ยังไม่มีอันดับแรงค์":"ยังไม่มีผู้เล่นในอันดับ"}</b>
+        <span>${mode==="ranked"?"เมื่อมีผู้เล่นลงสนามจัดอันดับ คะแนน RP จะขึ้นที่นี่":"เล่นเกมจบรอบแรก แล้วอันดับจะขึ้นที่นี่"}</span>
       </div>`;
       return;
     }
@@ -3968,13 +4084,28 @@ try{
         ? `<img src="${safe(u.avatar_url)}" alt="">`
         : `<span class="bbHomeTop10Bear"></span>`;
       const pos=i+1;
-      const tier=safe(u.rank_tier||"Bronze");
+
+      if(mode==="ranked"){
+        return `<button class="bbHomeTop10Row pos-${pos}" data-app-action="rank">
+          <span class="bbHomeTop10Pos">${pos}</span>
+          <span class="bbHomeTop10Avatar">${avatar}</span>
+          <span class="bbHomeTop10Name">
+            <b>${safe(u.display_name||"ผู้เล่น")}</b>
+            <small>${safe(u.ranked_tier||"Bronze")} • ชนะ ${Number(u.ranked_wins||0).toLocaleString()} ครั้ง</small>
+          </span>
+          <span class="bbHomeTop10Score ranked">
+            <b>${Number(u.ranked_points||0).toLocaleString()}</b>
+            <small>RP</small>
+          </span>
+        </button>`;
+      }
+
       return `<button class="bbHomeTop10Row pos-${pos}" data-app-action="rank">
         <span class="bbHomeTop10Pos">${pos}</span>
         <span class="bbHomeTop10Avatar">${avatar}</span>
         <span class="bbHomeTop10Name">
           <b>${safe(u.display_name||"ผู้เล่น")}</b>
-          <small>${tier} • ${Number(u.xp||0).toLocaleString()} XP</small>
+          <small>${Number(u.xp||0).toLocaleString()} XP</small>
         </span>
         <span class="bbHomeTop10Score">
           <b>${Number(u.best_score||0).toLocaleString()}</b>
@@ -3985,39 +4116,74 @@ try{
   }
 
   async function renderTop(){
-    const rows=await getLeaderboard(10);
+    const rows=await getScoreLeaderboard(10);
     const box=document.getElementById("v16TopList");
     if(box){
       if(!rows.length){
         box.innerHTML=`<div class="v16TopRow">
           <div class="v16TopPos">1</div><div class="v16TopAvatar">—</div>
-          <div class="v16TopName"><b>ยังไม่มีอันดับ</b><span>สมัครสมาชิกแล้วเป็นคนแรกได้เลย</span></div>
+          <div class="v16TopName"><b>ยังไม่มีอันดับ</b><span>เล่นเกมจบรอบแรกแล้วอันดับจะขึ้น</span></div>
           <div class="v16TopScore"><b>0</b><span>คะแนน</span></div>
         </div>`;
       }else{
-        box.innerHTML=rows.slice(0,3).map(topRow).join("");
+        box.innerHTML=rows.slice(0,3).map((u,i)=>topRow(u,i,"score")).join("");
       }
     }
-    await renderHomeTop10(rows);
+    await renderHomeTop10(null,bbHomeRankMode);
   }
 
-  async function renderFull(){
+  async function renderFull(mode=bbFullRankMode){
     const box=document.getElementById("v16FullLeaderboard");
     if(!box)return;
+
+    bbFullRankMode=mode;
+
+    document.querySelectorAll("[data-full-rank-mode]").forEach(b=>{
+      b.classList.toggle("active",b.dataset.fullRankMode===mode);
+    });
+
+    const desc=document.getElementById("bbFullRankDesc");
+    if(desc){
+      desc.textContent=mode==="ranked"
+        ? "อันดับคะแนนแรงค์ RP — แยกจาก XP และคะแนนเกม"
+        : "อันดับคะแนนเกม — XP แสดงแยกและไม่ใช้เป็นคะแนนจัดอันดับ";
+    }
+
     box.innerHTML='<div class="v16TopLoading">กำลังโหลดตารางจัดอันดับ…</div>';
-    const rows=await getLeaderboard(50);
+    const rows=await getLeaderboard(50,mode);
+
     if(!rows.length){
-      box.innerHTML='<div class="v16TopLoading">ยังไม่มีสมาชิกบนตารางจัดอันดับ — เล่นจบรอบแรกแล้วอันดับจะเริ่มขึ้นที่นี่</div>';
+      box.innerHTML=`<div class="v16TopLoading">${mode==="ranked"
+        ?"ยังไม่มีผู้เล่นที่มีคะแนนแรงค์"
+        :"ยังไม่มีสมาชิกบนตารางคะแนนเกม"}</div>`;
       return;
     }
+
     box.innerHTML=rows.map((u,i)=>{
-      const avatar=u.avatar_url?`<img src="${u.avatar_url}" alt="">`:(u.avatar||"🧸");
+      const avatar=u.avatar_url?`<img src="${u.avatar_url}" alt="">`:(u.avatar||"—");
+
+      if(mode==="ranked"){
+        return `<div class="v16FullRow">
+          <div class="v16FullPos">${i+1}</div>
+          <div class="v16FullAvatar">${avatar}</div>
+          <div class="v16FullName">
+            <b>${u.display_name||"ผู้เล่น"}</b>
+            <span>${u.ranked_tier||"Bronze"} • แข่ง ${u.ranked_games||0} • ชนะ ${u.ranked_wins||0}</span>
+          </div>
+          <div class="v16FullMetric"><b>${Number(u.ranked_points||0).toLocaleString()}</b><span>คะแนนแรงค์ RP</span></div>
+          <div class="v16FullMetric"><b>${Number(u.ranked_top3||0).toLocaleString()}</b><span>Top 3</span></div>
+        </div>`;
+      }
+
       return `<div class="v16FullRow">
         <div class="v16FullPos">${i+1}</div>
         <div class="v16FullAvatar">${avatar}</div>
-        <div class="v16FullName"><b>${u.display_name||"ผู้เล่น"}</b><span>${rankIcon(u.rank_tier)} ${u.rank_tier||"Bronze"} • เล่น ${u.games_played||0} รอบ</span></div>
-        <div class="v16FullMetric"><b>${u.best_score||0}</b><span>คะแนนสูงสุด</span></div>
-        <div class="v16FullMetric"><b>${u.xp||0}</b><span>XP</span></div>
+        <div class="v16FullName">
+          <b>${u.display_name||"ผู้เล่น"}</b>
+          <span>เล่น ${u.games_played||0} รอบ</span>
+        </div>
+        <div class="v16FullMetric"><b>${Number(u.best_score||0).toLocaleString()}</b><span>คะแนนเกม</span></div>
+        <div class="v16FullMetric"><b>${Number(u.xp||0).toLocaleString()}</b><span>XP</span></div>
       </div>`;
     }).join("");
 
@@ -4029,7 +4195,13 @@ try{
         const mine=document.getElementById("v16MyRank");
         if(mine&&idx>=0){
           mine.classList.remove("hidden");
-          mine.innerHTML=`🎯 <b>อันดับของคุณ #${idx+1}</b> • ${rows[idx].best_score||0} คะแนน • ${rankIcon(rows[idx].rank_tier)} ${rows[idx].rank_tier||"Bronze"}`;
+          if(mode==="ranked"){
+            mine.innerHTML=`<b>อันดับแรงค์ของคุณ #${idx+1}</b> • ${Number(rows[idx].ranked_points||0).toLocaleString()} RP • ${rows[idx].ranked_tier||"Bronze"}`;
+          }else{
+            mine.innerHTML=`<b>อันดับคะแนนเกมของคุณ #${idx+1}</b> • ${Number(rows[idx].best_score||0).toLocaleString()} คะแนน • ${Number(rows[idx].xp||0).toLocaleString()} XP`;
+          }
+        }else if(mine){
+          mine.classList.add("hidden");
         }
       }
     }
@@ -4037,7 +4209,7 @@ try{
 
   function openLeaderboard(){
     const m=document.getElementById("leaderboardModal");
-    if(m){m.classList.remove("hidden");renderFull()}
+    if(m){m.classList.remove("hidden");renderFull(bbFullRankMode)}
   }
 
   function guestPlay(){
@@ -4046,7 +4218,7 @@ try{
     else document.getElementById("quickPlay")?.click();
   }
 
-  window.__bbRenderCloudLeaderboard=async()=>{await renderTop();await renderFull()};
+  window.__bbRenderCloudLeaderboard=async()=>{await renderTop();await renderFull(bbFullRankMode)};
   window.__bbRenderHomeTop10=renderHomeTop10;
 
   window.addEventListener("load",()=>{
@@ -4061,6 +4233,21 @@ try{
     document.getElementById("v16MenuLeaderboard")?.addEventListener("click",()=>{
       document.getElementById("popover")?.classList.add("hidden");
       openLeaderboard();
+    });
+
+    document.querySelectorAll("[data-home-rank-mode]").forEach(btn=>{
+      btn.addEventListener("click",async e=>{
+        e.stopPropagation();
+        bbHomeRankMode=btn.dataset.homeRankMode||"score";
+        await renderHomeTop10(null,bbHomeRankMode);
+      });
+    });
+
+    document.querySelectorAll("[data-full-rank-mode]").forEach(btn=>{
+      btn.addEventListener("click",async()=>{
+        bbFullRankMode=btn.dataset.fullRankMode||"score";
+        await renderFull(bbFullRankMode);
+      });
     });
 
     // Account button stays obvious for guests.
@@ -4405,10 +4592,14 @@ try{
             <div>
               <small>อันดับผู้เล่น</small>
               <h3 id="bbHomeTop10Title">TOP 10</h3>
-              <p>ผู้เล่นที่มีคะแนนสูงสุดตอนนี้</p>
+              <p id="bbHomeTop10Desc">จัดอันดับจากคะแนนเกมสูงสุด</p>
             </div>
           </div>
           <button class="bbHomeTop10All" data-app-action="rank">ดูทั้งหมด →</button>
+        </div>
+        <div class="bbHomeRankTabs" role="tablist" aria-label="ประเภทอันดับ">
+          <button class="active" data-home-rank-mode="score">คะแนนเกม</button>
+          <button data-home-rank-mode="ranked">คะแนนแรงค์</button>
         </div>
         <div class="bbHomeTop10List" id="bbHomeTop10List" aria-live="polite">
           <div class="bbHomeTop10Loading">กำลังโหลดอันดับ…</div>
@@ -4729,12 +4920,16 @@ try{
         <div>
           <span class="v16Live">● LIVE CLOUD</span>
           <h2>ตารางจัดอันดับสมาชิก</h2>
-          <p>จัดอันดับจากคะแนนสูงสุดและ XP ของสมาชิก Brain Buddy ทุกบัญชี</p>
+          <p id="bbFullRankDesc">อันดับคะแนนเกม — XP แสดงแยกและไม่ใช้เป็นคะแนนจัดอันดับ</p>
         </div>
       </div>
       <div class="v16RankLegend">
         <span class="bronze">Bronze</span><span class="silver">Silver</span><span class="gold">Gold</span><span class="platinum">Platinum</span><span class="diamond">Diamond</span>
       </div>
+    </div>
+    <div class="bbFullRankTabs" role="tablist" aria-label="ประเภทตารางอันดับ">
+      <button class="active" data-full-rank-mode="score">อันดับคะแนนเกม</button>
+      <button data-full-rank-mode="ranked">อันดับคะแนนแรงค์</button>
     </div>
     <div class="v16MyRank hidden" id="v16MyRank"></div>
     <div class="v16FullLeaderboard" id="v16FullLeaderboard">
