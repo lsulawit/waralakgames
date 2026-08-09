@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy v25 — Ranked Final Flow</title>
+<title>Brain Buddy v26 — Ranked Timeout & Forfeit</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -1211,6 +1211,15 @@ body.bbRankedWaiting #game{display:none!important}
 body.bbRankedWaiting #bbAppShell{display:none!important}
 body.bbRankedWaiting .v17bar{display:none!important}
 
+
+/* ===== Brain Buddy v26 — 60s result timeout + forfeit ===== */
+.bbWaitClock{width:150px;margin:12px auto 3px;padding:9px 10px;border-radius:15px;background:#f5f1fa;border:1px solid #e8e0ed}
+.bbWaitClock small{display:block;font-size:7px;color:#786d7f}.bbWaitClock strong{display:block;font-size:24px;color:#59456d;letter-spacing:.04em;margin-top:1px}
+.bbResultsExitBtn{display:block;margin:11px auto 0;border:1px solid #ddd5e2;background:#fff;color:#625668;border-radius:12px;padding:9px 13px;font-size:9px;font-weight:900;cursor:pointer}
+.bbRankedGameRight{display:flex;align-items:center;gap:8px}.bbRankedForfeitBtn{border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.12);color:#fff;border-radius:11px;padding:7px 9px;font-size:8px;font-weight:900;cursor:pointer}
+.bbRankedForfeitBtn:hover{background:rgba(255,255,255,.20)}.bbResultForfeit{font-size:7px;color:#a04f64!important;font-weight:900}
+@media(max-width:600px){.bbRankedGameHud{gap:6px}.bbRankedGameRight{gap:5px}.bbRankedForfeitBtn{padding:6px 7px;font-size:7px}}
+
 </style>
 
 <script>
@@ -1727,7 +1736,14 @@ try{
 </main>
 <button class="bbAppGameBack hidden" id="bbAppGameBack">← เมนูเกม</button>
 
-<section class="game" id="game"><div class="shell"><div class="gameCard"><div class="gameTop"><div class="status"><div class="statusIcon" id="statusIcon">👀</div><div><b id="statusTitle">พร้อมเริ่มเล่น</b><span id="statusText">กด เล่นด่วน หรือเริ่มรอบใหม่ได้เลย</span></div></div><div class="hudrow"><div class="hud"><span>PROGRESS</span><b id="progress">0 / 4</b></div><div class="hud"><span>COMBO</span><b id="combo">0</b></div><div class="hud"><span>SCORE</span><b id="score">0</b></div><div class="hud"><span>ระดับ</span><b id="levelHud">1</b></div><div class="hud hidden" id="livesHud"><span>LIVES</span><b id="lives">♥♥♥</b></div></div></div><div class="timer hidden" id="timer"><i id="timerFill"></i></div><div class="stage"><div class="scene active" id="boardScene"><div class="sceneTitle"><h2 id="boardTitle">พร้อมเริ่ม</h2><p id="boardSub">เลือกโหมดและระดับจากหน้าแรกได้ตลอด</p></div><div class="answer hidden" id="answer"></div><div class="board" id="board"></div></div><div class="scene" id="targetScene"><div class="targetWrap"><div class="targetCard" id="targetCard"></div><div class="targetLabel" id="targetLabel">ตัวนี้อยู่หมายเลขอะไร?</div></div></div><div class="scene" id="choiceScene"><div class="sceneTitle"><h2 id="choiceTitle">เลือกคำตอบ</h2><p id="choiceSub">เลือกคำตอบที่ถูกต้อง</p></div><div class="choiceGrid" id="choiceGrid"></div></div><div class="scene" id="resultScene"><div class="resultWrap"><div class="resultCard"><h2>จบรอบแล้ว! 🎉</h2><p id="resultText">มาดูผลของรอบนี้กัน</p><div class="bigคะแนน" id="resultคะแนน">0</div><div style="font-size:9px;color:var(--muted)" id="resultคะแนนLabel">คะแนน</div><div class="resultMetrics"><div class="resultMetric"><b id="resultCorrect">0</b><span>ตอบถูก</span></div><div class="resultMetric"><b id="resultAcc">0%</b><span>ความแม่นยำ</span></div><div class="resultMetric"><b id="resultCombo">0</b><span>Best Combo</span></div><div class="resultMetric"><b id="resultXP">+0</b><span>XP</span></div></div><div class="insight"><strong id="insightTitle">🧠 จุดเด่นจากรอบนี้</strong><p id="insightText"></p><div class="nexts" id="nexts"></div><p style="font-size:9px;margin-top:9px">คำแนะนำอิงแนวคิด working memory, attention, visuospatial processing และงานวิจัยด้าน cognitive training ที่สรุปไว้ในเมนู “หลักการ & งานวิจัย”</p></div><div class="resultActions"><button class="btn primary" id="againBtn">เล่นอีกครั้ง</button><button class="btn" id="saveBtn">🖼️ บันทึกผล</button><button class="btn" id="shareBtn">↗ แชร์</button><button class="btn" id="resultSettings">เปลี่ยนเกม</button></div></div></div></div></div><div class="teamBar hidden" id="teamBar"></div><div class="dock"><button class="secondary" id="homeBtn">⌂</button><button class="main" id="main">เริ่มรอบใหม่</button><button class="secondary hidden" id="hintBtn">💡 <span id="hintNum">3</span></button><button class="secondary hidden" id="voiceBtn">🗣️ เฉลย</button><button class="secondary hidden" id="replayBtn">↺ ดูโจทย์</button><button class="secondary" id="settingsBtn">⚙️</button></div><div class="hintline" id="hintline">ไม่มีการจับเวลาโดยค่าเริ่มต้น คุณเป็นคนกำหนดจังหวะเอง</div></div></div></section>
+<section class="game" id="game">
+<div class="bbRankedGameHud hidden" id="bbRankedGameHud">
+  <div><span>⚔️ RANKED</span><b id="bbRankedGameMode">Ranked Match</b></div>
+  <div class="bbRankedGameRight">
+    <div class="bbRankedGameClock"><small id="bbRankedGameClockLabel">เวลาตอบ</small><strong id="bbRankedGameClock">--</strong></div>
+    <button class="bbRankedForfeitBtn" id="bbRankedForfeitBtn">🏳️ ยอมแพ้</button>
+  </div>
+</div><div class="shell"><div class="gameCard"><div class="gameTop"><div class="status"><div class="statusIcon" id="statusIcon">👀</div><div><b id="statusTitle">พร้อมเริ่มเล่น</b><span id="statusText">กด เล่นด่วน หรือเริ่มรอบใหม่ได้เลย</span></div></div><div class="hudrow"><div class="hud"><span>PROGRESS</span><b id="progress">0 / 4</b></div><div class="hud"><span>COMBO</span><b id="combo">0</b></div><div class="hud"><span>SCORE</span><b id="score">0</b></div><div class="hud"><span>ระดับ</span><b id="levelHud">1</b></div><div class="hud hidden" id="livesHud"><span>LIVES</span><b id="lives">♥♥♥</b></div></div></div><div class="timer hidden" id="timer"><i id="timerFill"></i></div><div class="stage"><div class="scene active" id="boardScene"><div class="sceneTitle"><h2 id="boardTitle">พร้อมเริ่ม</h2><p id="boardSub">เลือกโหมดและระดับจากหน้าแรกได้ตลอด</p></div><div class="answer hidden" id="answer"></div><div class="board" id="board"></div></div><div class="scene" id="targetScene"><div class="targetWrap"><div class="targetCard" id="targetCard"></div><div class="targetLabel" id="targetLabel">ตัวนี้อยู่หมายเลขอะไร?</div></div></div><div class="scene" id="choiceScene"><div class="sceneTitle"><h2 id="choiceTitle">เลือกคำตอบ</h2><p id="choiceSub">เลือกคำตอบที่ถูกต้อง</p></div><div class="choiceGrid" id="choiceGrid"></div></div><div class="scene" id="resultScene"><div class="resultWrap"><div class="resultCard"><h2>จบรอบแล้ว! 🎉</h2><p id="resultText">มาดูผลของรอบนี้กัน</p><div class="bigคะแนน" id="resultคะแนน">0</div><div style="font-size:9px;color:var(--muted)" id="resultคะแนนLabel">คะแนน</div><div class="resultMetrics"><div class="resultMetric"><b id="resultCorrect">0</b><span>ตอบถูก</span></div><div class="resultMetric"><b id="resultAcc">0%</b><span>ความแม่นยำ</span></div><div class="resultMetric"><b id="resultCombo">0</b><span>Best Combo</span></div><div class="resultMetric"><b id="resultXP">+0</b><span>XP</span></div></div><div class="insight"><strong id="insightTitle">🧠 จุดเด่นจากรอบนี้</strong><p id="insightText"></p><div class="nexts" id="nexts"></div><p style="font-size:9px;margin-top:9px">คำแนะนำอิงแนวคิด working memory, attention, visuospatial processing และงานวิจัยด้าน cognitive training ที่สรุปไว้ในเมนู “หลักการ & งานวิจัย”</p></div><div class="resultActions"><button class="btn primary" id="againBtn">เล่นอีกครั้ง</button><button class="btn" id="saveBtn">🖼️ บันทึกผล</button><button class="btn" id="shareBtn">↗ แชร์</button><button class="btn" id="resultSettings">เปลี่ยนเกม</button></div></div></div></div></div><div class="teamBar hidden" id="teamBar"></div><div class="dock"><button class="secondary" id="homeBtn">⌂</button><button class="main" id="main">เริ่มรอบใหม่</button><button class="secondary hidden" id="hintBtn">💡 <span id="hintNum">3</span></button><button class="secondary hidden" id="voiceBtn">🗣️ เฉลย</button><button class="secondary hidden" id="replayBtn">↺ ดูโจทย์</button><button class="secondary" id="settingsBtn">⚙️</button></div><div class="hintline" id="hintline">ไม่มีการจับเวลาโดยค่าเริ่มต้น คุณเป็นคนกำหนดจังหวะเอง</div></div></div></section>
 <!-- ปรับเกมเอง -->
 <div class="modal hidden" id="customModal"><div class="modalCard wide"><button class="close" data-close="customModal">×</button><h2>ปรับเกมเอง</h2><p class="lead">เลือกได้ละเอียด แต่ค่าเริ่มต้นยังคงง่าย ถ้าไม่อยากตั้งค่าให้ใช้ เล่นด่วน ได้เสมอ</p><div class="settingGrid">
 <div class="setting"><h3>👤 รูปแบบผู้เล่น</h3><div class="segment" id="styleSeg"><button class="chip active" data-style="solo">คนเดียว</button><button class="chip" data-style="team">ทีม</button></div></div>
@@ -2912,7 +2928,13 @@ window.addEventListener("load",()=>{
           <h1>รอผู้เล่นทุกคนจบเกม</h1>
           <p>คุณเล่นจบแล้วและออกจากห้องแข่งขันอัตโนมัติ • ระบบจะประกาศอันดับเมื่อทุกคนส่งผลครบ</p>
           <div class="bbResultsProgress"><i id="bbResultsProgressFill"></i></div>
-          <b id="bbResultsProgressText">1 / 2 คน เล่นจบแล้ว</b><span class="bbAutoExitNote">✓ ออกจากห้องแล้ว • จะไม่เริ่มเกมซ้ำ</span>
+          <b id="bbResultsProgressText">1 / 2 คน เล่นจบแล้ว</b>
+          <div class="bbWaitClock">
+            <small>สรุปผลอัตโนมัติภายใน</small>
+            <strong id="bbResultsWaitTimer">01:00</strong>
+          </div>
+          <span class="bbAutoExitNote">✓ ออกจากห้องแข่งขันแล้ว • จะไม่เริ่มเกมซ้ำ</span>
+          <button class="bbResultsExitBtn" id="bbResultsExit">ออกจาก Ranked ตอนนี้</button>
         </div>
 
         <div class="bbResultsFinal hidden" id="bbResultsFinal">
@@ -3008,6 +3030,7 @@ window.addEventListener("load",()=>{
       already_in_another_room:"คุณอยู่ในห้อง Ranked อื่นอยู่แล้ว",
       room_full:"ห้องเต็มแล้ว",
       not_in_room:"คุณไม่ได้อยู่ในห้องนี้",
+      not_in_match:"ไม่พบชื่อคุณในแมตช์นี้ • รัน STEP 8 แล้วลองใหม่",
       cannot_leave_after_start:"ออกจากห้องไม่ได้หลังการแข่งขันเริ่ม",
       host_only:"เฉพาะ Host เท่านั้นที่เริ่มเกมได้",
       need_at_least_2_players:"ต้องมีผู้เล่นอย่างน้อย 2 คน",
@@ -3396,11 +3419,35 @@ window.addEventListener("load",()=>{
     toast("⚔️ Ranked เริ่มแล้ว!");
   }
 
-  let rankedResultChannel=null,rankedResultPoll=null;
+  let rankedResultChannel=null,rankedResultPoll=null,rankedWaitClockTimer=null,rankedWaitDeadline=null;
+
+  function stopRankedWaitClock(){
+    if(rankedWaitClockTimer){clearInterval(rankedWaitClockTimer);rankedWaitClockTimer=null}
+    rankedWaitDeadline=null;
+  }
+
+  function startRankedWaitClock(deadline){
+    if(!deadline)return;
+    const ms=new Date(deadline).getTime();
+    if(!Number.isFinite(ms))return;
+    rankedWaitDeadline=ms;
+    if(rankedWaitClockTimer)clearInterval(rankedWaitClockTimer);
+    const draw=()=>{
+      const left=Math.max(0,rankedWaitDeadline-Date.now());
+      const sec=Math.ceil(left/1000),el=$("#bbResultsWaitTimer");
+      if(el)el.textContent=`${String(Math.floor(sec/60)).padStart(2,"0")}:${String(sec%60).padStart(2,"0")}`;
+      if(left<=0){
+        if(rankedWaitClockTimer){clearInterval(rankedWaitClockTimer);rankedWaitClockTimer=null}
+        refreshRankedResults();
+      }
+    };
+    draw();rankedWaitClockTimer=setInterval(draw,250);
+  }
 
   function cleanupRankedResultsWatch(){
     if(rankedResultChannel&&client){client.removeChannel(rankedResultChannel);rankedResultChannel=null}
     if(rankedResultPoll){clearInterval(rankedResultPoll);rankedResultPoll=null}
+    stopRankedWaitClock();
   }
 
   function resultAvatar(row){
@@ -3421,7 +3468,11 @@ window.addEventListener("load",()=>{
     $("#bbResultsProgressFill").style.width=`${Math.min(100,submitted/Math.max(1,expected)*100)}%`;
     $("#bbResultsProgressText").textContent=`${submitted} / ${expected} คน เล่นจบแล้ว`;
 
-    if(!finalized)return;
+    if(!finalized){
+      if(first.wait_deadline)startRankedWaitClock(first.wait_deadline);
+      return;
+    }
+    stopRankedWaitClock();
 
     cleanupRankedResultsWatch();
     cleanupRoomChannel();
@@ -3443,7 +3494,7 @@ window.addEventListener("load",()=>{
         <div class="bbPodiumAvatar">${resultAvatar(r)}</div>
         <b>${esc(r.display_name)}</b>
         <small class="bbPodiumScore">${Number(r.score||0).toLocaleString()} คะแนน</small>
-        <small>+${Number(r.rp_change||0)} RP</small>
+        ${r.forfeited?'<small class="bbResultForfeit">🏳️ ยอมแพ้ / ไม่จบ</small>':`<small>+${Number(r.rp_change||0)} RP</small>`}
       </div>`).join("");
 
     const mine=ordered.find(r=>r.user_id===user?.id);
@@ -3456,7 +3507,7 @@ window.addEventListener("load",()=>{
         <strong>${r.placement<=3?(r.placement===1?"🥇":r.placement===2?"🥈":"🥉"):"#"+r.placement}</strong>
         <span class="bbResultName">${esc(r.display_name)}</span>
         <span class="bbResultScore">${Number(r.score||0).toLocaleString()} คะแนน</span>
-        <span class="bbResultRP">+${Number(r.rp_change||0)} RP</span>
+        <span class="bbResultRP">${r.forfeited?"🏳️ ไม่จบ":"+"+Number(r.rp_change||0)+" RP"}</span>
       </div>`).join("");
   }
 
@@ -3469,15 +3520,12 @@ window.addEventListener("load",()=>{
     rankedResultPoll=setInterval(refreshRankedResults,1200);
   }
 
-  window.bbRankedRoundFinished=async result=>{
-    // จบรอบ = หยุดเกมทันที ไม่ให้ timer / realtime ห้องเดิมเรียกเกมซ้ำ
+  function showRankedWaitingScreen(){
     clearRankedAuto();
     try{stopTimer()}catch(e){}
     try{roundStarted=false;roundComplete=true}catch(e){}
-    window.BB_RANKED_ACTIVE=false;
-    window.__bbRankedRng=null;
-    cleanupRoomChannel();
-    cleanupLobbyChannel();
+    window.BB_RANKED_ACTIVE=false;window.__bbRankedRng=null;
+    cleanupRoomChannel();cleanupLobbyChannel();
     document.body.classList.remove("bbRankedPlaying");
     document.body.classList.add("bbRankedWaiting");
     document.getElementById("bbRankedGameHud")?.classList.add("hidden");
@@ -3485,6 +3533,29 @@ window.addEventListener("load",()=>{
     document.body.style.overflow="hidden";
     show("#bbArenaCountdown",false);show("#bbArenaRoom",false);show("#bbArenaLobby",false);show("#bbArenaResults",true);
     show("#bbResultsWait",true);show("#bbResultsFinal",false);
+  }
+
+  async function forfeitRankedMatch(){
+    if(!activeRankedMatch?.id||!client)return;
+    if(!confirm("ยอมแพ้การแข่งขันนี้? คะแนนจะเป็น 0 และออกจากเกมทันที"))return;
+    showRankedWaitingScreen();
+    $("#bbResultsProgressText").textContent="กำลังบันทึกการยอมแพ้…";
+    try{localStorage.setItem("bb_ranked_waiting_match",activeRankedMatch.id)}catch(e){}
+    try{
+      const {data,error}=await client.rpc("bb_ranked_forfeit",{p_match_id:activeRankedMatch.id});
+      if(error)throw error;
+      currentRoom=null;players=[];
+      const s=data?.[0]||{};
+      $("#bbResultsProgressText").textContent=`${Number(s.submitted_count||0)} / ${Number(s.expected_count||0)} คน เล่นจบแล้ว`;
+      watchRankedResults();await refreshRankedResults();
+    }catch(e){
+      $("#bbResultsProgressText").textContent="ยอมแพ้ไม่สำเร็จ • "+errText(e);
+      toast(errText(e));
+    }
+  }
+
+  window.bbRankedRoundFinished=async result=>{
+    showRankedWaitingScreen();
     $("#bbResultsProgressText").textContent="กำลังส่งคะแนน…";
     try{localStorage.setItem("bb_ranked_waiting_match",activeRankedMatch.id)}catch(e){}
 
@@ -3509,6 +3580,19 @@ window.addEventListener("load",()=>{
       toast(errText(e))
     }
   };
+
+  $("#bbRankedForfeitBtn")?.addEventListener("click",forfeitRankedMatch);
+
+  $("#bbResultsExit")?.addEventListener("click",async()=>{
+    cleanupRankedResultsWatch();cleanupRoomChannel();stopCountdown();
+    window.BB_RANKED_ACTIVE=false;window.__bbRankedRng=null;
+    document.body.classList.remove("bbRankedPlaying","bbRankedWaiting");
+    try{localStorage.removeItem("bb_ranked_waiting_match")}catch(e){}
+    currentRoom=null;players=[];activeRankedMatch=null;
+    show("#bbArenaResults",false);show("#bbArenaRoom",false);show("#bbArenaCountdown",false);show("#bbArenaLobby",true);
+    await getAuth();renderMe();await loadLobby();subscribeLobby();
+    toast("ออกจาก Ranked แล้ว • ผลของคุณยังถูกเก็บไว้");
+  });
 
   $("#bbResultsLobby")?.addEventListener("click",async()=>{
     cleanupRankedResultsWatch();cleanupRoomChannel();stopCountdown();
