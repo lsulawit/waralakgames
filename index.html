@@ -440,94 +440,520 @@ body.dark .loginGuideCard, body.dark .guideStep{background:rgba(255,255,255,.05)
 body.dark .guideBlock h3{color:#f4eefb} body.dark .guideBlock p, body.dark .guideStep span{color:#c7bed4} body.dark .guideStep b{color:#f4eefb}
 
 
-/* ===== v15 readability + hero leaderboard ===== */
+/* =========================================================
+   Brain Buddy v16 — Clear, Light, Competitive
+   ========================================================= */
 :root{
-  --bb-surface:#fffdfd;
-  --bb-card:#ffffff;
-  --bb-stroke:rgba(104,87,129,.12);
-  --bb-shadow:0 18px 48px rgba(72,48,96,.10);
-  --bb-text:#2f2735;
-  --bb-muted:#6f6877;
-  --bb-pink:#ff72af;
-  --bb-purple:#9b7cff;
+  --v16-bg:#fbf9fe;
+  --v16-card:#ffffff;
+  --v16-text:#2c2632;
+  --v16-muted:#6d6673;
+  --v16-border:#e9e3ee;
+  --v16-pink:#ec5f9f;
+  --v16-pink2:#ff8fbd;
+  --v16-purple:#7559d9;
+  --v16-purple2:#9a83f2;
+  --v16-mint:#52c7a7;
+  --v16-shadow:0 18px 48px rgba(65,46,82,.10);
 }
-body{color:var(--bb-text)!important}
-.heroMain,.premiumHero{
-  background:linear-gradient(180deg,#fffefe 0%, #fff9fc 65%, #faf6ff 100%)!important;
-  border:1px solid var(--bb-stroke)!important;
-  box-shadow:var(--bb-shadow)!important;
+
+/* Never let the home screen look washed out. */
+body{
+  background:
+    radial-gradient(circle at 5% 0%,rgba(248,204,226,.35),transparent 26rem),
+    radial-gradient(circle at 96% 5%,rgba(211,202,255,.34),transparent 28rem),
+    linear-gradient(180deg,#fdfbfe 0%,#f7f4fb 100%)!important;
 }
-.authOverlay,.modalOverlay{background:rgba(23,16,31,.58)!important;backdrop-filter:blur(12px)!important}
-.authCard,.authModal,.memberModal{
-  background:#fff!important; opacity:1!important; 
-  border:1px solid rgba(104,87,129,.14)!important;
-  box-shadow:0 32px 84px rgba(31,18,41,.28)!important;
+.topbar{
+  background:rgba(255,255,255,.96)!important;
+  border-bottom:1px solid var(--v16-border)!important;
+  box-shadow:0 5px 20px rgba(58,43,72,.05);
 }
-.authLeft,.authBody,.authInner{opacity:1!important}
-.authField input{background:#fff!important; color:#241d2b!important; border:1.6px solid rgba(104,87,129,.16)!important}
-.authField label{color:#4a4054!important; font-weight:800!important}
-.authDesc{color:#5e5668!important}
-.authHint{background:#f8f6fb!important; color:#544b5f!important}
-.entryGuideHero{
-  display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:stretch;
-  margin:22px 0 24px;
+.brand,.panelHead h2,.daily h3,.quick strong{color:var(--v16-text)!important}
+.profilemini,.icon,.popover,.quick,.panel,.daily,.metricsPanel,.metric{
+  background:#fff!important;
+  color:var(--v16-text)!important;
+  border-color:var(--v16-border)!important;
 }
-@media(max-width:980px){.entryGuideHero{grid-template-columns:1fr}}
-.heroBlock,.leaderHero{
-  background:#fff;border:1px solid var(--bb-stroke);border-radius:28px;padding:26px;box-shadow:var(--bb-shadow);
+.popover button{color:var(--v16-text)!important}
+
+/* Hero */
+.v16Hero{
+  grid-template-columns:minmax(0,1.08fr) minmax(350px,.92fr)!important;
+  align-items:stretch!important;
+  background:#fff!important;
+  border:1px solid var(--v16-border)!important;
+  box-shadow:0 24px 66px rgba(68,48,86,.11)!important;
 }
-.heroBlock h2{margin:0 0 10px;font-size:34px;line-height:1.15}
-.heroBlock p{margin:0;color:var(--bb-muted);line-height:1.8;font-size:16px}
-.ctaRow{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-.ctaBtn{border:none;border-radius:18px;padding:15px 18px;font-weight:900;font-size:17px;cursor:pointer}
-.ctaPrimary{background:linear-gradient(135deg,var(--bb-pink),var(--bb-purple));color:#fff;box-shadow:0 12px 28px rgba(195,115,193,.25)}
-.ctaSecondary{background:#fff;color:#43384d;border:1px solid var(--bb-stroke)}
-.guideMini{display:grid;gap:10px;margin-top:18px}
-.guideMini .item{display:flex;gap:12px;align-items:flex-start;background:#faf8fd;border:1px solid rgba(104,87,129,.08);padding:14px;border-radius:18px}
-.guideMini b{display:block;font-size:15px}
-.guideMini span{color:var(--bb-muted);font-size:13px}
-.leaderHero h3{margin:0;font-size:28px}
-.leaderHero p{margin:8px 0 14px;color:var(--bb-muted)}
-.lbTopList{display:grid;gap:10px}
-.lbTopItem{display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:12px;background:#faf8fd;border:1px solid rgba(104,87,129,.08);padding:12px 14px;border-radius:18px}
-.lbTopPos{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-weight:900;background:linear-gradient(135deg,#ffe7f3,#efe4ff);color:#6d4dc7}
-.lbTopUser{display:flex;align-items:center;gap:10px}
-.lbTopAvatar{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;background:#fff;border:1px solid rgba(104,87,129,.08);overflow:hidden}
-.lbTopMeta b{display:block}
-.lbTopMeta span{font-size:12px;color:var(--bb-muted)}
-.lbTopScore{font-weight:900}
-.lbSection{
-  background:#fff;border:1px solid var(--bb-stroke);border-radius:28px;padding:22px;box-shadow:var(--bb-shadow);margin-top:18px;
+.v16HeroCopy{display:flex;flex-direction:column;justify-content:center;min-width:0}
+.heroTitle{color:var(--v16-text)!important;font-weight:850!important}
+.heroTitle span{color:var(--v16-purple)!important}
+.hero p{color:var(--v16-muted)!important}
+.kicker{
+  background:#fff7fb!important;
+  border-color:#f2dce7!important;
+  color:#684d61!important;
 }
-.competeBanner{
-  display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;
-  background:linear-gradient(135deg,#fff3f9,#f3ecff);border:1px solid rgba(169,124,255,.14);
-  border-radius:22px;padding:18px;margin-top:18px;
+.v16HeroSide{display:grid;grid-template-rows:205px auto;gap:12px;min-width:0}
+.v16BearStage{
+  min-height:205px!important;
+  height:205px;
+  background:
+    radial-gradient(circle at 22% 20%,#fff 0 34px,transparent 35px),
+    radial-gradient(circle at 85% 22%,rgba(255,255,255,.7) 0 21px,transparent 22px),
+    linear-gradient(145deg,#ffe8f2,#eee9ff 58%,#e2f7f1)!important;
+  border:1px solid #f0e7f2;
 }
-.competeBanner b{font-size:20px}
-.competeBanner span{color:var(--bb-muted)}
-.quickStartGrid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px;
+.v16BearStage .heroBear{width:150px;height:185px}
+
+/* Member choice = obvious login/signup */
+.v16MemberChoice{
+  margin-top:20px;
+  padding:17px;
+  background:#faf7fc;
+  border:1px solid var(--v16-border);
+  border-radius:22px;
 }
-@media(max-width:980px){.quickStartGrid{grid-template-columns:1fr}}
-.qCard{
-  background:#fff;border:1px solid var(--bb-stroke);box-shadow:var(--bb-shadow);border-radius:24px;padding:18px;
+.v16MemberTitle{font-weight:900;font-size:14px;margin-bottom:10px;color:var(--v16-text)}
+.v16MemberButtons{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.v16AuthBtn{
+  border:1px solid var(--v16-border);
+  border-radius:15px;
+  padding:12px 9px;
+  font-weight:900;
+  font-size:13px;
+  background:#fff;
+  color:var(--v16-text);
 }
-.qCard h4{margin:0 0 8px;font-size:22px}
-.qCard p{margin:0 0 14px;color:var(--bb-muted);line-height:1.7}
-.qCard .sub{font-size:13px;color:var(--bb-muted)}
-body.dark .heroBlock,body.dark .leaderHero,body.dark .lbSection,body.dark .qCard{background:#1c1723!important;border-color:rgba(255,255,255,.08)!important}
-body.dark .heroBlock p,body.dark .leaderHero p,body.dark .qCard p,.dark .guideMini span{color:#c9bfd8!important}
-body.dark .guideMini .item,.dark .lbTopItem,.dark .competeBanner{background:rgba(255,255,255,.05)!important;border-color:rgba(255,255,255,.08)!important}
+.v16AuthBtn.login{
+  background:linear-gradient(135deg,var(--v16-purple),var(--v16-purple2));
+  border-color:transparent;color:#fff;
+  box-shadow:0 10px 20px rgba(117,89,217,.20);
+}
+.v16AuthBtn.signup{
+  background:linear-gradient(135deg,var(--v16-pink),var(--v16-pink2));
+  border-color:transparent;color:#fff;
+  box-shadow:0 10px 20px rgba(236,95,159,.18);
+}
+.v16AuthBtn.guest{background:#fff;color:#4f4657}
+.v16MemberHelp{margin-top:9px;font-size:10.5px;line-height:1.6;color:var(--v16-muted)}
+.v16PlayActions{margin-top:12px!important}
+
+/* Leaderboard visible inside hero */
+.v16TopCard{
+  background:#fff;
+  border:1px solid var(--v16-border);
+  border-radius:23px;
+  padding:15px;
+  box-shadow:0 12px 28px rgba(60,44,74,.07);
+}
+.v16TopHead{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.v16TopHead h3{margin:3px 0 0;font-size:20px;line-height:1.3;color:var(--v16-text)}
+.v16TopHead p{margin:2px 0 0!important;font-size:10.5px!important;line-height:1.45!important;color:var(--v16-muted)!important}
+.v16Live{font-size:9px;font-weight:950;color:#2f8b73;letter-spacing:.04em}
+.v16SeeAll{border:0;background:#f4efff;color:#6650bb;border-radius:12px;padding:8px 9px;font-weight:900;font-size:10px;white-space:nowrap}
+.v16TopList{display:grid;gap:6px;margin-top:10px}
+.v16TopRow{
+  display:grid;grid-template-columns:30px 34px 1fr auto;gap:8px;align-items:center;
+  padding:7px 8px;border:1px solid #f0ebf3;border-radius:13px;background:#fcfbfd;
+}
+.v16TopPos{
+  width:30px;height:30px;border-radius:10px;display:grid;place-items:center;
+  font-weight:950;font-size:12px;color:#654fc0;background:#f0eaff;
+}
+.v16TopRow:nth-child(1) .v16TopPos{background:#fff0c9;color:#896400}
+.v16TopRow:nth-child(2) .v16TopPos{background:#eef0f6;color:#656b7c}
+.v16TopRow:nth-child(3) .v16TopPos{background:#f8e5d9;color:#8c5c3f}
+.v16TopAvatar{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:#fff;border:1px solid #eee8f1;overflow:hidden;font-size:18px}
+.v16TopAvatar img{width:100%;height:100%;object-fit:cover}
+.v16TopName{min-width:0}
+.v16TopName b{display:block;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--v16-text)}
+.v16TopName span{display:block;font-size:9px;color:var(--v16-muted);margin-top:1px}
+.v16TopScore{text-align:right}
+.v16TopScore b{display:block;font-size:12px;color:var(--v16-text)}
+.v16TopScore span{font-size:8px;color:var(--v16-muted)}
+.v16TopLoading{padding:14px;text-align:center;color:var(--v16-muted);font-size:11px}
+
+/* Competition strip */
+.v16CompeteStrip{
+  margin-top:1px;margin-bottom:15px;
+  border:1px solid #eadff4;
+  border-radius:22px;
+  padding:13px 16px;
+  background:linear-gradient(100deg,#fff8fb,#f5f0ff);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  box-shadow:0 10px 26px rgba(68,48,86,.06);
+}
+.v16CompeteText{display:flex;align-items:center;gap:10px}
+.v16CompeteText>span{font-size:25px}
+.v16CompeteText b{display:block;font-size:13px;color:var(--v16-text)}
+.v16CompeteText small{display:block;margin-top:2px;color:var(--v16-muted);font-size:10px}
+
+/* Home cards become crisp instead of dark/washed */
+.homeGrid{grid-template-columns:1.2fr .8fr!important}
+.panel,.daily,.metricsPanel{
+  background:#fff!important;border:1px solid var(--v16-border)!important;box-shadow:var(--v16-shadow)!important
+}
+.quick{background:#fff!important;border:1px solid var(--v16-border)!important;box-shadow:0 7px 18px rgba(65,46,82,.04)}
+.quick small,.panelHead p,.daily p{color:var(--v16-muted)!important}
+.daily{
+  background:linear-gradient(145deg,#fffdf8,#fff9ed)!important;
+}
+.dailyTag{background:#fff0b8!important;color:#71530d!important}
+
+/* Full leaderboard modal */
+.v16LeaderboardModal{
+  width:min(900px,calc(100% - 22px))!important;
+  max-height:88vh!important;
+  overflow:auto!important;
+  background:#fff!important;
+  color:var(--v16-text)!important;
+  border:1px solid var(--v16-border)!important;
+  border-radius:28px!important;
+  padding:24px!important;
+  box-shadow:0 32px 90px rgba(35,24,44,.28)!important;
+}
+.v16LbModalHead{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;padding-right:35px}
+.v16LbModalHead h2{margin:4px 0 4px!important;padding:0!important;color:var(--v16-text)!important}
+.v16LbModalHead p{margin:0;color:var(--v16-muted);font-size:12px}
+.v16RankLegend{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.v16RankLegend span{padding:6px 8px;border-radius:999px;background:#faf7fc;border:1px solid var(--v16-border);font-size:9px;font-weight:850}
+.v16FullLeaderboard{display:grid;gap:8px;margin-top:16px}
+.v16FullRow{
+  display:grid;grid-template-columns:42px 44px minmax(0,1fr) 100px 85px;gap:10px;align-items:center;
+  padding:11px 12px;border-radius:16px;border:1px solid #eee8f1;background:#fdfcfe;
+}
+.v16FullPos{font-size:18px;font-weight:950;color:#7057c7;text-align:center}
+.v16FullAvatar{width:44px;height:44px;border-radius:13px;background:#fff;display:grid;place-items:center;overflow:hidden;border:1px solid #eee8f1}
+.v16FullAvatar img{width:100%;height:100%;object-fit:cover}
+.v16FullName b{display:block;color:var(--v16-text);font-size:13px}
+.v16FullName span{display:block;color:var(--v16-muted);font-size:10px;margin-top:2px}
+.v16FullMetric{text-align:right}
+.v16FullMetric b{display:block;font-size:14px;color:var(--v16-text)}
+.v16FullMetric span{font-size:9px;color:var(--v16-muted)}
+.v16MyRank{
+  margin-top:14px;padding:13px 15px;border-radius:16px;
+  background:linear-gradient(90deg,#fff3f8,#f1ebff);border:1px solid #e8dcf2;font-size:12px;color:#4b4055
+}
+
+/* Actual account modal — this is the real class in the HTML. */
+#accountModal{
+  background:rgba(34,25,42,.72)!important;
+  backdrop-filter:blur(8px)!important;
+}
+#accountModal .modalcard{
+  position:relative!important;
+  width:min(650px,calc(100% - 24px))!important;
+  max-height:88vh!important;
+  overflow:auto!important;
+  padding:25px!important;
+  border-radius:28px!important;
+  background:#ffffff!important;
+  color:#2b2431!important;
+  border:1px solid #e8e0ec!important;
+  box-shadow:0 35px 95px rgba(24,15,31,.38)!important;
+  opacity:1!important;
+}
+#accountModal .modalcard h2{color:#2b2431!important;font-size:28px!important;margin:0 0 5px!important}
+#accountModal .lead{color:#625b68!important;opacity:1!important;line-height:1.7!important}
+#accountModal .authTabs{
+  padding:5px!important;background:#f4eff7!important;border:1px solid #e8e1ec!important;
+  border-radius:17px!important;gap:6px!important
+}
+#accountModal .authTab{
+  border:0!important;background:transparent!important;color:#4e4556!important;padding:12px!important;font-size:16px!important
+}
+#accountModal .authTab.active{
+  background:linear-gradient(135deg,var(--v16-purple),var(--v16-purple2))!important;
+  color:#fff!important;box-shadow:0 8px 18px rgba(117,89,217,.18)!important
+}
+#accountModal .authForm .field label{color:#4b4251!important;font-size:11px!important}
+#accountModal .authForm input{
+  background:#fff!important;color:#2c2632!important;border:1.5px solid #ddd5e2!important;
+  padding:13px!important;font-size:15px!important;opacity:1!important
+}
+#accountModal .authForm input::placeholder{color:#a39aa7!important}
+#accountModal .authForm input:focus{border-color:#9b7cff!important;box-shadow:0 0 0 4px rgba(155,124,255,.12)!important}
+#accountModal .btn.primary{
+  background:linear-gradient(135deg,var(--v16-pink),var(--v16-pink2))!important;color:#fff!important;
+  font-size:16px!important;padding:13px!important
+}
+#accountModal .btn:not(.primary){background:#fff!important;color:#342c3a!important;border-color:#ddd6e1!important}
+#accountModal .authDivider{color:#8a828d!important}
+#accountModal .authMessage{color:#403648!important}
+#accountModal .authFoot{color:#6f6675!important}
+#accountModal .x{
+  position:absolute!important;right:14px!important;top:13px!important;
+  width:38px!important;height:38px!important;border:0!important;border-radius:12px!important;
+  background:#f5f1f7!important;color:#3f3546!important;font-size:20px!important;z-index:3
+}
+
+/* Dark mode stays readable; auth modal intentionally remains light. */
+body.dark{
+  --ink:#f8f5fb!important;
+  --muted:#c4bdcb!important;
+  background:linear-gradient(180deg,#171321,#211a31)!important;
+}
+body.dark .topbar{background:rgba(28,23,38,.97)!important;border-color:rgba(255,255,255,.10)!important}
+body.dark .brand{color:#fff!important}
+body.dark .profilemini,body.dark .icon,body.dark .popover{
+  background:#29223a!important;color:#fff!important;border-color:rgba(255,255,255,.11)!important
+}
+body.dark .v16Hero,body.dark .panel,body.dark .metricsPanel,body.dark .quick{
+  background:#211b2d!important;border-color:rgba(255,255,255,.10)!important
+}
+body.dark .heroTitle,body.dark .panelHead h2,body.dark .quick strong{color:#fff!important}
+body.dark .hero p,body.dark .quick small,body.dark .panelHead p{color:#c9c0d0!important}
+body.dark .v16MemberChoice,body.dark .v16TopCard{
+  background:#2a2238!important;border-color:rgba(255,255,255,.10)!important
+}
+body.dark .v16MemberTitle,body.dark .v16TopHead h3,body.dark .v16TopName b,body.dark .v16TopScore b{color:#fff!important}
+body.dark .v16MemberHelp,body.dark .v16TopHead p,body.dark .v16TopName span,body.dark .v16TopScore span{color:#c5bccd!important}
+body.dark .v16AuthBtn.guest,body.dark .v16TopRow{
+  background:#342b44!important;color:#fff!important;border-color:rgba(255,255,255,.10)!important
+}
+body.dark .v16CompeteStrip{background:#282036!important;border-color:rgba(255,255,255,.10)!important}
+body.dark .v16CompeteText b{color:#fff!important}
+body.dark .v16CompeteText small{color:#c8bfd0!important}
+body.dark .daily{background:#2b2630!important;border-color:rgba(255,255,255,.10)!important}
+body.dark .daily h3{color:#fff!important}
+body.dark .daily p{color:#c9c0d0!important}
+
+@media(max-width:980px){
+  .v16Hero{grid-template-columns:1fr!important}
+  .v16HeroSide{grid-template-columns:260px 1fr;grid-template-rows:auto;align-items:stretch}
+  .v16BearStage{height:auto;min-height:250px!important}
+}
+@media(max-width:700px){
+  .v16MemberButtons{grid-template-columns:1fr}
+  .v16HeroSide{grid-template-columns:1fr}
+  .v16BearStage{min-height:180px!important;height:180px}
+  .v16CompeteStrip{align-items:flex-start}
+  .v16FullRow{grid-template-columns:36px 40px minmax(0,1fr) 70px}
+  .v16FullRow .v16FullMetric:last-child{display:none}
+  .v16RankLegend{justify-content:flex-start}
+  .v16LbModalHead{display:block}
+}
 
 </style>
+
+<script>
+try{
+  if(!localStorage.getItem("bb_v16_ui_migrated")){
+    localStorage.setItem("bb_theme", JSON.stringify("light"));
+    localStorage.setItem("bb_v16_ui_migrated","1");
+  }
+}catch(e){}
+
+(function brainBuddyV16(){
+  const $q=(s,r=document)=>r.querySelector(s);
+  const rankIcon=t=>({Bronze:"🌱",Silver:"✨",Gold:"🏆",Platinum:"🌌",Diamond:"💎"})[t]||"🌱";
+
+  function openAccount(tab){
+    const modal=document.getElementById("accountModal");
+    if(!modal)return;
+    modal.classList.remove("hidden");
+    document.querySelectorAll("[data-auth-tab]").forEach(b=>b.classList.toggle("active",b.dataset.authTab===tab));
+    const login=document.getElementById("loginForm"), signup=document.getElementById("signupForm");
+    if(login)login.classList.toggle("hidden",tab!=="login");
+    if(signup)signup.classList.toggle("hidden",tab!=="signup");
+    const title=document.getElementById("accountTitle");
+    if(title)title.textContent=tab==="signup"?"สมัครสมาชิก Brain Buddy":"เข้าสู่ระบบ Brain Buddy";
+    const lead=document.getElementById("accountLead");
+    if(lead)lead.textContent=tab==="signup"
+      ?"สร้างบัญชีเพื่อเก็บคะแนน XP แรงก์ ความสำเร็จ และประวัติการเล่นไว้บน Cloud"
+      :"เข้าสู่ระบบเพื่อเล่นต่อจากข้อมูลเดิมและให้คะแนนของคุณขึ้นตารางจัดอันดับ";
+  }
+
+  async function client(){
+    if(window.__bbSupabase)return window.__bbSupabase;
+    if(window.sb)return window.sb;
+    const c=window.BRAIN_BUDDY_SUPABASE||{};
+    if(window.supabase&&c.url&&c.publishableKey){
+      window.__bbSupabase=window.supabase.createClient(c.url,c.publishableKey);
+      return window.__bbSupabase;
+    }
+    return null;
+  }
+
+  async function getLeaderboard(limit=30){
+    const c=await client();
+    if(!c)return [];
+    const {data,error}=await c.from("leaderboard_view").select("*").limit(limit);
+    if(error){console.warn("leaderboard_view:",error.message);return []}
+    return data||[];
+  }
+
+  function topRow(u,i){
+    const avatar=u.avatar_url
+      ? `<img src="${u.avatar_url}" alt="">`
+      : (u.avatar||"🧸");
+    return `<div class="v16TopRow">
+      <div class="v16TopPos">${i+1}</div>
+      <div class="v16TopAvatar">${avatar}</div>
+      <div class="v16TopName"><b>${u.display_name||"ผู้เล่น"}</b><span>${rankIcon(u.rank_tier)} ${u.rank_tier||"Bronze"}</span></div>
+      <div class="v16TopScore"><b>${u.best_score||0}</b><span>คะแนน</span></div>
+    </div>`;
+  }
+
+  async function renderTop(){
+    const box=document.getElementById("v16TopList");
+    if(!box)return;
+    const rows=await getLeaderboard(3);
+    if(!rows.length){
+      box.innerHTML=`<div class="v16TopRow">
+        <div class="v16TopPos">1</div><div class="v16TopAvatar">🏆</div>
+        <div class="v16TopName"><b>ยังไม่มีอันดับ</b><span>สมัครสมาชิกแล้วเป็นคนแรกได้เลย</span></div>
+        <div class="v16TopScore"><b>0</b><span>คะแนน</span></div>
+      </div>`;
+      return;
+    }
+    box.innerHTML=rows.map(topRow).join("");
+  }
+
+  async function renderFull(){
+    const box=document.getElementById("v16FullLeaderboard");
+    if(!box)return;
+    box.innerHTML='<div class="v16TopLoading">กำลังโหลดตารางจัดอันดับ…</div>';
+    const rows=await getLeaderboard(50);
+    if(!rows.length){
+      box.innerHTML='<div class="v16TopLoading">ยังไม่มีสมาชิกบนตารางจัดอันดับ — เล่นจบรอบแรกแล้วอันดับจะเริ่มขึ้นที่นี่</div>';
+      return;
+    }
+    box.innerHTML=rows.map((u,i)=>{
+      const avatar=u.avatar_url?`<img src="${u.avatar_url}" alt="">`:(u.avatar||"🧸");
+      return `<div class="v16FullRow">
+        <div class="v16FullPos">${i+1}</div>
+        <div class="v16FullAvatar">${avatar}</div>
+        <div class="v16FullName"><b>${u.display_name||"ผู้เล่น"}</b><span>${rankIcon(u.rank_tier)} ${u.rank_tier||"Bronze"} • เล่น ${u.games_played||0} รอบ</span></div>
+        <div class="v16FullMetric"><b>${u.best_score||0}</b><span>คะแนนสูงสุด</span></div>
+        <div class="v16FullMetric"><b>${u.xp||0}</b><span>XP</span></div>
+      </div>`;
+    }).join("");
+
+    const c=await client();
+    if(c){
+      const {data:{session}}=await c.auth.getSession();
+      if(session?.user){
+        const idx=rows.findIndex(r=>r.id===session.user.id);
+        const mine=document.getElementById("v16MyRank");
+        if(mine&&idx>=0){
+          mine.classList.remove("hidden");
+          mine.innerHTML=`🎯 <b>อันดับของคุณ #${idx+1}</b> • ${rows[idx].best_score||0} คะแนน • ${rankIcon(rows[idx].rank_tier)} ${rows[idx].rank_tier||"Bronze"}`;
+        }
+      }
+    }
+  }
+
+  function openLeaderboard(){
+    const m=document.getElementById("leaderboardModal");
+    if(m){m.classList.remove("hidden");renderFull()}
+  }
+
+  function guestPlay(){
+    const b=document.getElementById("continueผู้เยี่ยมชมBtn");
+    if(b)b.click();
+    else document.getElementById("quickPlay")?.click();
+  }
+
+  window.__bbRenderCloudLeaderboard=async()=>{await renderTop();await renderFull()};
+
+  window.addEventListener("load",()=>{
+    setTimeout(renderTop,600);
+    setTimeout(renderTop,1700);
+
+    document.getElementById("v16LoginBtn")?.addEventListener("click",()=>openAccount("login"));
+    document.getElementById("v16SignupBtn")?.addEventListener("click",()=>openAccount("signup"));
+    document.getElementById("v16GuestBtn")?.addEventListener("click",guestPlay);
+    document.getElementById("v16CompeteLogin")?.addEventListener("click",()=>openAccount("signup"));
+    document.getElementById("v16SeeLeaderboard")?.addEventListener("click",openLeaderboard);
+    document.getElementById("v16MenuLeaderboard")?.addEventListener("click",()=>{
+      document.getElementById("popover")?.classList.add("hidden");
+      openLeaderboard();
+    });
+
+    // Account button stays obvious for guests.
+    const small=document.getElementById("cloudMini");
+    if(small&&/ผู้เยี่ยมชม|Guest/i.test(small.textContent||"")){
+      const n=document.getElementById("navName");
+      if(n)n.textContent="เข้าสู่ระบบ";
+      small.textContent="หรือสมัครสมาชิก";
+    }
+
+    // Refresh ranking shortly after auth state changes.
+    (async()=>{
+      const c=await client();
+      if(c&&c.auth?.onAuthStateChange){
+        c.auth.onAuthStateChange(()=>setTimeout(renderTop,500));
+      }
+    })();
+  });
+})();
+
+</script>
+
 </head>
 <body>
-<header class="topbar"><div class="shell nav"><div class="brand" id="brand"><div class="logo" id="logo">🧠</div><span>Brain Buddy</span></div><div class="navright"><button class="profilemini accountBtn" id="accountBtn" type="button"><div class="miniavatar" id="navAvatar">🧸</div><span class="accountText"><b id="navName">ผู้เล่น</b><small id="cloudMini">ผู้เยี่ยมชม</small></span><i class="cloudDot" id="cloudDot"></i></button><button class="icon" id="musicBtn">🎵</button><button class="icon" id="themeBtn">🌙</button><button class="icon" id="fullBtn">⛶</button><div class="menubox"><button class="icon" id="menuBtn">☰</button><div class="popover hidden" id="popover"><button data-open="profileModal">👤 โปรไฟล์ & Level</button><button data-open="statsModal">📊 สถิติ & ความสำเร็จ</button><button data-open="collectionModal">🧸 Character Collection</button><button data-open="audioModal">🎧 เพลง & เสียง</button><button data-open="accessModal">Aa การมองเห็น</button><button data-open="helpModal">? วิธีเล่น</button><button data-open="researchModal">🧠 หลักการ & งานวิจัย</button><button id="presenterBtn">🖥️ โหมดนำเกม</button></div></div></div></div></header>
-<section class="hero" id="home"><div class="shell"><div class="heroCard"><div><span class="kicker">✨ เกมฝึกความจำที่เริ่มเล่นได้ทันที</span><h1 class="heroTitle">จำภาพให้แม่น <span>ทายตำแหน่งให้ถูก</span></h1><p>เริ่มง่ายจากกระดาน 2×2 แล้วค่อยเพิ่มระดับเมื่อพร้อม เล่นคนเดียวเพื่อทำสถิติของตัวเอง หรือแบ่งทีมเพื่อเพิ่มความสนุกก็ได้</p><div class="heroActions"><button class="btn primary" id="quickPlay">🎮 เล่นด่วน</button><button class="btn" id="customPlay">⚙️ ปรับเกมเอง</button><button class="btn hidden" id="resumeBtn">↩️ เล่นรอบเดิมต่อ</button></div><div class="summary"><i></i><span id="heroSummary">คนเดียว • จำตำแหน่ง • ง่าย 2×2 • ไม่จับเวลา</span></div></div><div class="heroArt"><div class="heroBear" id="heroBear"></div></div></div></div></section>
-<section class="shell homeGrid"><div class="panel"><div class="panelHead"><h2>เลือกเล่นแบบรวดเร็ว</h2><p>ฟังก์ชันเยอะ แต่หน้าเริ่มยังเรียบและกดง่าย</p></div><div class="quickGrid"><button class="quick" id="soloQuick"><span>👤</span><strong>เล่นคนเดียว</strong><small>2×2 • จำตำแหน่ง • คะแนนอัตโนมัติ</small></button><div class="quick teamQuickCard"><span class="quickIcon">👥</span><strong>เล่นเป็นทีม</strong><small>เลือกจำนวนทีมได้ทันที • ตอบออกเสียง • เพิ่มคะแนนเอง</small><div class="quickTeamPicker" id="quickTeamPicker"><button class="quickTeamChip active" data-quick-team="2">2 ทีม</button><button class="quickTeamChip" data-quick-team="3">3 ทีม</button><button class="quickTeamChip" data-quick-team="4">4 ทีม</button><button class="quickTeamChip" data-quick-team="5">5 ทีม</button><button class="quickTeamChip" data-quick-team="6">6 ทีม</button></div><button class="quickTeamStart" id="teamQuick">เริ่มแบบ 2 ทีม →</button></div></div></div><div class="daily"><span class="dailyTag">📅 DAILY CHALLENGE</span><h3 id="dailyTitle">ภารกิจวันนี้</h3><p id="dailyText">โจทย์ประจำวันเลือกโหมดและระดับให้อัตโนมัติ</p><button class="btn purple" id="dailyBtn">เล่นภารกิจวันนี้</button><div style="font-size:10px;color:var(--muted);margin-top:9px">🔥 Daily streak <b id="dailyStreak">0</b> วัน</div></div><div class="metricsPanel"><div class="metricGrid"><div class="metric"><b id="homeLevel">1</b><span>LEVEL</span></div><div class="metric"><b id="homeXP">0</b><span>XP</span></div><div class="metric"><b id="homeBest">0</b><span>BEST SCORE</span></div><div class="metric"><b id="homeAcc">0%</b><span>BEST ACCURACY</span></div><div class="metric"><b id="homeRounds">0</b><span>ROUNDS</span></div></div></div></section>
+<header class="topbar"><div class="shell nav"><div class="brand" id="brand"><div class="logo" id="logo">🧠</div><span>Brain Buddy</span></div><div class="navright"><button class="profilemini accountBtn" id="accountBtn" type="button"><div class="miniavatar" id="navAvatar">🧸</div><span class="accountText"><b id="navName">ผู้เล่น</b><small id="cloudMini">ผู้เยี่ยมชม</small></span><i class="cloudDot" id="cloudDot"></i></button><button class="icon" id="musicBtn">🎵</button><button class="icon" id="themeBtn">🌙</button><button class="icon" id="fullBtn">⛶</button><div class="menubox"><button class="icon" id="menuBtn">☰</button><div class="popover hidden" id="popover"><button id="v16MenuLeaderboard">🏆 ตารางจัดอันดับ</button><button data-open="profileModal">👤 โปรไฟล์ & Level</button><button data-open="statsModal">📊 สถิติ & ความสำเร็จ</button><button data-open="collectionModal">🧸 คอลเลกชันตัวละคร</button><button data-open="audioModal">🎧 เพลง & เสียง</button><button data-open="accessModal">Aa การมองเห็น</button><button data-open="helpModal">? วิธีเล่น</button><button data-open="researchModal">🧠 หลักการ & งานวิจัย</button><button id="presenterBtn">🖥️ โหมดนำเกม</button></div></div></div></div></header>
+
+<section class="hero" id="home">
+  <div class="shell">
+    <div class="heroCard v16Hero">
+      <div class="v16HeroCopy">
+        <span class="kicker">✨ Brain Buddy • เกมฝึกความจำแบบเล่นง่าย</span>
+        <h1 class="heroTitle">จำภาพให้แม่น <span>ทายตำแหน่งให้ถูก</span></h1>
+        <p>เริ่มง่ายจาก 2×2 แล้วค่อยเพิ่มระดับเมื่อพร้อม เล่นคนเดียวเพื่อทำสถิติ หรือแบ่งทีมเพื่อเพิ่มความสนุก</p>
+
+        <div class="v16MemberChoice">
+          <div class="v16MemberTitle">เริ่มแบบไหนดี?</div>
+          <div class="v16MemberButtons">
+            <button class="v16AuthBtn login" id="v16LoginBtn">🔐 เข้าสู่ระบบ</button>
+            <button class="v16AuthBtn signup" id="v16SignupBtn">✨ สมัครสมาชิก</button>
+            <button class="v16AuthBtn guest" id="v16GuestBtn">🎮 เล่นแบบผู้เยี่ยมชม</button>
+          </div>
+          <div class="v16MemberHelp">สมาชิกจะเก็บคะแนน XP แรงก์ และประวัติไว้บน Cloud • ผู้เยี่ยมชมเริ่มเล่นได้ทันที</div>
+        </div>
+
+        <div class="heroActions v16PlayActions">
+          <button class="btn primary" id="quickPlay">🎮 เล่นด่วน</button>
+          <button class="btn" id="customPlay">⚙️ ปรับเกมเอง</button>
+          <button class="btn hidden" id="resumeBtn">↩️ เล่นรอบเดิมต่อ</button>
+        </div>
+        <div class="summary"><i></i><span id="heroSummary">คนเดียว • จำตำแหน่ง • ง่าย 2×2 • ไม่จับเวลา</span></div>
+      </div>
+
+      <div class="v16HeroSide">
+        <div class="heroArt v16BearStage"><div class="heroBear" id="heroBear"></div></div>
+
+        <div class="v16TopCard" id="leaderboardSpotlight">
+          <div class="v16TopHead">
+            <div>
+              <span class="v16Live">● LIVE CLOUD</span>
+              <h3>🏆 อันดับผู้เล่น</h3>
+              <p>คะแนนจริงจากสมาชิกทุกบัญชี</p>
+            </div>
+            <button class="v16SeeAll" id="v16SeeLeaderboard">ดูทั้งหมด →</button>
+          </div>
+          <div class="v16TopList" id="v16TopList">
+            <div class="v16TopLoading">กำลังโหลดอันดับ…</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="shell v16CompeteStrip">
+  <div class="v16CompeteText">
+    <span>🔥</span>
+    <div><b>ทำคะแนนให้สูง แล้วขึ้นอันดับเหนือเพื่อน</b><small>เล่นในบัญชีสมาชิกเพื่อให้คะแนนของคุณขึ้นตารางจัดอันดับ</small></div>
+  </div>
+  <button class="btn purple" id="v16CompeteLogin">เริ่มเก็บอันดับ</button>
+</section>
+
+<section class="shell homeGrid"><div class="panel"><div class="panelHead"><h2>เลือกเล่นแบบรวดเร็ว</h2><p>ฟังก์ชันเยอะ แต่หน้าเริ่มยังเรียบและกดง่าย</p></div><div class="quickGrid"><button class="quick" id="soloQuick"><span>👤</span><strong>เล่นคนเดียว</strong><small>2×2 • จำตำแหน่ง • คะแนนอัตโนมัติ</small></button><div class="quick teamQuickCard"><span class="quickIcon">👥</span><strong>เล่นเป็นทีม</strong><small>เลือกจำนวนทีมได้ทันที • ตอบออกเสียง • เพิ่มคะแนนเอง</small><div class="quickTeamPicker" id="quickTeamPicker"><button class="quickTeamChip active" data-quick-team="2">2 ทีม</button><button class="quickTeamChip" data-quick-team="3">3 ทีม</button><button class="quickTeamChip" data-quick-team="4">4 ทีม</button><button class="quickTeamChip" data-quick-team="5">5 ทีม</button><button class="quickTeamChip" data-quick-team="6">6 ทีม</button></div><button class="quickTeamStart" id="teamQuick">เริ่มแบบ 2 ทีม →</button></div></div></div><div class="daily"><span class="dailyTag">📅 ภารกิจประจำวัน</span><h3 id="dailyTitle">ภารกิจวันนี้</h3><p id="dailyText">โจทย์ประจำวันเลือกโหมดและระดับให้อัตโนมัติ</p><button class="btn purple" id="dailyBtn">เล่นภารกิจวันนี้</button><div style="font-size:10px;color:var(--muted);margin-top:9px">🔥 เล่นต่อเนื่อง <b id="dailyStreak">0</b> วัน</div></div><div class="metricsPanel"><div class="metricGrid"><div class="metric"><b id="homeLevel">1</b><span>ระดับ</span></div><div class="metric"><b id="homeXP">0</b><span>XP</span></div><div class="metric"><b id="homeBest">0</b><span>คะแนนสูงสุด</span></div><div class="metric"><b id="homeAcc">0%</b><span>ความแม่นยำสูงสุด</span></div><div class="metric"><b id="homeRounds">0</b><span>รอบที่เล่น</span></div></div></div></section>
 <div class="shell pills"><span class="chip">โหมด <strong id="pillMode">จำตำแหน่ง</strong></span><span class="chip">ระดับ <strong id="pillDiff">ง่าย • 2×2</strong></span><span class="chip">ผู้เล่น <strong id="pillStyle">คนเดียว</strong></span><span class="chip">เนื้อหา <strong id="pillSource">Teddy</strong></span></div>
-<section class="game" id="game"><div class="shell"><div class="gameCard"><div class="gameTop"><div class="status"><div class="statusIcon" id="statusIcon">👀</div><div><b id="statusTitle">พร้อมเริ่มเล่น</b><span id="statusText">กด เล่นด่วน หรือเริ่มรอบใหม่ได้เลย</span></div></div><div class="hudrow"><div class="hud"><span>PROGRESS</span><b id="progress">0 / 4</b></div><div class="hud"><span>COMBO</span><b id="combo">0</b></div><div class="hud"><span>SCORE</span><b id="score">0</b></div><div class="hud"><span>LEVEL</span><b id="levelHud">1</b></div><div class="hud hidden" id="livesHud"><span>LIVES</span><b id="lives">♥♥♥</b></div></div></div><div class="timer hidden" id="timer"><i id="timerFill"></i></div><div class="stage"><div class="scene active" id="boardScene"><div class="sceneTitle"><h2 id="boardTitle">พร้อมเริ่ม</h2><p id="boardSub">ค่าเริ่มต้นเป็น 2×2 และไม่มีการจับเวลา</p></div><div class="answer hidden" id="answer"></div><div class="board" id="board"></div></div><div class="scene" id="targetScene"><div class="targetWrap"><div class="targetCard" id="targetCard"></div><div class="targetLabel" id="targetLabel">ตัวนี้อยู่หมายเลขอะไร?</div></div></div><div class="scene" id="choiceScene"><div class="sceneTitle"><h2 id="choiceTitle">เลือกคำตอบ</h2><p id="choiceSub">เลือกคำตอบที่ถูกต้อง</p></div><div class="choiceGrid" id="choiceGrid"></div></div><div class="scene" id="resultScene"><div class="resultWrap"><div class="resultCard"><h2>จบรอบแล้ว! 🎉</h2><p id="resultText">มาดูผลของรอบนี้กัน</p><div class="bigคะแนน" id="resultคะแนน">0</div><div style="font-size:9px;color:var(--muted)" id="resultคะแนนLabel">คะแนน</div><div class="resultMetrics"><div class="resultMetric"><b id="resultCorrect">0</b><span>ตอบถูก</span></div><div class="resultMetric"><b id="resultAcc">0%</b><span>ความแม่นยำ</span></div><div class="resultMetric"><b id="resultCombo">0</b><span>Best Combo</span></div><div class="resultMetric"><b id="resultXP">+0</b><span>XP</span></div></div><div class="insight"><strong id="insightTitle">🧠 จุดเด่นจากรอบนี้</strong><p id="insightText"></p><div class="nexts" id="nexts"></div><p style="font-size:9px;margin-top:9px">คำแนะนำอิงแนวคิด working memory, attention, visuospatial processing และงานวิจัยด้าน cognitive training ที่สรุปไว้ในเมนู “หลักการ & งานวิจัย”</p></div><div class="resultActions"><button class="btn primary" id="againBtn">เล่นอีกครั้ง</button><button class="btn" id="saveBtn">🖼️ บันทึกผล</button><button class="btn" id="shareBtn">↗ แชร์</button><button class="btn" id="resultSettings">เปลี่ยนเกม</button></div></div></div></div></div><div class="teamBar hidden" id="teamBar"></div><div class="dock"><button class="secondary" id="homeBtn">⌂</button><button class="main" id="main">เริ่มรอบใหม่</button><button class="secondary hidden" id="hintBtn">💡 <span id="hintNum">3</span></button><button class="secondary hidden" id="voiceBtn">🗣️ เฉลย</button><button class="secondary hidden" id="replayBtn">↺ ดูโจทย์</button><button class="secondary" id="settingsBtn">⚙️</button></div><div class="hintline" id="hintline">ไม่มีการจับเวลาโดยค่าเริ่มต้น คุณเป็นคนกำหนดจังหวะเอง</div></div></div></section>
+<section class="game" id="game"><div class="shell"><div class="gameCard"><div class="gameTop"><div class="status"><div class="statusIcon" id="statusIcon">👀</div><div><b id="statusTitle">พร้อมเริ่มเล่น</b><span id="statusText">กด เล่นด่วน หรือเริ่มรอบใหม่ได้เลย</span></div></div><div class="hudrow"><div class="hud"><span>PROGRESS</span><b id="progress">0 / 4</b></div><div class="hud"><span>COMBO</span><b id="combo">0</b></div><div class="hud"><span>SCORE</span><b id="score">0</b></div><div class="hud"><span>ระดับ</span><b id="levelHud">1</b></div><div class="hud hidden" id="livesHud"><span>LIVES</span><b id="lives">♥♥♥</b></div></div></div><div class="timer hidden" id="timer"><i id="timerFill"></i></div><div class="stage"><div class="scene active" id="boardScene"><div class="sceneTitle"><h2 id="boardTitle">พร้อมเริ่ม</h2><p id="boardSub">ค่าเริ่มต้นเป็น 2×2 และไม่มีการจับเวลา</p></div><div class="answer hidden" id="answer"></div><div class="board" id="board"></div></div><div class="scene" id="targetScene"><div class="targetWrap"><div class="targetCard" id="targetCard"></div><div class="targetLabel" id="targetLabel">ตัวนี้อยู่หมายเลขอะไร?</div></div></div><div class="scene" id="choiceScene"><div class="sceneTitle"><h2 id="choiceTitle">เลือกคำตอบ</h2><p id="choiceSub">เลือกคำตอบที่ถูกต้อง</p></div><div class="choiceGrid" id="choiceGrid"></div></div><div class="scene" id="resultScene"><div class="resultWrap"><div class="resultCard"><h2>จบรอบแล้ว! 🎉</h2><p id="resultText">มาดูผลของรอบนี้กัน</p><div class="bigคะแนน" id="resultคะแนน">0</div><div style="font-size:9px;color:var(--muted)" id="resultคะแนนLabel">คะแนน</div><div class="resultMetrics"><div class="resultMetric"><b id="resultCorrect">0</b><span>ตอบถูก</span></div><div class="resultMetric"><b id="resultAcc">0%</b><span>ความแม่นยำ</span></div><div class="resultMetric"><b id="resultCombo">0</b><span>Best Combo</span></div><div class="resultMetric"><b id="resultXP">+0</b><span>XP</span></div></div><div class="insight"><strong id="insightTitle">🧠 จุดเด่นจากรอบนี้</strong><p id="insightText"></p><div class="nexts" id="nexts"></div><p style="font-size:9px;margin-top:9px">คำแนะนำอิงแนวคิด working memory, attention, visuospatial processing และงานวิจัยด้าน cognitive training ที่สรุปไว้ในเมนู “หลักการ & งานวิจัย”</p></div><div class="resultActions"><button class="btn primary" id="againBtn">เล่นอีกครั้ง</button><button class="btn" id="saveBtn">🖼️ บันทึกผล</button><button class="btn" id="shareBtn">↗ แชร์</button><button class="btn" id="resultSettings">เปลี่ยนเกม</button></div></div></div></div></div><div class="teamBar hidden" id="teamBar"></div><div class="dock"><button class="secondary" id="homeBtn">⌂</button><button class="main" id="main">เริ่มรอบใหม่</button><button class="secondary hidden" id="hintBtn">💡 <span id="hintNum">3</span></button><button class="secondary hidden" id="voiceBtn">🗣️ เฉลย</button><button class="secondary hidden" id="replayBtn">↺ ดูโจทย์</button><button class="secondary" id="settingsBtn">⚙️</button></div><div class="hintline" id="hintline">ไม่มีการจับเวลาโดยค่าเริ่มต้น คุณเป็นคนกำหนดจังหวะเอง</div></div></div></section>
 <!-- ปรับเกมเอง -->
 <div class="modal hidden" id="customModal"><div class="modalCard wide"><button class="close" data-close="customModal">×</button><h2>ปรับเกมเอง</h2><p class="lead">เลือกได้ละเอียด แต่ค่าเริ่มต้นยังคงง่าย ถ้าไม่อยากตั้งค่าให้ใช้ เล่นด่วน ได้เสมอ</p><div class="settingGrid">
 <div class="setting"><h3>👤 รูปแบบผู้เล่น</h3><div class="segment" id="styleSeg"><button class="chip active" data-style="solo">คนเดียว</button><button class="chip" data-style="team">ทีม</button></div></div>
@@ -552,7 +978,7 @@ body.dark .guideMini .item,.dark .lbTopItem,.dark .competeBanner{background:rgba
 <div class="modal hidden" id="statsModal"><div class="modalCard wide"><button class="close" data-close="statsModal">×</button><h2>สถิติ & ความสำเร็จ</h2><p class="lead">ดูพัฒนาการจากรอบที่เล่นบนอุปกรณ์นี้</p><div class="dashGrid"><div class="dash"><b id="statRounds">0</b><span>รอบทั้งหมด</span></div><div class="dash"><b id="statBest">0</b><span>คะแนนสูงสุด</span></div><div class="dash"><b id="statAcc">0%</b><span>แม่นยำสูงสุด</span></div><div class="dash"><b id="statCombo">0</b><span>Combo สูงสุด</span></div></div><div class="chart"><div style="font-size:11px;font-weight:900">ความแม่นยำ 10 รอบล่าสุด</div><svg id="chartSvg" viewBox="0 0 760 170"></svg></div><div class="badgeGrid" id="badgeGrid"></div><div class="modalActions"><button class="btn" id="clearStats">ล้างประวัติ</button></div></div></div>
 
 <!-- Collection -->
-<div class="modal hidden" id="collectionModal"><div class="modalCard wide"><button class="close" data-close="collectionModal">×</button><h2>Character Collection</h2><p class="lead">เล่นเพื่อสะสม XP และปลดล็อก Avatar ใหม่ ไม่มีการซื้อในเกม</p><div class="collection" id="collection"></div></div></div>
+<div class="modal hidden" id="collectionModal"><div class="modalCard wide"><button class="close" data-close="collectionModal">×</button><h2>คอลเลกชันตัวละคร</h2><p class="lead">เล่นเพื่อสะสม XP และปลดล็อก Avatar ใหม่ ไม่มีการซื้อในเกม</p><div class="collection" id="collection"></div></div></div>
 
 <!-- Audio -->
 <div class="modal hidden" id="audioModal"><div class="modalCard"><button class="close" data-close="audioModal">×</button><h2>เพลง & เสียง</h2><p class="lead">แยก Music และ SFX ได้ พร้อมเพลงหลายบรรยากาศ</p><div class="settingGrid"><div class="setting full"><h3>🎵 Music Theme</h3><div class="segment" id="musicThemeSeg"><button class="chip active" data-music="cozy">Cozy</button><button class="chip" data-music="dream">Dream</button><button class="chip" data-music="night">Night</button><button class="chip" data-music="focus">Focus</button></div></div><div class="setting"><h3>Music</h3><label class="switchrow"><input type="checkbox" id="musicToggle"><span class="switch"></span><span>เปิดเพลงพื้นหลัง</span></label></div><div class="setting"><h3>SFX</h3><label class="switchrow"><input type="checkbox" id="sfxToggle" checked><span class="switch"></span><span>เสียงกด ถูก ผิด และเฉลย</span></label></div><div class="setting full"><h3>ระดับเสียงเพลง</h3><input type="range" id="musicVol" min="0" max="100" value="28"><span id="musicVolText">28%</span></div><div class="setting full"><h3>ระดับเสียงเอฟเฟกต์</h3><input type="range" id="sfxVol" min="0" max="100" value="55"><span id="sfxVolText">55%</span></div></div></div></div>
@@ -566,6 +992,27 @@ body.dark .guideMini .item,.dark .lbTopItem,.dark .competeBanner{background:rgba
 
 <!-- Help -->
 <div class="modal hidden" id="helpModal"><div class="modalCard"><button class="close" data-close="helpModal">×</button><h2>วิธีเล่น</h2><p class="lead">กติกาหลักสั้น ๆ: ดู → จำ → ตอบ → ดูเฉลย แล้วค่อยไปข้อต่อไป</p><div class="settingGrid"><div class="setting"><h3>1. 👀 สังเกต</h3><p>ดูภาพ สี รายละเอียด และตำแหน่งบนกระดานให้ครบ</p></div><div class="setting"><h3>2. 🧠 จดจำ</h3><p>ใช้วิธีจำที่ถนัด เช่น จำเป็นแถว เป็นคู่ หรือจัดกลุ่มภาพ</p></div><div class="setting"><h3>3. 🎯 ตอบโจทย์</h3><p>แต่ละโหมดจะให้ทายตำแหน่ง หาคู่ หาสิ่งที่หาย สังเกตการสลับ/เปลี่ยน หรือจำลำดับ</p></div><div class="setting"><h3>4. ✨ ดูเฉลย</h3><p>เฉลยจะแสดงคำตอบชัดเจน จากนั้นกดไปข้อต่อไปตามจังหวะของคุณเอง</p></div><div class="setting full"><h3>💡 เริ่มอย่างไรดี?</h3><p>ครั้งแรกแนะนำ เล่นด่วน ซึ่งเริ่มที่ 2×2 และไม่จับเวลา เมื่อรู้สึกคล่องค่อยเปลี่ยนเป็น 3×3 หรือเปิด Adaptive Difficulty</p></div></div></div></div>
+
+
+<div class="modal hidden" id="leaderboardModal">
+  <div class="modalcard v16LeaderboardModal">
+    <button class="x v16ModalClose" data-close="leaderboardModal">×</button>
+    <div class="v16LbModalHead">
+      <div>
+        <span class="v16Live">● LIVE CLOUD</span>
+        <h2>🏆 ตารางจัดอันดับสมาชิก</h2>
+        <p>จัดอันดับจากคะแนนสูงสุดและ XP ของสมาชิก Brain Buddy ทุกบัญชี</p>
+      </div>
+      <div class="v16RankLegend">
+        <span>🌱 Bronze</span><span>✨ Silver</span><span>🏆 Gold</span><span>🌌 Platinum</span><span>💎 Diamond</span>
+      </div>
+    </div>
+    <div class="v16MyRank hidden" id="v16MyRank"></div>
+    <div class="v16FullLeaderboard" id="v16FullLeaderboard">
+      <div class="v16TopLoading">กำลังโหลดตารางจัดอันดับ…</div>
+    </div>
+  </div>
+</div>
 
 <div class="modal hidden" id="accountModal">
   <div class="modalcard" style="width:min(540px,100%)">
@@ -1006,109 +1453,6 @@ body.dark .guideMini .item,.dark .lbTopItem,.dark .competeBanner{background:rgba
   }
   function patchStatPersistence(){ const stats=getJSON(STATS_KEY,{xp:0,bestScore:0,bestCombo:0,games:0,wins:0,total_score:0}); window.__bbSubmitCloudResult=submitCloudResult; setJSON(STATS_KEY, stats); }
   window.addEventListener('load', ()=>{ setTimeout(async()=>{ mountEntryGuide(); patchProfileUploader(); patchStatPersistence(); await syncProfileToCloud(); await renderCloudLeaderboard(); setInterval(syncProfileToCloud,30000); }, 1100); });
-})();
-
-
-(function homepageRefreshV15(){
-  function $(s,r=document){return r.querySelector(s)}
-  function rankEmoji(rank){return ({Diamond:'💎',Platinum:'🌌',Gold:'🏆',Silver:'✨',Bronze:'🌱'})[rank]||'🌱'}
-  async function getTopPlayers(){
-    if(!window.__bbSupabase) return [];
-    const {data} = await window.__bbSupabase.from('leaderboard_view').select('*').limit(5);
-    return data || [];
-  }
-  function openAuth(){ Array.from(document.querySelectorAll('button,a')).find(el=>/บัญชี|เข้าสู่ระบบ|ล็อกอิน|สมัครสมาชิก/i.test(el.textContent||''))?.click(); }
-  function guestPlay(){ Array.from(document.querySelectorAll('button')).find(el=>/ผู้เยี่ยมชม|เล่นต่อแบบผู้เยี่ยมชม/i.test(el.textContent||''))?.click(); }
-  async function mountNewTopSections(){
-    if(document.querySelector('.entryGuideHero')) return;
-    const hero = document.querySelector('.premiumHero,.heroMain') || document.querySelector('main') || document.body;
-    const wrap = document.createElement('section');
-    wrap.className = 'entryGuideHero';
-    const players = await getTopPlayers();
-    const topHtml = players.length ? players.map((u,i)=>{
-      const avatar = u.avatar_url ? `<img src="${u.avatar_url}" style="width:100%;height:100%;object-fit:cover">` : (u.avatar || '🧸');
-      return `<div class="lbTopItem">
-        <div class="lbTopPos">${i+1}</div>
-        <div class="lbTopUser">
-          <div class="lbTopAvatar">${avatar}</div>
-          <div class="lbTopMeta"><b>${u.display_name || 'ผู้เล่น'}</b><span>${rankEmoji(u.rank_tier)} ${u.rank_tier || 'Bronze'}</span></div>
-        </div>
-        <div class="lbTopScore">${u.best_score || 0}</div>
-      </div>`;
-    }).join('') : `<div class="lbTopItem"><div class="lbTopPos">1</div><div class="lbTopUser"><div class="lbTopAvatar">🏆</div><div class="lbTopMeta"><b>ยังไม่มีผู้เล่นอันดับ</b><span>สมัครสมาชิกและเป็นคนแรกบนตาราง</span></div></div><div class="lbTopScore">0</div></div>`;
-
-    wrap.innerHTML = `
-      <div class="heroBlock">
-        <div class="entryTag">✨ เริ่มเล่นได้ทันที</div>
-        <h2>เล่นยังไง? เข้าสู่ระบบตรงไหน? สมัครสมาชิกตรงไหน?</h2>
-        <p>ถ้าต้องการบันทึกคะแนน XP และแรงก์ขึ้นคลาวด์ ให้กด <b>เข้าสู่ระบบ / สมัครสมาชิก</b> ก่อนเล่น ส่วนคนที่อยากลองเล่นก่อน สามารถกด <b>เล่นแบบผู้เยี่ยมชม</b> ได้ทันที</p>
-        <div class="ctaRow">
-          <button class="ctaBtn ctaPrimary" id="bbLoginHero">🔐 เข้าสู่ระบบ / สมัครสมาชิก</button>
-          <button class="ctaBtn ctaSecondary" id="bbGuestHero">🎮 เล่นแบบผู้เยี่ยมชม</button>
-        </div>
-        <div class="guideMini">
-          <div class="item"><div>1️⃣</div><div><b>เข้าสู่ระบบ</b><span>สำหรับสมาชิกที่มีบัญชีแล้ว สามารถเล่นต่อจากเดิม ดูแรงก์ และสะสมคะแนนได้ทันที</span></div></div>
-          <div class="item"><div>2️⃣</div><div><b>สมัครสมาชิก</b><span>สำหรับผู้เล่นใหม่ สร้างบัญชีเพื่อเก็บคะแนน ประวัติการเล่น รูปโปรไฟล์ และอันดับบนคลาวด์</span></div></div>
-          <div class="item"><div>3️⃣</div><div><b>เริ่มแข่งกับคนอื่น</b><span>คะแนนของสมาชิกจะขึ้นบนตารางจัดอันดับ ทำให้คนอื่นเห็นและแข่งกันได้จริง</span></div></div>
-        </div>
-      </div>
-      <div class="leaderHero">
-        <div class="entryTag">🏆 แข่งกับผู้เล่นคนอื่น</div>
-        <h3>อันดับผู้เล่นเด่นตอนนี้</h3>
-        <p>คะแนนจริงจากสมาชิกทุกบัญชี ยิ่งเล่นเก่ง ยิ่งไต่อันดับสูงขึ้น</p>
-        <div class="lbTopList">${topHtml}</div>
-      </div>
-    `;
-    hero.parentNode.insertBefore(wrap, hero.nextSibling);
-    document.getElementById('bbLoginHero')?.addEventListener('click', openAuth);
-    document.getElementById('bbGuestHero')?.addEventListener('click', guestPlay);
-
-    // Quick start section under hero for easier reading
-    if(!document.querySelector('.quickStartGrid')){
-      const qs = document.createElement('section');
-      qs.className = 'lbSection';
-      qs.innerHTML = `
-        <div class="competeBanner">
-          <div><b>อยากให้คนสนใจและอยากแข่ง?</b><br><span>เราแสดงอันดับตั้งแต่ต้นหน้า เพื่อชวนให้ผู้เล่นเข้าสู่ระบบแล้วทำคะแนนแข่งกันทันที</span></div>
-          <button class="ctaBtn ctaPrimary" id="bbCompeteBtn">ดูตารางจัดอันดับสมาชิก</button>
-        </div>
-        <div class="quickStartGrid">
-          <div class="qCard">
-            <h4>เล่นด่วน</h4>
-            <p>เริ่มจากกระดาน 2×2 แบบง่าย เพื่อให้ผู้เล่นเข้าใจเกมทันทีและรู้สึกเล่นสำเร็จเร็ว</p>
-            <div class="sub">เหมาะสำหรับผู้เล่นใหม่</div>
-          </div>
-          <div class="qCard">
-            <h4>สมัครสมาชิก</h4>
-            <p>ปลดล็อกการเก็บคะแนน XP แรงก์ รูปโปรไฟล์ และอันดับผู้เล่นแบบออนไลน์บนคลาวด์</p>
-            <div class="sub">เหมาะสำหรับคนที่อยากสะสมสถิติ</div>
-          </div>
-          <div class="qCard">
-            <h4>โหมดแข่งทีม</h4>
-            <p>เลือกจำนวนทีมได้หลายแบบ เพื่อเล่นในห้องเรียนหรือกับเพื่อน แล้วช่วยกันเก็บคะแนนไต่แรงก์</p>
-            <div class="sub">เหมาะสำหรับกิจกรรมกลุ่ม</div>
-          </div>
-        </div>
-      `;
-      hero.parentNode.insertBefore(qs, wrap.nextSibling);
-      document.getElementById('bbCompeteBtn')?.addEventListener('click', ()=>{
-        document.getElementById('leaderboard')?.scrollIntoView({behavior:'smooth', block:'start'});
-      });
-    }
-  }
-
-  // strengthen auth modal opacity if opens
-  const mo = new MutationObserver(()=>{
-    const m = document.querySelector('.authCard,.authModal,.memberModal');
-    if(m){
-      m.style.background = '#ffffff';
-      m.style.opacity = '1';
-      m.style.backdropFilter = 'none';
-    }
-  });
-  mo.observe(document.documentElement,{subtree:true,childList:true});
-
-  window.addEventListener('load', ()=>setTimeout(mountNewTopSections, 1200));
 })();
 
 </script>
