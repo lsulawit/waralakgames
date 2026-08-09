@@ -5323,6 +5323,177 @@ body.bbGuestMode #cloudDot{
   }
 }
 
+
+/* =========================================================
+   Brain Buddy v59 — Apply equipped Shop cosmetics
+   ========================================================= */
+
+.bbEquippedCosmeticLabel{
+  margin-top:6px;
+  padding:4px 8px;
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  border-radius:999px;
+  color:#fff9d8;
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.23);
+  font-size:.62rem;
+  font-weight:900;
+}
+
+/* Pink Buddy */
+body.bbCosBearPink .avatarBear{
+  background:linear-gradient(180deg,#ffe5f3,#ff9dcc)!important;
+}
+body.bbCosBearPink .avatarBear::before{
+  background:linear-gradient(180deg,#ffb5d5,#ed6da8)!important;
+  box-shadow:
+    -18px -9px 0 -9px #f38eb9,
+     18px -9px 0 -9px #f38eb9,
+     inset 0 4px 5px rgba(255,255,255,.45)!important;
+}
+body.bbCosBearPink .avatarBear::after{
+  background:linear-gradient(180deg,#f8a2c6,#df619a)!important;
+  box-shadow:32px 0 0 0 #e979aa!important;
+}
+body.bbCosBearPink .miniBear,
+body.bbCosBearPink .miniBear::before,
+body.bbCosBearPink .miniBear::after{
+  background:linear-gradient(180deg,#ffb8d7,#e66ca6)!important;
+}
+body.bbCosBearPink #bbAppAvatar,
+body.bbCosBearPink #navAvatar{
+  background:linear-gradient(180deg,#ffd9ea,#ff91c2)!important;
+}
+
+/* If a bear product has image_url later, automatically use its real picture. */
+body.bbHasEquippedBearImage .avatarBear{
+  background-image:var(--bb-equipped-bear-image)!important;
+  background-size:contain!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+}
+body.bbHasEquippedBearImage .avatarBear::before,
+body.bbHasEquippedBearImage .avatarBear::after{
+  display:none!important;
+}
+
+/* Candy Dream theme */
+body.bbCosThemeCandy .bbCandyHomeScreen{
+  background:
+    radial-gradient(circle at 10% 3%,rgba(173,235,255,.98) 0 11%,transparent 30%),
+    radial-gradient(circle at 92% 12%,rgba(255,192,225,.92) 0 10%,transparent 30%),
+    radial-gradient(circle at 52% 62%,rgba(255,235,151,.38),transparent 28%),
+    linear-gradient(180deg,#7b79ef 0%,#9f79ea 35%,#df91db 68%,#ffb4cf 100%)!important;
+}
+body.bbCosThemeCandy .bbHeroCard{
+  background:
+    linear-gradient(145deg,rgba(138,97,241,.88),rgba(204,111,226,.84) 53%,rgba(255,143,194,.86))!important;
+}
+
+/* Star Frame */
+body.bbCosFrameStar .avatarBear,
+body.bbCosFrameStar #bbAppAvatar,
+body.bbCosFrameStar #navAvatar{
+  outline:4px solid #ffd660!important;
+  box-shadow:
+    0 0 0 7px rgba(255,143,196,.78),
+    0 0 0 10px rgba(255,245,168,.62),
+    0 10px 20px rgba(87,49,118,.18)!important;
+}
+body.bbCosFrameStar .bbPlayerCard{
+  position:relative;
+}
+body.bbCosFrameStar .bbPlayerCard::before,
+body.bbCosFrameStar .bbPlayerCard::after{
+  content:"";
+  position:absolute;
+  width:13px;
+  height:13px;
+  border-radius:4px;
+  transform:rotate(45deg);
+  background:linear-gradient(145deg,#fff7aa,#ffc640);
+  box-shadow:0 0 11px rgba(255,238,128,.9);
+}
+body.bbCosFrameStar .bbPlayerCard::before{left:12px;top:10px}
+body.bbCosFrameStar .bbPlayerCard::after{right:13px;bottom:11px}
+
+/* Sparkle Effect */
+body.bbCosEffectSparkle .bbHeroCard,
+body.bbCosEffectSparkle .bbPlayerCard{
+  position:relative;
+}
+body.bbCosEffectSparkle .bbHeroCard::after{
+  content:"✦  ·  ✧  ·  ✦";
+  position:absolute;
+  right:22px;
+  top:16px;
+  color:#fff5a3;
+  font-size:1.25rem;
+  letter-spacing:.2em;
+  text-shadow:0 0 9px rgba(255,239,130,.9);
+  pointer-events:none;
+  animation:bbCosSparkleFloat 2.4s ease-in-out infinite;
+}
+body.bbCosEffectSparkle .bbPlayerCard::after{
+  content:"✧";
+  position:absolute;
+  right:14px;
+  top:9px;
+  color:#fff8ae;
+  font-size:1.15rem;
+  text-shadow:0 0 10px rgba(255,238,111,.95);
+  animation:bbCosSparklePulse 1.6s ease-in-out infinite;
+  pointer-events:none;
+}
+
+@keyframes bbCosSparkleFloat{
+  0%,100%{transform:translateY(0);opacity:.68}
+  50%{transform:translateY(-5px);opacity:1}
+}
+@keyframes bbCosSparklePulse{
+  0%,100%{transform:scale(.8) rotate(0deg);opacity:.55}
+  50%{transform:scale(1.18) rotate(20deg);opacity:1}
+}
+
+/* Cosmetics may decorate gameplay, but never alter score/RP mechanics. */
+body.bbCosFrameStar.bbAppPlaying .gameCard,
+body.bbCosFrameStar.bbRankedPlaying .gameCard{
+  box-shadow:
+    0 0 0 3px rgba(255,213,91,.42),
+    0 14px 28px rgba(65,39,100,.16)!important;
+}
+body.bbCosEffectSparkle.bbAppPlaying .gameCard::before,
+body.bbCosEffectSparkle.bbRankedPlaying .gameCard::before{
+  content:"✦";
+  position:absolute;
+  right:18px;
+  top:14px;
+  z-index:5;
+  color:#ffdf61;
+  font-size:1.2rem;
+  text-shadow:0 0 10px rgba(255,223,97,.82);
+  animation:bbCosSparklePulse 1.6s ease-in-out infinite;
+  pointer-events:none;
+}
+
+@media(max-width:640px){
+  body.bbCosEffectSparkle .bbHeroCard::after{
+    right:10px;
+    top:10px;
+    font-size:.9rem;
+  }
+  body.bbCosFrameStar .avatarBear{
+    outline-width:3px!important;
+    box-shadow:
+      0 0 0 5px rgba(255,143,196,.75),
+      0 0 0 8px rgba(255,245,168,.58),
+      0 8px 16px rgba(87,49,118,.16)!important;
+  }
+}
+
 </style>
 
 <script>
@@ -5921,6 +6092,7 @@ try{
             <small>ผู้เล่น</small>
             <strong id="bbHomePlayerName">ผู้เยี่ยมชม</strong>
             <em id="bbHomePlayerRank">Bronze • Lv. 1</em>
+            <span class="bbEquippedCosmeticLabel hidden" id="bbEquippedCosmeticLabel"></span>
           </span>
         </button>
 
@@ -9499,6 +9671,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }catch(e){}
 
       await loadShop();
+      try{await window.bbApplyEquippedCosmetics?.()}catch(e){}
     }catch(err){
       console.error("Brain Buddy Shop equip:",err);
       shopToast(String(err?.message||"ใช้งานสินค้าไม่สำเร็จ"));
@@ -9582,6 +9755,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.bbLoadShop=async function(){
     await loadShop();
     await refreshStarterReward();
+    try{await window.bbApplyEquippedCosmetics?.()}catch(e){}
   };
 
   window.addEventListener("bb:auth-changed",window.bbLoadShop);
@@ -9821,6 +9995,169 @@ document.addEventListener('DOMContentLoaded', () => {
   }else{
     init();
   }
+})();
+</script>
+
+
+<script>
+(function brainBuddyV59Cosmetics(){
+  const CLASSES=[
+    "bbCosBearPink",
+    "bbCosThemeCandy",
+    "bbCosFrameStar",
+    "bbCosEffectSparkle",
+    "bbHasEquippedBearImage"
+  ];
+
+  let busy=false;
+  const q=s=>document.querySelector(s);
+
+  function getClient(){
+    if(window.__bbSupabase)return window.__bbSupabase;
+    const cfg=window.BRAIN_BUDDY_SUPABASE||{};
+    if(window.supabase&&cfg.url&&cfg.publishableKey){
+      window.__bbSupabase=window.supabase.createClient(cfg.url,cfg.publishableKey);
+      return window.__bbSupabase;
+    }
+    return null;
+  }
+
+  function clearCosmetics(){
+    document.body.classList.remove(...CLASSES);
+    document.documentElement.style.removeProperty("--bb-equipped-bear-image");
+
+    const label=q("#bbEquippedCosmeticLabel");
+    if(label){
+      label.textContent="";
+      label.classList.add("hidden");
+    }
+
+    for(const el of [q("#navAvatar"),q("#bbAppAvatar")]){
+      if(el?.dataset?.bbShopAvatar==="1"){
+        el.innerHTML="🧸";
+        delete el.dataset.bbShopAvatar;
+      }
+    }
+  }
+
+  async function applyEquippedCosmetics(){
+    if(busy)return;
+    busy=true;
+
+    try{
+      const c=getClient();
+
+      if(!c){
+        clearCosmetics();
+        return;
+      }
+
+      const {data:sessionData}=await c.auth.getSession();
+      const user=sessionData?.session?.user;
+
+      if(!user){
+        clearCosmetics();
+        return;
+      }
+
+      const {data:equipped,error:eqErr}=await c
+        .from("bb_equipped_items")
+        .select("item_type,item_id")
+        .eq("user_id",user.id);
+
+      if(eqErr)throw eqErr;
+
+      const ids=(equipped||[])
+        .map(x=>Number(x.item_id))
+        .filter(Boolean);
+
+      clearCosmetics();
+
+      if(!ids.length)return;
+
+      const {data:items,error:itemErr}=await c
+        .from("bb_shop_items")
+        .select("id,item_code,item_type,name,image_url")
+        .in("id",ids);
+
+      if(itemErr)throw itemErr;
+
+      const byId=new Map((items||[]).map(x=>[Number(x.id),x]));
+      const equippedNames=[];
+
+      for(const eq of equipped||[]){
+        const item=byId.get(Number(eq.item_id));
+        if(!item)continue;
+
+        equippedNames.push(item.name);
+
+        if(item.item_code==="bear_pink_01"){
+          document.body.classList.add("bbCosBearPink");
+        }
+        if(item.item_code==="theme_candy_01"){
+          document.body.classList.add("bbCosThemeCandy");
+        }
+        if(item.item_code==="frame_star_01"){
+          document.body.classList.add("bbCosFrameStar");
+        }
+        if(item.item_code==="effect_sparkle_01"){
+          document.body.classList.add("bbCosEffectSparkle");
+        }
+
+        if(item.item_type==="bear" && item.image_url){
+          document.body.classList.add("bbHasEquippedBearImage");
+          document.documentElement.style.setProperty(
+            "--bb-equipped-bear-image",
+            `url("${String(item.image_url).replace(/"/g,"%22")}")`
+          );
+
+          const safeUrl=String(item.image_url).replace(/"/g,"&quot;");
+          const safeName=String(item.name||"Buddy").replace(/"/g,"&quot;");
+
+          for(const el of [q("#navAvatar"),q("#bbAppAvatar")]){
+            if(el){
+              el.innerHTML=`<img src="${safeUrl}" alt="${safeName}">`;
+              el.dataset.bbShopAvatar="1";
+            }
+          }
+        }
+      }
+
+      const label=q("#bbEquippedCosmeticLabel");
+      if(label && equippedNames.length){
+        label.textContent="กำลังใช้: "+equippedNames.join(" • ");
+        label.classList.remove("hidden");
+      }
+
+    }catch(err){
+      console.warn("Brain Buddy cosmetics:",err);
+    }finally{
+      busy=false;
+    }
+  }
+
+  window.bbApplyEquippedCosmetics=applyEquippedCosmetics;
+
+  document.addEventListener("click",e=>{
+    if(e.target.closest("[data-shop-equip]")){
+      setTimeout(applyEquippedCosmetics,500);
+      setTimeout(applyEquippedCosmetics,1200);
+    }
+  });
+
+  window.addEventListener("bb:auth-changed",()=>{
+    setTimeout(applyEquippedCosmetics,120);
+  });
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",()=>{
+      setTimeout(applyEquippedCosmetics,500);
+    },{once:true});
+  }else{
+    setTimeout(applyEquippedCosmetics,500);
+  }
+
+  setTimeout(applyEquippedCosmetics,1600);
 })();
 </script>
 
