@@ -4014,6 +4014,125 @@ body.bbRankedPlaying .gameCard{
   overflow:visible!important;
 }
 
+
+/* =========================================================
+   Brain Buddy v49 — Ranked question UX / iPad interaction
+   ========================================================= */
+
+/* The purple Ranked bar was sticky and physically covered the target.
+   Keep it in normal flow above the game card instead. */
+body.bbRankedPlaying .bbRankedGameHud{
+  position:relative!important;
+  top:auto!important;
+  z-index:20!important;
+  width:min(1160px,calc(100% - 30px))!important;
+  margin:12px auto 10px!important;
+  border-radius:20px!important;
+  padding:10px 14px!important;
+}
+
+/* Never let the HUD capture touches outside its actual buttons. */
+body.bbRankedPlaying .bbRankedGameHud{
+  pointer-events:none!important;
+}
+body.bbRankedPlaying .bbRankedGameHud button{
+  pointer-events:auto!important;
+}
+
+/* Give the game card its own clean layer below the HUD. */
+body.bbRankedPlaying .shell{
+  position:relative!important;
+  z-index:10!important;
+}
+
+/* Target phase: the image is for viewing only, but it must not look like
+   a disabled overlay covering the answer board. */
+body.bbRankedPlaying #targetScene.active{
+  pointer-events:none!important;
+}
+body.bbRankedPlaying #targetScene .targetWrap{
+  min-height:470px!important;
+  padding:22px 10px!important;
+}
+body.bbRankedPlaying #targetScene .targetCard{
+  width:min(330px,58vw)!important;
+  height:min(350px,45vh)!important;
+}
+body.bbRankedPlaying #targetScene .targetLabel{
+  margin-top:10px!important;
+  background:rgba(255,255,255,.96)!important;
+  box-shadow:0 8px 20px rgba(83,54,103,.10)!important;
+}
+
+/* Answer phase must be fully tappable. */
+body.bbRankedPlaying #boardScene.active,
+body.bbRankedPlaying #boardScene.active #board,
+body.bbRankedPlaying #boardScene.active #board .slot{
+  pointer-events:auto!important;
+}
+body.bbRankedPlaying #boardScene.active #board .slot{
+  touch-action:manipulation!important;
+  cursor:pointer!important;
+}
+
+/* Make numbered answer cells obviously interactive. */
+body.bbRankedPlaying #board.numberBoard .slot{
+  background:
+    linear-gradient(145deg,#ffe4f0 0%,#f1eaff 100%)!important;
+  border:2px solid rgba(160,122,210,.18)!important;
+  box-shadow:
+    inset 0 3px 4px rgba(255,255,255,.75),
+    0 10px 18px rgba(86,53,112,.10)!important;
+}
+body.bbRankedPlaying #board.numberBoard .slot:active{
+  transform:scale(.975)!important;
+}
+body.bbRankedPlaying #board.numberBoard .slot.selected{
+  border-color:#8a6cec!important;
+  box-shadow:
+    0 0 0 5px rgba(138,108,236,.22),
+    0 10px 20px rgba(85,52,113,.12)!important;
+}
+
+/* The bottom pink button is status-only in Ranked; visually reduce it so users
+   understand that answers are chosen on the board itself. */
+body.bbRankedPlaying #main{
+  opacity:.74!important;
+  cursor:default!important;
+}
+
+/* iPad */
+@media(min-width:700px) and (max-width:1100px){
+  body.bbRankedPlaying .bbRankedGameHud{
+    width:calc(100% - 28px)!important;
+    margin-top:10px!important;
+  }
+  body.bbRankedPlaying #targetScene .targetWrap{
+    min-height:430px!important;
+  }
+  body.bbRankedPlaying #targetScene .targetCard{
+    width:min(300px,48vw)!important;
+    height:min(315px,40vh)!important;
+  }
+}
+
+/* Phone */
+@media(max-width:699px){
+  body.bbRankedPlaying .bbRankedGameHud{
+    width:calc(100% - 16px)!important;
+    margin:8px auto!important;
+    border-radius:15px!important;
+    padding:8px 9px!important;
+  }
+  body.bbRankedPlaying #targetScene .targetWrap{
+    min-height:390px!important;
+  }
+  body.bbRankedPlaying #targetScene .targetCard{
+    width:min(260px,72vw)!important;
+    height:min(285px,38vh)!important;
+  }
+}
+
 </style>
 
 <script>
@@ -5624,6 +5743,17 @@ function runRankedRevealHold(seconds,label,onDone){
 }
 function positionAnswer(){
   state="position_answer";showScene("board");renderBoard(true);
+
+  const rankedBoard=document.getElementById("board");
+  if(rankedBoard){
+    rankedBoard.style.pointerEvents="auto";
+    rankedBoard.style.touchAction="manipulation";
+    [...rankedBoard.children].forEach(slot=>{
+      slot.style.pointerEvents="auto";
+      slot.style.touchAction="manipulation";
+    });
+  }
+
   $("boardTitle").textContent="อยู่หมายเลขไหน?";
   $("boardSub").textContent=window.BB_RANKED_ACTIVE?"เลือกคำตอบ แล้วรอเวลาหมดเพื่อดูเฉลย":cfg.answer==="voice"&&cfg.style==="team"?"ตอบออกเสียง แล้วกดเฉลยเมื่อพร้อม":"แตะหมายเลขที่คิดว่าถูกต้อง";
   setStatus(cfg.answer==="voice"&&cfg.style==="team"?"🗣️":"🔢",cfg.answer==="voice"&&cfg.style==="team"?"ตอบออกเสียง":"เลือกตำแหน่ง",window.BB_RANKED_ACTIVE?"คำตอบจะเฉลยพร้อมกันเมื่อหมดเวลา":"ตอบแล้วเปิดเฉลยทั้งกระดาน");
@@ -6873,9 +7003,38 @@ window.addEventListener("load",()=>{
   positionAsk=function(){
     clearRankedAuto();
     corePositionAsk();
+
     if(window.BB_RANKED_ACTIVE&&activeRankedMatch&&state==="position_target"){
-      rankedClock(2,"ดูเป้าหมาย",()=>positionAnswer());
-      setMain("กำลังเปิดคำตอบ…",()=>{},true);
+      setMain("ดูรูปเป้าหมาย • ระบบจะเปิดช่องให้เลือกอัตโนมัติ",()=>{},true);
+
+      const goToAnswer=()=>{
+        if(!window.BB_RANKED_ACTIVE)return;
+        if(state!=="position_target")return;
+        try{
+          positionAnswer();
+          requestAnimationFrame(()=>{
+            const board=document.getElementById("board");
+            if(board){
+              board.style.pointerEvents="auto";
+              [...board.children].forEach(slot=>{
+                slot.style.pointerEvents="auto";
+                slot.style.touchAction="manipulation";
+              });
+            }
+            const title=document.getElementById("boardTitle");
+            if(title)title.scrollIntoView({block:"center",behavior:"smooth"});
+          });
+        }catch(err){
+          console.error("Ranked position answer transition:",err);
+          toast("เปิดช่องคำตอบไม่สำเร็จ • กรุณาลองอีกครั้ง");
+        }
+      };
+
+      rankedClock(2,"ดูเป้าหมาย",goToAnswer);
+
+      // Safari/iPad backup: even if the clock callback gets paused,
+      // force the answer board to open after ~2.3s.
+      setTimeout(goToAnswer,2300);
     }
   };
 
