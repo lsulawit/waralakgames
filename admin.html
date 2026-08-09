@@ -3,86 +3,471 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f9f6fc">
-<title>Brain Buddy • ศูนย์แอดมิน</title>
+<meta name="theme-color" content="#765fda">
+<meta name="author" content="Sulawit Songsang">
+<title>Brain Buddy • Admin Center</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{box-sizing:border-box}
-:root{--bg:#f8f5fb;--card:#fff;--ink:#2d2634;--muted:#756d7b;--line:#e8e1ec;--pink:#ed659e;--purple:#7458d7;--mint:#55c9aa;--shadow:0 20px 52px rgba(58,39,73,.10)}
-body{margin:0;min-height:100vh;font-family:"Noto Sans Thai","Thonburi","Sukhumvit Set",system-ui,-apple-system,sans-serif;color:var(--ink);background:radial-gradient(circle at 8% 0%,#ffe8f2,transparent 26rem),radial-gradient(circle at 92% 0%,#eee9ff,transparent 28rem),linear-gradient(180deg,#fcfafc,var(--bg))}
-button,input{font:inherit}
-.shell{width:min(1180px,calc(100% - 24px));margin:auto}
-.top{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-.nav{height:68px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.brand{font-size:18px;font-weight:950}.back{text-decoration:none;color:#51465d;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 13px;font-weight:850}
-.hero{padding:24px 0 14px}.heroCard{background:#fff;border:1px solid var(--line);border-radius:30px;padding:25px;box-shadow:var(--shadow);display:flex;justify-content:space-between;gap:20px;align-items:center}
-.hero h1{margin:0 0 5px;font-size:clamp(30px,5vw,45px)}.hero p{margin:0;color:var(--muted);line-height:1.7}.shield{font-size:58px}
-.state{margin:10px auto 30px}.card{background:#fff;border:1px solid var(--line);border-radius:27px;padding:22px;box-shadow:var(--shadow)}
-.hidden{display:none!important}.status{display:inline-flex;gap:7px;align-items:center;padding:8px 11px;border-radius:999px;background:#f4effa;color:#665376;font-size:11px;font-weight:900}
-.loginBox{max-width:570px;margin:auto;text-align:center;padding:30px}.loginBox h2{font-size:27px;margin:12px 0 7px}.loginBox p{color:var(--muted);line-height:1.75;margin:0 0 18px}
-.btn{border:1px solid var(--line);border-radius:15px;background:#fff;color:var(--ink);padding:12px 15px;font-weight:900;cursor:pointer}
-.btn.primary{border:0;background:linear-gradient(135deg,var(--purple),#9d86f3);color:#fff}.btn.pink{border:0;background:linear-gradient(135deg,var(--pink),#ff91bd);color:#fff}
-.codeForm{max-width:520px;margin:18px auto 0;display:grid;gap:10px}.codeForm input{width:100%;height:54px;border-radius:16px;border:1.5px solid var(--line);padding:0 15px;font-size:17px;outline:none;background:#fff;color:var(--ink)}
-.codeForm input:focus{border-color:#9b83f1;box-shadow:0 0 0 4px rgba(155,131,241,.12)}.msg{min-height:22px;color:#b34e70;font-size:12px;font-weight:750}
-.toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:15px}.toolbar h2{margin:0;font-size:27px}.toolbar p{margin:3px 0 0;color:var(--muted);font-size:12px}
+:root{
+  --bg:#f8f5fb;--card:#fff;--ink:#30253c;--muted:#81758a;--line:#e8dfec;
+  --pink:#ed659e;--purple:#7458d7;--purple2:#9b7cea;--mint:#55c9aa;
+  --yellow:#ffd86b;--blue:#6bcdf5;--shadow:0 20px 52px rgba(58,39,73,.12)
+}
+html{background:#765fda}
+body{
+  margin:0;min-height:100vh;
+  font-family:"Noto Sans Thai","Thonburi","Sukhumvit Set",system-ui,-apple-system,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 8% 0%,#c7f1ff,transparent 26rem),
+    radial-gradient(circle at 92% 0%,#ffd3e7,transparent 28rem),
+    linear-gradient(180deg,#efe8ff 0%,#f9eaf4 60%,#ffe0c8 100%);
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+.shell{width:min(1240px,calc(100% - 24px));margin:auto}
+
+/* top */
+.top{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.94);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(230,219,235,.9);box-shadow:0 8px 24px rgba(63,42,85,.07)
+}
+.nav{min-height:72px;display:flex;align-items:center;gap:15px}
+.brand{display:flex;align-items:center;gap:10px;min-width:max-content}
+.brandMark{
+  width:46px;height:42px;border-radius:48% 52% 46% 49%;position:relative;
+  background:linear-gradient(145deg,#ff91bf,#c96bd0 58%,#8068df);
+  box-shadow:inset 0 4px 5px rgba(255,255,255,.38),0 7px 12px rgba(89,52,128,.16)
+}
+.brandMark:before,.brandMark:after{
+  content:"";position:absolute;top:17px;width:5px;height:7px;border-radius:50%;background:#49384e
+}
+.brandMark:before{left:12px}.brandMark:after{right:12px}
+.brandMark i{position:absolute;left:18px;top:27px;width:9px;height:5px;border-bottom:2px solid #583e52;border-radius:0 0 9px 9px}
+.brand div{display:flex;flex-direction:column}
+.brand small{font-size:10px;letter-spacing:.12em;color:#9d779b;font-weight:950}
+.brand strong{font-size:18px;color:#5e4073;font-weight:1000}
+.adminTabs{display:flex;gap:7px;flex:1;justify-content:center}
+.adminTabs button{
+  border:0;border-radius:15px;padding:11px 15px;background:#f5eff8;color:#725e7e;font-weight:900
+}
+.adminTabs button.active{
+  color:#fff;background:linear-gradient(180deg,var(--purple2),var(--purple));
+  box-shadow:0 8px 14px rgba(80,53,131,.15)
+}
+.back{
+  text-decoration:none;color:#6d5879;background:#fff;border:1px solid var(--line);
+  border-radius:14px;padding:10px 13px;font-weight:900
+}
+
+/* hero */
+.hero{padding:18px 0 12px}
+.heroCard{
+  position:relative;overflow:hidden;
+  min-height:190px;border-radius:31px;padding:26px 28px;
+  color:#fff;display:grid;grid-template-columns:1fr .38fr;align-items:center;gap:18px;
+  border:2px solid rgba(255,255,255,.38);
+  background:linear-gradient(135deg,#755ad8,#a76ee0 53%,#ef78b4);
+  box-shadow:inset 0 5px 7px rgba(255,255,255,.2),0 18px 34px rgba(61,34,103,.21)
+}
+.heroCard:before,.heroCard:after{
+  content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.09)
+}
+.heroCard:before{width:220px;height:220px;right:-60px;top:-85px}
+.heroCard:after{width:130px;height:130px;right:160px;bottom:-90px}
+.status{
+  display:inline-flex;gap:7px;align-items:center;padding:7px 11px;border-radius:999px;
+  background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.24);
+  color:#fff7c7;font-size:11px;font-weight:950;letter-spacing:.06em
+}
+.hero h1{margin:9px 0 6px;font-size:clamp(32px,5vw,49px);line-height:1;font-weight:1000}
+.hero p{margin:0;max-width:760px;color:#f7eaff;line-height:1.65;font-weight:650}
+.heroArt{position:relative;min-height:150px}
+.heroArt .bear{
+  position:absolute;right:58px;bottom:1px;width:115px;height:115px;border-radius:48%;
+  background:linear-gradient(145deg,#ffc7df,#ef79ae);
+  box-shadow:inset 10px 9px 12px rgba(255,255,255,.35),0 18px 25px rgba(77,35,115,.18)
+}
+.heroArt .bear:before,.heroArt .bear:after{
+  content:"";position:absolute;top:-12px;width:44px;height:44px;border-radius:50%;
+  background:inherit
+}
+.heroArt .bear:before{left:5px}.heroArt .bear:after{right:5px}
+.heroArt .brain{
+  position:absolute;right:180px;top:5px;width:72px;height:65px;border-radius:45% 55% 48% 46%;
+  background:linear-gradient(145deg,#ff9fc8,#cb70d2);box-shadow:inset 0 5px 7px rgba(255,255,255,.35)
+}
+.heroArt .book{
+  position:absolute;right:2px;top:23px;width:75px;height:55px;border-radius:11px 16px 16px 11px;
+  background:linear-gradient(145deg,#ffd86c,#f1a25f);transform:rotate(10deg);
+  box-shadow:inset 0 5px 6px rgba(255,255,255,.34)
+}
+
+/* gate */
+.state{margin:10px auto 30px}
+.card{
+  background:rgba(255,255,255,.94);border:1px solid rgba(232,225,236,.9);
+  border-radius:27px;padding:22px;box-shadow:var(--shadow);backdrop-filter:blur(14px)
+}
+.loginBox{max-width:570px;margin:auto;text-align:center;padding:30px}
+.loginBox h2{font-size:27px;margin:12px 0 7px}
+.loginBox p{color:var(--muted);line-height:1.75;margin:0 0 18px}
+.btn{
+  border:1px solid var(--line);border-radius:15px;background:#fff;color:var(--ink);
+  padding:12px 15px;font-weight:900
+}
+.btn.primary{border:0;background:linear-gradient(135deg,var(--purple),#9d86f3);color:#fff}
+.btn.pink{border:0;background:linear-gradient(135deg,var(--pink),#ff91bd);color:#fff}
+.codeForm{max-width:520px;margin:18px auto 0;display:grid;gap:10px}
+.codeForm input{
+  width:100%;height:54px;border-radius:16px;border:1.5px solid var(--line);padding:0 15px;
+  font-size:17px;outline:none;background:#fff;color:var(--ink)
+}
+.codeForm input:focus{border-color:#9b83f1;box-shadow:0 0 0 4px rgba(155,131,241,.12)}
+.msg{min-height:22px;color:#b34e70;font-size:12px;font-weight:750}
+.userline{font-size:11px;color:var(--muted);margin-top:8px}
+
+/* dashboard */
+#dashboard{padding:0;background:transparent;border:0;box-shadow:none}
+.adminPanel{
+  display:none;background:rgba(255,255,255,.95);border:1px solid rgba(231,221,235,.9);
+  border-radius:28px;padding:20px;box-shadow:var(--shadow)
+}
+.adminPanel.active{display:block}
+.toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:15px}
+.toolbar h2{margin:0;font-size:27px;color:#5a4070}
+.toolbar p{margin:3px 0 0;color:var(--muted);font-size:12px}
 .actions{display:flex;gap:8px;flex-wrap:wrap}
-.globalBox{background:linear-gradient(135deg,#fff5fa,#f4efff);border:1px solid #e9ddf0;border-radius:22px;padding:17px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
-.globalBox b{display:block;font-size:16px}.globalBox span{font-size:11px;color:var(--muted)}.fileBtn{position:relative;overflow:hidden}.fileBtn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.globalBox{
+  background:linear-gradient(135deg,#fff5fa,#f4efff);border:1px solid #e9ddf0;border-radius:22px;
+  padding:17px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap
+}
+.globalBox b{display:block;font-size:16px}.globalBox span{font-size:11px;color:var(--muted)}
+.fileBtn{position:relative;overflow:hidden}.fileBtn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+
+/* bears */
 .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:11px}
 .bearCard{border:1px solid var(--line);border-radius:20px;background:#fff;overflow:hidden;box-shadow:0 8px 22px rgba(64,45,79,.05)}
 .preview{aspect-ratio:1/1;background:radial-gradient(circle at 35% 25%,#fff,#f7f1fb 72%);display:grid;place-items:center;padding:8px}
 .preview .teddy{width:92%;height:92%;display:grid;place-items:center}.preview svg,.preview img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 8px 7px rgba(75,52,88,.13))}
-.meta{padding:10px}.row{display:flex;justify-content:space-between;gap:7px;align-items:center}.meta b{font-size:12px}.badge{font-size:8px;font-weight:900;padding:4px 6px;border-radius:999px;background:#f0ecf5;color:#6c6275}.badge.custom{background:#e5f9f3;color:#287d67}
+.meta{padding:10px}.row{display:flex;justify-content:space-between;gap:7px;align-items:center}.meta b{font-size:12px}
+.badge{font-size:8px;font-weight:900;padding:4px 6px;border-radius:999px;background:#f0ecf5;color:#6c6275}.badge.custom{background:#e5f9f3;color:#287d67}
 .cardActions{display:grid;grid-template-columns:1fr auto;gap:6px;margin-top:8px}.small{padding:8px 7px;border-radius:11px;font-size:9px}.danger{color:#9d4360;background:#fff6f8}
-.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;z-index:100;background:#2f2736;color:#fff;border-radius:999px;padding:11px 15px;font-size:11px;font-weight:850;transition:.23s;box-shadow:0 14px 32px rgba(32,21,39,.25)}.toast.show{opacity:1;transform:translate(-50%,0)}
-.userline{font-size:11px;color:var(--muted);margin-top:8px}
-@media(max-width:950px){.grid{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:720px){.grid{grid-template-columns:repeat(3,1fr)}.heroCard{border-radius:24px;padding:20px}.shield{font-size:45px}}
-@media(max-width:520px){.shell{width:min(100% - 14px,1180px)}.nav{height:60px}.brand{font-size:15px}.back{font-size:11px;padding:8px 10px}.hero{padding-top:12px}.heroCard{display:block}.shield{display:none}.card{padding:14px;border-radius:22px}.grid{grid-template-columns:repeat(2,1fr);gap:7px}.preview{padding:5px}.meta{padding:8px}.toolbar h2{font-size:22px}}
+
+/* learning CMS */
+.learnStats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:13px}
+.learnStat{
+  display:flex;align-items:center;gap:8px;padding:10px;border-radius:18px;background:#faf7fc;border:1px solid #eee5f0
+}
+.learnStat .ico{
+  width:37px;height:37px;border-radius:12px;display:grid;place-items:center;color:#fff;font-weight:1000;
+  background:linear-gradient(145deg,#9678e9,#7558d0)
+}
+.learnStat.cn .ico{background:linear-gradient(145deg,#ff91b9,#e45e99)}
+.learnStat.en .ico{background:linear-gradient(145deg,#73d8ff,#458fd2)}
+.learnStat.math .ico{background:linear-gradient(145deg,#ffd66d,#eb9d43)}
+.learnStat.on .ico{background:linear-gradient(145deg,#69d1a4,#44aa80)}
+.learnStat small{display:block;color:#927f98;font-size:10px;font-weight:800}.learnStat strong{display:block;color:#5e4472;font-size:18px;font-weight:1000}
+
+.learnTools{
+  display:grid;grid-template-columns:2fr 1fr 1.1fr 1fr auto;gap:8px;align-items:end;
+  padding:11px;border-radius:19px;background:#f8f4fa;margin-bottom:9px
+}
+.learnTools label{display:grid;gap:4px;min-width:0}.learnTools label>span{color:#806d88;font-size:10px;font-weight:900}
+.learnTools input,.learnTools select{
+  width:100%;height:42px;border:1px solid #e9dfee;border-radius:13px;padding:0 10px;
+  outline:none;background:#fff;color:#52405d;font-size:12px
+}
+.learnMeta{display:flex;justify-content:space-between;gap:10px;margin:7px 3px;color:#8e7b94;font-size:10px;font-weight:800}
+.learnList{display:grid;gap:8px}
+.learnLoading,.learnEmpty{padding:30px;text-align:center;border-radius:18px;background:#faf7fc;color:#887691;font-weight:850}
+
+.contentRow{
+  display:grid;grid-template-columns:minmax(0,1.45fr) minmax(160px,.55fr) auto;gap:9px;align-items:center;
+  padding:10px;border-radius:18px;border:1px solid #eee5f0;background:#fff
+}
+.contentRow.off{opacity:.7;background:#f8f5f8}
+.contentMain{display:flex;gap:9px;align-items:flex-start;min-width:0}
+.subjectIcon{
+  width:43px;height:43px;flex:0 0 43px;border-radius:14px;display:grid;place-items:center;color:#fff;font-weight:1000;
+  background:linear-gradient(145deg,#9678e9,#7558d0)
+}
+.subjectIcon.chinese{background:linear-gradient(145deg,#ff91b9,#e45e99)}
+.subjectIcon.english{background:linear-gradient(145deg,#73d8ff,#458fd2)}
+.subjectIcon.math{background:linear-gradient(145deg,#ffd66d,#eb9d43)}
+.contentCopy{min-width:0}.chips{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:4px}
+.chips span{padding:3px 6px;border-radius:999px;background:#f5eff7;color:#755f80;font-size:8px;font-weight:900}
+.chips .on{background:#ddfff0;color:#337b5d}.chips .off{background:#ffeaf0;color:#9a586d}
+.contentCopy h3{margin:0;color:#5b4070;font-size:14px;font-weight:1000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.contentCopy p{margin:3px 0 0;color:#8c7a92;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.answerBox{min-width:0;padding:8px 10px;border-radius:13px;background:#faf7fb}
+.answerBox small{display:block;color:#9a879f;font-size:9px;font-weight:850}
+.answerBox strong{display:block;color:#654a79;font-size:11px;font-weight:950;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rowActions{display:flex;gap:5px}.rowActions button{height:36px;border:0;border-radius:11px;padding:0 9px;font-size:10px;font-weight:950}
+.rowActions .edit{color:#7356aa;background:#eee6fa}.rowActions .toggleOn{color:#9b5870;background:#ffeaf0}.rowActions .toggleOff{color:#337b5c;background:#dffff0}.rowActions .delete{color:#ab4767;background:#fff0f4}
+
+/* editor */
+.editorWrap{display:none;margin-top:12px;padding:15px;border-radius:22px;background:#fbf9fc;border:1px solid #ede4ef}
+.editorWrap.active{display:block}
+.editorHead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:12px}
+.editorHead h3{margin:0;color:#5d4174;font-size:22px}.editorHead p{margin:3px 0 0;color:#8d7993;font-size:11px}
+.formSection{padding:13px;border-radius:18px;background:#fff;border:1px solid #eee5f0;margin-bottom:9px}
+.formTitle{display:flex;gap:8px;align-items:center;margin-bottom:10px}.formTitle>span{width:31px;height:31px;border-radius:10px;display:grid;place-items:center;color:#fff;background:linear-gradient(145deg,#9678e9,#7457cf);font-weight:1000}
+.formTitle strong{display:block;color:#5c4172;font-size:13px}.formTitle small{color:#948198;font-size:9px}
+.formGrid{display:grid;gap:8px;margin-bottom:8px}.formGrid.three{grid-template-columns:repeat(3,1fr)}.formGrid.two{grid-template-columns:repeat(2,1fr)}
+.learnForm label{display:grid;gap:4px;margin-bottom:8px}.learnForm label>span{color:#74617e;font-size:10px;font-weight:900}
+.learnForm input,.learnForm select,.learnForm textarea{
+  width:100%;border:1.5px solid #e9dfee;border-radius:13px;padding:9px 10px;outline:none;background:#fff;color:#4a3954;font-size:12px;resize:vertical
+}
+.learnForm input,.learnForm select{min-height:42px}.learnForm input:focus,.learnForm select:focus,.learnForm textarea:focus{border-color:#9879e7;box-shadow:0 0 0 4px rgba(144,112,221,.08)}
+.help{font-size:9px;color:#9a879f}
+.editorActions{display:flex;justify-content:flex-end;gap:7px}
+.editorActions button{min-width:140px;min-height:44px;border:0;border-radius:14px;font-weight:950}
+.editorActions .cancel{color:#755e82;background:#f1ebf5}.editorActions .save{color:#fff;background:linear-gradient(180deg,#9879ea,#7457cf)}
+.mediaPreview{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mediaBox{min-height:105px;border-radius:15px;background:linear-gradient(145deg,#f0f8ff,#fff0f7);display:grid;place-items:center;overflow:hidden;color:#9a829d;font-size:10px;font-weight:900}
+.mediaBox img{width:100%;height:105px;object-fit:contain}.mediaBox button{border:0;border-radius:11px;padding:7px 10px;background:#8566d6;color:#fff;font-weight:900}
+
+/* confirm + toast */
+.modal{
+  position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:16px;
+  background:rgba(46,29,64,.45);backdrop-filter:blur(8px)
+}
+.modalCard{width:min(94vw,440px);padding:21px;border-radius:25px;background:#fff;text-align:center;box-shadow:0 25px 55px rgba(38,22,58,.3)}
+.modalCard .warn{width:50px;height:50px;margin:auto;border-radius:16px;display:grid;place-items:center;background:linear-gradient(180deg,#ff96b2,#e15882);color:#fff;font-size:22px;font-weight:1000}
+.modalCard h3{margin:8px 0 5px;color:#5e405f}.modalCard p{margin:0 0 11px;color:#887587;font-size:11px}.deletePreview{padding:9px;border-radius:12px;background:#faf5f7;color:#785e70;font-size:11px;font-weight:850}
+.modalActions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:11px}.modalActions button{min-height:42px;border:0;border-radius:13px;font-weight:950}.modalActions .secondary{background:#f2edf5;color:#76637e}.modalActions .dangerBtn{background:linear-gradient(180deg,#ef789a,#d65379);color:#fff}
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;z-index:1500;background:#2f2736;color:#fff;border-radius:999px;padding:11px 15px;font-size:11px;font-weight:850;transition:.23s;box-shadow:0 14px 32px rgba(32,21,39,.25)}.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:1000px){
+  .grid{grid-template-columns:repeat(4,1fr)}
+  .learnStats{grid-template-columns:repeat(3,1fr)}
+  .learnTools{grid-template-columns:2fr 1fr 1fr}
+  .contentRow{grid-template-columns:minmax(0,1fr) auto}.answerBox{grid-column:1/-1;order:3}
+}
+@media(max-width:760px){
+  .nav{min-height:64px}.adminTabs{overflow:auto;justify-content:flex-start}.adminTabs button{white-space:nowrap;padding:9px 11px}
+  .brand strong{font-size:15px}.brand small{font-size:8px}.back{display:none}
+  .heroCard{grid-template-columns:1fr;min-height:0;padding:20px;border-radius:24px}.heroArt{display:none}
+  .grid{grid-template-columns:repeat(3,1fr)}
+  .learnStats{grid-template-columns:repeat(2,1fr)}
+  .learnTools{grid-template-columns:1fr 1fr}.learnTools label:first-child{grid-column:1/-1}
+  .formGrid.three{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){
+  .shell{width:min(100% - 14px,1240px)}.brandMark{width:40px;height:37px}.adminTabs{gap:4px}.adminTabs button{font-size:10px}
+  .hero{padding-top:10px}.hero h1{font-size:31px}.hero p{font-size:12px}
+  .card{padding:13px;border-radius:22px}.adminPanel{padding:12px;border-radius:22px}
+  .grid{grid-template-columns:repeat(2,1fr);gap:7px}.preview{padding:5px}.meta{padding:8px}
+  .toolbar h2{font-size:22px}
+  .learnStats{grid-template-columns:1fr 1fr}
+  .learnTools{grid-template-columns:1fr}.learnTools label:first-child{grid-column:auto}
+  .contentRow{grid-template-columns:1fr}.answerBox{grid-column:auto}.rowActions button{flex:1}.rowActions{justify-content:stretch}
+  .formGrid.three,.formGrid.two{grid-template-columns:1fr}.mediaPreview{grid-template-columns:1fr}
+  .editorActions{display:grid;grid-template-columns:1fr 1fr}.editorActions button{min-width:0}
+}
 </style>
 </head>
 <body>
-<header class="top"><div class="shell nav"><div class="brand">🧠 Brain Buddy • แอดมิน</div><a class="back" href="/">← กลับหน้าเกม</a></div></header>
+<header class="top">
+  <div class="shell nav">
+    <div class="brand">
+      <span class="brandMark"><i></i></span>
+      <div><small>BRAIN BUDDY</small><strong>Admin Center</strong></div>
+    </div>
+    <div class="adminTabs" id="adminTabs">
+      <button class="active" data-admin-panel="bears">จัดการหมี</button>
+      <button data-admin-panel="learning">คำศัพท์ / โจทย์</button>
+    </div>
+    <a class="back" href="/">← กลับหน้าเกม</a>
+  </div>
+</header>
+
 <main>
-<section class="hero"><div class="shell"><div class="heroCard"><div><span class="status">🛡️ ADMIN CONTROL CENTER</span><h1>จัดการตัวหมีในเกม</h1><p>เปลี่ยนหมีทีละตัว หรือใช้รูปเดียวแทนหมีทั้ง 20 ตัว เมื่อบันทึกแล้วผู้เล่นทุกคนจะเห็นจาก Cloud</p></div><div class="shield">🛡️🧸</div></div></div></section>
+<section class="hero">
+  <div class="shell">
+    <div class="heroCard">
+      <div>
+        <span class="status">ADMIN CONTROL CENTER</span>
+        <h1>ศูนย์จัดการ Brain Buddy</h1>
+        <p>จัดการตัวหมีในเกม และเพิ่มคำศัพท์/โจทย์ภาษาจีน ภาษาอังกฤษ และคณิตศาสตร์จากหน้าเดียว</p>
+      </div>
+      <div class="heroArt"><span class="brain"></span><span class="bear"></span><span class="book"></span></div>
+    </div>
+  </div>
+</section>
 
 <section class="state shell">
   <div class="card loginBox" id="needLogin">
-    <div style="font-size:48px">🔐</div><h2>กรุณาเข้าสู่ระบบก่อน</h2>
-    <p>ศูนย์แอดมินตรวจทั้งบัญชีที่ล็อกอินและรหัสแอดมิน จึงไม่สามารถเปิดด้วยรหัสอย่างเดียวจากบัญชีอื่นได้</p>
+    <div style="font-size:48px">🔐</div>
+    <h2>กรุณาเข้าสู่ระบบก่อน</h2>
+    <p>Admin Center ต้องใช้บัญชี Brain Buddy ที่เข้าสู่ระบบอยู่ก่อน</p>
     <a class="btn primary" style="display:inline-block;text-decoration:none" href="/">ไปหน้าเข้าสู่ระบบ</a>
   </div>
 
   <div class="card loginBox hidden" id="codeGate">
-    <span class="status">บัญชีผู้ดูแลที่กำลังใช้งาน</span>
+    <span class="status" style="background:#f4effa;color:#665376;border:0">บัญชีผู้ดูแลที่กำลังใช้งาน</span>
     <h2>ใส่รหัสแอดมิน</h2>
-    <p>รหัสจะถูกตรวจที่ฐานข้อมูล Supabase และไม่ได้ฝังไว้ในไฟล์เว็บไซต์</p>
+    <p>ส่วนจัดการหมีเดิมยังใช้รหัสแอดมินเพื่อความเข้ากันได้กับระบบเดิม</p>
     <div class="userline" id="adminEmail"></div>
     <div class="codeForm">
       <input type="password" id="adminCode" autocomplete="current-password" placeholder="รหัสแอดมิน">
-      <button class="btn primary" id="unlockBtn">🔓 เข้าศูนย์แอดมิน</button>
+      <button class="btn primary" id="unlockBtn">เข้าสู่ Admin Center</button>
       <div class="msg" id="gateMsg"></div>
     </div>
   </div>
 
   <div class="card hidden" id="dashboard">
-    <div class="toolbar"><div><h2>🧸 หมีทั้งหมด 20 ตัว</h2><p>แตะ “เปลี่ยนรูป” ใต้ตัวที่ต้องการแก้ ระบบจะบีบอัดภาพให้เหมาะกับเว็บอัตโนมัติ</p></div><div class="actions"><button class="btn" id="reloadBtn">↻ โหลดใหม่</button><button class="btn danger" id="resetAllBtn">คืนค่าเดิมทั้งหมด</button></div></div>
-    <div class="globalBox"><div><b>✨ ใช้รูปเดียวกับหมีทุกตัว</b><span>เหมาะเมื่อต้องการเปลี่ยนธีมทั้งเกมในครั้งเดียว</span></div><label class="btn pink fileBtn">เลือกรูปแล้วใช้ทั้ง 20 ตัว<input type="file" id="allFile" accept="image/png,image/jpeg,image/webp"></label></div>
-    <div class="grid" id="bearGrid"></div>
+    <!-- BEARS -->
+    <section class="adminPanel active" id="panel-bears">
+      <div class="toolbar">
+        <div><h2>จัดการหมีในเกม</h2><p>เปลี่ยนรูปทีละตัว หรือใช้รูปเดียวแทนหมีทั้ง 20 ตัว</p></div>
+        <div class="actions">
+          <button class="btn" id="reloadBtn">โหลดใหม่</button>
+          <button class="btn danger" id="resetAllBtn">คืนค่าเดิมทั้งหมด</button>
+        </div>
+      </div>
+      <div class="globalBox">
+        <div><b>ใช้รูปเดียวกับหมีทุกตัว</b><span>เหมาะเมื่อต้องการเปลี่ยนธีมทั้งเกมในครั้งเดียว</span></div>
+        <label class="btn pink fileBtn">เลือกรูปแล้วใช้ทั้ง 20 ตัว<input type="file" id="allFile" accept="image/png,image/jpeg,image/webp"></label>
+      </div>
+      <div class="grid" id="bearGrid"></div>
+    </section>
+
+    <!-- LEARNING -->
+    <section class="adminPanel" id="panel-learning">
+      <div class="toolbar">
+        <div><h2>คำศัพท์และโจทย์</h2><p>Chinese • English • Mathematics — เพิ่ม แก้ ปิด/เปิด และลบได้จาก iPad</p></div>
+        <div class="actions">
+          <button class="btn" id="learnReloadBtn">โหลดใหม่</button>
+          <button class="btn primary" id="newLearnBtn">+ เพิ่มเนื้อหา</button>
+        </div>
+      </div>
+
+      <div class="learnStats">
+        <div class="learnStat"><span class="ico">#</span><div><small>ทั้งหมด</small><strong id="statAll">0</strong></div></div>
+        <div class="learnStat on"><span class="ico">✓</span><div><small>เปิดใช้งาน</small><strong id="statOn">0</strong></div></div>
+        <div class="learnStat cn"><span class="ico">中</span><div><small>ภาษาจีน</small><strong id="statCN">0</strong></div></div>
+        <div class="learnStat en"><span class="ico">A</span><div><small>ภาษาอังกฤษ</small><strong id="statEN">0</strong></div></div>
+        <div class="learnStat math"><span class="ico">÷</span><div><small>คณิตศาสตร์</small><strong id="statMath">0</strong></div></div>
+      </div>
+
+      <div class="learnTools">
+        <label><span>ค้นหา</span><input id="learnSearch" type="search" placeholder="คำถาม คำตอบ พินอิน หมวด…"></label>
+        <label><span>วิชา</span>
+          <select id="learnSubjectFilter">
+            <option value="">ทุกวิชา</option><option value="chinese">ภาษาจีน</option><option value="english">ภาษาอังกฤษ</option><option value="math">คณิตศาสตร์</option>
+          </select>
+        </label>
+        <label><span>ประเภท</span>
+          <select id="learnTypeFilter">
+            <option value="">ทุกประเภท</option><option value="vocabulary">คำศัพท์</option><option value="multiple_choice">ปรนัย</option><option value="typing">พิมพ์คำตอบ</option><option value="matching">จับคู่</option><option value="sentence_order">เรียงประโยค</option><option value="listening">ฟัง</option>
+          </select>
+        </label>
+        <label><span>สถานะ</span>
+          <select id="learnStatusFilter">
+            <option value="">ทั้งหมด</option><option value="active">เปิดใช้งาน</option><option value="inactive">ปิดใช้งาน</option>
+          </select>
+        </label>
+        <button class="btn" id="learnFilterRefresh">รีเฟรช</button>
+      </div>
+
+      <div class="learnMeta"><span id="learnCount">0 รายการ</span><span id="learnStatus">พร้อมใช้งาน</span></div>
+      <div class="learnList" id="learnList"><div class="learnLoading">กำลังโหลดเนื้อหา…</div></div>
+
+      <div class="editorWrap" id="learnEditor">
+        <div class="editorHead">
+          <div><h3 id="editorTitle">เพิ่มคำศัพท์ / โจทย์</h3><p id="editorLead">กรอกเฉพาะข้อมูลที่จำเป็น ช่องเสริมเว้นว่างได้</p></div>
+          <button class="btn" id="closeEditorBtn">ปิด</button>
+        </div>
+
+        <form class="learnForm" id="learnForm">
+          <input type="hidden" id="editId">
+
+          <div class="formSection">
+            <div class="formTitle"><span>1</span><div><strong>ประเภทเนื้อหา</strong><small>เลือกวิชา รูปแบบเกม และระดับ</small></div></div>
+            <div class="formGrid three">
+              <label><span>วิชา *</span>
+                <select id="fSubject" required><option value="chinese">ภาษาจีน</option><option value="english">ภาษาอังกฤษ</option><option value="math">คณิตศาสตร์</option></select>
+              </label>
+              <label><span>ประเภท *</span>
+                <select id="fType" required><option value="vocabulary">คำศัพท์</option><option value="multiple_choice">ปรนัย</option><option value="typing">พิมพ์คำตอบ</option><option value="matching">จับคู่</option><option value="sentence_order">เรียงประโยค</option><option value="listening">ฟังแล้วตอบ</option></select>
+              </label>
+              <label><span>ระดับ *</span>
+                <select id="fDifficulty" required><option value="easy">ง่าย</option><option value="normal">ปานกลาง</option><option value="hard">ยาก</option><option value="expert">Expert</option></select>
+              </label>
+            </div>
+            <div class="formGrid two">
+              <label><span>หมวด</span><input id="fCategory" type="text" placeholder="HSK1, Animals, Grammar, Addition"></label>
+              <label><span>คะแนนพื้นฐาน</span><input id="fScore" type="number" min="0" value="100"></label>
+            </div>
+          </div>
+
+          <div class="formSection">
+            <div class="formTitle"><span>2</span><div><strong>คำถามและคำตอบ</strong><small>จำเป็น</small></div></div>
+            <label><span>คำถาม / คำศัพท์หลัก *</span><textarea id="fPrompt" rows="3" required placeholder="เช่น 苹果 หรือ What is 12 × 4?"></textarea></label>
+            <label><span>คำตอบ *</span><textarea id="fAnswer" rows="2" required placeholder="เช่น แอปเปิล หรือ 48"></textarea></label>
+            <div class="formGrid two">
+              <label><span>Pinyin</span><input id="fPinyin" type="text" placeholder="píngguǒ"></label>
+              <label><span>ความหมาย / คำแปล</span><input id="fMeaning" type="text" placeholder="แอปเปิล"></label>
+            </div>
+          </div>
+
+          <div class="formSection">
+            <div class="formTitle"><span>3</span><div><strong>ตัวเลือกและเฉลย</strong><small>ใส่เมื่อต้องการ</small></div></div>
+            <label><span>ตัวเลือก</span><textarea id="fOptions" rows="4" placeholder="หนึ่งตัวเลือกต่อหนึ่งบรรทัด&#10;苹果&#10;香蕉&#10;西瓜&#10;葡萄"></textarea><small class="help">หรือใส่ JSON array เช่น ["A","B","C"]</small></label>
+            <label><span>คำอธิบายหลังตอบ</span><textarea id="fExplanation" rows="3"></textarea></label>
+            <label><span>ประโยคตัวอย่าง</span><textarea id="fExample" rows="2"></textarea></label>
+          </div>
+
+          <div class="formSection">
+            <div class="formTitle"><span>4</span><div><strong>สื่อประกอบ</strong><small>URL รูปและเสียง</small></div></div>
+            <div class="formGrid two">
+              <label><span>Image URL</span><input id="fImage" type="url" placeholder="https://…"></label>
+              <label><span>Audio URL</span><input id="fAudio" type="url" placeholder="https://…"></label>
+            </div>
+            <div class="mediaPreview">
+              <div class="mediaBox" id="imagePreview">IMAGE</div>
+              <div class="mediaBox"><button type="button" id="audioPreviewBtn" disabled>เล่นเสียง</button></div>
+            </div>
+          </div>
+
+          <div class="editorActions">
+            <button type="button" class="cancel" id="clearLearnForm">ล้างแบบฟอร์ม</button>
+            <button type="submit" class="save" id="saveLearnBtn">บันทึกเนื้อหา</button>
+          </div>
+        </form>
+      </div>
+    </section>
   </div>
 </section>
 </main>
+
+<div class="modal hidden" id="deleteModal">
+  <div class="modalCard">
+    <div class="warn">!</div><h3>ลบเนื้อหานี้?</h3>
+    <p>ถ้าแค่ไม่ต้องการให้ผู้เล่นเห็น แนะนำใช้ “ปิด” แทน</p>
+    <div class="deletePreview" id="deletePreview"></div>
+    <div class="modalActions"><button class="secondary" id="cancelDelete">ยกเลิก</button><button class="dangerBtn" id="confirmDelete">ลบถาวร</button></div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
+
 <script>
 const SUPABASE_URL="https://zumxppmhpajfhttdmlgu.supabase.co";
 const SUPABASE_KEY="sb_publishable_mLG21_IL92Jo2Pt7swNTYw_tVHME3a9";
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
 const palettes=[
-  ["#b57a53","#e3ad82","#fff0db"],["#d19a77","#f0c4a5","#fff3e9"],["#98694e","#c89270","#f4ddc4"],["#c17f88","#ebb2b9","#fff0f1"],
-  ["#a88a69","#d8b68f","#f9e8d3"],["#8f725f","#b99782","#eee0d2"],["#c49a63","#edc68a","#fff0d1"],["#a17963","#d3a58b","#f5dfd3"],
-  ["#b97661","#e8a997","#ffe7df"],["#8f766b","#bca599","#efe4de"],["#c08c66","#eab691","#fff0de"],["#a56a58","#d6957e","#f7ddd4"],
-  ["#b49a72","#dbc39a","#f5ead6"],["#916f5d","#c39f8b","#efe0d7"],["#c48b70","#eeb59b","#ffe9de"],["#a27e54","#d0a774","#f1dec6"],
-  ["#b67d9a","#e4b1c9","#f9e5ee"],["#8697b7","#b8c7de","#edf2fa"],["#7e9a77","#aac6a2","#e6f2e2"],["#a382b7","#cab0d8","#f1e8f6"]
+["#b57a53","#e3ad82","#fff0db"],["#d19a77","#f0c4a5","#fff3e9"],["#98694e","#c89270","#f4ddc4"],["#c17f88","#ebb2b9","#fff0f1"],
+["#a88a69","#d8b68f","#f9e8d3"],["#8f725f","#b99782","#eee0d2"],["#c49a63","#edc68a","#fff0d1"],["#a17963","#d3a58b","#f5dfd3"],
+["#b97661","#e8a997","#ffe7df"],["#8f766b","#bca599","#efe4de"],["#c08c66","#eab691","#fff0de"],["#a56a58","#d6957e","#f7ddd4"],
+["#b49a72","#dbc39a","#f5ead6"],["#916f5d","#c39f8b","#efe0d7"],["#c48b70","#eeb59b","#ffe9de"],["#a27e54","#d0a774","#f1dec6"],
+["#b67d9a","#e4b1c9","#f9e5ee"],["#8697b7","#b8c7de","#edf2fa"],["#7e9a77","#aac6a2","#e6f2e2"],["#a382b7","#cab0d8","#f1e8f6"]
 ];
 const accessories=["heart","bow","crown","star","flower","glasses","balloon","gift","honey","ribbon","moon","apple","rainbow","butterfly","cookie","book","heart2","bow2","star2","flower2"];
 
@@ -117,19 +502,22 @@ function teddySVG(i){
   <ellipse cx="75" cy="113" rx="55" ry="62" fill="url(#${id}b)"/><circle cx="75" cy="76" r="50" fill="url(#${id}b)"/>
   <ellipse cx="75" cy="96" rx="29" ry="23" fill="url(#${id}m)"/><ellipse cx="75" cy="88" rx="10" ry="8" fill="#4b3b3b"/>
   <path d="M75 96 C68 105 59 105 55 100 M75 96 C82 105 91 105 95 100" fill="none" stroke="#4b3b3b" stroke-width="3.2" stroke-linecap="round"/>
-  <circle class="eye" cx="57" cy="74" r="5.8" fill="#382f33"/><circle class="eye" cx="93" cy="74" r="5.8" fill="#382f33"/>
+  <circle cx="57" cy="74" r="5.8" fill="#382f33"/><circle cx="93" cy="74" r="5.8" fill="#382f33"/>
   <ellipse cx="75" cy="132" rx="28" ry="34" fill="url(#${id}m)" opacity=".92"/>
-  <g class="paw"><ellipse cx="28" cy="128" rx="18" ry="35" fill="url(#${id}b)" transform="rotate(18 28 128)"/></g><ellipse cx="122" cy="128" rx="18" ry="35" fill="url(#${id}b)" transform="rotate(-18 122 128)"/>
+  <ellipse cx="28" cy="128" rx="18" ry="35" fill="url(#${id}b)" transform="rotate(18 28 128)"/><ellipse cx="122" cy="128" rx="18" ry="35" fill="url(#${id}b)" transform="rotate(-18 122 128)"/>
   <ellipse cx="51" cy="164" rx="24" ry="21" fill="url(#${id}b)"/><ellipse cx="99" cy="164" rx="24" ry="21" fill="url(#${id}b)"/>${A}
   <path d="M46 46 C57 21 91 17 105 39" fill="none" stroke="white" stroke-opacity=".34" stroke-width="8" stroke-linecap="round"/></svg>`;
 }
 
+/* shared */
+const $=s=>document.querySelector(s);
+function toast(t){const x=$("#toast");x.textContent=t;x.classList.add("show");clearTimeout(x._t);x._t=setTimeout(()=>x.classList.remove("show"),1900)}
+async function session(){const {data:{session}}=await sb.auth.getSession();return session}
 
+/* ---------------- Bear manager ---------------- */
 let adminCode=sessionStorage.getItem("bb_admin_code")||"";
 let assets={};
-const $=s=>document.querySelector(s);
-function toast(t){const x=$("#toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),1900)}
-async function session(){const {data:{session}}=await sb.auth.getSession();return session}
+
 function originalBear(i){return `<div class="teddy">${teddySVG(i)}</div>`}
 function bearHTML(i){const custom=assets[i];return custom?`<img src="${custom}" alt="หมี ${i+1}">`:originalBear(i)}
 
@@ -144,7 +532,7 @@ async function compressImage(file){
     const ctx=c.getContext("2d");ctx.clearRect(0,0,c.width,c.height);ctx.drawImage(img,0,0,c.width,c.height);
     let out;
     try{out=c.toDataURL("image/webp",.82)}catch(e){out=c.toDataURL("image/jpeg",.84)}
-    if(out.length>850000) return reject(new Error("ภาพใหญ่เกินไป กรุณาใช้ภาพขนาดเล็กลง"));
+    if(out.length>850000)return reject(new Error("ภาพใหญ่เกินไป กรุณาใช้ภาพขนาดเล็กลง"));
     resolve(out);
    };
    img.onerror=()=>reject(new Error("อ่านรูปไม่ได้"));img.src=rd.result;
@@ -163,7 +551,9 @@ async function checkAdmin(){
  if(!adminCode)return false;
  const {data,error}=await sb.rpc("bb_admin_check",{p_code:adminCode});
  if(error||!data){adminCode="";sessionStorage.removeItem("bb_admin_code");return false}
- $("#codeGate").classList.add("hidden");$("#dashboard").classList.remove("hidden");await loadAssets();return true;
+ $("#codeGate").classList.add("hidden");$("#dashboard").classList.remove("hidden");
+ await Promise.all([loadAssets(),loadLearning()]);
+ return true;
 }
 
 async function unlock(){
@@ -172,7 +562,10 @@ async function unlock(){
  const {data,error}=await sb.rpc("bb_admin_check",{p_code:code});
  if(error){$("#gateMsg").textContent=error.message.includes("function")?"ยังไม่ได้ติดตั้งระบบแอดมินใน Supabase":"ตรวจรหัสไม่ได้";return}
  if(!data){$("#gateMsg").textContent="รหัสไม่ถูกต้อง หรือบัญชีนี้ไม่ใช่ผู้ดูแล";return}
- adminCode=code;sessionStorage.setItem("bb_admin_code",code);$("#codeGate").classList.add("hidden");$("#dashboard").classList.remove("hidden");await loadAssets();toast("เข้าสู่ระบบแอดมินแล้ว");
+ adminCode=code;sessionStorage.setItem("bb_admin_code",code);
+ $("#codeGate").classList.add("hidden");$("#dashboard").classList.remove("hidden");
+ await Promise.all([loadAssets(),loadLearning()]);
+ toast("เข้าสู่ Admin Center แล้ว");
 }
 
 async function loadAssets(){
@@ -199,18 +592,165 @@ function renderGrid(){
  }));
 }
 
+/* ---------------- Learning content CMS ---------------- */
+let learningRows=[];
+let deleteItem=null;
+let searchTimer=null;
+const subjectText={chinese:"ภาษาจีน",english:"ภาษาอังกฤษ",math:"คณิตศาสตร์"};
+const typeText={vocabulary:"คำศัพท์",multiple_choice:"ปรนัย",typing:"พิมพ์คำตอบ",matching:"จับคู่",sentence_order:"เรียงประโยค",listening:"ฟัง"};
+const diffText={easy:"ง่าย",normal:"ปานกลาง",hard:"ยาก",expert:"Expert"};
+
+function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+function v(id){return ($("#"+id)?.value||"").trim()}
+function parseOptions(raw){
+ raw=String(raw||"").trim();if(!raw)return null;
+ if(raw.startsWith("[")){const arr=JSON.parse(raw);if(!Array.isArray(arr))throw new Error("ตัวเลือก JSON ต้องเป็น Array");return arr.map(x=>String(x).trim()).filter(Boolean)}
+ const a=raw.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);return a.length?a:null;
+}
+function optionsText(o){return Array.isArray(o)?o.map(String).join("\n"):""}
+
+function openPanel(name){
+ document.querySelectorAll("[data-admin-panel]").forEach(b=>b.classList.toggle("active",b.dataset.adminPanel===name));
+ $("#panel-bears").classList.toggle("active",name==="bears");
+ $("#panel-learning").classList.toggle("active",name==="learning");
+ if(name==="learning")loadLearning();
+}
+document.querySelectorAll("[data-admin-panel]").forEach(b=>b.onclick=()=>openPanel(b.dataset.adminPanel));
+
+function updateLearningStats(){
+ $("#statAll").textContent=learningRows.length;
+ $("#statOn").textContent=learningRows.filter(x=>x.is_active).length;
+ $("#statCN").textContent=learningRows.filter(x=>x.subject==="chinese").length;
+ $("#statEN").textContent=learningRows.filter(x=>x.subject==="english").length;
+ $("#statMath").textContent=learningRows.filter(x=>x.subject==="math").length;
+}
+function shownRows(){
+ const status=v("learnStatusFilter");
+ if(status==="active")return learningRows.filter(x=>x.is_active);
+ if(status==="inactive")return learningRows.filter(x=>!x.is_active);
+ return learningRows;
+}
+function renderLearning(){
+ const rows=shownRows(),host=$("#learnList");
+ $("#learnCount").textContent=`${rows.length} รายการ`;
+ if(!rows.length){host.innerHTML='<div class="learnEmpty">ยังไม่มีเนื้อหาตามตัวกรองนี้</div>';return}
+ host.innerHTML=rows.map(item=>{
+  const ans=[item.answer,item.pinyin?`Pinyin: ${item.pinyin}`:"",item.meaning&&item.meaning!==item.answer?`แปล: ${item.meaning}`:""].filter(Boolean).join(" • ");
+  return `<article class="contentRow ${item.is_active?"":"off"}">
+   <div class="contentMain">
+    <span class="subjectIcon ${esc(item.subject)}">${item.subject==="chinese"?"中":item.subject==="english"?"A":"÷"}</span>
+    <div class="contentCopy">
+     <div class="chips"><span>${esc(subjectText[item.subject]||item.subject)}</span><span>${esc(typeText[item.content_type]||item.content_type)}</span><span>${esc(diffText[item.difficulty]||item.difficulty)}</span>${item.category?`<span>${esc(item.category)}</span>`:""}<span class="${item.is_active?"on":"off"}">${item.is_active?"เปิดอยู่":"ปิดอยู่"}</span></div>
+     <h3>${esc(item.prompt)}</h3><p>${esc(item.explanation||item.example_text||"ไม่มีคำอธิบายเพิ่มเติม")}</p>
+    </div>
+   </div>
+   <div class="answerBox"><small>คำตอบ</small><strong>${esc(ans)}</strong></div>
+   <div class="rowActions">
+    <button class="edit" data-learn-edit="${item.id}">แก้ไข</button>
+    <button class="${item.is_active?"toggleOn":"toggleOff"}" data-learn-toggle="${item.id}">${item.is_active?"ปิด":"เปิด"}</button>
+    <button class="delete" data-learn-delete="${item.id}">ลบ</button>
+   </div>
+  </article>`;
+ }).join("");
+}
+
+async function loadLearning(){
+ const s=await session();if(!s||$("#dashboard").classList.contains("hidden"))return;
+ $("#learnStatus").textContent="กำลังโหลด…";$("#learnList").innerHTML='<div class="learnLoading">กำลังโหลดเนื้อหา…</div>';
+ const {data:isAdmin,error:adminErr}=await sb.rpc("bb_is_admin");
+ if(adminErr||isAdmin!==true){
+  learningRows=[];updateLearningStats();$("#learnCount").textContent="0 รายการ";$("#learnStatus").textContent="ไม่มีสิทธิ์";
+  $("#learnList").innerHTML='<div class="learnEmpty">บัญชีนี้ยังไม่มีสิทธิ์ Learning Content Admin</div>';return;
+ }
+ const {data,error}=await sb.rpc("bb_admin_list_learning_content",{
+  p_subject:v("learnSubjectFilter")||null,
+  p_content_type:v("learnTypeFilter")||null,
+  p_search:v("learnSearch")||null
+ });
+ if(error){learningRows=[];updateLearningStats();$("#learnStatus").textContent="โหลดไม่สำเร็จ";$("#learnList").innerHTML=`<div class="learnEmpty">${esc(error.message)}</div>`;return}
+ learningRows=Array.isArray(data)?data:[];updateLearningStats();renderLearning();$("#learnStatus").textContent="อัปเดตแล้ว";
+}
+
+function clearLearnEditor(){
+ $("#learnForm").reset();$("#editId").value="";$("#fScore").value="100";$("#fSubject").value="chinese";$("#fType").value="vocabulary";$("#fDifficulty").value="easy";
+ $("#editorTitle").textContent="เพิ่มคำศัพท์ / โจทย์";$("#editorLead").textContent="กรอกเฉพาะข้อมูลที่จำเป็น ช่องเสริมเว้นว่างได้";$("#saveLearnBtn").textContent="บันทึกเนื้อหา";
+ updateMediaPreview();
+}
+function openEditor(item=null){
+ clearLearnEditor();$("#learnEditor").classList.add("active");
+ if(item){
+  $("#editId").value=item.id;$("#fSubject").value=item.subject;$("#fType").value=item.content_type;$("#fDifficulty").value=item.difficulty;$("#fCategory").value=item.category||"";$("#fScore").value=item.base_score||100;
+  $("#fPrompt").value=item.prompt||"";$("#fAnswer").value=item.answer||"";$("#fPinyin").value=item.pinyin||"";$("#fMeaning").value=item.meaning||"";$("#fOptions").value=optionsText(item.options);$("#fExplanation").value=item.explanation||"";$("#fExample").value=item.example_text||"";$("#fImage").value=item.image_url||"";$("#fAudio").value=item.audio_url||"";
+  $("#editorTitle").textContent="แก้ไขเนื้อหา";$("#editorLead").textContent=`กำลังแก้ไข ID #${item.id}`;$("#saveLearnBtn").textContent="บันทึกการแก้ไข";updateMediaPreview();
+ }
+ $("#learnEditor").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function updateMediaPreview(){
+ const img=v("fImage"),audio=v("fAudio");
+ $("#imagePreview").innerHTML=img?`<img src="${esc(img)}" alt="Preview">`:"IMAGE";
+ $("#audioPreviewBtn").disabled=!audio;$("#audioPreviewBtn").dataset.url=audio;
+}
+async function saveLearning(){
+ let options=null;try{options=parseOptions($("#fOptions").value)}catch(e){toast(e.message);return}
+ const common={
+  p_subject:v("fSubject"),p_content_type:v("fType"),p_difficulty:v("fDifficulty"),p_category:v("fCategory")||null,
+  p_prompt:v("fPrompt"),p_answer:v("fAnswer"),p_pinyin:v("fPinyin")||null,p_meaning:v("fMeaning")||null,p_options:options,
+  p_explanation:v("fExplanation")||null,p_example_text:v("fExample")||null,p_image_url:v("fImage")||null,p_audio_url:v("fAudio")||null,p_base_score:Math.max(0,Number(v("fScore"))||100)
+ };
+ if(!common.p_prompt){toast("กรุณากรอกคำถามหรือคำศัพท์");return}if(!common.p_answer){toast("กรุณากรอกคำตอบ");return}
+ const id=Number(v("editId"))||null,btn=$("#saveLearnBtn"),old=btn.textContent;btn.disabled=true;btn.textContent="กำลังบันทึก…";
+ try{
+  const {error}=id?await sb.rpc("bb_admin_update_learning_content",{p_id:id,...common}):await sb.rpc("bb_admin_add_learning_content",common);
+  if(error)throw error;toast(id?"แก้ไขสำเร็จ":"เพิ่มเนื้อหาสำเร็จ");$("#learnEditor").classList.remove("active");clearLearnEditor();await loadLearning();
+ }catch(e){toast(e.message||"บันทึกไม่สำเร็จ")}finally{btn.disabled=false;btn.textContent=old}
+}
+async function toggleLearning(id){
+ const item=learningRows.find(x=>Number(x.id)===Number(id));if(!item)return;
+ const {error}=await sb.rpc("bb_admin_set_learning_content_active",{p_id:Number(id),p_is_active:!item.is_active});
+ if(error){toast(error.message);return}toast(item.is_active?"ปิดใช้งานแล้ว":"เปิดใช้งานแล้ว");await loadLearning();
+}
+function askDelete(id){
+ const item=learningRows.find(x=>Number(x.id)===Number(id));if(!item)return;
+ deleteItem=item;$("#deletePreview").textContent=item.prompt;$("#deleteModal").classList.remove("hidden");
+}
+async function doDelete(){
+ if(!deleteItem)return;const item=deleteItem;
+ const {error}=await sb.rpc("bb_admin_delete_learning_content",{p_id:Number(item.id)});
+ if(error){toast(error.message);return}$("#deleteModal").classList.add("hidden");deleteItem=null;toast("ลบเนื้อหาแล้ว");await loadLearning();
+}
+
+/* Events */
 $("#unlockBtn").onclick=unlock;
 $("#adminCode").addEventListener("keydown",e=>{if(e.key==="Enter")unlock()});
 $("#reloadBtn").onclick=loadAssets;
 $("#allFile").addEventListener("change",async e=>{
- const file=e.target.files?.[0];if(!file)return;
- if(!confirm("ใช้รูปนี้แทนหมีทั้ง 20 ตัว?"))return;
+ const file=e.target.files?.[0];if(!file)return;if(!confirm("ใช้รูปนี้แทนหมีทั้ง 20 ตัว?"))return;
  try{const image=await compressImage(file);const {error}=await sb.rpc("bb_admin_set_all_bears",{p_code:adminCode,p_image_data:image});if(error)throw error;for(let i=0;i<20;i++)assets[i]=image;renderGrid();toast("เปลี่ยนหมีทั้ง 20 ตัวแล้ว")}catch(err){toast(err.message||"บันทึกไม่สำเร็จ")}
 });
 $("#resetAllBtn").onclick=async()=>{
  if(!confirm("คืนหมีทั้ง 20 ตัวกลับเป็นรูปต้นฉบับ?"))return;
  const {error}=await sb.rpc("bb_admin_reset_all_bears",{p_code:adminCode});if(error){toast("คืนค่าไม่สำเร็จ");return}assets={};renderGrid();toast("คืนค่าเดิมทั้งหมดแล้ว");
 };
+
+$("#newLearnBtn").onclick=()=>openEditor();
+$("#closeEditorBtn").onclick=()=>$("#learnEditor").classList.remove("active");
+$("#clearLearnForm").onclick=clearLearnEditor;
+$("#learnForm").addEventListener("submit",e=>{e.preventDefault();saveLearning()});
+$("#learnReloadBtn").onclick=loadLearning;$("#learnFilterRefresh").onclick=loadLearning;
+$("#learnSubjectFilter").onchange=loadLearning;$("#learnTypeFilter").onchange=loadLearning;$("#learnStatusFilter").onchange=renderLearning;
+$("#learnSearch").addEventListener("input",()=>{clearTimeout(searchTimer);searchTimer=setTimeout(loadLearning,300)});
+$("#fImage").addEventListener("input",updateMediaPreview);$("#fAudio").addEventListener("input",updateMediaPreview);
+$("#audioPreviewBtn").onclick=()=>{const u=$("#audioPreviewBtn").dataset.url;if(u)new Audio(u).play().catch(()=>toast("เล่นเสียงไม่ได้"))};
+
+document.addEventListener("click",e=>{
+ const edit=e.target.closest("[data-learn-edit]");if(edit){openEditor(learningRows.find(x=>Number(x.id)===Number(edit.dataset.learnEdit)));return}
+ const tog=e.target.closest("[data-learn-toggle]");if(tog){toggleLearning(Number(tog.dataset.learnToggle));return}
+ const del=e.target.closest("[data-learn-delete]");if(del){askDelete(Number(del.dataset.learnDelete));return}
+});
+$("#cancelDelete").onclick=()=>{deleteItem=null;$("#deleteModal").classList.add("hidden")};
+$("#confirmDelete").onclick=doDelete;
+$("#deleteModal").addEventListener("click",e=>{if(e.target.id==="deleteModal"){$("#deleteModal").classList.add("hidden");deleteItem=null}});
+
 checkAdmin();
 </script>
 </body>
