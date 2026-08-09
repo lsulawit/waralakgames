@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy v37 — Candy Screens Pack</title>
+<title>Brain Buddy v38 — iPad Setup Fix</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -1846,6 +1846,186 @@ body.bbCandyHome .bbCandyHomeScreen{
   .bbCandySetupCard .bbAppStyleGrid button{grid-template-columns:70px 1fr!important;padding:14px!important}
   #leaderboardModal .v16LeaderboardModal{padding:18px!important;border-radius:28px!important}.bbLbCup{width:52px;height:48px}.bbCandyLbHead h2{font-size:2rem!important}
   .bbCandyGameScreen{padding:10px 6px 22px!important}.bbCandyGameScreen .scene{min-height:500px!important;padding:14px!important}.bbCandyGameScreen .sceneTitle h2{font-size:28px!important}
+}
+
+
+/* =========================================================
+   Brain Buddy v38 — iPad setup screen repair
+   - full width
+   - remove duplicated old white header
+   - 4 difficulty cards on iPad landscape/portrait
+   - clean team icon and proportions
+   ========================================================= */
+
+body.bbCandySetup{
+  margin:0!important;
+  padding:0!important;
+  background:linear-gradient(180deg,#fff1f8 0%,#f7eaff 52%,#edf3ff 100%)!important;
+  overflow-x:hidden!important;
+}
+
+body.bbCandySetup .v17bar,
+body.bbCandySetup .topbar,
+body.bbCandySetup .bbPlayerStatus{
+  display:none!important;
+}
+
+body.bbCandySetup .bbAppShell{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+  min-height:100dvh!important;
+}
+
+body.bbCandySetup #bbAppSetup{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  min-height:100dvh!important;
+  padding:0 22px 34px!important;
+  box-sizing:border-box!important;
+}
+
+/* Header should feel like one continuous game screen, not a page inside a page */
+body.bbCandySetup .bbSetupTop{
+  width:min(1320px,100%)!important;
+  margin:0 auto!important;
+  min-height:82px!important;
+  padding:13px 4px!important;
+}
+
+body.bbCandySetup .bbSetupHero{
+  width:min(1240px,100%)!important;
+  margin:0 auto!important;
+  padding:22px 8px 20px!important;
+}
+
+body.bbCandySetup .bbCandySetupCard{
+  width:min(1240px,100%)!important;
+  max-width:none!important;
+  margin:0 auto!important;
+  padding:24px 28px!important;
+}
+
+/* iPad gets all 4 difficulty choices in one row, like the reference */
+@media (min-width:700px){
+  body.bbCandySetup .bbCandySetupCard .bbAppDifficultyGrid{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:16px!important;
+  }
+
+  body.bbCandySetup .bbCandySetupCard .bbAppDifficultyGrid button{
+    min-height:158px!important;
+    padding:13px 10px!important;
+  }
+
+  body.bbCandySetup .bbCandySetupCard .bbAppStyleGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:18px!important;
+  }
+
+  body.bbCandySetup .bbCandySetupCard .bbAppSetupSummary{
+    display:grid!important;
+    grid-template-columns:1fr auto!important;
+    gap:20px!important;
+  }
+
+  body.bbCandySetup .bbCandySetupCard .bbAppStartBtn{
+    width:auto!important;
+    min-width:300px!important;
+  }
+}
+
+/* Repair the team graphic: old box-shadow made it look like a giant blue oval */
+body.bbCandySetup .peopleIcon,
+body.bbCandySetup .peopleIcon.team{
+  width:64px!important;
+  height:64px!important;
+  min-width:64px!important;
+  max-width:64px!important;
+  border-radius:50%!important;
+  box-shadow:
+    inset 0 6px 8px rgba(255,255,255,.30),
+    0 10px 15px rgba(71,43,112,.18)!important;
+  overflow:visible!important;
+}
+
+body.bbCandySetup .peopleIcon.team::before{
+  width:22px!important;height:22px!important;
+  left:11px!important;top:10px!important;
+  background:#c0c9ff!important;
+  box-shadow:25px 2px 0 #91a7f3!important;
+}
+
+body.bbCandySetup .peopleIcon.team::after{
+  width:29px!important;height:18px!important;
+  left:6px!important;bottom:9px!important;
+  background:#9dacef!important;
+  box-shadow:25px 0 0 #7188dc!important;
+}
+
+/* remove accidental old icons/text affecting layout */
+body.bbCandySetup .bbAppDifficultyGrid button > span:not(.brainBlob),
+body.bbCandySetup .bbAppStyleGrid button > span:not(.peopleIcon){
+  max-width:100%!important;
+}
+
+/* iPad typography and spacing */
+@media (min-width:700px) and (max-width:1100px){
+  body.bbCandySetup #bbAppSetup{padding-left:18px!important;padding-right:18px!important}
+  body.bbCandySetup .bbSetupBrand b{font-size:22px!important}
+  body.bbCandySetup .bbSetupNav{gap:6px!important}
+  body.bbCandySetup .bbSetupNav button,
+  body.bbCandySetup .bbSetupAdmin{padding:9px 12px!important;font-size:12px!important}
+
+  body.bbCandySetup .bbSetupHero{
+    grid-template-columns:68px minmax(0,1fr) auto!important;
+    gap:14px!important;
+  }
+
+  body.bbCandySetup .bbSetupHeroTitle h2{
+    font-size:3.05rem!important;
+  }
+
+  body.bbCandySetup .brainBlob{
+    width:70px!important;height:56px!important;
+  }
+
+  body.bbCandySetup .bbCandySetupCard .bbAppDifficultyGrid b{
+    font-size:17px!important;
+  }
+
+  body.bbCandySetup .bbCandySetupCard .bbAppStyleGrid button{
+    min-height:112px!important;
+    grid-template-columns:78px 1fr!important;
+    padding:15px 18px!important;
+  }
+}
+
+/* only phones collapse difficulty to 2 columns */
+@media (max-width:699px){
+  body.bbCandySetup #bbAppSetup{
+    padding:0 9px 24px!important;
+  }
+  body.bbCandySetup .bbSetupTop{
+    grid-template-columns:1fr auto!important;
+  }
+  body.bbCandySetup .bbSetupNav{display:none!important}
+  body.bbCandySetup .bbSetupHero{
+    grid-template-columns:54px 1fr!important;
+  }
+  body.bbCandySetup .bbSetupPlayerMini{display:none!important}
+  body.bbCandySetup .bbCandySetupCard{
+    padding:14px!important;
+    border-radius:26px!important;
+  }
+  body.bbCandySetup .bbCandySetupCard .bbAppDifficultyGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  body.bbCandySetup .bbCandySetupCard .bbAppStyleGrid{
+    grid-template-columns:1fr!important;
+  }
 }
 
 </style>
@@ -4739,6 +4919,7 @@ window.addEventListener("load",()=>{
     document.querySelectorAll(".bbAppScreen").forEach(s=>s.classList.toggle("active",s===target));
     document.body.classList.toggle("bbCandySelect",next==="modes");
     document.body.classList.toggle("bbCandyHome",next==="home");
+    document.body.classList.toggle("bbCandySetup",next==="setup");
     window.scrollTo({top:0,behavior:"smooth"});syncSetup();
     return true;
   }
