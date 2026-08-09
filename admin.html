@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f9f6fc">
+<title>Brain Buddy • ศูนย์แอดมิน</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#f8f5fb;--card:#fff;--ink:#2d2634;--muted:#756d7b;--line:#e8e1ec;--pink:#ed659e;--purple:#7458d7;--mint:#55c9aa;--shadow:0 20px 52px rgba(58,39,73,.10)}
+body{margin:0;min-height:100vh;font-family:"Noto Sans Thai","Thonburi","Sukhumvit Set",system-ui,-apple-system,sans-serif;color:var(--ink);background:radial-gradient(circle at 8% 0%,#ffe8f2,transparent 26rem),radial-gradient(circle at 92% 0%,#eee9ff,transparent 28rem),linear-gradient(180deg,#fcfafc,var(--bg))}
+button,input{font:inherit}
+.shell{width:min(1180px,calc(100% - 24px));margin:auto}
+.top{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav{height:68px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-size:18px;font-weight:950}.back{text-decoration:none;color:#51465d;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 13px;font-weight:850}
+.hero{padding:24px 0 14px}.heroCard{background:#fff;border:1px solid var(--line);border-radius:30px;padding:25px;box-shadow:var(--shadow);display:flex;justify-content:space-between;gap:20px;align-items:center}
+.hero h1{margin:0 0 5px;font-size:clamp(30px,5vw,45px)}.hero p{margin:0;color:var(--muted);line-height:1.7}.shield{font-size:58px}
+.state{margin:10px auto 30px}.card{background:#fff;border:1px solid var(--line);border-radius:27px;padding:22px;box-shadow:var(--shadow)}
+.hidden{display:none!important}.status{display:inline-flex;gap:7px;align-items:center;padding:8px 11px;border-radius:999px;background:#f4effa;color:#665376;font-size:11px;font-weight:900}
+.loginBox{max-width:570px;margin:auto;text-align:center;padding:30px}.loginBox h2{font-size:27px;margin:12px 0 7px}.loginBox p{color:var(--muted);line-height:1.75;margin:0 0 18px}
+.btn{border:1px solid var(--line);border-radius:15px;background:#fff;color:var(--ink);padding:12px 15px;font-weight:900;cursor:pointer}
+.btn.primary{border:0;background:linear-gradient(135deg,var(--purple),#9d86f3);color:#fff}.btn.pink{border:0;background:linear-gradient(135deg,var(--pink),#ff91bd);color:#fff}
+.codeForm{max-width:520px;margin:18px auto 0;display:grid;gap:10px}.codeForm input{width:100%;height:54px;border-radius:16px;border:1.5px solid var(--line);padding:0 15px;font-size:17px;outline:none;background:#fff;color:var(--ink)}
+.codeForm input:focus{border-color:#9b83f1;box-shadow:0 0 0 4px rgba(155,131,241,.12)}.msg{min-height:22px;color:#b34e70;font-size:12px;font-weight:750}
+.toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:15px}.toolbar h2{margin:0;font-size:27px}.toolbar p{margin:3px 0 0;color:var(--muted);font-size:12px}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.globalBox{background:linear-gradient(135deg,#fff5fa,#f4efff);border:1px solid #e9ddf0;border-radius:22px;padding:17px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.globalBox b{display:block;font-size:16px}.globalBox span{font-size:11px;color:var(--muted)}.fileBtn{position:relative;overflow:hidden}.fileBtn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:11px}
+.bearCard{border:1px solid var(--line);border-radius:20px;background:#fff;overflow:hidden;box-shadow:0 8px 22px rgba(64,45,79,.05)}
+.preview{aspect-ratio:1/1;background:radial-gradient(circle at 35% 25%,#fff,#f7f1fb 72%);display:grid;place-items:center;padding:8px}
+.preview .teddy{width:92%;height:92%;display:grid;place-items:center}.preview svg,.preview img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 8px 7px rgba(75,52,88,.13))}
+.meta{padding:10px}.row{display:flex;justify-content:space-between;gap:7px;align-items:center}.meta b{font-size:12px}.badge{font-size:8px;font-weight:900;padding:4px 6px;border-radius:999px;background:#f0ecf5;color:#6c6275}.badge.custom{background:#e5f9f3;color:#287d67}
+.cardActions{display:grid;grid-template-columns:1fr auto;gap:6px;margin-top:8px}.small{padding:8px 7px;border-radius:11px;font-size:9px}.danger{color:#9d4360;background:#fff6f8}
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;z-index:100;background:#2f2736;color:#fff;border-radius:999px;padding:11px 15px;font-size:11px;font-weight:850;transition:.23s;box-shadow:0 14px 32px rgba(32,21,39,.25)}.toast.show{opacity:1;transform:translate(-50%,0)}
+.userline{font-size:11px;color:var(--muted);margin-top:8px}
+@media(max-width:950px){.grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:720px){.grid{grid-template-columns:repeat(3,1fr)}.heroCard{border-radius:24px;padding:20px}.shield{font-size:45px}}
+@media(max-width:520px){.shell{width:min(100% - 14px,1180px)}.nav{height:60px}.brand{font-size:15px}.back{font-size:11px;padding:8px 10px}.hero{padding-top:12px}.heroCard{display:block}.shield{display:none}.card{padding:14px;border-radius:22px}.grid{grid-template-columns:repeat(2,1fr);gap:7px}.preview{padding:5px}.meta{padding:8px}.toolbar h2{font-size:22px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="shell nav"><div class="brand">🧠 Brain Buddy • แอดมิน</div><a class="back" href="/">← กลับหน้าเกม</a></div></header>
+<main>
+<section class="hero"><div class="shell"><div class="heroCard"><div><span class="status">🛡️ ADMIN CONTROL CENTER</span><h1>จัดการตัวหมีในเกม</h1><p>เปลี่ยนหมีทีละตัว หรือใช้รูปเดียวแทนหมีทั้ง 20 ตัว เมื่อบันทึกแล้วผู้เล่นทุกคนจะเห็นจาก Cloud</p></div><div class="shield">🛡️🧸</div></div></div></section>
+
+<section class="state shell">
+  <div class="card loginBox" id="needLogin">
+    <div style="font-size:48px">🔐</div><h2>กรุณาเข้าสู่ระบบก่อน</h2>
+    <p>ศูนย์แอดมินตรวจทั้งบัญชีที่ล็อกอินและรหัสแอดมิน จึงไม่สามารถเปิดด้วยรหัสอย่างเดียวจากบัญชีอื่นได้</p>
+    <a class="btn primary" style="display:inline-block;text-decoration:none" href="/">ไปหน้าเข้าสู่ระบบ</a>
+  </div>
+
+  <div class="card loginBox hidden" id="codeGate">
+    <span class="status">บัญชีผู้ดูแลที่กำลังใช้งาน</span>
+    <h2>ใส่รหัสแอดมิน</h2>
+    <p>รหัสจะถูกตรวจที่ฐานข้อมูล Supabase และไม่ได้ฝังไว้ในไฟล์เว็บไซต์</p>
+    <div class="userline" id="adminEmail"></div>
+    <div class="codeForm">
+      <input type="password" id="adminCode" autocomplete="current-password" placeholder="รหัสแอดมิน">
+      <button class="btn primary" id="unlockBtn">🔓 เข้าศูนย์แอดมิน</button>
+      <div class="msg" id="gateMsg"></div>
+    </div>
+  </div>
+
+  <div class="card hidden" id="dashboard">
+    <div class="toolbar"><div><h2>🧸 หมีทั้งหมด 20 ตัว</h2><p>แตะ “เปลี่ยนรูป” ใต้ตัวที่ต้องการแก้ ระบบจะบีบอัดภาพให้เหมาะกับเว็บอัตโนมัติ</p></div><div class="actions"><button class="btn" id="reloadBtn">↻ โหลดใหม่</button><button class="btn danger" id="resetAllBtn">คืนค่าเดิมทั้งหมด</button></div></div>
+    <div class="globalBox"><div><b>✨ ใช้รูปเดียวกับหมีทุกตัว</b><span>เหมาะเมื่อต้องการเปลี่ยนธีมทั้งเกมในครั้งเดียว</span></div><label class="btn pink fileBtn">เลือกรูปแล้วใช้ทั้ง 20 ตัว<input type="file" id="allFile" accept="image/png,image/jpeg,image/webp"></label></div>
+    <div class="grid" id="bearGrid"></div>
+  </div>
+</section>
+</main>
+<div class="toast" id="toast"></div>
+<script>
+const SUPABASE_URL="https://zumxppmhpajfhttdmlgu.supabase.co";
+const SUPABASE_KEY="sb_publishable_mLG21_IL92Jo2Pt7swNTYw_tVHME3a9";
+const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const palettes=[
+  ["#b57a53","#e3ad82","#fff0db"],["#d19a77","#f0c4a5","#fff3e9"],["#98694e","#c89270","#f4ddc4"],["#c17f88","#ebb2b9","#fff0f1"],
+  ["#a88a69","#d8b68f","#f9e8d3"],["#8f725f","#b99782","#eee0d2"],["#c49a63","#edc68a","#fff0d1"],["#a17963","#d3a58b","#f5dfd3"],
+  ["#b97661","#e8a997","#ffe7df"],["#8f766b","#bca599","#efe4de"],["#c08c66","#eab691","#fff0de"],["#a56a58","#d6957e","#f7ddd4"],
+  ["#b49a72","#dbc39a","#f5ead6"],["#916f5d","#c39f8b","#efe0d7"],["#c48b70","#eeb59b","#ffe9de"],["#a27e54","#d0a774","#f1dec6"],
+  ["#b67d9a","#e4b1c9","#f9e5ee"],["#8697b7","#b8c7de","#edf2fa"],["#7e9a77","#aac6a2","#e6f2e2"],["#a382b7","#cab0d8","#f1e8f6"]
+];
+const accessories=["heart","bow","crown","star","flower","glasses","balloon","gift","honey","ribbon","moon","apple","rainbow","butterfly","cookie","book","heart2","bow2","star2","flower2"];
+
+function teddySVG(i){
+  const [dark,mid,light]=palettes[i%palettes.length],acc=accessories[i%accessories.length],id="x"+i+"_"+Math.floor(Math.random()*999999);
+  const A={
+    heart:`<path d="M76 112 C60 96 33 111 39 134 C43 151 62 160 76 172 C90 160 109 151 113 134 C119 111 92 96 76 112Z" fill="#ff6f9d" stroke="#d95782" stroke-width="4"/>`,
+    heart2:`<path d="M76 112 C60 96 33 111 39 134 C43 151 62 160 76 172 C90 160 109 151 113 134 C119 111 92 96 76 112Z" fill="#9d7ff2" stroke="#7558d2" stroke-width="4"/>`,
+    bow:`<g transform="translate(75 76)"><path d="M0 0 C-20 -22 -42 -12 -33 10 C-22 31 -4 18 0 10 C4 18 22 31 33 10 C42 -12 20 -22 0 0Z" fill="#ff73a7" stroke="#d95083" stroke-width="3"/><circle cx="0" cy="6" r="9" fill="#ffc3da"/></g>`,
+    bow2:`<g transform="translate(75 76)"><path d="M0 0 C-20 -22 -42 -12 -33 10 C-22 31 -4 18 0 10 C4 18 22 31 33 10 C42 -12 20 -22 0 0Z" fill="#7fcff5" stroke="#4ca7d5" stroke-width="3"/><circle cx="0" cy="6" r="9" fill="#d9f3ff"/></g>`,
+    crown:`<g transform="translate(48 16)"><path d="M0 34 L7 4 L25 22 L40 0 L55 22 L73 4 L80 34Z" fill="#ffd75e" stroke="#d6a82f" stroke-width="3"/><circle cx="40" cy="16" r="5" fill="#ff7ca8"/></g>`,
+    star:`<path d="M75 113 L85 134 L108 137 L91 153 L96 176 L75 165 L54 176 L59 153 L42 137 L65 134Z" fill="#ffd85e" stroke="#d7ae30" stroke-width="4"/>`,
+    star2:`<path d="M75 113 L85 134 L108 137 L91 153 L96 176 L75 165 L54 176 L59 153 L42 137 L65 134Z" fill="#8d7be8" stroke="#6b59c9" stroke-width="4"/>`,
+    flower:`<g transform="translate(75 140)"><circle r="11" fill="#ffd75f"/><circle cx="0" cy="-18" r="14" fill="#ff85b1"/><circle cx="17" cy="-5" r="14" fill="#ff9fc2"/><circle cx="10" cy="15" r="14" fill="#ff7da9"/></g>`,
+    flower2:`<g transform="translate(75 140)"><circle r="11" fill="#ffd75f"/><circle cx="0" cy="-18" r="14" fill="#a990f3"/><circle cx="17" cy="-5" r="14" fill="#c7b7ff"/><circle cx="10" cy="15" r="14" fill="#8e78e7"/></g>`,
+    glasses:`<g fill="none" stroke="#4d4351" stroke-width="5"><circle cx="55" cy="86" r="18"/><circle cx="95" cy="86" r="18"/><path d="M73 86h4"/></g>`,
+    balloon:`<g><circle cx="122" cy="74" r="24" fill="#ff89b2" stroke="#d35e8b" stroke-width="4"/><path d="M122 98 C112 119 116 137 103 158" fill="none" stroke="#8f7d86" stroke-width="3"/></g>`,
+    gift:`<g transform="translate(48 123)"><rect width="55" height="47" rx="7" fill="#8fdcc6" stroke="#54b79c" stroke-width="4"/><path d="M27 0v47M0 15h55" stroke="#fff3c8" stroke-width="7"/></g>`,
+    honey:`<g transform="translate(52 125)"><rect width="48" height="45" rx="10" fill="#ffc94f" stroke="#c8972c" stroke-width="4"/></g>`,
+    ribbon:`<g transform="translate(76 126)"><circle r="16" fill="#8d78e8"/><path d="M-8 13l-16 35 21-8 7 21 10-43M8 13l16 35-21-8-7 21-10-43" fill="#aa98f4"/></g>`,
+    moon:`<path d="M91 121 C70 119 62 148 78 162 C88 171 103 170 112 161 C95 160 86 142 91 121Z" fill="#ffdc72" stroke="#d4ae42" stroke-width="4"/>`,
+    apple:`<g transform="translate(76 143)"><path d="M0 -25 C-35 -35 -42 20 0 35 C42 20 35 -35 0 -25Z" fill="#ff7382" stroke="#cd4d5d" stroke-width="4"/></g>`,
+    rainbow:`<g fill="none" stroke-linecap="round"><path d="M42 155a34 34 0 0 1 68 0" stroke="#ff7e9d" stroke-width="11"/><path d="M49 155a27 27 0 0 1 54 0" stroke="#ffd86d" stroke-width="10"/><path d="M57 155a19 19 0 0 1 38 0" stroke="#7dd7bd" stroke-width="9"/></g>`,
+    butterfly:`<g transform="translate(76 140)"><ellipse cx="-14" cy="-8" rx="17" ry="23" fill="#b69df7"/><ellipse cx="14" cy="-8" rx="17" ry="23" fill="#ff99bf"/></g>`,
+    cookie:`<g transform="translate(76 144)"><circle r="32" fill="#d9a16e" stroke="#af7a4d" stroke-width="4"/></g>`,
+    book:`<g transform="translate(38 127)"><path d="M0 0 Q20 -8 38 4 V49 Q18 39 0 46Z" fill="#7fcff4"/><path d="M76 0 Q56 -8 38 4 V49 Q58 39 76 46Z" fill="#ff9fc1"/></g>`
+  }[acc]||"";
+  return `<svg viewBox="0 0 150 190"><defs><radialGradient id="${id}b" cx="35%" cy="25%" r="78%"><stop offset="0%" stop-color="${light}"/><stop offset="42%" stop-color="${mid}"/><stop offset="100%" stop-color="${dark}"/></radialGradient><radialGradient id="${id}m" cx="40%" cy="25%" r="78%"><stop offset="0%" stop-color="#fff7ef"/><stop offset="100%" stop-color="#ead3be"/></radialGradient></defs>
+  <ellipse cx="75" cy="167" rx="49" ry="13" fill="#7b627a" opacity=".13"/>
+  <circle cx="43" cy="47" r="27" fill="url(#${id}b)"/><circle cx="107" cy="47" r="27" fill="url(#${id}b)"/>
+  <circle cx="43" cy="47" r="14" fill="#f1c6bd" opacity=".75"/><circle cx="107" cy="47" r="14" fill="#f1c6bd" opacity=".75"/>
+  <ellipse cx="75" cy="113" rx="55" ry="62" fill="url(#${id}b)"/><circle cx="75" cy="76" r="50" fill="url(#${id}b)"/>
+  <ellipse cx="75" cy="96" rx="29" ry="23" fill="url(#${id}m)"/><ellipse cx="75" cy="88" rx="10" ry="8" fill="#4b3b3b"/>
+  <path d="M75 96 C68 105 59 105 55 100 M75 96 C82 105 91 105 95 100" fill="none" stroke="#4b3b3b" stroke-width="3.2" stroke-linecap="round"/>
+  <circle class="eye" cx="57" cy="74" r="5.8" fill="#382f33"/><circle class="eye" cx="93" cy="74" r="5.8" fill="#382f33"/>
+  <ellipse cx="75" cy="132" rx="28" ry="34" fill="url(#${id}m)" opacity=".92"/>
+  <g class="paw"><ellipse cx="28" cy="128" rx="18" ry="35" fill="url(#${id}b)" transform="rotate(18 28 128)"/></g><ellipse cx="122" cy="128" rx="18" ry="35" fill="url(#${id}b)" transform="rotate(-18 122 128)"/>
+  <ellipse cx="51" cy="164" rx="24" ry="21" fill="url(#${id}b)"/><ellipse cx="99" cy="164" rx="24" ry="21" fill="url(#${id}b)"/>${A}
+  <path d="M46 46 C57 21 91 17 105 39" fill="none" stroke="white" stroke-opacity=".34" stroke-width="8" stroke-linecap="round"/></svg>`;
+}
+
+
+let adminCode=sessionStorage.getItem("bb_admin_code")||"";
+let assets={};
+const $=s=>document.querySelector(s);
+function toast(t){const x=$("#toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),1900)}
+async function session(){const {data:{session}}=await sb.auth.getSession();return session}
+function originalBear(i){return `<div class="teddy">${teddySVG(i)}</div>`}
+function bearHTML(i){const custom=assets[i];return custom?`<img src="${custom}" alt="หมี ${i+1}">`:originalBear(i)}
+
+async function compressImage(file){
+ return new Promise((resolve,reject)=>{
+  const rd=new FileReader();
+  rd.onload=()=>{
+   const img=new Image();
+   img.onload=()=>{
+    const max=480,scale=Math.min(1,max/Math.max(img.width,img.height));
+    const c=document.createElement("canvas");c.width=Math.max(1,Math.round(img.width*scale));c.height=Math.max(1,Math.round(img.height*scale));
+    const ctx=c.getContext("2d");ctx.clearRect(0,0,c.width,c.height);ctx.drawImage(img,0,0,c.width,c.height);
+    let out;
+    try{out=c.toDataURL("image/webp",.82)}catch(e){out=c.toDataURL("image/jpeg",.84)}
+    if(out.length>850000) return reject(new Error("ภาพใหญ่เกินไป กรุณาใช้ภาพขนาดเล็กลง"));
+    resolve(out);
+   };
+   img.onerror=()=>reject(new Error("อ่านรูปไม่ได้"));img.src=rd.result;
+  };
+  rd.onerror=()=>reject(new Error("อ่านไฟล์ไม่ได้"));rd.readAsDataURL(file);
+ });
+}
+
+async function checkAdmin(){
+ const s=await session();
+ if(!s){
+  $("#needLogin").classList.remove("hidden");$("#codeGate").classList.add("hidden");$("#dashboard").classList.add("hidden");return false;
+ }
+ $("#needLogin").classList.add("hidden");$("#codeGate").classList.remove("hidden");
+ $("#adminEmail").textContent="บัญชี: "+(s.user.email||"");
+ if(!adminCode)return false;
+ const {data,error}=await sb.rpc("bb_admin_check",{p_code:adminCode});
+ if(error||!data){adminCode="";sessionStorage.removeItem("bb_admin_code");return false}
+ $("#codeGate").classList.add("hidden");$("#dashboard").classList.remove("hidden");await loadAssets();return true;
+}
+
+async function unlock(){
+ const code=$("#adminCode").value.trim();$("#gateMsg").textContent="";
+ if(!code){$("#gateMsg").textContent="กรุณาใส่รหัสแอดมิน";return}
+ const {data,error}=await sb.rpc("bb_admin_check",{p_code:code});
+ if(error){$("#gateMsg").textContent=error.message.includes("function")?"ยังไม่ได้ติดตั้งระบบแอดมินใน Supabase":"ตรวจรหัสไม่ได้";return}
+ if(!data){$("#gateMsg").textContent="รหัสไม่ถูกต้อง หรือบัญชีนี้ไม่ใช่ผู้ดูแล";return}
+ adminCode=code;sessionStorage.setItem("bb_admin_code",code);$("#codeGate").classList.add("hidden");$("#dashboard").classList.remove("hidden");await loadAssets();toast("เข้าสู่ระบบแอดมินแล้ว");
+}
+
+async function loadAssets(){
+ const {data,error}=await sb.from("bb_game_assets").select("slot,image_data").order("slot");
+ if(error){toast("โหลดรูปไม่สำเร็จ");return}
+ assets={};(data||[]).forEach(r=>{if(r.image_data)assets[Number(r.slot)]=r.image_data});renderGrid();
+}
+function renderGrid(){
+ const g=$("#bearGrid");g.innerHTML="";
+ for(let i=0;i<20;i++){
+  const card=document.createElement("div");card.className="bearCard";
+  card.innerHTML=`<div class="preview" id="preview-${i}">${bearHTML(i)}</div>
+   <div class="meta"><div class="row"><b>หมี ${String(i+1).padStart(2,"0")}</b><span class="badge ${assets[i]?"custom":""}">${assets[i]?"กำหนดเอง":"ต้นฉบับ"}</span></div>
+   <div class="cardActions"><label class="btn small fileBtn">เปลี่ยนรูป<input type="file" data-file="${i}" accept="image/png,image/jpeg,image/webp"></label><button class="btn small danger" data-reset="${i}" ${assets[i]?"":"disabled"}>คืนค่า</button></div></div>`;
+  g.appendChild(card);
+ }
+ g.querySelectorAll("[data-file]").forEach(inp=>inp.addEventListener("change",async e=>{
+   const slot=Number(e.target.dataset.file),file=e.target.files?.[0];if(!file)return;
+   try{toast("กำลังเตรียมรูป…");const image=await compressImage(file);const {error}=await sb.rpc("bb_admin_set_bear",{p_code:adminCode,p_slot:slot,p_image_data:image});if(error)throw error;assets[slot]=image;renderGrid();toast(`บันทึกหมี ${slot+1} แล้ว`)}catch(err){toast(err.message||"บันทึกไม่สำเร็จ")}
+ }));
+ g.querySelectorAll("[data-reset]").forEach(b=>b.addEventListener("click",async()=>{
+   const slot=Number(b.dataset.reset);if(!confirm(`คืนหมี ${slot+1} เป็นรูปเดิม?`))return;
+   const {error}=await sb.rpc("bb_admin_reset_bear",{p_code:adminCode,p_slot:slot});if(error){toast("คืนค่าไม่สำเร็จ");return}delete assets[slot];renderGrid();toast("คืนค่าแล้ว");
+ }));
+}
+
+$("#unlockBtn").onclick=unlock;
+$("#adminCode").addEventListener("keydown",e=>{if(e.key==="Enter")unlock()});
+$("#reloadBtn").onclick=loadAssets;
+$("#allFile").addEventListener("change",async e=>{
+ const file=e.target.files?.[0];if(!file)return;
+ if(!confirm("ใช้รูปนี้แทนหมีทั้ง 20 ตัว?"))return;
+ try{const image=await compressImage(file);const {error}=await sb.rpc("bb_admin_set_all_bears",{p_code:adminCode,p_image_data:image});if(error)throw error;for(let i=0;i<20;i++)assets[i]=image;renderGrid();toast("เปลี่ยนหมีทั้ง 20 ตัวแล้ว")}catch(err){toast(err.message||"บันทึกไม่สำเร็จ")}
+});
+$("#resetAllBtn").onclick=async()=>{
+ if(!confirm("คืนหมีทั้ง 20 ตัวกลับเป็นรูปต้นฉบับ?"))return;
+ const {error}=await sb.rpc("bb_admin_reset_all_bears",{p_code:adminCode});if(error){toast("คืนค่าไม่สำเร็จ");return}assets={};renderGrid();toast("คืนค่าเดิมทั้งหมดแล้ว");
+};
+checkAdmin();
+</script>
+</body>
+</html>
