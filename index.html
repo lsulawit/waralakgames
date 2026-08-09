@@ -3953,6 +3953,67 @@ body.bbArenaOpen .v17dock.bbCandyDock{
   .bbFullRankTabs button{font-size:10px;min-height:41px}
 }
 
+
+/* =========================================================
+   Brain Buddy v48 — CRITICAL Ranked gameplay interaction fix
+   ========================================================= */
+
+/* Arena lock must NEVER survive into Ranked gameplay. */
+body.bbRankedPlaying{
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  touch-action:pan-y!important;
+  -webkit-overflow-scrolling:touch!important;
+  overscroll-behavior-y:auto!important;
+}
+
+/* The hidden Arena must not intercept any touch/click. */
+body.bbRankedPlaying #bbArena,
+body.bbRankedPlaying #bbCreateBackdrop{
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+
+/* Gameplay must be the interactive layer. */
+body.bbRankedPlaying #game{
+  display:block!important;
+  position:relative!important;
+  z-index:1!important;
+  pointer-events:auto!important;
+  touch-action:pan-y!important;
+}
+
+body.bbRankedPlaying #game .gameCard,
+body.bbRankedPlaying #game .stage,
+body.bbRankedPlaying #game .scene,
+body.bbRankedPlaying #game #board{
+  pointer-events:auto!important;
+}
+
+/* Cards/answer choices remain tappable unless game logic explicitly disables them. */
+body.bbRankedPlaying #board .slot:not([style*="pointer-events: none"]){
+  pointer-events:auto;
+  touch-action:manipulation;
+}
+
+/* Main button is intentionally server-controlled in Ranked.
+   Do not let this rule block the actual board. */
+body.bbRankedPlaying #mainBtn{
+  pointer-events:none!important;
+}
+
+/* Enough page height so iPad can scroll the whole board naturally. */
+body.bbRankedPlaying .bbCandyGameScreen{
+  min-height:100dvh!important;
+  height:auto!important;
+  overflow:visible!important;
+}
+body.bbRankedPlaying .gameCard{
+  height:auto!important;
+  overflow:visible!important;
+}
+
 </style>
 
 <script>
@@ -6256,6 +6317,7 @@ window.addEventListener("load",()=>{
     // เปิด Arena ให้เห็น "ทันที" ก่อนรอ Network/Supabase
     arena.classList.remove("hidden");
     arena.setAttribute("aria-hidden","false");
+    arena.style.pointerEvents="";
     document.body.style.overflow="hidden";
 
     show("#bbArenaGate",false);
@@ -6949,10 +7011,38 @@ window.addEventListener("load",()=>{
 
     show("#bbArenaCountdown",false);
     show("#bbArenaRoom",false);
-    $("#bbArena").classList.add("hidden");
-    $("#bbArena").setAttribute("aria-hidden","true");
+
+    // IMPORTANT: Arena is a fixed overlay and locks body scrolling.
+    // Clear every Arena lock BEFORE showing the actual game.
+    document.body.classList.remove("bbArenaOpen","bbRankedWaiting");
     document.body.style.overflow="";
+    document.body.style.overflowY="";
+    document.body.style.touchAction="";
+    document.documentElement.style.overflow="";
+    document.documentElement.style.overflowY="";
+
+    const arenaEl=$("#bbArena");
+    if(arenaEl){
+      arenaEl.classList.add("hidden");
+      arenaEl.setAttribute("aria-hidden","true");
+      arenaEl.style.pointerEvents="none";
+    }
+
+    // No sheet/backdrop may remain above the game.
+    show("#bbCreateBackdrop",false);
+
     document.body.classList.add("bbRankedPlaying");
+
+    requestAnimationFrame(()=>{
+      document.body.classList.remove("bbArenaOpen");
+      document.body.style.overflowY="auto";
+      document.body.style.touchAction="pan-y";
+      const g=document.getElementById("game");
+      if(g){
+        g.style.pointerEvents="auto";
+        g.style.touchAction="pan-y";
+      }
+    });
 
     const hud=document.getElementById("bbRankedGameHud");
     if(hud)hud.classList.remove("hidden");
@@ -7091,7 +7181,8 @@ window.addEventListener("load",()=>{
     document.body.classList.remove("bbRankedPlaying");
     document.body.classList.add("bbRankedWaiting");
     document.getElementById("bbRankedGameHud")?.classList.add("hidden");
-    $("#bbArena").classList.remove("hidden");$("#bbArena").setAttribute("aria-hidden","false");
+    $("#bbArena").classList.remove("hidden");$("#bbArena").setAttribute("aria-hidden","false");$("#bbArena").style.pointerEvents="";
+    document.body.classList.add("bbArenaOpen");
     document.body.style.overflow="hidden";
     show("#bbArenaCountdown",false);show("#bbArenaRoom",false);show("#bbArenaLobby",false);show("#bbArenaResults",true);
     show("#bbResultsWait",true);show("#bbResultsFinal",false);
