@@ -4274,6 +4274,89 @@ body.bbRankedPlaying #main{
   }
 }
 
+
+/* =========================================================
+   Brain Buddy v51 — HARD mobile dock fix
+   ========================================================= */
+
+/* While any game is active, the site navigation must never overlay gameplay. */
+body.bbGameActive .v17dock,
+body.bbRankedPlaying .v17dock,
+body.bbAppPlaying .v17dock{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+}
+
+/* Phone gameplay: tighter canvas and safe bottom breathing room for Safari UI. */
+@media(max-width:820px){
+  body.bbGameActive #game,
+  body.bbRankedPlaying #game,
+  body.bbAppPlaying #game{
+    padding-bottom:calc(78px + env(safe-area-inset-bottom))!important;
+  }
+
+  body.bbGameActive .gameCard,
+  body.bbRankedPlaying .gameCard,
+  body.bbAppPlaying .gameCard{
+    overflow:visible!important;
+  }
+
+  body.bbGameActive .stage,
+  body.bbRankedPlaying .stage,
+  body.bbAppPlaying .stage{
+    overflow:hidden!important;
+  }
+
+  body.bbGameActive #board,
+  body.bbRankedPlaying #board,
+  body.bbAppPlaying #board{
+    width:100%!important;
+    max-width:100%!important;
+    grid-template-columns:repeat(var(--cols),minmax(0,1fr))!important;
+    column-gap:5px!important;
+    row-gap:7px!important;
+  }
+
+  body.bbGameActive #board .slot,
+  body.bbRankedPlaying #board .slot,
+  body.bbAppPlaying #board .slot{
+    min-width:0!important;
+    max-width:100%!important;
+    width:auto!important;
+    box-sizing:border-box!important;
+  }
+}
+
+/* iPhone narrow portrait */
+@media(max-width:480px){
+  body.bbGameActive .shell,
+  body.bbRankedPlaying .shell,
+  body.bbAppPlaying .shell{
+    padding-left:4px!important;
+    padding-right:4px!important;
+  }
+
+  body.bbGameActive .gameCard,
+  body.bbRankedPlaying .gameCard,
+  body.bbAppPlaying .gameCard{
+    padding:5px!important;
+  }
+
+  body.bbGameActive .stage,
+  body.bbRankedPlaying .stage,
+  body.bbAppPlaying .stage{
+    padding:4px!important;
+  }
+
+  body.bbGameActive #board,
+  body.bbRankedPlaying #board,
+  body.bbAppPlaying #board{
+    gap:4px!important;
+  }
+}
+
 </style>
 
 <script>
@@ -7331,7 +7414,14 @@ window.addEventListener("load",()=>{
     // No sheet/backdrop may remain above the game.
     show("#bbCreateBackdrop",false);
 
-    document.body.classList.add("bbRankedPlaying");
+    document.body.classList.add("bbRankedPlaying","bbGameActive");
+
+    const mobileDock=document.querySelector(".v17dock");
+    if(mobileDock){
+      mobileDock.style.setProperty("display","none","important");
+      mobileDock.setAttribute("aria-hidden","true");
+      mobileDock.style.pointerEvents="none";
+    }
 
     requestAnimationFrame(()=>{
       document.body.classList.remove("bbArenaOpen");
@@ -7432,7 +7522,8 @@ window.addEventListener("load",()=>{
     window.__bbRankedRng=null;
     currentRoom=null;
     players=[];
-    document.body.classList.remove("bbRankedPlaying");
+    document.body.classList.remove("bbRankedPlaying","bbGameActive");
+    try{window.bbRestoreGameplayDock?.()}catch(e){}
     document.body.classList.add("bbRankedWaiting");
     show("#bbResultsWait",false);show("#bbResultsFinal",true);
 
@@ -7478,7 +7569,8 @@ window.addEventListener("load",()=>{
     try{roundStarted=false;roundComplete=true}catch(e){}
     window.BB_RANKED_ACTIVE=false;window.__bbRankedRng=null;
     cleanupRoomChannel();cleanupLobbyChannel();
-    document.body.classList.remove("bbRankedPlaying");
+    document.body.classList.remove("bbRankedPlaying","bbGameActive");
+    try{window.bbRestoreGameplayDock?.()}catch(e){}
     document.body.classList.add("bbRankedWaiting");
     document.getElementById("bbRankedGameHud")?.classList.add("hidden");
     $("#bbArena").classList.remove("hidden");$("#bbArena").setAttribute("aria-hidden","false");$("#bbArena").style.pointerEvents="";
@@ -7539,7 +7631,8 @@ window.addEventListener("load",()=>{
   $("#bbResultsExit")?.addEventListener("click",async()=>{
     cleanupRankedResultsWatch();cleanupRoomChannel();stopCountdown();
     window.BB_RANKED_ACTIVE=false;window.__bbRankedRng=null;
-    document.body.classList.remove("bbRankedPlaying","bbRankedWaiting");
+    document.body.classList.remove("bbRankedPlaying","bbRankedWaiting","bbGameActive");
+    try{window.bbRestoreGameplayDock?.()}catch(e){}
     try{localStorage.removeItem("bb_ranked_waiting_match")}catch(e){}
     currentRoom=null;players=[];activeRankedMatch=null;
     show("#bbArenaResults",false);show("#bbArenaRoom",false);show("#bbArenaCountdown",false);show("#bbArenaLobby",true);
@@ -7550,7 +7643,8 @@ window.addEventListener("load",()=>{
   $("#bbResultsLobby")?.addEventListener("click",async()=>{
     cleanupRankedResultsWatch();cleanupRoomChannel();stopCountdown();
     window.BB_RANKED_ACTIVE=false;window.__bbRankedRng=null;
-    document.body.classList.remove("bbRankedPlaying","bbRankedWaiting");
+    document.body.classList.remove("bbRankedPlaying","bbRankedWaiting","bbGameActive");
+    try{window.bbRestoreGameplayDock?.()}catch(e){}
     try{localStorage.removeItem("bb_ranked_waiting_match")}catch(e){}
     show("#bbArenaResults",false);show("#bbArenaRoom",false);show("#bbArenaCountdown",false);show("#bbArenaLobby",true);
     currentRoom=null;players=[];activeRankedMatch=null;
@@ -7629,14 +7723,35 @@ window.addEventListener("load",()=>{
   }
 
   function chooseMode(mode){selectedMode=mode;if(!(MODE[mode]||{}).team)selectedStyle="solo";showScreen("setup")}
+  function bbRestoreMobileDock(){
+    document.body.classList.remove("bbGameActive");
+    const mobileDock=document.querySelector(".v17dock");
+    if(mobileDock){
+      mobileDock.style.removeProperty("display");
+      mobileDock.removeAttribute("aria-hidden");
+      mobileDock.style.removeProperty("pointer-events");
+    }
+  }
+
+  window.bbRestoreMobileDock=bbRestoreMobileDock;
+
   function startNormalGame(){
     cfg={...cfg,style:selectedStyle,mode:selectedMode,diff:selectedDiff,source:"teddy",teams:selectedTeams,answer:selectedStyle==="team"?"voice":"screen",adaptive:false,combo:false,timer:0,lives:false,daily:false};
-    updateSummary();document.body.classList.add("bbAppPlaying");$("#bbAppGameBack").classList.remove("hidden");startRound();
+    updateSummary();
+    document.body.classList.add("bbAppPlaying","bbGameActive");
+    const mobileDock=document.querySelector(".v17dock");
+    if(mobileDock){
+      mobileDock.style.setProperty("display","none","important");
+      mobileDock.setAttribute("aria-hidden","true");
+      mobileDock.style.pointerEvents="none";
+    }
+    $("#bbAppGameBack").classList.remove("hidden");
+    startRound();
   }
   function returnToMenu(force=false){
     if(!force&&typeof roundStarted!=="undefined"&&roundStarted&&!roundComplete){if(!confirm("ออกจากเกมรอบนี้และกลับเมนู?"))return}
     try{stopTimer()}catch(e){}
-    document.body.classList.remove("bbAppPlaying");$("#bbAppGameBack").classList.add("hidden");showScreen("home",false);syncPlayer();
+    document.body.classList.remove("bbAppPlaying");bbRestoreMobileDock();$("#bbAppGameBack").classList.add("hidden");showScreen("home",false);syncPlayer();
   }
   window.bbReturnToApp=returnToMenu;
   function setDockActive(name){
@@ -7735,6 +7850,63 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     },0);
   },true);
+})();
+</script>
+
+
+<script>
+(function(){
+  function dock(){
+    return document.querySelector(".v17dock");
+  }
+
+  function hideGameplayDock(){
+    const d=dock();
+    if(!d)return;
+    d.style.setProperty("display","none","important");
+    d.style.setProperty("pointer-events","none","important");
+    d.setAttribute("aria-hidden","true");
+  }
+
+  function restoreGameplayDock(){
+    const d=dock();
+    if(!d)return;
+    d.style.removeProperty("display");
+    d.style.removeProperty("pointer-events");
+    d.removeAttribute("aria-hidden");
+  }
+
+  function gameplayIsActive(){
+    return document.body.classList.contains("bbRankedPlaying") ||
+           document.body.classList.contains("bbAppPlaying") ||
+           document.body.classList.contains("bbGameActive") ||
+           !!window.BB_RANKED_ACTIVE;
+  }
+
+  function syncGameplayDock(){
+    if(gameplayIsActive()) hideGameplayDock();
+    else restoreGameplayDock();
+  }
+
+  window.bbHideGameplayDock=hideGameplayDock;
+  window.bbRestoreGameplayDock=restoreGameplayDock;
+  window.bbSyncGameplayDock=syncGameplayDock;
+
+  const observer=new MutationObserver(syncGameplayDock);
+  observer.observe(document.body,{attributes:true,attributeFilter:["class"]});
+
+  // Safari can repaint fixed elements after toolbar changes; keep it enforced.
+  window.addEventListener("resize",syncGameplayDock,{passive:true});
+  window.addEventListener("orientationchange",()=>setTimeout(syncGameplayDock,150),{passive:true});
+  document.addEventListener("visibilitychange",()=>{
+    if(!document.hidden)setTimeout(syncGameplayDock,50);
+  });
+
+  setInterval(()=>{
+    if(gameplayIsActive())hideGameplayDock();
+  },500);
+
+  window.addEventListener("load",syncGameplayDock);
 })();
 </script>
 
