@@ -2,12 +2,12 @@
 <html lang="th">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy v79 — Google Login</title>
+<title>Brain Buddy v80 — Responsive Polish</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -8835,6 +8835,261 @@ body.bbRankedLearningPlaying .v17dock{display:none!important}
   height:1px;
   background:#e7e4ea;
   flex:1;
+}
+
+
+/* ==========================================================
+   Brain Buddy v80 — Responsive Polish
+   - fixes decorative blob overlapping text in Ranked Lobby
+   - improves spacing, scaling, and readability on phone/tablet/desktop
+   ========================================================== */
+
+:root{
+  --bb-max: 1280px;
+  --bb-gap: clamp(10px, 2vw, 22px);
+  --bb-card-radius: clamp(18px, 2.2vw, 28px);
+  --bb-shadow-soft: 0 10px 28px rgba(74,48,128,.10);
+  --bb-shadow-card: 0 10px 22px rgba(36,27,66,.10);
+}
+
+html, body{
+  max-width:100%;
+  overflow-x:hidden;
+}
+
+body{
+  text-wrap:pretty;
+  -webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(circle at top left, rgba(255,255,255,.18), transparent 24%),
+    linear-gradient(180deg,#7650ef 0%, #8b63f2 18%, #d88ac0 100%);
+}
+
+img, svg, canvas{
+  max-width:100%;
+  height:auto;
+}
+
+button, .btn, .card, .panel, .tile, .roomCard{
+  border-radius: var(--bb-card-radius);
+}
+
+main, .page, .screen, .app, .wrap, .container, .shell{
+  width:min(100%, var(--bb-max));
+  margin-inline:auto;
+}
+
+/* Generic large card cleanup */
+.sectionCard, .panel, .glassCard, .card, .tile, .roomCard, .leaderCard{
+  box-shadow: var(--bb-shadow-card);
+}
+
+/* Prevent long labels from colliding */
+h1,h2,h3,h4,p,span,button,small,div{
+  word-break: break-word;
+}
+
+/* Ranked / lobby floating decoration fix:
+   any decorative glow/blob inside hero/empty-state containers
+   should never sit above readable content or block taps */
+.rankDecor,
+.rankGlow,
+.rankBlob,
+.heroGlow,
+.heroOrb,
+.floatBlob,
+.decorBlob,
+.bgBlob,
+.lobbyBlob{
+  pointer-events:none !important;
+  z-index:0 !important;
+  opacity:.42 !important;
+  filter: blur(34px) saturate(112%);
+  mix-blend-mode:screen;
+}
+
+.hasDecor, .rankedLobby, .rankRoomList, .emptyState, .heroSection, .topBanner{
+  position:relative;
+  isolation:isolate;
+}
+.hasDecor > *:not(.rankDecor):not(.rankGlow):not(.rankBlob):not(.heroGlow):not(.heroOrb):not(.floatBlob):not(.decorBlob):not(.bgBlob):not(.lobbyBlob),
+.rankedLobby > *,
+.rankRoomList > *,
+.emptyState > *,
+.heroSection > *,
+.topBanner > *{
+  position:relative;
+  z-index:1;
+}
+
+/* Extra safety: pseudo element glow behind content */
+.rankRoomList::after,
+.emptyState::after{
+  content:"";
+  position:absolute;
+  right:-6%;
+  bottom:4%;
+  width:clamp(110px, 22vw, 220px);
+  height:clamp(110px, 22vw, 220px);
+  border-radius:999px;
+  background: radial-gradient(circle, rgba(126,164,255,.65), rgba(117,93,255,.36) 45%, rgba(117,93,255,0) 72%);
+  filter: blur(20px);
+  z-index:0;
+  pointer-events:none;
+  opacity:.5;
+}
+
+/* If previous glow was hard-coded inline on room section, hide it softly */
+[style*="blur"][style*="radial-gradient"],
+[style*="filter: blur"][style*="radial-gradient"]{
+  pointer-events:none;
+}
+
+/* Top area */
+.siteHeader, .topBar{
+  padding-inline: clamp(10px, 2vw, 18px);
+}
+.brandRow{
+  gap:12px;
+}
+
+/* Better card rhythm */
+.cardGrid, .grid2, .grid3, .modeGrid, .roomGrid, .statsGrid{
+  display:grid;
+  gap: var(--bb-gap);
+}
+
+/* Responsive 2-col to 1-col stacks */
+@media (min-width: 860px){
+  .grid2, .modeGrid, .statsGrid{
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+  .grid3{
+    grid-template-columns: repeat(3, minmax(0,1fr));
+  }
+}
+@media (max-width: 859px){
+  .grid2, .grid3, .modeGrid, .roomGrid, .statsGrid{
+    grid-template-columns: 1fr;
+  }
+}
+
+.heroCard, .bigHero, .welcomeHero{
+  display:grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: clamp(12px, 2vw, 24px);
+  align-items:center;
+}
+@media (max-width: 900px){
+  .heroCard, .bigHero, .welcomeHero{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Buttons scale properly */
+.btn, button, .primaryBtn, .secondaryBtn, .pillBtn{
+  min-height: 46px;
+  padding: 12px 16px;
+  font-size: clamp(12px, 1.4vw, 16px);
+}
+
+/* Ranking page / lobby specific readability */
+.rankedTopStats, .topStats, .statsStrip{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: var(--bb-gap);
+}
+@media (max-width: 700px){
+  .rankedTopStats, .topStats, .statsStrip{
+    grid-template-columns: 1fr;
+  }
+}
+
+.roomOpenTitle, .sectionTitle, .subTitle{
+  padding-right: clamp(16px, 12vw, 160px); /* reserve space so decorative blob won't cover title */
+}
+
+/* Empty state card */
+.emptyState, .roomEmptyState{
+  min-height: clamp(240px, 32vw, 360px);
+  padding: clamp(18px, 2vw, 28px);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+/* Room action cards */
+.actionTiles, .rankActions{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: var(--bb-gap);
+}
+@media (max-width: 780px){
+  .actionTiles, .rankActions{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Safer text sizes */
+.bigTitle, .heroTitle, h1{
+  font-size: clamp(30px, 5vw, 66px) !important;
+  line-height: 1.05;
+}
+h2{
+  font-size: clamp(22px, 3.5vw, 38px);
+}
+h3{
+  font-size: clamp(18px, 2.5vw, 26px);
+}
+p, .sub, .muted{
+  font-size: clamp(12px, 1.5vw, 16px);
+}
+
+/* Improve section widths and side padding */
+.screen, .page, .app, .container, .shell{
+  padding-inline: clamp(12px, 2.2vw, 24px);
+  padding-bottom: clamp(30px, 4vw, 60px);
+}
+
+/* Tables / long leaderboard rows on small screens */
+.leaderRow, .rankingRow, .userRow{
+  display:grid;
+  grid-template-columns: auto minmax(0,1fr) auto;
+  gap: 12px;
+  align-items:center;
+}
+@media (max-width: 560px){
+  .leaderRow, .rankingRow, .userRow{
+    grid-template-columns: 1fr;
+    justify-items:start;
+  }
+}
+
+/* Make auth modal and panels feel cleaner */
+.authCard, .modalCard{
+  max-width:min(94vw, 480px);
+}
+.authField input, input, select, textarea{
+  min-height:46px;
+  font-size:16px; /* avoids iOS zoom */
+}
+
+/* Footer not too cramped */
+footer{
+  padding-bottom: max(20px, env(safe-area-inset-bottom));
+}
+
+/* Small device tune */
+@media (max-width: 480px){
+  .siteHeader, .topBar, .screen, .page, .app, .container, .shell{
+    padding-inline: 12px;
+  }
+  .btn, button{
+    min-height:44px;
+    padding:10px 14px;
+  }
 }
 
 </style>
@@ -19898,6 +20153,86 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Admin changes become visible without requiring a full reload.
   setInterval(()=>load(true),30000);
+})();
+</script>
+
+
+<script>
+/* ==========================================================
+   Brain Buddy v80 — runtime responsive patch
+   ========================================================== */
+(function(){
+  function applyResponsivePolish(){
+    const selectors = {
+      containers: ['body > div', '.app', '.page', '.screen', '.container', '.shell'],
+      hero: ['.hero', '.heroCard', '.welcomeHero', '.bigHero'],
+      stats: ['.topStats', '.rankedTopStats', '.statsStrip'],
+      actions: ['.rankActions', '.actionTiles'],
+      empties: ['.emptyState', '.roomEmptyState']
+    };
+
+    // Add classes if elements exist
+    document.querySelectorAll('.hero, .heroCard, .welcomeHero, .bigHero').forEach(el=>el.classList.add('heroCard'));
+    document.querySelectorAll('.topStats, .rankedTopStats, .statsStrip').forEach(el=>el.classList.add('rankedTopStats'));
+    document.querySelectorAll('.rankActions, .actionTiles').forEach(el=>el.classList.add('actionTiles'));
+    document.querySelectorAll('.emptyState, .roomEmptyState').forEach(el=>el.classList.add('emptyState'));
+
+    // Ranked room / open rooms section
+    document.querySelectorAll('*').forEach(el=>{
+      const text = (el.textContent || '').trim();
+
+      // Empty/open room block
+      if(text.includes('ห้องที่กำลังเปิด') || text.includes('ยังไม่มีห้องเปิดอยู่')){
+        const card = el.closest('.card, .panel, section, div') || el;
+        card.classList.add('hasDecor');
+        const title = card.querySelector('h1,h2,h3,h4,.title,.sectionTitle');
+        if(title) title.classList.add('roomOpenTitle');
+
+        // find suspicious decorative absolute circle by size/shape
+        const descendants = card.querySelectorAll('div,span');
+        descendants.forEach(n=>{
+          const st = getComputedStyle(n);
+          const w = parseFloat(st.width), h = parseFloat(st.height);
+          const rounded = st.borderRadius;
+          const pos = st.position;
+          const bg = st.backgroundImage || st.background;
+          if(
+            pos === 'absolute' &&
+            w >= 60 && h >= 60 &&
+            rounded.includes('999') || rounded.includes('%')
+          ){
+            if((bg && (bg.includes('gradient') || bg.includes('rgb'))) || st.filter.includes('blur')){
+              n.classList.add('rankGlow');
+              // move a bit more outward to avoid text
+              n.style.right = '-28px';
+              n.style.bottom = '10px';
+              n.style.zIndex = '0';
+              n.style.pointerEvents = 'none';
+            }
+          }
+        });
+      }
+    });
+
+    // Clean obvious overflow on big sections
+    document.querySelectorAll('section, .card, .panel').forEach(el=>{
+      const st = getComputedStyle(el);
+      if(st.overflowX === 'visible'){
+        el.style.overflowX = 'clip';
+      }
+      if(st.position === 'static'){
+        el.style.position = 'relative';
+      }
+    });
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', applyResponsivePolish);
+  }else{
+    applyResponsivePolish();
+  }
+  window.addEventListener('load', applyResponsivePolish);
+  window.addEventListener('resize', ()=>setTimeout(applyResponsivePolish, 60));
 })();
 </script>
 
