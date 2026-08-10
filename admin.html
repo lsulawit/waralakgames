@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#765fda">
 <meta name="author" content="Sulawit Songsang">
-<title>Brain Buddy • Admin Center v66</title>
+<title>Brain Buddy • Admin Center v67</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{box-sizing:border-box}
@@ -384,6 +384,107 @@ button{cursor:pointer}
   .hskLevelBadge{min-height:57px}
 }
 
+
+/* HSK Vocabulary Manager */
+.hskManager{
+  margin-top:14px;
+  padding:14px;
+  border:1px solid #eee4f0;
+  border-radius:22px;
+  background:linear-gradient(180deg,#fff,#fcf9fd)
+}
+.hskManagerHead{
+  display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px
+}
+.hskManagerHead small{display:block;color:#a06fa1;font-size:9px;letter-spacing:.12em;font-weight:1000}
+.hskManagerHead h3{margin:2px 0;color:#5b4070;font-size:20px;font-weight:1000}
+.hskManagerHead p{margin:2px 0;color:#8d7a94;font-size:10px}
+.hskManagerFilters{
+  display:grid;grid-template-columns:150px minmax(220px,1fr) 130px auto;gap:8px;align-items:end;
+  padding:10px;border-radius:17px;background:#f8f4fa
+}
+.hskManagerFilters label{display:grid;gap:4px}.hskManagerFilters label>span{font-size:9px;color:#806d88;font-weight:900}
+.hskManagerFilters input,.hskManagerFilters select{
+  height:42px;border:1px solid #e9dfee;border-radius:12px;padding:0 10px;background:#fff;color:#51405c;outline:none;font-size:11px
+}
+.hskManagerFilters input:focus,.hskManagerFilters select:focus{
+  border-color:#9a7ce6;box-shadow:0 0 0 3px rgba(144,112,221,.08)
+}
+.hskManagerMeta{display:flex;justify-content:space-between;margin:8px 3px;color:#8e7b94;font-size:9px;font-weight:800}
+.hskVocabularyList{display:grid;gap:7px}
+.hskWordRow{
+  display:grid;grid-template-columns:75px minmax(0,1.35fr) minmax(0,.8fr) auto;gap:9px;align-items:center;
+  padding:9px;border:1px solid #eee5f0;border-radius:17px;background:#fff
+}
+.hskWordRow.inactive{opacity:.62;background:#f7f4f7}
+.hskWordLevel{
+  min-height:52px;border-radius:14px;display:grid;place-items:center;text-align:center;
+  color:#fff;background:linear-gradient(145deg,#8d75e6,#bd6fd0);font-weight:1000
+}
+.hskWordLevel b{font-size:11px}.hskWordLevel small{font-size:8px;color:#eee9ff}
+.hskWordMain{min-width:0}
+.hskWordMain h4{margin:0;color:#573e6d;font-size:17px;font-weight:1000}
+.hskWordMain .pinyin{margin-top:2px;color:#776186;font-size:10px;font-weight:850}
+.hskWordMain .meaning{margin-top:4px;color:#8b7891;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hskWordExtra{min-width:0;padding:7px 9px;border-radius:12px;background:#faf7fb}
+.hskWordExtra small{display:block;color:#9c899f;font-size:8px}
+.hskWordExtra strong{display:block;color:#674b78;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hskWordActions{display:flex;gap:5px}
+.hskWordActions button{height:34px;border:0;border-radius:10px;padding:0 9px;font-size:9px;font-weight:950}
+.hskWordActions .edit{color:#7356aa;background:#eee6fa}
+.hskWordActions .toggleOn{color:#9a5870;background:#ffeaf0}
+.hskWordActions .toggleOff{color:#337b5c;background:#dffff0}
+.hskPager{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:10px}
+.hskPager span{min-width:70px;text-align:center;color:#796685;font-size:10px;font-weight:900}
+.hskPager .btn{padding:9px 12px}
+.hskPager .btn:disabled{opacity:.4;cursor:not-allowed}
+
+.hskEditModalCard{
+  width:min(96vw,920px);
+  max-height:92vh;
+  overflow:auto;
+  text-align:left
+}
+.hskEditHeader{
+  display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px
+}
+.hskEditHeader small{color:#a16f9e;font-size:9px;letter-spacing:.12em;font-weight:1000}
+.hskEditHeader h3{margin:2px 0;color:#5e4072;font-size:23px}
+.hskEditForm label{display:grid;gap:4px;margin-bottom:8px}
+.hskEditForm label>span{font-size:10px;color:#74617e;font-weight:900}
+.hskEditForm input,.hskEditForm select,.hskEditForm textarea{
+  width:100%;border:1.5px solid #e9dfee;border-radius:12px;padding:9px 10px;background:#fff;color:#493953;outline:none;font-size:11px
+}
+.hskEditForm input,.hskEditForm select{min-height:40px}
+.hskEditForm textarea{resize:vertical}
+.hskEditForm input:focus,.hskEditForm select:focus,.hskEditForm textarea:focus{
+  border-color:#9879e7;box-shadow:0 0 0 3px rgba(144,112,221,.08)
+}
+.hskActiveToggle{
+  display:flex!important;flex-direction:row!important;align-items:center!important;gap:8px!important;
+  padding:10px;border-radius:13px;background:#f7f3fa
+}
+.hskActiveToggle input{width:18px!important;height:18px!important;min-height:18px!important}
+.hskEditActions{display:flex;justify-content:flex-end;gap:7px;margin-top:10px}
+.hskEditActions .btn{min-width:130px}
+
+@media(max-width:820px){
+  .hskManagerFilters{grid-template-columns:1fr 1fr}
+  .hskManagerFilters .search{grid-column:1/-1}
+  .hskWordRow{grid-template-columns:65px minmax(0,1fr) auto}
+  .hskWordExtra{grid-column:1/-1;order:4}
+}
+@media(max-width:560px){
+  .hskManager{padding:10px}
+  .hskManagerHead{flex-direction:column}.hskManagerHead .btn{width:100%}
+  .hskManagerFilters{grid-template-columns:1fr}
+  .hskManagerFilters .search{grid-column:auto}
+  .hskWordRow{grid-template-columns:60px minmax(0,1fr)}
+  .hskWordActions{grid-column:1/-1}
+  .hskWordActions button{flex:1}
+  .hskEditModalCard{padding:14px}
+}
+
 </style>
 </head>
 <body>
@@ -658,13 +759,177 @@ button{cursor:pointer}
         <span>DATA</span>
         <div>
           <b>HSK 2.0 • Levels 1–6</b>
-          <small>นำเข้า Hanzi, Traditional, Pinyin และความหมายภาษาอังกฤษเข้าสู่คลัง Brain Buddy</small>
+          <small>คำศัพท์ที่แก้ไขหรือปิดในหน้านี้จะมีผลกับเกม HSK โดยตรง</small>
         </div>
       </div>
+
+      <section class="hskManager">
+        <div class="hskManagerHead">
+          <div>
+            <small>VOCABULARY MANAGER</small>
+            <h3>จัดการคำศัพท์ HSK</h3>
+            <p>ค้นหา แก้ความหมายไทย/อังกฤษ Pinyin ตัวอย่าง รูป เสียง และเปิด–ปิดคำ</p>
+          </div>
+          <button class="btn" id="hskManagerRefresh">รีเฟรชรายการ</button>
+        </div>
+
+        <div class="hskManagerFilters">
+          <label>
+            <span>ระดับ</span>
+            <select id="hskManagerLevel">
+              <option value="">ทุกระดับ</option>
+              <option value="1">HSK 1</option>
+              <option value="2">HSK 2</option>
+              <option value="3">HSK 3</option>
+              <option value="4">HSK 4</option>
+              <option value="5">HSK 5</option>
+              <option value="6">HSK 6</option>
+            </select>
+          </label>
+
+          <label class="search">
+            <span>ค้นหา</span>
+            <input id="hskManagerSearch" type="search" placeholder="เช่น 苹果, píngguǒ, apple, แอปเปิล">
+          </label>
+
+          <label>
+            <span>จำนวนต่อหน้า</span>
+            <select id="hskManagerPageSize">
+              <option value="50">50</option>
+              <option value="100" selected>100</option>
+              <option value="200">200</option>
+            </select>
+          </label>
+
+          <button class="btn primary" id="hskManagerSearchBtn">ค้นหา</button>
+        </div>
+
+        <div class="hskManagerMeta">
+          <span id="hskManagerCount">0 รายการ</span>
+          <span id="hskManagerStatus">พร้อมใช้งาน</span>
+        </div>
+
+        <div class="hskVocabularyList" id="hskVocabularyList">
+          <div class="learnLoading">เลือกตัวกรองหรือค้นหาคำศัพท์ได้เลย</div>
+        </div>
+
+        <div class="hskPager">
+          <button class="btn" id="hskPrevPage">← ก่อนหน้า</button>
+          <span id="hskPageLabel">หน้า 1</span>
+          <button class="btn" id="hskNextPage">ถัดไป →</button>
+        </div>
+      </section>
     </section>
   </div>
 </section>
 </main>
+
+
+<div class="modal hidden" id="hskEditModal">
+  <div class="modalCard hskEditModalCard">
+    <div class="hskEditHeader">
+      <div>
+        <small>EDIT HSK VOCABULARY</small>
+        <h3 id="hskEditTitle">แก้ไขคำศัพท์</h3>
+      </div>
+      <button class="btn" type="button" id="hskEditClose">ปิด</button>
+    </div>
+
+    <form id="hskEditForm" class="hskEditForm">
+      <input type="hidden" id="hskEditId">
+
+      <div class="formGrid three">
+        <label>
+          <span>HSK Level *</span>
+          <select id="hskEditLevel" required>
+            <option value="1">HSK 1</option>
+            <option value="2">HSK 2</option>
+            <option value="3">HSK 3</option>
+            <option value="4">HSK 4</option>
+            <option value="5">HSK 5</option>
+            <option value="6">HSK 6</option>
+          </select>
+        </label>
+
+        <label>
+          <span>汉字 *</span>
+          <input id="hskEditSimplified" required>
+        </label>
+
+        <label>
+          <span>Traditional</span>
+          <input id="hskEditTraditional">
+        </label>
+      </div>
+
+      <div class="formGrid two">
+        <label>
+          <span>Pinyin *</span>
+          <input id="hskEditPinyin" required>
+        </label>
+
+        <label>
+          <span>Sort Order</span>
+          <input id="hskEditSort" type="number" value="0">
+        </label>
+      </div>
+
+      <div class="formGrid two">
+        <label>
+          <span>ความหมายอังกฤษ *</span>
+          <textarea id="hskEditMeaningEn" rows="3" required></textarea>
+        </label>
+        <label>
+          <span>ความหมายไทย</span>
+          <textarea id="hskEditMeaningTh" rows="3" placeholder="เช่น แอปเปิล"></textarea>
+        </label>
+      </div>
+
+      <div class="formGrid two">
+        <label>
+          <span>ประโยคตัวอย่างจีน</span>
+          <textarea id="hskEditExampleZh" rows="2"></textarea>
+        </label>
+        <label>
+          <span>Pinyin ตัวอย่าง</span>
+          <textarea id="hskEditExamplePinyin" rows="2"></textarea>
+        </label>
+      </div>
+
+      <div class="formGrid two">
+        <label>
+          <span>คำแปลตัวอย่างอังกฤษ</span>
+          <textarea id="hskEditExampleEn" rows="2"></textarea>
+        </label>
+        <label>
+          <span>คำแปลตัวอย่างไทย</span>
+          <textarea id="hskEditExampleTh" rows="2"></textarea>
+        </label>
+      </div>
+
+      <div class="formGrid two">
+        <label>
+          <span>Image URL</span>
+          <input id="hskEditImageUrl" type="url" placeholder="https://…">
+        </label>
+        <label>
+          <span>Audio URL</span>
+          <input id="hskEditAudioUrl" type="url" placeholder="https://…">
+        </label>
+      </div>
+
+      <label class="hskActiveToggle">
+        <input id="hskEditActive" type="checkbox" checked>
+        <span>เปิดใช้งานคำนี้ในเกม</span>
+      </label>
+
+      <div class="hskEditActions">
+        <button class="btn" type="button" id="hskEditCancel">ยกเลิก</button>
+        <button class="btn primary" type="submit" id="hskEditSave">บันทึกการแก้ไข</button>
+      </div>
+    </form>
+  </div>
+</div>
 
 <div class="modal hidden" id="deleteModal">
   <div class="modalCard">
@@ -835,7 +1100,7 @@ function openPanel(name){
  $("#panel-learning").classList.toggle("active",name==="learning");
  $("#panel-hsk").classList.toggle("active",name==="hsk");
  if(name==="learning")loadLearning();
- if(name==="hsk")loadHSKAdminStats();
+ if(name==="hsk")Promise.all([loadHSKAdminStats(),loadHSKManager(false)]);
 }
 document.querySelectorAll("[data-admin-panel]").forEach(b=>b.onclick=()=>openPanel(b.dataset.adminPanel));
 
@@ -1131,6 +1396,206 @@ async function loadHSKAdminStats(){
 }
 
 
+
+/* ---------------- HSK Vocabulary Manager ---------------- */
+let hskManagerRows=[];
+let hskManagerPage=0;
+let hskManagerSearchTimer=null;
+
+function hskManagerValue(id){
+ return ($("#"+id)?.value||"").trim();
+}
+function hskManagerEscape(v){
+ return String(v??"").replace(/[&<>"']/g,m=>({
+   "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[m]));
+}
+
+async function loadHSKManager(resetPage=false){
+ if(resetPage)hskManagerPage=0;
+
+ const levelRaw=hskManagerValue("hskManagerLevel");
+ const search=hskManagerValue("hskManagerSearch");
+ const pageSize=Math.max(1,Number(hskManagerValue("hskManagerPageSize"))||100);
+ const offset=hskManagerPage*pageSize;
+
+ $("#hskManagerStatus").textContent="กำลังโหลด…";
+ $("#hskVocabularyList").innerHTML='<div class="learnLoading">กำลังโหลดคำศัพท์…</div>';
+
+ try{
+   const {data,error}=await sb.rpc("bb_admin_list_hsk_vocabulary",{
+     p_level:levelRaw?Number(levelRaw):null,
+     p_search:search||null,
+     p_limit:pageSize,
+     p_offset:offset
+   });
+   if(error)throw error;
+
+   hskManagerRows=Array.isArray(data)?data:[];
+   renderHSKManager(pageSize);
+
+ }catch(err){
+   console.error("HSK manager list:",err);
+   hskManagerRows=[];
+   $("#hskManagerCount").textContent="0 รายการ";
+   $("#hskManagerStatus").textContent="โหลดไม่สำเร็จ";
+   $("#hskVocabularyList").innerHTML=
+     `<div class="learnEmpty">${hskManagerEscape(err?.message||"โหลดไม่สำเร็จ")}</div>`;
+ }
+}
+
+function renderHSKManager(pageSize){
+ const host=$("#hskVocabularyList");
+ const rows=hskManagerRows;
+
+ $("#hskManagerCount").textContent=`${rows.length.toLocaleString()} รายการในหน้านี้`;
+ $("#hskManagerStatus").textContent="อัปเดตแล้ว";
+ $("#hskPageLabel").textContent=`หน้า ${hskManagerPage+1}`;
+ $("#hskPrevPage").disabled=hskManagerPage<=0;
+ $("#hskNextPage").disabled=rows.length<pageSize;
+
+ if(!rows.length){
+   host.innerHTML='<div class="learnEmpty">ไม่พบคำศัพท์ตามตัวกรองนี้</div>';
+   return;
+ }
+
+ host.innerHTML=rows.map(row=>{
+   const thai=row.meaning_th||"";
+   const english=row.meaning_en||"";
+   const meaning=thai ? `${thai} • ${english}` : english;
+   const example=row.example_zh || row.example_th || row.example_en || "ยังไม่มีตัวอย่าง";
+
+   return `
+   <article class="hskWordRow ${row.is_active?"":"inactive"}">
+     <div class="hskWordLevel">
+       <b>HSK ${Number(row.hsk_level)||1}</b>
+       <small>#${Number(row.id)}</small>
+     </div>
+
+     <div class="hskWordMain">
+       <h4>${hskManagerEscape(row.simplified)}</h4>
+       <div class="pinyin">${hskManagerEscape(row.pinyin)}</div>
+       <div class="meaning" title="${hskManagerEscape(meaning)}">${hskManagerEscape(meaning)}</div>
+     </div>
+
+     <div class="hskWordExtra">
+       <small>ตัวอย่าง</small>
+       <strong title="${hskManagerEscape(example)}">${hskManagerEscape(example)}</strong>
+     </div>
+
+     <div class="hskWordActions">
+       <button class="edit" data-hsk-edit="${Number(row.id)}">แก้ไข</button>
+       <button class="${row.is_active?"toggleOn":"toggleOff"}" data-hsk-toggle="${Number(row.id)}">
+         ${row.is_active?"ปิด":"เปิด"}
+       </button>
+     </div>
+   </article>`;
+ }).join("");
+}
+
+function findHSKManagerRow(id){
+ return hskManagerRows.find(x=>Number(x.id)===Number(id));
+}
+
+function openHSKEditor(id){
+ const row=findHSKManagerRow(id);
+ if(!row)return toast("ไม่พบคำศัพท์");
+
+ $("#hskEditId").value=row.id;
+ $("#hskEditLevel").value=String(row.hsk_level||1);
+ $("#hskEditSimplified").value=row.simplified||"";
+ $("#hskEditTraditional").value=row.traditional||"";
+ $("#hskEditPinyin").value=row.pinyin||"";
+ $("#hskEditSort").value=String(row.sort_order||0);
+ $("#hskEditMeaningEn").value=row.meaning_en||"";
+ $("#hskEditMeaningTh").value=row.meaning_th||"";
+ $("#hskEditExampleZh").value=row.example_zh||"";
+ $("#hskEditExamplePinyin").value=row.example_pinyin||"";
+ $("#hskEditExampleEn").value=row.example_en||"";
+ $("#hskEditExampleTh").value=row.example_th||"";
+ $("#hskEditImageUrl").value=row.image_url||"";
+ $("#hskEditAudioUrl").value=row.audio_url||"";
+ $("#hskEditActive").checked=row.is_active!==false;
+
+ $("#hskEditTitle").textContent=`แก้ไข ${row.simplified}`;
+ $("#hskEditModal").classList.remove("hidden");
+}
+
+function closeHSKEditor(){
+ $("#hskEditModal").classList.add("hidden");
+}
+
+async function saveHSKEditor(){
+ const id=Number($("#hskEditId").value)||0;
+ if(!id)return toast("ไม่พบรหัสคำศัพท์");
+
+ const simplified=$("#hskEditSimplified").value.trim();
+ const pinyin=$("#hskEditPinyin").value.trim();
+ const meaningEn=$("#hskEditMeaningEn").value.trim();
+
+ if(!simplified)return toast("กรุณากรอกคำศัพท์จีน");
+ if(!pinyin)return toast("กรุณากรอก Pinyin");
+ if(!meaningEn)return toast("กรุณากรอกความหมายอังกฤษ");
+
+ const btn=$("#hskEditSave");
+ const old=btn.textContent;
+ btn.disabled=true;
+ btn.textContent="กำลังบันทึก…";
+
+ try{
+   const {data,error}=await sb.rpc("bb_admin_update_hsk_vocabulary",{
+     p_id:id,
+     p_hsk_level:Number($("#hskEditLevel").value)||1,
+     p_simplified:simplified,
+     p_traditional:$("#hskEditTraditional").value.trim()||null,
+     p_pinyin:pinyin,
+     p_meaning_en:meaningEn,
+     p_meaning_th:$("#hskEditMeaningTh").value.trim()||null,
+     p_example_zh:$("#hskEditExampleZh").value.trim()||null,
+     p_example_pinyin:$("#hskEditExamplePinyin").value.trim()||null,
+     p_example_en:$("#hskEditExampleEn").value.trim()||null,
+     p_example_th:$("#hskEditExampleTh").value.trim()||null,
+     p_image_url:$("#hskEditImageUrl").value.trim()||null,
+     p_audio_url:$("#hskEditAudioUrl").value.trim()||null,
+     p_is_active:$("#hskEditActive").checked,
+     p_sort_order:Number($("#hskEditSort").value)||0
+   });
+   if(error)throw error;
+
+   closeHSKEditor();
+   toast("บันทึกคำศัพท์แล้ว ✓");
+   await Promise.all([loadHSKManager(false),loadHSKAdminStats()]);
+
+ }catch(err){
+   console.error("HSK update:",err);
+   toast(err?.message||"บันทึกไม่สำเร็จ");
+ }finally{
+   btn.disabled=false;
+   btn.textContent=old;
+ }
+}
+
+async function toggleHSKWord(id){
+ const row=findHSKManagerRow(id);
+ if(!row)return;
+
+ try{
+   const {error}=await sb.rpc("bb_admin_set_hsk_vocabulary_active",{
+     p_id:Number(id),
+     p_is_active:!row.is_active
+   });
+   if(error)throw error;
+
+   toast(row.is_active?"ปิดคำนี้แล้ว":"เปิดคำนี้แล้ว");
+   await Promise.all([loadHSKManager(false),loadHSKAdminStats()]);
+
+ }catch(err){
+   console.error("HSK toggle:",err);
+   toast(err?.message||"เปลี่ยนสถานะไม่สำเร็จ");
+ }
+}
+
+
 /* Events */
 $("#unlockBtn").onclick=unlock;
 $("#adminCode").addEventListener("keydown",e=>{if(e.key==="Enter")unlock()});
@@ -1152,7 +1617,48 @@ $("#learnReloadBtn").onclick=loadLearning;$("#learnFilterRefresh").onclick=loadL
 $("#learnSubjectFilter").onchange=loadLearning;$("#learnTypeFilter").onchange=loadLearning;$("#learnStatusFilter").onchange=renderLearning;
 $("#learnSearch").addEventListener("input",()=>{clearTimeout(searchTimer);searchTimer=setTimeout(loadLearning,300)});
 
-$("#hskReloadBtn").onclick=loadHSKAdminStats;
+$("#hskReloadBtn").onclick=()=>Promise.all([loadHSKAdminStats(),loadHSKManager(false)]);
+$("#hskManagerRefresh").onclick=()=>loadHSKManager(false);
+$("#hskManagerSearchBtn").onclick=()=>loadHSKManager(true);
+$("#hskManagerLevel").onchange=()=>loadHSKManager(true);
+$("#hskManagerPageSize").onchange=()=>loadHSKManager(true);
+$("#hskManagerSearch").addEventListener("input",()=>{
+ clearTimeout(hskManagerSearchTimer);
+ hskManagerSearchTimer=setTimeout(()=>loadHSKManager(true),320);
+});
+$("#hskPrevPage").onclick=()=>{
+ if(hskManagerPage<=0)return;
+ hskManagerPage--;
+ loadHSKManager(false);
+};
+$("#hskNextPage").onclick=()=>{
+ hskManagerPage++;
+ loadHSKManager(false);
+};
+
+$("#hskEditClose").onclick=closeHSKEditor;
+$("#hskEditCancel").onclick=closeHSKEditor;
+$("#hskEditForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ saveHSKEditor();
+});
+$("#hskEditModal").addEventListener("click",e=>{
+ if(e.target.id==="hskEditModal")closeHSKEditor();
+});
+
+document.addEventListener("click",e=>{
+ const edit=e.target.closest("[data-hsk-edit]");
+ if(edit){
+   openHSKEditor(Number(edit.dataset.hskEdit));
+   return;
+ }
+ const toggle=e.target.closest("[data-hsk-toggle]");
+ if(toggle){
+   toggleHSKWord(Number(toggle.dataset.hskToggle));
+   return;
+ }
+});
+
 $("#hskImportAllBtn").onclick=()=>{
  if(confirm("นำเข้าคำศัพท์ HSK 1–6 ทั้งหมดเข้าสู่ฐานข้อมูล Brain Buddy?"))importHSKToLevel(6);
 };
