@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>POMRU • ผมรู้ — v89.1</title>
+<title>POMRU • ผมรู้ — v89.5 Hero Buddy</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -12256,6 +12256,247 @@ body.bbCandyHome .bbCandyHomeScreen.pomruHomeScreen{
 }
 </style>
 
+
+<style id="pomru-v895-hero-buddy-focus">
+/* ============================================================
+   POMRU v89.5 — HERO BUDDY FOCUS
+   Goal: Buddy is the clear focal point without changing game data.
+   Only stable transform/opacity effects; no animated gradients.
+   ============================================================ */
+
+/* Softer peripheral UI, stronger center stage */
+.p89MissionCard,.p89RankCard,.p89BuddyCard,.p89Online{
+  border-color:rgba(113,78,142,.09)!important;
+  box-shadow:0 9px 22px rgba(78,51,84,.085)!important;
+  backdrop-filter:blur(7px)!important;
+  -webkit-backdrop-filter:blur(7px)!important;
+}
+.p89MissionCard,.p89RankCard{opacity:.94!important}
+.p89BuddyCard,.p89Online{opacity:.92!important}
+
+/* Create depth behind the pet; the halo is static to avoid flicker. */
+.p89PetCenter{
+  isolation:isolate!important;
+  z-index:9!important;
+}
+.p89PetCenter::before{
+  content:"";
+  position:absolute;
+  z-index:-2;
+  left:50%;
+  top:48%;
+  width:min(500px,48vw);
+  height:min(500px,48vw);
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:radial-gradient(circle,
+    rgba(255,255,255,.78) 0%,
+    rgba(255,232,244,.46) 34%,
+    rgba(255,215,236,.16) 56%,
+    rgba(255,255,255,0) 74%);
+  pointer-events:none;
+}
+.p89PetCenter::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  left:50%;
+  bottom:10%;
+  width:min(240px,24vw);
+  height:30px;
+  transform:translateX(-50%);
+  border-radius:50%;
+  background:radial-gradient(ellipse,rgba(110,67,79,.20) 0%,rgba(110,67,79,.09) 45%,transparent 72%);
+  filter:blur(5px);
+  pointer-events:none;
+}
+
+/* Hero art: stable transform only. */
+.p89BuddyStage{
+  position:relative!important;
+  z-index:3!important;
+  transform-origin:center bottom!important;
+  will-change:transform;
+  animation:p895BuddyIdle 4.6s ease-in-out infinite!important;
+}
+#bbEquippedHeroCharacter{
+  cursor:pointer!important;
+  -webkit-tap-highlight-color:transparent!important;
+  transform-origin:center 78%!important;
+  will-change:transform!important;
+}
+#bbEquippedHeroCharacter.p895Tap{
+  animation:p895BuddyTap .44s cubic-bezier(.2,.86,.35,1.18) both!important;
+}
+@keyframes p895BuddyIdle{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(0,-5px,0) scale(1.012)}
+}
+@keyframes p895BuddyTap{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  35%{transform:translate3d(0,-12px,0) scale(1.045,.97)}
+  70%{transform:translate3d(0,2px,0) scale(.985,1.025)}
+  100%{transform:translate3d(0,0,0) scale(1)}
+}
+
+/* Shrink the rug so it reads as a pedestal instead of a large empty object. */
+.p89Rug{
+  opacity:.78!important;
+  filter:saturate(.92)!important;
+  box-shadow:0 14px 28px rgba(138,69,96,.085)!important;
+}
+
+/* Speech belongs to the pet, not the right dashboard. */
+.p89Speech{
+  z-index:12!important;
+  box-shadow:0 8px 20px rgba(75,51,70,.085)!important;
+}
+
+/* Actions receive slightly more visual weight than support cards. */
+.p89MainActions{z-index:14!important}
+.p89Action{
+  border:1px solid rgba(255,255,255,.42)!important;
+  box-shadow:0 7px 0 rgba(92,44,87,.16),0 13px 22px rgba(88,55,75,.105)!important;
+}
+.p89Action.play{
+  box-shadow:0 7px 0 rgba(71,42,153,.24),0 16px 26px rgba(93,65,194,.18)!important;
+}
+
+/* ---------------- iPad portrait ---------------- */
+@media (min-width:761px) and (max-width:1180px) and (orientation:portrait){
+  .p89MissionCard{
+    left:14px!important;
+    top:184px!important;
+    transform:scale(.83)!important;
+  }
+  .p89RankCard{
+    right:14px!important;
+    top:184px!important;
+    transform:scale(.83)!important;
+  }
+
+  .p89PetCenter{
+    top:218px!important;
+    width:min(455px,45vw)!important;
+    height:585px!important;
+  }
+  .p89BuddyStage{
+    width:min(435px,43vw)!important;
+    height:525px!important;
+  }
+  .p89Speech{
+    top:0!important;
+    left:58%!important;
+    right:auto!important;
+    transform:none!important;
+    min-width:148px!important;
+  }
+
+  .p89Rug{
+    bottom:118px!important;
+    width:min(395px,39vw)!important;
+    height:100px!important;
+  }
+  .p89Plant{bottom:139px!important;font-size:37px!important}
+
+  .p89BuddyCard{
+    left:14px!important;
+    bottom:122px!important;
+    transform:scale(.78)!important;
+  }
+  .p89Online{
+    right:14px!important;
+    bottom:122px!important;
+    transform:scale(.78)!important;
+  }
+  .p89MainActions{
+    bottom:18px!important;
+    grid-template-columns:repeat(3,150px)!important;
+  }
+}
+
+/* ---------------- iPad / laptop landscape ---------------- */
+@media (min-width:761px) and (orientation:landscape){
+  .p89MissionCard{
+    left:10px!important;
+    top:100px!important;
+    transform:scale(.66)!important;
+  }
+  .p89RankCard{
+    right:10px!important;
+    top:100px!important;
+    transform:scale(.66)!important;
+  }
+
+  .p89PetCenter{
+    top:78px!important;
+    width:min(420px,34vw)!important;
+    height:min(455px,58vh)!important;
+  }
+  .p89BuddyStage{
+    width:min(350px,28vw)!important;
+    height:min(405px,52vh)!important;
+  }
+  .p89Speech{
+    top:-2px!important;
+    left:58%!important;
+    right:auto!important;
+    transform:scale(.90)!important;
+    transform-origin:left top!important;
+  }
+
+  .p89Rug{
+    bottom:82px!important;
+    width:min(330px,28vw)!important;
+    height:76px!important;
+  }
+  .p89Plant{bottom:101px!important;font-size:31px!important}
+
+  .p89BuddyCard{
+    left:10px!important;
+    bottom:86px!important;
+    transform:scale(.62)!important;
+  }
+  .p89Online{
+    right:10px!important;
+    bottom:86px!important;
+    transform:scale(.62)!important;
+  }
+  .p89MainActions{
+    bottom:10px!important;
+    grid-template-columns:repeat(3,136px)!important;
+    gap:7px!important;
+  }
+  .p89Action{min-height:66px!important}
+}
+
+/* ---------------- phones ---------------- */
+@media (max-width:760px){
+  .p89PetCenter{
+    top:188px!important;
+    height:430px!important;
+  }
+  .p89BuddyStage{
+    width:min(340px,82vw)!important;
+    height:405px!important;
+  }
+  .p89Speech{
+    top:4%!important;
+    right:4%!important;
+    left:auto!important;
+  }
+  .p89Rug{
+    width:min(280px,68vw)!important;
+    height:70px!important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .p89BuddyStage{animation:none!important}
+  #bbEquippedHeroCharacter.p895Tap{animation:none!important}
+}
+</style>
+
 </head>
 <body>
 
@@ -23643,6 +23884,34 @@ document.addEventListener('DOMContentLoaded', () => {
   if(window.visualViewport){
     window.visualViewport.addEventListener('resize',schedule,{passive:true});
   }
+})();
+</script>
+
+
+<script id="pomru-v895-hero-interaction">
+(function(){
+  'use strict';
+  function bind(){
+    const buddy=document.getElementById('bbEquippedHeroCharacter');
+    if(!buddy || buddy.dataset.p895Bound==='1')return;
+    buddy.dataset.p895Bound='1';
+    const bounce=()=>{
+      buddy.classList.remove('p895Tap');
+      void buddy.offsetWidth;
+      buddy.classList.add('p895Tap');
+      window.setTimeout(()=>buddy.classList.remove('p895Tap'),480);
+    };
+    buddy.addEventListener('pointerup',bounce,{passive:true});
+    buddy.setAttribute('role','button');
+    buddy.setAttribute('tabindex','0');
+    buddy.setAttribute('aria-label','แตะ Pink Buddy');
+    buddy.addEventListener('keydown',(e)=>{
+      if(e.key==='Enter' || e.key===' '){e.preventDefault();bounce();}
+    });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind,{once:true});
+  else bind();
+  window.addEventListener('pageshow',bind);
 })();
 </script>
 
