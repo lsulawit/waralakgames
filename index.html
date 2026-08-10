@@ -4460,7 +4460,7 @@ body.bbRankedPlaying .bbRankedMatchBoard .bbMatchCard.wrong{
 
 
 /* =========================================================
-   Brain Buddy v53 — Brain Coins Shop
+   Brain Buddy v53 — เหรียญ Shop
    ========================================================= */
 
 .bbNavIcon.shop{
@@ -4781,7 +4781,7 @@ body.bbRankedPlaying .bbRankedMatchBoard .bbMatchCard.wrong{
 
 
 /* =========================================================
-   Brain Buddy v54 — Starter 500 Brain Coins Reward
+   Brain Buddy v54 — Starter 500 เหรียญ Reward
    ========================================================= */
 
 .bbStarterReward{
@@ -6121,7 +6121,7 @@ body.bbHeroUsesBear.bbHeroBearHasImage #bbEquippedHeroCharacterImg{
 
 
 /* =========================================================
-   Brain Buddy v63 — Brain Coins Top Up / Order page
+   Brain Buddy v63 — เหรียญ Top Up / Order page
    ========================================================= */
 
 .bbShopWalletTopup,
@@ -10972,7 +10972,7 @@ try{
     const desc=document.getElementById("bbHomeTop10Desc");
     if(desc){
       desc.textContent=mode==="ranked"
-        ? "จัดอันดับจากคะแนนแรงค์ RP"
+        ? "จัดอันดับจากผลงานการแข่งขัน"
         : "จัดอันดับจากคะแนนเกมสูงสุด";
     }
 
@@ -10991,7 +10991,7 @@ try{
     if(!list.length){
       box.innerHTML=`<div class="bbHomeTop10Empty">
         <b>${mode==="ranked"?"ยังไม่มีอันดับแรงค์":"ยังไม่มีผู้เล่นในอันดับ"}</b>
-        <span>${mode==="ranked"?"เมื่อมีผู้เล่นลงสนามจัดอันดับ คะแนน RP จะขึ้นที่นี่":"เล่นเกมจบรอบแรก แล้วอันดับจะขึ้นที่นี่"}</span>
+        <span>${mode==="ranked"?"เมื่อมีผู้เล่นลงสนามจัดอันดับ อันดับจะขึ้นที่นี่":"เล่นเกมจบรอบแรก แล้วอันดับจะขึ้นที่นี่"}</span>
       </div>`;
       return;
     }
@@ -11070,8 +11070,8 @@ try{
     const desc=document.getElementById("bbFullRankDesc");
     if(desc){
       desc.textContent=mode==="ranked"
-        ? "อันดับคะแนนแรงค์ RP — แยกจาก XP และคะแนนเกม"
-        : "อันดับคะแนนเกม — XP แสดงแยกและไม่ใช้เป็นคะแนนจัดอันดับ";
+        ? "อันดับการแข่งขัน"
+        : "อันดับจากผลงานเกม";
     }
 
     box.innerHTML='<div class="v16TopLoading">กำลังโหลดตารางจัดอันดับ…</div>';
@@ -13202,6 +13202,1094 @@ body.p898FeedOpen{
 }
 </style>
 
+
+<style id="pomru-v899-progression-style">
+/* ============================================================
+   POMRU v89.9 — แต้ม • เลเวล • แรงก์ • เหรียญ
+   ============================================================ */
+
+.p89RankCard .p89RankScore{
+  white-space:nowrap;
+}
+
+.p89RankCard .p89RankName small{
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.p89MissionCard .missionRow.done{
+  background:rgba(238,255,246,.72);
+}
+
+.p89MissionCard .missionRow.done .miniTrack i{
+  width:100%!important;
+}
+
+.p89MissionCard .missionRow.done strong{
+  color:#2ba86b;
+}
+
+#p89MissionReward.ready{
+  cursor:pointer;
+  opacity:1!important;
+  filter:none!important;
+  background:linear-gradient(180deg,#ff72ae,#ea438f)!important;
+  color:#fff!important;
+  box-shadow:0 8px 18px rgba(232,67,143,.20)!important;
+}
+
+#p89MissionReward.claimed{
+  opacity:1!important;
+  background:#eaf8f0!important;
+  color:#26905d!important;
+}
+
+.p899ProgressToast{
+  position:fixed;
+  left:50%;
+  top:max(16px,env(safe-area-inset-top));
+  z-index:95000;
+  min-width:min(440px,calc(100% - 26px));
+  max-width:min(560px,calc(100% - 26px));
+  padding:12px 16px;
+  border:1px solid rgba(255,255,255,.72);
+  border-radius:999px;
+  background:rgba(62,48,68,.94);
+  color:#fff;
+  box-shadow:0 15px 34px rgba(46,31,52,.20);
+  text-align:center;
+  font-size:.72rem;
+  font-weight:950;
+  opacity:0;
+  pointer-events:none;
+  transform:translate(-50%,-12px);
+  transition:.2s ease;
+}
+
+.p899ProgressToast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+@media(prefers-reduced-motion:reduce){
+  .p899ProgressToast{transition:none!important}
+}
+</style>
+
+
+<style id="pomru-v900-full-visual-system">
+/* ============================================================
+   POMRU v90.0 — FULL VISUAL UNIFICATION
+   Design language: clean pastel competitive game.
+   ============================================================ */
+
+:root{
+  --p900-bg:#fff8fb;
+  --p900-bg2:#f7f2ff;
+  --p900-paper:rgba(255,255,255,.92);
+  --p900-paper-solid:#fff;
+  --p900-ink:#47394f;
+  --p900-muted:#8a7b91;
+  --p900-line:rgba(93,67,103,.10);
+  --p900-pink:#ef5c9b;
+  --p900-pink-deep:#dc3f84;
+  --p900-purple:#7856df;
+  --p900-purple-deep:#6542c9;
+  --p900-gold:#f3bf50;
+  --p900-green:#70c992;
+  --p900-blue:#67a8df;
+  --p900-shadow:0 18px 46px rgba(79,54,87,.11);
+  --p900-soft-shadow:0 8px 24px rgba(79,54,87,.075);
+  --p900-radius-xl:34px;
+  --p900-radius-lg:26px;
+  --p900-radius-md:18px;
+}
+
+/* ---------- Universal non-home shell ---------- */
+.bbWorldHubScreen,
+.bbSubjectGamesScreen,
+.bbLearningPlayScreen,
+.bbWorldGameScreen,
+.bbSetupCandyScreen,
+#bbAppScoreInfo,
+.bbTopupScreen,
+.bbClosetScreen,
+.bbShopV2{
+  color:var(--p900-ink)!important;
+  background:
+    radial-gradient(circle at 12% 0%,rgba(255,215,235,.46),transparent 28rem),
+    radial-gradient(circle at 92% 2%,rgba(216,225,255,.55),transparent 30rem),
+    linear-gradient(180deg,#fffafd 0%,#faf6ff 50%,#fff9fb 100%)!important;
+}
+
+.bbWorldBackdrop,
+.bbSubjectBg,
+.bbLearningPlayBg,
+.bbCandySky,
+.bbSetupBackdrop,
+.bbTopupSky{
+  display:none!important;
+}
+
+/* ---------- Shared headers ---------- */
+.bbWorldTop,
+.bbSubjectTop,
+.bbLearningTop,
+.bbCandyTop,
+.bbSetupTop,
+.bbTopupTop,
+.bbClosetTop,
+.bbShopTop{
+  width:min(1180px,calc(100% - 28px))!important;
+  min-height:72px!important;
+  margin:14px auto 0!important;
+  padding:10px 12px!important;
+  border:1px solid var(--p900-line)!important;
+  border-radius:24px!important;
+  background:rgba(255,255,255,.88)!important;
+  box-shadow:var(--p900-soft-shadow)!important;
+  backdrop-filter:blur(14px)!important;
+  -webkit-backdrop-filter:blur(14px)!important;
+  color:var(--p900-ink)!important;
+}
+
+.bbWorldBack,.bbSubjectBack,.bbLearningBack,.bbCandyBack,.bbSetupBack,
+.bbTopupBack,.bbClosetBack,.bbShopBack,.bbAppBack{
+  width:48px!important;
+  height:48px!important;
+  min-width:48px!important;
+  border:1px solid var(--p900-line)!important;
+  border-radius:16px!important;
+  background:#fff!important;
+  color:#6f52b9!important;
+  box-shadow:none!important;
+}
+
+.bbWorldBrand small,.bbSubjectBrand small,.bbLearningTitle small,
+.bbCandyIntroCopy small,.bbSetupBrand small,.bbTopupBrand small,
+.bbClosetBrand small,.bbShopBrand small{
+  color:#a1718c!important;
+  letter-spacing:.12em!important;
+  font-weight:950!important;
+}
+
+.bbWorldBrand strong,.bbSubjectBrand strong,.bbLearningTitle strong,
+.bbClosetBrand h2,.bbShopBrand h2,.bbTopupBrand h2{
+  color:var(--p900-ink)!important;
+}
+
+.bbWorldMiniNav button,
+.bbSubjectTopBadge{
+  min-height:44px!important;
+  border:1px solid var(--p900-line)!important;
+  border-radius:15px!important;
+  background:#fff!important;
+  color:#65586a!important;
+  box-shadow:none!important;
+}
+
+/* ---------- Game Worlds ---------- */
+.bbWorldHubScreen{
+  min-height:100dvh!important;
+  padding-bottom:44px!important;
+  overflow:auto!important;
+}
+
+.bbWorldIntro{
+  width:min(1180px,calc(100% - 28px))!important;
+  min-height:220px!important;
+  margin:14px auto!important;
+  padding:30px 34px!important;
+  border:1px solid rgba(233,116,166,.13)!important;
+  border-radius:var(--p900-radius-xl)!important;
+  background:
+    radial-gradient(circle at 86% 30%,rgba(255,255,255,.72),transparent 13rem),
+    linear-gradient(135deg,#fff0f6 0%,#f5ecff 58%,#edf6ff 100%)!important;
+  color:var(--p900-ink)!important;
+  box-shadow:var(--p900-shadow)!important;
+}
+
+.bbWorldIntro .eyebrow{
+  color:#b05f82!important;
+  background:#fff!important;
+  border:1px solid rgba(232,91,151,.12)!important;
+}
+
+.bbWorldIntro h1{
+  color:#49374f!important;
+  font-size:clamp(2.5rem,5vw,4.4rem)!important;
+  letter-spacing:-.055em!important;
+  text-shadow:none!important;
+}
+
+.bbWorldIntro p{color:#806f86!important}
+.bbWorldIntroArt{opacity:.62!important;transform:scale(.88)!important}
+
+.bbWorldCards{
+  width:min(1180px,calc(100% - 28px))!important;
+  margin:16px auto!important;
+  gap:14px!important;
+}
+
+.bbWorldCard{
+  min-height:250px!important;
+  padding:25px!important;
+  border:1px solid var(--p900-line)!important;
+  border-radius:30px!important;
+  color:var(--p900-ink)!important;
+  box-shadow:var(--p900-shadow)!important;
+  overflow:hidden!important;
+}
+
+.bbWorldCard.teddy{background:linear-gradient(145deg,#fff1f7,#ffe4f0)!important}
+.bbWorldCard.math{background:linear-gradient(145deg,#fff8ea,#ffefd0)!important}
+.bbWorldCard.language{background:linear-gradient(145deg,#eef8ff,#e8efff)!important}
+
+.bbWorldCardCopy small{color:#9c6f89!important}
+.bbWorldCardCopy b{color:#47394f!important;text-shadow:none!important}
+.bbWorldCardCopy em{color:#796c80!important}
+.bbWorldTag{
+  color:#665570!important;
+  background:rgba(255,255,255,.72)!important;
+  border:1px solid rgba(255,255,255,.76)!important;
+}
+.bbWorldArrow{
+  color:#7656ca!important;
+  background:rgba(255,255,255,.78)!important;
+  border:1px solid rgba(106,79,126,.08)!important;
+}
+
+/* ---------- Math / Language worlds ---------- */
+.bbSubjectGamesScreen{
+  min-height:100dvh!important;
+  padding:0 0 50px!important;
+  overflow:auto!important;
+}
+
+.bbSubjectIntro,
+.bbMathLevelChooser,
+.bbHSKSelector,
+.bbHSKCoverage,
+.bbEnglishLevelSelector{
+  width:min(1180px,calc(100% - 28px))!important;
+  margin:14px auto!important;
+  border:1px solid var(--p900-line)!important;
+  border-radius:30px!important;
+  box-shadow:var(--p900-soft-shadow)!important;
+}
+
+.bbSubjectIntro{
+  min-height:210px!important;
+  padding:28px 32px!important;
+  color:var(--p900-ink)!important;
+  background:linear-gradient(135deg,#fff0f6,#f3edff 55%,#eef7ff)!important;
+}
+.mathWorld .bbSubjectIntro{
+  background:linear-gradient(135deg,#fff5e7,#fff0db 45%,#f7ecff)!important;
+}
+
+.bbSubjectIntro h1{
+  color:#49384f!important;
+  font-size:clamp(2.35rem,4.7vw,4.2rem)!important;
+  letter-spacing:-.055em!important;
+  text-shadow:none!important;
+}
+.bbSubjectIntro p,.bbSubjectIntro small{color:#817184!important}
+
+.bbSubjectMascot{
+  background:rgba(255,255,255,.58)!important;
+  border:1px solid rgba(255,255,255,.72)!important;
+  box-shadow:none!important;
+  color:#6b4fb0!important;
+}
+
+.bbMathLevelChooser,
+.bbHSKSelector,
+.bbHSKCoverage,
+.bbEnglishLevelSelector{
+  padding:18px!important;
+  background:rgba(255,255,255,.82)!important;
+  color:var(--p900-ink)!important;
+}
+
+.bbMathLevelHead small,.bbHSKSelectorHead small{color:#9e778e!important}
+.bbMathLevelHead h2,.bbHSKSelectorHead strong{color:#49394f!important}
+.bbMathLevelHead p{color:#86778b!important}
+
+.bbMathLevelGrid button,
+.bbHSKLevelGrid button,
+.bbEnglishLevelGrid button{
+  border:1px solid var(--p900-line)!important;
+  border-radius:18px!important;
+  background:#fff!important;
+  color:#615268!important;
+  box-shadow:none!important;
+}
+.bbMathLevelGrid button.active,
+.bbHSKLevelGrid button.active,
+.bbEnglishLevelGrid button.active{
+  border-color:rgba(232,81,148,.28)!important;
+  background:linear-gradient(145deg,#fff2f7,#f4edff)!important;
+  color:#4c3b52!important;
+  box-shadow:0 8px 20px rgba(97,61,110,.08)!important;
+}
+
+.bbMathLevelGrid button>span{
+  display:grid!important;
+  place-items:center!important;
+  width:34px!important;height:34px!important;
+  margin:0 auto 5px!important;
+  border-radius:10px!important;
+  background:#f5efff!important;
+  color:#7153c6!important;
+  font-size:.62rem!important;
+  font-weight:1000!important;
+  letter-spacing:.02em!important;
+}
+
+.bbLanguageSwitch button{
+  border:1px solid var(--p900-line)!important;
+  background:rgba(255,255,255,.76)!important;
+  color:#62546a!important;
+  box-shadow:none!important;
+}
+.bbLanguageSwitch button.active{
+  background:#fff!important;
+  border-color:rgba(234,87,151,.24)!important;
+}
+.bbLanguageSwitch span{
+  background:#f2ebff!important;
+  color:#7052c3!important;
+}
+
+.bbSubjectGameGrid{
+  width:min(1180px,calc(100% - 28px))!important;
+  margin:14px auto!important;
+  gap:14px!important;
+}
+
+.bbSubjectGameCard{
+  min-height:180px!important;
+  padding:22px!important;
+  border:1px solid var(--p900-line)!important;
+  border-radius:28px!important;
+  background:#fff!important;
+  color:var(--p900-ink)!important;
+  box-shadow:var(--p900-soft-shadow)!important;
+}
+
+.bbSubjectGameCard.rose{background:linear-gradient(145deg,#fff2f7,#fff)!important}
+.bbSubjectGameCard.lime{background:linear-gradient(145deg,#f2fff5,#fff)!important}
+.bbSubjectGameCard.gold{background:linear-gradient(145deg,#fff9e9,#fff)!important}
+.bbSubjectGameCard.blue{background:linear-gradient(145deg,#eef8ff,#fff)!important}
+.bbSubjectGameCard.purple{background:linear-gradient(145deg,#f5f0ff,#fff)!important}
+.bbSubjectGameCard.cyan{background:linear-gradient(145deg,#effcfc,#fff)!important}
+
+.bbSubjectGameCard .copy b{color:#47394f!important;text-shadow:none!important}
+.bbSubjectGameCard .copy small{color:#83758a!important}
+.bbSubjectGameCard .copy em{
+  color:#8c5f75!important;
+  background:#fff!important;
+  border:1px solid var(--p900-line)!important;
+}
+.bbSubjectGameCard .icon,
+.bbSubjectGameCard .play{
+  background:rgba(255,255,255,.88)!important;
+  color:#7054b4!important;
+  border:1px solid var(--p900-line)!important;
+  box-shadow:none!important;
+}
+
+/* ---------- Memory world ---------- */
+.bbWorldGameScreen{
+  min-height:100dvh!important;
+  padding:0 0 50px!important;
+  overflow:auto!important;
+}
+
+.bbCandyBrandMark,.bbCandyBrandSpark{display:none!important}
+.bbCandyBrand strong{
+  display:flex!important;align-items:center!important;gap:0!important;
+  font-size:1.55rem!important;
+}
+.bbCandyBrand strong i{color:#ed5c9c!important}
+.bbCandyBrand strong b{color:#7352c8!important}
+
+.bbCandyControls{gap:6px!important}
+.bbCandyControl{
+  width:44px!important;height:44px!important;
+  border:1px solid var(--p900-line)!important;
+  border-radius:14px!important;
+  background:#fff!important;
+  color:#6c55af!important;
+  box-shadow:none!important;
+}
+
+.bbCandyIntro{
+  width:min(1180px,calc(100% - 28px))!important;
+  min-height:205px!important;
+  margin:14px auto!important;
+  padding:28px 32px!important;
+  border:1px solid var(--p900-line)!important;
+  border-radius:32px!important;
+  color:var(--p900-ink)!important;
+  background:linear-gradient(135deg,#fff1f7,#f4ecff 55%,#eef8ff)!important;
+  box-shadow:var(--p900-shadow)!important;
+}
+
+.bbCandyIntroCopy h2{
+  color:#49384f!important;
+  font-size:clamp(2.3rem,4.8vw,4.2rem)!important;
+  text-shadow:none!important;
+}
+.bbCandyIntroCopy p{color:#827386!important}
+.bbCandyMascot3D{opacity:.75!important;transform:scale(.82)!important}
+.bbCandyScore{
+  background:#fff!important;
+  color:#674fa7!important;
+  border:1px solid var(--p900-line)!important;
+  box-shadow:none!important;
+}
+
+.bbCandyGameGrid{
+  width:min(1180px,calc(100% - 28px))!important;
+  margin:14px auto!important;
+  gap:14px!important;
+}
+
+.bbCandyCard{
+  min-height:165px!important;
+  border:1px solid var(--p900-line)!important;
+  border-radius:28px!important;
+  background:#fff!important;
+  color:var(--p900-ink)!important;
+  box-shadow:var(--p900-soft-shadow)!important;
+}
+
+.bbCandyCard.pink{background:linear-gradient(145deg,#fff2f7,#fff)!important}
+.bbCandyCard.green{background:linear-gradient(145deg,#f1fff5,#fff)!important}
+.bbCandyCard.yellow{background:linear-gradient(145deg,#fff9e9,#fff)!important}
+.bbCandyCard.blue{background:linear-gradient(145deg,#eef8ff,#fff)!important}
+.bbCandyCard.purple{background:linear-gradient(145deg,#f5efff,#fff)!important}
+.bbCandyCard.cyan{background:linear-gradient(145deg,#effcfc,#fff)!important}
+
+.bbCandyCopy b{color:#47394f!important;text-shadow:none!important}
+.bbCandyCopy small{color:#827489!important}
+.bbCandyCopy em{
+  color:#8d6076!important;
+  background:#fff!important;
+  border:1px solid var(--p900-line)!important;
+}
+.bbCandyIcon,.bbCandyPlay{
+  color:#7052bd!important;
+  background:rgba(255,255,255,.88)!important;
+  border:1px solid var(--p900-line)!important;
+  box-shadow:none!important;
+}
+
+/* ---------- Setup ---------- */
+.bbSetupCandyScreen{
+  min-height:100dvh!important;
+  padding:0 0 50px!important;
+  overflow:auto!important;
+}
+
+.bbSetupNav button{
+  border:0!important;
+  border-radius:12px!important;
+  background:transparent!important;
+  color:#76697c!important;
+}
+.bbSetupNav button.active{
+  background:#f5efff!important;
+  color:#684eb1!important;
+}
+
+.bbSetupHero,
+.bbCandySetupCard{
+  width:min(1180px,calc(100% - 28px))!important;
+  margin:14px auto!important;
+}
+
+.bbSetupHero{
+  border:1px solid var(--p900-line)!important;
+  border-radius:28px!important;
+  background:linear-gradient(135deg,#fff2f7,#f5efff)!important;
+  color:var(--p900-ink)!important;
+  box-shadow:var(--p900-soft-shadow)!important;
+}
+
+.bbSetupHeroTitle h2{color:#49394f!important;text-shadow:none!important}
+.bbSetupHeroTitle p,.bbSetupHeroTitle small{color:#837489!important}
+.bbSetupPlayerMini{background:#fff!important;border:1px solid var(--p900-line)!important}
+
+.bbCandySetupCard{
+  border:1px solid var(--p900-line)!important;
+  border-radius:30px!important;
+  background:#fff!important;
+  box-shadow:var(--p900-shadow)!important;
+}
+.bbAppDifficultyGrid button,
+.bbAppStyleGrid button{
+  border:1px solid var(--p900-line)!important;
+  background:#fff!important;
+  color:#615268!important;
+  box-shadow:none!important;
+}
+.bbAppDifficultyGrid button.active,
+.bbAppStyleGrid button.active{
+  background:linear-gradient(145deg,#fff2f7,#f5efff)!important;
+  border-color:rgba(233,84,149,.28)!important;
+}
+.bbAppStartBtn{
+  border:0!important;
+  background:linear-gradient(180deg,#ee619e,#dc4388)!important;
+  color:#fff!important;
+  box-shadow:0 10px 24px rgba(217,63,132,.20)!important;
+}
+
+/* ---------- Learning play ---------- */
+.bbLearningPlayScreen{
+  min-height:100dvh!important;
+  padding:0 0 45px!important;
+  overflow:auto!important;
+}
+
+.bbLearningScore{
+  border:1px solid var(--p900-line)!important;
+  border-radius:16px!important;
+  background:#fff!important;
+  color:#654f6c!important;
+}
+
+.bbLearningCard{
+  width:min(920px,calc(100% - 28px))!important;
+  margin:16px auto!important;
+  padding:26px!important;
+  border:1px solid var(--p900-line)!important;
+  border-radius:32px!important;
+  background:#fff!important;
+  color:var(--p900-ink)!important;
+  box-shadow:var(--p900-shadow)!important;
+}
+
+.bbLearningProgress>div,
+.bbLearningTyping input,
+.bbLearningOrder .selected,
+.bbLearningOrder .tokens{
+  border-color:var(--p900-line)!important;
+  background:#faf8fc!important;
+}
+
+#bbLearningPrompt{
+  color:#44364a!important;
+  font-size:clamp(1.8rem,4vw,3.2rem)!important;
+  line-height:1.22!important;
+  overflow-wrap:anywhere!important;
+}
+
+.bbLearningChoices button{
+  border:1px solid var(--p900-line)!important;
+  border-radius:18px!important;
+  background:#fff!important;
+  color:#594b61!important;
+  box-shadow:0 5px 14px rgba(76,51,83,.055)!important;
+}
+
+.bbLearningChoices button:hover,
+.bbLearningChoices button:focus-visible{
+  border-color:rgba(228,84,146,.30)!important;
+  background:#fff5f9!important;
+}
+
+.bbLearningFeedback,
+.bbLearningResult{
+  border:1px solid var(--p900-line)!important;
+  border-radius:24px!important;
+  background:#fff8fb!important;
+  color:var(--p900-ink)!important;
+}
+
+.bbLearningResult .trophy{
+  width:54px!important;height:54px!important;
+  display:grid!important;place-items:center!important;
+  margin-inline:auto!important;
+  border-radius:18px!important;
+  background:linear-gradient(145deg,#fff0f6,#eee7ff)!important;
+}
+.bbLearningResult .trophy::before{
+  content:"P";
+  color:#e65091;
+  font-weight:1000;
+}
+
+.bbPracticeReward{
+  border:1px solid var(--p900-line)!important;
+  border-radius:20px!important;
+  background:linear-gradient(145deg,#fff5fa,#f6f1ff)!important;
+}
+.bbPracticeRewardIcon{
+  color:#fff!important;
+  background:linear-gradient(145deg,#f06aa2,#7a59da)!important;
+}
+
+/* ---------- Actual Memory game ---------- */
+#game{
+  background:
+    radial-gradient(circle at 10% 0%,rgba(255,220,237,.45),transparent 27rem),
+    radial-gradient(circle at 90% 0%,rgba(224,231,255,.55),transparent 28rem),
+    linear-gradient(180deg,#fffafd,#f9f5ff)!important;
+  color:var(--p900-ink)!important;
+}
+
+#game .bbGameCandyBackdrop{display:none!important}
+#game .gameCard{
+  border:1px solid var(--p900-line)!important;
+  background:rgba(255,255,255,.94)!important;
+  box-shadow:var(--p900-shadow)!important;
+}
+#game .gameTop,
+#game .stage,
+#game .dock{
+  background:#fff!important;
+  border-color:var(--p900-line)!important;
+}
+#game .hud{
+  background:#faf7fc!important;
+  border-color:var(--p900-line)!important;
+  color:#62556a!important;
+}
+#game .resultCard{
+  background:#fff!important;
+  border-color:var(--p900-line)!important;
+  color:var(--p900-ink)!important;
+}
+#game .resultMetric,.insight{
+  background:#faf7fc!important;
+  border-color:var(--p900-line)!important;
+}
+#game .btn,#game .dock button{
+  border-color:var(--p900-line)!important;
+  border-radius:15px!important;
+  box-shadow:none!important;
+}
+#game .btn.primary,#game .dock .main{
+  background:linear-gradient(180deg,#7659dc,#6748ca)!important;
+  color:#fff!important;
+}
+
+/* ---------- Topup / Closet / Shop ---------- */
+.bbTopupHero,.bbTopupBody,.bbTopupGuest,
+.bbClosetLayout,.bbClosetGuest,
+.bbShopV2Hero,.bbShopV2Body,.bbShopGuest{
+  width:min(1180px,calc(100% - 28px))!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+
+.bbTopupHero,.bbShopV2Hero{
+  border:1px solid var(--p900-line)!important;
+  border-radius:32px!important;
+  background:linear-gradient(135deg,#fff1f7,#f4edff 58%,#eef7ff)!important;
+  box-shadow:var(--p900-shadow)!important;
+  color:var(--p900-ink)!important;
+}
+.bbTopupHero h1,.bbShopV2Hero h1{color:#49384f!important;text-shadow:none!important}
+.bbTopupHero p,.bbShopV2Hero p{color:#817184!important}
+
+.bbTopupBody,
+.bbClosetPreviewCard,.bbClosetInventory,
+.bbShopV2Body{
+  border-color:var(--p900-line)!important;
+  background:#fff!important;
+  box-shadow:var(--p900-soft-shadow)!important;
+}
+
+.bbClosetBrandIcon{
+  background:linear-gradient(145deg,#fff0f6,#eee8ff)!important;
+  color:#df4d8d!important;
+  font-weight:1000!important;
+}
+.bbClosetWallet,.bbShopWallet,.bbTopupCurrentWallet{
+  background:#fff!important;
+  border:1px solid var(--p900-line)!important;
+  box-shadow:none!important;
+}
+.bbLoadoutSlots button,
+.bbClosetTabs button{
+  border-color:var(--p900-line)!important;
+  background:#faf8fc!important;
+  color:#64576b!important;
+}
+.p900SlotLetter{
+  display:grid!important;
+  place-items:center!important;
+  width:28px!important;height:28px!important;
+  margin:auto!important;
+  border-radius:9px!important;
+  background:#f0e9ff!important;
+  color:#6f53ba!important;
+  font-size:.58rem!important;
+  font-weight:1000!important;
+}
+
+/* ---------- Score information ---------- */
+#bbAppScoreInfo{
+  min-height:100dvh!important;
+  padding:16px!important;
+  overflow:auto!important;
+}
+#bbAppScoreInfo .bbAppScreenHead,
+#bbAppScoreInfo .bbAppInfoGrid{
+  width:min(1050px,100%)!important;
+  margin:0 auto 14px!important;
+}
+#bbAppScoreInfo .bbAppScreenHead{
+  padding:12px!important;
+  border:1px solid var(--p900-line)!important;
+  border-radius:24px!important;
+  background:#fff!important;
+  box-shadow:var(--p900-soft-shadow)!important;
+}
+.bbAppInfoCard{
+  border:1px solid var(--p900-line)!important;
+  border-radius:26px!important;
+  background:#fff!important;
+  box-shadow:var(--p900-soft-shadow)!important;
+  color:var(--p900-ink)!important;
+}
+
+/* ---------- Modal / account / leaderboard consistency ---------- */
+.modal,
+#accountModal,
+#leaderboardModal{
+  background:rgba(69,49,72,.30)!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+}
+.modalCard,.modalcard,
+#accountModal .modalcard,
+#leaderboardModal .modalcard{
+  border:1px solid rgba(255,255,255,.75)!important;
+  border-radius:30px!important;
+  background:#fffafd!important;
+  color:var(--p900-ink)!important;
+  box-shadow:0 30px 80px rgba(60,38,66,.20)!important;
+}
+
+/* ---------- Arena light pass ---------- */
+#bbArena{
+  background:linear-gradient(180deg,#fffafd,#f7f2ff)!important;
+  color:var(--p900-ink)!important;
+}
+#bbArena .bbArenaHeader,
+#bbArena .bbArenaHero,
+#bbArena .bbArenaActions,
+#bbArena .bbArenaRoomsWrap,
+#bbArena .bbArenaRoom,
+#bbArena .bbArenaResults{
+  border-color:var(--p900-line)!important;
+  box-shadow:var(--p900-soft-shadow)!important;
+}
+#bbArena .bbArenaHeader{background:rgba(255,255,255,.92)!important}
+#bbArena .bbArenaHero{
+  background:linear-gradient(135deg,#fff1f7,#f3ecff,#edf7ff)!important;
+  color:var(--p900-ink)!important;
+}
+#bbArena .bbArenaHero h2,#bbArena .bbArenaHero p{color:inherit!important;text-shadow:none!important}
+
+/* ---------- HOME cleanup ---------- */
+.p89Plant,.p89Shelf{display:none!important}
+
+.p89Tagline{
+  color:#765f7e!important;
+  letter-spacing:.01em!important;
+  background:rgba(255,255,255,.82)!important;
+}
+
+#p89ProfileAvatar{
+  font-size:0!important;
+  overflow:hidden!important;
+  background:
+    #fff
+    url("/assets/buddy/default-pink-buddy.png?v=900")
+    center/86% 86% no-repeat!important;
+}
+#p89ProfileAvatar img{
+  width:100%!important;height:100%!important;object-fit:cover!important;
+}
+
+.p89Vital .vIcon,
+.missionRow .mi,
+.p900CardMark,
+.p900ActionIcon,
+.p89Online .onlineArt{
+  position:relative!important;
+  display:grid!important;
+  place-items:center!important;
+  font-size:0!important;
+  overflow:hidden!important;
+}
+
+.p89Vital .foodIcon::before{
+  content:"";
+  width:17px;height:17px;
+  border-radius:50% 50% 47% 53%;
+  background:#ee6b88;
+  box-shadow:7px -2px 0 -5px #7cbd75;
+}
+.p89Vital .energyIcon::before{
+  content:"";
+  width:14px;height:23px;
+  background:#f0bd46;
+  clip-path:polygon(58% 0,25% 45%,50% 45%,34% 100%,82% 37%,57% 37%);
+}
+
+.p900CardMark{
+  width:28px!important;height:28px!important;
+  border-radius:9px!important;
+  background:#f5efff!important;
+}
+.p900CardMark.daily::before{
+  content:"";
+  width:13px;height:13px;
+  border:2px solid #b06c92;
+  border-radius:4px;
+}
+.p900CardMark.rank::before{
+  content:"";
+  width:14px;height:11px;
+  border:2px solid #a77a3c;
+  border-top:0;
+  border-radius:0 0 8px 8px;
+}
+
+.missionRow .mi{
+  width:26px!important;height:26px!important;
+  border-radius:9px!important;
+  background:#f6f1f8!important;
+}
+.missionRow .playMi::before{
+  content:"";
+  width:13px;height:9px;
+  border:2px solid #7256ba;
+  border-radius:5px;
+}
+.missionRow .feedMi::before{
+  content:"";
+  width:12px;height:12px;
+  border-radius:50%;
+  background:#ee6d88;
+}
+.missionRow .exerciseMi::before{
+  content:"";
+  width:15px;height:5px;
+  border-radius:999px;
+  background:#e0a848;
+  box-shadow:0 -5px 0 -1px #e0a848,0 5px 0 -1px #e0a848;
+}
+
+.p89Online .onlineArt{
+  width:36px!important;height:36px!important;
+  border-radius:12px!important;
+  background:#fff5dc!important;
+}
+.p89Online .onlineArt::before{
+  content:"";
+  width:17px;height:14px;
+  border:2px solid #bd8728;
+  border-top:0;
+  border-radius:0 0 9px 9px;
+}
+
+.p900ActionIcon{
+  width:34px!important;height:34px!important;
+  margin:0 auto 2px!important;
+}
+.p900ActionIcon.playIcon::before{
+  content:"";
+  width:23px;height:15px;
+  border:3px solid currentColor;
+  border-radius:9px;
+}
+.p900ActionIcon.feedIcon::before{
+  content:"";
+  width:22px;height:13px;
+  border:3px solid currentColor;
+  border-radius:4px 4px 13px 13px;
+  border-top-width:2px;
+}
+.p900ActionIcon.workoutIcon::before{
+  content:"";
+  width:24px;height:6px;
+  border-radius:999px;
+  background:currentColor;
+  box-shadow:0 -7px 0 -2px currentColor,0 7px 0 -2px currentColor;
+}
+
+/* Fix the speech bubble overlapping the vitals on iPad. */
+.p89Speech{
+  max-width:170px!important;
+  min-width:138px!important;
+  padding:8px 11px!important;
+  line-height:1.2!important;
+}
+.p89Speech b,.p89Speech span{
+  white-space:normal!important;
+  overflow-wrap:anywhere!important;
+}
+
+@media (min-width:761px) and (orientation:landscape){
+  .p89Speech{
+    top:92px!important;
+    left:64%!important;
+    right:auto!important;
+    transform:scale(.82)!important;
+    transform-origin:left top!important;
+  }
+}
+
+@media (min-width:761px) and (max-width:1180px) and (orientation:portrait){
+  .p89Speech{
+    top:74px!important;
+    left:65%!important;
+    right:auto!important;
+    transform:scale(.88)!important;
+  }
+}
+
+@media(max-width:760px){
+  .p89Speech{
+    top:56px!important;
+    right:2%!important;
+    left:auto!important;
+    max-width:150px!important;
+  }
+}
+
+/* Feeding no-emoji visual markers */
+.p900FoodGlyph{
+  width:50px;height:50px;
+  display:grid;place-items:center;
+  border-radius:16px;
+  background:linear-gradient(145deg,#fff,#f3ecff);
+  border:1px solid var(--p900-line);
+  color:#7656c3;
+  font-size:.7rem;
+  font-weight:1000;
+}
+.p900FeedLoader,.p900FeedEmptyMark{
+  width:42px;height:42px;
+  display:block;
+  border-radius:14px;
+  background:linear-gradient(145deg,#fff0f6,#eee8ff);
+  position:relative;
+}
+.p900FeedLoader::before,.p900FeedEmptyMark::before{
+  content:"P";
+  position:absolute;inset:0;
+  display:grid;place-items:center;
+  color:#de4b8c;font-style:normal;font-weight:1000;
+}
+.p898FlyingFood.p900FlyingFoodDot{
+  font-size:0!important;
+  background:#f06a9f!important;
+}
+.p898FlyingFood.p900FlyingFoodDot::before{
+  content:"";
+  width:28px;height:28px;border-radius:50%;
+  background:#fff;
+}
+.p898FeedBurst i{
+  width:8px!important;height:8px!important;
+  border-radius:50%!important;
+  background:#ef72a5!important;
+  font-size:0!important;
+}
+
+/* ---------- Responsive consistency ---------- */
+@media(max-width:900px){
+  .bbWorldTop,.bbSubjectTop,.bbLearningTop,.bbCandyTop,.bbSetupTop,
+  .bbTopupTop,.bbClosetTop,.bbShopTop{
+    width:calc(100% - 18px)!important;
+    margin-top:9px!important;
+    border-radius:20px!important;
+  }
+
+  .bbWorldIntro,.bbSubjectIntro,.bbCandyIntro,
+  .bbMathLevelChooser,.bbHSKSelector,.bbHSKCoverage,.bbEnglishLevelSelector,
+  .bbWorldCards,.bbSubjectGameGrid,.bbCandyGameGrid,
+  .bbSetupHero,.bbCandySetupCard,
+  .bbTopupHero,.bbTopupBody,.bbClosetLayout,.bbShopV2Hero,.bbShopV2Body{
+    width:calc(100% - 18px)!important;
+  }
+
+  .bbWorldIntro h1,.bbSubjectIntro h1,.bbCandyIntroCopy h2{
+    font-size:clamp(2rem,7vw,3.15rem)!important;
+  }
+}
+
+@media(max-width:700px){
+  .bbWorldCards{grid-template-columns:1fr!important}
+  .bbSubjectGameGrid,.bbCandyGameGrid{grid-template-columns:1fr!important}
+  .bbWorldCard{min-height:190px!important}
+  .bbSubjectGameCard,.bbCandyCard{min-height:145px!important}
+  .bbWorldIntro,.bbSubjectIntro,.bbCandyIntro{padding:22px!important}
+  .bbSetupNav{display:none!important}
+}
+
+/* No infinite background motion in the unified visual layer. */
+.bbWorldHubScreen *,
+.bbSubjectGamesScreen *,
+.bbWorldGameScreen *,
+.bbSetupCandyScreen *{
+  animation-duration:0s;
+}
+#bbEquippedHeroCharacter,
+.p89BuddyStage,
+.p897Particle,
+.p898FeedBurst i,
+.p898FlyingFood{
+  animation-duration:initial;
+}
+
+@media(prefers-reduced-motion:reduce){
+  *{scroll-behavior:auto!important}
+}
+</style>
+
+
+<style id="pomru-v900-clean-icons-final">
+#game .statusIcon{
+  width:38px!important;height:38px!important;
+  border-radius:13px!important;
+  background:linear-gradient(145deg,#fff0f6,#eee9ff)!important;
+  position:relative!important;
+}
+#game .statusIcon::before{
+  content:"P";
+  position:absolute;inset:0;
+  display:grid;place-items:center;
+  color:#d94a8b;font-size:.72rem;font-weight:1000;
+}
+#memberAvatar{
+  background:#fff url("/assets/buddy/default-pink-buddy.png?v=900") center/88% no-repeat!important;
+  font-size:0!important;
+}
+.bbEnglishLevelGrid button>span{
+  display:grid!important;
+  place-items:center!important;
+  width:34px!important;height:34px!important;
+  margin:0 auto 5px!important;
+  border-radius:10px!important;
+  background:#eef1ff!important;
+  color:#5f57b7!important;
+  font-size:.58rem!important;
+  font-weight:1000!important;
+}
+</style>
+
 </head>
 <body>
 
@@ -13355,7 +14443,7 @@ body.p898FeedOpen{
     <div class="bbStartRow">
       <div class="bbSelectedSummary">
         <b id="bbSelectedTitle">📍 จำตำแหน่ง • ง่าย 2×2</b>
-        <span id="bbSelectedText">เล่นคนเดียว • หมี Brain Buddy • ไม่มีการจับเวลา</span>
+        <span id="bbSelectedText">เล่นคนเดียว • Memory • ไม่มีการจับเวลา</span>
       </div>
       <button class="bbStartGame" id="bbStartSelected">เริ่มเกมนี้ →</button>
     </div>
@@ -13412,9 +14500,6 @@ body.p898FeedOpen{
     <div class="p89Curtain p89CurtainL" aria-hidden="true"></div>
     <div class="p89Curtain p89CurtainR" aria-hidden="true"></div>
     <div class="p89Window" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-    <div class="p89Plant p89PlantL" aria-hidden="true">🌿</div>
-    <div class="p89Plant p89PlantR" aria-hidden="true">🪴</div>
-    <div class="p89Shelf" aria-hidden="true"><span>🧸</span><span>📚</span></div>
     <div class="p89Floor" aria-hidden="true"></div>
     <div class="p89Rug" aria-hidden="true"></div>
 
@@ -13425,15 +14510,15 @@ body.p898FeedOpen{
         <span class="p89Thai">ผมรู้</span>
       </button>
 
-      <div class="p89Tagline">💗 เล่น • เรียน • เลี้ยง Buddy 🌱</div>
+      <div class="p89Tagline">เล่น • เรียน • เติบโตไปกับ Buddy</div>
 
       <div class="p89TopActions">
         <button class="p89Coins" type="button" data-app-go="topup">
           <span class="coin">P</span><b id="pomruHomeCoinBalance">0</b><span class="plus">+</span>
         </button>
         <button class="p89Profile" type="button" data-app-action="profile">
-          <span class="avatar" id="p89ProfileAvatar">🧸</span>
-          <span class="profileCopy"><small id="p89ProfileLevel">Lv.1</small><b id="p89ProfileName">ผู้เยี่ยมชม</b></span>
+          <span class="avatar" id="p89ProfileAvatar"></span>
+          <span class="profileCopy"><small id="p89ProfileLevel">เลเวล 1</small><b id="p89ProfileName">ผู้เยี่ยมชม</b></span>
           <span class="gear">⚙</span>
         </button>
       </div>
@@ -13446,37 +14531,37 @@ body.p898FeedOpen{
         <div class="vTrack"><i id="p89HappyBar"></i></div>
       </article>
       <article class="p89Vital hungry">
-        <span class="vIcon">🍓</span>
+        <span class="vIcon foodIcon" aria-hidden="true"></span>
         <span class="vCopy"><small>ความอิ่ม</small><strong id="p89HungerPct">100%</strong></span>
         <div class="vTrack"><i id="p89HungerBar"></i></div>
       </article>
       <article class="p89Vital energy">
-        <span class="vIcon">⚡</span>
+        <span class="vIcon energyIcon" aria-hidden="true"></span>
         <span class="vCopy"><small>พลัง</small><strong id="p89EnergyPct">100%</strong></span>
         <div class="vTrack"><i id="p89EnergyBar"></i></div>
       </article>
     </section>
 
     <aside class="p89MissionCard">
-      <div class="cardHead"><span>🗓️</span><div><small>DAILY</small><h3>ภารกิจวันนี้</h3></div><span class="heart">♥</span></div>
-      <div class="missionRow"><span class="mi">🎮</span><div><b>เล่นเกม 1 ครั้ง</b><div class="miniTrack"><i style="width:0%"></i></div></div><span><strong>0/1</strong><small>+20</small></span></div>
-      <div class="missionRow"><span class="mi">🍓</span><div><b>ให้อาหาร Buddy</b><div class="miniTrack"><i style="width:0%"></i></div></div><span><strong>0/1</strong><small>+10</small></span></div>
-      <div class="missionRow"><span class="mi">🏃</span><div><b>ออกกำลังกาย</b><div class="miniTrack"><i style="width:0%"></i></div></div><span><strong>0/1</strong><small>+10</small></span></div>
-      <button type="button" class="p89MissionReward" id="p89MissionReward" disabled>🎁 รับรางวัล</button>
+      <div class="cardHead"><span class="p900CardMark daily" aria-hidden="true"></span><div><small>วันนี้</small><h3>ภารกิจประจำวัน</h3></div><span class="heart">♥</span></div>
+      <div class="missionRow" data-p899-mission="play"><span class="mi playMi" aria-hidden="true"></span><div><b>เล่นเกม 1 ครั้ง</b><div class="miniTrack"><i id="p899MissionPlayBar" style="width:0%"></i></div></div><span><strong id="p899MissionPlay">0/1</strong><small>แต้ม ✓</small></span></div>
+      <div class="missionRow" data-p899-mission="feed"><span class="mi feedMi" aria-hidden="true"></span><div><b>ให้อาหาร Buddy</b><div class="miniTrack"><i id="p899MissionFeedBar" style="width:0%"></i></div></div><span><strong id="p899MissionFeed">0/1</strong><small>ดูแล ✓</small></span></div>
+      <div class="missionRow" data-p899-mission="exercise"><span class="mi exerciseMi" aria-hidden="true"></span><div><b>ออกกำลังกาย</b><div class="miniTrack"><i id="p899MissionExerciseBar" style="width:0%"></i></div></div><span><strong id="p899MissionExercise">0/1</strong><small>พลัง ✓</small></span></div>
+      <button type="button" class="p89MissionReward" id="p89MissionReward" disabled>ทำครบ 3 ภารกิจก่อน</button>
     </aside>
 
     <aside class="p89RankCard">
-      <div class="cardHead"><span>🏆</span><div><small>RANKING</small><h3>อันดับวันนี้</h3></div><button type="button" data-app-action="rank">ดูทั้งหมด ›</button></div>
+      <div class="cardHead"><span class="p900CardMark rank" aria-hidden="true"></span><div><small>ซีซัน</small><h3>อันดับซีซัน</h3></div><button type="button" id="p899RankAllBtn">ดูทั้งหมด ›</button></div>
       <div class="p89RankRows" id="p89RankRows">
         <div class="rankLoading">กำลังโหลดอันดับ…</div>
       </div>
-      <button class="p89MyRank" type="button" data-app-action="rank"><span id="p89MyRankPos">#—</span><b id="p89MyRankName">อันดับของฉัน</b><strong id="p89MyRankScore">—</strong></button>
+      <button class="p89MyRank" type="button" id="p899MyRankBtn"><span id="p89MyRankPos">#—</span><b id="p89MyRankName">อันดับของฉัน</b><strong id="p89MyRankScore">—</strong></button>
     </aside>
 
     <section class="p89BuddyCard">
-      <div class="buddyCardHead"><span>🎟️ Buddy ของฉัน</span><button type="button" data-app-go="inventory">?</button></div>
-      <div class="buddyCardBody"><span class="miniBuddy"><img src="/assets/buddy/default-pink-buddy.png?v=891" alt="Pink Buddy"></span><div><b id="p89PetName">Pink Buddy</b><strong id="p89BuddyLevel">Level 1</strong><div class="xpTrack"><i id="p89XpBar"></i></div><small id="p89XpText">0 / 500 EXP</small></div></div>
-      <button type="button" class="dress" data-app-go="inventory">👕 แต่งตัว</button>
+      <div class="buddyCardHead"><span>Buddy ของฉัน</span><button type="button" data-app-go="inventory">?</button></div>
+      <div class="buddyCardBody"><span class="miniBuddy"><img src="/assets/buddy/default-pink-buddy.png?v=891" alt="Pink Buddy"></span><div><b id="p89PetName">Pink Buddy</b><strong id="p89BuddyLevel">เลเวล 1</strong><div class="xpTrack"><i id="p89XpBar"></i></div><small id="p89XpText">0 / 500 แต้ม</small></div></div>
+      <button type="button" class="dress" data-app-go="inventory">แต่งตัว</button>
     </section>
 
     <section class="p89PetCenter">
@@ -13493,13 +14578,13 @@ body.p898FeedOpen{
     </section>
 
     <button class="p89Online" type="button" data-app-action="arena">
-      <span class="onlineArt">🏆</span><span><small>ONLINE</small><b>แข่งขันออนไลน์</b><em>สร้างห้อง • แข่งกับเพื่อน</em></span><strong>เข้าร่วมเลย ›</strong>
+      <span class="onlineArt" aria-hidden="true"></span><span><small>ONLINE</small><b>แข่งขันออนไลน์</b><em>สร้างห้อง • แข่งกับเพื่อน</em></span><strong>เข้าร่วมเลย ›</strong>
     </button>
 
     <section class="p89MainActions" aria-label="กิจกรรมหลัก">
-      <button class="p89Action feed" type="button" id="p898FeedBtn" aria-haspopup="dialog" aria-controls="p898FeedModal"><span>🍓</span><b>ให้อาหาร</b><small>เปิดตู้เย็น Buddy ♥</small></button>
-      <button class="p89Action play" type="button" data-app-go="modes"><span>🎮</span><b>เล่นเกม</b><small>รับ Coins / EXP</small></button>
-      <button class="p89Action workout" type="button" id="p89WorkoutBtn"><span>🏃</span><b>ออกกำลังกาย</b><small>เพิ่มพลัง / ความสุข</small></button>
+      <button class="p89Action feed" type="button" id="p898FeedBtn" aria-haspopup="dialog" aria-controls="p898FeedModal"><span class="p900ActionIcon feedIcon" aria-hidden="true"></span><b>ให้อาหาร</b><small>ดูแลความอิ่มของ Buddy</small></button>
+      <button class="p89Action play" type="button" data-app-go="modes"><span class="p900ActionIcon playIcon" aria-hidden="true"></span><b>เล่นเกม</b><small>เก็บแต้มและเหรียญ</small></button>
+      <button class="p89Action workout" type="button" id="p89WorkoutBtn"><span class="p900ActionIcon workoutIcon" aria-hidden="true"></span><b>ออกกำลังกาย</b><small>เพิ่มพลังและความสุข</small></button>
     </section>
 
     
@@ -13646,7 +14731,7 @@ body.p898FeedOpen{
         </div>
 
         <div class="bbPetHomeActions">
-          <button type="button" class="primary" data-app-go="modes">🎮 เล่นหา EXP</button>
+          <button type="button" class="primary" data-app-go="modes">🎮 เล่นเก็บแต้ม</button>
           <button type="button" data-app-go="inventory">🧸 ดู Buddy</button>
         </div>
       </div>
@@ -13814,8 +14899,8 @@ body.p898FeedOpen{
     <div class="bbTopupBrand">
       <span class="bbTopupCoinBrand">B</span>
       <div>
-        <small>BRAIN BUDDY</small>
-        <h2>เติม Brain Coins</h2>
+        <small>POMRU</small>
+        <h2>เติมเหรียญ</h2>
       </div>
     </div>
 
@@ -13827,8 +14912,8 @@ body.p898FeedOpen{
 
   <section class="bbTopupHero">
     <div class="copy">
-      <span class="pill">COIN STORE</span>
-      <h1>เลือกแพ็กเกจ Brain Coins</h1>
+      <span class="pill">ร้านเหรียญ</span>
+      <h1>เลือกแพ็กเกจ เหรียญ</h1>
       <p>ขั้นนี้เป็นระบบ Order สำหรับทดสอบเท่านั้น ยังไม่มีการตัดเงินจริง และ Coins จะยังไม่ถูกเพิ่มจนกว่าจะมีระบบยืนยันการชำระเงิน</p>
     </div>
 
@@ -13844,7 +14929,7 @@ body.p898FeedOpen{
   <section class="bbTopupGuest hidden" id="bbTopupGuest">
     <div class="icon"></div>
     <div>
-      <strong>เข้าสู่ระบบก่อนเติม Brain Coins</strong>
+      <strong>เข้าสู่ระบบก่อนเติม เหรียญ</strong>
       <p>คำสั่งซื้อและยอด Coins จะผูกกับบัญชีสมาชิกของคุณ</p>
     </div>
     <button type="button" id="bbTopupLoginBtn">เข้าสู่ระบบ</button>
@@ -13882,7 +14967,7 @@ body.p898FeedOpen{
       <div class="bbTopupOrderSuccess">✓</div>
       <small>ORDER CREATED</small>
       <h3 id="bbTopupOrderTitle">สร้าง Order แล้ว</h3>
-      <p>ยังไม่มีการชำระเงินจริง และยังไม่เพิ่ม Brain Coins ในขั้นนี้</p>
+      <p>ยังไม่มีการชำระเงินจริง และยังไม่เพิ่ม เหรียญ ในขั้นนี้</p>
 
       <div class="bbTopupOrderSummary">
         <div><span>แพ็กเกจ</span><strong id="bbTopupOrderPackage">—</strong></div>
@@ -13909,7 +14994,7 @@ body.p898FeedOpen{
     <button class="bbClosetBack" type="button" data-app-go="home" aria-label="กลับหน้าหลัก">‹</button>
 
     <div class="bbClosetBrand">
-      <span class="bbClosetBrandIcon">🧸</span>
+      <span class="bbClosetBrandIcon" aria-hidden="true">P</span>
       <div>
         <small>BUDDY CLOSET</small>
         <h2>ห้องแต่งตัว</h2>
@@ -13918,13 +15003,13 @@ body.p898FeedOpen{
 
     <button class="bbClosetWallet" type="button" data-app-go="topup">
       <span class="bbCoinGlyph">B</span>
-      <span><small>Brain Coins</small><strong id="bbInventoryBalance">—</strong></span>
+      <span><small>เหรียญ</small><strong id="bbInventoryBalance">—</strong></span>
       <b>+</b>
     </button>
   </header>
 
   <section class="bbClosetGuest hidden" id="bbInventoryGuest">
-    <span class="icon">🔐</span>
+    <span class="icon lockMark" aria-hidden="true"></span>
     <div>
       <strong>เข้าสู่ระบบเพื่อเก็บชุดของ Buddy</strong>
       <p>Guest ยังเห็น Default Pink Buddy ได้ แต่การซื้อและแต่งตัวจะบันทึกกับบัญชีสมาชิก</p>
@@ -13962,14 +15047,14 @@ body.p898FeedOpen{
       </div>
 
       <div class="bbLoadoutSlots" id="bbLoadoutSlots">
-        <button data-closet-slot="character"><span>🧸</span><small>Buddy</small><b>Pink Buddy</b></button>
-        <button data-closet-slot="skin"><span>🎨</span><small>Skin</small><b>Default</b></button>
-        <button data-closet-slot="outfit"><span>👕</span><small>Outfit</small><b>ไม่ได้ใส่</b></button>
-        <button data-closet-slot="hat"><span>🎩</span><small>Hat</small><b>ไม่ได้ใส่</b></button>
-        <button data-closet-slot="accessory"><span>🕶️</span><small>Accessory</small><b>ไม่ได้ใส่</b></button>
-        <button data-closet-slot="effect"><span>✨</span><small>Effect</small><b>ไม่ได้ใส่</b></button>
-        <button data-closet-slot="frame"><span>🖼️</span><small>Frame</small><b>Default</b></button>
-        <button data-closet-slot="theme"><span>🌈</span><small>Theme</small><b>Default</b></button>
+        <button data-closet-slot="character"><span class="p900SlotLetter">B</span><small>Buddy</small><b>Pink Buddy</b></button>
+        <button data-closet-slot="skin"><span class="p900SlotLetter">S</span><small>Skin</small><b>Default</b></button>
+        <button data-closet-slot="outfit"><span class="p900SlotLetter">O</span><small>Outfit</small><b>ไม่ได้ใส่</b></button>
+        <button data-closet-slot="hat"><span class="p900SlotLetter">H</span><small>Hat</small><b>ไม่ได้ใส่</b></button>
+        <button data-closet-slot="accessory"><span class="p900SlotLetter">A</span><small>Accessory</small><b>ไม่ได้ใส่</b></button>
+        <button data-closet-slot="effect"><span class="p900SlotLetter">E</span><small>Effect</small><b>ไม่ได้ใส่</b></button>
+        <button data-closet-slot="frame"><span class="p900SlotLetter">F</span><small>Frame</small><b>Default</b></button>
+        <button data-closet-slot="theme"><span class="p900SlotLetter">T</span><small>Theme</small><b>Default</b></button>
       </div>
     </section>
 
@@ -13985,14 +15070,14 @@ body.p898FeedOpen{
 
       <div class="bbClosetTabs" role="tablist">
         <button class="active" type="button" data-inventory-filter="all">ทั้งหมด</button>
-        <button type="button" data-inventory-filter="character">🧸 Buddy</button>
-        <button type="button" data-inventory-filter="skin">🎨 Skin</button>
-        <button type="button" data-inventory-filter="outfit">👕 ชุด</button>
-        <button type="button" data-inventory-filter="hat">🎩 หมวก</button>
-        <button type="button" data-inventory-filter="accessory">🕶️ Accessory</button>
-        <button type="button" data-inventory-filter="effect">✨ Effect</button>
-        <button type="button" data-inventory-filter="frame">🖼️ Frame</button>
-        <button type="button" data-inventory-filter="theme">🌈 Theme</button>
+        <button type="button" data-inventory-filter="character">Buddy</button>
+        <button type="button" data-inventory-filter="skin">Skin</button>
+        <button type="button" data-inventory-filter="outfit">ชุด</button>
+        <button type="button" data-inventory-filter="hat">หมวก</button>
+        <button type="button" data-inventory-filter="accessory">Accessory</button>
+        <button type="button" data-inventory-filter="effect">Effect</button>
+        <button type="button" data-inventory-filter="frame">Frame</button>
+        <button type="button" data-inventory-filter="theme">Theme</button>
       </div>
 
       <div class="bbClosetGrid" id="bbInventoryGrid" aria-live="polite">
@@ -14013,12 +15098,12 @@ body.p898FeedOpen{
 
     <div class="bbShopBrand">
       <span class="bbShopBagMini" aria-hidden="true"></span>
-      <div><small>BRAIN BUDDY</small><h2>Buddy Shop</h2></div>
+      <div><small>POMRU</small><h2>Buddy Shop</h2></div>
     </div>
 
     <button class="bbShopWallet bbShopWalletTopup" type="button" data-app-go="topup">
       <span class="bbCoinGlyph" aria-hidden="true">B</span>
-      <span class="bbShopWalletText"><small>Brain Coins</small><strong id="bbShopBalance">—</strong></span>
+      <span class="bbShopWalletText"><small>เหรียญ</small><strong id="bbShopBalance">—</strong></span>
       <span class="bbShopWalletPlus">+</span>
     </button>
   </header>
@@ -14027,7 +15112,7 @@ body.p898FeedOpen{
     <div class="bbShopV2HeroCopy">
       <span>SHOP 2.0</span>
       <h1>สร้าง Buddy ในแบบของคุณ</h1>
-      <p>เปลี่ยนตัวละคร สกิน ชุด หมวก และเอฟเฟกต์ได้อย่างอิสระ ของแต่งไม่มีผลต่อคะแนนหรือ RP</p>
+      <p>เปลี่ยนตัวละคร สกิน ชุด หมวก และเอฟเฟกต์ได้อย่างอิสระ ของแต่งไม่มีผลต่อแรงก์หรืออันดับ</p>
       <button type="button" data-app-go="inventory">เปิดห้องแต่งตัว →</button>
     </div>
 
@@ -14049,7 +15134,7 @@ body.p898FeedOpen{
     <div class="bbStarterRewardCopy">
       <small>WELCOME BONUS</small>
       <h3>โบนัสต้อนรับสมาชิก</h3>
-      <p>รับ Brain Coins ฟรีได้ 1 ครั้งต่อบัญชี</p>
+      <p>รับ เหรียญ ฟรีได้ 1 ครั้งต่อบัญชี</p>
     </div>
     <button class="bbStarterRewardBtn" id="bbClaimStarterCoins">รับโบนัส</button>
   </section>
@@ -14071,14 +15156,14 @@ body.p898FeedOpen{
 
     <div class="bbShopV2Tabs" role="tablist">
       <button class="active" data-shop-filter="all">ทั้งหมด</button>
-      <button data-shop-filter="character">🧸 Buddy</button>
-      <button data-shop-filter="skin">🎨 Skin</button>
-      <button data-shop-filter="outfit">👕 ชุด</button>
-      <button data-shop-filter="hat">🎩 หมวก</button>
-      <button data-shop-filter="accessory">🕶️ Accessory</button>
-      <button data-shop-filter="effect">✨ Effect</button>
-      <button data-shop-filter="frame">🖼️ Frame</button>
-      <button data-shop-filter="theme">🌈 Theme</button>
+      <button data-shop-filter="character">Buddy</button>
+      <button data-shop-filter="skin">Skin</button>
+      <button data-shop-filter="outfit">ชุด</button>
+      <button data-shop-filter="hat">หมวก</button>
+      <button data-shop-filter="accessory">Accessory</button>
+      <button data-shop-filter="effect">Effect</button>
+      <button data-shop-filter="frame">Frame</button>
+      <button data-shop-filter="theme">Theme</button>
     </div>
 
     <div class="bbShopGrid bbShopV2Grid" id="bbShopGrid" aria-live="polite">
@@ -14102,7 +15187,7 @@ body.p898FeedOpen{
     </button>
     <div class="bbWorldBrand">
       <span class="mark"></span>
-      <div><small>BRAIN BUDDY</small><strong>Game Worlds</strong></div>
+      <div><small>POMRU</small><strong>เลือกเกม</strong></div>
     </div>
     <div class="bbWorldMiniNav">
       <button data-app-action="rank">อันดับ</button>
@@ -14191,29 +15276,29 @@ body.p898FeedOpen{
       <div>
         <small>MATH JOURNEY</small>
         <h2>เลือกระดับคณิตศาสตร์</h2>
-        <p id="bbMathSelectedLevelName">🌱 Math 1 • พื้นฐานนักคิด</p>
+        <p id="bbMathSelectedLevelName">Math 1 • พื้นฐานนักคิด</p>
       </div>
       <span class="bbMathBankBadge"><b id="bbMathLevelTotal">0</b> ข้อ</span>
     </div>
 
     <div class="bbMathLevelGrid">
       <button type="button" data-math-level="math1" class="active">
-        <span>🌱</span><b>Math 1</b><small>บวก • ลบ</small><em data-math-level-count="math1">0 ข้อ</em>
+        <span>M1</span><b>Math 1</b><small>บวก • ลบ</small><em data-math-level-count="math1">0 ข้อ</em>
       </button>
       <button type="button" data-math-level="math2">
-        <span>⚡</span><b>Math 2</b><small>คูณ • หาร</small><em data-math-level-count="math2">0 ข้อ</em>
+        <span>M2</span><b>Math 2</b><small>คูณ • หาร</small><em data-math-level-count="math2">0 ข้อ</em>
       </button>
       <button type="button" data-math-level="math3">
-        <span>🧠</span><b>Math 3</b><small>หลายขั้นตอน</small><em data-math-level-count="math3">0 ข้อ</em>
+        <span>M3</span><b>Math 3</b><small>หลายขั้นตอน</small><em data-math-level-count="math3">0 ข้อ</em>
       </button>
       <button type="button" data-math-level="math4">
-        <span>💎</span><b>Math 4</b><small>เศษส่วน • %</small><em data-math-level-count="math4">0 ข้อ</em>
+        <span>M4</span><b>Math 4</b><small>เศษส่วน • %</small><em data-math-level-count="math4">0 ข้อ</em>
       </button>
       <button type="button" data-math-level="math5">
-        <span>🔥</span><b>Math 5</b><small>สมการ</small><em data-math-level-count="math5">0 ข้อ</em>
+        <span>M5</span><b>Math 5</b><small>สมการ</small><em data-math-level-count="math5">0 ข้อ</em>
       </button>
       <button type="button" data-math-level="math6">
-        <span>👑</span><b>Math 6</b><small>คิดวิเคราะห์</small><em data-math-level-count="math6">0 ข้อ</em>
+        <span>M6</span><b>Math 6</b><small>คิดวิเคราะห์</small><em data-math-level-count="math6">0 ข้อ</em>
       </button>
     </div>
   </section>
@@ -14338,26 +15423,26 @@ body.p898FeedOpen{
       <div>
         <small>ENGLISH JOURNEY • A1 → C1</small>
         <h2>เลือกระดับภาษาอังกฤษ</h2>
-        <p id="bbEnglishSelectedLevelName">🌱 A1 • Beginner</p>
+        <p id="bbEnglishSelectedLevelName">A1 • Beginner</p>
       </div>
       <span class="bbEnglishBankBadge"><b id="bbEnglishLevelTotal">0</b> รายการ</span>
     </div>
 
     <div class="bbEnglishLevelGrid">
       <button type="button" data-english-level="a1" class="active">
-        <span>🌱</span><b>A1</b><small>Beginner</small><em data-english-level-count="a1">0 รายการ</em>
+        <span>A1</span><b>A1</b><small>Beginner</small><em data-english-level-count="a1">0 รายการ</em>
       </button>
       <button type="button" data-english-level="a2">
-        <span>✨</span><b>A2</b><small>Elementary</small><em data-english-level-count="a2">0 รายการ</em>
+        <span>A2</span><b>A2</b><small>Elementary</small><em data-english-level-count="a2">0 รายการ</em>
       </button>
       <button type="button" data-english-level="b1">
-        <span>🧠</span><b>B1</b><small>Intermediate</small><em data-english-level-count="b1">0 รายการ</em>
+        <span>B1</span><b>B1</b><small>Intermediate</small><em data-english-level-count="b1">0 รายการ</em>
       </button>
       <button type="button" data-english-level="b2">
-        <span>🔥</span><b>B2</b><small>Upper Intermediate</small><em data-english-level-count="b2">0 รายการ</em>
+        <span>B2</span><b>B2</b><small>Upper Intermediate</small><em data-english-level-count="b2">0 รายการ</em>
       </button>
       <button type="button" data-english-level="c1">
-        <span>👑</span><b>C1</b><small>Advanced</small><em data-english-level-count="c1">0 รายการ</em>
+        <span>C1</span><b>C1</b><small>Advanced</small><em data-english-level-count="c1">0 รายการ</em>
       </button>
     </div>
   </section>
@@ -14380,7 +15465,7 @@ body.p898FeedOpen{
       <span class="copy"><b>Typing</b><small>ฝึกพิมพ์คำตอบด้วยตัวเอง</small><em><span data-content-count="english:typing">0</span> รายการ</em></span><span class="play">▶</span>
     </button>
     <button class="bbSubjectGameCard purple" data-learning-start data-learning-subject="language" data-learning-type="sentence_order" data-learning-title="Sentence Order">
-      <span class="icon order"><i>I</i><i>♥</i><i>U</i></span>
+      <span class="icon order"><i>I</i><i>—</i><i>U</i></span>
       <span class="copy"><b>Sentence Order</b><small>เรียงคำให้เป็นประโยคภาษาอังกฤษที่ถูกต้อง</small><em><span data-content-count="english:sentence_order">0</span> รายการ</em></span><span class="play">▶</span>
     </button>
     <button class="bbSubjectGameCard cyan" data-learning-start data-learning-subject="language" data-learning-type="listening" data-learning-title="Listening">
@@ -14395,8 +15480,8 @@ body.p898FeedOpen{
   <div class="bbLearningPlayBg" aria-hidden="true"><i></i><i></i><i></i></div>
   <header class="bbLearningTop">
     <button class="bbLearningBack" type="button" id="bbLearningBack"><svg viewBox="0 0 64 64"><path d="M38 14 20 32l18 18" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-    <div class="bbLearningTitle"><small id="bbLearningSubjectLabel">BRAIN BUDDY</small><strong id="bbLearningGameTitle">เกมการเรียนรู้</strong></div>
-    <div class="bbLearningScore"><small>SCORE</small><strong id="bbLearningScore">0</strong></div>
+    <div class="bbLearningTitle"><small id="bbLearningSubjectLabel">POMRU</small><strong id="bbLearningGameTitle">เกมการเรียนรู้</strong></div>
+    <div class="bbLearningScore"><small>คะแนนรอบนี้</small><strong id="bbLearningScore">0</strong></div>
   </header>
 
   <section class="bbLearningCard">
@@ -14446,18 +15531,18 @@ body.p898FeedOpen{
     </div>
 
     <div id="bbLearningResult" class="bbLearningResult hidden">
-      <span class="trophy">★</span>
-      <small>ROUND COMPLETE</small>
+      <span class="trophy" aria-hidden="true"></span>
+      <small>จบรอบ</small>
       <h2>จบรอบแล้ว!</h2>
       <strong id="bbLearningFinalScore">0</strong>
       <p id="bbLearningFinalText"></p>
 
       <div class="bbPracticeReward hidden" id="bbPracticeReward">
-        <div class="bbPracticeRewardIcon">⭐</div>
+        <div class="bbPracticeRewardIcon" aria-hidden="true">P</div>
         <div class="bbPracticeRewardCopy">
-          <small>EXP REWARD</small>
+          <small>รางวัลจากเกม</small>
           <b id="bbPracticeRewardTitle">กำลังคำนวณรางวัล…</b>
-          <span id="bbPracticeRewardDetail">Brain Buddy กำลังประเมินผลงานรอบนี้</span>
+          <span id="bbPracticeRewardDetail">กำลังสรุปผลงานรอบนี้</span>
         </div>
       </div>
 
@@ -14484,7 +15569,7 @@ body.p898FeedOpen{
         <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M38 14 20 32l18 18" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
 
-      <div class="bbCandyBrand" aria-label="Brain Buddy">
+      <div class="bbCandyBrand" aria-label="POMRU">
         <span class="bbCandyBrandMark" aria-hidden="true">
           <svg viewBox="0 0 100 100">
             <defs>
@@ -14499,7 +15584,7 @@ body.p898FeedOpen{
             <ellipse cx="38" cy="28" rx="19" ry="10" fill="rgba(255,255,255,.24)"/>
           </svg>
         </span>
-        <strong><i>Brain</i> <b>Buddy</b></strong>
+        <strong><i>POM</i><b>RU</b></strong>
         <span class="bbCandyBrandSpark" aria-hidden="true"></span>
       </div>
 
@@ -14521,8 +15606,8 @@ body.p898FeedOpen{
 
     <div class="bbCandyIntro">
       <div class="bbCandyIntroCopy">
-        <small>เกมหมี • 6 รูปแบบ</small>
-        <h2>เกมหมี Brain Buddy</h2>
+        <small>MEMORY • 6 รูปแบบ</small>
+        <h2>เกมความจำ</h2>
         <p>เลือกเกมฝึกความจำที่อยากเล่น แล้วค่อยเลือกระดับในขั้นถัดไป</p>
       </div>
 
@@ -14599,7 +15684,7 @@ body.p898FeedOpen{
     </div>
 
     <header class="bbSetupTop">
-      <div class="bbSetupBrand"><span class="mark"></span><b><i>Brain</i> <strong>Buddy</strong></b></div>
+      <div class="bbSetupBrand"><span class="mark"></span><b><i>POM</i><strong>RU</strong></b></div>
       <nav class="bbSetupNav">
         <button data-app-go="home">หน้าหลัก</button>
         <button data-app-go="modes" class="active">เล่นเกม</button>
@@ -14647,10 +15732,10 @@ body.p898FeedOpen{
       </div>
 
       <div class="bbAppSetupBlock">
-        <div class="bbAppSetupLabel"><b>รูปแบบการเล่น</b><small id="bbAppStyleNote">คนเดียวสะสม XP ได้</small></div>
+        <div class="bbAppSetupLabel"><b>รูปแบบการเล่น</b><small id="bbAppStyleNote">คนเดียวสะสมแต้มได้</small></div>
         <div class="bbAppStyleGrid">
           <button class="active" data-app-style="solo">
-            <span class="peopleIcon solo"></span><b>คนเดียว</b><small>เก็บคะแนนและ XP</small>
+            <span class="peopleIcon solo"></span><b>คนเดียว</b><small>เก็บแต้มและเหรียญ</small>
           </button>
           <button data-app-style="team" id="bbAppTeamChoice">
             <span class="peopleIcon team"></span><b>เล่นเป็นทีม</b><small>แข่งขันกับเพื่อนกันเลย!</small>
@@ -14663,7 +15748,7 @@ body.p898FeedOpen{
       </div>
 
       <div class="bbAppSetupSummary">
-        <div class="bbSetupChosen"><small>เกมที่เลือก</small><b id="bbSetupSummary">จำตำแหน่ง • ง่าย 2×2</b><span id="bbSetupSummary2">คนเดียว • หมี Brain Buddy</span></div>
+        <div class="bbSetupChosen"><small>เกมที่เลือก</small><b id="bbSetupSummary">จำตำแหน่ง • ง่าย 2×2</b><span id="bbSetupSummary2">คนเดียว • Memory</span></div>
         <button class="bbAppStartBtn" id="bbAppStartBtn">เริ่มเกม →</button>
       </div>
     </div>
@@ -14672,26 +15757,26 @@ body.p898FeedOpen{
   <section class="bbAppScreen" id="bbAppScoreInfo" data-app-screen="scoreinfo">
     <div class="bbAppScreenHead">
       <button class="bbAppBack" data-app-back>←</button>
-      <div><small>ข้อมูลเกม</small><h2>⭐ คะแนนและ XP</h2></div><span></span>
+      <div><small>ข้อมูลเกม</small><h2>คะแนนและแต้ม</h2></div><span></span>
     </div>
     <div class="bbAppInfoGrid">
       <div class="bbAppInfoCard">
-        <h3>🎯 คะแนนพื้นฐาน</h3>
+        <h3>คะแนนพื้นฐาน</h3>
         <div class="bbAppInfoRows">
-          <div><span>📍 จำตำแหน่ง</span><b>100</b></div><div><span>🧩 จับคู่</span><b>80</b></div>
-          <div><span>👀 ตัวไหนหาย</span><b>120</b></div><div><span>🔄 สลับที่</span><b>150</b></div>
-          <div><span>🔎 อะไรเปลี่ยน</span><b>130</b></div><div><span>🔢 จำลำดับ</span><b>160</b></div>
+          <div><span>จำตำแหน่ง</span><b>100</b></div><div><span>จับคู่</span><b>80</b></div>
+          <div><span>ตัวไหนหาย</span><b>120</b></div><div><span>สลับที่</span><b>150</b></div>
+          <div><span>อะไรเปลี่ยน</span><b>130</b></div><div><span>จำลำดับ</span><b>160</b></div>
         </div>
         <p>คะแนนที่ได้ = คะแนนพื้นฐาน × ระดับความยาก</p>
       </div>
       <div class="bbAppInfoCard">
-        <h3>⭐ คะแนน → XP</h3>
+        <h3>คะแนน → แต้มสะสม</h3>
         <div class="bbAppInfoRows xp">
-          <div><span>0–399</span><b>+50 XP</b></div><div><span>400–799</span><b>+100 XP</b></div>
-          <div><span>800–1,199</span><b>+150 XP</b></div><div><span>1,200–1,799</span><b>+220 XP</b></div>
-          <div><span>1,800–2,499</span><b>+300 XP</b></div><div><span>2,500+</span><b>+400 XP</b></div>
+          <div><span>0–399</span><b>+50 แต้ม</b></div><div><span>400–799</span><b>+100 แต้ม</b></div>
+          <div><span>800–1,199</span><b>+150 แต้ม</b></div><div><span>1,200–1,799</span><b>+220 แต้ม</b></div>
+          <div><span>1,800–2,499</span><b>+300 แต้ม</b></div><div><span>2,500+</span><b>+400 แต้ม</b></div>
         </div>
-        <p>ทุก 500 XP = เพิ่ม 1 Level • Ranked ใช้ RP แยกจาก XP</p>
+        <p>ทุก 500 แต้ม = เพิ่ม 1 เลเวล • แต้มซีซันใช้จัดอันดับและแรงก์</p>
       </div>
     </div>
   </section>
@@ -14702,26 +15787,26 @@ body.p898FeedOpen{
 <div class="bbGameCandyBackdrop" aria-hidden="true"><i class="st a"></i><i class="st b"></i><i class="st c"></i></div>
 
 <div class="bbRankedGameHud hidden" id="bbRankedGameHud">
-  <div><span>⚔️ RANKED</span><b id="bbRankedGameMode">Ranked Match</b></div>
+  <div><span>RANKED</span><b id="bbRankedGameMode">Ranked Match</b></div>
   <div class="bbRankedGameRight">
     <div class="bbRankedGameClock"><small id="bbRankedGameClockLabel">เวลาตอบ</small><strong id="bbRankedGameClock">--</strong></div>
-    <button class="bbRankedForfeitBtn" id="bbRankedForfeitBtn">🏳️ ยอมแพ้</button>
+    <button class="bbRankedForfeitBtn" id="bbRankedForfeitBtn">ยอมแพ้</button>
   </div>
-</div><div class="shell"><div class="gameCard"><div class="gameTop"><div class="status"><div class="statusIcon" id="statusIcon">👀</div><div><b id="statusTitle">พร้อมเริ่มเล่น</b><span id="statusText">กด เล่นด่วน หรือเริ่มรอบใหม่ได้เลย</span></div></div><div class="hudrow"><div class="hud"><span>PROGRESS</span><b id="progress">0 / 4</b></div><div class="hud"><span>COMBO</span><b id="combo">0</b></div><div class="hud"><span>SCORE</span><b id="score">0</b></div><div class="hud"><span>ระดับ</span><b id="levelHud">1</b></div><div class="hud hidden" id="livesHud"><span>LIVES</span><b id="lives">♥♥♥</b></div></div></div><div class="timer hidden" id="timer"><i id="timerFill"></i></div><div class="stage"><div class="scene active" id="boardScene"><div class="sceneTitle"><h2 id="boardTitle">พร้อมเริ่ม</h2><p id="boardSub">เลือกโหมดและระดับจากหน้าแรกได้ตลอด</p></div><div class="answer hidden" id="answer"></div><div class="board" id="board"></div></div><div class="scene" id="targetScene"><div class="targetWrap"><div class="targetCard" id="targetCard"></div><div class="targetLabel" id="targetLabel">ตัวนี้อยู่หมายเลขอะไร?</div></div></div><div class="scene" id="choiceScene"><div class="sceneTitle"><h2 id="choiceTitle">เลือกคำตอบ</h2><p id="choiceSub">เลือกคำตอบที่ถูกต้อง</p></div><div class="choiceGrid" id="choiceGrid"></div></div><div class="scene" id="resultScene"><div class="resultWrap"><div class="resultCard"><h2>จบรอบแล้ว! 🎉</h2><p id="resultText">มาดูผลของรอบนี้กัน</p><div class="bigคะแนน" id="resultคะแนน">0</div><div style="font-size:9px;color:var(--muted)" id="resultคะแนนLabel">คะแนน</div><div class="resultMetrics"><div class="resultMetric"><b id="resultCorrect">0</b><span>ตอบถูก</span></div><div class="resultMetric"><b id="resultAcc">0%</b><span>ความแม่นยำ</span></div><div class="resultMetric"><b id="resultCombo">0</b><span>Best Combo</span></div><div class="resultMetric"><b id="resultXP">+0</b><span>XP</span></div></div><div class="insight"><strong id="insightTitle">🧠 จุดเด่นจากรอบนี้</strong><p id="insightText"></p><div class="nexts" id="nexts"></div><p style="font-size:9px;margin-top:9px">คำแนะนำอิงแนวคิด working memory, attention, visuospatial processing และงานวิจัยด้าน cognitive training ที่สรุปไว้ในเมนู “หลักการ & งานวิจัย”</p></div><div class="resultActions"><button class="btn primary" id="againBtn">เล่นอีกครั้ง</button><button class="btn" id="saveBtn">🖼️ บันทึกผล</button><button class="btn" id="shareBtn">↗ แชร์</button><button class="btn" id="resultSettings">เปลี่ยนเกม</button></div></div></div></div></div><div class="teamBar hidden" id="teamBar"></div><div class="dock"><button class="secondary" id="homeBtn">⌂</button><button class="main" id="main">เริ่มรอบใหม่</button><button class="secondary hidden" id="hintBtn">💡 <span id="hintNum">3</span></button><button class="secondary hidden" id="voiceBtn">🗣️ เฉลย</button><button class="secondary hidden" id="replayBtn">↺ ดูโจทย์</button><button class="secondary" id="settingsBtn">⚙️</button></div><div class="hintline" id="hintline">ไม่มีการจับเวลาโดยค่าเริ่มต้น คุณเป็นคนกำหนดจังหวะเอง</div></div></div></section>
+</div><div class="shell"><div class="gameCard"><div class="gameTop"><div class="status"><div class="statusIcon" id="statusIcon" aria-hidden="true"></div><div><b id="statusTitle">พร้อมเริ่มเล่น</b><span id="statusText">กด เล่นด่วน หรือเริ่มรอบใหม่ได้เลย</span></div></div><div class="hudrow"><div class="hud"><span>PROGRESS</span><b id="progress">0 / 4</b></div><div class="hud"><span>COMBO</span><b id="combo">0</b></div><div class="hud"><span>SCORE</span><b id="score">0</b></div><div class="hud"><span>ระดับ</span><b id="levelHud">1</b></div><div class="hud hidden" id="livesHud"><span>LIVES</span><b id="lives">♥♥♥</b></div></div></div><div class="timer hidden" id="timer"><i id="timerFill"></i></div><div class="stage"><div class="scene active" id="boardScene"><div class="sceneTitle"><h2 id="boardTitle">พร้อมเริ่ม</h2><p id="boardSub">เลือกโหมดและระดับจากหน้าแรกได้ตลอด</p></div><div class="answer hidden" id="answer"></div><div class="board" id="board"></div></div><div class="scene" id="targetScene"><div class="targetWrap"><div class="targetCard" id="targetCard"></div><div class="targetLabel" id="targetLabel">ตัวนี้อยู่หมายเลขอะไร?</div></div></div><div class="scene" id="choiceScene"><div class="sceneTitle"><h2 id="choiceTitle">เลือกคำตอบ</h2><p id="choiceSub">เลือกคำตอบที่ถูกต้อง</p></div><div class="choiceGrid" id="choiceGrid"></div></div><div class="scene" id="resultScene"><div class="resultWrap"><div class="resultCard"><h2>จบรอบแล้ว</h2><p id="resultText">มาดูผลของรอบนี้กัน</p><div class="bigคะแนน" id="resultคะแนน">0</div><div style="font-size:9px;color:var(--muted)" id="resultคะแนนLabel">คะแนน</div><div class="resultMetrics"><div class="resultMetric"><b id="resultCorrect">0</b><span>ตอบถูก</span></div><div class="resultMetric"><b id="resultAcc">0%</b><span>ความแม่นยำ</span></div><div class="resultMetric"><b id="resultCombo">0</b><span>Best Combo</span></div><div class="resultMetric"><b id="resultXP">+0</b><span>แต้ม</span></div></div><div class="insight"><strong id="insightTitle">จุดเด่นจากรอบนี้</strong><p id="insightText"></p><div class="nexts" id="nexts"></div><p style="font-size:9px;margin-top:9px">คำแนะนำอิงแนวคิด working memory, attention, visuospatial processing และงานวิจัยด้าน cognitive training ที่สรุปไว้ในเมนู “หลักการ & งานวิจัย”</p></div><div class="resultActions"><button class="btn primary" id="againBtn">เล่นอีกครั้ง</button><button class="btn" id="saveBtn">บันทึกผล</button><button class="btn" id="shareBtn">↗ แชร์</button><button class="btn" id="resultSettings">เปลี่ยนเกม</button></div></div></div></div></div><div class="teamBar hidden" id="teamBar"></div><div class="dock"><button class="secondary" id="homeBtn">⌂</button><button class="main" id="main">เริ่มรอบใหม่</button><button class="secondary hidden" id="hintBtn">คำใบ้ <span id="hintNum">3</span></button><button class="secondary hidden" id="voiceBtn">เฉลย</button><button class="secondary hidden" id="replayBtn">↺ ดูโจทย์</button><button class="secondary" id="settingsBtn">ตั้งค่า</button></div><div class="hintline" id="hintline">ไม่มีการจับเวลาโดยค่าเริ่มต้น คุณเป็นคนกำหนดจังหวะเอง</div></div></div></section>
 <!-- ปรับเกมเอง -->
 <div class="modal hidden" id="customModal"><div class="modalCard wide"><button class="close" data-close="customModal">×</button><h2>ปรับเกมเอง</h2><p class="lead">เลือกได้ละเอียด แต่ค่าเริ่มต้นยังคงง่าย ถ้าไม่อยากตั้งค่าให้ใช้ เล่นด่วน ได้เสมอ</p><div class="settingGrid">
-<div class="setting"><h3>👤 รูปแบบผู้เล่น</h3><div class="segment" id="styleSeg"><button class="chip active" data-style="solo">คนเดียว</button><button class="chip" data-style="team">ทีม</button></div></div>
-<div class="setting"><h3>🎮 เกม</h3><div class="segment" id="modeSeg"><button class="chip active" data-mode="position">จำตำแหน่ง</button><button class="chip" data-mode="match">จับคู่</button><button class="chip" data-mode="missing">ตัวไหนหาย</button><button class="chip" data-mode="swap">สลับที่</button><button class="chip" data-mode="change">อะไรเปลี่ยน</button><button class="chip" data-mode="sequence">จำลำดับ</button></div></div>
-<div class="setting"><h3>🌱 ระดับ</h3><div class="segment" id="diffSeg"><button class="chip active" data-diff="easy">ง่าย 2×2</button><button class="chip" data-diff="normal">3×3</button><button class="chip" data-diff="hard">4×4</button><button class="chip" data-diff="expert">Expert</button></div></div>
-<div class="setting"><h3>🧸 เนื้อหา</h3><div class="segment" id="sourceSeg"><button class="chip active" data-source="teddy">Teddy</button><button class="chip" data-source="animals">Animals</button><button class="chip" data-source="space">Space</button><button class="chip" data-source="food">Food</button><button class="chip" data-source="fantasy">Fantasy</button><button class="chip" data-source="custom">รูปของฉัน</button></div></div>
-<div class="setting"><h3>⚡ Adaptive Difficulty</h3><label class="switchrow"><input type="checkbox" id="adaptiveToggle"><span class="switch"></span><span>ค่อย ๆ ปรับความท้าทายตามผลงานในรอบ</span></label></div>
-<div class="setting"><h3>🔥 Challenge / Combo</h3><label class="switchrow"><input type="checkbox" id="comboToggle" checked><span class="switch"></span><span>เปิด Combo และคะแนนโบนัส</span></label></div>
+<div class="setting"><h3>รูปแบบผู้เล่น</h3><div class="segment" id="styleSeg"><button class="chip active" data-style="solo">คนเดียว</button><button class="chip" data-style="team">ทีม</button></div></div>
+<div class="setting"><h3>เกม</h3><div class="segment" id="modeSeg"><button class="chip active" data-mode="position">จำตำแหน่ง</button><button class="chip" data-mode="match">จับคู่</button><button class="chip" data-mode="missing">ตัวไหนหาย</button><button class="chip" data-mode="swap">สลับที่</button><button class="chip" data-mode="change">อะไรเปลี่ยน</button><button class="chip" data-mode="sequence">จำลำดับ</button></div></div>
+<div class="setting"><h3>ระดับ</h3><div class="segment" id="diffSeg"><button class="chip active" data-diff="easy">ง่าย 2×2</button><button class="chip" data-diff="normal">3×3</button><button class="chip" data-diff="hard">4×4</button><button class="chip" data-diff="expert">Expert</button></div></div>
+<div class="setting"><h3>เนื้อหา</h3><div class="segment" id="sourceSeg"><button class="chip active" data-source="teddy">Teddy</button><button class="chip" data-source="animals">Animals</button><button class="chip" data-source="space">Space</button><button class="chip" data-source="food">Food</button><button class="chip" data-source="fantasy">Fantasy</button><button class="chip" data-source="custom">รูปของฉัน</button></div></div>
+<div class="setting"><h3>Adaptive Difficulty</h3><label class="switchrow"><input type="checkbox" id="adaptiveToggle"><span class="switch"></span><span>ค่อย ๆ ปรับความท้าทายตามผลงานในรอบ</span></label></div>
+<div class="setting"><h3>Challenge / Combo</h3><label class="switchrow"><input type="checkbox" id="comboToggle" checked><span class="switch"></span><span>เปิด Combo และคะแนนโบนัส</span></label></div>
 <div class="setting"><h3>⏱️ Timer</h3><select class="select" id="timerSelect"><option value="0">ไม่จับเวลา</option><option value="10">10 วินาที</option><option value="20">20 วินาที</option><option value="30">30 วินาที</option></select></div>
-<div class="setting"><h3>❤️ Lives Mode</h3><label class="switchrow"><input type="checkbox" id="livesToggle"><span class="switch"></span><span>เริ่มด้วย 3 หัวใจ</span></label></div>
-<div class="setting teamSetting hidden" id="teamCountBox"><h3>👥 จำนวนทีม</h3><select class="select" id="teamCount"><option value="2">2 ทีม</option><option value="3">3 ทีม</option><option value="4">4 ทีม</option><option value="5">5 ทีม</option><option value="6">6 ทีม</option></select></div>
-<div class="setting teamSetting hidden" id="answerBox"><h3>🗣️ วิธีตอบจำตำแหน่ง</h3><div class="segment" id="answerSeg"><button class="chip active" data-answer="screen">กดบนจอ</button><button class="chip" data-answer="voice">ตอบออกเสียง</button></div></div>
-<div class="setting full teamSetting hidden"><h3>🎨 Team Mode Pro</h3><p>ตั้งชื่อ สี และ Emoji ทีมได้เอง</p><div class="teamEditor" id="teamEditor"></div><button class="btn small" id="randomTeam" style="margin-top:8px">🎲 สุ่มทีมที่จะตอบ</button><div id="randomTeamOut" style="font-size:11px;font-weight:900;margin-top:6px;color:#7558c6"></div></div>
-<div class="setting full hidden" id="uploadBox"><h3>🖼️ Custom Images</h3><p>อัปโหลดอย่างน้อย 4 รูป เกมจะย่อรูปก่อนเก็บในเครื่องเพื่อลดขนาด</p><div class="uploadZone"><input type="file" id="upload" accept="image/*" multiple><div class="uploadPreview" id="uploadPreview"></div></div></div>
+<div class="setting"><h3>Lives Mode</h3><label class="switchrow"><input type="checkbox" id="livesToggle"><span class="switch"></span><span>เริ่มด้วย 3 หัวใจ</span></label></div>
+<div class="setting teamSetting hidden" id="teamCountBox"><h3>จำนวนทีม</h3><select class="select" id="teamCount"><option value="2">2 ทีม</option><option value="3">3 ทีม</option><option value="4">4 ทีม</option><option value="5">5 ทีม</option><option value="6">6 ทีม</option></select></div>
+<div class="setting teamSetting hidden" id="answerBox"><h3>วิธีตอบจำตำแหน่ง</h3><div class="segment" id="answerSeg"><button class="chip active" data-answer="screen">กดบนจอ</button><button class="chip" data-answer="voice">ตอบออกเสียง</button></div></div>
+<div class="setting full teamSetting hidden"><h3>Team Mode Pro</h3><p>ตั้งชื่อ สี และสัญลักษณ์ทีมได้เอง</p><div class="teamEditor" id="teamEditor"></div><button class="btn small" id="randomTeam" style="margin-top:8px">สุ่มทีมที่จะตอบ</button><div id="randomTeamOut" style="font-size:11px;font-weight:900;margin-top:6px;color:#7558c6"></div></div>
+<div class="setting full hidden" id="uploadBox"><h3>Custom Images</h3><p>อัปโหลดอย่างน้อย 4 รูป เกมจะย่อรูปก่อนเก็บในเครื่องเพื่อลดขนาด</p><div class="uploadZone"><input type="file" id="upload" accept="image/*" multiple><div class="uploadPreview" id="uploadPreview"></div></div></div>
 
 </div><div class="modalActions"><button class="btn" data-close="customModal">ยกเลิก</button><button class="btn primary" id="applyCustom">ใช้การตั้งค่าและเริ่ม</button></div></div></div>
 
@@ -14735,7 +15820,7 @@ body.p898FeedOpen{
 <div class="modal hidden" id="collectionModal"><div class="modalCard wide"><button class="close" data-close="collectionModal">×</button><h2>คอลเลกชันตัวละคร</h2><p class="lead">เล่นเพื่อสะสม XP และปลดล็อก Avatar ใหม่ ไม่มีการซื้อในเกม</p><div class="collection" id="collection"></div></div></div>
 
 <!-- Audio -->
-<div class="modal hidden" id="audioModal"><div class="modalCard"><button class="close" data-close="audioModal">×</button><h2>เพลง & เสียง</h2><p class="lead">แยก Music และ SFX ได้ พร้อมเพลงหลายบรรยากาศ</p><div class="settingGrid"><div class="setting full"><h3>🎵 Music Theme</h3><div class="segment" id="musicThemeSeg"><button class="chip active" data-music="cozy">Cozy</button><button class="chip" data-music="dream">Dream</button><button class="chip" data-music="night">Night</button><button class="chip" data-music="focus">Focus</button></div></div><div class="setting"><h3>Music</h3><label class="switchrow"><input type="checkbox" id="musicToggle"><span class="switch"></span><span>เปิดเพลงพื้นหลัง</span></label></div><div class="setting"><h3>SFX</h3><label class="switchrow"><input type="checkbox" id="sfxToggle" checked><span class="switch"></span><span>เสียงกด ถูก ผิด และเฉลย</span></label></div><div class="setting full"><h3>ระดับเสียงเพลง</h3><input type="range" id="musicVol" min="0" max="100" value="28"><span id="musicVolText">28%</span></div><div class="setting full"><h3>ระดับเสียงเอฟเฟกต์</h3><input type="range" id="sfxVol" min="0" max="100" value="55"><span id="sfxVolText">55%</span></div></div></div></div>
+<div class="modal hidden" id="audioModal"><div class="modalCard"><button class="close" data-close="audioModal">×</button><h2>เพลง & เสียง</h2><p class="lead">แยก Music และ SFX ได้ พร้อมเพลงหลายบรรยากาศ</p><div class="settingGrid"><div class="setting full"><h3>Music Theme</h3><div class="segment" id="musicThemeSeg"><button class="chip active" data-music="cozy">Cozy</button><button class="chip" data-music="dream">Dream</button><button class="chip" data-music="night">Night</button><button class="chip" data-music="focus">Focus</button></div></div><div class="setting"><h3>Music</h3><label class="switchrow"><input type="checkbox" id="musicToggle"><span class="switch"></span><span>เปิดเพลงพื้นหลัง</span></label></div><div class="setting"><h3>SFX</h3><label class="switchrow"><input type="checkbox" id="sfxToggle" checked><span class="switch"></span><span>เสียงกด ถูก ผิด และเฉลย</span></label></div><div class="setting full"><h3>ระดับเสียงเพลง</h3><input type="range" id="musicVol" min="0" max="100" value="28"><span id="musicVolText">28%</span></div><div class="setting full"><h3>ระดับเสียงเอฟเฟกต์</h3><input type="range" id="sfxVol" min="0" max="100" value="55"><span id="sfxVolText">55%</span></div></div></div></div>
 
 <!-- Accessibility -->
 <div class="modal hidden" id="accessModal"><div class="modalCard"><button class="close" data-close="accessModal">×</button><h2>การมองเห็น & Animation</h2><p class="lead">ปรับให้เหมาะกับการมองและการใช้งานของคุณ</p><div class="settingGrid"><div class="setting"><h3>Animation</h3><div class="segment" id="motionSeg"><button class="chip active" data-motion="full">เต็ม</button><button class="chip" data-motion="reduced">เบา</button><button class="chip" data-motion="off">ปิด</button></div></div><div class="setting"><h3>ตัวอักษรใหญ่</h3><label class="switchrow"><input type="checkbox" id="largeToggle"><span class="switch"></span><span>เพิ่มขนาดข้อความ</span></label></div><div class="setting"><h3>Contrast สูง</h3><label class="switchrow"><input type="checkbox" id="contrastToggle"><span class="switch"></span><span>เพิ่มความชัดของเส้นขอบ</span></label></div><div class="setting full"><h3>⌨️ Keyboard Shortcuts</h3><p>Space = ขั้นต่อไป • R = เฉลย • H = Hint • F = เต็มจอ • P = โหมดนำเกม • Esc = ปิดหน้าต่าง</p></div></div></div></div>
@@ -14745,7 +15830,7 @@ body.p898FeedOpen{
 
 
 <!-- Help -->
-<div class="modal hidden" id="helpModal"><div class="modalCard"><button class="close" data-close="helpModal">×</button><h2>วิธีเล่น</h2><p class="lead">กติกาหลักสั้น ๆ: ดู → จำ → ตอบ → ดูเฉลย แล้วค่อยไปข้อต่อไป</p><div class="settingGrid"><div class="setting"><h3>1. 👀 สังเกต</h3><p>ดูภาพ สี รายละเอียด และตำแหน่งบนกระดานให้ครบ</p></div><div class="setting"><h3>2. 🧠 จดจำ</h3><p>ใช้วิธีจำที่ถนัด เช่น จำเป็นแถว เป็นคู่ หรือจัดกลุ่มภาพ</p></div><div class="setting"><h3>3. 🎯 ตอบโจทย์</h3><p>แต่ละโหมดจะให้ทายตำแหน่ง หาคู่ หาสิ่งที่หาย สังเกตการสลับ/เปลี่ยน หรือจำลำดับ</p></div><div class="setting"><h3>4. ✨ ดูเฉลย</h3><p>เฉลยจะแสดงคำตอบชัดเจน จากนั้นกดไปข้อต่อไปตามจังหวะของคุณเอง</p></div><div class="setting full"><h3>💡 เริ่มอย่างไรดี?</h3><p>ครั้งแรกแนะนำ เล่นด่วน ซึ่งเริ่มที่ 2×2 และไม่จับเวลา เมื่อรู้สึกคล่องค่อยเปลี่ยนเป็น 3×3 หรือเปิด Adaptive Difficulty</p></div></div></div></div>
+<div class="modal hidden" id="helpModal"><div class="modalCard"><button class="close" data-close="helpModal">×</button><h2>วิธีเล่น</h2><p class="lead">กติกาหลักสั้น ๆ: ดู → จำ → ตอบ → ดูเฉลย แล้วค่อยไปข้อต่อไป</p><div class="settingGrid"><div class="setting"><h3>1. สังเกต</h3><p>ดูภาพ สี รายละเอียด และตำแหน่งบนกระดานให้ครบ</p></div><div class="setting"><h3>2. จดจำ</h3><p>ใช้วิธีจำที่ถนัด เช่น จำเป็นแถว เป็นคู่ หรือจัดกลุ่มภาพ</p></div><div class="setting"><h3>3. ตอบโจทย์</h3><p>แต่ละโหมดจะให้ทายตำแหน่ง หาคู่ หาสิ่งที่หาย สังเกตการสลับ/เปลี่ยน หรือจำลำดับ</p></div><div class="setting"><h3>4. ดูเฉลย</h3><p>เฉลยจะแสดงคำตอบชัดเจน จากนั้นกดไปข้อต่อไปตามจังหวะของคุณเอง</p></div><div class="setting full"><h3>เริ่มอย่างไรดี?</h3><p>ครั้งแรกแนะนำ เล่นด่วน ซึ่งเริ่มที่ 2×2 และไม่จับเวลา เมื่อรู้สึกคล่องค่อยเปลี่ยนเป็น 3×3 หรือเปิด Adaptive Difficulty</p></div></div></div></div>
 
 
 <div class="modal hidden" id="leaderboardModal">
@@ -14781,10 +15866,10 @@ body.p898FeedOpen{
   <div class="modalcard" style="width:min(540px,100%)">
     <button class="x" data-close="accountModal">×</button>
     <h2 id="accountTitle">เข้าสู่ระบบ / สมัครสมาชิก</h2>
-    <p class="lead" id="accountLead">เล่นแบบ ผู้เยี่ยมชม ได้ตามปกติ หรือสมัครสมาชิกเพื่อบันทึก Level, XP, ความสำเร็จ และประวัติไว้บน Cloud</p>
+    <p class="lead" id="accountLead">เล่นแบบ Guest ได้ตามปกติ หรือสมัครสมาชิกเพื่อเก็บแต้ม เลเวล แรงก์ เหรียญ และประวัติไว้กับบัญชี</p>
 
     <div id="cloudSetupPanel" class="setupCloud hidden">
-      <strong>☁️ ระบบ Cloud พร้อมในโค้ดแล้ว แต่ยังต้องเชื่อม Supabase</strong>
+      <strong>ระบบ Cloud พร้อมในโค้ดแล้ว แต่ยังต้องเชื่อม Supabase</strong>
       <p>เวอร์ชันนี้เชื่อม Project URL และ Publishable key แล้ว หากกล่องนี้ยังแสดง ให้ตรวจอินเทอร์เน็ตหรือการโหลด Supabase CDN</p>
     </div>
 
@@ -14826,10 +15911,10 @@ body.p898FeedOpen{
     </div>
 
     <div id="authLoggedPanel" class="authLogged hidden">
-      <div class="memberHero"><div class="memberAvatar" id="memberAvatar">🧸</div><div><strong id="memberName">ผู้เล่น</strong><small id="memberEmail">email@example.com</small><span class="syncBadge" style="margin-top:7px"><i></i><span id="memberLevel">Level 1 • 0 XP</span></span></div></div>
-      <div class="cloudStatusCard"><div class="cloudStatusIcon">☁️</div><div><strong id="cloudStatusTitle">บันทึกบนคลาวด์ พร้อมใช้งาน</strong><span id="cloudStatusText">Level, XP, ความสำเร็จ, ประวัติ และการตั้งค่าจะซิงก์กับบัญชีนี้</span></div></div>
+      <div class="memberHero"><div class="memberAvatar" id="memberAvatar"></div><div><strong id="memberName">ผู้เล่น</strong><small id="memberEmail">email@example.com</small><span class="syncBadge" style="margin-top:7px"><i></i><span id="memberLevel">Level 1 • 0 XP</span></span></div></div>
+      <div class="cloudStatusCard"><div class="cloudStatusIcon" aria-hidden="true">P</div><div><strong id="cloudStatusTitle">บันทึกบนคลาวด์ พร้อมใช้งาน</strong><span id="cloudStatusText">Level, XP, ความสำเร็จ, ประวัติ และการตั้งค่าจะซิงก์กับบัญชีนี้</span></div></div>
       <div class="migrateBox hidden" id="migrateBox"><strong>มีข้อมูล ผู้เยี่ยมชม จากเครื่องนี้</strong><p>คุณสามารถรวมความคืบหน้าที่เล่นก่อนสมัครเข้ากับบัญชีนี้ได้ โดยระบบจะเก็บคะแนน/XP ที่มากกว่าและรวมประวัติที่ไม่ซ้ำ</p><button class="btn small purple" id="migrateผู้เยี่ยมชมBtn">ย้ายข้อมูล ผู้เยี่ยมชม เข้าบัญชี</button></div>
-      <div class="memberActions"><button class="btn" id="syncNowBtn">↻ ซิงก์ตอนนี้</button><button class="btn" id="openProfileFromAccount">👤 แก้โปรไฟล์</button><button class="btn" id="openStatsFromAccount">📊 ดูสถิติ</button><button class="btn" id="signOutBtn">ออกจากระบบ</button></div>
+      <div class="memberActions"><button class="btn" id="syncNowBtn">↻ ซิงก์ตอนนี้</button><button class="btn" id="openProfileFromAccount">แก้โปรไฟล์</button><button class="btn" id="openStatsFromAccount">ดูสถิติ</button><button class="btn" id="signOutBtn">ออกจากระบบ</button></div>
       <div class="authMessage" id="memberMessage"></div>
     </div>
 
@@ -15758,14 +16843,14 @@ function finishRound(){
   $("resultCorrect").textContent=measurable?correct:"—";
   $("resultAcc").textContent=measurable?rate+"%":"ทีม";
   $("resultCombo").textContent=bestCombo;
-  $("resultXP").textContent=isRanked?"รอ RP":cloudMember?"…":(cfg.style==="solo"?"+"+roundXP:"0");
+  $("resultXP").textContent=isRanked?"—":cloudMember?"…":(cfg.style==="solo"?"+"+roundXP:"0");
 
   $("resultText").textContent=isRanked
-    ?"🏆 จบการแข่งขัน Ranked แล้ว • กำลังรอระบบคำนวณ RP"
+    ?"🏆 จบการแข่งขันแล้ว • กำลังสรุปแรงก์"
     :cfg.style==="team"
       ?"จบรอบทีมแล้ว! คะแนนทีมใช้สำหรับการแข่งขันในกิจกรรม"
       :cloudMember
-        ?"กำลังคำนวณ EXP จากโหมด ความยาก ความแม่นยำ และ Performance…"
+        ?"กำลังคำนวณแต้มและเหรียญจากผลงานรอบนี้…"
         :rate>=90
           ?"ยอดเยี่ยมมาก! รอบนี้แม่นและสม่ำเสมอ"
           :rate>=75
@@ -15809,12 +16894,13 @@ function finishRound(){
       completed:true
     }).then(result=>{
       if(result?.ok){
-        roundXP=Number(result.exp_gained||0);
+        roundXP=Number(result.points_gained??result.exp_gained??0);
+        const rewardCoins=Number(result.coins_gained||0);
         $("resultXP").textContent=`+${roundXP}`;
         $("resultText").textContent=
           result.level_up
-            ? `⚡ LEVEL UP! Level ${result.old_level} → ${result.new_level} • +${roundXP} EXP`
-            : `⭐ ได้รับ +${roundXP} EXP • Performance ${Number(result.performance_score||0)}/1000`;
+            ? `🎉 เลเวลเพิ่ม! ${Number(result.old_level)} → ${Number(result.player_level||result.new_level)} • ⭐ +${roundXP} แต้ม • 🪙 +${rewardCoins} เหรียญ`
+            : `⭐ +${roundXP} แต้ม • 🪙 +${rewardCoins} เหรียญ • ${result.rank_icon||"🌱"} แรงก์ ${result.rank_name||"มือใหม่"}`;
 
         saveHistory(rate,finalคะแนน);
         checkความสำเร็จs(rate);
@@ -15845,7 +16931,7 @@ function finishRound(){
     renderCollection();
   }
 
-  setStatus("🏁","จบรอบแล้ว","ดูคะแนนและ EXP ที่ได้รับ แล้วเลือกความท้าทายถัดไป");
+  setStatus("🏁","จบรอบแล้ว","ดูแต้มและเหรียญที่ได้รับ แล้วเลือกความท้าทายถัดไป");
 
   if(isRanked)setMain("กำลังรอผลผู้เล่นทุกคน…",()=>{},true);
   else setMain("เล่นอีกครั้ง",()=>startRound());
@@ -15856,8 +16942,8 @@ function finishRound(){
   sfx("done")
 }
 function saveHistory(rate,sc){const h=hist();h.push({date:Date.now(),mode:cfg.mode,diff:effDiff(),source:cfg.source,style:cfg.style,rate,score:sc,combo:bestCombo,xp:roundXP});save("bb_history",h.slice(-80));if(cfg.style==="solo")cloudRecordGame(rate,sc)}function unlock(id){const b=badgeData();if(b[id])return;b[id]=Date.now();save("bb_badges",b);const a=ACH.find(x=>x[0]===id);if(a)toast(`🏅 ความสำเร็จ: ${a[2]}`)}function checkความสำเร็จs(rate){const h=hist();unlock("first");if(rate===100)unlock("perfect");if(bestCombo>=5)unlock("combo5");if(bestCombo>=10)unlock("combo10");const ms=new Set(h.map(x=>x.mode));if(ms.size>=4)unlock("explorer");if(ms.size>=6)unlock("allmodes");if(level(profile().xp||0)>=5)unlock("level5");if(level(profile().xp||0)>=10)unlock("level10");if(load("bb_daily_streak",0)>=3)unlock("daily3");if(cfg.source==="custom")unlock("custom");if(rate>=90)unlock("master")}
-function renderProfile(){const p=profile(),lv=level(p.xp||0);$("navName").textContent=p.name||"ผู้เล่น";$("navAvatar").textContent=p.avatar||"🧸";$("profileName").value=p.name||"";$("profileLevel").textContent=lv;$("xpBar").style.width=((p.xp||0)%500/500*100)+"%";$("xpLabel").textContent=`${(p.xp||0)%500} / 500 XP`;$("levelHud").textContent=lv}function renderHome(){const h=hist(),p=profile(),rates=h.map(x=>x.rate).filter(x=>typeof x==="number");$("homeLevel").textContent=level(p.xp||0);$("homeXP").textContent=p.xp||0;$("homeBest").textContent=h.length?Math.max(...h.map(x=>x.score||0)):0;$("homeAcc").textContent=(rates.length?Math.max(...rates):0)+"%";$("homeRounds").textContent=h.length}function renderStats(){const h=hist(),rates=h.map(x=>x.rate).filter(x=>typeof x==="number");$("statRounds").textContent=h.length;$("statBest").textContent=h.length?Math.max(...h.map(x=>x.score||0)):0;$("statAcc").textContent=(rates.length?Math.max(...rates):0)+"%";$("statCombo").textContent=h.length?Math.max(...h.map(x=>x.combo||0)):0;const last=h.filter(x=>typeof x.rate==="number").slice(-10),W=760,H=170,p=25;let svg=`<line x1="${p}" y1="${H-p}" x2="${W-p}" y2="${H-p}" stroke="rgba(136,116,231,.15)"/><line x1="${p}" y1="${p}" x2="${p}" y2="${H-p}" stroke="rgba(136,116,231,.15)"/>`;if(last.length){const pts=last.map((x,i)=>[last.length===1?W/2:p+i*((W-2*p)/(last.length-1)),H-p-(x.rate/100)*(H-2*p)]);svg+=`<polyline points="${pts.map(x=>x.join(",")).join(" ")}" fill="none" stroke="#8874e7" stroke-width="5" stroke-linecap="round"/>`;pts.forEach(q=>svg+=`<circle cx="${q[0]}" cy="${q[1]}" r="6" fill="white" stroke="#f270a7" stroke-width="4"/>`)}$("chartSvg").innerHTML=svg;const b=badgeData();$("badgeGrid").innerHTML="";ACH.forEach(a=>{const d=document.createElement("div");d.className="badge"+(b[a[0]]?"":" lock");d.innerHTML=`<span>${a[1]}</span><div><strong>${a[2]}</strong><small>${a[3]}</small></div>`;$("badgeGrid").appendChild(d)})}function renderCollection(){const lv=level(profile().xp||0);$("collection").innerHTML="";COLLECTION.forEach(([em,n,need])=>{const d=document.createElement("div");d.className="collect"+(lv>=need?"":" lock");d.innerHTML=`<span>${em}</span><div><strong>${n}</strong><small>${lv>=need?"ปลดล็อกแล้ว":`Level ${need}`}</small></div>`;if(lv>=need)d.onclick=()=>{const p=profile();p.avatar=em;save("bb_profile",p);renderProfile();toast(`เลือก ${n} แล้ว`)};$("collection").appendChild(d)})}
-function dailyCfg(){const r=seeded(todaySeed()),ms=["position","missing","swap","change","sequence"],ds=["easy","normal","normal","hard"],ss=["teddy","animals","space","food","fantasy"];return{mode:ms[Math.floor(r()*ms.length)],diff:ds[Math.floor(r()*ds.length)],source:ss[Math.floor(r()*ss.length)]}}function renderDaily(){const d=dailyCfg();$("dailyTitle").textContent=`${MODES[d.mode]} • ${DIFF[d.diff].label}`;$("dailyText").textContent=`วันนี้ใช้ชุด ${SOURCES[d.source]} • EXP คำนวณตามโหมด ความยาก และผลงานจริง`;$("dailyStreak").textContent=load("bb_daily_streak",0)}function startDaily(){const d=dailyCfg();cfg={...cfg,style:"solo",mode:d.mode,diff:d.diff,source:d.source,teams:2,answer:"screen",adaptive:false,combo:true,timer:0,lives:false,daily:true};updateSummary();startRound(seeded(todaySeed()))}function markDaily(){const today=new Date().toISOString().slice(0,10),last=load("bb_daily_last",""),st=load("bb_daily_streak",0);if(last===today)return;const y=new Date(Date.now()-86400000).toISOString().slice(0,10);save("bb_daily_streak",last===y?st+1:1);save("bb_daily_last",today);renderDaily()}
+function renderProfile(){const p=profile(),lv=level(p.xp||0);$("navName").textContent=p.name||"ผู้เล่น";$("navAvatar").textContent=p.avatar||"🧸";$("profileName").value=p.name||"";$("profileLevel").textContent=lv;$("xpBar").style.width=((p.xp||0)%500/500*100)+"%";$("xpLabel").textContent=`${(p.xp||0)%500} / 500 แต้ม`;$("levelHud").textContent=lv}function renderHome(){const h=hist(),p=profile(),rates=h.map(x=>x.rate).filter(x=>typeof x==="number");$("homeLevel").textContent=level(p.xp||0);$("homeXP").textContent=p.xp||0;$("homeBest").textContent=h.length?Math.max(...h.map(x=>x.score||0)):0;$("homeAcc").textContent=(rates.length?Math.max(...rates):0)+"%";$("homeRounds").textContent=h.length}function renderStats(){const h=hist(),rates=h.map(x=>x.rate).filter(x=>typeof x==="number");$("statRounds").textContent=h.length;$("statBest").textContent=h.length?Math.max(...h.map(x=>x.score||0)):0;$("statAcc").textContent=(rates.length?Math.max(...rates):0)+"%";$("statCombo").textContent=h.length?Math.max(...h.map(x=>x.combo||0)):0;const last=h.filter(x=>typeof x.rate==="number").slice(-10),W=760,H=170,p=25;let svg=`<line x1="${p}" y1="${H-p}" x2="${W-p}" y2="${H-p}" stroke="rgba(136,116,231,.15)"/><line x1="${p}" y1="${p}" x2="${p}" y2="${H-p}" stroke="rgba(136,116,231,.15)"/>`;if(last.length){const pts=last.map((x,i)=>[last.length===1?W/2:p+i*((W-2*p)/(last.length-1)),H-p-(x.rate/100)*(H-2*p)]);svg+=`<polyline points="${pts.map(x=>x.join(",")).join(" ")}" fill="none" stroke="#8874e7" stroke-width="5" stroke-linecap="round"/>`;pts.forEach(q=>svg+=`<circle cx="${q[0]}" cy="${q[1]}" r="6" fill="white" stroke="#f270a7" stroke-width="4"/>`)}$("chartSvg").innerHTML=svg;const b=badgeData();$("badgeGrid").innerHTML="";ACH.forEach(a=>{const d=document.createElement("div");d.className="badge"+(b[a[0]]?"":" lock");d.innerHTML=`<span>${a[1]}</span><div><strong>${a[2]}</strong><small>${a[3]}</small></div>`;$("badgeGrid").appendChild(d)})}function renderCollection(){const lv=level(profile().xp||0);$("collection").innerHTML="";COLLECTION.forEach(([em,n,need])=>{const d=document.createElement("div");d.className="collect"+(lv>=need?"":" lock");d.innerHTML=`<span>${em}</span><div><strong>${n}</strong><small>${lv>=need?"ปลดล็อกแล้ว":`Level ${need}`}</small></div>`;if(lv>=need)d.onclick=()=>{const p=profile();p.avatar=em;save("bb_profile",p);renderProfile();toast(`เลือก ${n} แล้ว`)};$("collection").appendChild(d)})}
+function dailyCfg(){const r=seeded(todaySeed()),ms=["position","missing","swap","change","sequence"],ds=["easy","normal","normal","hard"],ss=["teddy","animals","space","food","fantasy"];return{mode:ms[Math.floor(r()*ms.length)],diff:ds[Math.floor(r()*ds.length)],source:ss[Math.floor(r()*ss.length)]}}function renderDaily(){const d=dailyCfg();$("dailyTitle").textContent=`${MODES[d.mode]} • ${DIFF[d.diff].label}`;$("dailyText").textContent=`วันนี้ใช้ชุด ${SOURCES[d.source]} • แต้มคำนวณตามโหมด ความยาก และผลงานจริง`;$("dailyStreak").textContent=load("bb_daily_streak",0)}function startDaily(){const d=dailyCfg();cfg={...cfg,style:"solo",mode:d.mode,diff:d.diff,source:d.source,teams:2,answer:"screen",adaptive:false,combo:true,timer:0,lives:false,daily:true};updateSummary();startRound(seeded(todaySeed()))}function markDaily(){const today=new Date().toISOString().slice(0,10),last=load("bb_daily_last",""),st=load("bb_daily_streak",0);if(last===today)return;const y=new Date(Date.now()-86400000).toISOString().slice(0,10);save("bb_daily_streak",last===y?st+1:1);save("bb_daily_last",today);renderDaily()}
 function syncDraft(){document.querySelectorAll("[data-style]").forEach(b=>b.classList.toggle("active",b.dataset.style===draft.style));document.querySelectorAll("[data-mode]").forEach(b=>b.classList.toggle("active",b.dataset.mode===draft.mode));document.querySelectorAll("[data-diff]").forEach(b=>b.classList.toggle("active",b.dataset.diff===draft.diff));document.querySelectorAll("[data-source]").forEach(b=>b.classList.toggle("active",b.dataset.source===draft.source));document.querySelectorAll("[data-answer]").forEach(b=>b.classList.toggle("active",b.dataset.answer===draft.answer));$("adaptiveToggle").checked=draft.adaptive;$("comboToggle").checked=draft.combo;$("timerSelect").value=draft.timer;$("livesToggle").checked=draft.lives;$("teamCount").value=draft.teams;document.querySelectorAll(".teamSetting").forEach(x=>x.classList.toggle("hidden",draft.style!=="team"));$("answerBox").classList.toggle("hidden",!(draft.style==="team"&&draft.mode==="position"));$("uploadBox").classList.toggle("hidden",draft.source!=="custom");renderTeamEditor()}function openCustom(){draft={...cfg,daily:false};syncDraft();openModal("customModal")}function applyCustom(){draft.adaptive=$("adaptiveToggle").checked;draft.combo=$("comboToggle").checked;draft.timer=Number($("timerSelect").value);draft.lives=$("livesToggle").checked;draft.teams=Math.max(2,Math.min(6,Number($("teamCount").value)));if(draft.source==="custom"&&customImages.length<4){toast("กรุณาอัปโหลดอย่างน้อย 4 รูป");return}cfg={...draft,daily:false};closeModal("customModal");updateSummary();startRound()}function renderTeamEditor(){$("teamEditor").innerHTML="";for(let i=0;i<draft.teams;i++){const t=teamData[i],d=document.createElement("div");d.className="teamEdit";d.innerHTML=`<input type="color" value="${t.color}"><input class="input" value="${t.name}" maxlength="16"><input class="input" value="${t.emoji}" maxlength="2">`;const z=d.querySelectorAll("input");z[0].oninput=()=>t.color=z[0].value;z[1].oninput=()=>t.name=z[1].value||`ทีม ${String.fromCharCode(65+i)}`;z[2].oninput=()=>t.emoji=z[2].value||"⭐";$("teamEditor").appendChild(d)}}function uploads(files){const f=[...files].slice(0,20);Promise.all(f.map(file=>new Promise(res=>{const r=new FileReader();r.onload=()=>compress(r.result,res);r.readAsDataURL(file)}))).then(a=>{customImages=a.filter(Boolean);save("bb_custom",customImages);renderUploads();toast(`เพิ่มรูป ${customImages.length} รูปแล้ว`)})}function compress(src,done){const im=new Image();im.onload=()=>{const c=document.createElement("canvas"),m=360,s=Math.min(1,m/Math.max(im.width,im.height));c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext("2d").drawImage(im,0,0,c.width,c.height);done(c.toDataURL("image/jpeg",.78))};im.onerror=()=>done(null);im.src=src}function renderUploads(){$("uploadPreview").innerHTML="";customImages.forEach(x=>{const i=document.createElement("img");i.src=x;$("uploadPreview").appendChild(i)})}function saveResume(){if(!roundStarted||roundComplete)return;save("bb_resume",{cfg,layout,baseLayout,asked:[...asked],correct,score,combo,bestCombo,lives,hints,state,targetIndex,pickedIndex,missingId,swapPair,swapPicks,changeIndex,changeAlt,teamคะแนนs,adaptiveShift,customImages,roundStartedAt,roundAttempts});$("resumeBtn").classList.remove("hidden")}function clearResume(){localStorage.removeItem("bb_resume");$("resumeBtn").classList.add("hidden")}function restoreResume(){const r=load("bb_resume",null);if(!r)return;cfg={...cfg,...r.cfg};if(cfg.source==="study")cfg.source="teddy";cfg.teams=Math.max(2,Math.min(6,Number(cfg.teams)||2));layout=r.layout||[];baseLayout=r.baseLayout||[];asked=new Set(r.asked||[]);correct=r.correct||0;score=r.score||0;combo=r.combo||0;bestCombo=r.bestCombo||0;lives=r.lives??3;hints=r.hints??3;state=r.state||"idle";targetIndex=r.targetIndex;pickedIndex=r.pickedIndex;missingId=r.missingId;swapPair=r.swapPair||[];swapPicks=r.swapPicks||[];changeIndex=r.changeIndex;changeAlt=r.changeAlt;teamคะแนนs=[...(r.teamคะแนนs||[]),0,0,0,0,0,0].slice(0,6);adaptiveShift=r.adaptiveShift||0;customImages=r.customImages||customImages;roundStartedAt=Number(r.roundStartedAt)||Date.now();roundAttempts=Number(r.roundAttempts)||Math.max(correct,asked.size);practiceRewardSubmitted=false;roundStarted=true;roundComplete=false;updateSummary();renderTeams();updateHUD();if(state==="position_target"){renderTarget(targetIndex);showScene("target");setMain("พร้อมตอบ",positionAnswer)}else if(state==="position_answer")positionAnswer();else startMode();$("game").scrollIntoView({behavior:"smooth"})}
 function openModal(id){$(id).classList.remove("hidden");$("popover").classList.add("hidden");if(id==="statsModal")renderStats();if(id==="collectionModal")renderCollection();if(id==="profileModal")renderProfile()}function closeModal(id){$(id).classList.add("hidden")}function toast(t){let x=$("toast");if(!x){x=document.createElement("div");x.id="toast";x.style.cssText="position:fixed;left:50%;bottom:20px;z-index:220;transform:translate(-50%,18px);padding:10px 14px;border-radius:999px;background:#302733;color:white;font-size:11px;font-weight:850;opacity:0;transition:.22s;box-shadow:0 14px 30px rgba(30,20,36,.22)";document.body.appendChild(x)}x.textContent=t;x.style.opacity=1;x.style.transform="translate(-50%,0)";setTimeout(()=>{x.style.opacity=0;x.style.transform="translate(-50%,18px)"},1700)}function stars(){const box=$("starfall"),cs=["✨","⭐","🌟","💗","🌸"];box.innerHTML="";for(let i=0;i<35;i++){const s=document.createElement("i");s.textContent=cs[Math.floor(Math.random()*cs.length)];s.style.left=Math.random()*100+"vw";s.style.fontSize=13+Math.random()*18+"px";s.style.animationDelay=Math.random()*.7+"s";box.appendChild(s)}setTimeout(()=>box.innerHTML="",2600)}
 function resultTextSummary(){const rate=asked.size?Math.round(correct/asked.size*100):0;return `Brain Buddy • ${profile().name||"ผู้เล่น"} • ${score} คะแนน • ${rate}% • Combo ${bestCombo}`}function resultCanvas(){const c=document.createElement("canvas");c.width=1200;c.height=675;const x=c.getContext("2d"),g=x.createLinearGradient(0,0,1200,675);g.addColorStop(0,"#fff3f9");g.addColorStop(.55,"#f1edff");g.addColorStop(1,"#e7faf4");x.fillStyle=g;x.fillRect(0,0,1200,675);x.fillStyle="#302733";x.font="900 64px sans-serif";x.fillText("Brain Buddy",70,105);x.font="700 25px sans-serif";x.fillStyle="#7a6f7e";x.fillText("MEMORY • ATTENTION • OBSERVATION",72,145);x.fillStyle="#fff";if(x.roundRect){x.beginPath();x.roundRect(65,195,1070,350,36);x.fill()}else x.fillRect(65,195,1070,350);const rate=asked.size?Math.round(correct/asked.size*100):0;x.fillStyle="#302733";x.font="900 40px sans-serif";x.fillText(profile().name||"ผู้เล่น",110,275);x.fillStyle="#7558c6";x.font="900 88px sans-serif";x.fillText(String(score),110,400);x.font="700 22px sans-serif";x.fillStyle="#7a6f7e";x.fillText("คะแนน",112,435);x.fillStyle="#f270a7";x.font="900 58px sans-serif";x.fillText(rate+"%",505,400);x.font="700 22px sans-serif";x.fillStyle="#7a6f7e";x.fillText("ความแม่นยำ",508,435);x.fillStyle="#58b99d";x.font="900 58px sans-serif";x.fillText(String(bestCombo),835,400);x.font="700 22px sans-serif";x.fillStyle="#7a6f7e";x.fillText("Best Combo",838,435);x.font="700 20px sans-serif";x.fillStyle="#8a7f8f";x.fillText("© 2026 Sulawit Songsang • Brain Buddy",70,610);return c}
@@ -16222,7 +17308,7 @@ window.addEventListener("load",()=>{
 
       <section class="bbArenaCountdown hidden" id="bbArenaCountdown">
         <div class="bbCountdownCard">
-          <span class="bbRankedPill dark">⚔️ RANKED MATCH</span>
+          <span class="bbRankedPill dark">RANKED MATCH</span>
           <div class="bbCountdownBear">🧸</div>
           <small id="bbCountdownLabel">เตรียมตัวให้พร้อม</small>
           <strong id="bbCountdownNumber">3</strong>
@@ -17913,7 +18999,7 @@ window.addEventListener("load",()=>{
     if(mine){
       $("#bbResultMainTitle").textContent=
         mine.forfeited
-          ? "🏳️ จบการแข่งขัน"
+          ? "จบการแข่งขัน"
           : Number(mine.placement)===1
             ? "🥇 เบอร์หนึ่งของแมตช์!"
             : `🏆 อันดับ #${Number(mine.placement)}`;
@@ -17943,7 +19029,7 @@ window.addEventListener("load",()=>{
         <small class="bbPodiumScore">${Number(r.score||0).toLocaleString()} คะแนน</small>
         <span class="bbPodiumPerformance">🔥 Performance ${Number(r.performance_score||0)}</span>
         ${r.forfeited
-          ? '<small class="bbResultForfeit">🏳️ ยอมแพ้ / ไม่จบ</small>'
+          ? '<small class="bbResultForfeit">ยอมแพ้ / ไม่จบ</small>'
           : `<small class="bbPodiumDelta ${delta>=0?"positive":"negative"}">${fmtRPDelta(delta)} Overall RP</small>`
         }
       </div>`;
@@ -17983,7 +19069,7 @@ window.addEventListener("load",()=>{
           <div class="bbMyResultIdentity">
             <small>YOUR MATCH RESULT</small>
             <h2>${esc(mine.display_name||"ผู้เล่น")}</h2>
-            <p>${mine.forfeited?"🏳️ ยอมแพ้ / ไม่จบ":`${Number(mine.correct_answers||0)} / ${Number(mine.total_answers||0)} ข้อถูก • ${Number(mine.score||0).toLocaleString()} คะแนน`}</p>
+            <p>${mine.forfeited?"ยอมแพ้ / ไม่จบ":`${Number(mine.correct_answers||0)} / ${Number(mine.total_answers||0)} ข้อถูก • ${Number(mine.score||0).toLocaleString()} คะแนน`}</p>
           </div>
 
           <div class="bbMyResultPerformance">
@@ -18050,7 +19136,7 @@ window.addEventListener("load",()=>{
 
         <span class="bbResultNameV74">
           <b>${esc(r.display_name)}${r.user_id===user?.id?" • คุณ":""}</b>
-          <small>${r.forfeited?"🏳️ ไม่จบ":`${Number(r.correct_answers||0)}/${Number(r.total_answers||0)} ข้อถูก`}</small>
+          <small>${r.forfeited?"ไม่จบ":`${Number(r.correct_answers||0)}/${Number(r.total_answers||0)} ข้อถูก`}</small>
         </span>
 
         <span class="bbResultMetricV74">
@@ -18316,7 +19402,7 @@ window.addEventListener("load",()=>{
     const teamBtn=$("#bbAppTeamChoice"),teamPicker=$("#bbAppTeamPicker"),note=$("#bbAppStyleNote"),canTeam=!!mode.team;
     teamBtn.disabled=!canTeam;if(!canTeam&&selectedStyle==="team")selectedStyle="solo";
     teamPicker.classList.toggle("hidden",selectedStyle!=="team");
-    note.textContent=canTeam?"คนเดียวสะสม XP • ทีมใช้สำหรับกิจกรรม":"โหมดนี้เล่นคนเดียวเพื่อเก็บคะแนนและ XP";
+    note.textContent=canTeam?"คนเดียวสะสม XP • ทีมใช้สำหรับกิจกรรม":"โหมดนี้เล่นคนเดียวเพื่อเก็บแต้มและเหรียญ";
   }
 
   function chooseMode(mode){selectedMode=mode;if(!(MODE[mode]||{}).team)selectedStyle="solo";showScreen("setup")}
@@ -18567,8 +19653,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if(lead){
       lead.textContent=tab==="signup"
-        ?"สร้างบัญชีเพื่อเก็บ Brain Coins, XP, คะแนน, แรงก์ และประวัติไว้กับบัญชีของคุณ"
-        :"เข้าสู่ระบบเพื่อใช้ข้อมูลสมาชิก Brain Coins และความคืบหน้าของคุณ";
+        ?"สร้างบัญชีเพื่อเก็บแต้ม เลเวล แรงก์ เหรียญ และประวัติไว้กับบัญชีของคุณ"
+        :"เข้าสู่ระบบเพื่อใช้แต้ม เลเวล แรงก์ เหรียญ และความคืบหน้าของคุณ";
     }
   }
 
@@ -20632,12 +21718,15 @@ document.addEventListener('DOMContentLoaded', () => {
       completed:true
     }).then(result=>{
       if(result?.ok){
+        const pts=Number(result.points_gained??result.exp_gained??0);
+        const coins=Number(result.coins_gained||0);
+        const badge=`แรงก์ ${result.rank_name||"มือใหม่"}`;
         q("#bbLearningFinalText").textContent=
           learning.subject==="math"
-            ? `ตอบถูก ${learning.correct} จาก ${learning.rows.length} ข้อ • ${mathLevels[mathLevel]?.icon||"➗"} ${mathLevels[mathLevel]?.name||"Math"} • +${Number(result.exp_gained||0)} EXP`
+            ? `ตอบถูก ${learning.correct} จาก ${learning.rows.length} ข้อ • ${mathLevels[mathLevel]?.icon||"➗"} ${mathLevels[mathLevel]?.name||"Math"} • +${pts} แต้ม • +${coins} เหรียญ • ${badge}`
             : learning.subject==="english"
-              ? `ตอบถูก ${learning.correct} จาก ${learning.rows.length} ข้อ • 🇬🇧 ${englishLevels[englishLevel]?.name||"English"} • +${Number(result.exp_gained||0)} EXP`
-              : `ตอบถูก ${learning.correct} จาก ${learning.rows.length} ข้อ • ${labels[learning.subject]||""} • +${Number(result.exp_gained||0)} EXP`;
+              ? `ตอบถูก ${learning.correct} จาก ${learning.rows.length} ข้อ • 🇬🇧 ${englishLevels[englishLevel]?.name||"English"} • +${pts} แต้ม • +${coins} เหรียญ • ${badge}`
+              : `ตอบถูก ${learning.correct} จาก ${learning.rows.length} ข้อ • ${labels[learning.subject]||""} • +${pts} แต้ม • +${coins} เหรียญ • ${badge}`;
       }
     });
   }
@@ -21273,10 +22362,13 @@ document.addEventListener('DOMContentLoaded', () => {
       completed:true
     }).then(result=>{
       if(result?.ok){
+        const pts=Number(result.points_gained??result.exp_gained??0);
+        const coins=Number(result.coins_gained||0);
         q("#bbLearningFinalText").textContent=
           `ตอบถูก ${game.correct} จาก ${game.round.length} ข้อ • `+
           `ฝึกแล้ว ${done.toLocaleString()} / ${total.toLocaleString()} คำ • `+
-          `+${Number(result.exp_gained||0)} EXP`;
+          `+${pts} แต้ม • +${coins} เหรียญ • `+
+          `แรงก์ ${result.rank_name||"มือใหม่"}`;
       }
     });
   }
@@ -21405,7 +22497,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <span id="bbRLDiff">ระดับ</span>
     </div>
 
-    <button type="button" id="bbRLForfeit" class="bbRLForfeit">🏳️ ยอมแพ้</button>
+    <button type="button" id="bbRLForfeit" class="bbRLForfeit">ยอมแพ้</button>
   </header>
 
   <main class="bbRankLearnShell">
@@ -22618,8 +23710,10 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 
 
-<script>
-(function brainBuddyV75PracticeRewards(){
+<script id="pomru-v899-game-reward-engine">
+(function pomruV899GameRewardEngine(){
+  "use strict";
+
   const q=s=>document.querySelector(s);
 
   function client(){
@@ -22641,7 +23735,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const t=q("#bbPracticeRewardTitle");
     const d=q("#bbPracticeRewardDetail");
-
     if(t)t.textContent=title||"";
     if(d)d.textContent=detail||"";
   }
@@ -22650,103 +23743,198 @@ document.addEventListener('DOMContentLoaded', () => {
     q("#bbPracticeReward")?.classList.add("hidden");
   }
 
-  function syncLocalXP(result){
+  function makeRunId(args){
+    if(args?.runId && String(args.runId).length>=8){
+      return String(args.runId).slice(0,120);
+    }
+
+    try{
+      if(crypto?.randomUUID){
+        return "game:"+crypto.randomUUID();
+      }
+    }catch(_){}
+
+    return "game:"+Date.now().toString(36)+":"+Math.random().toString(36).slice(2,12);
+  }
+
+  function oldLevelFromLocal(){
+    try{
+      const p=JSON.parse(localStorage.getItem("bb_profile")||"{}");
+      return Math.floor(Math.max(0,Number(p.xp)||0)/500)+1;
+    }catch(_){
+      return 1;
+    }
+  }
+
+  function syncLocal(result){
     try{
       const raw=localStorage.getItem("bb_profile");
       const p=raw?JSON.parse(raw):{name:"ผู้เล่น",avatar:"🧸",xp:0};
-      p.xp=Number(result?.new_xp||0);
+      p.xp=Number(result?.lifetime_points||0);
       localStorage.setItem("bb_profile",JSON.stringify(p));
-    }catch(e){}
+    }catch(_){}
 
-    try{window.renderProfile?.()}catch(e){}
-    try{window.renderHome?.()}catch(e){}
-    try{window.bbSyncThaiBrainRank?.()}catch(e){}
-    try{document.dispatchEvent(new CustomEvent("bb:profile-updated"))}catch(e){}
+    const coins=Number(result?.coin_balance||0).toLocaleString();
+    ["pomruHomeCoinBalance","bbHomeCoinBalance","bbShopBalance","bbInventoryBalance"].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el)el.textContent=coins;
+    });
+
+    try{window.renderProfile?.()}catch(_){}
+    try{window.renderHome?.()}catch(_){}
+    try{window.renderStats?.()}catch(_){}
+    try{window.renderCollection?.()}catch(_){}
+
+    try{
+      document.dispatchEvent(new CustomEvent("bb:profile-updated",{
+        detail:{source:"pomru-v899",result}
+      }));
+    }catch(_){}
+
+    try{
+      document.dispatchEvent(new CustomEvent("pomru:progress-updated",{
+        detail:result
+      }));
+    }catch(_){}
+
+    try{
+      document.dispatchEvent(new CustomEvent("bb:game-finished",{
+        detail:result
+      }));
+    }catch(_){}
+  }
+
+  function friendlyError(error){
+    const m=String(error?.message||error||"");
+    if(m.includes("game_reward_too_fast"))
+      return "ระบบรับผลเกมเร็วเกินไปเล็กน้อย ลองเล่นรอบถัดไปได้เลย";
+    if(m.includes("authentication_required") || /jwt/i.test(m))
+      return "เข้าสู่ระบบก่อนเพื่อเก็บแต้มและเหรียญ";
+    if(m.includes("game_not_completed"))
+      return "ต้องเล่นให้จบรอบก่อนจึงจะได้รับรางวัล";
+    return m || "บันทึกรางวัลไม่สำเร็จ";
   }
 
   async function award(args={}){
     const c=client();
 
     if(!c){
-      setRewardUI("error","ยังเชื่อมต่อ EXP ไม่สำเร็จ","ลองรีเฟรชหน้าเว็บแล้วเล่นอีกครั้ง");
+      setRewardUI(
+        "error",
+        "ยังเชื่อมต่อระบบรางวัลไม่สำเร็จ",
+        "ลองรีเฟรชหน้าเว็บแล้วเล่นอีกครั้ง"
+      );
       return {ok:false,error:"no_client"};
     }
 
-    const {data:sessionData}=await c.auth.getSession();
+    const {data:sessionData,error:sessionError}=await c.auth.getSession();
+    if(sessionError){
+      setRewardUI("error","ตรวจสอบบัญชีไม่สำเร็จ",friendlyError(sessionError));
+      return {ok:false,error:sessionError};
+    }
+
     const user=sessionData?.session?.user;
 
     if(!user){
       setRewardUI(
         "guest",
-        "เข้าสู่ระบบเพื่อสะสม EXP",
-        "เล่นต่อได้ตามปกติ • EXP และ Level บน Cloud จะบันทึกเมื่อใช้บัญชีสมาชิก"
+        "เข้าสู่ระบบเพื่อเก็บแต้ม",
+        "เล่นได้ตามปกติ • เมื่อเข้าสู่ระบบ แต้ม เลเวล แรงก์ และเหรียญจะบันทึกกับบัญชี"
       );
       return {ok:false,guest:true};
     }
 
+    const oldLevel=oldLevelFromLocal();
+
     setRewardUI(
       "",
-      "กำลังคำนวณ EXP…",
-      "พิจารณาโหมดเกม ระดับความยาก ความแม่นยำ และ Performance"
+      "กำลังสรุปรางวัล…",
+      "ผลงานรอบนี้กำลังถูกเปลี่ยนเป็นแต้มและเหรียญ"
     );
 
     const payload={
+      p_run_id:makeRunId(args),
       p_mode_code:String(args.modeCode||""),
       p_difficulty_code:String(args.difficultyCode||"normal"),
-      p_raw_score:Number(args.rawScore)||0,
-      p_max_score:Math.max(0,Number(args.maxScore)||0),
-      p_correct:Math.max(0,Number(args.correct)||0),
-      p_total:Math.max(0,Number(args.total)||0),
-      p_duration_seconds:Math.max(0,Number(args.durationSeconds)||0),
+      p_raw_score:Math.max(0,Math.round(Number(args.rawScore)||0)),
+      p_max_score:Math.max(0,Math.round(Number(args.maxScore)||0)),
+      p_correct:Math.max(0,Math.round(Number(args.correct)||0)),
+      p_total:Math.max(0,Math.round(Number(args.total)||0)),
+      p_duration_seconds:Math.max(0,Math.round(Number(args.durationSeconds)||0)),
       p_completed:args.completed!==false
     };
 
-    const {data,error}=await c.rpc("bb_finish_game_reward",payload);
+    const {data,error}=await c.rpc("bb_pomru_finish_game",payload);
 
     if(error){
-      console.warn("Practice EXP:",error);
-      setRewardUI("error","บันทึก EXP ไม่สำเร็จ",error.message||"กรุณาลองใหม่อีกครั้ง");
+      console.warn("POMRU game reward:",error);
+      setRewardUI(
+        "error",
+        "บันทึกรางวัลไม่สำเร็จ",
+        friendlyError(error)
+      );
       return {ok:false,error};
     }
 
-    const result=Array.isArray(data)?data[0]:data;
-    if(!result){
-      setRewardUI("error","บันทึก EXP ไม่สำเร็จ","ระบบไม่ได้ส่งผลรางวัลกลับมา");
+    const raw=Array.isArray(data)?data[0]:data;
+    if(!raw){
+      setRewardUI(
+        "error",
+        "บันทึกรางวัลไม่สำเร็จ",
+        "ระบบไม่ได้ส่งผลรางวัลกลับมา"
+      );
       return {ok:false,error:"empty_result"};
     }
 
-    syncLocalXP(result);
+    const points=Number(raw.points_gained||0);
+    const coins=Number(raw.coins_gained||0);
+    const playerLevel=Number(raw.player_level||1);
+    const levelUp=playerLevel>oldLevel;
+    const detail=raw.reward_detail||{};
 
-    const detail=result.reward_detail||{};
-    const exp=Number(result.exp_gained||0);
-    const perf=Number(result.performance_score||0);
-    const repeat=Number(detail.repeat_multiplier??1);
-    const diff=Number(detail.difficulty_multiplier??1);
+    const result={
+      ...raw,
+      ok:true,
 
-    const extra=[];
-    extra.push(`Performance ${perf}/1000`);
-    extra.push(`ความยาก ×${diff.toFixed(2)}`);
+      // Compatibility fields for old modules.
+      exp_gained:points,
+      new_xp:Number(raw.lifetime_points||0),
+      new_level:playerLevel,
+      old_level:oldLevel,
+      level_up:levelUp,
+      performance_score:
+        Math.max(0,Number(detail.performance_percent||0))*10
+    };
 
-    if(repeat<1){
-      extra.push(`เล่นโหมดเดิมซ้ำ ×${repeat.toFixed(2)}`);
-    }
+    syncLocal(result);
 
-    if(result.level_up){
-      extra.push(`⚡ LEVEL ${Number(result.old_level)} → ${Number(result.new_level)}`);
-    }else{
-      extra.push(`Level ${Number(result.new_level)}`);
+    const rankText=(raw.rank_name||"มือใหม่");
+    const rankPos=Number(raw.rank_position||0);
+
+    const detailParts=[
+      "เลเวล "+playerLevel,
+      "แรงก์ "+rankText
+    ];
+
+    if(rankPos>0){
+      detailParts.push("อันดับ #"+rankPos.toLocaleString());
     }
 
     setRewardUI(
       "success",
-      `+${exp.toLocaleString()} EXP`,
-      extra.join(" • ")
+      "+"+points.toLocaleString()+" แต้ม  •  +"+coins.toLocaleString()+" เหรียญ",
+      detailParts.join(" • ")
     );
 
-    return {ok:true,...result};
+    return result;
   }
 
+  window.bbAwardPracticeReward=award;
+
+  // Old game modules still call this name; keeping the alias avoids
+  // rewriting stable gameplay code while the reward system is new.
   window.bbAwardPracticeXP=award;
+
   window.bbPracticeRewardUI={
     hide:hideRewardUI,
     set:setRewardUI
@@ -23850,7 +25038,7 @@ document.addEventListener('DOMContentLoaded', () => {
       try{if(typeof sfx==="function")sfx("done")}catch(e){}
     }catch(err){
       const msg=String(err?.message||"ซื้อสินค้าไม่สำเร็จ");
-      shopToast(/ไม่เพียงพอ|Brain Coins/i.test(msg)?"Brain Coins ไม่เพียงพอ":msg);
+      shopToast(/ไม่เพียงพอ|เหรียญ/i.test(msg)?"เหรียญ ไม่เพียงพอ":msg);
       if(button){button.disabled=false;button.innerHTML=old}
     }
   }
@@ -24106,8 +25294,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if(lead){
       lead.textContent=tab==="signup"
-        ?"สร้างบัญชีเพื่อเก็บ Brain Coins, XP, คะแนน และความคืบหน้าของคุณ"
-        :"เข้าสู่ระบบเพื่อใช้ Brain Coins และความคืบหน้าของคุณ";
+        ?"สร้างบัญชีเพื่อเก็บแต้ม เลเวล แรงก์ เหรียญ และความคืบหน้าของคุณ"
+        :"เข้าสู่ระบบเพื่อใช้แต้ม เลเวล แรงก์ เหรียญ และความคืบหน้าของคุณ";
     }
 
     message("");
@@ -24446,11 +25634,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function moodCopy(state){
-    if(state.mood==="hungry") return "Buddy หิวแล้ว 🍓 หาอาหารให้น้องหน่อย";
-    if(state.mood==="sad") return "Buddy อยากให้มาเล่นด้วย 🥺";
-    if(state.mood==="tired") return "Buddy เริ่มง่วงแล้ว ⚡";
-    if(state.mood==="great") return "วันนี้ Buddy แฮปปี้สุด ๆ ✨";
-    return "วันนี้ Buddy อารมณ์ดี 💕";
+    if(state.mood==="hungry") return "Buddy หิวแล้ว หาอาหารให้น้องหน่อย";
+    if(state.mood==="sad") return "Buddy อยากให้มาเล่นด้วย";
+    if(state.mood==="tired") return "Buddy เริ่มง่วงแล้ว";
+    if(state.mood==="great") return "วันนี้ Buddy แฮปปี้สุด ๆ";
+    return "วันนี้ Buddy อารมณ์ดี";
   }
 
   function renderPet(state){
@@ -24531,7 +25719,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const safe=t=>String(t??'');
   function toast(msg){const el=$('p89Toast');if(!el)return;el.textContent=msg;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),1700)}
   function setPct(bar,pct,text){const p=clamp(pct);if($(bar))$(bar).style.width=p+'%';if($(text))$(text).textContent=Math.round(p)+'%'}
-  function renderPet(s){if(!s)return;setPct('p89HappyBar',s.happiness,'p89HappyPct');setPct('p89HungerBar',s.hunger,'p89HungerPct');setPct('p89EnergyBar',s.energy,'p89EnergyPct');if($('p89PetName'))$('p89PetName').textContent=s.pet_name||'Pink Buddy';if($('p89BuddyLevel'))$('p89BuddyLevel').textContent='Level '+(s.pet_level||1);if($('p89ProfileLevel'))$('p89ProfileLevel').textContent='Lv.'+(s.pet_level||1);const progress=Number(s.level_progress)||0,target=Number(s.level_target)||500;if($('p89XpBar'))$('p89XpBar').style.width=Math.min(100,(progress/target)*100)+'%';if($('p89XpText'))$('p89XpText').textContent=progress.toLocaleString()+' / '+target.toLocaleString()+' EXP';if($('pomruHomeCoinBalance'))$('pomruHomeCoinBalance').textContent=(Number(s.coin_balance)||0).toLocaleString();const speech=$('pomruPetSpeech');if(speech){const map={hungry:['หิวแล้ว~','ขอของกินหน่อยน้า'],sad:['เหงาจัง~','มาเล่นด้วยกันหน่อย'],tired:['ง่วงแล้ว~','พักพลังกันหน่อย'],great:['แฮปปี้~','วันนี้พร้อมลุยสุด ๆ'],happy:['แฮปปี้~','วันนี้เล่นด้วยกันนะ']};const m=map[s.mood]||map.happy;speech.innerHTML='<b>'+m[0]+'</b><span>'+m[1]+'</span>'}}
+  function renderPet(s){if(!s)return;setPct('p89HappyBar',s.happiness,'p89HappyPct');setPct('p89HungerBar',s.hunger,'p89HungerPct');setPct('p89EnergyBar',s.energy,'p89EnergyPct');if($('p89PetName'))$('p89PetName').textContent=s.pet_name||'Pink Buddy';if($('p89BuddyLevel'))$('p89BuddyLevel').textContent='เลเวล '+(s.pet_level||1);if($('p89ProfileLevel'))$('p89ProfileLevel').textContent='เลเวล '+(s.pet_level||1);const progress=Number(s.level_progress)||0,target=Number(s.level_target)||500;if($('p89XpBar'))$('p89XpBar').style.width=Math.min(100,(progress/target)*100)+'%';if($('p89XpText'))$('p89XpText').textContent=progress.toLocaleString()+' / '+target.toLocaleString()+' แต้ม';if($('pomruHomeCoinBalance'))$('pomruHomeCoinBalance').textContent=(Number(s.coin_balance)||0).toLocaleString();const speech=$('pomruPetSpeech');if(speech){const map={hungry:['หิวแล้ว~','ขอของกินหน่อยน้า'],sad:['เหงาจัง~','มาเล่นด้วยกันหน่อย'],tired:['ง่วงแล้ว~','พักพลังกันหน่อย'],great:['แฮปปี้~','วันนี้พร้อมลุยสุด ๆ'],happy:['แฮปปี้~','วันนี้เล่นด้วยกันนะ']};const m=map[s.mood]||map.happy;speech.innerHTML='<b>'+m[0]+'</b><span>'+m[1]+'</span>'}}
   function syncText(oldId,newId,transform){const a=$(oldId),b=$(newId);if(!a||!b)return;const run=()=>{let v=safe(a.textContent).trim();if(transform)v=transform(v);if(v)b.textContent=v};run();new MutationObserver(run).observe(a,{subtree:true,childList:true,characterData:true})}
   function syncProfile(){syncText('bbHomePlayerName','p89ProfileName',v=>v||'ผู้เล่น');syncText('bbHomeCoinBalance','pomruHomeCoinBalance',v=>v==='—'?'0':v);const old=$('navAvatar');const dest=$('p89ProfileAvatar');if(old&&dest){const run=()=>{dest.innerHTML='';dest.style.backgroundImage=old.style.backgroundImage||'';dest.style.backgroundSize='contain';dest.style.backgroundPosition='center';dest.style.backgroundRepeat='no-repeat';if(!dest.style.backgroundImage){dest.textContent='';dest.style.backgroundImage='url(\"/assets/buddy/default-pink-buddy.png?v=891\")'}};run();new MutationObserver(run).observe(old,{childList:true,subtree:true,attributes:true,attributeFilter:['style']})}}
   function parseRanks(){const src=$('bbHomeTop10List'),dest=$('p89RankRows');if(!src||!dest)return;const rows=[...src.querySelectorAll('.bbHomeTop10Row')].slice(0,3);if(!rows.length){dest.innerHTML='<div class="rankLoading">เล่นเกมเพื่อเริ่มจัดอันดับ</div>';return}dest.innerHTML=rows.map((r,i)=>{const name=r.querySelector('.bbHomeTop10Name b')?.textContent?.trim()||'ผู้เล่น';const sub=r.querySelector('.bbHomeTop10Name small')?.textContent?.trim()||'';const score=r.querySelector('.bbHomeTop10Score b')?.textContent?.trim()||'0';const av=r.querySelector('.bbHomeTop10Avatar img');return '<button class="p89RankRow" type="button" data-app-action="rank"><span class="p89RankPos">'+(i+1)+'</span><span class="p89RankAvatar">'+(av?'<img src="'+av.src+'" alt="">':'<img src="/assets/buddy/default-pink-buddy.png?v=891" alt="Buddy">')+'</span><span class="p89RankName"><b>'+name.replace(/[<>]/g,'')+'</b><small>'+sub.replace(/[<>]/g,'')+'</small></span><span class="p89RankScore">🏆 '+score.replace(/[<>]/g,'')+'</span></button>'}).join('')}
@@ -24891,28 +26079,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const phrases={
     great:[
-      ['เย้~ 💕','วันนี้ Buddy ฟิตสุด ๆ ไปเล่นเกมกัน!'],
-      ['แฮปปี้มาก! ✨','อยากอยู่กับเธอทั้งวันเลย'],
-      ['พร้อมลุย! 🎮','วันนี้ต้องเก็บ EXP ให้ได้เยอะ ๆ']
+      ['เย้~','วันนี้ Buddy ฟิตสุด ๆ ไปเล่นเกมกัน!'],
+      ['แฮปปี้มาก!','อยากอยู่กับเธอทั้งวันเลย'],
+      ['พร้อมลุย!','วันนี้ไปเก็บแต้มกัน!']
     ],
     happy:[
       ['แฮปปี้~','วันนี้เล่นด้วยกันนะ'],
-      ['ฮึบ! 💗','แตะอีกทีสิ ชอบจัง'],
+      ['ฮึบ!','แตะอีกทีสิ ชอบจัง'],
       ['ไปกันไหม~','เล่นเกมแล้วเก็บ Coins กัน!']
     ],
     hungry:[
-      ['หิวแล้ว~ 🍓','ขอของกินหน่อยน้า'],
+      ['หิวแล้ว~','ขอของกินหน่อยน้า'],
       ['ท้องร้องแล้ว','แวะร้านอาหารให้ Buddy หน่อย'],
       ['อยากกินของอร่อย','มีสตรอว์เบอร์รีไหมนะ?']
     ],
     tired:[
-      ['เริ่มเหนื่อยแล้ว~ ⚡','พักก่อนแล้วค่อยเล่นกันนะ'],
+      ['เริ่มเหนื่อยแล้ว~','พักก่อนแล้วค่อยเล่นกันนะ'],
       ['พลังใกล้หมด','วันนี้ใช้พลังไปเยอะเลย'],
       ['ง่วงนิด ๆ','ขอพักแป๊บนึงนะ']
     ],
     sad:[
-      ['เหงาจัง~ 🥺','มาเล่นด้วยกันหน่อย'],
-      ['ขอกอดหน่อยได้ไหม','แตะ Buddy อีกทีนะ 💗'],
+      ['เหงาจัง~','มาเล่นด้วยกันหน่อย'],
+      ['ขอกอดหน่อยได้ไหม','แตะ Buddy อีกทีนะ'],
       ['คิดถึงจัง','เล่นเกมด้วยกันแล้วจะดีขึ้นแน่']
     ]
   };
@@ -24986,9 +26174,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(reduced())return;
     const layer=ensureFx();
     if(!layer)return;
-    const icons=mood==='hungry'?['🍓','♡','✨']:
-      mood==='tired'?['✨','💤','♡']:
-      mood==='sad'?['💗','♡','✨']:['💗','💕','✨','♡'];
+    const icons=['','','','',''];
     const count=mood==='great'?7:5;
     for(let i=0;i<count;i++){
       const p=document.createElement('i');
@@ -25136,14 +26322,14 @@ document.addEventListener('DOMContentLoaded', () => {
   <section class="p898FeedSheet">
     <header class="p898FeedHead">
       <div class="p898FeedTitle">
-        <span class="p898FeedTitleIcon">🍓</span>
+        <span class="p898FeedTitleIcon" aria-hidden="true">P</span>
         <div>
           <small>BUDDY KITCHEN</small>
           <h2 id="p898FeedTitle">ครัวของ Buddy</h2>
         </div>
       </div>
 
-      <div class="p898FeedWallet" aria-label="POMRU Coins">
+      <div class="p898FeedWallet" aria-label="เหรียญ">
         <i>P</i>
         <span><b id="p898FeedCoins">0</b> Coins</span>
       </div>
@@ -25152,18 +26338,18 @@ document.addEventListener('DOMContentLoaded', () => {
     </header>
 
     <nav class="p898FeedTabs" aria-label="เมนูอาหาร">
-      <button type="button" class="p898FeedTab active" data-p898-tab="fridge">🧊 ตู้เย็นของฉัน</button>
-      <button type="button" class="p898FeedTab" data-p898-tab="shop">🛒 ร้านอาหาร</button>
+      <button type="button" class="p898FeedTab active" data-p898-tab="fridge">ตู้เย็นของฉัน</button>
+      <button type="button" class="p898FeedTab" data-p898-tab="shop">ร้านอาหาร</button>
     </nav>
 
     <div class="p898FeedSummary" id="p898FeedSummary">
-      <span>🍓 เลือกอาหารที่ Buddy มีอยู่แล้ว</span>
+      <span>เลือกอาหารที่ Buddy มีอยู่แล้ว</span>
       <span>ของในตู้เย็น <strong id="p898OwnedTotal">0</strong> ชิ้น</span>
     </div>
 
     <div class="p898FeedBody">
       <div class="p898FeedLoading" id="p898FeedLoading">
-        <i>🍱</i>
+        <i class="p900FeedLoader" aria-hidden="true"></i>
         <b>กำลังเปิดครัว…</b>
         <p>กำลังโหลดอาหารและตู้เย็นจาก POMRU Cloud</p>
       </div>
@@ -25215,7 +26401,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if(raw.includes('authentication_required') || raw.includes('jwt'))
       return 'กรุณาเข้าสู่ระบบก่อนใช้งานครัว Buddy';
     if(raw.includes('insufficient_coins'))
-      return 'POMRU Coins ไม่พอสำหรับอาหารชิ้นนี้';
+      return 'เหรียญ ไม่พอสำหรับอาหารชิ้นนี้';
+    if(raw.includes('buddy_not_hungry'))
+      return 'Buddy อิ่มแล้ว ไว้หิวค่อยกินนะ';
     if(raw.includes('food_not_owned'))
       return 'อาหารชิ้นนี้หมดแล้ว ลองซื้อเพิ่มก่อนนะ';
     if(raw.includes('food_not_found'))
@@ -25289,7 +26477,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function art(row){
     const url=String(row?.image_url||'').replace(/["\n\r]/g,'');
     if(url)return '<img src="'+esc(url)+'" alt="">';
-    return esc(row?.emoji||'🍓');
+    const code=String(row?.item_code||'food').toUpperCase();
+    const short=(code.replace(/[^A-Z0-9]/g,'').slice(0,2)||'FD');
+    return '<span class="p900FoodGlyph" data-food-code="'+esc(code.toLowerCase())+'">'+short+'</span>';
   }
 
   function restoreBadges(row){
@@ -25298,10 +26488,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const happy=num(row?.happiness_restore);
     const energy=num(row?.energy_restore);
     const xp=num(row?.care_xp);
-    if(h)out.push('<span>🍓 +'+h+' อิ่ม</span>');
-    if(happy)out.push('<span>💗 +'+happy+' สุข</span>');
-    if(energy)out.push('<span>⚡ +'+energy+' พลัง</span>');
-    if(xp)out.push('<span class="xp">✨ +'+xp+' Care EXP</span>');
+    if(h)out.push('<span>อิ่ม +'+h+'</span>');
+    if(happy)out.push('<span>สุข +'+happy+'</span>');
+    if(energy)out.push('<span>พลัง +'+energy+'</span>');
+    /* Care EXP remains internal in v89.9 so players only see one score: แต้ม */
     return out.join('');
   }
 
@@ -25317,14 +26507,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if(fridge){
       actions=has
         ? '<div class="p898FoodActions two">'+
-            '<button class="p898FoodBtn feed" type="button" data-p898-feed="'+id+'">🍽️ ให้อาหาร</button>'+
+            '<button class="p898FoodBtn feed" type="button" data-p898-feed="'+id+'">ให้อาหาร</button>'+
             '<button class="p898FoodBtn secondary" type="button" data-p898-buy="'+id+'">+ ซื้อเพิ่ม</button>'+
           '</div>'
         : '';
     }else{
       actions=
         '<div class="p898FoodActions">'+
-          '<button class="p898FoodBtn buy" type="button" data-p898-buy="'+id+'">🪙 ซื้อ '+price.toLocaleString()+' P</button>'+
+          '<button class="p898FoodBtn buy" type="button" data-p898-buy="'+id+'">ซื้อ '+price.toLocaleString()+' เหรียญ</button>'+
         '</div>';
     }
 
@@ -25334,7 +26524,7 @@ document.addEventListener('DOMContentLoaded', () => {
         '<div class="p898FoodCopy">'+
           '<h3>'+esc(row?.name_th||'อาหาร Buddy')+'</h3>'+
           '<p>'+esc(description)+'</p>'+
-          '<span class="p898Owned">🎒 มี '+owned.toLocaleString()+' ชิ้น</span>'+
+          '<span class="p898Owned">มี '+owned.toLocaleString()+' ชิ้น</span>'+
         '</div>'+
       '</div>'+
       '<div class="p898Restore">'+restoreBadges(row)+'</div>'+
@@ -25362,8 +26552,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const summary=$('p898FeedSummary');
     if(summary){
       summary.firstElementChild.textContent=fridge
-        ? '🍓 เลือกอาหารจากตู้เย็น แล้วให้ Buddy กินได้เลย'
-        : '🛒 ซื้ออาหารด้วย POMRU Coins แล้วอาหารจะเข้าตู้เย็น';
+        ? 'เลือกอาหารจากตู้เย็น แล้วให้ Buddy กินได้เลย'
+        : 'ซื้ออาหารด้วยเหรียญ แล้วอาหารจะเข้าตู้เย็น';
     }
 
     loading.classList.add('hidden');
@@ -25372,7 +26562,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(!rows.length){
       grid.innerHTML=
         '<div class="p898Empty" style="grid-column:1/-1">'+
-          '<i>🧊</i>'+
+          '<i class="p900FeedEmptyMark" aria-hidden="true"></i>'+
           '<b>ตู้เย็นยังว่างอยู่</b>'+
           '<p>ซื้ออาหารจากร้านก่อน แล้วอาหารจะถูกเก็บไว้ในตู้เย็นของ Buddy</p>'+
           '<button type="button" data-p898-switch-shop>ไปซื้ออาหาร</button>'+
@@ -25391,7 +26581,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const grid=$('p898FoodGrid');
     if(loading){
       loading.classList.remove('hidden');
-      loading.innerHTML='<i>🍱</i><b>กำลังเปิดครัว…</b><p>กำลังโหลดอาหารและตู้เย็นจาก POMRU Cloud</p>';
+      loading.innerHTML='<i class="p900FeedLoader" aria-hidden="true"></i><b>กำลังเปิดครัว…</b><p>กำลังโหลดอาหารและตู้เย็นจาก POMRU Cloud</p>';
     }
     grid?.classList.add('hidden');
 
@@ -25465,7 +26655,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if(row && Number.isFinite(Number(row.coin_balance)))paintCoins(row.coin_balance);
 
       await loadCatalog();
-      toast('ซื้อ '+(row?.item_name||'อาหาร')+' สำเร็จ 🎁');
+      toast('ซื้อ '+(row?.item_name||'อาหาร')+' สำเร็จ');
 
       try{await window.bbLoadShop?.()}catch(_){}
       try{await window.POMRUCoreSync?.refresh?.('food-purchase')}catch(_){}
@@ -25531,7 +26721,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const target=buddyCenter();
     const el=document.createElement('div');
     el.className='p898FlyingFood';
-    el.textContent=row?.emoji||'🍓';
+    el.textContent=''; el.classList.add('p900FlyingFoodDot');
     el.style.left=(start?start.left+start.width/2:innerWidth/2)+'px';
     el.style.top=(start?start.top+start.height/2:innerHeight*.72)+'px';
     document.body.appendChild(el);
@@ -25554,7 +26744,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(layer)layer.remove();
     layer=document.createElement('div');
     layer.className='p898FeedBurst';
-    const parts=['💗','✨','💕','★','♡','✨'];
+    const parts=['','','','','',''];
     parts.forEach((icon,i)=>{
       const p=document.createElement('i');
       p.textContent=icon;
@@ -25639,7 +26829,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const name=row?.item_name||selected?.name_th||'อาหาร';
       const homeToast=$('p89Toast');
       if(homeToast){
-        homeToast.textContent='🍽️ Buddy กิน '+name+' แล้ว • +'+gain+' Care EXP';
+        homeToast.textContent='Buddy กิน '+name+' แล้ว';
         homeToast.classList.add('show');
         clearTimeout(feed.homeToastTimer);
         feed.homeToastTimer=setTimeout(()=>homeToast.classList.remove('show'),2400);
@@ -25758,6 +26948,592 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('DOMContentLoaded',init,{once:true});
   else
     init();
+})();
+</script>
+
+
+<div class="p899ProgressToast" id="p899ProgressToast" role="status"></div>
+
+<script id="pomru-v899-progression-sync">
+(function pomruV899ProgressionSync(){
+  "use strict";
+
+  const $=id=>document.getElementById(id);
+  const DEFAULT_BUDDY="/assets/buddy/default-pink-buddy.png?v=899";
+
+  const state={
+    user:null,
+    progress:null,
+    board:[],
+    missions:null,
+    busy:false,
+    rerun:false,
+    toastTimer:null
+  };
+
+  function client(){
+    if(window.__bbSupabase)return window.__bbSupabase;
+    const cfg=window.BRAIN_BUDDY_SUPABASE||{};
+    if(window.supabase&&cfg.url&&cfg.publishableKey){
+      window.__bbSupabase=window.supabase.createClient(cfg.url,cfg.publishableKey);
+      return window.__bbSupabase;
+    }
+    return null;
+  }
+
+  function esc(v){
+    return String(v??"").replace(/[&<>"']/g,m=>({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#39;"
+    }[m]));
+  }
+
+  function n(v,f=0){
+    const x=Number(v);
+    return Number.isFinite(x)?x:f;
+  }
+
+  function text(id,value){
+    const el=$(id);
+    if(!el)return;
+    const v=String(value??"");
+    if(el.textContent!==v)el.textContent=v;
+  }
+
+  function toast(message){
+    const el=$("p899ProgressToast");
+    if(!el)return;
+    el.textContent=message;
+    el.classList.add("show");
+    clearTimeout(state.toastTimer);
+    state.toastTimer=setTimeout(()=>el.classList.remove("show"),2300);
+  }
+
+  function avatar(row){
+    const url=String(row?.avatar_url||"").replace(/["\n\r]/g,"");
+    if(url)return '<img src="'+esc(url)+'" alt="">';
+    return '<img src="'+DEFAULT_BUDDY+'" alt="Buddy">';
+  }
+
+  function renderBoard(){
+    const host=$("p89RankRows");
+    if(!host)return;
+
+    const rows=(state.board||[]).slice(0,3);
+
+    let markup="";
+
+    if(!rows.length){
+      markup='<div class="rankLoading">ยังไม่มีอันดับซีซัน • เล่นเกมแรกเพื่อขึ้นตาราง</div>';
+    }else{
+      markup=rows.map((row,index)=>{
+        const pos=n(row.rank_position,index+1);
+        const name=esc(row.display_name||"ผู้เล่น");
+        const level=n(row.player_level,1);
+        const points=n(row.season_points);
+        const rank=esc(row.rank_name||"มือใหม่");
+
+        return '<button class="p89RankRow" type="button" data-p899-player="'+esc(row.user_id||"")+'">'+
+          '<span class="p89RankPos">'+pos+'</span>'+
+          '<span class="p89RankAvatar">'+avatar(row)+'</span>'+
+          '<span class="p89RankName"><b>'+name+'</b><small>'+rank+' • เลเวล '+level+'</small></span>'+
+          '<span class="p89RankScore">⭐ '+points.toLocaleString()+'</span>'+
+        '</button>';
+      }).join("");
+    }
+
+    if(host.innerHTML!==markup){
+      host.innerHTML=markup;
+    }
+
+    if(!state.user){
+      text("p89MyRankPos","#—");
+      text("p89MyRankName","เข้าสู่ระบบเพื่อเก็บอันดับ");
+      text("p89MyRankScore","—");
+      return;
+    }
+
+    const p=state.progress;
+    if(!p){
+      text("p89MyRankPos","#—");
+      text("p89MyRankName","กำลังโหลดอันดับ…");
+      text("p89MyRankScore","—");
+      return;
+    }
+
+    const pos=n(p.rank_position);
+    text("p89MyRankPos",pos>0?"#"+pos.toLocaleString():"#—");
+    text(
+      "p89MyRankName",
+      (p.rank_name||"มือใหม่")
+    );
+    text(
+      "p89MyRankScore",
+      n(p.season_points).toLocaleString()+" แต้ม"
+    );
+  }
+
+  function renderProgress(){
+    const p=state.progress;
+    if(!p)return;
+
+    const level=Math.max(1,n(p.player_level,1));
+    const progress=Math.max(0,n(p.level_progress));
+    const target=Math.max(1,n(p.level_target,500));
+    const pct=Math.min(100,(progress/target)*100);
+
+    text("p89ProfileLevel","เลเวล "+level);
+    text("p89BuddyLevel","เลเวล "+level);
+    text(
+      "p89XpText",
+      progress.toLocaleString()+" / "+target.toLocaleString()+" แต้ม"
+    );
+
+    const bar=$("p89XpBar");
+    if(bar)bar.style.width=pct+"%";
+
+    const coins=n(p.coins).toLocaleString();
+    text("pomruHomeCoinBalance",coins);
+    text("bbHomeCoinBalance",coins);
+  }
+
+  function setMission(type,progress,target){
+    const ids={
+      play:["p899MissionPlay","p899MissionPlayBar"],
+      feed:["p899MissionFeed","p899MissionFeedBar"],
+      exercise:["p899MissionExercise","p899MissionExerciseBar"]
+    }[type];
+
+    if(!ids)return;
+
+    const done=progress>=target;
+    text(ids[0],Math.min(progress,target)+"/"+target);
+
+    const bar=$(ids[1]);
+    if(bar){
+      bar.style.width=Math.min(100,(progress/Math.max(1,target))*100)+"%";
+    }
+
+    const row=document.querySelector('[data-p899-mission="'+type+'"]');
+    row?.classList.toggle("done",done);
+  }
+
+  function renderMissions(){
+    const m=state.missions;
+    const btn=$("p89MissionReward");
+
+    if(!state.user){
+      setMission("play",0,1);
+      setMission("feed",0,1);
+      setMission("exercise",0,1);
+      if(btn){
+        btn.disabled=true;
+        btn.classList.remove("ready","claimed");
+        btn.textContent="เข้าสู่ระบบเพื่อทำภารกิจ";
+      }
+      return;
+    }
+
+    if(!m){
+      if(btn){
+        btn.disabled=true;
+        btn.classList.remove("ready","claimed");
+        btn.textContent="กำลังโหลดภารกิจ…";
+      }
+      return;
+    }
+
+    setMission("play",n(m.play_progress),Math.max(1,n(m.play_target,1)));
+    setMission("feed",n(m.feed_progress),Math.max(1,n(m.feed_target,1)));
+    setMission("exercise",n(m.exercise_progress),Math.max(1,n(m.exercise_target,1)));
+
+    if(!btn)return;
+
+    const reward=Math.max(0,n(m.reward_coins,30));
+
+    btn.classList.toggle("claimed",!!m.reward_claimed);
+    btn.classList.toggle("ready",!!m.can_claim && !m.reward_claimed);
+
+    if(m.reward_claimed){
+      btn.disabled=true;
+      btn.textContent="✅ รับ "+reward.toLocaleString()+" เหรียญแล้ว";
+    }else if(m.can_claim){
+      btn.disabled=false;
+      btn.textContent="รับ "+reward.toLocaleString()+" เหรียญ";
+    }else{
+      btn.disabled=true;
+      btn.textContent="ทำครบ 3 ภารกิจก่อน";
+    }
+  }
+
+  async function readSession(c){
+    const {data,error}=await c.auth.getSession();
+    if(error)throw error;
+    state.user=data?.session?.user||null;
+  }
+
+  async function readBoard(c){
+    const {data,error}=await c.rpc("bb_pomru_leaderboard",{
+      p_limit:50,
+      p_offset:0
+    });
+    if(error)throw error;
+    state.board=Array.isArray(data)?data:[];
+  }
+
+  async function readProgress(c){
+    if(!state.user){
+      state.progress=null;
+      return;
+    }
+
+    const {data,error}=await c.rpc("bb_pomru_my_progress");
+    if(error)throw error;
+    state.progress=Array.isArray(data)?(data[0]||null):(data||null);
+  }
+
+  async function readMissions(c){
+    if(!state.user){
+      state.missions=null;
+      return;
+    }
+
+    const {data,error}=await c.rpc("bb_get_daily_missions");
+    if(error)throw error;
+    state.missions=Array.isArray(data)?(data[0]||null):(data||null);
+  }
+
+  async function refresh(reason="manual"){
+    if(state.busy){
+      state.rerun=true;
+      return state;
+    }
+
+    state.busy=true;
+
+    try{
+      const c=client();
+
+      if(!c){
+        state.user=null;
+        state.progress=null;
+        state.board=[];
+        state.missions=null;
+        renderBoard();
+        renderMissions();
+        return state;
+      }
+
+      await readSession(c);
+
+      const jobs=[readBoard(c)];
+
+      if(state.user){
+        jobs.push(readProgress(c));
+        jobs.push(readMissions(c));
+      }else{
+        state.progress=null;
+        state.missions=null;
+      }
+
+      const results=await Promise.allSettled(jobs);
+      results.forEach(r=>{
+        if(r.status==="rejected"){
+          console.warn("POMRU v89.9 sync:",r.reason?.message||r.reason);
+        }
+      });
+
+      renderProgress();
+      renderBoard();
+      renderMissions();
+
+      document.dispatchEvent(new CustomEvent("pomru:v899-synced",{
+        detail:{
+          reason,
+          user:state.user,
+          progress:state.progress,
+          board:state.board,
+          missions:state.missions
+        }
+      }));
+
+      return state;
+
+    }finally{
+      state.busy=false;
+
+      if(state.rerun){
+        state.rerun=false;
+        setTimeout(()=>refresh("rerun"),40);
+      }
+    }
+  }
+
+  async function claimDaily(){
+    if(!state.user || !state.missions?.can_claim)return;
+
+    const btn=$("p89MissionReward");
+    if(btn){
+      btn.disabled=true;
+      btn.textContent="กำลังรับรางวัล…";
+    }
+
+    try{
+      const c=client();
+      if(!c)throw new Error("no_client");
+
+      const {data,error}=await c.rpc("bb_claim_daily_mission_reward");
+      if(error)throw error;
+
+      const row=Array.isArray(data)?data[0]:data;
+
+      if(row?.coin_balance!==undefined){
+        const value=n(row.coin_balance).toLocaleString();
+        text("pomruHomeCoinBalance",value);
+        text("bbHomeCoinBalance",value);
+      }
+
+      toast("รับรางวัลภารกิจแล้ว • +"+n(row?.reward_coins,30)+" เหรียญ");
+      await refresh("daily-claimed");
+
+    }catch(err){
+      console.warn("POMRU daily claim:",err);
+      toast("รับรางวัลไม่สำเร็จ • "+String(err?.message||"ลองใหม่อีกครั้ง"));
+      await refresh("daily-claim-error");
+    }
+  }
+
+  function bind(){
+    $("p89MissionReward")?.addEventListener("click",claimDaily);
+
+    // Player-card / full leaderboard UI comes in the next social step.
+    // For now these buttons keep the user on the new season ranking source.
+    $("p899RankAllBtn")?.addEventListener("click",()=>{
+      toast("ตารางอันดับซีซันแบบเต็มกำลังมาในขั้นถัดไป");
+    });
+
+    $("p899MyRankBtn")?.addEventListener("click",()=>{
+      const p=state.progress;
+      if(!p){
+        toast("เข้าสู่ระบบก่อนเพื่อดูอันดับของคุณ");
+        return;
+      }
+      const pos=n(p.rank_position);
+      toast(
+        (p.rank_name||"มือใหม่")+
+        " • "+(pos>0?"อันดับ #"+pos.toLocaleString():"ยังไม่มีอันดับ")+
+        " • "+n(p.season_points).toLocaleString()+" แต้ม"
+      );
+    });
+
+    document.addEventListener("pomru:progress-updated",()=>refresh("game-reward"));
+    document.addEventListener("pomru:core-synced",()=>refresh("core-sync"));
+    document.addEventListener("bb:pet-updated",()=>{
+      // Pet Core may repaint Level/EXP using old pet wording.
+      // Re-apply the one-score POMRU progression view.
+      renderProgress();
+      setTimeout(renderProgress,40);
+    });
+
+    window.addEventListener("pageshow",()=>refresh("pageshow"));
+
+    const c=client();
+    c?.auth?.onAuthStateChange?.(()=>{
+      setTimeout(()=>refresh("auth"),80);
+    });
+
+    // Old Home modules can repaint ranking/profile after their own sync.
+    // Observe only the affected elements and re-apply cached POMRU data
+    // when their visible content actually differs.
+    const rankHost=$("p89RankRows");
+    if(rankHost){
+      new MutationObserver(()=>{
+        if(state.board.length)setTimeout(renderBoard,0);
+      }).observe(rankHost,{childList:true,subtree:true,characterData:true});
+    }
+
+    ["p89ProfileLevel","p89BuddyLevel","p89XpText"].forEach(id=>{
+      const el=$(id);
+      if(!el)return;
+      new MutationObserver(()=>setTimeout(renderProgress,0))
+        .observe(el,{childList:true,subtree:true,characterData:true});
+    });
+  }
+
+  function init(){
+    bind();
+    refresh("init");
+  }
+
+  window.POMRUProgress={
+    refresh,
+    getState:()=>({
+      user:state.user,
+      progress:state.progress,
+      board:[...state.board],
+      missions:state.missions
+    })
+  };
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",init,{once:true});
+  }else{
+    init();
+  }
+})();
+</script>
+
+
+<script id="pomru-v900-visual-runtime">
+(function pomruV900VisualRuntime(){
+  "use strict";
+
+  const $=id=>document.getElementById(id);
+
+  // UI-only emoji cleaner. It deliberately avoids gameplay boards,
+  // question content, and user-entered text.
+  const emojiRx=/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}]/gu;
+
+  function cleanText(el){
+    if(!el)return;
+    const text=String(el.textContent||"");
+    const next=text.replace(emojiRx,"").replace(/\s{2,}/g," ").trim();
+    if(next && next!==text.trim())el.textContent=next;
+  }
+
+  function cleanStaticUI(){
+    const safeSelectors=[
+      "#bbAppHome .p89Tagline",
+      "#bbAppHome .p89MissionReward",
+      "#bbAppHome .p89Online small",
+      "#bbAppHome .p89Online b",
+      "#bbAppHome .p89Online em",
+      "#bbAppHome .p89Online strong",
+      "#bbAppModes .bbWorldTag",
+      "#bbAppSetup .bbAppStyleGrid small",
+      "#bbAppScoreInfo h2",
+      "#bbAppScoreInfo h3",
+      "#bbAppScoreInfo .bbAppInfoRows span",
+      "#bbAppInventory .bbClosetTabs button",
+      "#bbAppInventory .bbLoadoutSlots small",
+      "#bbAppShop .bbShopBrand small"
+    ];
+    safeSelectors.forEach(sel=>{
+      document.querySelectorAll(sel).forEach(cleanText);
+    });
+  }
+
+  function normalizeHome(){
+    // Legacy scripts can repaint the profile fallback with a teddy emoji.
+    const avatar=$("p89ProfileAvatar");
+    if(avatar && !avatar.querySelector("img")){
+      avatar.textContent="";
+    }
+
+    // Ranking v89.6 can repaint old trophy/RP strings. v89.9 remains
+    // the data source, this only removes the visual emoji if a race occurs.
+    const score=$("p89MyRankScore");
+    if(score)cleanText(score);
+
+    document.querySelectorAll("#p89RankRows .p89RankScore,#p89RankRows .p89RankName small")
+      .forEach(cleanText);
+  }
+
+  function normalizeArena(){
+    // Until the old Ranked backend is migrated to the unified season points,
+    // keep RP as an internal legacy value and avoid showing it as another unit.
+    const rp=$("bbArenaRP");
+    if(rp){
+      const parent=rp.parentElement;
+      if(parent)parent.style.display="none";
+    }
+
+    const me=$("bbArenaMeRank");
+    if(me){
+      let t=String(me.textContent||"");
+      t=t.replace(emojiRx,"")
+         .replace(/\s*[•·]\s*[\d,.]+\s*RP\b/gi,"")
+         .replace(/\s+\d[\d,.]*\s*RP\b/gi,"")
+         .replace(/\s{2,}/g," ")
+         .trim();
+      if(t)me.textContent=t;
+    }
+  }
+
+  function normalizeAccount(){
+    const title=$("accountTitle");
+    const lead=$("accountLead");
+    if(lead){
+      lead.textContent="เล่นแบบ Guest ได้ หรือสมัครสมาชิกเพื่อเก็บแต้ม เลเวล แรงก์ เหรียญ และประวัติไว้กับบัญชีของคุณ";
+    }
+    const memberLevel=$("memberLevel");
+    if(memberLevel){
+      memberLevel.textContent=String(memberLevel.textContent||"")
+        .replace(/\bXP\b/gi,"แต้ม")
+        .replace(/\bLevel\b/gi,"เลเวล");
+    }
+    const cloud=$("cloudStatusText");
+    if(cloud){
+      cloud.textContent="แต้ม เลเวล แรงก์ เหรียญ ความสำเร็จ และประวัติจะซิงก์กับบัญชีนี้";
+    }
+  }
+
+  function normalizeFeeding(){
+    document.querySelectorAll("#p898FeedModal [data-p898-tab],#p898FeedSummary,#p898FeedModal button")
+      .forEach(cleanText);
+  }
+
+  function normalize(){
+    cleanStaticUI();
+    normalizeHome();
+    normalizeArena();
+    normalizeAccount();
+    normalizeFeeding();
+  }
+
+  function observe(){
+    const targets=[
+      $("p89ProfileAvatar"),
+      $("p89RankRows"),
+      $("p89MyRankScore"),
+      $("bbArenaMeRank"),
+      $("memberLevel"),
+      $("p898FeedModal")
+    ].filter(Boolean);
+
+    targets.forEach(el=>{
+      new MutationObserver(()=>queueMicrotask(normalize))
+        .observe(el,{childList:true,subtree:true,characterData:true});
+    });
+  }
+
+  function init(){
+    normalize();
+    observe();
+
+    document.addEventListener("pomru:v899-synced",normalize);
+    document.addEventListener("pomru:core-synced",normalize);
+    document.addEventListener("bb:profile-updated",normalize);
+    document.addEventListener("bb:pet-updated",normalize);
+    window.addEventListener("pageshow",normalize);
+
+    // Re-run once after all legacy inline modules have initialized.
+    setTimeout(normalize,120);
+    setTimeout(normalize,500);
+  }
+
+  window.POMRUVisual={
+    refresh:normalize
+  };
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",init,{once:true});
+  }else{
+    init();
+  }
 })();
 </script>
 
