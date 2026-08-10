@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy v86.3 — Buddy Asset Containment Fix</title>
+<title>Brain Buddy v86.4 — Stable Layer Renderer</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -10775,6 +10775,165 @@ body.bbAccountModalOpen{
   }
 }
 
+
+/* ==========================================================
+   Brain Buddy v86.4 — STABLE BACKGROUND LAYER RENDERER
+   Character/cosmetic preview assets are backgrounds, not <img>.
+   They cannot escape their fixed preview boxes on Safari/iPad.
+   ========================================================== */
+
+.bbBuddyBaseImage,
+.bbBuddyLayer,
+.bbClosetLayer{
+  position:absolute!important;
+  inset:0!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  min-width:0!important;
+  min-height:0!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  margin:0!important;
+  padding:0!important;
+  box-sizing:border-box!important;
+  background-repeat:no-repeat!important;
+  background-position:center!important;
+  background-size:contain!important;
+  background-origin:content-box!important;
+  pointer-events:none!important;
+  transform:none!important;
+  filter:none!important;
+}
+
+.bbBuddyBaseImage.hidden,
+.bbBuddyLayer.hidden,
+.bbClosetLayer.hidden{
+  display:none!important;
+  background-image:none!important;
+}
+
+/* HOME */
+#bbEquippedHeroCharacter{
+  position:relative!important;
+  width:210px!important;
+  height:190px!important;
+  min-width:210px!important;
+  min-height:190px!important;
+  max-width:210px!important;
+  max-height:190px!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  contain:layout paint size!important;
+}
+#bbEquippedHeroCharacterImg{z-index:10!important}
+#bbHomeBuddySkin{z-index:20!important}
+#bbHomeBuddyOutfit{z-index:30!important}
+#bbHomeBuddyAccessory{z-index:40!important}
+#bbHomeBuddyHat{z-index:50!important}
+#bbHomeBuddyEffect{z-index:60!important}
+#bbPinkBuddy3D{z-index:9!important}
+
+/* CLOSET */
+.bbBuddyStage{
+  position:relative!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  contain:paint!important;
+}
+#bbClosetBuddyRender{
+  position:relative!important;
+  width:300px!important;
+  height:300px!important;
+  min-width:300px!important;
+  min-height:300px!important;
+  max-width:300px!important;
+  max-height:300px!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  contain:layout paint size!important;
+}
+#bbClosetBuddyRender .bbClosetLayer.character{z-index:10!important}
+#bbClosetBuddyRender .bbClosetLayer.skin{z-index:20!important}
+#bbClosetBuddyRender .bbClosetLayer.outfit{z-index:30!important}
+#bbClosetBuddyRender .bbClosetLayer.accessory{z-index:40!important}
+#bbClosetBuddyRender .bbClosetLayer.hat{z-index:50!important}
+#bbClosetBuddyRender .bbClosetLayer.effect{z-index:60!important}
+#bbClosetBuddyRender [data-buddy-css-default]{z-index:9!important}
+
+/* SHOP */
+.bbShopV2Hero,
+.bbShopPreviewMini{
+  overflow:hidden!important;
+  isolation:isolate!important;
+  contain:paint!important;
+}
+#bbShopBuddyRender{
+  position:relative!important;
+  width:190px!important;
+  height:190px!important;
+  min-width:190px!important;
+  min-height:190px!important;
+  max-width:190px!important;
+  max-height:190px!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  contain:layout paint size!important;
+  border-radius:50%!important;
+}
+#bbShopBuddyRender .bbClosetLayer.character{z-index:10!important}
+#bbShopBuddyRender .bbClosetLayer.skin{z-index:20!important}
+#bbShopBuddyRender .bbClosetLayer.outfit{z-index:30!important}
+#bbShopBuddyRender .bbClosetLayer.accessory{z-index:40!important}
+#bbShopBuddyRender .bbClosetLayer.hat{z-index:50!important}
+#bbShopBuddyRender .bbClosetLayer.effect{z-index:60!important}
+#bbShopBuddyRender [data-buddy-css-default]{z-index:9!important}
+
+/* Product thumbnails remain ordinary <img>, but stay clipped. */
+.bbShopV2 .bbShopItemArt,
+.bbClosetItemArt{
+  position:relative!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  contain:layout paint size!important;
+}
+.bbShopV2 .bbShopItemArt > img,
+.bbClosetItemArt > img{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  box-sizing:border-box!important;
+  padding:8px!important;
+  transform:none!important;
+}
+
+@media(max-width:980px){
+  #bbShopBuddyRender{
+    width:170px!important;height:170px!important;
+    min-width:170px!important;min-height:170px!important;
+    max-width:170px!important;max-height:170px!important;
+  }
+}
+@media(max-width:720px){
+  #bbClosetBuddyRender{
+    width:245px!important;height:245px!important;
+    min-width:245px!important;min-height:245px!important;
+    max-width:245px!important;max-height:245px!important;
+  }
+}
+@media(max-width:420px){
+  #bbClosetBuddyRender{
+    width:220px!important;height:220px!important;
+    min-width:220px!important;min-height:220px!important;
+    max-width:220px!important;max-height:220px!important;
+  }
+}
+
 </style>
 
 <script>
@@ -11433,12 +11592,12 @@ try{
         </div>
 
         <div class="bbEquippedHeroCharacter" id="bbEquippedHeroCharacter">
-          <img id="bbEquippedHeroCharacterImg" alt="" class="bbBuddyBaseImage">
-          <img class="bbBuddyLayer bbBuddySkinLayer hidden" id="bbHomeBuddySkin" alt="">
-          <img class="bbBuddyLayer bbBuddyOutfitLayer hidden" id="bbHomeBuddyOutfit" alt="">
-          <img class="bbBuddyLayer bbBuddyAccessoryLayer hidden" id="bbHomeBuddyAccessory" alt="">
-          <img class="bbBuddyLayer bbBuddyHatLayer hidden" id="bbHomeBuddyHat" alt="">
-          <img class="bbBuddyLayer bbBuddyEffectLayer hidden" id="bbHomeBuddyEffect" alt="">
+          <span id="bbEquippedHeroCharacterImg" class="bbBuddyBaseImage hidden" role="img" aria-label=""></span>
+          <span class="bbBuddyLayer bbBuddySkinLayer hidden" id="bbHomeBuddySkin" role="img" aria-label=""></span>
+          <span class="bbBuddyLayer bbBuddyOutfitLayer hidden" id="bbHomeBuddyOutfit" role="img" aria-label=""></span>
+          <span class="bbBuddyLayer bbBuddyAccessoryLayer hidden" id="bbHomeBuddyAccessory" role="img" aria-label=""></span>
+          <span class="bbBuddyLayer bbBuddyHatLayer hidden" id="bbHomeBuddyHat" role="img" aria-label=""></span>
+          <span class="bbBuddyLayer bbBuddyEffectLayer hidden" id="bbHomeBuddyEffect" role="img" aria-label=""></span>
           <div class="bbPinkBuddy3D" id="bbPinkBuddy3D">
             <span class="ear left"></span>
             <span class="ear right"></span>
@@ -11762,12 +11921,12 @@ try{
             <span class="leg left"></span><span class="leg right"></span>
             <span class="heart"></span>
           </div>
-          <img class="bbClosetLayer character hidden" data-buddy-preview-layer="character" alt="">
-          <img class="bbClosetLayer skin hidden" data-buddy-preview-layer="skin" alt="">
-          <img class="bbClosetLayer outfit hidden" data-buddy-preview-layer="outfit" alt="">
-          <img class="bbClosetLayer accessory hidden" data-buddy-preview-layer="accessory" alt="">
-          <img class="bbClosetLayer hat hidden" data-buddy-preview-layer="hat" alt="">
-          <img class="bbClosetLayer effect hidden" data-buddy-preview-layer="effect" alt="">
+          <span class="bbClosetLayer character hidden" data-buddy-preview-layer="character" role="img" aria-label=""></span>
+          <span class="bbClosetLayer skin hidden" data-buddy-preview-layer="skin" role="img" aria-label=""></span>
+          <span class="bbClosetLayer outfit hidden" data-buddy-preview-layer="outfit" role="img" aria-label=""></span>
+          <span class="bbClosetLayer accessory hidden" data-buddy-preview-layer="accessory" role="img" aria-label=""></span>
+          <span class="bbClosetLayer hat hidden" data-buddy-preview-layer="hat" role="img" aria-label=""></span>
+          <span class="bbClosetLayer effect hidden" data-buddy-preview-layer="effect" role="img" aria-label=""></span>
         </div>
 
         <div class="bbBuddyStageLabel">
@@ -11860,12 +12019,12 @@ try{
           <span class="leg left"></span><span class="leg right"></span>
           <span class="heart"></span>
         </div>
-        <img class="bbClosetLayer character hidden" data-buddy-preview-layer="character" alt="">
-        <img class="bbClosetLayer skin hidden" data-buddy-preview-layer="skin" alt="">
-        <img class="bbClosetLayer outfit hidden" data-buddy-preview-layer="outfit" alt="">
-        <img class="bbClosetLayer accessory hidden" data-buddy-preview-layer="accessory" alt="">
-        <img class="bbClosetLayer hat hidden" data-buddy-preview-layer="hat" alt="">
-        <img class="bbClosetLayer effect hidden" data-buddy-preview-layer="effect" alt="">
+        <span class="bbClosetLayer character hidden" data-buddy-preview-layer="character" role="img" aria-label=""></span>
+        <span class="bbClosetLayer skin hidden" data-buddy-preview-layer="skin" role="img" aria-label=""></span>
+        <span class="bbClosetLayer outfit hidden" data-buddy-preview-layer="outfit" role="img" aria-label=""></span>
+        <span class="bbClosetLayer accessory hidden" data-buddy-preview-layer="accessory" role="img" aria-label=""></span>
+        <span class="bbClosetLayer hat hidden" data-buddy-preview-layer="hat" role="img" aria-label=""></span>
+        <span class="bbClosetLayer effect hidden" data-buddy-preview-layer="effect" role="img" aria-label=""></span>
       </div>
     </div>
   </section>
@@ -21290,12 +21449,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const src=assetOf(item);
 
     if(src){
-      if(el.getAttribute("src")!==src)el.setAttribute("src",src);
-      el.alt=item?.name||"";
+      const safe=String(src).replace(/[\"\n\r]/g,"");
+      const next=`url("${safe}")`;
+      if(el.style.backgroundImage!==next)el.style.backgroundImage=next;
+      el.setAttribute("aria-label",item?.name||"");
       el.classList.remove("hidden");
     }else{
-      el.removeAttribute("src");
-      el.alt="";
+      el.style.backgroundImage="";
+      el.setAttribute("aria-label","");
       el.classList.add("hidden");
     }
   }
@@ -21329,17 +21490,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const character=loadoutItem("character");
     const charAsset=assetOf(character);
 
-    if(base){
-      if(charAsset){
-        if(base.getAttribute("src")!==charAsset)base.setAttribute("src",charAsset);
-        base.alt=character?.name||"Buddy";
-        base.classList.remove("hidden");
-      }else{
-        base.removeAttribute("src");
-        base.alt="";
-        base.classList.add("hidden");
-      }
-    }
+    renderImageLayer(base,character);
 
     pink?.classList.toggle("hidden",!!charAsset);
 
@@ -22061,42 +22212,19 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
+
+
+
 <script>
-/* ==========================================================
-   Brain Buddy v86.3 — Asset containment safety
-   ========================================================== */
-(function bbV863AssetSafety(){
-  function secureBuddyImages(){
-    document.querySelectorAll(
-      '#bbShopBuddyRender img[data-buddy-preview-layer],'+
-      '#bbClosetBuddyRender img[data-buddy-preview-layer],'+
-      '#bbEquippedHeroCharacter > img'
-    ).forEach(img=>{
-      img.draggable=false;
-      img.style.pointerEvents="none";
-    });
-
-    /* Product assets must remain inside their own card. */
-    document.querySelectorAll('.bbShopV2 .bbShopItemArt, .bbClosetItemArt').forEach(box=>{
-      box.style.overflow="hidden";
+(function bbV864LayerSafety(){
+  function secure(){
+    document.querySelectorAll('.bbBuddyBaseImage,.bbBuddyLayer,.bbClosetLayer').forEach(el=>{
+      el.style.pointerEvents='none';
     });
   }
-
-  if(document.readyState==="loading"){
-    document.addEventListener("DOMContentLoaded",secureBuddyImages,{once:true});
-  }else{
-    secureBuddyImages();
-  }
-
-  /* Shop/Closet HTML is rendered after Supabase returns. One lightweight
-     event is enough; no polling or animation loop is introduced. */
-  document.addEventListener("click",e=>{
-    if(e.target.closest('[data-app-go="shop"],[data-app-go="inventory"]')){
-      requestAnimationFrame(secureBuddyImages);
-    }
-  },true);
-
-  window.bbSecureBuddyImages=secureBuddyImages;
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',secure,{once:true});
+  else secure();
+  window.bbSecureBuddyLayers=secure;
 })();
 </script>
 
