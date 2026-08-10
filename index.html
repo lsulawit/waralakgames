@@ -7811,6 +7811,200 @@ body.bbContentAdminMode #bbArena{
   .bbRankGameGrid{grid-template-columns:repeat(2,1fr)}
 }
 
+
+/* ==========================================================
+   v71 — Ranked Learning Engine
+   ========================================================== */
+.bbRankLearn{
+  position:fixed;inset:0;z-index:10060;
+  overflow:auto;
+  background:
+    radial-gradient(circle at 15% 15%,rgba(255,164,215,.38),transparent 27%),
+    radial-gradient(circle at 86% 20%,rgba(137,117,238,.34),transparent 27%),
+    linear-gradient(145deg,#30294e 0%,#5c3f8c 42%,#9e5299 100%);
+  color:#fff
+}
+.bbRankLearn.hidden{display:none!important}
+.bbRankLearnBg{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.bbRankLearnBg i{
+  position:absolute;border-radius:40%;filter:blur(1px);
+  background:rgba(255,255,255,.07);transform:rotate(24deg)
+}
+.bbRankLearnBg .a{width:280px;height:280px;left:-90px;top:17%}
+.bbRankLearnBg .b{width:190px;height:190px;right:-35px;top:8%}
+.bbRankLearnBg .c{width:350px;height:350px;right:6%;bottom:-210px}
+.bbRankLearnBg .d{width:140px;height:140px;left:18%;bottom:-55px}
+
+.bbRankLearnTop{
+  position:sticky;top:0;z-index:5;
+  min-height:74px;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;
+  padding:10px clamp(14px,3vw,34px);
+  background:rgba(37,29,63,.76);
+  border-bottom:1px solid rgba(255,255,255,.13);
+  backdrop-filter:blur(20px)
+}
+.bbRankLearnBrand{display:flex;align-items:center;gap:9px}
+.bbRankLearnBrand>span{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:22px;
+  background:rgba(255,255,255,.12);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)
+}
+.bbRankLearnBrand div,.bbRankLearnMode{display:flex;flex-direction:column}
+.bbRankLearnBrand small,.bbRankLearnMode small{font-size:8px;letter-spacing:.12em;color:#d7cff1;font-weight:1000}
+.bbRankLearnBrand b{font-size:13px}
+.bbRankLearnMode{text-align:center;min-width:180px}
+.bbRankLearnMode b{font-size:13px}
+.bbRankLearnMode span{font-size:9px;color:#ffd9ee;font-weight:850}
+.bbRLForfeit{
+  justify-self:end;border:1px solid rgba(255,255,255,.16);border-radius:12px;
+  padding:9px 12px;background:rgba(255,255,255,.09);color:#fff;font-weight:900;font-size:10px
+}
+
+.bbRankLearnShell{
+  width:min(920px,calc(100% - 24px));
+  margin:18px auto 30px;
+  position:relative;z-index:2
+}
+.bbRLStatus{
+  display:grid;grid-template-columns:110px minmax(0,1fr) 110px;gap:10px;
+  align-items:stretch;margin-bottom:10px
+}
+.bbRLQuestionNo,.bbRLScore,.bbRLTimerWrap{
+  border-radius:18px;background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(12px)
+}
+.bbRLQuestionNo,.bbRLScore{
+  padding:10px;text-align:center;display:flex;flex-direction:column;justify-content:center
+}
+.bbRLQuestionNo small,.bbRLScore small{font-size:7px;letter-spacing:.12em;color:#d8cfeb;font-weight:1000}
+.bbRLQuestionNo b,.bbRLScore b{font-size:17px}
+.bbRLTimerWrap{padding:10px 12px}
+.bbRLTimerHead{display:flex;justify-content:space-between;align-items:center;font-size:9px;font-weight:900}
+.bbRLTimerHead strong{font-size:14px;font-variant-numeric:tabular-nums}
+.bbRLTimerTrack{height:8px;margin-top:8px;border-radius:999px;background:rgba(255,255,255,.15);overflow:hidden}
+.bbRLTimerTrack i{
+  display:block;width:100%;height:100%;border-radius:inherit;
+  background:linear-gradient(90deg,#7de0bf,#ffe47d,#ff86b9);
+  transform-origin:left center
+}
+
+.bbRLCard{
+  min-height:480px;
+  padding:clamp(18px,4vw,34px);
+  border-radius:30px;
+  color:#4e3b5a;
+  background:linear-gradient(150deg,rgba(255,255,255,.98),rgba(255,247,252,.96));
+  box-shadow:0 26px 70px rgba(27,16,49,.32);
+  border:1px solid rgba(255,255,255,.8)
+}
+.bbRLMeta{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.bbRLMeta span{
+  padding:5px 9px;border-radius:999px;background:#f1eafb;color:#745a92;font-size:8px;font-weight:1000
+}
+.bbRLMeta .sync{background:#e7fff5;color:#348563}
+#bbRLPrompt{
+  margin:24px auto 5px;max-width:760px;text-align:center;
+  color:#513d63;font-size:clamp(29px,6vw,50px);line-height:1.16;font-weight:1000
+}
+#bbRLSubPrompt{
+  min-height:24px;margin:0 auto 22px;text-align:center;color:#907c98;font-size:12px;font-weight:750
+}
+
+.bbRLChoices{
+  width:min(700px,100%);margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:9px
+}
+.bbRLChoices button{
+  min-height:64px;border:1.5px solid #eadff0;border-radius:17px;padding:11px 13px;
+  background:linear-gradient(145deg,#fff,#fbf7fd);
+  color:#5d4968;font-size:13px;font-weight:900;cursor:pointer;
+  box-shadow:0 6px 15px rgba(76,54,86,.06)
+}
+.bbRLChoices button.selected{
+  border-color:#8c70df;background:linear-gradient(145deg,#eee8ff,#f9edff);color:#6045a0
+}
+.bbRLChoices button.correct{
+  border-color:#59c994;background:#e9fff4;color:#277653
+}
+.bbRLChoices button.wrong{
+  border-color:#ee8cad;background:#fff0f5;color:#a64a69
+}
+.bbRLChoices button:disabled{cursor:default}
+
+.bbRLTyping{
+  width:min(660px,100%);margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px
+}
+.bbRLTyping.hidden,.bbRLOrder.hidden,.bbRLLocked.hidden,.bbRLReveal.hidden,.bbRLAudio.hidden{display:none!important}
+.bbRLTyping input{
+  min-height:54px;border:1.5px solid #e8dcec;border-radius:15px;padding:0 14px;
+  font-size:14px;outline:none;color:#51405e
+}
+.bbRLTyping button,.bbRLOrder>button{
+  min-height:54px;border:0;border-radius:15px;padding:0 18px;
+  color:#fff;background:linear-gradient(135deg,#8068df,#d45caa);font-weight:1000
+}
+
+.bbRLOrder{width:min(720px,100%);margin:0 auto}
+.bbRLOrder .selected,.bbRLOrder .tokens{
+  min-height:62px;padding:9px;border-radius:15px;border:1.5px dashed #dfd0e8;
+  display:flex;flex-wrap:wrap;gap:6px;align-items:center
+}
+.bbRLOrder .selected{margin-bottom:8px;background:#faf6fc}
+.bbRLOrder .tokens{margin-bottom:9px;background:#fff}
+.bbRLOrder .selected button,.bbRLOrder .tokens button{
+  border:1px solid #e2d6e9;border-radius:10px;padding:8px 10px;background:#f3edfa;color:#644f73;font-weight:900
+}
+.bbRLOrder>button{width:100%}
+
+.bbRLAudio{
+  margin:0 auto 10px;border:0;border-radius:14px;padding:10px 14px;
+  display:flex;align-items:center;gap:7px;color:#6a4b8a;background:#eee7fb;font-weight:900
+}
+.bbRLLocked,.bbRLReveal{
+  width:min(700px,100%);margin:14px auto 0;padding:11px 13px;border-radius:15px;
+  display:flex;align-items:center;gap:10px
+}
+.bbRLLocked{background:#f2ecfb;color:#655078}
+.bbRLLocked>span,.bbRLReveal>span{
+  width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:#fff;font-size:18px
+}
+.bbRLLocked div,.bbRLReveal div{display:flex;flex-direction:column}
+.bbRLLocked b,.bbRLReveal b{font-size:11px}
+.bbRLLocked small{font-size:9px;color:#8f7a9a}
+.bbRLReveal{background:#eafff4;color:#317454}
+.bbRLReveal.wrong{background:#fff0f5;color:#a44c69}
+.bbRLReveal p{margin:1px 0 0;font-size:9px}
+
+.bbRLFooter{
+  display:flex;justify-content:space-between;gap:8px;padding:10px 5px;color:rgba(255,255,255,.72);
+  font-size:8px;font-weight:800
+}
+.bbRLLoading{
+  position:absolute;inset:74px 0 0;z-index:7;display:grid;place-content:center;text-align:center;
+  background:linear-gradient(145deg,#30294e,#774893)
+}
+.bbRLLoading.hidden{display:none!important}
+.bbRLLoading .brain{font-size:60px;animation:bbRLPulse 1.05s ease-in-out infinite}
+.bbRLLoading h2{margin:10px 0 2px;font-size:22px}
+.bbRLLoading p{margin:0;color:#ddcfea;font-size:10px}
+@keyframes bbRLPulse{50%{transform:scale(1.12) rotate(3deg)}}
+
+body.bbRankedLearningPlaying{overflow:hidden!important}
+body.bbRankedLearningPlaying .v17dock{display:none!important}
+
+@media(max-width:640px){
+  .bbRankLearnTop{grid-template-columns:1fr auto;padding:8px 10px}
+  .bbRankLearnMode{grid-row:2;grid-column:1/-1;min-width:0;padding-top:4px}
+  .bbRLForfeit{grid-column:2;grid-row:1}
+  .bbRLStatus{grid-template-columns:80px minmax(0,1fr) 80px}
+  .bbRLQuestionNo b,.bbRLScore b{font-size:14px}
+  .bbRLCard{min-height:430px;border-radius:23px;padding:16px 12px}
+  .bbRLChoices{grid-template-columns:1fr}
+  .bbRLChoices button{min-height:52px}
+  .bbRLTyping{grid-template-columns:1fr}
+  .bbRLFooter{flex-direction:column;text-align:center}
+}
+
 </style>
 
 <script>
@@ -11363,25 +11557,20 @@ window.addEventListener("load",()=>{
   }
   async function startMatch(){
     const btn=$("#bbRoomStartBtn");
-    const code=roomModeCode(currentRoom);
-
-    // Teddy ใช้ engine Ranked เดิมได้ทันที
-    // เกมการเรียนจะต่อ Ranked engine ในรุ่นถัดไป เพื่อไม่ให้เปิดเกม Teddy ผิดโหมด
-    if(!code.startsWith("teddy_")){
-      toast("โหมดนี้ถูกเลือกและบันทึกใน Ranked แล้ว • ระบบแข่งขันของเกมนี้จะเปิดในอัปเดตถัดไป");
-      return;
-    }
-
     btn.disabled=true;btn.textContent="กำลังเริ่ม…";
+
     try{
       const {data,error}=await client.rpc("bb_ranked_start_match_v2",{p_room_id:currentRoom.id});
       if(error)throw error;
+
       if(data?.[0]){
         const row=data[0];
         startCountdown({...row,id:row.match_id});
       }
     }catch(x){
-      toast(errText(x));btn.disabled=false;btn.textContent="▶ เล่นเลย";
+      toast(errText(x));
+      btn.disabled=false;
+      btn.textContent="▶ เล่นเลย";
     }
   }
   async function loadLatestMatch(){
@@ -11396,6 +11585,11 @@ window.addEventListener("load",()=>{
   function startCountdown(match){
     if(!match?.id)return;
     if(window.BB_RANKED_ACTIVE&&activeRankedMatch?.id===match.id)return;
+
+    const preloadMode=match.mode_code || (match.mode?"teddy_"+match.mode:null);
+    if(preloadMode && !preloadMode.startsWith("teddy_")){
+      window.bbPrepareRankedLearning?.(match);
+    }
     if(document.body.classList.contains("bbRankedPlaying")&&activeRankedMatch?.id===match.id)return;
 
     stopCountdown();
@@ -11465,7 +11659,14 @@ window.addEventListener("load",()=>{
   $("#bbArenaClose")?.addEventListener("click",closeArena);
   $("#bbArenaLogin")?.addEventListener("click",()=>{closeArena();document.getElementById("v16LoginBtn")?.click()});
   $("#bbArenaRefresh")?.addEventListener("click",loadLobby);
-  $("#bbArenaCreateOpen")?.addEventListener("click",()=>{const n=profile?.display_name||"ผู้เล่น";$("#bbCreateName").value=`ห้อง ${n}`;$("#bbCreateError").textContent="";show("#bbCreateBackdrop",true)});
+  $("#bbArenaCreateOpen")?.addEventListener("click",()=>{
+    const n=profile?.display_name||"ผู้เล่น";
+    $("#bbCreateName").value=`ห้อง ${n}`;
+    $("#bbCreateError").textContent="";
+    renderRankGameChoices();
+    loadRankedCatalog();
+    show("#bbCreateBackdrop",true);
+  });
   $("#bbCreateClose")?.addEventListener("click",()=>show("#bbCreateBackdrop",false));
   $("#bbCreateBackdrop")?.addEventListener("click",e=>{if(e.target.id==="bbCreateBackdrop")show("#bbCreateBackdrop",false)});
   $("#bbCreateSubmit")?.addEventListener("click",createRoom);
@@ -12021,6 +12222,19 @@ window.addEventListener("load",()=>{
       modeText.textContent=`${modeLabel(mCode,match.mode)} • ${diffLabel(dCode,match.difficulty)}`;
     }
 
+    const actualRankedMode=match.mode_code || (match.mode?"teddy_"+match.mode:null);
+
+    if(actualRankedMode && !actualRankedMode.startsWith("teddy_")){
+      document.getElementById("bbRankedGameHud")?.classList.add("hidden");
+
+      if(typeof window.bbLaunchRankedLearning==="function"){
+        window.bbLaunchRankedLearning(match);
+      }else{
+        toast("โหลด Ranked Learning Engine ไม่สำเร็จ");
+      }
+      return;
+    }
+
     cfg={
       ...cfg,
       style:"solo",
@@ -12145,6 +12359,7 @@ window.addEventListener("load",()=>{
   }
 
   function showRankedWaitingScreen(){
+    document.getElementById("bbRankedLearningOverlay")?.classList.add("hidden");
     show("#bbCreateBackdrop",false);
     clearRankedAuto();
     try{stopTimer()}catch(e){}
@@ -15960,6 +16175,870 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 </script>
 
+
+
+<!-- =========================================================
+     v71 Ranked Learning Arena
+     ========================================================= -->
+<section id="bbRankedLearningOverlay" class="bbRankLearn hidden" aria-hidden="true">
+  <div class="bbRankLearnBg" aria-hidden="true">
+    <i class="a"></i><i class="b"></i><i class="c"></i><i class="d"></i>
+  </div>
+
+  <header class="bbRankLearnTop">
+    <div class="bbRankLearnBrand">
+      <span>🇹🇭</span>
+      <div>
+        <small>THAI BRAIN RANK</small>
+        <b id="bbRLWorld">Ranked</b>
+      </div>
+    </div>
+
+    <div class="bbRankLearnMode">
+      <small>MATCH MODE</small>
+      <b id="bbRLMode">เกม</b>
+      <span id="bbRLDiff">ระดับ</span>
+    </div>
+
+    <button type="button" id="bbRLForfeit" class="bbRLForfeit">🏳️ ยอมแพ้</button>
+  </header>
+
+  <main class="bbRankLearnShell">
+    <section class="bbRLStatus">
+      <div class="bbRLQuestionNo">
+        <small>QUESTION</small>
+        <b id="bbRLQuestionNo">1 / 10</b>
+      </div>
+
+      <div class="bbRLTimerWrap">
+        <div class="bbRLTimerHead">
+          <span id="bbRLPhaseText">ตอบคำถาม</span>
+          <strong id="bbRLTimer">13.0</strong>
+        </div>
+        <div class="bbRLTimerTrack"><i id="bbRLTimerBar"></i></div>
+      </div>
+
+      <div class="bbRLScore">
+        <small>SCORE</small>
+        <b id="bbRLScore">0</b>
+      </div>
+    </section>
+
+    <section class="bbRLCard">
+      <div class="bbRLMeta">
+        <span id="bbRLCategory">RANKED</span>
+        <span class="sync">● SERVER SYNC</span>
+      </div>
+
+      <button type="button" id="bbRLAudio" class="bbRLAudio hidden">
+        <span>🔊</span>
+        <b>กดเพื่อฟังอีกครั้ง</b>
+      </button>
+
+      <h1 id="bbRLPrompt">กำลังเตรียมโจทย์…</h1>
+      <p id="bbRLSubPrompt">ผู้เล่นทุกคนจะได้โจทย์ชุดเดียวกัน</p>
+
+      <div id="bbRLChoices" class="bbRLChoices"></div>
+
+      <div id="bbRLTyping" class="bbRLTyping hidden">
+        <input id="bbRLInput" type="text" autocomplete="off" placeholder="พิมพ์คำตอบ">
+        <button type="button" id="bbRLSubmit">ล็อกคำตอบ</button>
+      </div>
+
+      <div id="bbRLOrder" class="bbRLOrder hidden">
+        <div id="bbRLSelected" class="selected"></div>
+        <div id="bbRLTokens" class="tokens"></div>
+        <button type="button" id="bbRLOrderSubmit">ล็อกคำตอบ</button>
+      </div>
+
+      <div id="bbRLLocked" class="bbRLLocked hidden">
+        <span>🔒</span>
+        <div>
+          <b>ล็อกคำตอบแล้ว</b>
+          <small>รอเปิดเฉลยพร้อมกันทุกคน</small>
+        </div>
+      </div>
+
+      <div id="bbRLReveal" class="bbRLReveal hidden">
+        <span id="bbRLRevealIcon">✓</span>
+        <div>
+          <b id="bbRLRevealTitle">ถูกต้อง!</b>
+          <p id="bbRLRevealText"></p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bbRLFooter">
+      <span>🧠 ความแม่น + ความเร็ว = คะแนนการแข่งขัน</span>
+      <span>คำตอบจะไม่เฉลยก่อนหมดเวลา</span>
+    </footer>
+  </main>
+
+  <section id="bbRLLoading" class="bbRLLoading">
+    <div class="brain">🧠</div>
+    <h2>กำลังเตรียมสนามแข่งขัน</h2>
+    <p id="bbRLLoadingText">กำลังซิงก์โจทย์ของผู้เล่นทุกคน…</p>
+  </section>
+</section>
+
+
+<script>
+(function brainBuddyV71RankedLearning(){
+  const q=s=>document.querySelector(s);
+
+  const SLOT_MS=15000;
+  const ANSWER_MS=13000;
+  const QUESTION_COUNT=10;
+
+  const WORLD={
+    math:{name:"Math",thai:"คณิตศาสตร์",icon:"➗"},
+    chinese:{name:"Chinese",thai:"ภาษาจีน",icon:"🇨🇳"},
+    english:{name:"English",thai:"ภาษาอังกฤษ",icon:"🇬🇧"}
+  };
+
+  const MODE={
+    math_multiple_choice:{subject:"math",type:"multiple_choice",title:"เลือกคำตอบ",icon:"🎯"},
+    math_typing:{subject:"math",type:"typing",title:"พิมพ์คำตอบ",icon:"⌨️"},
+    math_matching:{subject:"math",type:"matching",title:"จับคู่",icon:"🧩"},
+    math_sentence_order:{subject:"math",type:"sentence_order",title:"เรียงขั้นตอน",icon:"🧠"},
+    math_listening:{subject:"math",type:"listening",title:"โจทย์เสียง",icon:"🎧"},
+    math_mix:{subject:"math",type:"all",title:"Math Mix",icon:"⚡"},
+
+    chinese_hanzi_meaning:{subject:"chinese",type:"hanzi_meaning",title:"汉字 → ความหมาย",icon:"汉"},
+    chinese_meaning_hanzi:{subject:"chinese",type:"meaning_hanzi",title:"ความหมาย → 汉字",icon:"中"},
+    chinese_hanzi_pinyin:{subject:"chinese",type:"hanzi_pinyin",title:"汉字 → Pinyin",icon:"拼"},
+    chinese_pinyin_hanzi:{subject:"chinese",type:"pinyin_hanzi",title:"Pinyin → 汉字",icon:"字"},
+    chinese_listening:{subject:"chinese",type:"listen_hanzi",title:"ฟัง → 汉字",icon:"🎧"},
+    chinese_mix:{subject:"chinese",type:"mix",title:"HSK Mix",icon:"🔥"},
+
+    english_vocabulary:{subject:"english",type:"vocabulary",title:"Vocabulary",icon:"A"},
+    english_multiple_choice:{subject:"english",type:"multiple_choice",title:"เลือกคำตอบ",icon:"🎯"},
+    english_matching:{subject:"english",type:"matching",title:"จับคู่คำศัพท์",icon:"🧩"},
+    english_typing:{subject:"english",type:"typing",title:"พิมพ์คำตอบ",icon:"⌨️"},
+    english_sentence_order:{subject:"english",type:"sentence_order",title:"เรียงประโยค",icon:"🔀"},
+    english_listening:{subject:"english",type:"listening",title:"Listening",icon:"🎧"}
+  };
+
+  const DIFF={
+    easy:"ง่าย",normal:"ปกติ",hard:"ยาก",expert:"Expert",
+    hsk1:"HSK 1",hsk2:"HSK 2",hsk3:"HSK 3",hsk4:"HSK 4",hsk5:"HSK 5",hsk6:"HSK 6"
+  };
+
+  let prepared=new Map();
+  let session=null;
+  let tickTimer=null;
+  let finishing=false;
+
+  function client(){
+    if(window.__bbSupabase)return window.__bbSupabase;
+    const cfg=window.BRAIN_BUDDY_SUPABASE||{};
+    if(window.supabase&&cfg.url&&cfg.publishableKey){
+      window.__bbSupabase=window.supabase.createClient(cfg.url,cfg.publishableKey);
+      return window.__bbSupabase;
+    }
+    return null;
+  }
+
+  function clean(v){return String(v??"").trim().replace(/\s+/g," ")}
+  function norm(v){
+    return clean(v).toLowerCase().replace(/[’']/g,"'").replace(/[，。！？,.!?]/g,"")
+  }
+  function esc(v){
+    return String(v??"").replace(/[&<>"']/g,m=>({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    }[m]))
+  }
+
+  function rngFromSeed(seed){
+    let a=(Number(seed)||1)>>>0;
+    return function(){
+      a|=0;a=a+0x6D2B79F5|0;
+      let t=Math.imul(a^a>>>15,1|a);
+      t=t+Math.imul(t^t>>>7,61|t)^t;
+      return ((t^t>>>14)>>>0)/4294967296;
+    }
+  }
+
+  function shuffleWith(a,rng){
+    const x=[...a];
+    for(let i=x.length-1;i>0;i--){
+      const j=Math.floor(rng()*(i+1));
+      [x[i],x[j]]=[x[j],x[i]];
+    }
+    return x;
+  }
+
+  async function fullMatch(match){
+    const c=client();
+    if(!c)throw new Error("เชื่อมต่อฐานข้อมูลไม่สำเร็จ");
+
+    const id=match?.id||match?.match_id;
+    if(!id)throw new Error("ไม่พบ Match");
+
+    if(match.seed && match.mode_code && match.started_at)return {...match,id};
+
+    const {data,error}=await c.from("ranked_matches")
+      .select("*")
+      .eq("id",id)
+      .maybeSingle();
+
+    if(error)throw error;
+    if(!data)throw new Error("ไม่พบข้อมูล Match");
+
+    return {...data,id:data.id};
+  }
+
+  async function loadGenericRows(subject,type,difficulty){
+    const c=client();
+    if(!c)throw new Error("เชื่อมต่อฐานข้อมูลไม่สำเร็จ");
+
+    let req=c.from("bb_learning_content")
+      .select("id,subject,content_type,difficulty,category,prompt,answer,pinyin,meaning,options,explanation,example_text,image_url,audio_url,base_score")
+      .eq("subject",subject)
+      .eq("is_active",true)
+      .order("id",{ascending:true})
+      .limit(500);
+
+    if(type!=="all")req=req.eq("content_type",type);
+    if(["easy","normal","hard","expert"].includes(difficulty))req=req.eq("difficulty",difficulty);
+
+    let {data,error}=await req;
+    if(error)throw error;
+    data=Array.isArray(data)?data:[];
+
+    // ถ้าระดับที่เลือกมีเนื้อหาน้อยเกินไป ให้ใช้เนื้อหาในโหมดเดียวกันทุกระดับ
+    // เพื่อให้ห้อง Ranked ยังเริ่มได้ แต่ทุกคนจะได้ชุดเดียวกันจาก seed เดียวกัน
+    if(data.length<QUESTION_COUNT){
+      let fallback=c.from("bb_learning_content")
+        .select("id,subject,content_type,difficulty,category,prompt,answer,pinyin,meaning,options,explanation,example_text,image_url,audio_url,base_score")
+        .eq("subject",subject)
+        .eq("is_active",true)
+        .order("id",{ascending:true})
+        .limit(500);
+
+      if(type!=="all")fallback=fallback.eq("content_type",type);
+      const fb=await fallback;
+      if(fb.error)throw fb.error;
+      data=Array.isArray(fb.data)?fb.data:data;
+    }
+
+    return data;
+  }
+
+  async function loadHSKRows(level){
+    const c=client();
+    if(!c)throw new Error("เชื่อมต่อฐานข้อมูลไม่สำเร็จ");
+
+    const rows=[];
+    const page=1000;
+    let from=0;
+
+    while(true){
+      const {data,error}=await c.from("bb_hsk_vocabulary")
+        .select("id,hsk_level,simplified,traditional,pinyin,meaning_en,meaning_th,example_zh,example_pinyin,example_en,example_th,image_url,audio_url")
+        .eq("is_active",true)
+        .lte("hsk_level",level)
+        .order("hsk_level",{ascending:true})
+        .order("id",{ascending:true})
+        .range(from,from+page-1);
+
+      if(error)throw error;
+      const batch=Array.isArray(data)?data:[];
+      rows.push(...batch);
+      if(batch.length<page)break;
+      from+=page;
+    }
+
+    return rows.map(x=>({
+      ...x,
+      hanzi:clean(x.simplified),
+      pinyin:clean(x.pinyin),
+      meaning:clean(x.meaning_th)||clean(x.meaning_en),
+      meaning_en:clean(x.meaning_en),
+      meaning_th:clean(x.meaning_th),
+      level:Number(x.hsk_level)||1
+    })).filter(x=>x.hanzi&&x.pinyin&&x.meaning);
+  }
+
+  function uniqueChoices(answer,pool,rng){
+    const out=[clean(answer)];
+    const used=new Set([norm(answer)]);
+    for(const value of shuffleWith(pool,rng)){
+      const v=clean(value),n=norm(v);
+      if(!v||used.has(n))continue;
+      used.add(n);out.push(v);
+      if(out.length>=4)break;
+    }
+    return shuffleWith(out,rng);
+  }
+
+  function buildHSKQuestions(rows,modeCode,seed){
+    const rng=rngFromSeed(seed);
+    const selected=shuffleWith(rows,rng).slice(0,Math.min(QUESTION_COUNT,rows.length));
+    const fixed=MODE[modeCode]?.type||"hanzi_meaning";
+    const mixTypes=["hanzi_meaning","meaning_hanzi","hanzi_pinyin","pinyin_hanzi","listen_hanzi"];
+
+    return selected.map((row,index)=>{
+      const type=fixed==="mix"?mixTypes[Math.floor(rng()*mixTypes.length)]:fixed;
+      let prompt="",sub="",answer="",field="",audio=false;
+
+      if(type==="hanzi_meaning"){
+        prompt=row.hanzi;sub=row.pinyin;answer=row.meaning;field="meaning";
+      }else if(type==="meaning_hanzi"){
+        prompt=row.meaning;sub="เลือกคำภาษาจีนที่ตรงกับความหมาย";answer=row.hanzi;field="hanzi";
+      }else if(type==="hanzi_pinyin"){
+        prompt=row.hanzi;sub="เลือก Pinyin ที่ถูกต้อง";answer=row.pinyin;field="pinyin";
+      }else if(type==="pinyin_hanzi"){
+        prompt=row.pinyin;sub="เลือกคำภาษาจีนที่ถูกต้อง";answer=row.hanzi;field="hanzi";
+      }else{
+        prompt="ฟังแล้วเลือกคำที่ได้ยิน";sub=`HSK ${row.level}`;answer=row.hanzi;field="hanzi";audio=true;
+      }
+
+      const pool=rows.map(x=>x[field]).filter(Boolean);
+      const choices=uniqueChoices(answer,pool,rng);
+
+      return {
+        id:`hsk-${row.id}-${index}`,
+        kind:"choice",
+        prompt,sub,answer,choices,
+        category:`HSK ${row.level}`,
+        explanation:[
+          row.hanzi,
+          row.pinyin,
+          row.meaning_th || row.meaning_en,
+          row.example_zh,
+          row.example_th || row.example_en
+        ].filter(Boolean).join(" • "),
+        audio,
+        speakText:row.hanzi,
+        audioUrl:row.audio_url||null
+      };
+    });
+  }
+
+  function genericPool(rows,row){
+    return rows
+      .filter(x=>Number(x.id)!==Number(row.id))
+      .map(x=>clean(x.answer||x.meaning))
+      .filter(Boolean);
+  }
+
+  function buildGenericQuestions(rows,modeCode,seed){
+    const rng=rngFromSeed(seed);
+    const selected=shuffleWith(rows,rng).slice(0,Math.min(QUESTION_COUNT,rows.length));
+    const mode=MODE[modeCode];
+    const fixedType=mode?.type||"multiple_choice";
+
+    return selected.map((row,index)=>{
+      const type=fixedType==="all"?(row.content_type||"multiple_choice"):fixedType;
+      const answer=clean(row.answer);
+      let kind="choice";
+      if(type==="typing")kind="typing";
+      if(type==="sentence_order")kind="order";
+
+      let choices=[];
+      if(kind==="choice"){
+        if(Array.isArray(row.options)&&row.options.length>=2){
+          const pool=[...row.options.map(String),answer];
+          choices=uniqueChoices(answer,pool,rng);
+        }else{
+          choices=uniqueChoices(answer,genericPool(rows,row),rng);
+        }
+      }
+
+      let tokens=[];
+      if(kind==="order"){
+        if(answer.includes(" "))tokens=answer.split(/\s+/).filter(Boolean);
+        else if(Array.isArray(row.options)&&row.options.length>1)tokens=row.options.map(String);
+        if(tokens.length<2)kind="typing";
+        else tokens=shuffleWith(tokens,rng);
+      }
+
+      return {
+        id:`generic-${row.id}-${index}`,
+        kind,
+        prompt:type==="listening"?"ฟังโจทย์แล้วตอบให้ถูกต้อง":clean(row.prompt),
+        sub:type==="listening"?"กดปุ่มเสียงเพื่อฟังอีกครั้ง":clean(row.pinyin||row.meaning),
+        answer,
+        choices,
+        tokens,
+        category:clean(row.category||type||"RANKED").toUpperCase(),
+        explanation:[
+          `คำตอบ: ${answer}`,
+          row.explanation,
+          row.example_text
+        ].filter(Boolean).join(" • "),
+        audio:type==="listening",
+        speakText:clean(row.prompt),
+        audioUrl:row.audio_url||null,
+        subject:mode?.subject
+      };
+    });
+  }
+
+  async function build(match){
+    const full=await fullMatch(match);
+    const modeCode=full.mode_code || (full.mode?"teddy_"+full.mode:null);
+    const diffCode=full.difficulty_code || full.difficulty || "normal";
+    const info=MODE[modeCode];
+
+    if(!info)throw new Error("ยังไม่มี Ranked Engine สำหรับเกมนี้");
+
+    let questions=[];
+
+    if(info.subject==="chinese"){
+      const level=Math.max(1,Math.min(6,Number(String(diffCode).replace("hsk",""))||1));
+      const rows=await loadHSKRows(level);
+      if(rows.length<4)throw new Error(`HSK ${level} มีคำศัพท์ไม่เพียงพอสำหรับ Ranked`);
+      questions=buildHSKQuestions(rows,modeCode,Number(full.seed)||1);
+    }else{
+      const rows=await loadGenericRows(info.subject,info.type,diffCode);
+      if(rows.length<2)throw new Error(`ยังมีโจทย์ ${info.title} ไม่เพียงพอสำหรับ Ranked`);
+      questions=buildGenericQuestions(rows,modeCode,Number(full.seed)||1);
+    }
+
+    if(!questions.length)throw new Error("ไม่พบโจทย์สำหรับการแข่งขัน");
+
+    return {
+      match:full,
+      modeCode,
+      diffCode,
+      info,
+      questions,
+      world:WORLD[info.subject],
+      baseMs:new Date(full.started_at).getTime()+650
+    };
+  }
+
+  function setLoading(text,show=true){
+    const el=q("#bbRLLoading");
+    if(el)el.classList.toggle("hidden",!show);
+    if(q("#bbRLLoadingText"))q("#bbRLLoadingText").textContent=text||"กำลังเตรียมโจทย์…";
+  }
+
+  window.bbPrepareRankedLearning=function(match){
+    const id=match?.id||match?.match_id;
+    if(!id)return Promise.reject(new Error("ไม่พบ Match"));
+    if(prepared.has(id))return prepared.get(id);
+
+    const p=build(match).catch(err=>{
+      prepared.delete(id);
+      throw err;
+    });
+    prepared.set(id,p);
+    return p;
+  };
+
+  function clearTick(){
+    if(tickTimer){clearInterval(tickTimer);tickTimer=null}
+  }
+
+  function clearQuestionUI(){
+    q("#bbRLChoices").innerHTML="";
+    q("#bbRLChoices").classList.add("hidden");
+    q("#bbRLTyping").classList.add("hidden");
+    q("#bbRLOrder").classList.add("hidden");
+    q("#bbRLLocked").classList.add("hidden");
+    q("#bbRLReveal").classList.add("hidden");
+    q("#bbRLAudio").classList.add("hidden");
+    q("#bbRLInput").value="";
+    q("#bbRLSelected").innerHTML="";
+    q("#bbRLTokens").innerHTML="";
+  }
+
+  function speak(text,subject){
+    try{
+      if(!("speechSynthesis" in window))return;
+      speechSynthesis.cancel();
+      const u=new SpeechSynthesisUtterance(clean(text));
+      u.lang=subject==="chinese"?"zh-CN":subject==="english"?"en-US":"th-TH";
+      u.rate=.85;
+      speechSynthesis.speak(u);
+    }catch(e){}
+  }
+
+  function playAudio(question){
+    if(!question)return;
+    if(question.audioUrl){
+      try{
+        const a=new Audio(question.audioUrl);
+        a.play().catch(()=>speak(question.speakText,session?.data?.info?.subject));
+      }catch(e){speak(question.speakText,session?.data?.info?.subject)}
+    }else{
+      speak(question.speakText,session?.data?.info?.subject);
+    }
+  }
+
+  function renderQuestion(index){
+    if(!session)return;
+    const question=session.data.questions[index];
+    if(!question)return;
+
+    session.index=index;
+    session.revealedIndex=-1;
+    session.selectedTokens=[];
+    clearQuestionUI();
+
+    q("#bbRLQuestionNo").textContent=`${index+1} / ${session.data.questions.length}`;
+    q("#bbRLCategory").textContent=question.category||"RANKED";
+    q("#bbRLPrompt").textContent=question.prompt||"";
+    q("#bbRLSubPrompt").textContent=question.sub||"";
+    q("#bbRLScore").textContent=session.score.toLocaleString();
+
+    if(question.audio){
+      q("#bbRLAudio").classList.remove("hidden");
+      setTimeout(()=>playAudio(question),220);
+    }
+
+    const existing=session.answers[index];
+
+    if(question.kind==="typing"){
+      q("#bbRLTyping").classList.remove("hidden");
+      if(existing?.locked){
+        q("#bbRLInput").value=existing.value||"";
+        q("#bbRLInput").disabled=true;
+        q("#bbRLSubmit").disabled=true;
+        q("#bbRLLocked").classList.remove("hidden");
+      }else{
+        q("#bbRLInput").disabled=false;
+        q("#bbRLSubmit").disabled=false;
+      }
+      return;
+    }
+
+    if(question.kind==="order"){
+      q("#bbRLOrder").classList.remove("hidden");
+      const tokens=q("#bbRLTokens");
+      question.tokens.forEach((tok,i)=>{
+        const b=document.createElement("button");
+        b.type="button";b.textContent=tok;b.dataset.rlToken=String(i);b.dataset.rlValue=tok;
+        tokens.appendChild(b);
+      });
+      q("#bbRLOrderSubmit").disabled=!!existing?.locked;
+      if(existing?.locked){
+        q("#bbRLLocked").classList.remove("hidden");
+      }
+      return;
+    }
+
+    const host=q("#bbRLChoices");
+    host.classList.remove("hidden");
+    host.innerHTML=question.choices.map(opt=>
+      `<button type="button" data-rl-choice="${encodeURIComponent(opt)}">${esc(opt)}</button>`
+    ).join("");
+
+    if(existing?.locked){
+      host.querySelectorAll("button").forEach(b=>{
+        b.disabled=true;
+        if(norm(decodeURIComponent(b.dataset.rlChoice||""))===norm(existing.value))b.classList.add("selected");
+      });
+      q("#bbRLLocked").classList.remove("hidden");
+    }
+  }
+
+  function lockAnswer(value){
+    if(!session||finishing)return;
+    const idx=session.index;
+    const qn=session.data.questions[idx];
+    if(!qn||session.answers[idx]?.locked)return;
+
+    const now=Date.now();
+    const slotStart=session.data.baseMs+(idx*SLOT_MS);
+    const phase=now-slotStart;
+
+    if(phase<0||phase>=ANSWER_MS)return;
+
+    session.answers[idx]={
+      locked:true,
+      value:clean(value),
+      answerMs:Math.max(0,Math.round(phase)),
+      scored:false
+    };
+
+    q("#bbRLLocked").classList.remove("hidden");
+
+    q("#bbRLChoices").querySelectorAll("button").forEach(b=>b.disabled=true);
+    q("#bbRLInput").disabled=true;
+    q("#bbRLSubmit").disabled=true;
+    q("#bbRLOrderSubmit").disabled=true;
+  }
+
+  function orderCandidate(){
+    return session?.selectedTokens?.join(" ")||"";
+  }
+
+  function scoreAndReveal(index){
+    if(!session||index<0||index>=session.data.questions.length)return;
+    if(session.revealedIndex===index)return;
+
+    const question=session.data.questions[index];
+    const a=session.answers[index]||{locked:false,value:"",answerMs:ANSWER_MS,scored:false};
+
+    if(!a.scored){
+      const ok=a.locked && (
+        norm(a.value)===norm(question.answer) ||
+        (question.kind==="order" && norm(String(a.value).replace(/\s+/g,""))===norm(String(question.answer).replace(/\s+/g,"")))
+      );
+
+      a.ok=ok;
+      a.scored=true;
+      session.answers[index]=a;
+
+      if(ok){
+        session.correct++;
+        const speedRatio=Math.max(0,Math.min(1,(ANSWER_MS-a.answerMs)/ANSWER_MS));
+        session.score+=100+Math.round(50*speedRatio);
+        session.answerTimes.push(a.answerMs);
+      }
+    }
+
+    session.revealedIndex=index;
+    q("#bbRLScore").textContent=session.score.toLocaleString();
+    q("#bbRLLocked").classList.add("hidden");
+    q("#bbRLReveal").classList.remove("hidden");
+    q("#bbRLReveal").classList.toggle("wrong",!a.ok);
+    q("#bbRLRevealIcon").textContent=a.ok?"✓":"✕";
+    q("#bbRLRevealTitle").textContent=a.ok?"ถูกต้อง!":"คำตอบที่ถูก";
+    q("#bbRLRevealText").textContent=question.explanation||question.answer;
+
+    if(question.kind==="choice"){
+      q("#bbRLChoices").querySelectorAll("button").forEach(b=>{
+        b.disabled=true;
+        const v=decodeURIComponent(b.dataset.rlChoice||"");
+        if(norm(v)===norm(question.answer))b.classList.add("correct");
+        else if(a.locked&&norm(v)===norm(a.value))b.classList.add("wrong");
+      });
+    }
+
+    q("#bbRLInput").disabled=true;
+    q("#bbRLSubmit").disabled=true;
+    q("#bbRLOrderSubmit").disabled=true;
+  }
+
+  async function finish(){
+    if(finishing||!session)return;
+    finishing=true;
+    clearTick();
+
+    // ปิดคำถามใดที่ยังไม่ score
+    for(let i=0;i<session.data.questions.length;i++){
+      if(!session.answers[i]?.scored){
+        const a=session.answers[i]||{locked:false,value:"",answerMs:ANSWER_MS,scored:false};
+        const question=session.data.questions[i];
+        const ok=a.locked && norm(a.value)===norm(question.answer);
+        a.ok=ok;a.scored=true;session.answers[i]=a;
+        if(ok){
+          session.correct++;
+          const speedRatio=Math.max(0,Math.min(1,(ANSWER_MS-a.answerMs)/ANSWER_MS));
+          session.score+=100+Math.round(50*speedRatio);
+          session.answerTimes.push(a.answerMs);
+        }
+      }
+    }
+
+    const result={
+      mode:"learning",
+      score:session.score,
+      correct:session.correct,
+      total:session.data.questions.length,
+      averageAnswerMs:session.answerTimes.length
+        ? Math.round(session.answerTimes.reduce((a,b)=>a+b,0)/session.answerTimes.length)
+        : null
+    };
+
+    q("#bbRankedLearningOverlay").classList.add("hidden");
+    q("#bbRankedLearningOverlay").setAttribute("aria-hidden","true");
+    document.body.classList.remove("bbRankedLearningPlaying");
+
+    const matchId=session.data.match.id;
+    prepared.delete(matchId);
+
+    const submit=window.bbRankedRoundFinished;
+    session=null;
+
+    if(typeof submit==="function"){
+      await submit(result);
+    }else{
+      alert("ไม่พบระบบส่งผล Ranked");
+    }
+
+    finishing=false;
+  }
+
+  function syncTick(){
+    if(!session||finishing)return;
+
+    const now=Date.now();
+    const elapsed=now-session.data.baseMs;
+
+    if(elapsed<0){
+      q("#bbRLPhaseText").textContent="กำลังซิงก์เวลา";
+      q("#bbRLTimer").textContent=Math.max(0,(-elapsed/1000)).toFixed(1);
+      q("#bbRLTimerBar").style.width="100%";
+      return;
+    }
+
+    const total=session.data.questions.length;
+    const index=Math.floor(elapsed/SLOT_MS);
+
+    if(index>=total){
+      finish();
+      return;
+    }
+
+    // ผู้เล่นที่เข้าช้า: ข้อก่อนหน้าถือว่าไม่ได้ตอบ
+    if(index!==session.index){
+      for(let i=Math.max(0,session.index);i<index;i++){
+        if(!session.answers[i]?.scored){
+          const a=session.answers[i]||{locked:false,value:"",answerMs:ANSWER_MS,scored:false};
+          a.ok=false;a.scored=true;session.answers[i]=a;
+        }
+      }
+      renderQuestion(index);
+    }
+
+    const phase=elapsed-(index*SLOT_MS);
+
+    if(phase<ANSWER_MS){
+      const left=ANSWER_MS-phase;
+      q("#bbRLPhaseText").textContent=session.answers[index]?.locked?"ล็อกคำตอบแล้ว":"ตอบคำถาม";
+      q("#bbRLTimer").textContent=Math.max(0,left/1000).toFixed(1);
+      q("#bbRLTimerBar").style.width=`${Math.max(0,Math.min(100,(left/ANSWER_MS)*100))}%`;
+    }else{
+      scoreAndReveal(index);
+      const revealLeft=SLOT_MS-phase;
+      q("#bbRLPhaseText").textContent="เฉลยพร้อมกัน";
+      q("#bbRLTimer").textContent=Math.max(0,revealLeft/1000).toFixed(1);
+      q("#bbRLTimerBar").style.width=`${Math.max(0,Math.min(100,(revealLeft/(SLOT_MS-ANSWER_MS))*100))}%`;
+    }
+  }
+
+  async function launch(match){
+    const id=match?.id||match?.match_id;
+    if(!id)return;
+
+    clearTick();
+    finishing=false;
+
+    const overlay=q("#bbRankedLearningOverlay");
+    overlay.classList.remove("hidden");
+    overlay.setAttribute("aria-hidden","false");
+    document.body.classList.add("bbRankedLearningPlaying");
+    setLoading("กำลังซิงก์โจทย์ของผู้เล่นทุกคน…",true);
+
+    try{
+      const data=await window.bbPrepareRankedLearning(match);
+
+      session={
+        data,
+        index:-1,
+        score:0,
+        correct:0,
+        answers:Array(data.questions.length).fill(null),
+        answerTimes:[],
+        selectedTokens:[],
+        revealedIndex:-1
+      };
+
+      q("#bbRLWorld").textContent=`${data.world?.icon||"🧠"} ${data.world?.name||"Ranked"}`;
+      q("#bbRLMode").textContent=`${data.info.icon||"🎮"} ${data.info.title}`;
+      q("#bbRLDiff").textContent=DIFF[data.diffCode]||data.diffCode;
+      q("#bbRLScore").textContent="0";
+
+      setLoading("",false);
+
+      // ถ้าข้อมูลพร้อมก่อนเวลาเริ่ม จะรอตาม Server timeline
+      syncTick();
+      tickTimer=setInterval(syncTick,80);
+
+    }catch(err){
+      console.error("Ranked learning:",err);
+      setLoading(err?.message||"โหลดเกมไม่สำเร็จ",true);
+      setTimeout(()=>{
+        overlay.classList.add("hidden");
+        document.body.classList.remove("bbRankedLearningPlaying");
+        document.getElementById("bbRankedForfeitBtn")?.click();
+      },2200);
+    }
+  }
+
+  window.bbLaunchRankedLearning=launch;
+
+  // ---------------- UI actions ----------------
+  document.addEventListener("click",e=>{
+    const choice=e.target.closest("[data-rl-choice]");
+    if(choice&&session){
+      const value=decodeURIComponent(choice.dataset.rlChoice||"");
+      choice.classList.add("selected");
+      lockAnswer(value);
+      return;
+    }
+
+    const token=e.target.closest("[data-rl-token]");
+    if(token&&session&&!session.answers[session.index]?.locked){
+      session.selectedTokens.push(token.dataset.rlValue||token.textContent||"");
+      token.disabled=true;
+
+      const b=document.createElement("button");
+      b.type="button";
+      b.textContent=token.dataset.rlValue||token.textContent||"";
+      b.dataset.rlSelected=String(session.selectedTokens.length-1);
+      q("#bbRLSelected").appendChild(b);
+      return;
+    }
+
+    const selected=e.target.closest("[data-rl-selected]");
+    if(selected&&session&&!session.answers[session.index]?.locked){
+      const idx=Number(selected.dataset.rlSelected);
+      const value=session.selectedTokens[idx];
+      session.selectedTokens.splice(idx,1);
+
+      const token=[...q("#bbRLTokens").querySelectorAll("[data-rl-token]")]
+        .find(x=>x.disabled&&(x.dataset.rlValue||x.textContent)===value);
+      if(token)token.disabled=false;
+
+      q("#bbRLSelected").innerHTML="";
+      session.selectedTokens.forEach((v,i)=>{
+        const b=document.createElement("button");
+        b.type="button";b.textContent=v;b.dataset.rlSelected=String(i);
+        q("#bbRLSelected").appendChild(b);
+      });
+      return;
+    }
+
+    if(e.target.closest("#bbRLSubmit")&&session){
+      const value=q("#bbRLInput").value;
+      if(value.trim())lockAnswer(value);
+      return;
+    }
+
+    if(e.target.closest("#bbRLOrderSubmit")&&session){
+      const value=orderCandidate();
+      if(value.trim())lockAnswer(value);
+      return;
+    }
+
+    if(e.target.closest("#bbRLAudio")&&session){
+      playAudio(session.data.questions[session.index]);
+      return;
+    }
+
+    if(e.target.closest("#bbRLForfeit")){
+      document.getElementById("bbRankedForfeitBtn")?.click();
+      return;
+    }
+  },true);
+
+  q("#bbRLInput")?.addEventListener("keydown",e=>{
+    if(e.key==="Enter"&&session){
+      e.preventDefault();
+      const value=e.target.value;
+      if(value.trim())lockAnswer(value);
+    }
+  });
+
+})();
+</script>
 
 </body>
 </html>
