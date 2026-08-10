@@ -1,0 +1,571 @@
+
+/* ============================================================
+   POMRU • ผมรู้
+   STEP A1 — Pet Home Visual Foundation
+   ------------------------------------------------------------
+   Inspired by simple virtual-pet game UX:
+   status at top -> pet room -> main action -> bottom dock.
+   This module is intentionally isolated for easy future updates.
+   ============================================================ */
+
+#pomruPetHome{
+  --pomru-ink:#27343d;
+  --pomru-muted:#7a7b86;
+  --pomru-wall:#f6d9cf;
+  --pomru-wall-soft:#fde8df;
+  --pomru-floor:#efbd86;
+  --pomru-floor-light:#f8d4a8;
+  --pomru-pink:#ff4f93;
+  --pomru-pink-deep:#d93178;
+  --pomru-purple:#7654db;
+  --pomru-green:#38d869;
+  --pomru-cream:#fffaf3;
+  --pomru-card:rgba(255,255,255,.88);
+  --pomru-line:rgba(57,44,66,.10);
+  --pomru-shadow:0 14px 34px rgba(73,48,63,.12);
+
+  position:relative;
+  width:100%;
+  min-height:calc(100svh - 72px);
+  overflow:hidden;
+  border-radius:0 0 28px 28px;
+  background:var(--pomru-wall);
+  color:var(--pomru-ink);
+  isolation:isolate;
+}
+
+/* ---------- room ---------- */
+
+#pomruPetHome .pomruRoom{
+  position:relative;
+  min-height:calc(100svh - 72px);
+  padding:
+    max(14px,env(safe-area-inset-top))
+    18px
+    calc(96px + env(safe-area-inset-bottom));
+  display:flex;
+  flex-direction:column;
+}
+
+#pomruPetHome .pomruRoom::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  height:58%;
+  z-index:-3;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.14) 0 1px,
+      transparent 1px 100%
+    ),
+    linear-gradient(180deg,#f5d6cc 0%,#f8dfd6 100%);
+}
+
+#pomruPetHome .pomruRoom::after{
+  content:"";
+  position:absolute;
+  left:-8%;
+  right:-8%;
+  bottom:-7%;
+  height:51%;
+  z-index:-2;
+  transform:perspective(760px) rotateX(59deg);
+  transform-origin:center bottom;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 78px,
+      rgba(116,74,40,.14) 79px 80px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 43px,
+      rgba(116,74,40,.10) 44px 45px
+    ),
+    linear-gradient(180deg,var(--pomru-floor-light),var(--pomru-floor));
+}
+
+/* white skirting line */
+#pomruPetHome .pomruSkirting{
+  position:absolute;
+  z-index:-1;
+  left:0;
+  right:0;
+  top:54%;
+  height:12px;
+  background:#fff9f5;
+  box-shadow:0 2px 0 rgba(123,75,54,.07);
+}
+
+/* ---------- compact brand / wallet ---------- */
+
+#pomruPetHome .pomruGameTop{
+  position:relative;
+  z-index:5;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+#pomruPetHome .pomruMiniBrand{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  min-width:0;
+}
+
+#pomruPetHome .pomruMiniLogo{
+  width:40px;
+  height:40px;
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  flex:0 0 40px;
+  background:linear-gradient(145deg,#ff75ab,#8d6cf2);
+  box-shadow:0 7px 16px rgba(117,74,165,.20);
+  color:#fff;
+  font-weight:1000;
+  font-size:1rem;
+}
+
+#pomruPetHome .pomruMiniBrandText{
+  line-height:1.06;
+}
+
+#pomruPetHome .pomruMiniBrandText strong{
+  display:block;
+  font-size:1rem;
+  font-weight:1000;
+  letter-spacing:.03em;
+}
+
+#pomruPetHome .pomruMiniBrandText small{
+  display:block;
+  margin-top:3px;
+  color:#7b6875;
+  font-size:.60rem;
+  font-weight:800;
+}
+
+#pomruPetHome .pomruWallet{
+  height:40px;
+  padding:0 12px 0 8px;
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:999px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  background:rgba(255,255,255,.70);
+  box-shadow:0 6px 20px rgba(74,49,62,.07);
+  backdrop-filter:blur(9px);
+  -webkit-backdrop-filter:blur(9px);
+}
+
+#pomruPetHome .pomruWalletCoin{
+  width:27px;
+  height:27px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(145deg,#ffe16f,#f7b93d);
+  box-shadow:inset 0 0 0 3px rgba(255,255,255,.43);
+  font-size:.64rem;
+  font-weight:1000;
+}
+
+#pomruPetHome .pomruWallet b{
+  font-size:.78rem;
+}
+
+/* ---------- three simple pet stats ---------- */
+
+#pomruPetHome .pomruStatusRow{
+  position:relative;
+  z-index:5;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+  margin-top:14px;
+}
+
+#pomruPetHome .pomruStat{
+  min-width:0;
+  text-align:center;
+}
+
+#pomruPetHome .pomruStatHearts{
+  min-height:27px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:2px;
+  color:var(--pomru-green);
+  font-size:1.24rem;
+  line-height:1;
+  letter-spacing:-.13em;
+  filter:drop-shadow(0 2px 2px rgba(32,122,56,.10));
+}
+
+#pomruPetHome .pomruStatHearts .off{
+  opacity:.18;
+  filter:grayscale(1);
+}
+
+#pomruPetHome .pomruStatName{
+  display:block;
+  margin-top:4px;
+  color:#344049;
+  font-size:.64rem;
+  font-weight:1000;
+  letter-spacing:.10em;
+  white-space:nowrap;
+}
+
+/* ---------- window ---------- */
+
+#pomruPetHome .pomruWindow{
+  position:absolute;
+  z-index:-1;
+  top:116px;
+  left:50%;
+  width:min(310px,53vw);
+  height:155px;
+  transform:translateX(-50%);
+  border:10px solid #fff9f5;
+  background:#aee1f4;
+  box-shadow:0 9px 0 rgba(158,109,84,.06);
+}
+
+#pomruPetHome .pomruWindow::before,
+#pomruPetHome .pomruWindow::after{
+  content:"";
+  position:absolute;
+  background:#fff9f5;
+}
+
+#pomruPetHome .pomruWindow::before{
+  width:9px;
+  top:0;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+#pomruPetHome .pomruWindow::after{
+  height:9px;
+  left:0;
+  right:0;
+  top:50%;
+  transform:translateY(-50%);
+}
+
+#pomruPetHome .pomruBlind{
+  position:absolute;
+  z-index:1;
+  left:-13px;
+  right:-13px;
+  top:-18px;
+  height:53px;
+  background:
+    repeating-linear-gradient(
+      180deg,
+      #e8bfae 0 8px,
+      #f5d7ca 9px 14px
+    );
+  box-shadow:0 5px 0 rgba(129,81,59,.09);
+}
+
+/* ---------- central pet stage ---------- */
+
+#pomruPetHome .pomruPetStage{
+  position:relative;
+  z-index:3;
+  flex:1;
+  min-height:390px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-end;
+  padding:76px 0 112px;
+}
+
+#pomruPetHome .pomruSpeech{
+  position:absolute;
+  top:49px;
+  left:50%;
+  width:min(430px,88%);
+  transform:translateX(-50%);
+  text-align:center;
+  color:#513b4a;
+  font-size:clamp(.82rem,2vw,1rem);
+  font-weight:950;
+  line-height:1.42;
+  text-shadow:0 1px 0 rgba(255,255,255,.85);
+}
+
+#pomruPetHome .pomruSpeech strong{
+  color:#db4f82;
+}
+
+#pomruPetHome .pomruPetWrap{
+  position:relative;
+  width:min(310px,62vw);
+  aspect-ratio:1/1;
+  display:grid;
+  place-items:end center;
+}
+
+#pomruPetHome .pomruPetWrap::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  left:21%;
+  right:21%;
+  bottom:7%;
+  height:8%;
+  border-radius:50%;
+  background:rgba(101,65,54,.13);
+  filter:blur(5px);
+}
+
+#pomruPetHome .pomruPetImage{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center bottom;
+  filter:drop-shadow(0 12px 10px rgba(74,49,62,.10));
+}
+
+/* ---------- level CTA ---------- */
+
+#pomruPetHome .pomruLevelCTA{
+  position:absolute;
+  z-index:4;
+  left:50%;
+  bottom:38px;
+  width:min(350px,78%);
+  min-height:70px;
+  transform:translateX(-50%);
+  border:0;
+  border-radius:21px;
+  display:grid;
+  grid-template-columns:48px 1fr 39px;
+  align-items:center;
+  gap:10px;
+  padding:9px 15px 9px 10px;
+  background:linear-gradient(180deg,#ff5196 0%,#f54288 72%,#ce2b71 100%);
+  box-shadow:
+    0 10px 0 #be2766,
+    0 18px 30px rgba(167,39,98,.20);
+  color:#fff;
+  text-align:left;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+
+#pomruPetHome .pomruLevelCTA:active{
+  transform:translate(-50%,4px);
+  box-shadow:
+    0 6px 0 #be2766,
+    0 12px 22px rgba(167,39,98,.18);
+}
+
+#pomruPetHome .pomruLevelBadge{
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#34414a;
+  color:#fff;
+  font-size:.64rem;
+  font-weight:1000;
+}
+
+#pomruPetHome .pomruLevelCopy small{
+  display:block;
+  opacity:.78;
+  font-size:.52rem;
+  font-weight:850;
+  letter-spacing:.08em;
+}
+
+#pomruPetHome .pomruLevelCopy b{
+  display:block;
+  margin-top:1px;
+  font-size:1.13rem;
+  font-weight:1000;
+}
+
+#pomruPetHome .pomruPlayTri{
+  width:0;
+  height:0;
+  margin-left:4px;
+  border-top:12px solid transparent;
+  border-bottom:12px solid transparent;
+  border-left:19px solid #fff;
+}
+
+/* ---------- bottom game dock ---------- */
+
+#pomruPetHome .pomruPetDock{
+  position:absolute;
+  z-index:10;
+  left:10px;
+  right:10px;
+  bottom:max(8px,env(safe-area-inset-bottom));
+  min-height:78px;
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:5px;
+  padding:7px 6px;
+  border:1px solid rgba(255,255,255,.79);
+  border-radius:22px;
+  background:rgba(255,250,246,.88);
+  box-shadow:0 8px 28px rgba(62,42,52,.12);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
+
+#pomruPetHome .pomruDockBtn{
+  min-width:0;
+  border:0;
+  border-radius:16px;
+  padding:7px 3px 5px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  background:transparent;
+  color:#4b4650;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+
+#pomruPetHome .pomruDockBtn:active{
+  background:rgba(231,217,228,.53);
+}
+
+#pomruPetHome .pomruDockIcon{
+  min-height:31px;
+  display:grid;
+  place-items:center;
+  font-size:1.45rem;
+  line-height:1;
+}
+
+#pomruPetHome .pomruDockBtn span:last-child{
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  color:#424149;
+  font-size:.55rem;
+  font-weight:950;
+  white-space:nowrap;
+}
+
+/* ---------- status hints / game-friendly states ---------- */
+
+#pomruPetHome[data-pet-mood="hungry"] .pomruSpeech::after{
+  content:" หิวแล้ว 🍓";
+  color:#dc7745;
+}
+
+#pomruPetHome[data-pet-mood="sad"] .pomruSpeech::after{
+  content:" อยากเล่นด้วย 🥺";
+  color:#7364b1;
+}
+
+#pomruPetHome[data-pet-mood="tired"] .pomruSpeech::after{
+  content:" ขอพักแป๊บ ⚡";
+  color:#5b968d;
+}
+
+/* ---------- tablet / desktop ---------- */
+
+@media(min-width:760px){
+  #pomruPetHome{
+    width:min(820px,calc(100% - 24px));
+    min-height:min(900px,calc(100svh - 86px));
+    margin:8px auto 18px;
+    border:1px solid rgba(79,53,69,.10);
+    border-radius:30px;
+    box-shadow:0 20px 54px rgba(63,42,55,.12);
+  }
+
+  #pomruPetHome .pomruRoom{
+    min-height:min(900px,calc(100svh - 86px));
+    padding-left:28px;
+    padding-right:28px;
+  }
+
+  #pomruPetHome .pomruWindow{
+    top:118px;
+  }
+
+  #pomruPetHome .pomruPetStage{
+    min-height:505px;
+  }
+
+  #pomruPetHome .pomruPetWrap{
+    width:min(350px,46vw);
+  }
+
+  #pomruPetHome .pomruPetDock{
+    left:18px;
+    right:18px;
+  }
+
+  #pomruPetHome .pomruDockBtn span:last-child{
+    font-size:.63rem;
+  }
+}
+
+/* ---------- small phones ---------- */
+
+@media(max-width:390px){
+  #pomruPetHome .pomruRoom{
+    padding-left:12px;
+    padding-right:12px;
+  }
+
+  #pomruPetHome .pomruStatusRow{
+    gap:3px;
+  }
+
+  #pomruPetHome .pomruStatHearts{
+    font-size:1.05rem;
+  }
+
+  #pomruPetHome .pomruStatName{
+    font-size:.54rem;
+  }
+
+  #pomruPetHome .pomruPetStage{
+    min-height:365px;
+  }
+
+  #pomruPetHome .pomruLevelCTA{
+    width:82%;
+  }
+
+  #pomruPetHome .pomruDockBtn span:last-child{
+    font-size:.50rem;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  #pomruPetHome *,
+  #pomruPetHome *::before,
+  #pomruPetHome *::after{
+    scroll-behavior:auto!important;
+    transition:none!important;
+    animation:none!important;
+  }
+}
