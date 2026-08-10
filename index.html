@@ -4359,7 +4359,7 @@ body.bbAppPlaying .v17dock{
 
 
 /* =========================================================
-   Brain Buddy v52 — Ranked Match gameplay
+   Brain Buddy v52 — การแข่งขัน gameplay
    ========================================================= */
 
 body.bbRankedPlaying .bbRankedMatchBoard{
@@ -14646,205 +14646,929 @@ body.p92HideSpeech .p89Speech{display:none!important}
 }
 </style>
 
+
+<style id="pomru-v921-login-create-room">
+/* ============================================================
+   POMRU v92.1 — Login scene + Create Room daily mission
+   ============================================================ */
+
+/* Daily mission: create room icon */
+.p89MissionCard .roomMi{
+  width:25px!important;
+  height:25px!important;
+  position:relative!important;
+  display:block!important;
+  border-radius:8px!important;
+  background:linear-gradient(145deg,#eaf7ff,#d8ecff)!important;
+}
+.p89MissionCard .roomMi::before{
+  content:"";
+  position:absolute;
+  left:5px;right:5px;top:7px;bottom:5px;
+  border:2px solid #5a9ed3;
+  border-radius:5px;
+}
+.p89MissionCard .roomMi::after{
+  content:"+";
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  color:#4b92cc;
+  font-size:13px;
+  font-weight:1000;
+}
+
+/* ----------------------------------------------------------------
+   Member-first scene — inspired by the supplied POMRU login mood.
+   No expensive animated blur layers.
+   ---------------------------------------------------------------- */
+.p921MemberGate{
+  overflow:auto!important;
+  display:block!important;
+  padding:0!important;
+  background:
+    radial-gradient(circle at 18% 16%,rgba(255,237,166,.45),transparent 15rem),
+    linear-gradient(180deg,#dbf4ff 0%,#ffe9f2 48%,#f4d3eb 100%)!important;
+}
+
+.p921MemberGate.hidden{display:none!important}
+
+.p921RoomScene{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 20%,rgba(255,255,255,.58),transparent 30rem),
+    linear-gradient(180deg,#c8eeff 0 38%,#ffe7ee 38% 73%,#d9a5e7 73% 100%);
+}
+.p921Window{
+  position:absolute;
+  left:50%;
+  top:6%;
+  width:min(430px,45vw);
+  height:44%;
+  transform:translateX(-50%);
+  border:18px solid rgba(255,255,255,.93);
+  border-radius:26px;
+  background:
+    linear-gradient(180deg,#71cef6 0 64%,#9bdc8e 65% 100%);
+  box-shadow:0 18px 40px rgba(75,73,103,.10);
+}
+.p921Window::before,
+.p921Window::after{
+  content:"";
+  position:absolute;
+  background:rgba(255,255,255,.94);
+}
+.p921Window::before{left:50%;top:0;bottom:0;width:12px;transform:translateX(-50%)}
+.p921Window::after{left:0;right:0;top:52%;height:12px;transform:translateY(-50%)}
+.p921Curtain{
+  position:absolute;
+  top:0;
+  width:24%;
+  height:69%;
+  background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.10) 0 18px,rgba(196,84,139,.055) 19px 31px),
+    linear-gradient(180deg,#ff9fc4,#f38db7 70%,#e67eab);
+  box-shadow:inset 0 0 28px rgba(162,65,110,.12);
+}
+.p921Curtain.left{
+  left:-2%;
+  border-radius:0 0 55% 18%;
+  transform:skewX(-3deg);
+}
+.p921Curtain.right{
+  right:-2%;
+  border-radius:0 0 18% 55%;
+  transform:skewX(3deg);
+}
+.p921Plant{
+  position:absolute;
+  left:5%;
+  bottom:27%;
+  width:70px;
+  height:88px;
+  border-radius:18px 18px 28px 28px;
+  background:linear-gradient(#e9b783,#c98052);
+}
+.p921Plant::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:62px;
+  width:120px;
+  height:100px;
+  transform:translateX(-50%);
+  background:
+    radial-gradient(ellipse at 20% 66%,#79b95f 0 13%,transparent 14%),
+    radial-gradient(ellipse at 38% 33%,#65ad57 0 14%,transparent 15%),
+    radial-gradient(ellipse at 60% 24%,#7abb61 0 14%,transparent 15%),
+    radial-gradient(ellipse at 78% 62%,#5fa94f 0 13%,transparent 14%);
+}
+.p921Shelf{
+  position:absolute;
+  right:5%;
+  top:24%;
+  width:150px;
+  height:205px;
+  border-radius:18px;
+  border:14px solid rgba(194,121,98,.42);
+  background:
+    linear-gradient(180deg,transparent 29%,rgba(194,121,98,.30) 30% 35%,transparent 36% 64%,rgba(194,121,98,.30) 65% 70%,transparent 71%);
+}
+.p921Floor{
+  position:absolute;
+  left:-8%;
+  right:-8%;
+  bottom:-10%;
+  height:38%;
+  background:
+    repeating-linear-gradient(90deg,transparent 0 120px,rgba(116,71,103,.08) 121px 124px),
+    repeating-linear-gradient(0deg,transparent 0 74px,rgba(116,71,103,.06) 75px 78px),
+    linear-gradient(180deg,#eac1dd,#c995df);
+  transform:perspective(850px) rotateX(57deg);
+  transform-origin:top center;
+}
+
+.p921GateHud{
+  position:relative;
+  z-index:5;
+  width:min(1120px,calc(100% - 32px));
+  min-height:86px;
+  margin:18px auto 6px;
+  display:grid;
+  grid-template-columns:minmax(190px,1fr) auto auto;
+  align-items:center;
+  gap:12px;
+}
+.p921GateLogo{
+  position:relative;
+  width:max-content;
+  padding:8px 16px 10px;
+}
+.p921GateLogo strong{
+  display:block;
+  color:#6c45bd;
+  font-size:38px;
+  line-height:.9;
+  font-weight:1000;
+  letter-spacing:-.07em;
+  text-shadow:
+    0 3px 0 #fff,
+    0 6px 0 rgba(228,91,151,.55);
+}
+.p921GateLogo small{
+  display:block;
+  width:max-content;
+  margin:5px auto 0;
+  padding:3px 12px;
+  border-radius:8px;
+  background:#c98c66;
+  color:#5f3b2e;
+  font-size:9px;
+  font-weight:1000;
+}
+.p921Crown{
+  position:absolute;
+  left:0;
+  top:0;
+  width:25px;height:20px;
+  background:linear-gradient(#ffe36e,#f0ad23);
+  clip-path:polygon(0 100%,8% 23%,29% 61%,50% 0,70% 61%,92% 23%,100% 100%);
+  transform:rotate(-12deg);
+}
+
+.p921GateSafe,
+.p921GateProfile{
+  min-height:58px;
+  padding:7px 13px 7px 7px;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  border:1px solid rgba(132,81,116,.11);
+  border-radius:20px;
+  background:rgba(255,255,255,.94);
+  box-shadow:0 9px 21px rgba(98,63,91,.11);
+}
+.p921SafeMark{
+  width:43px;height:43px;
+  display:grid;place-items:center;
+  border-radius:50%;
+  background:linear-gradient(145deg,#ffe470,#f2b631);
+  box-shadow:inset 0 0 0 5px rgba(255,255,255,.42);
+  color:#8b6113;
+  font-size:14px;
+  font-weight:1000;
+}
+.p921GateSafe b,.p921GateProfile b{
+  display:block;
+  color:#493949;
+  font-size:11px;
+}
+.p921GateSafe small,.p921GateProfile small{
+  display:block;
+  margin-top:2px;
+  color:#9b8290;
+  font-size:7px;
+}
+.p921ProfileFace{
+  width:43px;height:43px;
+  border-radius:14px;
+  overflow:hidden;
+  background:#fff0f6;
+}
+.p921ProfileFace img{
+  width:100%;height:100%;object-fit:contain;
+}
+
+.p921GateStage{
+  position:relative;
+  z-index:6;
+  width:min(1020px,calc(100% - 26px));
+  min-height:calc(100dvh - 128px);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:minmax(460px,640px) minmax(260px,1fr);
+  align-items:center;
+  gap:0;
+  padding-bottom:max(18px,env(safe-area-inset-bottom));
+  box-sizing:border-box;
+}
+
+.p921GateCard{
+  width:auto!important;
+  margin:12px 0!important;
+  padding:28px 34px 24px!important;
+  border:1px solid rgba(196,135,166,.24)!important;
+  border-radius:42px!important;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.985),rgba(255,248,252,.985))!important;
+  box-shadow:
+    0 30px 60px rgba(102,59,87,.18),
+    inset 0 1px 0 #fff!important;
+}
+.p921CardBrand>span{
+  width:56px!important;
+  height:56px!important;
+  border-radius:18px!important;
+  color:#e25593!important;
+  font-size:18px!important;
+  box-shadow:0 7px 17px rgba(218,78,140,.12);
+}
+.p921CardBrand b{
+  font-size:32px!important;
+  color:#7350c3!important;
+  letter-spacing:-.04em;
+}
+.p921CardBrand small{
+  margin-top:4px!important;
+  color:#8c5fa4!important;
+  font-size:10px!important;
+  font-weight:850!important;
+}
+.p921GateTitle{
+  margin:27px 0 18px!important;
+}
+.p921GateTitle>small{
+  color:#e35b94!important;
+  font-size:10px!important;
+}
+.p921GateTitle h1{
+  margin:8px 0 10px!important;
+  color:#45233f!important;
+  font-size:clamp(42px,5.5vw,64px)!important;
+  line-height:.96!important;
+  letter-spacing:-.06em!important;
+}
+.p921GateTitle p{
+  max-width:520px;
+  color:#806f79!important;
+  font-size:12px!important;
+  line-height:1.55!important;
+}
+
+.p921GateTabs{
+  gap:0!important;
+  padding:5px!important;
+  border-radius:18px!important;
+  background:linear-gradient(90deg,#f8ecf7,#f6eefc)!important;
+}
+.p921GateTabs button{
+  min-height:48px!important;
+  border-radius:14px!important;
+  font-size:12px!important;
+}
+.p921GateTabs button.active{
+  color:#6d48bd!important;
+  box-shadow:0 6px 15px rgba(103,68,124,.09)!important;
+}
+
+.p921Google{
+  min-height:54px!important;
+  margin-top:13px!important;
+  border-radius:17px!important;
+  font-size:11px!important;
+  box-shadow:0 7px 17px rgba(93,62,80,.06);
+}
+.p921Google svg{width:22px!important;height:22px!important}
+
+.p921Or{
+  margin:15px 0 12px!important;
+  color:#a7919e!important;
+  font-size:8px!important;
+}
+
+.p921GateForm{
+  gap:11px!important;
+}
+.p921GateForm label>span{
+  margin-bottom:6px!important;
+  color:#644b5b!important;
+  font-size:9px!important;
+}
+.p921InputWrap{
+  position:relative;
+}
+.p921InputWrap input{
+  min-height:54px!important;
+  padding-left:50px!important;
+  padding-right:13px!important;
+  border-radius:17px!important;
+  border-color:rgba(176,112,151,.19)!important;
+  background:#fff!important;
+  color:#503b4a!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
+}
+.p921InputWrap>i{
+  position:absolute;
+  z-index:2;
+  left:17px;
+  top:50%;
+  width:19px;
+  height:19px;
+  transform:translateY(-50%);
+  color:#b3589a;
+}
+.mailIcon::before{
+  content:"";
+  position:absolute;
+  inset:2px 0;
+  border:2px solid currentColor;
+  border-radius:4px;
+}
+.mailIcon::after{
+  content:"";
+  position:absolute;
+  left:3px;right:3px;top:5px;height:8px;
+  border-left:2px solid currentColor;
+  border-bottom:2px solid currentColor;
+  transform:rotate(-45deg) skew(6deg,6deg);
+}
+.lockIcon::before{
+  content:"";
+  position:absolute;
+  left:3px;right:3px;top:8px;bottom:0;
+  border:2px solid currentColor;
+  border-radius:4px;
+}
+.lockIcon::after{
+  content:"";
+  position:absolute;
+  left:6px;right:6px;top:0;height:10px;
+  border:2px solid currentColor;
+  border-bottom:0;
+  border-radius:9px 9px 0 0;
+}
+.userIcon::before{
+  content:"";
+  position:absolute;
+  left:6px;top:1px;
+  width:8px;height:8px;
+  border:2px solid currentColor;
+  border-radius:50%;
+}
+.userIcon::after{
+  content:"";
+  position:absolute;
+  left:2px;right:2px;bottom:0;height:8px;
+  border:2px solid currentColor;
+  border-radius:10px 10px 4px 4px;
+}
+
+.p921Primary{
+  min-height:56px!important;
+  margin-top:3px;
+  border-radius:17px!important;
+  background:linear-gradient(180deg,#8a5bed,#6d3fd3)!important;
+  box-shadow:
+    0 10px 20px rgba(109,63,211,.26),
+    inset 0 1px 0 rgba(255,255,255,.30)!important;
+  font-size:13px!important;
+}
+.p921Forgot{
+  color:#704bb3!important;
+  font-size:9px!important;
+}
+.p921GateFoot{
+  margin-top:8px!important;
+  color:#9c8995!important;
+  text-align:center;
+}
+
+.p921BuddySide{
+  position:relative;
+  align-self:stretch;
+  min-height:620px;
+  display:grid;
+  place-items:end center;
+  overflow:visible;
+}
+.p921BuddySide img{
+  position:absolute;
+  right:-25%;
+  bottom:3%;
+  width:125%;
+  max-width:520px;
+  max-height:620px;
+  object-fit:contain;
+  filter:drop-shadow(0 23px 18px rgba(105,54,82,.15));
+}
+.p921Speech{
+  position:absolute;
+  z-index:3;
+  top:18%;
+  left:-10%;
+  width:180px;
+  padding:18px 16px;
+  border:1px solid rgba(190,132,163,.16);
+  border-radius:50% 48% 45% 50%;
+  background:rgba(255,255,255,.97);
+  color:#64405e;
+  box-shadow:0 10px 24px rgba(94,58,80,.10);
+  text-align:center;
+  font-size:17px;
+  line-height:1.35;
+  font-weight:1000;
+}
+.p921Speech::after{
+  content:"";
+  position:absolute;
+  right:5px;
+  bottom:-15px;
+  width:28px;height:28px;
+  background:inherit;
+  clip-path:polygon(0 0,100% 0,100% 100%);
+  transform:rotate(17deg);
+}
+
+/* Existing v92 gate layout must not constrain the redesigned one. */
+.p921MemberGate .p92GateShell{display:none!important}
+
+/* Tablet */
+@media(max-width:900px){
+  .p921GateHud{
+    width:calc(100% - 20px);
+    margin-top:10px;
+  }
+  .p921GateSafe{display:none}
+  .p921GateStage{
+    width:calc(100% - 18px);
+    grid-template-columns:minmax(430px,1fr) 250px;
+  }
+  .p921GateCard{
+    padding:25px 28px 22px!important;
+  }
+  .p921BuddySide img{
+    right:-42%;
+    width:145%;
+  }
+  .p921Speech{
+    left:-25%;
+    width:150px;
+    font-size:14px;
+  }
+}
+
+/* Phone: card becomes the focus, Buddy peeks from the right like the reference. */
+@media(max-width:680px){
+  .p921MemberGate{
+    min-height:100dvh!important;
+  }
+  .p921RoomScene{
+    min-height:100dvh;
+  }
+  .p921Window{
+    top:3%;
+    width:60vw;
+    height:30%;
+    border-width:11px;
+  }
+  .p921Curtain{
+    width:29%;
+    height:45%;
+  }
+  .p921Plant,.p921Shelf{display:none}
+
+  .p921GateHud{
+    min-height:74px;
+    grid-template-columns:1fr auto;
+    margin:8px auto 0;
+  }
+  .p921GateLogo strong{font-size:31px}
+  .p921GateLogo small{font-size:7px}
+  .p921GateProfile{
+    min-height:50px;
+    padding:5px 8px 5px 5px;
+  }
+  .p921ProfileFace{width:37px;height:37px}
+  .p921GateProfile div{display:none}
+
+  .p921GateStage{
+    min-height:calc(100dvh - 84px);
+    width:calc(100% - 14px);
+    display:block;
+    padding-bottom:max(10px,env(safe-area-inset-bottom));
+  }
+  .p921GateCard{
+    position:relative;
+    z-index:4;
+    width:calc(100% - 6px)!important;
+    margin:4px auto 10px!important;
+    padding:22px 20px 19px!important;
+    border-radius:30px!important;
+  }
+  .p921CardBrand>span{
+    width:47px!important;height:47px!important;
+  }
+  .p921CardBrand b{font-size:27px!important}
+  .p921CardBrand small{font-size:8px!important}
+
+  .p921GateTitle{
+    max-width:74%;
+    margin:19px 0 15px!important;
+  }
+  .p921GateTitle h1{
+    font-size:38px!important;
+  }
+  .p921GateTitle p{
+    font-size:10px!important;
+  }
+
+  .p921BuddySide{
+    position:absolute;
+    z-index:5;
+    right:-4px;
+    top:88px;
+    width:38%;
+    min-height:260px;
+    pointer-events:none;
+  }
+  .p921BuddySide img{
+    right:-26%;
+    bottom:auto;
+    top:65px;
+    width:145%;
+    max-height:295px;
+  }
+  .p921Speech{
+    top:4px;
+    left:-48%;
+    width:112px;
+    padding:10px;
+    font-size:10px;
+  }
+
+  .p921GateTabs button{min-height:44px!important}
+  .p921Google{min-height:50px!important}
+  .p921InputWrap input{
+    min-height:50px!important;
+    font-size:16px!important;
+  }
+  .p921Primary{min-height:52px!important}
+}
+
+@media(max-width:420px){
+  .p921GateTitle{
+    max-width:70%;
+  }
+  .p921GateTitle h1{
+    font-size:34px!important;
+  }
+  .p921BuddySide{
+    width:35%;
+  }
+  .p921BuddySide img{
+    right:-42%;
+    width:165%;
+  }
+  .p921Speech{
+    display:none;
+  }
+}
+</style>
+
+
+<style id="pomru-v922-safe-core-cleanup">
+#p922LegacyCompat{display:none!important}
+#teamBar,.teamBar,.teamQuickCard,#customModal{display:none!important}
+
+/* Memory now intentionally has three clear choices. */
+#bbAppTeddyModes .p92MemoryGrid{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+}
+@media(max-width:760px){
+  #bbAppTeddyModes .p92MemoryGrid{grid-template-columns:1fr!important}
+}
+</style>
+
+
+<style id="pomru-v93-social-duel">
+/* ============================================================
+   POMRU v93 — Social Duel 1v1
+   ============================================================ */
+.p93FriendsTopBtn{
+  position:relative;
+  width:48px;height:48px;
+  flex:0 0 48px;
+  display:grid;place-items:center;
+  border:1px solid rgba(114,79,98,.10);
+  border-radius:16px;
+  background:#fff;
+  box-shadow:0 6px 15px rgba(92,62,79,.075);
+  color:#7252c2;
+}
+.p93FriendsIcon{
+  position:relative;width:24px;height:21px;
+}
+.p93FriendsIcon::before{
+  content:"";
+  position:absolute;left:2px;top:1px;
+  width:9px;height:9px;border:2.5px solid currentColor;border-radius:50%;
+  box-shadow:10px 2px 0 -1px #fff,10px 2px 0 1.5px currentColor;
+}
+.p93FriendsIcon::after{
+  content:"";
+  position:absolute;left:0;bottom:0;
+  width:15px;height:8px;border:2.5px solid currentColor;border-radius:10px 10px 5px 5px;
+}
+.p93FriendsBadge{
+  position:absolute;right:-4px;top:-5px;
+  min-width:19px;height:19px;padding:0 4px;
+  display:grid;place-items:center;box-sizing:border-box;
+  border:3px solid #fff;border-radius:999px;
+  background:#f05e92;color:#fff;font-size:7px;font-weight:1000;
+}
+.p93FriendsBadge.hidden{display:none!important}
+
+/* Social hub */
+.p93SocialHub{
+  position:fixed;inset:0;z-index:125000;
+  overflow:auto;
+  color:#4d3e4c;
+  background:linear-gradient(180deg,#eaf9ff 0%,#fff4f8 49%,#fff6ea 100%);
+}
+.p93SocialHub.hidden{display:none!important}
+body.p93SocialOpen{overflow:hidden!important}
+.p93SocialScene{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.p93Cloud{position:absolute;width:170px;height:55px;border-radius:999px;background:rgba(255,255,255,.65)}
+.p93Cloud::before,.p93Cloud::after{content:"";position:absolute;border-radius:50%;background:inherit}
+.p93Cloud::before{width:70px;height:70px;left:25px;bottom:10px}
+.p93Cloud::after{width:90px;height:90px;right:18px;bottom:2px}
+.p93Cloud.c1{left:4%;top:14%}.p93Cloud.c2{right:8%;top:28%;transform:scale(.75)}
+.p93Hill{position:absolute;bottom:-14%;width:65%;height:43%;border-radius:50% 50% 0 0}
+.p93Hill.h1{left:-15%;background:#d8efd1}.p93Hill.h2{right:-20%;background:#f5d5e9}
+
+.p93SocialTop{
+  position:relative;z-index:3;
+  width:min(1080px,calc(100% - 28px));min-height:76px;
+  margin:14px auto 0;padding:8px 10px;box-sizing:border-box;
+  display:grid;grid-template-columns:50px 1fr auto;align-items:center;gap:10px;
+  border:1px solid rgba(111,79,96,.09);border-radius:24px;background:rgba(255,255,255,.96);
+  box-shadow:0 10px 28px rgba(89,62,79,.09)
+}
+.p93CircleBtn{
+  width:46px;height:46px;display:grid;place-items:center;border:0;border-radius:15px;background:#f7f1f7;color:#674c8e
+}
+.p93CircleBtn svg{width:22px;height:22px}
+.p93SocialBrand small{display:block;color:#a0718b;font-size:7px;font-weight:1000;letter-spacing:.13em}
+.p93SocialBrand h1{margin:2px 0 0;color:#523d50;font-size:23px;line-height:1}
+.p93SocialMe{
+  min-height:48px;padding:0 13px;display:flex;align-items:center;gap:8px;border-radius:16px;background:#f9f7fa
+}
+.p93Pulse{width:10px;height:10px;border:4px solid #dff5e8;border-radius:50%;background:#48b878}
+.p93SocialMe small{display:block;color:#9a8590;font-size:7px}.p93SocialMe b{display:block;margin-top:1px;color:#49825e;font-size:10px}
+
+.p93SocialMain{position:relative;z-index:2;width:min(1080px,calc(100% - 28px));margin:13px auto 45px}
+.p93DuelHero{
+  min-height:275px;padding:29px 43% 28px 31px;box-sizing:border-box;position:relative;overflow:hidden;
+  border:1px solid rgba(112,80,99,.09);border-radius:34px;
+  background:linear-gradient(135deg,#ffe4ef 0%,#fff8fb 48%,#e4f6ff 100%);
+  box-shadow:0 15px 35px rgba(93,63,80,.10)
+}
+.p93DuelHeroCopy{position:relative;z-index:3}
+.p93HeroPill{display:inline-flex;padding:6px 10px;border-radius:999px;background:#f1e8ff;color:#7150bf;font-size:8px;font-weight:1000;letter-spacing:.08em}
+.p93DuelHero h2{margin:10px 0 8px;color:#59305e;font-size:45px;line-height:.97;letter-spacing:-.055em}
+.p93DuelHero p{max-width:520px;margin:0;color:#7e6e79;font-size:11px;line-height:1.55}
+.p93HeroActions{display:flex;gap:8px;margin-top:18px}
+.p93HeroActions button{min-height:44px;padding:0 17px;border:0;border-radius:14px;font-size:10px;font-weight:1000}
+.p93HeroActions .primary{background:linear-gradient(180deg,#805de4,#6948ce);color:#fff;box-shadow:0 8px 18px rgba(107,73,201,.20)}
+.p93HeroActions .secondary{background:#fff;color:#765c73;border:1px solid rgba(111,79,96,.11)}
+.p93HeroDuel{position:absolute;right:2%;top:0;bottom:0;width:42%;display:flex;align-items:center;justify-content:center}
+.p93HeroDuel strong{
+  position:relative;z-index:4;width:61px;height:61px;display:grid;place-items:center;border:6px solid #fff;border-radius:50%;
+  background:linear-gradient(145deg,#f3b84e,#e88d35);color:#fff;font-size:22px;box-shadow:0 10px 22px rgba(104,67,80,.14)
+}
+.p93HeroBear{position:absolute;bottom:-12px;width:54%;height:245px}
+.p93HeroBear img{width:100%;height:100%;object-fit:contain}
+.p93HeroBear.left{left:-2%;transform:rotate(5deg)}.p93HeroBear.right{right:-2%;transform:scaleX(-1) rotate(5deg)}
+
+.p93SocialShell{
+  margin-top:14px;padding:12px;border:1px solid rgba(111,79,96,.09);border-radius:29px;background:rgba(255,255,255,.94);
+  box-shadow:0 11px 30px rgba(91,62,79,.075)
+}
+.p93SocialTabs{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;padding:5px;border-radius:20px;background:#f7f2f6}
+.p93SocialTabs button{
+  min-height:60px;padding:8px 7px;position:relative;display:flex;align-items:center;justify-content:center;gap:7px;
+  border:0;border-radius:16px;background:transparent;color:#87727f;font-size:9px;font-weight:950
+}
+.p93SocialTabs button.active{background:#fff;color:#6547a2;box-shadow:0 6px 16px rgba(86,58,78,.07)}
+.p93SocialTabs em{min-width:20px;height:20px;padding:0 5px;display:grid;place-items:center;border-radius:999px;background:#eee7f1;color:#795f6e;font-style:normal;font-size:7px}
+.p93SocialTabs button.active em{background:#eee8ff;color:#6d4eba}
+.p93TabIcon{width:22px;height:22px;position:relative;color:currentColor}
+.p93TabIcon.friends::before{content:"";position:absolute;left:0;top:1px;width:8px;height:8px;border:2px solid currentColor;border-radius:50%;box-shadow:9px 1px 0 -1px #fff,9px 1px 0 1px currentColor}
+.p93TabIcon.friends::after{content:"";position:absolute;left:-1px;bottom:0;width:14px;height:7px;border:2px solid currentColor;border-radius:8px}
+.p93TabIcon.request::before{content:"?";position:absolute;inset:0;display:grid;place-items:center;border:2px solid currentColor;border-radius:7px;font-size:11px}
+.p93TabIcon.invite::before{content:"VS";position:absolute;inset:1px -2px;display:grid;place-items:center;border:2px solid currentColor;border-radius:7px;font-size:7px;font-weight:1000}
+.p93TabIcon.add::before{content:"+";position:absolute;inset:0;display:grid;place-items:center;border:2px solid currentColor;border-radius:50%;font-size:17px}
+
+.p93SocialPanel{display:none;padding:18px 9px 8px}.p93SocialPanel.active{display:block}
+.p93PanelHead{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:12px}
+.p93PanelHead small{display:block;color:#a17288;font-size:7px;font-weight:1000;letter-spacing:.12em}
+.p93PanelHead h3{margin:2px 0;color:#4f3e4d;font-size:20px}.p93PanelHead p{margin:3px 0 0;color:#94818c;font-size:8px}
+.p93PanelHead>button{min-height:36px;padding:0 11px;border:0;border-radius:11px;background:#f4eff4;color:#6c5965;font-size:8px;font-weight:900}
+
+.p93FriendList,.p93RequestList,.p93InviteList,.p93SearchResults{display:grid;gap:8px}
+.p93FriendCard,.p93RequestCard,.p93InviteCard,.p93SearchCard{
+  min-height:76px;padding:9px 10px;display:grid;grid-template-columns:54px minmax(0,1fr) auto;align-items:center;gap:10px;
+  border:1px solid rgba(111,79,96,.09);border-radius:19px;background:#fff
+}
+.p93PersonAvatar{width:52px;height:52px;position:relative;overflow:hidden;border-radius:17px;background:#fff0f5}
+.p93PersonAvatar img{width:100%;height:100%;object-fit:cover}
+.p93PersonAvatar .p93AvatarFallback{width:100%;height:100%;display:grid;place-items:center;color:#d36595;font-size:18px;font-weight:1000}
+.p93PersonAvatar i{position:absolute;right:1px;bottom:1px;width:10px;height:10px;border:3px solid #fff;border-radius:50%;background:#b7acb2}
+.p93PersonAvatar i.online{background:#42b978}
+.p93PersonInfo{min-width:0}.p93PersonInfo b{display:block;color:#4f3f4e;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p93PersonInfo small{display:block;margin-top:3px;color:#8f7b87;font-size:7px}.p93PersonInfo span{display:block;margin-top:3px;color:#6e55ae;font-size:8px;font-weight:900}
+.p93PersonActions{display:flex;align-items:center;gap:5px}
+.p93PersonActions button{min-height:37px;padding:0 10px;border:0;border-radius:12px;background:#7352d0;color:#fff;font-size:8px;font-weight:1000}
+.p93PersonActions button.alt{background:#f2edf2;color:#6c5865}
+.p93PersonActions button.good{background:#52ad79}
+.p93PersonActions button:disabled{opacity:.45}
+.p93EmptyState{min-height:120px;padding:20px;display:grid;place-items:center;text-align:center;border:1px dashed rgba(111,79,96,.14);border-radius:19px;background:#fdfbfd;color:#947f8b;font-size:9px}
+
+.p93SearchBox{min-height:54px;padding:5px 5px 5px 15px;display:grid;grid-template-columns:24px 1fr auto;align-items:center;gap:6px;border:1px solid rgba(111,79,96,.11);border-radius:17px;background:#fff;margin-bottom:11px}
+.p93SearchIcon{width:15px;height:15px;border:2px solid #a36f94;border-radius:50%;position:relative}.p93SearchIcon::after{content:"";position:absolute;right:-5px;bottom:-3px;width:7px;height:2px;background:#a36f94;transform:rotate(45deg);border-radius:2px}
+.p93SearchBox input{min-width:0;height:42px;border:0;outline:0;background:transparent;color:#554551;font-size:16px}
+.p93SearchBox button{min-height:42px;padding:0 15px;border:0;border-radius:12px;background:#7654d0;color:#fff;font-size:9px;font-weight:1000}
+
+/* Config sheets */
+.p93SheetBackdrop{
+  position:fixed;inset:0;z-index:180000;padding:18px;display:grid;place-items:center;background:rgba(74,51,69,.28)
+}
+.p93SheetBackdrop.hidden{display:none!important}
+.p93DuelSheet{position:relative;width:min(490px,100%);max-height:calc(100dvh - 36px);overflow:auto;padding:25px;box-sizing:border-box;border-radius:28px;background:#fff;box-shadow:0 25px 70px rgba(78,50,70,.23)}
+.p93DuelSheet.small{width:min(420px,100%)}
+.p93SheetX{position:absolute;right:13px;top:13px;width:38px;height:38px;border:0;border-radius:12px;background:#f4eef3;color:#715d69;font-size:21px}
+.p93DuelSheet h2{margin:10px 0 4px;color:#4d3b4b;font-size:27px}.p93DuelSheet>p{margin:0 0 16px;color:#907c88;font-size:9px}
+.p93ChallengeTarget{min-height:67px;padding:8px;margin-bottom:12px;display:flex;align-items:center;gap:10px;border-radius:17px;background:linear-gradient(135deg,#fff0f6,#f3efff)}
+.p93ChallengeTarget.hidden{display:none!important}
+.p93TargetAvatar{width:49px;height:49px;overflow:hidden;border-radius:15px;background:#fff}.p93TargetAvatar img{width:100%;height:100%;object-fit:cover}
+.p93ChallengeTarget small{display:block;color:#9d7c8f;font-size:7px}.p93ChallengeTarget b{display:block;margin-top:2px;color:#553f50;font-size:12px}.p93ChallengeTarget span{display:block;margin-top:2px;color:#4da875;font-size:7px}
+.p93DuelField{display:block;margin-top:10px}.p93DuelField>span{display:block;margin-bottom:5px;color:#705d69;font-size:8px;font-weight:900}
+.p93DuelField select,.p93DuelField input{width:100%;min-height:48px;padding:0 12px;box-sizing:border-box;border:1px solid rgba(111,79,96,.13);border-radius:14px;background:#fff;color:#51414f;font-size:16px;outline:0}
+.p93DuelRules{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:13px}.p93DuelRules>div{padding:11px 6px;text-align:center;border-radius:14px;background:#faf7fa}.p93DuelRules b{display:block;color:#7452ca;font-size:12px}.p93DuelRules span{display:block;margin-top:2px;color:#9a8792;font-size:6px}
+.p93SheetError{min-height:17px;margin-top:8px;color:#bc4f70;font-size:8px}
+.p93SheetPrimary{width:100%;min-height:51px;margin-top:4px;border:0;border-radius:15px;background:linear-gradient(180deg,#815ce1,#6a49cb);color:#fff;font-size:11px;font-weight:1000;box-shadow:0 8px 18px rgba(105,72,197,.18)}
+
+/* Incoming invite */
+.p93GlobalInvite{
+  position:fixed;z-index:210000;right:18px;bottom:max(18px,env(safe-area-inset-bottom));
+  width:min(440px,calc(100% - 26px));min-height:74px;padding:8px;box-sizing:border-box;
+  display:grid;grid-template-columns:54px 1fr auto auto;align-items:center;gap:8px;
+  border:1px solid rgba(111,79,96,.12);border-radius:21px;background:#fff;
+  box-shadow:0 18px 45px rgba(77,50,69,.22)
+}
+.p93GlobalInvite.hidden{display:none!important}
+.p93GlobalInviteAvatar{width:52px;height:52px;overflow:hidden;border-radius:16px;background:#fff0f5}.p93GlobalInviteAvatar img{width:100%;height:100%;object-fit:cover}
+.p93GlobalInviteCopy small{display:block;color:#d15d8b;font-size:7px;font-weight:1000}.p93GlobalInviteCopy b{display:block;margin-top:2px;color:#4f3e4d;font-size:11px}.p93GlobalInviteCopy span{display:block;margin-top:2px;color:#8e7885;font-size:7px}
+.p93GlobalInvite button{width:43px;height:43px;border:0;border-radius:13px;font-weight:1000}.p93GlobalInvite .accept{background:#7654d1;color:#fff}.p93GlobalInvite .decline{background:#f3edf1;color:#765f6d}
+
+/* Rebuild old Arena room into Duel Lounge */
+#bbArenaRoom .bbRoomProgress,
+#bbArenaRoom .bbRoomPlayersHead,
+#bbArenaRoom .bbRoomPlayers{display:none!important}
+#bbArenaRoom .bbRoomTop{margin-bottom:12px!important}
+#bbArenaRoom .bbRoomMeta{font-size:9px!important}
+#bbArenaRoom .bbRoomCodeBox{background:#fff!important}
+.p93DuelLounge{display:block}
+.p93DuelHeader{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:4px 0 11px}
+.p93DuelHeader small{display:block;color:#9f7489;font-size:7px;font-weight:1000;letter-spacing:.12em}.p93DuelHeader h2{margin:2px 0;color:#4e3c4b;font-size:21px}.p93DuelHeader p{margin:2px 0 0;color:#93808b;font-size:8px}
+.p93DuelHeader button{min-height:39px;padding:0 12px;border:0;border-radius:12px;background:#f1eafd;color:#6e4db7;font-size:8px;font-weight:1000}
+
+.p93VersusStage{
+  min-height:300px;padding:16px;display:grid;grid-template-columns:1fr 100px 1fr;align-items:center;gap:9px;
+  border:1px solid rgba(111,79,96,.09);border-radius:27px;
+  background:linear-gradient(135deg,#fff0f6,#fff 48%,#edf8ff)
+}
+.p93Fighter{position:relative;min-height:245px;padding:14px 10px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid rgba(111,79,96,.08);border-radius:23px;background:rgba(255,255,255,.83);overflow:hidden}
+.p93FighterGlow{position:absolute;width:160px;height:160px;border-radius:50%;background:#ffe2ef;opacity:.64;top:23px}
+.p93Fighter.opponent .p93FighterGlow{background:#e2f2ff}
+.p93FighterLabel{position:absolute;left:11px;top:10px;padding:4px 7px;border-radius:999px;background:#f4ecff;color:#7150bc;font-size:6px;font-weight:1000}
+.p93FighterAvatar{position:relative;z-index:2;width:112px;height:112px;overflow:hidden;border:7px solid #fff;border-radius:35px;background:#fff0f6;box-shadow:0 10px 22px rgba(89,57,78,.12)}
+.p93FighterAvatar img{width:100%;height:100%;object-fit:cover}.p93Question{width:100%;height:100%;display:grid;place-items:center;color:#b7a6b1;font-size:34px;font-weight:1000}
+.p93Fighter h3{position:relative;z-index:2;margin:10px 0 5px;color:#4d3c4b;font-size:16px}
+.p93FighterMeta{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:5px;color:#897580;font-size:7px}.p93FighterMeta>span{color:#7053b0;font-weight:900}.p93FighterMeta b{font-size:7px}
+.p93OnlineDot{width:7px;height:7px;border-radius:50%;background:#45b976}.p93OnlineDot.offline{background:#bcb0b7}
+.p93ReadyState{position:relative;z-index:2;margin-top:9px;padding:5px 9px;border-radius:999px;background:#f3edf1;color:#866f7c;font-size:7px;font-weight:950}.p93ReadyState.ready{background:#e0f5e8;color:#3f9665}
+.p93VSCore{text-align:center}.p93VSCore>span{width:72px;height:72px;margin:auto;display:grid;place-items:center;border:7px solid #fff;border-radius:50%;background:linear-gradient(145deg,#ffbf56,#e88c36);color:#fff;font-size:25px;font-weight:1000;box-shadow:0 10px 23px rgba(104,66,80,.13)}.p93VSCore small{display:block;margin-top:9px;color:#846f7b;font-size:7px;font-weight:950}
+.p93Fighter.waiting{opacity:.78}
+
+.p93RoomChat{margin-top:11px;padding:13px;border:1px solid rgba(111,79,96,.09);border-radius:22px;background:#fff}
+.p93ChatHead{display:flex;align-items:end;justify-content:space-between;margin-bottom:8px}.p93ChatHead small{display:block;color:#a07188;font-size:6px;font-weight:1000;letter-spacing:.12em}.p93ChatHead h3{margin:2px 0;color:#4f3e4d;font-size:15px}.p93ChatHead>span{padding:5px 8px;border-radius:999px;background:#e2f5e9;color:#429569;font-size:6px;font-weight:950}
+.p93ChatMessages{height:190px;padding:8px;box-sizing:border-box;overflow:auto;display:flex;flex-direction:column;gap:7px;border-radius:15px;background:#faf7fa}
+.p93ChatEmpty{margin:auto;color:#9d8994;font-size:8px;text-align:center}
+.p93ChatRow{display:flex;gap:6px;align-items:flex-end}.p93ChatRow.me{justify-content:flex-end}
+.p93ChatMiniAvatar{width:27px;height:27px;flex:0 0 27px;overflow:hidden;border-radius:9px;background:#fff0f5}.p93ChatMiniAvatar img{width:100%;height:100%;object-fit:cover}
+.p93ChatBubble{max-width:72%;padding:8px 10px;border-radius:13px 13px 13px 4px;background:#fff;color:#584650;box-shadow:0 3px 9px rgba(82,56,75,.06);font-size:9px;line-height:1.4;word-break:break-word}
+.p93ChatRow.me .p93ChatBubble{border-radius:13px 13px 4px 13px;background:#7856d2;color:#fff}
+.p93ChatBubble small{display:block;margin-top:3px;opacity:.65;font-size:5px}
+.p93ChatComposer{display:grid;grid-template-columns:1fr auto;gap:6px;margin-top:7px}.p93ChatComposer input{min-width:0;height:44px;padding:0 12px;border:1px solid rgba(111,79,96,.11);border-radius:13px;background:#fff;color:#554551;font-size:16px;outline:0}.p93ChatComposer button{min-width:66px;border:0;border-radius:13px;background:#7654d0;color:#fff;font-size:9px;font-weight:1000}
+.p93ChatComposer.disabled{opacity:.55;pointer-events:none}
+
+/* Existing ready controls become duel footer */
+#bbArenaRoom .bbRoomBottom{margin-top:11px!important;padding:12px!important;border:1px solid rgba(111,79,96,.09)!important;border-radius:20px!important;background:#fff!important}
+#bbArenaRoom .bbRoomInfo{font-size:8px!important;color:#806e79!important}
+#bbArenaRoom .bbRoomButtons{display:flex!important;gap:7px!important}
+#bbArenaRoom #bbRoomReadyBtn,#bbArenaRoom #bbRoomStartBtn{min-height:46px!important;border-radius:14px!important;font-size:9px!important;font-weight:1000!important}
+#bbArenaRoom #bbRoomReadyBtn{background:#f0eaff!important;color:#6e4db7!important}
+#bbArenaRoom #bbRoomReadyBtn.ready{background:#dff4e7!important;color:#3f9262!important}
+#bbArenaRoom #bbRoomStartBtn{background:linear-gradient(180deg,#815ce0,#6848c9)!important;color:#fff!important}
+
+/* Hide legacy public lobby from normal visual flow; Social hub is the front door. */
+#bbArena .p91ArenaActions .create span small{font-size:0}
+#bbArena .p91ArenaActions .create span small::after{content:"ดวล 1v1 กับเพื่อน";font-size:8px}
+
+@media(max-width:760px){
+  .p89TopActions{gap:5px!important}
+  .p93FriendsTopBtn{width:42px;height:42px;flex-basis:42px;border-radius:14px}
+  .p93FriendsIcon{transform:scale(.88)}
+  .p93SocialTop{width:calc(100% - 16px);margin-top:8px;grid-template-columns:46px 1fr auto;border-radius:20px}.p93SocialMe div{display:none}.p93SocialMe{padding:0 10px;min-height:43px}
+  .p93SocialMain{width:calc(100% - 16px);margin-top:8px}
+  .p93DuelHero{min-height:320px;padding:22px 24px 154px;border-radius:27px}.p93DuelHero h2{font-size:36px}.p93HeroDuel{left:0;right:0;bottom:-7px;top:auto;width:100%;height:170px}.p93HeroBear{width:44%;height:165px}.p93HeroDuel strong{width:52px;height:52px;font-size:18px}
+  .p93HeroActions{display:grid;grid-template-columns:1fr 1fr}.p93HeroActions button{padding:0 7px}
+  .p93SocialShell{padding:8px;border-radius:23px}.p93SocialTabs{grid-template-columns:repeat(4,1fr);gap:3px}.p93SocialTabs button{min-height:59px;display:grid;gap:1px;font-size:7px}.p93SocialTabs em{position:absolute;right:4px;top:4px;min-width:16px;height:16px}
+  .p93SocialPanel{padding:14px 3px 4px}
+  .p93FriendCard,.p93RequestCard,.p93InviteCard,.p93SearchCard{grid-template-columns:49px minmax(0,1fr);min-height:85px}.p93PersonAvatar{width:47px;height:47px}.p93PersonActions{grid-column:1/-1;justify-content:flex-end}.p93PersonActions button{min-height:34px}
+  .p93PanelHead{align-items:center}.p93PanelHead h3{font-size:17px}
+
+  .p93VersusStage{min-height:250px;padding:10px;grid-template-columns:1fr 58px 1fr;border-radius:21px}.p93Fighter{min-height:205px;padding:10px 5px}.p93FighterAvatar{width:78px;height:78px;border-width:5px;border-radius:25px}.p93Fighter h3{font-size:11px}.p93FighterMeta{display:grid;gap:2px}.p93FighterMeta i{display:none}.p93ReadyState{font-size:6px}.p93VSCore>span{width:50px;height:50px;border-width:5px;font-size:17px}.p93DuelHeader p{display:none}
+  .p93ChatMessages{height:155px}
+  #bbArenaRoom .bbRoomTop{display:grid!important;grid-template-columns:1fr!important}
+  #bbArenaRoom .bbRoomCodeBox{justify-self:stretch!important}
+}
+</style>
+
 </head>
 <body>
 
-
-<section class="bbPlayerStatus" aria-label="สถานะผู้เล่น">
-  <div class="bbPlayerStatusInner">
-    <div class="v17hud">
-      <div class="v17stat"><span class="bbStatIcon">🎯</span><span class="bbStatCopy"><small>ระดับของฉัน</small><b id="v17Level">Lv. 1</b></span></div>
-      <div class="v17stat"><span class="bbStatIcon">🏅</span><span class="bbStatCopy"><small>แรงก์</small><b id="v17Rank">🌱 Bronze</b></span></div>
-      <div class="v17stat"><span class="bbStatIcon">🏆</span><span class="bbStatCopy"><small>คะแนนสูงสุด</small><b id="v17Best">0</b></span></div>
-      <div class="v17stat"><span class="bbStatIcon">⭐</span><span class="bbStatCopy"><small>XP สะสม</small><b id="v17Xp">0 XP</b></span></div>
-    </div>
-  </div>
-</section>
-
-<header class="topbar"><div class="shell nav"><div class="brand" id="brand"><div class="logo" id="logo">🧠</div><span>Brain Buddy</span></div><div class="navright"><button class="profilemini accountBtn" id="accountBtn" type="button"><div class="miniavatar" id="navAvatar">🧸</div><span class="accountText"><b id="navName">ผู้เล่น</b><small id="cloudMini">ผู้เยี่ยมชม</small></span><i class="cloudDot" id="cloudDot"></i></button><button class="icon" id="musicBtn">🎵</button><button class="icon" id="themeBtn">🌙</button><button class="icon" id="fullBtn">⛶</button><div class="menubox"><button class="icon" id="menuBtn">☰</button><div class="popover hidden" id="popover"><button id="v16MenuLeaderboard">🏆 ตารางจัดอันดับ</button><button data-open="profileModal">👤 โปรไฟล์ & Level</button><button data-open="statsModal">📊 สถิติ & ความสำเร็จ</button><button data-open="collectionModal">🧸 คอลเลกชันตัวละคร</button><button data-open="audioModal">🎧 เพลง & เสียง</button><button data-open="accessModal">Aa การมองเห็น</button><button data-open="helpModal">? วิธีเล่น</button><button data-open="researchModal">🧠 หลักการ & งานวิจัย</button><button id="presenterBtn">🖥️ โหมดนำเกม</button></div></div></div></div></header>
-
-<section class="hero" id="home">
-  <div class="shell">
-    <div class="heroCard v16Hero">
-      <div class="v16HeroCopy">
-        <span class="kicker">✨ Brain Buddy • เกมฝึกความจำแบบเล่นง่าย</span>
-        <h1 class="heroTitle">จำภาพให้แม่น <span>ทายตำแหน่งให้ถูก</span></h1>
-        <p>เริ่มง่ายจาก 2×2 แล้วค่อยเพิ่มระดับเมื่อพร้อม เล่นคนเดียวเพื่อทำสถิติ หรือแบ่งทีมเพื่อเพิ่มความสนุก</p>
-
-        <div class="v16MemberChoice">
-          <div class="v16MemberTitle">เริ่มแบบไหนดี?</div>
-          <div class="v16MemberButtons">
-            <button class="v16AuthBtn login" id="v16LoginBtn">🔐 เข้าสู่ระบบ</button>
-            <button class="v16AuthBtn signup" id="v16SignupBtn">✨ สมัครสมาชิก</button>
-            <button class="v16AuthBtn guest" id="v16GuestBtn">🎮 เล่นแบบผู้เยี่ยมชม</button>
-          </div>
-          <div class="v16MemberHelp">สมาชิกจะเก็บคะแนน XP แรงก์ และประวัติไว้บน Cloud • ผู้เยี่ยมชมเริ่มเล่นได้ทันที</div>
-        </div>
-
-        <div class="heroActions v16PlayActions">
-          <button class="btn primary" id="quickPlay">🎮 เล่นด่วน</button>
-          <button class="btn" id="customPlay">⚙️ ปรับเกมเอง</button>
-          <button class="btn hidden" id="resumeBtn">↩️ เล่นรอบเดิมต่อ</button>
-        </div>
-        <div class="summary"><i></i><span id="heroSummary">คนเดียว • จำตำแหน่ง • ง่าย 2×2 • ไม่จับเวลา</span></div>
-      </div>
-
-      <div class="v16HeroSide">
-        <div class="heroArt v16BearStage"><div class="heroBear" id="heroBear"></div></div>
-
-        <div class="v16TopCard" id="leaderboardSpotlight">
-          <div class="v16TopHead">
-            <div>
-              <span class="v16Live">● LIVE CLOUD</span>
-              <h3>🏆 อันดับผู้เล่น</h3>
-              <p>คะแนนจริงจากสมาชิกทุกบัญชี</p>
-            </div>
-            <button class="v16SeeAll" id="v16SeeLeaderboard">ดูทั้งหมด →</button>
-          </div>
-          <div class="v16TopList" id="v16TopList">
-            <div class="v16TopLoading">กำลังโหลดอันดับ…</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="shell v16CompeteStrip">
-  <div class="v16CompeteText">
-    <span>🔥</span>
-    <div><b>ทำคะแนนให้สูง แล้วขึ้นอันดับเหนือเพื่อน</b><small>เล่นในบัญชีสมาชิกเพื่อให้คะแนนของคุณขึ้นตารางจัดอันดับ</small></div>
-  </div>
-  <button class="btn purple" id="v16CompeteLogin">เริ่มเก็บอันดับ</button>
-</section>
-
-
-
-<section class="bbRankedTeaser" id="bbRankedTeaser">
-  <div class="bbRankedTeaserGlow"></div>
-  <div class="bbRankedTeaserCopy">
-    <span class="bbRankedPill">● REALTIME MULTIPLAYER</span>
-    <h2>⚔️ สนามจัดอันดับ</h2>
-    <p>สร้างห้องหรือเข้าร่วมการแข่งขันกับผู้เล่นจริง <b>2–100 คน</b> พร้อมระบบ Ready และห้องอัปเดตแบบสด</p>
-    <div class="bbRankedMini">
-      <span>🏆 แข่งคะแนน</span><span>👥 สูงสุด 100 คน</span><span>⚡ Realtime</span><span>🔐 สมาชิกเท่านั้น</span>
-    </div>
-  </div>
-  <button class="bbRankedEnter" id="bbOpenArena">เข้าสู่ สนามจัดอันดับ <span>→</span></button>
-</section>
-
-<section class="bbModeHub" id="bbModeHub">
-  <div class="bbModePanel">
-    <div class="bbModeTop">
-      <div>
-        <h2>🎮 เลือกเกมที่อยากเล่น</h2>
-        <p>เลือกโหมดและระดับได้จากหน้าเดียว ไม่ต้องเปิดหน้าตั้งค่าซับซ้อน</p>
-      </div>
-      <span class="bbTeddyOnly">🧸 ใช้ตัวหมี Brain Buddy เท่านั้น</span>
-    </div>
-
-    <div class="bbModeGrid" id="bbModeGrid">
-      <button class="bbModeCard active" data-bb-mode="position">
-        <span class="bbModeIcon">📍</span><strong>จำตำแหน่ง</strong>
-        <small>จำว่าหมีแต่ละตัวอยู่ช่องไหน</small><span class="bbModePts">100 แต้ม/ข้อ</span>
-      </button>
-      <button class="bbModeCard" data-bb-mode="match">
-        <span class="bbModeIcon">🧩</span><strong>จับคู่</strong>
-        <small>เปิดหมีทีละคู่และจำตำแหน่งที่เคยเห็น</small><span class="bbModePts">80 แต้ม/คู่</span>
-      </button>
-      <button class="bbModeCard" data-bb-mode="missing">
-        <span class="bbModeIcon">👀</span><strong>ตัวไหนหาย</strong>
-        <small>จำภาพรวมแล้วหาว่าหมีตัวไหนหายไป</small><span class="bbModePts">120 แต้ม/ข้อ</span>
-      </button>
-      <button class="bbModeCard" data-bb-mode="swap">
-        <span class="bbModeIcon">🔄</span><strong>สลับที่</strong>
-        <small>หาสองตำแหน่งที่ถูกสลับจากเดิม</small><span class="bbModePts">150 แต้ม/ข้อ</span>
-      </button>
-      <button class="bbModeCard" data-bb-mode="change">
-        <span class="bbModeIcon">🔎</span><strong>อะไรเปลี่ยน</strong>
-        <small>สังเกตและหาจุดที่เปลี่ยนจากภาพเดิม</small><span class="bbModePts">130 แต้ม/ข้อ</span>
-      </button>
-      <button class="bbModeCard" data-bb-mode="sequence">
-        <span class="bbModeIcon">🔢</span><strong>จำลำดับ</strong>
-        <small>จำหมีตามลำดับแล้วเลือกกลับให้ถูกต้อง</small><span class="bbModePts">160 แต้ม/ข้อ</span>
-      </button>
-    </div>
-
-    <div class="bbGameOptions">
-      <div class="bbOptionBox">
-        <div class="bbOptionTitle"><b>🌱 ระดับความยาก</b><span>ระดับสูงได้ตัวคูณคะแนนมากขึ้น</span></div>
-        <div class="bbChoiceRow" id="bbDiffRow">
-          <button class="bbChoice active" data-bb-diff="easy">ง่าย 2×2 • ×1.0</button>
-          <button class="bbChoice" data-bb-diff="normal">ปานกลาง 3×3 • ×1.25</button>
-          <button class="bbChoice" data-bb-diff="hard">ยาก 4×4 • ×1.5</button>
-          <button class="bbChoice" data-bb-diff="expert">Expert • ×2.0</button>
-        </div>
-      </div>
-      <div class="bbOptionBox">
-        <div class="bbOptionTitle"><b>👤 รูปแบบผู้เล่น</b><span id="bbStyleHint">โหมดเดี่ยวเก็บ XP และขึ้นอันดับได้</span></div>
-        <div class="bbChoiceRow" id="bbStyleRow">
-          <button class="bbChoice active" data-bb-style="solo">👤 คนเดียว</button>
-          <button class="bbChoice" data-bb-style="team">👥 เล่นเป็นทีม</button>
-        </div>
-        <div class="bbTeamCount" id="bbTeamCount">
-          <button class="bbChoice active" data-bb-team="2">2 ทีม</button>
-          <button class="bbChoice" data-bb-team="3">3 ทีม</button>
-          <button class="bbChoice" data-bb-team="4">4 ทีม</button>
-          <button class="bbChoice" data-bb-team="5">5 ทีม</button>
-          <button class="bbChoice" data-bb-team="6">6 ทีม</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="bbStartRow">
-      <div class="bbSelectedSummary">
-        <b id="bbSelectedTitle">📍 จำตำแหน่ง • ง่าย 2×2</b>
-        <span id="bbSelectedText">เล่นคนเดียว • Memory • ไม่มีการจับเวลา</span>
-      </div>
-      <button class="bbStartGame" id="bbStartSelected">เริ่มเกมนี้ →</button>
-    </div>
-  </div>
-
-  <div class="bbXPPanel" id="bbXPGuide">
-    <div class="bbXPHead">
-      <div>
-        <h3>⭐ ระบบคะแนนและ XP</h3>
-        <p>คะแนนขึ้นกับโหมดและระดับความยาก ส่วน XP คำนวณจากคะแนนสุดท้ายอย่างตรงไปตรงมา</p>
-      </div>
-      <span class="bbLevelNote">ทุก 500 XP = +1 Level</span>
-    </div>
-    <div class="bbScoreGuide">
-      <div class="bbGuideBox">
-        <h4>🎯 คะแนนพื้นฐานของแต่ละโหมด</h4>
-        <div class="bbPointRows">
-          <div class="bbPointRow"><span>📍 จำตำแหน่ง</span><b>100</b></div>
-          <div class="bbPointRow"><span>🧩 จับคู่</span><b>80</b></div>
-          <div class="bbPointRow"><span>👀 ตัวไหนหาย</span><b>120</b></div>
-          <div class="bbPointRow"><span>🔄 สลับที่</span><b>150</b></div>
-          <div class="bbPointRow"><span>🔎 อะไรเปลี่ยน</span><b>130</b></div>
-          <div class="bbPointRow"><span>🔢 จำลำดับ</span><b>160</b></div>
-        </div>
-        <div class="bbFormulaNote">คะแนนต่อคำตอบถูก = คะแนนพื้นฐาน × ตัวคูณระดับ (ง่าย ×1.0 / ปานกลาง ×1.25 / ยาก ×1.5 / Expert ×2.0)</div>
-        <span class="bbNoRandom">✓ ไม่มีโบนัสคะแนนแบบสุ่ม จึงเทียบคะแนนกันได้ชัดเจน</span>
-      </div>
-      <div class="bbGuideBox">
-        <h4>⭐ คะแนนรอบนี้ → XP ที่ได้รับ</h4>
-        <div class="bbXPTable">
-          <div class="bbXPRow"><span>0–399 คะแนน</span><strong>+50 XP</strong></div>
-          <div class="bbXPRow"><span>400–799 คะแนน</span><strong>+100 XP</strong></div>
-          <div class="bbXPRow"><span>800–1,199 คะแนน</span><strong>+150 XP</strong></div>
-          <div class="bbXPRow"><span>1,200–1,799 คะแนน</span><strong>+220 XP</strong></div>
-          <div class="bbXPRow"><span>1,800–2,499 คะแนน</span><strong>+300 XP</strong></div>
-          <div class="bbXPRow"><span>2,500+ คะแนน</span><strong>+400 XP</strong></div>
-        </div>
-        <div class="bbFormulaNote">การเล่นแบบทีมใช้สำหรับกิจกรรมในห้อง/แข่งขันเป็นทีม และไม่เพิ่ม XP ส่วนตัวหรือคะแนน Cloud Leaderboard เพื่อป้องกันคะแนนที่เพิ่มด้วยมือกระทบอันดับสมาชิก</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="shell homeGrid"><div class="panel"><div class="panelHead"><h2>เลือกเล่นแบบรวดเร็ว</h2><p>เลือกเกมได้จากหน้าเดียว</p></div><div class="quickGrid"><button class="quick" id="soloQuick"><span>👤</span><strong>เล่นคนเดียว</strong><small>2×2 • จำตำแหน่ง • คะแนนอัตโนมัติ</small></button><div class="quick teamQuickCard"><span class="quickIcon">👥</span><strong>เล่นเป็นทีม</strong><small>เลือกจำนวนทีมได้ทันที • ตอบออกเสียง • เพิ่มคะแนนเอง</small><div class="quickTeamPicker" id="quickTeamPicker"><button class="quickTeamChip active" data-quick-team="2">2 ทีม</button><button class="quickTeamChip" data-quick-team="3">3 ทีม</button><button class="quickTeamChip" data-quick-team="4">4 ทีม</button><button class="quickTeamChip" data-quick-team="5">5 ทีม</button><button class="quickTeamChip" data-quick-team="6">6 ทีม</button></div><button class="quickTeamStart" id="teamQuick">เริ่มแบบ 2 ทีม →</button></div></div></div><div class="daily"><span class="dailyTag">📅 ภารกิจประจำวัน</span><h3 id="dailyTitle">ภารกิจวันนี้</h3><p id="dailyText">โจทย์ประจำวันเลือกโหมดและระดับให้อัตโนมัติ</p><button class="btn purple" id="dailyBtn">เล่นภารกิจวันนี้</button><div style="font-size:10px;color:var(--muted);margin-top:9px">🔥 เล่นต่อเนื่อง <b id="dailyStreak">0</b> วัน</div></div><div class="metricsPanel"><div class="metricGrid"><div class="metric"><b id="homeLevel">1</b><span>ระดับ</span></div><div class="metric"><b id="homeXP">0</b><span>XP</span></div><div class="metric"><b id="homeBest">0</b><span>คะแนนสูงสุด</span></div><div class="metric"><b id="homeAcc">0%</b><span>ความแม่นยำสูงสุด</span></div><div class="metric"><b id="homeRounds">0</b><span>รอบที่เล่น</span></div></div></div></section>
-<div class="shell pills"><span class="chip">โหมด <strong id="pillMode">จำตำแหน่ง</strong></span><span class="chip">ระดับ <strong id="pillDiff">ง่าย • 2×2</strong></span><span class="chip">ผู้เล่น <strong id="pillStyle">คนเดียว</strong></span><span class="chip">เนื้อหา <strong id="pillSource">Teddy</strong></span></div>
+<div id="p922LegacyCompat" hidden aria-hidden="true">
+  <span id="v17Level"></span><span id="v17Rank"></span><span id="v17Best"></span><span id="v17Xp"></span>
+  <button id="brand" type="button"></button><span id="logo"></span>
+  <button id="accountBtn" type="button"></button><span id="navAvatar"></span><span id="navName"></span>
+  <span id="cloudMini"></span><span id="cloudDot"></span>
+  <button id="musicBtn" type="button"></button><button id="themeBtn" type="button"></button>
+  <button id="fullBtn" type="button"></button><button id="menuBtn" type="button"></button>
+  <div id="popover"></div><button id="v16MenuLeaderboard" type="button"></button>
+  <button id="presenterBtn" type="button"></button><div id="home"></div>
+  <button id="v16LoginBtn" type="button"></button><button id="v16SignupBtn" type="button"></button>
+  <button id="v16GuestBtn" type="button"></button>
+  <button id="quickPlay" type="button"></button><button id="customPlay" type="button"></button>
+  <button id="resumeBtn" type="button" class="hidden"></button>
+  <span id="heroSummary"></span><div id="heroBear"></div>
+  <div id="leaderboardSpotlight"></div><button id="v16SeeLeaderboard" type="button"></button>
+  <div id="v16TopList"></div><button id="v16CompeteLogin" type="button"></button>
+  <div id="bbRankedTeaser"></div><button id="bbOpenArena" type="button"></button>
+  <div id="bbModeHub"></div><div id="bbModeGrid"></div><div id="bbDiffRow"></div>
+  <span id="bbStyleHint"></span><div id="bbStyleRow"></div><div id="bbTeamCount"></div>
+  <span id="bbSelectedTitle"></span><span id="bbSelectedText"></span><button id="bbStartSelected" type="button"></button>
+  <div id="bbXPGuide"></div>
+  <button id="soloQuick" type="button"></button><div id="quickTeamPicker"></div><button id="teamQuick" type="button"></button>
+  <span id="dailyTitle"></span><span id="dailyText"></span><button id="dailyBtn" type="button"></button><span id="dailyStreak"></span>
+  <span id="homeLevel"></span><span id="homeXP"></span><span id="homeBest"></span><span id="homeAcc"></span><span id="homeRounds"></span>
+  <span id="pillMode"></span><span id="pillDiff"></span><span id="pillStyle"></span><span id="pillSource"></span>
+</div>
 
 <main class="bbAppShell" id="bbAppShell">
   
@@ -14871,6 +15595,10 @@ body.p92HideSpeech .p89Speech{display:none!important}
       <div class="p89TopActions">
         <button class="p89Coins" type="button" data-app-go="topup">
           <span class="coin">P</span><b id="pomruHomeCoinBalance">0</b><span class="plus">+</span>
+        </button>
+        <button class="p93FriendsTopBtn" type="button" id="p93FriendsTopBtn" aria-label="เพื่อน">
+          <span class="p93FriendsIcon" aria-hidden="true"></span>
+          <span class="p93FriendsBadge hidden" id="p93FriendsBadge">0</span>
         </button>
         <button class="p89Profile" type="button" data-app-action="profile">
           <span class="avatar" id="p89ProfileAvatar"></span>
@@ -14902,7 +15630,7 @@ body.p92HideSpeech .p89Speech{display:none!important}
       <div class="cardHead"><span class="p900CardMark daily" aria-hidden="true"></span><div><small>วันนี้</small><h3>ภารกิจประจำวัน</h3></div><span class="heart">♥</span></div>
       <div class="missionRow" data-p899-mission="play"><span class="mi playMi" aria-hidden="true"></span><div><b>เล่นเกม 1 ครั้ง</b><div class="miniTrack"><i id="p899MissionPlayBar" style="width:0%"></i></div></div><span><strong id="p899MissionPlay">0/1</strong><small>แต้ม ✓</small></span></div>
       <div class="missionRow" data-p899-mission="feed"><span class="mi feedMi" aria-hidden="true"></span><div><b>ให้อาหาร Buddy</b><div class="miniTrack"><i id="p899MissionFeedBar" style="width:0%"></i></div></div><span><strong id="p899MissionFeed">0/1</strong><small>ดูแล ✓</small></span></div>
-      <div class="missionRow" data-p899-mission="exercise"><span class="mi exerciseMi" aria-hidden="true"></span><div><b>ออกกำลังกาย</b><div class="miniTrack"><i id="p899MissionExerciseBar" style="width:0%"></i></div></div><span><strong id="p899MissionExercise">0/1</strong><small>พลัง ✓</small></span></div>
+      <div class="missionRow" data-p899-mission="room"><span class="mi roomMi" aria-hidden="true"></span><div><b>สร้างห้อง 1 ครั้ง</b><div class="miniTrack"><i id="p899MissionRoomBar" style="width:0%"></i></div></div><span><strong id="p899MissionRoom">0/1</strong><small>แข่งขัน ✓</small></span></div>
       <button type="button" class="p89MissionReward" id="p89MissionReward" disabled>ทำครบ 3 ภารกิจก่อน</button>
     </aside>
 
@@ -15594,8 +16322,8 @@ body.p92HideSpeech .p89Speech{display:none!important}
         <span class="p911WorldContent">
           <small>โลกแห่งความจำ</small>
           <strong>เกมความจำ</strong>
-          <p>ฝึกสมอง จำให้แม่น จับคู่ให้เร็ว และท้าทายตัวเองใน 6 รูปแบบ</p>
-          <span class="p911WorldMeta"><b>6</b> รูปแบบเกม</span>
+          <p>ฝึกสมองผ่าน 3 เกมหลัก จำตำแหน่ง จับคู่ และจำลำดับ</p>
+          <span class="p911WorldMeta"><b>3</b> เกมหลัก</span>
         </span>
         <span class="p911WorldDoor pinkDoor" aria-hidden="true"><i></i></span>
         <span class="p911StartButton">เริ่มเล่น</span>
@@ -15991,7 +16719,7 @@ body.p92HideSpeech .p89Speech{display:none!important}
 <div class="bbGameCandyBackdrop" aria-hidden="true"><i class="st a"></i><i class="st b"></i><i class="st c"></i></div>
 
 <div class="bbRankedGameHud hidden" id="bbRankedGameHud">
-  <div><span>RANKED</span><b id="bbRankedGameMode">Ranked Match</b></div>
+  <div><span>RANKED</span><b id="bbRankedGameMode">การแข่งขัน</b></div>
   <div class="bbRankedGameRight">
     <div class="bbRankedGameClock"><small id="bbRankedGameClockLabel">เวลาตอบ</small><strong id="bbRankedGameClock">--</strong></div>
     <button class="bbRankedForfeitBtn" id="bbRankedForfeitBtn">ยอมแพ้</button>
@@ -16192,410 +16920,7 @@ body.p92HideSpeech .p89Speech{display:none!important}
 </div>
 
 <div class="starfall" id="starfall"></div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
 
-
-(function premiumV11(){
-  function getJSON(k, d){ try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d));}catch(e){return d} }
-  function setJSON(k,v){ localStorage.setItem(k, JSON.stringify(v)); }
-  const AV_KEY='bb_avatar_dataurl_v11';
-  const NAME_KEY='bb_display_name_v11';
-  const LB_KEY='bb_local_leaderboard_v11';
-
-  function calcRank(score=0,xp=0){
-    const power = score + xp*2;
-    if(power>=20000) return ['Diamond','💎'];
-    if(power>=12000) return ['Platinum','🌌'];
-    if(power>=7000) return ['Gold','🏆'];
-    if(power>=3500) return ['Silver','✨'];
-    return ['Bronze','🌱'];
-  }
-
-  function teddy(){
-    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 360"><defs><radialGradient id="g1" cx="35%" cy="28%" r="70%"><stop offset="0%" stop-color="#ffd9c5"/><stop offset="58%" stop-color="#d7a27a"/><stop offset="100%" stop-color="#b77a57"/></radialGradient><radialGradient id="g2" cx="50%" cy="35%" r="60%"><stop offset="0%" stop-color="#fffaf2"/><stop offset="100%" stop-color="#efe4d5"/></radialGradient></defs><ellipse cx="160" cy="324" rx="92" ry="20" fill="rgba(90,64,118,.12)"/><circle cx="90" cy="84" r="38" fill="url(#g1)"/><circle cx="230" cy="84" r="38" fill="url(#g1)"/><circle cx="160" cy="162" r="102" fill="url(#g1)"/><ellipse cx="160" cy="192" rx="56" ry="72" fill="url(#g2)"/><ellipse cx="98" cy="222" rx="28" ry="62" fill="url(#g1)" transform="rotate(14 98 222)"/><ellipse cx="222" cy="222" rx="28" ry="62" fill="url(#g1)" transform="rotate(-14 222 222)"/><ellipse cx="120" cy="306" rx="38" ry="30" fill="url(#g1)"/><ellipse cx="200" cy="306" rx="38" ry="30" fill="url(#g1)"/><circle cx="126" cy="156" r="10" fill="#2f2834"/><circle cx="194" cy="156" r="10" fill="#2f2834"/><ellipse cx="160" cy="182" rx="18" ry="14" fill="#4e3a32"/><path d="M144 198 Q160 212 176 198" stroke="#523a32" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M144 200 Q130 196 126 186" stroke="#523a32" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M176 200 Q190 196 194 186" stroke="#523a32" stroke-width="4" fill="none" stroke-linecap="round"/><polygon points="120,54 150,24 190,34 210,62" fill="#ffd84f"/><circle cx="171" cy="43" r="7" fill="#ff7eb4"/></svg>`;
-  }
-
-  function num(selector){
-    const el=document.querySelector(selector); if(!el) return 0;
-    const t=(el.textContent||'').replace(/[^\d]/g,''); return Number(t||0);
-  }
-
-  function gatherStats(){
-    const xp = num('[data-xp], .xpValue, #xpValue') || getJSON('bb_stats',{}).xp || 0;
-    const score = num('[data-score], .scoreValue, #scoreValue') || getJSON('bb_stats',{}).bestคะแนน || 0;
-    const bestCombo = num('[data-combo], .comboValue, #comboValue') || getJSON('bb_stats',{}).bestCombo || 0;
-    const wins = getJSON('bb_stats',{}).wins || 0;
-    const games = getJSON('bb_stats',{}).games || 0;
-    return {xp,score,bestCombo,wins,games};
-  }
-
-  function ensureตารางจัดอันดับSelf(){
-    const st = gatherStats();
-    const name = localStorage.getItem(NAME_KEY) || 'ผู้เล่น';
-    const avatar = localStorage.getItem(AV_KEY) || '🧸';
-    let lb = getJSON(LB_KEY, [
-      {name:'Lucky Star', avatar:'🌟', score:12880, xp:3400, win:84},
-      {name:'Pink Panda', avatar:'🐼', score:10450, xp:2800, win:75},
-      {name:'Bear Master', avatar:'🧸', score:9620, xp:2400, win:68},
-      {name:'Dream Fox', avatar:'🦊', score:7410, xp:1900, win:54},
-      {name:'Mint Bunny', avatar:'🐰', score:6120, xp:1600, win:44},
-    ]);
-    const me = {name, avatar, score:Math.max(st.score, getJSON('bb_stats',{}).bestคะแนน||0), xp:st.xp, win:st.wins};
-    const idx = lb.findIndex(x=>x.name===name && (x.avatar===avatar || avatar.startsWith('data:')));
-    if(idx>=0) lb[idx]=me; else lb.push(me);
-    lb.sort((a,b)=>(b.score+b.xp*2)-(a.score+a.xp*2));
-    lb = lb.slice(0,20);
-    setJSON(LB_KEY, lb);
-    return lb;
-  }
-
-  function mountHero(){
-    const home = document.querySelector('.shell,.container,main,.app') || document.body;
-    if(document.querySelector('.premiumHero')) return;
-    const hero = document.createElement('section');
-    hero.className = 'premiumHero';
-    const st = gatherStats();
-    hero.innerHTML = `
-      <div class="premiumHeroGrid">
-        <div>
-          <div class="premiumBadge">👑 ประสบการณ์ Brain Buddy แบบพรีเมียม</div>
-          <div class="premiumTitle">ฝึกความจำให้สนุก<br>พร้อมระบบสมาชิก <span style="background:linear-gradient(135deg,#ff75b1,#9e8dff);-webkit-background-clip:text;color:transparent">และแรงก์</span></div>
-          <div class="premiumSubtitle">เล่นได้ทั้งแบบ ผู้เยี่ยมชม และสมาชิก เก็บคะแนน สะสม XP ปลดล็อก แรงก์ ดูสถิติ และไต่ตารางจัดอันดับได้ในหน้าเดียว พร้อมดีไซน์ใหม่ที่สบายตาและดูเป็นแอปจริงมากขึ้น</div>
-          <div class="premiumActions">
-            <button class="premiumBtn" id="premiumAuthBtn">🔐 เข้าสู่ระบบ / สมัครสมาชิก</button>
-            <button class="premiumGhost" id="premiumผู้เยี่ยมชมBtn">🎮 เล่นต่อแบบ ผู้เยี่ยมชม</button>
-          </div>
-          <div class="statRow">
-            <div class="statMini"><b>${st.score||0}</b><span>คะแนนสูงสุด</span></div>
-            <div class="statMini"><b>${st.xp||0}</b><span>XP สะสม</span></div>
-            <div class="statMini"><b>${st.bestCombo||0}</b><span>Best Combo</span></div>
-            <div class="statMini"><b>${st.games||0}</b><span>จำนวนเกม</span></div>
-          </div>
-        </div>
-        <div class="heroBear3D">
-          <div class="heroBearOrb a"></div><div class="heroBearOrb b"></div><div class="heroBearOrb c"></div>
-          <div class="heroBearWrap">${teddy()}</div>
-        </div>
-      </div>`;
-    home.insertBefore(hero, home.firstChild);
-    document.getElementById('premiumAuthBtn')?.addEventListener('click',()=>{
-      const btn = Array.from(document.querySelectorAll('button')).find(b=>/ล็อกอิน|เข้าสู่ระบบ|สมัครสมาชิก|account|บัญชี/i.test(b.textContent||''));
-      if(btn) btn.click();
-    });
-    document.getElementById('premiumผู้เยี่ยมชมBtn')?.addEventListener('click',()=>{
-      const btn = Array.from(document.querySelectorAll('button')).find(b=>/ผู้เยี่ยมชม/i.test(b.textContent||''));
-      if(btn) btn.click();
-      window.scrollTo({top:hero.offsetHeight,behavior:'smooth'});
-    });
-  }
-
-  function mountProfileAndLB(){
-    const home = document.querySelector('.shell,.container,main,.app') || document.body;
-    if(document.querySelector('.profileShell')) return;
-    const lb = ensureตารางจัดอันดับSelf();
-    const st = gatherStats();
-    const name = localStorage.getItem(NAME_KEY) || 'ผู้เล่น';
-    const avatar = localStorage.getItem(AV_KEY);
-    const [rankName, rankEmoji] = calcRank(st.score, st.xp);
-    const meIndex = lb.findIndex(x=>x.name===name)+1 || lb.length;
-    const nextคะแนน = rankName==='Diamond' ? st.score : (rankName==='Platinum' ? 20000 : rankName==='Gold' ? 12000 : rankName==='Silver' ? 7000 : 3500);
-    const currentPower = st.score + st.xp*2;
-    const pct = rankName==='Diamond' ? 100 : Math.min(100, Math.round((currentPower/nextคะแนน)*100));
-
-    const wrap = document.createElement('section');
-    wrap.className = 'profileShell';
-    wrap.innerHTML = `
-      <div class="profileCardX">
-        <div class="profileTop">
-          <div>
-            <div class="avatarBig" id="avatarBig">${avatar ? (avatar.startsWith('data:') ? `<img src="${avatar}" style="width:100%;height:100%;object-fit:cover">` : avatar) : '🧸'}</div>
-            <button class="avatarUploadBtn" id="changeAvatarBtn">🖼️ เปลี่ยนรูปโปรไฟล์</button>
-            <input type="file" accept="image/*" id="avatarFile" class="fileHidden">
-          </div>
-          <div class="profileMeta">
-            <h3 id="profileName">${name}</h3>
-            <p>โปรไฟล์ผู้เล่น • เปลี่ยนชื่อ รูปโปรไฟล์ และดูความคืบหน้าได้ที่นี่</p>
-            <div class="rankPill">${rankEmoji} แรงก์ ${rankName} • อันดับที่ ${meIndex}</div>
-            <div class="progressBarX"><div style="width:${pct}%"></div></div>
-            <p style="margin-top:8px;font-size:12px;color:#7b7384">พลังรวม ${currentPower} / เป้าหมายแรงก์ถัดไป ${nextคะแนน}</p>
-          </div>
-        </div>
-        <div class="profileGridSmall">
-          <div class="profileMini"><b>${st.score||0}</b><span>คะแนนสูงสุด</span></div>
-          <div class="profileMini"><b>${st.xp||0}</b><span>XP สะสม</span></div>
-          <div class="profileMini"><b>${st.bestCombo||0}</b><span>Combo สูงสุด</span></div>
-          <div class="profileMini"><b>${st.games||0}</b><span>จำนวนเกม</span></div>
-          <div class="profileMini"><b>${st.wins||0}</b><span>ชนะ/ผ่านด่าน</span></div>
-          <div class="profileMini"><b>#${meIndex}</b><span>อันดับปัจจุบัน</span></div>
-        </div>
-      </div>
-      <div class="leaderboardCard">
-        <div class="lbHead">
-          <div>
-            <h3 style="margin:0;font-size:28px;color:#2f2735">ตารางจัดอันดับสมาชิก <span style="font-size:11px;padding:6px 9px;border-radius:999px;background:#e8faf5;color:#347d69;vertical-align:middle">☁️ CLOUD</span></h3>
-            <p style="margin:6px 0 0;color:#7b7282">อันดับจริงจากสมาชิกทุกบัญชีที่เล่นบน Brain Buddy</p>
-          </div>
-          <div class="lbFilters">
-            <div class="lbChip">🏆 คะแนนสูงสุด</div>
-            <div class="lbChip">⚡ XP Rank</div>
-          </div>
-        </div>
-        <div class="lbTable" id="lbTable"></div>
-      </div>`;
-    home.appendChild(wrap);
-
-    const renderLB = () => {
-      const table = document.getElementById('lbTable');
-      const rows = ensureตารางจัดอันดับSelf().slice(0,10).map((u,i)=>{
-        const [r,e]=calcRank(u.score,u.xp);
-        return `<div class="lbRow">
-          <div class="lbPos">${i+1}</div>
-          <div class="lbUser">
-            <div class="lbAvatar">${(u.avatar||'🧸').startsWith && String(u.avatar).startsWith('data:') ? `<img src="${u.avatar}" style="width:100%;height:100%;object-fit:cover;border-radius:14px">` : (u.avatar||'🧸')}</div>
-            <div><b>${u.name}</b><span>${e} ${r}</span></div>
-          </div>
-          <div class="lbคะแนน"><b>${u.score||0}</b><span>คะแนน</span></div>
-          <div class="lbคะแนน"><b>${u.xp||0}</b><span>XP</span></div>
-        </div>`;
-      }).join('');
-      table.innerHTML = rows;
-    };
-    renderLB();
-
-    document.getElementById('changeAvatarBtn')?.addEventListener('click',()=>document.getElementById('avatarFile')?.click());
-    document.getElementById('avatarFile')?.addEventListener('change', e=>{
-      const file=e.target.files?.[0]; if(!file) return;
-      const rd = new FileReader();
-      rd.onload = () => {
-        const data = rd.result;
-        localStorage.setItem(AV_KEY, data);
-        const box = document.getElementById('avatarBig');
-        if(box) box.innerHTML = `<img src="${data}" style="width:100%;height:100%;object-fit:cover">`;
-        ensureตารางจัดอันดับSelf(); renderLB();
-      };
-      rd.readAsDataURL(file);
-    });
-
-    // click name to rename
-    document.getElementById('profileName')?.addEventListener('click',()=>{
-      const curr = localStorage.getItem(NAME_KEY) || 'ผู้เล่น';
-      const n = prompt('เปลี่ยนชื่อโปรไฟล์', curr);
-      if(!n) return;
-      localStorage.setItem(NAME_KEY, n.trim());
-      document.getElementById('profileName').textContent = n.trim();
-      ensureตารางจัดอันดับSelf(); renderLB();
-    });
-  }
-
-  function markStatsAfterGame(){
-    // patch simple hook by observing score/result changes and store stats
-    const stats = getJSON('bb_stats',{xp:0,bestคะแนน:0,bestCombo:0,games:0,wins:0});
-    const observer = new MutationObserver(()=>{
-      const s = gatherStats();
-      if(s.score>stats.bestคะแนน) stats.bestคะแนน=s.score;
-      if(s.bestCombo>stats.bestCombo) stats.bestCombo=s.bestCombo;
-      if(s.xp>stats.xp) stats.xp=s.xp;
-      setJSON('bb_stats', stats);
-      ensureตารางจัดอันดับSelf();
-    });
-    observer.observe(document.body,{subtree:true,childList:true,characterData:true});
-  }
-
-  window.addEventListener('load',()=>{
-    setTimeout(()=>{mountHero(); mountProfileAndLB(); markStatsAfterGame();},900);
-  });
-})();
-
-
-(function enhanceAuthUI(){
-  const boot = () => {
-    const modal = document.querySelector('.authCard,.authModal,.memberModal');
-    if(!modal || modal.dataset.enhanced === '1') return;
-    modal.dataset.enhanced = '1';
-
-    const closeBtn = modal.querySelector('button[aria-label], .close, .x, .btnClose') || modal.querySelector('button');
-    if(closeBtn) closeBtn.classList.add('close');
-
-    const tabBtns = Array.from(modal.querySelectorAll('button')).filter(b => /เข้าสู่ระบบ|สมัครสมาชิก/.test((b.textContent||'').trim()));
-    let tabWrap = null;
-    if(tabBtns.length >= 2){
-      tabWrap = document.createElement('div');
-      tabWrap.className = 'authTabs';
-      tabBtns.slice(0,2).forEach((b,i)=>{
-        b.classList.add('authTab');
-        if(i===0) b.classList.add('active');
-        tabWrap.appendChild(b);
-      });
-    }
-
-    const currentChildren = Array.from(modal.children);
-    const left = document.createElement('div');
-    left.className = 'authLeft';
-    const right = document.createElement('div');
-    right.className = 'authRight';
-    const inner = document.createElement('div');
-    inner.className = 'authBody';
-
-    const badge = document.createElement('div');
-    badge.className = 'authBadge';
-    badge.innerHTML = '✨ บัญชีสมาชิกพร้อมใช้งาน';
-
-    const title = document.createElement('div');
-    title.className = 'authTitle';
-    title.textContent = 'เข้าสู่ระบบ Brain Buddy';
-
-    const desc = document.createElement('div');
-    desc.className = 'authDesc';
-    desc.textContent = 'สมัครสมาชิกเพื่อบันทึกคะแนน XP แรงก์ ความสำเร็จ และประวัติการเล่นไว้บนคลาวด์ ใช้ต่อได้ทุกอุปกรณ์ หรือจะเริ่มเล่นแบบผู้เยี่ยมชมก่อนก็ได้';
-
-    left.appendChild(badge);
-    left.appendChild(title);
-    left.appendChild(desc);
-    if(tabWrap) left.appendChild(tabWrap);
-
-    currentChildren.forEach(ch=>{
-      if(ch===closeBtn) return;
-      if(ch.classList && (ch.classList.contains('authBody') || ch.classList.contains('authLeft') || ch.classList.contains('authRight'))) return;
-      left.appendChild(ch);
-    });
-
-    const textInputs = Array.from(left.querySelectorAll('input')).filter(i => i.type !== 'hidden');
-    textInputs.forEach(inp=>{
-      if(inp.closest('.authField')) return;
-      const wrap = document.createElement('div');
-      wrap.className = 'authField';
-      const label = document.createElement('label');
-      const ph=(inp.getAttribute('placeholder')||'').toLowerCase();
-      let txt = 'ข้อมูล';
-      if(inp.type==='email' || ph.includes('@')) txt='อีเมล';
-      else if(inp.type==='password') txt='รหัสผ่าน';
-      else if(ph.includes('confirm') || /ยืนยัน/.test(ph)) txt='ยืนยันรหัสผ่าน';
-      else if(ph.includes('name') || /ชื่อ/.test(ph)) txt='ชื่อที่แสดง';
-      label.textContent = txt;
-      inp.parentNode.insertBefore(wrap, inp);
-      wrap.appendChild(label);
-      wrap.appendChild(inp);
-      if(!inp.placeholder || inp.placeholder==='you@example.com'){
-        if(txt==='อีเมล') inp.placeholder='กรอกอีเมล';
-        if(txt==='รหัสผ่าน') inp.placeholder='กรอกรหัสผ่าน';
-        if(txt==='ยืนยันรหัสผ่าน') inp.placeholder='กรอกรหัสผ่านอีกครั้ง';
-        if(txt==='ชื่อที่แสดง') inp.placeholder='ชื่อที่ต้องการแสดง';
-      }
-    });
-
-    const allBtns = Array.from(left.querySelectorAll('button'));
-    const primaryBtn = allBtns.find(b=>/เข้าสู่ระบบ|สมัครสมาชิก|สร้างบัญชี|ยืนยัน/.test((b.textContent||'').trim()) && !/ผู้เยี่ยมชม|ลืมรหัสผ่าน/.test(b.textContent));
-    const guestBtn = allBtns.find(b=>/Guest|ผู้เยี่ยมชม/.test((b.textContent||'')));
-    const forgotBtn = allBtns.find(b=>/ลืมรหัสผ่าน/.test((b.textContent||'')));
-
-    if(primaryBtn){ primaryBtn.classList.add('authPrimary'); if(/สมัครสมาชิก/.test(document.querySelector('.authTab.active')?.textContent||'')) primaryBtn.textContent='สมัครสมาชิก'; else primaryBtn.textContent='เข้าสู่ระบบ';}
-    if(guestBtn){ guestBtn.classList.add('authSecondary'); guestBtn.textContent='เล่นต่อแบบผู้เยี่ยมชม';}
-    if(forgotBtn){ forgotBtn.classList.add('authSecondary'); forgotBtn.textContent='ลืมรหัสผ่าน';}
-
-    const hint = document.createElement('div');
-    hint.className = 'authHint';
-    hint.innerHTML = '<span>🔒</span><span>สมาชิกจะซิงก์ความคืบหน้าและแรงก์ไว้บนคลาวด์ ส่วนผู้เยี่ยมชมจะเก็บข้อมูลไว้ในเครื่องนี้เท่านั้น</span>';
-    left.appendChild(hint);
-
-    right.innerHTML = `
-      <div class="authBullets">
-        <div class="authMascot" style="display:flex;justify-content:center">${document.querySelector('.heroBearWrap')?.innerHTML || '🧸'}</div>
-        <div class="authBullet"><div>☁️</div><div><b>บันทึกอัตโนมัติ</b><span>คะแนน ระดับ XP และความคืบหน้าไม่หายแม้เปลี่ยนเครื่อง</span></div></div>
-        <div class="authBullet"><div>🏆</div><div><b>มีแรงก์และอันดับ</b><span>สะสมคะแนน ไต่อันดับ และดูโปรไฟล์ผู้เล่นได้ชัดเจน</span></div></div>
-        <div class="authBullet"><div>🎮</div><div><b>เริ่มเล่นได้ทันที</b><span>ยังไม่พร้อมสมัคร? เริ่มแบบผู้เยี่ยมชมก่อน แล้วค่อยสมัครทีหลังก็ได้</span></div></div>
-      </div>`;
-
-    if(closeBtn) modal.prepend(closeBtn);
-    inner.appendChild(left); inner.appendChild(right);
-    modal.appendChild(inner);
-
-    left.addEventListener('click', e=>{
-      const b=e.target.closest('.authTab');
-      if(!b) return;
-      left.querySelectorAll('.authTab').forEach(x=>x.classList.remove('active'));
-      b.classList.add('active');
-      if(primaryBtn){
-        primaryBtn.textContent = /สมัครสมาชิก/.test(b.textContent||'') ? 'สมัครสมาชิก' : 'เข้าสู่ระบบ';
-      }
-    });
-  };
-
-  const mo = new MutationObserver(()=>{
-    boot();
-    const modal=document.querySelector('.authCard,.authModal,.memberModal');
-    if(modal?.dataset.enhanced==='1')mo.disconnect();
-  });
-  mo.observe(document.documentElement,{childList:true,subtree:true});
-  window.addEventListener('load',()=>setTimeout(()=>{boot();const modal=document.querySelector('.authCard,.authModal,.memberModal');if(modal?.dataset.enhanced==='1')mo.disconnect()},500));
-  setTimeout(()=>{boot();const modal=document.querySelector('.authCard,.authModal,.memberModal');if(modal?.dataset.enhanced==='1')mo.disconnect()},900);
-})();
-
-
-(function cloudLeaderboardV13(){
-  const supaCfg = window.BRAIN_BUDDY_SUPABASE || {};
-  const AV_KEY='bb_avatar_dataurl_v11', NAME_KEY='bb_display_name_v11', STATS_KEY='bb_stats';
-  function $(s,r=document){return r.querySelector(s)}
-  function getJSON(k,d){try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d))}catch(e){return d}}
-  function setJSON(k,v){localStorage.setItem(k,JSON.stringify(v))}
-  function rankTier(score=0,xp=0){const p=Number(score||0)+Number(xp||0)*2; if(p>=20000) return ['Diamond','💎']; if(p>=12000) return ['Platinum','🌌']; if(p>=7000) return ['Gold','🏆']; if(p>=3500) return ['Silver','✨']; return ['Bronze','🌱'];}
-  function currentName(){ return localStorage.getItem(NAME_KEY) || 'ผู้เล่น'; }
-  function currentAvatar(){ return localStorage.getItem(AV_KEY) || ''; }
-  async function getClient(){ if(window.__bbSupabase) return window.__bbSupabase; if(!window.supabase || !supaCfg.url || !supaCfg.publishableKey) return null; window.__bbSupabase = window.supabase.createClient(supaCfg.url, supaCfg.publishableKey); return window.__bbSupabase; }
-  function findAuthTrigger(){ return Array.from(document.querySelectorAll('button,a')).find(el => /บัญชี|เข้าสู่ระบบ|ล็อกอิน|login|signup/i.test(el.textContent||'')); }
-  function mountEntryGuide(){
-    const host = document.querySelector('.premiumHero') || document.body.firstElementChild || document.body;
-    if(document.querySelector('.loginGuideCard')) return;
-    const guide = document.createElement('section'); guide.className='loginGuideCard';
-    guide.innerHTML = `<div class="guideBlock"><div class="entryTag">🔐 เริ่มต้นใช้งานง่ายขึ้น</div><h3>เข้าสู่ระบบตรงไหน? สมัครสมาชิกตรงไหน?</h3><p>ถ้าต้องการบันทึกคะแนน ระดับ XP แรงก์ และประวัติการเล่นบนคลาวด์ ให้กดปุ่ม <b>เข้าสู่ระบบ / สมัครสมาชิก</b> ด้านล่างนี้ได้ทันที ส่วนถ้าอยากลองเล่นก่อน ให้กด <b>เล่นแบบผู้เยี่ยมชม</b></p><div class="authCtaBig"><button class="entryBtn entryPrimary" id="heroLoginBtn">🔐 เข้าสู่ระบบ / สมัครสมาชิก</button><button class="entryBtn entrySecondary" id="heroGuestBtn">🎮 เล่นแบบผู้เยี่ยมชม</button></div></div><div class="guideSteps"><div class="guideStep"><div>1️⃣</div><div><b>เข้าสู่ระบบ</b><span>สำหรับสมาชิกที่มีบัญชีอยู่แล้ว กรอกอีเมลและรหัสผ่านเพื่อเล่นต่อจากเดิม</span></div></div><div class="guideStep"><div>2️⃣</div><div><b>สมัครสมาชิก</b><span>สำหรับผู้เล่นใหม่ กดแท็บสมัครสมาชิก แล้วสร้างบัญชีเพื่อเก็บข้อมูลบนคลาวด์</span></div></div><div class="guideStep"><div>3️⃣</div><div><b>เล่นแบบผู้เยี่ยมชม</b><span>ข้อมูลจะเก็บไว้เฉพาะในเครื่องนี้ เหมาะสำหรับการลองเล่นก่อนสมัคร</span></div></div></div>`;
-    host.insertAdjacentElement('afterend', guide);
-    $('#heroLoginBtn')?.addEventListener('click', ()=> findAuthTrigger()?.click());
-    $('#heroGuestBtn')?.addEventListener('click', ()=> Array.from(document.querySelectorAll('button')).find(b=>/ผู้เยี่ยมชม|Guest/i.test(b.textContent||''))?.click());
-  }
-  async function syncProfileToCloud(){
-    const client = await getClient(); if(!client) return;
-    const {data:{session}} = await client.auth.getSession(); if(!session?.user) return;
-    let localProfile={};
-    try{localProfile=JSON.parse(localStorage.getItem("bb_profile")||"{}")}catch(e){}
-    const meta=session.user?.user_metadata||{};
-    const googleName=meta.full_name||meta.name||session.user?.email?.split("@")[0]||"ผู้เล่น";
-    const localName=currentName() || localProfile.name || "";
-    const finalName=(!localName || localName==="ผู้เล่น") ? googleName : localName;
-    const googleAvatar=meta.avatar_url||meta.picture||"";
-    const customAvatar=currentAvatar();
-
-    await client.from('profiles').upsert({
-      id: session.user.id,
-      display_name: finalName || 'ผู้เล่น',
-      avatar: customAvatar ? '🖼️' : (localProfile.avatar || '🧸'),
-      avatar_url: customAvatar || googleAvatar || null,
-      xp: Number(localProfile.xp)||0
-    }, {onConflict:'id'});
-  }
-  async function submitCloudResult(score,xp,bestCombo,mode='memory'){
-    const client = await getClient(); if(!client) return;
-    const {data:{session}} = await client.auth.getSession(); if(!session?.user) return;
-    await client.from('leaderboard_entries').insert({user_id: session.user.id, score:Number(score||0), xp:Number(xp||0), best_combo:Number(bestCombo||0), mode});
-    await syncProfileToCloud(); await renderCloudLeaderboard();
-  }
-  async function renderCloudLeaderboard(){
-    const holder = document.getElementById('lbTable'); if(!holder) return;
-    const client = await getClient();
-    if(!client){ holder.innerHTML = '<div class="lbRow"><div class="lbPos">!</div><div class="lbUser"><div><b>ยังไม่เชื่อมคลาวด์</b><span>หลังอัปเดต SQL และเผยแพร่เว็บ ตารางอันดับจะดึงข้อมูลสมาชิกทุกคนอัตโนมัติ</span></div></div><div></div><div></div></div>'; return; }
-    const {data,error} = await client.from('leaderboard_view').select('*').limit(20);
-    if(error){ holder.innerHTML = '<div class="lbRow"><div class="lbPos">!</div><div class="lbUser"><div><b>ยังโหลดอันดับไม่ได้</b><span>ให้รัน SQL รุ่นล่าสุดใน Supabase ก่อน แล้วรีเฟรชเว็บ</span></div></div><div></div><div></div></div>'; return; }
-    holder.innerHTML = (data||[]).map((u,i)=>{ const [tier,emoji]=rankTier(u.best_score,u.xp); const avatar=u.avatar_url?`<img src="${u.avatar_url}" style="width:100%;height:100%;object-fit:cover;border-radius:14px">`:(u.avatar||'🧸'); return `<div class="lbRow"><div class="lbPos">${i+1}</div><div class="lbUser"><div class="lbAvatar">${avatar}</div><div><b>${u.display_name||'ผู้เล่น'}</b><span>${emoji} ${u.rank_tier||tier}</span></div></div><div class="lbScore"><b>${u.best_score||0}</b><span>คะแนนสูงสุด</span></div><div class="lbScore"><b>${u.xp||0}</b><span>XP</span></div></div>`; }).join('') || '<div class="lbRow"><div class="lbPos">0</div><div class="lbUser"><div><b>ยังไม่มีผู้เล่นในตาราง</b><span>เมื่อมีสมาชิกเริ่มเล่น คะแนนจะขึ้นที่นี่</span></div></div><div></div><div></div></div>';
-  }
-  window.__bbRenderCloudLeaderboard=renderCloudLeaderboard;
-  function patchProfileUploader(){
-    const file = document.getElementById('avatarFile'); if(!file || file.dataset.cloudBind==='1') return; file.dataset.cloudBind='1';
-    file.addEventListener('change', async e=>{ const f=e.target.files?.[0]; if(!f) return; const rd=new FileReader(); rd.onload=async()=>{ localStorage.setItem(AV_KEY, rd.result); await syncProfileToCloud(); await renderCloudLeaderboard(); }; rd.readAsDataURL(f); });
-    document.getElementById('profileName')?.addEventListener('click', async ()=>{ setTimeout(syncProfileToCloud,300); setTimeout(renderCloudLeaderboard,500); });
-  }
-  function patchStatPersistence(){ const stats=getJSON(STATS_KEY,{xp:0,bestScore:0,bestCombo:0,games:0,wins:0,total_score:0}); window.__bbSubmitCloudResult=submitCloudResult; setJSON(STATS_KEY, stats); }
-  window.addEventListener('load', ()=>{ setTimeout(async()=>{ mountEntryGuide(); patchProfileUploader(); patchStatPersistence(); await syncProfileToCloud(); await renderCloudLeaderboard(); }, 1100); });
-})();
-
-</script>
 <script>
 // Brain Buddy Cloud connection — public browser credentials only.
 window.BRAIN_BUDDY_SUPABASE = {
@@ -16823,11 +17148,29 @@ function content(id){if(cfg.source==="teddy")return `<div class="teddy">${teddyS
 function setStatus(i,t,s){$("statusIcon").textContent=i;$("statusTitle").textContent=t;$("statusText").textContent=s}function showScene(n){["board","target","choice","result"].forEach(x=>$(x+"Scene").classList.toggle("active",x===n));$("answer").classList.add("hidden")}function setMain(t,f,dis=false){$("main").textContent=t;$("main").onclick=f;$("main").disabled=dis}function updateHUD(){$("progress").textContent=`${Math.min(asked.size,qCount())} / ${qCount()}`;$("combo").textContent=combo;$("score").textContent=score;$("levelHud").textContent=level(profile().xp||0);$("livesHud").classList.toggle("hidden",!cfg.lives);$("lives").textContent="♥".repeat(lives)+"♡".repeat(Math.max(0,3-lives));$("hintNum").textContent=hints;$("hintBtn").disabled=hints<=0}
 function renderBoard(numbers=false,override={}){const d=DIFF[cfg.diff];$("board").innerHTML="";$("board").className="board"+(numbers?" numberBoard":"");$("board").style.setProperty("--cols",d.cols);layout.forEach((id,i)=>{const s=document.createElement("div");s.className="slot";s.dataset.i=i;const rid=override[i]!==undefined?override[i]:id;s.innerHTML=`<div class="content">${content(rid)}</div><div class="num">${i+1}</div>`;$("board").appendChild(s)})}
 function renderTarget(i){lastTarget=i;$("targetCard").innerHTML=`<div class="content" style="width:100%;height:100%">${content(layout[i])}</div>`;$("targetLabel").textContent=cfg.mode==="position"?"ตัวนี้อยู่หมายเลขอะไร?":"จำรายการนี้"}
-function renderTeams(){const b=$("teamBar");if(cfg.style!=="team"){b.classList.add("hidden");b.innerHTML="";return}b.classList.remove("hidden");b.innerHTML="";for(let i=0;i<cfg.teams;i++){const t=teamData[i],d=document.createElement("div");d.className="team";d.innerHTML=`<strong><span style="color:${t.color}">●</span> ${t.emoji} ${t.name}</strong><b>${teamคะแนนs[i]||0}</b><span><button data-d="-1">−</button> <button data-d="1">+1</button></span>`;d.querySelectorAll("button").forEach(x=>x.onclick=()=>{teamคะแนนs[i]=Math.max(0,(teamคะแนนs[i]||0)+Number(x.dataset.d));renderTeams();sfx(Number(x.dataset.d)>0?"score":"tap");saveResume()});b.appendChild(d)}}
-function updateSummary(){const d=DIFF[cfg.diff],style=cfg.style==="solo"?"คนเดียว":`${cfg.teams} ทีม`,$x=`${d.cols}×${Math.ceil(d.n/d.cols)}`;$("heroSummary").textContent=`${style} • ${MODES[cfg.mode]} • ${d.label} ${$x} • ${cfg.timer?cfg.timer+" วิ":"ไม่จับเวลา"}`;$("pillMode").textContent=MODES[cfg.mode];$("pillDiff").textContent=`${d.label} • ${$x}`;$("pillStyle").textContent=style;$("pillSource").textContent=SOURCES[cfg.source];$("hintline").textContent=cfg.timer?`Timer ${cfg.timer} วินาทีเปิดอยู่`:"ไม่มีการจับเวลาโดยค่าเริ่มต้น คุณเป็นคนกำหนดจังหวะเอง"}
+function renderTeams(){
+  const b=$("teamBar");
+  if(b){b.classList.add("hidden");b.innerHTML=""}
+  cfg.style="solo";cfg.teams=1;cfg.answer="screen";
+}
+function updateSummary(){
+  if(!["position","match","sequence"].includes(cfg.mode))cfg.mode="position";
+  cfg.style="solo";cfg.teams=1;cfg.answer="screen";
+  const d=DIFF[cfg.diff]||DIFF.easy,$x=`${d.cols}×${Math.ceil(d.n/d.cols)}`;
+  $("heroSummary")&&($("heroSummary").textContent=`คนเดียว • ${MODES[cfg.mode]} • ${d.label} ${$x}`);
+  $("pillMode")&&($("pillMode").textContent=MODES[cfg.mode]);
+  $("pillDiff")&&($("pillDiff").textContent=`${d.label} • ${$x}`);
+  $("pillStyle")&&($("pillStyle").textContent="คนเดียว");
+  $("pillSource")&&($("pillSource").textContent="Teddy");
+  $("hintline")&&($("hintline").textContent="POMRU จับเวลาให้อัตโนมัติตามระดับ");
+}
 function roundLayout(r=Math.random){const pool=shuf(sourcePool(),r),d=dc();if(cfg.mode==="match"){const pairs=Math.max(2,Math.floor(d.n/2)),ids=pool.slice(0,pairs);return shuf(ids.flatMap(x=>[x,x]),r)}return pool.slice(0,d.n)}
 function resetRound(r=Math.random){stopTimer();layout=roundLayout(r);baseLayout=[...layout];asked=new Set();correct=score=combo=bestCombo=0;lives=3;hints=3;targetIndex=pickedIndex=lastTarget=null;swapPair=[];swapPicks=[];changeIndex=changeAlt=null;matchFirst=null;matchLock=false;matchDone=0;sequenceOrder=[];sequencePick=[];sequencePlaying=false;teamคะแนนs=[0,0,0,0,0,0];roundXP=0;roundStartedAt=Date.now();roundAttempts=0;practiceRewardSubmitted=false;adaptiveShift=adaptiveWins=adaptiveMisses=0;lucky=false;roundStarted=true;roundComplete=false;renderTeams();updateHUD();saveResume()}
-function startRound(r=Math.random){resetRound(r);startMode();updateSummary();$("game").scrollIntoView({behavior:"smooth",block:"start"})}
+function startRound(r=Math.random){
+  cfg.style="solo";cfg.teams=1;cfg.answer="screen";
+  if(cfg.source==="teddy"&&!["position","match","sequence"].includes(cfg.mode))cfg.mode="position";
+  resetRound(r);startMode();updateSummary();$("game").scrollIntoView({behavior:"smooth",block:"start"})
+}
 function startMode(){stopTimer();$("voiceBtn").classList.add("hidden");$("replayBtn").classList.add("hidden");$("hintBtn").classList.remove("hidden");if(cfg.mode==="position"){state="position_mem";showScene("board");renderBoard();$("boardTitle").textContent="จำภาพทั้งหมด";$("boardSub").textContent="จำรายละเอียดและตำแหน่งให้ดี";setStatus("👀","จำภาพและตำแหน่ง","เมื่อพร้อมแล้วค่อยสุ่มรูปเป้าหมาย");setMain("สุ่มรูปเป้าหมาย",positionAsk)}else if(cfg.mode==="match"){startMatch()}else if(cfg.mode==="missing"){state="missing_mem";showScene("board");renderBoard();$("boardTitle").textContent="จำว่ามีอะไรอยู่บนกระดาน";$("boardSub").textContent="เมื่อพร้อมแล้ว เกมจะซ่อนหนึ่งรายการ";setStatus("👀","จำชุดภาพ","สังเกตให้ครบทุกตัว");setMain("ซ่อนหนึ่งตัว",missingHide)}else if(cfg.mode==="swap"){state="swap_mem";layout=[...baseLayout];showScene("board");renderBoard();$("boardTitle").textContent="จำตำแหน่งทั้งหมด";$("boardSub").textContent="สองช่องจะถูกสลับหลังจากคุณพร้อม";setStatus("🔄","จำตำแหน่ง","สังเกตว่าตัวไหนอยู่ตรงไหน");setMain("สลับตำแหน่ง",swapNow)}else if(cfg.mode==="change"){state="change_mem";layout=[...baseLayout];showScene("board");renderBoard();$("boardTitle").textContent="จำรายละเอียด";$("boardSub").textContent="หนึ่งช่องจะเปลี่ยนเป็นรายการอื่น";setStatus("🔎","จำรายละเอียด","ดูทั้งภาพและตำแหน่ง");setMain("เปลี่ยนหนึ่งจุด",changeNow)}else{state="sequence_ready";showScene("board");renderBoard();$("boardTitle").textContent="เตรียมจำลำดับ";$("boardSub").textContent="เกมจะโชว์ทีละตัว แล้วให้แตะตามลำดับเดิม";setStatus("✨","เตรียมพร้อม","กดเริ่มเมื่อพร้อม");setMain("เริ่มแสดงลำดับ",sequenceStart)}saveResume()}
 function ensureAudio(){if(!audioCtx&&window.AudioContext)audioCtx=new AudioContext();if(audioCtx?.state==="suspended")audioCtx.resume()}function sfx(type="tap"){if(!sfxEnabled)return;ensureAudio();if(!audioCtx)return;const now=audioCtx.currentTime,map={tap:[520,.06],flip:[690,.08],ok:[650,.15],bad:[190,.13],score:[820,.11],done:[523,.26],hint:[440,.12],bonus:[930,.18]},[f,d]=map[type]||map.tap,o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);o.type=type==="bad"?"triangle":"sine";o.frequency.setValueAtTime(f,now);if(type==="ok"||type==="bonus")o.frequency.exponentialRampToValueAtTime(f*1.3,now+d);g.gain.setValueAtTime(.06*sfxVolume,now);g.gain.exponentialRampToValueAtTime(.001,now+d);o.start(now);o.stop(now+d)}
 function musicTick(){
@@ -17208,7 +17551,7 @@ function finishRound(){
 }
 function saveHistory(rate,sc){const h=hist();h.push({date:Date.now(),mode:cfg.mode,diff:effDiff(),source:cfg.source,style:cfg.style,rate,score:sc,combo:bestCombo,xp:roundXP});save("bb_history",h.slice(-80));if(cfg.style==="solo")cloudRecordGame(rate,sc)}function unlock(id){const b=badgeData();if(b[id])return;b[id]=Date.now();save("bb_badges",b);const a=ACH.find(x=>x[0]===id);if(a)toast(`🏅 ความสำเร็จ: ${a[2]}`)}function checkความสำเร็จs(rate){const h=hist();unlock("first");if(rate===100)unlock("perfect");if(bestCombo>=5)unlock("combo5");if(bestCombo>=10)unlock("combo10");const ms=new Set(h.map(x=>x.mode));if(ms.size>=4)unlock("explorer");if(ms.size>=6)unlock("allmodes");if(level(profile().xp||0)>=5)unlock("level5");if(level(profile().xp||0)>=10)unlock("level10");if(load("bb_daily_streak",0)>=3)unlock("daily3");if(cfg.source==="custom")unlock("custom");if(rate>=90)unlock("master")}
 function renderProfile(){const p=profile(),lv=level(p.xp||0);$("navName").textContent=p.name||"ผู้เล่น";$("navAvatar").textContent=p.avatar||"🧸";$("profileName").value=p.name||"";$("profileLevel").textContent=lv;$("xpBar").style.width=((p.xp||0)%500/500*100)+"%";$("xpLabel").textContent=`${(p.xp||0)%500} / 500 แต้ม`;$("levelHud").textContent=lv}function renderHome(){const h=hist(),p=profile(),rates=h.map(x=>x.rate).filter(x=>typeof x==="number");$("homeLevel").textContent=level(p.xp||0);$("homeXP").textContent=p.xp||0;$("homeBest").textContent=h.length?Math.max(...h.map(x=>x.score||0)):0;$("homeAcc").textContent=(rates.length?Math.max(...rates):0)+"%";$("homeRounds").textContent=h.length}function renderStats(){const h=hist(),rates=h.map(x=>x.rate).filter(x=>typeof x==="number");$("statRounds").textContent=h.length;$("statBest").textContent=h.length?Math.max(...h.map(x=>x.score||0)):0;$("statAcc").textContent=(rates.length?Math.max(...rates):0)+"%";$("statCombo").textContent=h.length?Math.max(...h.map(x=>x.combo||0)):0;const last=h.filter(x=>typeof x.rate==="number").slice(-10),W=760,H=170,p=25;let svg=`<line x1="${p}" y1="${H-p}" x2="${W-p}" y2="${H-p}" stroke="rgba(136,116,231,.15)"/><line x1="${p}" y1="${p}" x2="${p}" y2="${H-p}" stroke="rgba(136,116,231,.15)"/>`;if(last.length){const pts=last.map((x,i)=>[last.length===1?W/2:p+i*((W-2*p)/(last.length-1)),H-p-(x.rate/100)*(H-2*p)]);svg+=`<polyline points="${pts.map(x=>x.join(",")).join(" ")}" fill="none" stroke="#8874e7" stroke-width="5" stroke-linecap="round"/>`;pts.forEach(q=>svg+=`<circle cx="${q[0]}" cy="${q[1]}" r="6" fill="white" stroke="#f270a7" stroke-width="4"/>`)}$("chartSvg").innerHTML=svg;const b=badgeData();$("badgeGrid").innerHTML="";ACH.forEach(a=>{const d=document.createElement("div");d.className="badge"+(b[a[0]]?"":" lock");d.innerHTML=`<span>${a[1]}</span><div><strong>${a[2]}</strong><small>${a[3]}</small></div>`;$("badgeGrid").appendChild(d)})}function renderCollection(){const lv=level(profile().xp||0);$("collection").innerHTML="";COLLECTION.forEach(([em,n,need])=>{const d=document.createElement("div");d.className="collect"+(lv>=need?"":" lock");d.innerHTML=`<span>${em}</span><div><strong>${n}</strong><small>${lv>=need?"ปลดล็อกแล้ว":`Level ${need}`}</small></div>`;if(lv>=need)d.onclick=()=>{const p=profile();p.avatar=em;save("bb_profile",p);renderProfile();toast(`เลือก ${n} แล้ว`)};$("collection").appendChild(d)})}
-function dailyCfg(){const r=seeded(todaySeed()),ms=["position","missing","swap","change","sequence"],ds=["easy","normal","normal","hard"],ss=["teddy","animals","space","food","fantasy"];return{mode:ms[Math.floor(r()*ms.length)],diff:ds[Math.floor(r()*ds.length)],source:ss[Math.floor(r()*ss.length)]}}function renderDaily(){const d=dailyCfg();$("dailyTitle").textContent=`${MODES[d.mode]} • ${DIFF[d.diff].label}`;$("dailyText").textContent=`วันนี้ใช้ชุด ${SOURCES[d.source]} • แต้มคำนวณตามโหมด ความยาก และผลงานจริง`;$("dailyStreak").textContent=load("bb_daily_streak",0)}function startDaily(){const d=dailyCfg();cfg={...cfg,style:"solo",mode:d.mode,diff:d.diff,source:d.source,teams:2,answer:"screen",adaptive:false,combo:true,timer:0,lives:false,daily:true};updateSummary();startRound(seeded(todaySeed()))}function markDaily(){const today=new Date().toISOString().slice(0,10),last=load("bb_daily_last",""),st=load("bb_daily_streak",0);if(last===today)return;const y=new Date(Date.now()-86400000).toISOString().slice(0,10);save("bb_daily_streak",last===y?st+1:1);save("bb_daily_last",today);renderDaily()}
+function dailyCfg(){const r=seeded(todaySeed()),ms=["position","match","sequence"],ds=["easy","normal","hard"],ss=["teddy"];return{mode:ms[Math.floor(r()*ms.length)],diff:ds[Math.floor(r()*ds.length)],source:ss[Math.floor(r()*ss.length)]}}function renderDaily(){const d=dailyCfg();$("dailyTitle").textContent=`${MODES[d.mode]} • ${DIFF[d.diff].label}`;$("dailyText").textContent=`วันนี้ใช้ชุด ${SOURCES[d.source]} • แต้มคำนวณตามโหมด ความยาก และผลงานจริง`;$("dailyStreak").textContent=load("bb_daily_streak",0)}function startDaily(){const d=dailyCfg();cfg={...cfg,style:"solo",mode:d.mode,diff:d.diff,source:d.source,teams:2,answer:"screen",adaptive:false,combo:true,timer:0,lives:false,daily:true};updateSummary();startRound(seeded(todaySeed()))}function markDaily(){const today=new Date().toISOString().slice(0,10),last=load("bb_daily_last",""),st=load("bb_daily_streak",0);if(last===today)return;const y=new Date(Date.now()-86400000).toISOString().slice(0,10);save("bb_daily_streak",last===y?st+1:1);save("bb_daily_last",today);renderDaily()}
 function syncDraft(){document.querySelectorAll("[data-style]").forEach(b=>b.classList.toggle("active",b.dataset.style===draft.style));document.querySelectorAll("[data-mode]").forEach(b=>b.classList.toggle("active",b.dataset.mode===draft.mode));document.querySelectorAll("[data-diff]").forEach(b=>b.classList.toggle("active",b.dataset.diff===draft.diff));document.querySelectorAll("[data-source]").forEach(b=>b.classList.toggle("active",b.dataset.source===draft.source));document.querySelectorAll("[data-answer]").forEach(b=>b.classList.toggle("active",b.dataset.answer===draft.answer));$("adaptiveToggle").checked=draft.adaptive;$("comboToggle").checked=draft.combo;$("timerSelect").value=draft.timer;$("livesToggle").checked=draft.lives;$("teamCount").value=draft.teams;document.querySelectorAll(".teamSetting").forEach(x=>x.classList.toggle("hidden",draft.style!=="team"));$("answerBox").classList.toggle("hidden",!(draft.style==="team"&&draft.mode==="position"));$("uploadBox").classList.toggle("hidden",draft.source!=="custom");renderTeamEditor()}function openCustom(){draft={...cfg,daily:false};syncDraft();openModal("customModal")}function applyCustom(){draft.adaptive=$("adaptiveToggle").checked;draft.combo=$("comboToggle").checked;draft.timer=Number($("timerSelect").value);draft.lives=$("livesToggle").checked;draft.teams=Math.max(2,Math.min(6,Number($("teamCount").value)));if(draft.source==="custom"&&customImages.length<4){toast("กรุณาอัปโหลดอย่างน้อย 4 รูป");return}cfg={...draft,daily:false};closeModal("customModal");updateSummary();startRound()}function renderTeamEditor(){$("teamEditor").innerHTML="";for(let i=0;i<draft.teams;i++){const t=teamData[i],d=document.createElement("div");d.className="teamEdit";d.innerHTML=`<input type="color" value="${t.color}"><input class="input" value="${t.name}" maxlength="16"><input class="input" value="${t.emoji}" maxlength="2">`;const z=d.querySelectorAll("input");z[0].oninput=()=>t.color=z[0].value;z[1].oninput=()=>t.name=z[1].value||`ทีม ${String.fromCharCode(65+i)}`;z[2].oninput=()=>t.emoji=z[2].value||"⭐";$("teamEditor").appendChild(d)}}function uploads(files){const f=[...files].slice(0,20);Promise.all(f.map(file=>new Promise(res=>{const r=new FileReader();r.onload=()=>compress(r.result,res);r.readAsDataURL(file)}))).then(a=>{customImages=a.filter(Boolean);save("bb_custom",customImages);renderUploads();toast(`เพิ่มรูป ${customImages.length} รูปแล้ว`)})}function compress(src,done){const im=new Image();im.onload=()=>{const c=document.createElement("canvas"),m=360,s=Math.min(1,m/Math.max(im.width,im.height));c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext("2d").drawImage(im,0,0,c.width,c.height);done(c.toDataURL("image/jpeg",.78))};im.onerror=()=>done(null);im.src=src}function renderUploads(){$("uploadPreview").innerHTML="";customImages.forEach(x=>{const i=document.createElement("img");i.src=x;$("uploadPreview").appendChild(i)})}function saveResume(){if(!roundStarted||roundComplete)return;save("bb_resume",{cfg,layout,baseLayout,asked:[...asked],correct,score,combo,bestCombo,lives,hints,state,targetIndex,pickedIndex,missingId,swapPair,swapPicks,changeIndex,changeAlt,teamคะแนนs,adaptiveShift,customImages,roundStartedAt,roundAttempts});$("resumeBtn").classList.remove("hidden")}function clearResume(){localStorage.removeItem("bb_resume");$("resumeBtn").classList.add("hidden")}function restoreResume(){const r=load("bb_resume",null);if(!r)return;cfg={...cfg,...r.cfg};if(cfg.source==="study")cfg.source="teddy";cfg.style="solo";cfg.teams=1;if(!["position","match","sequence"].includes(cfg.mode))cfg.mode="position";layout=r.layout||[];baseLayout=r.baseLayout||[];asked=new Set(r.asked||[]);correct=r.correct||0;score=r.score||0;combo=r.combo||0;bestCombo=r.bestCombo||0;lives=r.lives??3;hints=r.hints??3;state=r.state||"idle";targetIndex=r.targetIndex;pickedIndex=r.pickedIndex;missingId=r.missingId;swapPair=r.swapPair||[];swapPicks=r.swapPicks||[];changeIndex=r.changeIndex;changeAlt=r.changeAlt;teamคะแนนs=[...(r.teamคะแนนs||[]),0,0,0,0,0,0].slice(0,6);adaptiveShift=r.adaptiveShift||0;customImages=r.customImages||customImages;roundStartedAt=Number(r.roundStartedAt)||Date.now();roundAttempts=Number(r.roundAttempts)||Math.max(correct,asked.size);practiceRewardSubmitted=false;roundStarted=true;roundComplete=false;updateSummary();renderTeams();updateHUD();if(state==="position_target"){renderTarget(targetIndex);showScene("target");setMain("พร้อมตอบ",positionAnswer)}else if(state==="position_answer")positionAnswer();else startMode();$("game").scrollIntoView({behavior:"smooth"})}
 function openModal(id){$(id).classList.remove("hidden");$("popover").classList.add("hidden");if(id==="statsModal")renderStats();if(id==="collectionModal")renderCollection();if(id==="profileModal")renderProfile()}function closeModal(id){$(id).classList.add("hidden")}function toast(t){let x=$("toast");if(!x){x=document.createElement("div");x.id="toast";x.style.cssText="position:fixed;left:50%;bottom:20px;z-index:220;transform:translate(-50%,18px);padding:10px 14px;border-radius:999px;background:#302733;color:white;font-size:11px;font-weight:850;opacity:0;transition:.22s;box-shadow:0 14px 30px rgba(30,20,36,.22)";document.body.appendChild(x)}x.textContent=t;x.style.opacity=1;x.style.transform="translate(-50%,0)";setTimeout(()=>{x.style.opacity=0;x.style.transform="translate(-50%,18px)"},1700)}function stars(){const box=$("starfall"),cs=["✨","⭐","🌟","💗","🌸"];box.innerHTML="";for(let i=0;i<35;i++){const s=document.createElement("i");s.textContent=cs[Math.floor(Math.random()*cs.length)];s.style.left=Math.random()*100+"vw";s.style.fontSize=13+Math.random()*18+"px";s.style.animationDelay=Math.random()*.7+"s";box.appendChild(s)}setTimeout(()=>box.innerHTML="",2600)}
 function resultTextSummary(){const rate=asked.size?Math.round(correct/asked.size*100):0;return `Brain Buddy • ${profile().name||"ผู้เล่น"} • ${score} คะแนน • ${rate}% • Combo ${bestCombo}`}function resultCanvas(){const c=document.createElement("canvas");c.width=1200;c.height=675;const x=c.getContext("2d"),g=x.createLinearGradient(0,0,1200,675);g.addColorStop(0,"#fff3f9");g.addColorStop(.55,"#f1edff");g.addColorStop(1,"#e7faf4");x.fillStyle=g;x.fillRect(0,0,1200,675);x.fillStyle="#302733";x.font="900 64px sans-serif";x.fillText("Brain Buddy",70,105);x.font="700 25px sans-serif";x.fillStyle="#7a6f7e";x.fillText("MEMORY • ATTENTION • OBSERVATION",72,145);x.fillStyle="#fff";if(x.roundRect){x.beginPath();x.roundRect(65,195,1070,350,36);x.fill()}else x.fillRect(65,195,1070,350);const rate=asked.size?Math.round(correct/asked.size*100):0;x.fillStyle="#302733";x.font="900 40px sans-serif";x.fillText(profile().name||"ผู้เล่น",110,275);x.fillStyle="#7558c6";x.font="900 88px sans-serif";x.fillText(String(score),110,400);x.font="700 22px sans-serif";x.fillStyle="#7a6f7e";x.fillText("คะแนน",112,435);x.fillStyle="#f270a7";x.font="900 58px sans-serif";x.fillText(rate+"%",505,400);x.font="700 22px sans-serif";x.fillStyle="#7a6f7e";x.fillText("ความแม่นยำ",508,435);x.fillStyle="#58b99d";x.font="900 58px sans-serif";x.fillText(String(bestCombo),835,400);x.font="700 22px sans-serif";x.fillStyle="#7a6f7e";x.fillText("Best Combo",838,435);x.font="700 20px sans-serif";x.fillStyle="#8a7f8f";x.fillText("© 2026 Sulawit Songsang • Brain Buddy",70,610);return c}
@@ -17218,8 +17561,8 @@ $('menuBtn').onclick=()=>$('popover').classList.toggle('hidden');document.addEve
 $('quickPlay').onclick=()=>{cfg={...cfg,style:'solo',mode:'position',diff:'easy',source:'teddy',teams:2,answer:'screen',adaptive:false,combo:true,timer:0,lives:false,daily:false};updateSummary();startRound()};$('soloQuick').onclick=$('quickPlay').onclick;
 let quickTeamCount=2;
 $('quickTeamPicker').onclick=e=>{const b=e.target.closest('[data-quick-team]');if(!b)return;quickTeamCount=Number(b.dataset.quickTeam);document.querySelectorAll('[data-quick-team]').forEach(x=>x.classList.toggle('active',x===b));$('teamQuick').textContent=`เริ่มแบบ ${quickTeamCount} ทีม →`};
-$('teamQuick').onclick=()=>{cfg={...cfg,style:'team',mode:'position',diff:'easy',source:'teddy',teams:quickTeamCount,answer:'voice',adaptive:false,combo:false,timer:0,lives:false,daily:false};updateSummary();startRound()};
-$('customPlay').onclick=openCustom;$('settingsBtn').onclick=openCustom;$('resultSettings').onclick=openCustom;$('dailyBtn').onclick=startDaily;$('resumeBtn').onclick=restoreResume;$('homeBtn').onclick=()=>$('home').scrollIntoView({behavior:'smooth'});$('againBtn').onclick=()=>startRound();$('hintBtn').onclick=useHint;
+$('teamQuick').onclick=()=>toast('POMRU เวอร์ชันใหม่ไม่มี Team Mode');
+$('customPlay').onclick=()=>window.bbAppShowScreen?.('setup');$('settingsBtn').onclick=()=>window.bbAppShowScreen?.('setup');$('resultSettings').onclick=()=>window.bbAppShowScreen?.('setup');$('dailyBtn').onclick=startDaily;$('resumeBtn').onclick=restoreResume;$('homeBtn').onclick=()=>$('home').scrollIntoView({behavior:'smooth'});$('againBtn').onclick=()=>startRound();$('hintBtn').onclick=useHint;
 $('fullBtn').onclick=async()=>{try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen()}catch(e){}};$('themeBtn').onclick=()=>applyTheme('light');$('presenterBtn').onclick=()=>{document.body.classList.toggle('presenter');$('popover').classList.add('hidden');$('game').scrollIntoView({behavior:'smooth'})};
 $('musicBtn').onclick=()=>musicEnabled?stopMusic():startMusic();$('musicToggle').onchange=e=>e.target.checked?startMusic():stopMusic();$('sfxToggle').onchange=e=>{sfxEnabled=e.target.checked;saveAudio()};$('musicVol').oninput=e=>{musicVolume=Number(e.target.value)/100;$('musicVolText').textContent=e.target.value+'%';saveAudio()};$('sfxVol').oninput=e=>{sfxVolume=Number(e.target.value)/100;$('sfxVolText').textContent=e.target.value+'%';saveAudio()};$('musicThemeSeg').onclick=e=>{const b=e.target.closest('[data-music]');if(!b)return;musicTheme=b.dataset.music;syncMusic();saveAudio()};
 $('themeSeg')&&($('themeSeg').onclick=e=>{const b=e.target.closest('[data-theme]');if(b)applyTheme(b.dataset.theme)});$('motionSeg').onclick=e=>{const b=e.target.closest('[data-motion]');if(b)applyMotion(b.dataset.motion)};$('largeToggle').onchange=e=>{document.body.classList.toggle('large',e.target.checked);save('bb_large',e.target.checked)};$('contrastToggle').onchange=e=>{document.body.classList.toggle('contrast',e.target.checked);save('bb_contrast',e.target.checked)};
@@ -17297,93 +17640,8 @@ window.addEventListener("load",()=>{
 });
 </script>
 
-<script>
-(function brainBuddyV19Layout(){
- function combineHeader(){
-   const bar=document.querySelector(".v17barin");
-   const navright=document.querySelector(".topbar .navright");
-   if(!bar||!navright||document.querySelector(".bb19Tools")) return;
-   const tools=document.createElement("div");
-   tools.className="bb19Tools";
-   while(navright.firstChild) tools.appendChild(navright.firstChild);
-   const admin=bar.querySelector(".v17b.admin");
-   if(admin) bar.insertBefore(tools,admin); else bar.appendChild(tools);
- }
- if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",combineHeader);
- else combineHeader();
-})();
-</script>
-<script>
-(function brainBuddyV20ModeHub(){
-  const modeNames={position:"📍 จำตำแหน่ง",match:"🧩 จับคู่",missing:"👀 ตัวไหนหาย",swap:"🔄 สลับที่",change:"🔎 อะไรเปลี่ยน",sequence:"🔢 จำลำดับ"};
-  const diffNames={easy:"ง่าย 2×2",normal:"ปานกลาง 3×3",hard:"ยาก 4×4",expert:"Expert"};
-  let selectedMode="position",selectedDiff="easy",selectedStyle="solo",selectedTeams=2;
-  const $q=s=>document.querySelector(s);
 
-  function sync(){
-    document.querySelectorAll("[data-bb-mode]").forEach(b=>b.classList.toggle("active",b.dataset.bbMode===selectedMode));
-    document.querySelectorAll("[data-bb-diff]").forEach(b=>b.classList.toggle("active",b.dataset.bbDiff===selectedDiff));
-    document.querySelectorAll("[data-bb-style]").forEach(b=>b.classList.toggle("active",b.dataset.bbStyle===selectedStyle));
-    document.querySelectorAll("[data-bb-team]").forEach(b=>b.classList.toggle("active",Number(b.dataset.bbTeam)===selectedTeams));
-    const teamBox=$q("#bbTeamCount"); if(teamBox)teamBox.classList.toggle("show",selectedStyle==="team");
-    const styleHint=$q("#bbStyleHint");
-    if(styleHint)styleHint.textContent=selectedStyle==="solo"?"โหมดเดี่ยวเก็บ XP และขึ้นอันดับได้":"โหมดทีมไม่เพิ่ม XP/Cloud Rank";
-    if(selectedStyle==="team"&&selectedMode!=="position"){
-      selectedMode="position";
-      document.querySelectorAll("[data-bb-mode]").forEach(b=>b.classList.toggle("active",b.dataset.bbMode==="position"));
-      if(styleHint)styleHint.textContent="โหมดทีมใช้กับ “จำตำแหน่ง” เพื่อให้ตอบออกเสียงและเพิ่มคะแนนทีม";
-    }
-    const t=$q("#bbSelectedTitle"),d=$q("#bbSelectedText");
-    if(t)t.textContent=`${modeNames[selectedMode]} • ${diffNames[selectedDiff]}`;
-    if(d)d.textContent=`${selectedStyle==="solo"?"เล่นคนเดียว":selectedTeams+" ทีม"} • หมี Brain Buddy • ไม่มีการจับเวลา`;
-  }
 
-  document.addEventListener("click",e=>{
-    const m=e.target.closest("[data-bb-mode]");
-    if(m){selectedMode=m.dataset.bbMode;if(selectedStyle==="team"&&selectedMode!=="position")selectedStyle="solo";sync();return}
-    const d=e.target.closest("[data-bb-diff]");
-    if(d){selectedDiff=d.dataset.bbDiff;sync();return}
-    const s=e.target.closest("[data-bb-style]");
-    if(s){selectedStyle=s.dataset.bbStyle;if(selectedStyle==="team"&&selectedMode!=="position")selectedMode="position";sync();return}
-    const tc=e.target.closest("[data-bb-team]");
-    if(tc){selectedTeams=Number(tc.dataset.bbTeam)||2;sync();return}
-  });
-
-  const start=$q("#bbStartSelected");
-  if(start)start.addEventListener("click",()=>{
-    cfg={
-      ...cfg,
-      style:selectedStyle,
-      mode:selectedMode,
-      diff:selectedDiff,
-      source:"teddy",
-      teams:selectedTeams,
-      answer:selectedStyle==="team"?"voice":"screen",
-      adaptive:false,combo:false,timer:0,lives:false,daily:false
-    };
-    updateSummary();startRound();
-  });
-
-  // Existing buttons now route to the simple chooser instead of the removed advanced modal.
-  const goChooser=()=>{
-    const hub=$q("#bbModeHub");if(hub)hub.scrollIntoView({behavior:"smooth",block:"start"});
-  };
-  const settings=$q("#settingsBtn"), resultSettings=$q("#resultSettings");
-  if(settings)settings.onclick=goChooser;
-  if(resultSettings){resultSettings.textContent="เลือกเกมอื่น";resultSettings.onclick=goChooser}
-
-  // Quick play stays the fastest path but is always Teddy-only.
-  const qp=$q("#quickPlay");
-  if(qp)qp.onclick=()=>{cfg={...cfg,style:"solo",mode:"position",diff:"easy",source:"teddy",teams:2,answer:"screen",adaptive:false,combo:false,timer:0,lives:false,daily:false};updateSummary();startRound()};
-
-  // Remove any resumed non-Teddy source from older versions.
-  try{
-    const r=JSON.parse(localStorage.getItem("bb_resume")||"null");
-    if(r&&r.cfg&&r.cfg.source!=="teddy"){r.cfg.source="teddy";localStorage.setItem("bb_resume",JSON.stringify(r))}
-  }catch(e){}
-  sync();
-})();
-</script>
 
 <div class="bbArena hidden" id="bbArena" aria-hidden="true">
   <div class="bbArenaShell">
@@ -17414,7 +17672,7 @@ window.addEventListener("load",()=>{
 <section class="hidden p91ArenaLobby" id="bbArenaLobby">
   <section class="p91ArenaHero">
     <div class="p91ArenaHeroCopy">
-      <span class="p91Eyebrow">POMRU RANKED</span>
+      <span class="p91Eyebrow">POMRU ROOM</span>
       <h1>แข่งให้ชนะ<br>แล้วไต่อันดับ</h1>
       <p>สร้างห้อง ชวนเพื่อน หรือเข้าร่วมการแข่งขัน เพื่อสะสมผลงานและขึ้นแรงก์ของคุณ</p>
       <div class="p91ArenaStats">
@@ -17468,7 +17726,7 @@ window.addEventListener("load",()=>{
         <div class="bbBrainBoardHero">
           <div class="bbBrainBoardHeroCopy">
             <button type="button" class="bbBrainBoardBack" id="bbBrainBoardBack">← กลับสนามแข่งขัน</button>
-            <span class="bbBrainBoardEyebrow">POMRU RANKED</span>
+            <span class="bbBrainBoardEyebrow">POMRU ROOM</span>
             <h1>ทำเนียบผู้เล่น POMRU</h1>
             <p>ดูอันดับผู้เล่นและผลงานการแข่งขันในแต่ละหมวดเกม</p>
             <small>เป็นอันดับการแข่งขันภายใน POMRU</small>
@@ -17526,7 +17784,7 @@ window.addEventListener("load",()=>{
         <div class="bbRoomTop">
           <div>
             <button class="bbRoomLeave" id="bbArenaLeave">← ออกจากห้อง</button>
-            <span class="bbRoomLive">● LIVE ROOM</span>
+            <span class="bbRoomLive">● LIVE DUEL</span>
             <h1 id="bbRoomName">ห้องแข่งขัน</h1>
             <div class="bbRoomMeta" id="bbRoomMeta"></div>
           </div>
@@ -17537,6 +17795,69 @@ window.addEventListener("load",()=>{
           </div>
         </div>
 
+        <section class="p93DuelLounge" id="p93DuelLounge">
+          <div class="p93DuelHeader">
+            <div>
+              <small>RANKED DUEL • 1 VS 1</small>
+              <h2>คู่ดวลของคุณ</h2>
+              <p>ทั้งสองคนต้องกดพร้อม ก่อน Host เริ่มการแข่งขัน</p>
+            </div>
+            <button type="button" id="p93InviteFriendInRoom">เชิญเพื่อน</button>
+          </div>
+
+          <div class="p93VersusStage">
+            <article class="p93Fighter me" id="p93FighterMe">
+              <div class="p93FighterGlow"></div>
+              <span class="p93FighterLabel">YOU</span>
+              <div class="p93FighterAvatar" id="p93MeAvatar">
+                <img src="/assets/buddy/default-pink-buddy.png?v=930" alt="">
+              </div>
+              <h3 id="p93MeName">ผู้เล่น</h3>
+              <div class="p93FighterMeta">
+                <span id="p93MeRank">แรงก์ —</span>
+                <i class="p93OnlineDot"></i><b id="p93MeOnline">ออนไลน์</b>
+              </div>
+              <span class="p93ReadyState" id="p93MeReady">ยังไม่พร้อม</span>
+            </article>
+
+            <div class="p93VSCore" aria-hidden="true">
+              <span>VS</span>
+              <small id="p93DuelStatus">รอคู่แข่ง</small>
+            </div>
+
+            <article class="p93Fighter opponent waiting" id="p93FighterOpponent">
+              <div class="p93FighterGlow"></div>
+              <span class="p93FighterLabel">OPPONENT</span>
+              <div class="p93FighterAvatar" id="p93OpponentAvatar">
+                <span class="p93Question">?</span>
+              </div>
+              <h3 id="p93OpponentName">กำลังรอคู่แข่ง</h3>
+              <div class="p93FighterMeta">
+                <span id="p93OpponentRank">แรงก์ —</span>
+                <i class="p93OnlineDot offline"></i><b id="p93OpponentOnline">ยังไม่มีผู้เล่น</b>
+              </div>
+              <span class="p93ReadyState" id="p93OpponentReady">รอเข้าห้อง</span>
+            </article>
+          </div>
+
+          <section class="p93RoomChat">
+            <div class="p93ChatHead">
+              <div>
+                <small>PRE-MATCH CHAT</small>
+                <h3>คุยกันก่อนเริ่ม</h3>
+              </div>
+              <span id="p93ChatStatus">เปิดอยู่</span>
+            </div>
+            <div class="p93ChatMessages" id="p93ChatMessages">
+              <div class="p93ChatEmpty">เมื่อคู่แข่งเข้าห้อง คุณสามารถคุยกันตรงนี้ได้</div>
+            </div>
+            <form class="p93ChatComposer" id="p93ChatForm">
+              <input id="p93ChatInput" maxlength="300" autocomplete="off" placeholder="พิมพ์ข้อความ…">
+              <button type="submit" id="p93ChatSend">ส่ง</button>
+            </form>
+          </section>
+        </section>
+
         <div class="bbRoomProgress">
           <div><span>ผู้เล่น</span><b id="bbRoomCount">1/100</b></div>
           <div class="bbRoomProgressTrack"><i id="bbRoomProgressFill"></i></div>
@@ -17544,7 +17865,7 @@ window.addEventListener("load",()=>{
         </div>
 
         <div class="bbRoomPlayersHead">
-          <div><h2>ผู้เล่นในห้อง</h2><p>สถานะ Ready เปลี่ยนแบบ Realtime</p></div>
+          <div><h2>คู่ดวล</h2><p>สถานะพร้อมเปลี่ยนแบบ Realtime</p></div>
           <span id="bbRoomReadyCount">0/0 พร้อม</span>
         </div>
         <div class="bbRoomPlayers" id="bbRoomPlayers"></div>
@@ -17560,11 +17881,11 @@ window.addEventListener("load",()=>{
 
       <section class="bbArenaCountdown hidden" id="bbArenaCountdown">
         <div class="bbCountdownCard">
-          <span class="bbRankedPill dark">RANKED MATCH</span>
+          <span class="bbRankedPill dark">1V1 DUEL</span>
           <div class="bbCountdownBear" aria-hidden="true"></div>
           <small id="bbCountdownLabel">เตรียมตัวให้พร้อม</small>
           <strong id="bbCountdownNumber">3</strong>
-          <p id="bbCountdownSub">การแข่งขันจะเริ่มพร้อมกันทุกเครื่อง</p>
+          <p id="bbCountdownSub">ทั้งสองคนจะเริ่มพร้อมกันจากเวลา Server</p>
         </div>
       </section>
 
@@ -17581,19 +17902,19 @@ window.addEventListener("load",()=>{
             <strong id="bbResultsWaitTimer">01:00</strong>
           </div>
           <span class="bbAutoExitNote">✓ ออกจากห้องแข่งขันแล้ว • จะไม่เริ่มเกมซ้ำ</span>
-          <button class="bbResultsExitBtn" id="bbResultsExit">ออกจาก Ranked ตอนนี้</button>
+          <button class="bbResultsExitBtn" id="bbResultsExit">ออกจากการดวล</button>
         </div>
 
         <div class="bbResultsFinal hidden bbResultsFinalV74" id="bbResultsFinal">
           <div class="bbResultsTitle bbResultsTitleV74">
-            <span class="bbRankedPill dark">POMRU RANKED</span>
+            <span class="bbRankedPill dark">POMRU ROOM</span>
             <small class="bbResultEyebrow">FINAL MATCH REPORT</small>
             <h1 id="bbResultMainTitle">ผลการแข่งขัน</h1>
             <p id="bbResultMainSub">กำลังสรุป Performance และคะแนนแรงค์ของคุณ</p>
           </div>
 
           <div class="bbResultMatchStamp" id="bbResultMatchStamp">
-            <span>Ranked Match</span>
+            <span>การแข่งขัน</span>
             <b>กำลังอ่านข้อมูล…</b>
           </div>
 
@@ -17613,7 +17934,7 @@ window.addEventListener("load",()=>{
 
           <div class="bbResultBottomActions">
             <button class="bbResultBoardBtn" id="bbResultOpenBoard">ดูทำเนียบผู้เล่น</button>
-            <button class="bbArenaPrimary" id="bbResultsLobby">กลับ Ranked Lobby</button>
+            <button class="bbArenaPrimary" id="bbResultsLobby">กลับหน้าเพื่อน</button>
           </div>
         </div>
       </section>
@@ -17674,7 +17995,7 @@ window.addEventListener("load",()=>{
       </div>
 
       <div class="bbArenaError" id="bbCreateError"></div>
-      <button class="bbArenaPrimary wide" id="bbCreateSubmit">สร้างห้อง Ranked</button>
+      <button class="bbArenaPrimary wide" id="bbCreateSubmit">สร้างห้อง</button>
     </div>
   </div>
 
@@ -17698,11 +18019,21 @@ window.addEventListener("load",()=>{
     english_vocabulary:"A",english_multiple_choice:"🎯",english_matching:"🧩",english_typing:"⌨️",english_sentence_order:"🔀",english_listening:"🎧"
   };
   const FALLBACK_CATALOG=[
-    ["teddy_position","teddy","จำตำแหน่ง",1],["teddy_match","teddy","จับคู่",2],["teddy_missing","teddy","ตัวไหนหาย",3],["teddy_change","teddy","อะไรเปลี่ยน",4],["teddy_swap","teddy","สลับที่",5],["teddy_sequence","teddy","จำลำดับ",6],
-    ["math_multiple_choice","math","เลือกคำตอบ",1],["math_typing","math","พิมพ์คำตอบ",2],["math_matching","math","จับคู่",3],["math_sentence_order","math","เรียงขั้นตอน",4],["math_listening","math","โจทย์เสียง",5],["math_mix","math","Math Mix",6],
-    ["chinese_hanzi_meaning","chinese","汉字 → ความหมาย",1],["chinese_meaning_hanzi","chinese","ความหมาย → 汉字",2],["chinese_hanzi_pinyin","chinese","汉字 → Pinyin",3],["chinese_pinyin_hanzi","chinese","Pinyin → 汉字",4],["chinese_listening","chinese","ฟัง → 汉字",5],["chinese_mix","chinese","HSK Mix",6],
-    ["english_vocabulary","english","Vocabulary",1],["english_multiple_choice","english","เลือกคำตอบ",2],["english_matching","english","จับคู่คำศัพท์",3],["english_typing","english","พิมพ์คำตอบ",4],["english_sentence_order","english","เรียงประโยค",5],["english_listening","english","Listening",6]
+    ["teddy_position","teddy","จำตำแหน่ง",1],
+    ["teddy_match","teddy","จับคู่",2],
+    ["teddy_sequence","teddy","จำลำดับ",3],
+    ["math_multiple_choice","math","เลือกคำตอบ",1],
+    ["math_typing","math","พิมพ์คำตอบ",2],
+    ["math_mix","math","Math Mix",3],
+    ["chinese_hanzi_meaning","chinese","คำศัพท์จีน",1],
+    ["chinese_hanzi_pinyin","chinese","พินอิน",2],
+    ["chinese_listening","chinese","ฝึกฟัง",3],
+    ["chinese_mix","chinese","Chinese Mix",4],
+    ["english_vocabulary","english","Vocabulary",1],
+    ["english_typing","english","Typing",2],
+    ["english_listening","english","Listening",3]
   ].map(x=>({mode_code:x[0],world:x[1],name_th:x[2],sort_order:x[3]}));
+  const POMRU_ALLOWED_RANKED_MODES=new Set(FALLBACK_CATALOG.map(x=>x.mode_code));
 
   const DIFF={
     easy:"ง่าย",normal:"ปกติ",hard:"ยาก",expert:"Expert",
@@ -17913,7 +18244,7 @@ window.addEventListener("load",()=>{
       const {data,error}=await c.rpc("bb_ranked_game_catalog");
       if(error)throw error;
 
-      rankedCatalog=Array.isArray(data)?data:[];
+      rankedCatalog=(Array.isArray(data)?data:[]).filter(x=>POMRU_ALLOWED_RANKED_MODES.has(x.mode_code));
 
       if(status){
         status.textContent=rankedCatalog.length
@@ -17940,7 +18271,7 @@ window.addEventListener("load",()=>{
           world:x.world,
           name_th:x.name_th,
           sort_order:x.sort_order
-        }));
+        })).filter(x=>POMRU_ALLOWED_RANKED_MODES.has(x.mode_code));
 
         if(status){
           status.textContent=rankedCatalog.length
@@ -18251,6 +18582,20 @@ window.addEventListener("load",()=>{
       const roomId=data?.[0]?.room_id;
       if(!roomId)throw new Error("สร้างห้องไม่สำเร็จ");
 
+      // C4 Daily Mission: creating a room completes mission #3.
+      try{
+        const missionResult=await c.rpc("bb_mark_room_created");
+        if(missionResult?.error)throw missionResult.error;
+        document.dispatchEvent(new CustomEvent("pomru:room-created",{
+          detail:{room_id:roomId}
+        }));
+        try{await window.POMRUProgress?.refresh?.("room-created")}catch(_){}
+      }catch(missionError){
+        // Room creation is the primary action. Do not undo it if the
+        // mission tracker has a temporary problem.
+        console.warn("POMRU room mission:",missionError?.message||missionError);
+      }
+
       closeCreateRoomSheet();
       await enterRoom(roomId);
       arenaScrollTop("auto");
@@ -18260,7 +18605,7 @@ window.addEventListener("load",()=>{
       e.textContent=errText(x);
     }finally{
       btn.disabled=false;
-      btn.textContent="สร้างห้อง Ranked";
+      btn.textContent="สร้างห้อง";
     }
   }
 
@@ -18282,6 +18627,9 @@ window.addEventListener("load",()=>{
     show("#bbArenaLobby",false);show("#bbArenaGate",false);show("#bbArenaRoom",true);show("#bbArenaCountdown",false);
     arenaScrollTop("auto");
     await refreshRoom();
+    document.dispatchEvent(new CustomEvent("pomru:duel-room-enter",{
+      detail:{room_id:roomId}
+    }));
     subscribeRoom();
     requestAnimationFrame(()=>arenaScrollTop("auto"));
   }
@@ -18319,19 +18667,33 @@ window.addEventListener("load",()=>{
       return `<div class="bbPlayerTile"><div class="bbPlayerAvatar">${av}</div><div class="bbPlayerText"><b>${esc(pr.display_name||"ผู้เล่น")}${isHost?" 👑":""}${p.user_id===user.id?" • คุณ":""}</b><small>${prRank.icon} ${esc(prRank.name)} • ${prRP.toLocaleString()} RP</small></div><span class="bbReadyBadge ${p.is_ready?"yes":""}">${p.is_ready?"✓ พร้อม":"รอ"}</span></div>`;
     }).join("");
     const rb=$("#bbRoomReadyBtn"),sbBtn=$("#bbRoomStartBtn");
+    rb.disabled=r.status!=="waiting";
+    rb.classList.toggle("ready",!!me?.is_ready);
+    rb.textContent=me?.is_ready?"✓ พร้อมแล้ว — แตะเพื่อยกเลิก":"✓ ฉันพร้อม";
+
     if(host){
-      rb.classList.add("ready");rb.textContent="👑 Host";rb.disabled=true;
-      sbBtn.classList.remove("hidden");sbBtn.disabled=!(n>=2&&r.status==="waiting");
-      sbBtn.textContent=n>=2?"▶ เล่นเลย":"ต้องมี 2 คน";
+      sbBtn.classList.remove("hidden");
+      sbBtn.disabled=!(n===2&&ready===2&&r.status==="waiting");
+      sbBtn.textContent=n<2?"รอคู่แข่ง":ready<2?"รอทั้งสองคนพร้อม":"เริ่มดวล 1v1";
       $("#bbRoomInfo").textContent=n<2
-        ?"แชร์รหัสห้องเพื่อชวนผู้เล่นอีกอย่างน้อย 1 คน"
-        :ready===n
-          ?"ทุกคนพร้อมแล้ว • กด “เล่นเลย” ได้ทันที"
-          :`มี ${n} คนในห้อง • ${ready}/${n} พร้อม • Host กด “เล่นเลย” ได้โดยไม่ต้องรอ`;
+        ?"เชิญเพื่อนหรือแชร์รหัสห้อง • ห้องดวลรองรับผู้เล่น 2 คน"
+        :ready===2
+          ?"ทั้งสองคนพร้อมแล้ว • Host เริ่มการแข่งขันได้"
+          :`พร้อม ${ready}/2 • ต้องกดพร้อมทั้งสองคนก่อนเริ่ม`;
     }else{
-      rb.disabled=r.status!=="waiting";rb.classList.toggle("ready",!!me?.is_ready);rb.textContent=me?.is_ready?"✓ พร้อมแล้ว — แตะเพื่อยกเลิก":"✓ พร้อมเล่น";
-      sbBtn.classList.add("hidden");$("#bbRoomInfo").textContent=me?.is_ready?"พร้อมแล้ว • รอ Host เริ่มการแข่งขัน":"กด “พร้อมเล่น” เพื่อบอก Host ว่าคุณพร้อม • Host สามารถเริ่มได้ทุกเมื่อ";
+      sbBtn.classList.add("hidden");
+      $("#bbRoomInfo").textContent=me?.is_ready
+        ?"คุณพร้อมแล้ว • รอคู่แข่งและ Host เริ่มดวล"
+        :"กด “ฉันพร้อม” เมื่อพร้อมแข่งขัน";
     }
+
+    document.dispatchEvent(new CustomEvent("pomru:duel-room-refresh",{
+      detail:{room_id:r.id,room:r,players:players.map(x=>({
+        user_id:x.user_id,
+        is_ready:!!x.is_ready,
+        seat:x.seat
+      }))}
+    }));
   }
 
   function subscribeRoom(){
@@ -18355,15 +18717,30 @@ window.addEventListener("load",()=>{
     if(!confirm(currentRoom.host_id===user.id?"คุณเป็น Host การออกจะปิดห้องนี้ ต้องการออกหรือไม่?":"ออกจากห้องนี้?"))return;
     try{const {error}=await client.rpc("bb_ranked_leave_room",{p_room_id:currentRoom.id});if(error)throw error}
     catch(x){toast(errText(x));return}
-    cleanupRoomChannel();stopCountdown();currentRoom=null;players=[];show("#bbArenaRoom",false);show("#bbArenaCountdown",false);show("#bbArenaLobby",true);await loadLobby();subscribeLobby();toast("ออกจากห้องแล้ว");
+    const leftRoomId=currentRoom?.id||null;
+    cleanupRoomChannel();stopCountdown();currentRoom=null;players=[];
+    document.dispatchEvent(new CustomEvent("pomru:duel-room-left",{detail:{room_id:leftRoomId}}));
+    closeArena();
+    setTimeout(()=>window.POMRUDuel?.openHub?.("friends"),60);
+    toast("ออกจากห้องแล้ว");
   }
   async function toggleReady(){
-    const me=players.find(x=>x.user_id===user.id);if(!me||currentRoom.host_id===user.id)return;
-    try{const {error}=await client.rpc("bb_ranked_set_ready",{p_room_id:currentRoom.id,p_ready:!me.is_ready});if(error)throw error;await refreshRoom()}
-    catch(x){toast(errText(x))}
+    const me=players.find(x=>x.user_id===user.id);if(!me||!currentRoom?.id)return;
+    try{
+      const {error}=await client.rpc("bb_ranked_set_ready",{
+        p_room_id:currentRoom.id,
+        p_ready:!me.is_ready
+      });
+      if(error)throw error;
+      await refreshRoom()
+    }catch(x){toast(errText(x))}
   }
   async function startMatch(){
     const btn=$("#bbRoomStartBtn");
+    if(players.length!==2 || players.filter(x=>x.is_ready).length!==2){
+      toast("ต้องมีผู้เล่น 2 คน และกดพร้อมทั้งสองคนก่อน");
+      return;
+    }
     btn.disabled=true;btn.textContent="กำลังเริ่ม…";
 
     try{
@@ -18400,6 +18777,9 @@ window.addEventListener("load",()=>{
     if(document.body.classList.contains("bbRankedPlaying")&&activeRankedMatch?.id===match.id)return;
 
     stopCountdown();
+    document.dispatchEvent(new CustomEvent("pomru:duel-starting",{
+      detail:{room_id:currentRoom?.id||null,match_id:match.id}
+    }));
     show("#bbArenaRoom",false);show("#bbArenaLobby",false);show("#bbArenaCountdown",true);
 
     // ใช้ started_at จาก Server เป็นนาฬิกากลางของทุกเครื่อง
@@ -19521,10 +19901,12 @@ window.addEventListener("load",()=>{
     document.body.classList.remove("bbRankedPlaying","bbRankedWaiting","bbGameActive");
     try{window.bbRestoreGameplayDock?.()}catch(e){}
     try{localStorage.removeItem("bb_ranked_waiting_match")}catch(e){}
+    const finishedRoom=currentRoom?.id||null;
     currentRoom=null;players=[];activeRankedMatch=null;
-    show("#bbArenaResults",false);show("#bbArenaRoom",false);show("#bbArenaCountdown",false);show("#bbArenaLobby",true);
-    await getAuth();renderMe();await loadLobby();subscribeLobby();
-    toast("ออกจาก Ranked แล้ว • ผลของคุณยังถูกเก็บไว้");
+    document.dispatchEvent(new CustomEvent("pomru:duel-room-left",{detail:{room_id:finishedRoom}}));
+    closeArena();
+    setTimeout(()=>window.POMRUDuel?.openHub?.("friends"),60);
+    toast("จบการดวลแล้ว • ผลการแข่งขันถูกบันทึกไว้");
   });
 
   $("#bbResultsLobby")?.addEventListener("click",async()=>{
@@ -19533,9 +19915,11 @@ window.addEventListener("load",()=>{
     document.body.classList.remove("bbRankedPlaying","bbRankedWaiting","bbGameActive");
     try{window.bbRestoreGameplayDock?.()}catch(e){}
     try{localStorage.removeItem("bb_ranked_waiting_match")}catch(e){}
-    show("#bbArenaResults",false);show("#bbArenaRoom",false);show("#bbArenaCountdown",false);show("#bbArenaLobby",true);
+    const finishedRoom=currentRoom?.id||null;
     currentRoom=null;players=[];activeRankedMatch=null;
-    await getAuth();renderMe();await loadLobby();subscribeLobby()
+    document.dispatchEvent(new CustomEvent("pomru:duel-room-left",{detail:{room_id:finishedRoom}}));
+    closeArena();
+    setTimeout(()=>window.POMRUDuel?.openHub?.("friends"),60)
   });
 
   window.bbReturnToRankedRoom=async()=>{
@@ -27332,7 +27716,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const ids={
       play:["p899MissionPlay","p899MissionPlayBar"],
       feed:["p899MissionFeed","p899MissionFeedBar"],
-      exercise:["p899MissionExercise","p899MissionExerciseBar"]
+      room:["p899MissionRoom","p899MissionRoomBar"]
     }[type];
 
     if(!ids)return;
@@ -27356,7 +27740,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(!state.user){
       setMission("play",0,1);
       setMission("feed",0,1);
-      setMission("exercise",0,1);
+      setMission("room",0,1);
       if(btn){
         btn.disabled=true;
         btn.classList.remove("ready","claimed");
@@ -27376,7 +27760,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setMission("play",n(m.play_progress),Math.max(1,n(m.play_target,1)));
     setMission("feed",n(m.feed_progress),Math.max(1,n(m.feed_target,1)));
-    setMission("exercise",n(m.exercise_progress),Math.max(1,n(m.exercise_target,1)));
+    setMission("room",n(m.exercise_progress),Math.max(1,n(m.exercise_target,1)));
 
     if(!btn)return;
 
@@ -27558,6 +27942,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.addEventListener("pomru:progress-updated",()=>refresh("game-reward"));
+    document.addEventListener("pomru:room-created",()=>refresh("room-created"));
     document.addEventListener("pomru:core-synced",()=>refresh("core-sync"));
     document.addEventListener("bb:pet-updated",()=>{
       // Pet Core may repaint Level/EXP using old pet wording.
@@ -27716,6 +28101,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function openCreateRoom(){
+    if(window.POMRUDuel?.openHub){
+      window.POMRUDuel.openHub("friends");
+      return;
+    }
     try{
       if(typeof window.bbOpenRankedArena==="function"){
         window.bbOpenRankedArena();
@@ -27723,31 +28112,8 @@ document.addEventListener('DOMContentLoaded', () => {
         $("bbOpenArena")?.click();
       }
     }catch(err){
-      console.error("POMRU create room: arena open failed",err);
+      console.error("POMRU duel open failed",err);
     }
-
-    let tries=0;
-    function tryOpenSheet(){
-      tries++;
-
-      if(arenaGateVisible()){
-        return;
-      }
-
-      const create=$("bbArenaCreateOpen");
-      const arena=$("bbArena");
-
-      if(create && arena && !arena.classList.contains("hidden")){
-        create.click();
-        return;
-      }
-
-      if(tries<6){
-        setTimeout(tryOpenSheet,120);
-      }
-    }
-
-    setTimeout(tryOpenSheet,120);
   }
 
   function init(){
@@ -27782,22 +28148,57 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
-<div class="p92MemberGate" id="p92MemberGate">
-  <div class="p92GateShell">
-    <div class="p92GateBuddy" aria-hidden="true">
-      <img src="/assets/buddy/default-pink-buddy.png?v=920" alt="">
+
+<div class="p92MemberGate p921MemberGate" id="p92MemberGate">
+  <div class="p921RoomScene" aria-hidden="true">
+    <span class="p921Curtain left"></span>
+    <span class="p921Curtain right"></span>
+    <span class="p921Window"><i></i><b></b></span>
+    <span class="p921Plant"></span>
+    <span class="p921Shelf"></span>
+    <span class="p921Floor"></span>
+  </div>
+
+  <div class="p921GateHud">
+    <div class="p921GateLogo">
+      <span class="p921Crown"></span>
+      <strong>POMRU</strong>
+      <small>ผมรู้</small>
     </div>
 
-    <section class="p92GateCard">
-      <div class="p92GateBrand"><span>P</span><div><b>POMRU</b><small>เล่น • เรียน • เติบโตไปด้วยกัน</small></div></div>
-      <div class="p92GateTitle"><small>ยินดีต้อนรับ</small><h1>เข้าบัญชีก่อน<br>เริ่มเล่น</h1><p>แต้ม เลเวล แรงก์ เหรียญ Buddy และประวัติจะอยู่กับบัญชีของคุณ</p></div>
+    <div class="p921GateSafe">
+      <span class="p921SafeMark">P</span>
+      <div><b>บัญชีเดียว</b><small>แต้ม • เลเวล • แรงก์</small></div>
+    </div>
 
-      <div class="p92GateTabs">
+    <div class="p921GateProfile">
+      <span class="p921ProfileFace"><img src="/assets/buddy/default-pink-buddy.png?v=921" alt=""></span>
+      <div><small>PLAYER PROFILE</small><b>ข้อมูลของคุณ</b></div>
+    </div>
+  </div>
+
+  <div class="p921GateStage">
+    <section class="p92GateCard p921GateCard">
+      <div class="p92GateBrand p921CardBrand">
+        <span>P</span>
+        <div>
+          <b>POMRU</b>
+          <small>เล่น • เรียน • เลี้ยง Buddy</small>
+        </div>
+      </div>
+
+      <div class="p92GateTitle p921GateTitle">
+        <small>ยินดีต้อนรับกลับ</small>
+        <h1>เข้าบัญชีก่อน<br>เริ่มเล่น</h1>
+        <p>แต้ม เลเวล แรงก์ เหรียญ Buddy และประวัติทั้งหมดจะอยู่กับบัญชีของคุณ</p>
+      </div>
+
+      <div class="p92GateTabs p921GateTabs" role="tablist">
         <button type="button" class="active" data-p92-tab="login">เข้าสู่ระบบ</button>
         <button type="button" data-p92-tab="signup">สมัครสมาชิก</button>
       </div>
 
-      <button class="p92Google" id="p92GoogleLogin" type="button">
+      <button class="p92Google p921Google" id="p92GoogleLogin" type="button">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path fill="#4285F4" d="M21.6 12.23c0-.71-.06-1.4-.18-2.07H12v3.92h5.38a4.6 4.6 0 0 1-1.99 3.02v2.54h3.22c1.89-1.74 2.99-4.3 2.99-7.41z"/>
           <path fill="#34A853" d="M12 22c2.7 0 4.96-.89 6.61-2.41l-3.22-2.54c-.89.6-2.03.96-3.39.96-2.6 0-4.81-1.76-5.6-4.12H3.07v2.62A9.99 9.99 0 0 0 12 22z"/>
@@ -27807,29 +28208,69 @@ document.addEventListener('DOMContentLoaded', () => {
         <span>ดำเนินการต่อด้วย Google</span>
       </button>
 
-      <div class="p92Or"><span>หรือใช้อีเมล</span></div>
+      <div class="p92Or p921Or"><span>หรือใช้อีเมล</span></div>
 
-      <form class="p92GateForm" id="p92LoginForm">
-        <label><span>อีเมล</span><input id="p92LoginEmail" type="email" required autocomplete="email" placeholder="you@example.com"></label>
-        <label><span>รหัสผ่าน</span><input id="p92LoginPassword" type="password" required minlength="6" autocomplete="current-password" placeholder="รหัสผ่าน"></label>
-        <button type="submit" class="p92Primary">เข้าสู่ระบบ</button>
-        <button type="button" class="p92Link" id="p92Forgot">ลืมรหัสผ่าน?</button>
+      <form class="p92GateForm p921GateForm" id="p92LoginForm">
+        <label>
+          <span>อีเมล</span>
+          <div class="p921InputWrap">
+            <i class="mailIcon" aria-hidden="true"></i>
+            <input id="p92LoginEmail" type="email" required autocomplete="email" placeholder="you@example.com">
+          </div>
+        </label>
+        <label>
+          <span>รหัสผ่าน</span>
+          <div class="p921InputWrap">
+            <i class="lockIcon" aria-hidden="true"></i>
+            <input id="p92LoginPassword" type="password" required minlength="6" autocomplete="current-password" placeholder="รหัสผ่าน">
+          </div>
+        </label>
+        <button type="submit" class="p92Primary p921Primary">เข้าสู่ระบบ</button>
+        <button type="button" class="p92Link p921Forgot" id="p92Forgot">ลืมรหัสผ่าน?</button>
       </form>
 
-      <form class="p92GateForm hidden" id="p92SignupForm">
-        <label><span>ชื่อที่ใช้ในเกม</span><input id="p92SignupName" maxlength="24" required placeholder="เช่น Lucky"></label>
-        <label><span>อีเมล</span><input id="p92SignupEmail" type="email" required autocomplete="email" placeholder="you@example.com"></label>
-        <label><span>รหัสผ่าน</span><input id="p92SignupPassword" type="password" required minlength="6" autocomplete="new-password" placeholder="อย่างน้อย 6 ตัวอักษร"></label>
-        <label><span>ยืนยันรหัสผ่าน</span><input id="p92SignupConfirm" type="password" required minlength="6" autocomplete="new-password" placeholder="พิมพ์อีกครั้ง"></label>
-        <button type="submit" class="p92Primary">สร้างบัญชี</button>
+      <form class="p92GateForm p921GateForm hidden" id="p92SignupForm">
+        <label>
+          <span>ชื่อที่ใช้ในเกม</span>
+          <div class="p921InputWrap">
+            <i class="userIcon" aria-hidden="true"></i>
+            <input id="p92SignupName" maxlength="24" required placeholder="เช่น Lucky">
+          </div>
+        </label>
+        <label>
+          <span>อีเมล</span>
+          <div class="p921InputWrap">
+            <i class="mailIcon" aria-hidden="true"></i>
+            <input id="p92SignupEmail" type="email" required autocomplete="email" placeholder="you@example.com">
+          </div>
+        </label>
+        <label>
+          <span>รหัสผ่าน</span>
+          <div class="p921InputWrap">
+            <i class="lockIcon" aria-hidden="true"></i>
+            <input id="p92SignupPassword" type="password" required minlength="6" autocomplete="new-password" placeholder="อย่างน้อย 6 ตัวอักษร">
+          </div>
+        </label>
+        <label>
+          <span>ยืนยันรหัสผ่าน</span>
+          <div class="p921InputWrap">
+            <i class="lockIcon" aria-hidden="true"></i>
+            <input id="p92SignupConfirm" type="password" required minlength="6" autocomplete="new-password" placeholder="พิมพ์อีกครั้ง">
+          </div>
+        </label>
+        <button type="submit" class="p92Primary p921Primary">สร้างบัญชี POMRU</button>
       </form>
 
       <div class="p92GateMessage" id="p92GateMessage"></div>
-      <p class="p92GateFoot">ไม่มีโหมด Guest เพื่อให้แต้มและอันดับของผู้เล่นผูกกับบัญชีเดียวอย่างชัดเจน</p>
+      <p class="p92GateFoot p921GateFoot">บัญชี POMRU ใช้บันทึกความคืบหน้าและทำให้อันดับของคุณไม่หายเมื่อเปลี่ยนอุปกรณ์</p>
     </section>
+
+    <div class="p921BuddySide" aria-hidden="true">
+      <div class="p921Speech">ยินดีต้อนรับ<br>กลับมานะ</div>
+      <img src="/assets/buddy/default-pink-buddy.png?v=921" alt="">
+    </div>
   </div>
 </div>
-
 
 <script id="pomru-v92-member-runtime">
 (function(){
@@ -28092,6 +28533,1006 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});
   else init();
+})();
+</script>
+
+
+<script id="pomru-v921-runtime">
+(function(){
+  "use strict";
+
+  function refreshRoomMission(){
+    try{window.POMRUProgress?.refresh?.("room-created")}catch(_){}
+  }
+
+  function init(){
+    document.addEventListener("pomru:room-created",refreshRoomMission);
+
+    // Ensure no legacy guest CTA can become visible above the member-first gate.
+    document.querySelectorAll(
+      "#v16GuestBtn,#continueผู้เยี่ยมชมBtn,#premiumผู้เยี่ยมชมBtn,#heroGuestBtn"
+    ).forEach(el=>{
+      el.hidden=true;
+      el.setAttribute("aria-hidden","true");
+      el.tabIndex=-1;
+    });
+  }
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",init,{once:true});
+  }else{
+    init();
+  }
+})();
+</script>
+
+
+<div class="p93SocialHub hidden" id="p93SocialHub" aria-hidden="true">
+  <div class="p93SocialScene" aria-hidden="true">
+    <span class="p93Cloud c1"></span><span class="p93Cloud c2"></span>
+    <span class="p93Hill h1"></span><span class="p93Hill h2"></span>
+  </div>
+
+  <header class="p93SocialTop">
+    <button type="button" class="p93CircleBtn" id="p93SocialClose" aria-label="กลับ">
+      <svg viewBox="0 0 24 24"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="p93SocialBrand">
+      <small>POMRU SOCIAL</small>
+      <h1>เพื่อน & ดวล 1v1</h1>
+    </div>
+    <div class="p93SocialMe">
+      <span class="p93Pulse"></span>
+      <div><small>สถานะของฉัน</small><b>ออนไลน์</b></div>
+    </div>
+  </header>
+
+  <main class="p93SocialMain">
+    <section class="p93DuelHero">
+      <div class="p93DuelHeroCopy">
+        <span class="p93HeroPill">RANKED DUEL</span>
+        <h2>ท้าดวลเพื่อน<br>แบบตัวต่อตัว</h2>
+        <p>เห็นว่าใครออนไลน์ ชวนเข้าห้อง คุยกันก่อนเริ่ม และแข่งพร้อมกันแบบ Realtime</p>
+        <div class="p93HeroActions">
+          <button type="button" class="primary" id="p93CreateCodeRoom">สร้างห้อง 1v1</button>
+          <button type="button" class="secondary" id="p93OpenJoinCode">เข้าด้วยรหัส</button>
+        </div>
+      </div>
+      <div class="p93HeroDuel" aria-hidden="true">
+        <div class="p93HeroBear left"><img src="/assets/buddy/default-pink-buddy.png?v=930" alt=""></div>
+        <strong>VS</strong>
+        <div class="p93HeroBear right"><img src="/assets/buddy/default-pink-buddy.png?v=930" alt=""></div>
+      </div>
+    </section>
+
+    <section class="p93SocialShell">
+      <nav class="p93SocialTabs" id="p93SocialTabs">
+        <button class="active" type="button" data-p93-tab="friends">
+          <span class="p93TabIcon friends"></span><b>เพื่อน</b><em id="p93FriendCount">0</em>
+        </button>
+        <button type="button" data-p93-tab="requests">
+          <span class="p93TabIcon request"></span><b>คำขอ</b><em id="p93RequestCount">0</em>
+        </button>
+        <button type="button" data-p93-tab="invites">
+          <span class="p93TabIcon invite"></span><b>คำเชิญดวล</b><em id="p93InviteCount">0</em>
+        </button>
+        <button type="button" data-p93-tab="add">
+          <span class="p93TabIcon add"></span><b>เพิ่มเพื่อน</b>
+        </button>
+      </nav>
+
+      <section class="p93SocialPanel active" data-p93-panel="friends">
+        <div class="p93PanelHead">
+          <div><small>MY FRIENDS</small><h3>เพื่อนของฉัน</h3><p><span id="p93OnlineCount">0</span> คนออนไลน์ตอนนี้</p></div>
+          <button type="button" id="p93RefreshFriends">รีเฟรช</button>
+        </div>
+        <div class="p93FriendList" id="p93FriendList">
+          <div class="p93EmptyState"><b>กำลังโหลดเพื่อน…</b></div>
+        </div>
+      </section>
+
+      <section class="p93SocialPanel" data-p93-panel="requests">
+        <div class="p93PanelHead">
+          <div><small>FRIEND REQUESTS</small><h3>คำขอเป็นเพื่อน</h3><p>รับหรือปฏิเสธคำขอได้จากที่นี่</p></div>
+        </div>
+        <div class="p93RequestList" id="p93RequestList"></div>
+      </section>
+
+      <section class="p93SocialPanel" data-p93-panel="invites">
+        <div class="p93PanelHead">
+          <div><small>DUEL INVITES</small><h3>คำเชิญดวล</h3><p>คำเชิญจะหมดอายุอัตโนมัติ</p></div>
+        </div>
+        <div class="p93InviteList" id="p93InviteList"></div>
+      </section>
+
+      <section class="p93SocialPanel" data-p93-panel="add">
+        <div class="p93PanelHead">
+          <div><small>FIND PLAYER</small><h3>เพิ่มเพื่อนใหม่</h3><p>ค้นหาจากชื่อที่ใช้ใน POMRU</p></div>
+        </div>
+        <form class="p93SearchBox" id="p93SearchForm">
+          <span class="p93SearchIcon"></span>
+          <input id="p93SearchInput" maxlength="40" autocomplete="off" placeholder="พิมพ์ชื่ออย่างน้อย 2 ตัวอักษร">
+          <button type="submit">ค้นหา</button>
+        </form>
+        <div class="p93SearchResults" id="p93SearchResults">
+          <div class="p93EmptyState"><b>ค้นหาผู้เล่นแล้วกด “เพิ่มเพื่อน”</b></div>
+        </div>
+      </section>
+    </section>
+  </main>
+</div>
+
+<div class="p93SheetBackdrop hidden" id="p93DuelConfig">
+  <section class="p93DuelSheet">
+    <button class="p93SheetX" type="button" id="p93DuelConfigClose">×</button>
+    <span class="p93HeroPill">1 VS 1</span>
+    <h2 id="p93DuelConfigTitle">สร้างห้องดวล</h2>
+    <p id="p93DuelConfigSub">เลือกเกมและระดับก่อนส่งคำเชิญ</p>
+
+    <div class="p93ChallengeTarget hidden" id="p93ChallengeTarget">
+      <div class="p93TargetAvatar" id="p93TargetAvatar"></div>
+      <div><small>คู่แข่งที่เลือก</small><b id="p93TargetName">เพื่อน</b><span id="p93TargetStatus">ออนไลน์</span></div>
+    </div>
+
+    <label class="p93DuelField">
+      <span>เกมที่ใช้ดวล</span>
+      <select id="p93DuelMode">
+        <optgroup label="Memory">
+          <option value="teddy_position">จำตำแหน่ง</option>
+          <option value="teddy_match">จับคู่</option>
+          <option value="teddy_sequence">จำลำดับ</option>
+        </optgroup>
+        <optgroup label="Math">
+          <option value="math_multiple_choice">เลือกคำตอบ</option>
+          <option value="math_typing">พิมพ์คำตอบ</option>
+          <option value="math_mix">Math Mix</option>
+        </optgroup>
+        <optgroup label="Chinese">
+          <option value="chinese_hanzi_meaning">คำศัพท์จีน</option>
+          <option value="chinese_hanzi_pinyin">พินอิน</option>
+          <option value="chinese_listening">ฝึกฟัง</option>
+          <option value="chinese_mix">Chinese Mix</option>
+        </optgroup>
+        <optgroup label="English">
+          <option value="english_vocabulary">Vocabulary</option>
+          <option value="english_typing">Typing</option>
+          <option value="english_listening">Listening</option>
+        </optgroup>
+      </select>
+    </label>
+
+    <label class="p93DuelField">
+      <span>ระดับ</span>
+      <select id="p93DuelDifficulty"></select>
+    </label>
+
+    <div class="p93DuelRules">
+      <div><b>2</b><span>ผู้เล่นเท่านั้น</span></div>
+      <div><b>LIVE</b><span>เวลา Server เดียวกัน</span></div>
+      <div><b>CHAT</b><span>คุยก่อนเริ่มได้</span></div>
+    </div>
+
+    <div class="p93SheetError" id="p93DuelConfigError"></div>
+    <button class="p93SheetPrimary" type="button" id="p93DuelCreateSubmit">สร้างห้องดวล</button>
+  </section>
+</div>
+
+<div class="p93SheetBackdrop hidden" id="p93JoinSheet">
+  <section class="p93DuelSheet small">
+    <button class="p93SheetX" type="button" id="p93JoinSheetClose">×</button>
+    <span class="p93HeroPill">JOIN DUEL</span>
+    <h2>เข้าห้องด้วยรหัส</h2>
+    <p>ขอรหัสจากเพื่อนแล้วกรอกด้านล่าง</p>
+    <label class="p93DuelField">
+      <span>รหัสห้อง</span>
+      <input id="p93JoinCodeInput" maxlength="12" autocomplete="off" placeholder="เช่น BB-A1B2C3">
+    </label>
+    <div class="p93SheetError" id="p93JoinError"></div>
+    <button class="p93SheetPrimary" type="button" id="p93JoinSubmit">เข้าห้องดวล</button>
+  </section>
+</div>
+
+<div class="p93GlobalInvite hidden" id="p93GlobalInvite">
+  <div class="p93GlobalInviteAvatar" id="p93GlobalInviteAvatar"></div>
+  <div class="p93GlobalInviteCopy">
+    <small>คำเชิญดวลใหม่</small>
+    <b id="p93GlobalInviteName">เพื่อนชวนคุณดวล</b>
+    <span id="p93GlobalInviteGame">1v1</span>
+  </div>
+  <button type="button" class="accept" id="p93GlobalInviteAccept">รับ</button>
+  <button type="button" class="decline" id="p93GlobalInviteDecline">×</button>
+</div>
+
+
+<script id="pomru-v93-social-duel-runtime">
+(function(){
+  "use strict";
+
+  const q=s=>document.querySelector(s);
+  const qa=s=>Array.from(document.querySelectorAll(s));
+  const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
+
+  let client=null;
+  let user=null;
+  let friends=[];
+  let requests=[];
+  let invites=[];
+  let selectedFriend=null;
+  let inviteIntoRoomId=null;
+  let activeRoomId=null;
+  let socialChannel=null;
+  let chatChannel=null;
+  let heartbeatTimer=null;
+  let refreshTimer=null;
+  let legacyArenaOpen=null;
+  let lastInviteId=null;
+
+  const MODES={
+    teddy_position:{label:"จำตำแหน่ง",world:"memory"},
+    teddy_match:{label:"จับคู่",world:"memory"},
+    teddy_sequence:{label:"จำลำดับ",world:"memory"},
+    math_multiple_choice:{label:"เลือกคำตอบ",world:"math"},
+    math_typing:{label:"พิมพ์คำตอบ",world:"math"},
+    math_mix:{label:"Math Mix",world:"math"},
+    chinese_hanzi_meaning:{label:"คำศัพท์จีน",world:"chinese"},
+    chinese_hanzi_pinyin:{label:"พินอิน",world:"chinese"},
+    chinese_listening:{label:"ฝึกฟัง",world:"chinese"},
+    chinese_mix:{label:"Chinese Mix",world:"chinese"},
+    english_vocabulary:{label:"Vocabulary",world:"english"},
+    english_typing:{label:"Typing",world:"english"},
+    english_listening:{label:"Listening",world:"english"}
+  };
+
+  const DIFF_LABEL={
+    easy:"ง่าย",normal:"ปานกลาง",hard:"ยาก",
+    hsk1:"HSK 1",hsk2:"HSK 2",hsk3:"HSK 3",
+    hsk4:"HSK 4",hsk5:"HSK 5",hsk6:"HSK 6"
+  };
+
+  function getClient(){
+    if(client)return client;
+    if(window.__bbSupabase?.auth)return client=window.__bbSupabase;
+    if(window.sb?.auth)return client=window.sb;
+    const cfg=window.BRAIN_BUDDY_SUPABASE||{};
+    if(window.supabase&&cfg.url&&cfg.publishableKey){
+      client=window.supabase.createClient(cfg.url,cfg.publishableKey);
+      window.__bbSupabase=client;
+      return client;
+    }
+    return null;
+  }
+
+  async function getUser(){
+    const c=getClient();
+    if(!c)return null;
+    const {data}=await c.auth.getUser();
+    user=data?.user||null;
+    return user;
+  }
+
+  function avatarHTML(url,name="P"){
+    if(url){
+      return `<img src="${esc(url)}" alt="">`;
+    }
+    const initial=String(name||"P").trim().slice(0,1).toUpperCase()||"P";
+    return `<span class="p93AvatarFallback">${esc(initial)}</span>`;
+  }
+
+  function rankLabel(tier){
+    const t=String(tier||"").toLowerCase();
+    const map={
+      bronze:"ทองแดง",
+      silver:"เงิน",
+      gold:"ทอง",
+      platinum:"แพลทินัม",
+      diamond:"เพชร",
+      master:"มาสเตอร์",
+      legend:"ตำนาน"
+    };
+    return map[t]||String(tier||"มือใหม่");
+  }
+
+  function relativeTime(value){
+    if(!value)return "ออฟไลน์";
+    const d=new Date(value).getTime();
+    if(!Number.isFinite(d))return "ออฟไลน์";
+    const min=Math.max(0,Math.floor((Date.now()-d)/60000));
+    if(min<2)return "เพิ่งออนไลน์";
+    if(min<60)return `${min} นาทีที่แล้ว`;
+    const hr=Math.floor(min/60);
+    if(hr<24)return `${hr} ชม.ที่แล้ว`;
+    return `${Math.floor(hr/24)} วันที่แล้ว`;
+  }
+
+  function show(el,on=true){
+    const node=typeof el==="string"?q(el):el;
+    if(node)node.classList.toggle("hidden",!on);
+  }
+
+  function setTab(tab){
+    qa("[data-p93-tab]").forEach(b=>b.classList.toggle("active",b.dataset.p93Tab===tab));
+    qa("[data-p93-panel]").forEach(p=>p.classList.toggle("active",p.dataset.p93Panel===tab));
+  }
+
+  async function openHub(tab="friends"){
+    await getUser();
+    if(!user){
+      window.POMRUMember?.gateOpen?.();
+      return;
+    }
+    inviteIntoRoomId=null;
+    show("#p93SocialHub",true);
+    q("#p93SocialHub")?.setAttribute("aria-hidden","false");
+    document.body.classList.add("p93SocialOpen");
+    setTab(tab);
+    await loadAll();
+  }
+
+  function closeHub(){
+    show("#p93SocialHub",false);
+    q("#p93SocialHub")?.setAttribute("aria-hidden","true");
+    document.body.classList.remove("p93SocialOpen");
+    inviteIntoRoomId=null;
+  }
+
+  async function rpc(name,args={}){
+    const c=getClient();
+    if(!c)throw new Error("ระบบออนไลน์ยังไม่พร้อม");
+    const {data,error}=await c.rpc(name,args);
+    if(error)throw error;
+    return data;
+  }
+
+  function niceError(e){
+    const s=String(e?.message||e||"เกิดข้อผิดพลาด");
+    const map=[
+      ["already_friends","เป็นเพื่อนกันอยู่แล้ว"],
+      ["player_not_found","ไม่พบผู้เล่น"],
+      ["request_not_found","ไม่พบคำขอ"],
+      ["not_friends","ต้องเป็นเพื่อนกันก่อน"],
+      ["room_full","ห้องเต็มแล้ว"],
+      ["invite_expired","คำเชิญหมดอายุแล้ว"],
+      ["chat_rate_limited","ส่งเร็วเกินไป ลองใหม่อีกครั้ง"],
+      ["chat_closed","แชทปิดเมื่อการแข่งขันเริ่มแล้ว"],
+      ["room_not_waiting","ห้องนี้เริ่มแข่งขันไปแล้ว"]
+    ];
+    for(const [a,b] of map)if(s.includes(a))return b;
+    return s;
+  }
+
+  async function loadFriends(){
+    try{
+      friends=await rpc("bb_my_friends")||[];
+    }catch(e){
+      console.warn("POMRU friends:",e);
+      friends=[];
+    }
+    renderFriends();
+  }
+
+  async function loadRequests(){
+    try{
+      requests=await rpc("bb_my_friend_requests")||[];
+    }catch(e){
+      console.warn("POMRU requests:",e);
+      requests=[];
+    }
+    renderRequests();
+  }
+
+  async function loadInvites(){
+    try{
+      invites=await rpc("bb_my_room_invites")||[];
+    }catch(e){
+      console.warn("POMRU invites:",e);
+      invites=[];
+    }
+    renderInvites();
+    renderGlobalInvite();
+  }
+
+  async function loadAll(){
+    if(!user)await getUser();
+    if(!user)return;
+    await Promise.all([loadFriends(),loadRequests(),loadInvites()]);
+    updateBadges();
+  }
+
+  function updateBadges(){
+    const incoming=requests.filter(x=>x.direction==="incoming").length;
+    const total=incoming+invites.length;
+    const badge=q("#p93FriendsBadge");
+    if(badge){
+      badge.textContent=total>99?"99+":String(total);
+      badge.classList.toggle("hidden",total<1);
+    }
+    if(q("#p93FriendCount"))q("#p93FriendCount").textContent=String(friends.length);
+    if(q("#p93RequestCount"))q("#p93RequestCount").textContent=String(incoming);
+    if(q("#p93InviteCount"))q("#p93InviteCount").textContent=String(invites.length);
+    if(q("#p93OnlineCount"))q("#p93OnlineCount").textContent=String(friends.filter(x=>x.is_online).length);
+  }
+
+  function renderFriends(){
+    const box=q("#p93FriendList");
+    if(!box)return;
+    if(!friends.length){
+      box.innerHTML=`<div class="p93EmptyState"><div><b>ยังไม่มีเพื่อน</b><br><small>ไปที่ “เพิ่มเพื่อน” แล้วค้นหาชื่อผู้เล่น</small></div></div>`;
+      updateBadges();
+      return;
+    }
+    box.innerHTML=friends.map(f=>{
+      const state=f.is_online
+        ? (f.current_room_id?"กำลังอยู่ในห้อง • ออนไลน์":"ออนไลน์")
+        : relativeTime(f.last_seen_at);
+      const action=inviteIntoRoomId
+        ? `<button class="good" data-p93-invite-existing="${esc(f.friend_id)}">เชิญเข้าห้อง</button>`
+        : `<button ${f.is_online?"":"class=\"alt\""} data-p93-duel="${esc(f.friend_id)}">${f.is_online?"ชวนดวล":"ชวนไว้"}</button>`;
+      return `<article class="p93FriendCard">
+        <div class="p93PersonAvatar">${avatarHTML(f.avatar_url,f.display_name)}<i class="${f.is_online?"online":""}"></i></div>
+        <div class="p93PersonInfo">
+          <b>${esc(f.display_name||"ผู้เล่น")}</b>
+          <small>${esc(state)}</small>
+          <span>แรงก์ ${esc(rankLabel(f.ranked_tier))}</span>
+        </div>
+        <div class="p93PersonActions">
+          ${action}
+          <button class="alt" data-p93-remove-friend="${esc(f.friend_id)}">ลบ</button>
+        </div>
+      </article>`;
+    }).join("");
+    updateBadges();
+  }
+
+  function renderRequests(){
+    const box=q("#p93RequestList");
+    if(!box)return;
+    if(!requests.length){
+      box.innerHTML=`<div class="p93EmptyState"><b>ยังไม่มีคำขอเป็นเพื่อน</b></div>`;
+      updateBadges();
+      return;
+    }
+    box.innerHTML=requests.map(r=>{
+      const incoming=r.direction==="incoming";
+      return `<article class="p93RequestCard">
+        <div class="p93PersonAvatar">${avatarHTML(r.avatar_url,r.display_name)}</div>
+        <div class="p93PersonInfo">
+          <b>${esc(r.display_name||"ผู้เล่น")}</b>
+          <small>${incoming?"ส่งคำขอเป็นเพื่อนถึงคุณ":"ส่งคำขอแล้ว"}</small>
+          <span>แรงก์ ${esc(rankLabel(r.ranked_tier))}</span>
+        </div>
+        <div class="p93PersonActions">
+          ${incoming?`
+            <button class="good" data-p93-friend-accept="${esc(r.request_id)}">รับ</button>
+            <button class="alt" data-p93-friend-decline="${esc(r.request_id)}">ปฏิเสธ</button>
+          `:`<button class="alt" disabled>รอตอบรับ</button>`}
+        </div>
+      </article>`;
+    }).join("");
+    updateBadges();
+  }
+
+  function renderInvites(){
+    const box=q("#p93InviteList");
+    if(!box)return;
+    if(!invites.length){
+      box.innerHTML=`<div class="p93EmptyState"><b>ยังไม่มีคำเชิญดวล</b></div>`;
+      updateBadges();
+      return;
+    }
+    box.innerHTML=invites.map(i=>`
+      <article class="p93InviteCard">
+        <div class="p93PersonAvatar">${avatarHTML(i.inviter_avatar_url,i.inviter_name)}</div>
+        <div class="p93PersonInfo">
+          <b>${esc(i.inviter_name||"ผู้เล่น")} ชวนคุณดวล</b>
+          <small>${esc(MODES[i.mode_code]?.label||i.mode_code||"เกม")} • ${esc(DIFF_LABEL[i.difficulty_code]||i.difficulty_code||"")}</small>
+          <span>แรงก์ ${esc(rankLabel(i.inviter_ranked_tier))} • ห้อง ${esc(i.room_code||"")}</span>
+        </div>
+        <div class="p93PersonActions">
+          <button class="good" data-p93-invite-accept="${esc(i.invite_id)}">รับคำเชิญ</button>
+          <button class="alt" data-p93-invite-decline="${esc(i.invite_id)}">ปฏิเสธ</button>
+        </div>
+      </article>
+    `).join("");
+    updateBadges();
+  }
+
+  function renderGlobalInvite(){
+    const box=q("#p93GlobalInvite");
+    const inv=invites[0];
+    if(!box||!inv){show(box,false);lastInviteId=null;return}
+    q("#p93GlobalInviteAvatar").innerHTML=avatarHTML(inv.inviter_avatar_url,inv.inviter_name);
+    q("#p93GlobalInviteName").textContent=`${inv.inviter_name||"เพื่อน"} ชวนคุณดวล`;
+    q("#p93GlobalInviteGame").textContent=`${MODES[inv.mode_code]?.label||inv.mode_code||"1v1"} • ${DIFF_LABEL[inv.difficulty_code]||inv.difficulty_code||""}`;
+    q("#p93GlobalInviteAccept").dataset.inviteId=inv.invite_id;
+    q("#p93GlobalInviteDecline").dataset.inviteId=inv.invite_id;
+    show(box,true);
+    lastInviteId=inv.invite_id;
+  }
+
+  async function searchPlayers(query){
+    const box=q("#p93SearchResults");
+    if(!box)return;
+    if(String(query||"").trim().length<2){
+      box.innerHTML=`<div class="p93EmptyState"><b>พิมพ์อย่างน้อย 2 ตัวอักษร</b></div>`;
+      return;
+    }
+    box.innerHTML=`<div class="p93EmptyState"><b>กำลังค้นหา…</b></div>`;
+    try{
+      const rows=await rpc("bb_search_players",{p_query:String(query).trim()})||[];
+      if(!rows.length){
+        box.innerHTML=`<div class="p93EmptyState"><b>ไม่พบผู้เล่นชื่อนี้</b></div>`;
+        return;
+      }
+      box.innerHTML=rows.map(p=>{
+        let action="";
+        if(p.relation_status==="friend") action=`<button class="alt" disabled>เป็นเพื่อนแล้ว</button>`;
+        else if(p.relation_status==="sent") action=`<button class="alt" disabled>ส่งคำขอแล้ว</button>`;
+        else if(p.relation_status==="incoming") action=`<button class="good" data-p93-send-friend="${esc(p.user_id)}">ตอบรับเป็นเพื่อน</button>`;
+        else action=`<button data-p93-send-friend="${esc(p.user_id)}">เพิ่มเพื่อน</button>`;
+        return `<article class="p93SearchCard">
+          <div class="p93PersonAvatar">${avatarHTML(p.avatar_url,p.display_name)}</div>
+          <div class="p93PersonInfo"><b>${esc(p.display_name||"ผู้เล่น")}</b><small>ผู้เล่น POMRU</small><span>แรงก์ ${esc(rankLabel(p.ranked_tier))}</span></div>
+          <div class="p93PersonActions">${action}</div>
+        </article>`;
+      }).join("");
+    }catch(e){
+      box.innerHTML=`<div class="p93EmptyState"><b>${esc(niceError(e))}</b></div>`;
+    }
+  }
+
+  function syncDifficulty(){
+    const mode=q("#p93DuelMode")?.value||"teddy_position";
+    const world=MODES[mode]?.world||"memory";
+    const select=q("#p93DuelDifficulty");
+    if(!select)return;
+    const options=world==="chinese"
+      ? ["hsk1","hsk2","hsk3","hsk4","hsk5","hsk6"]
+      : ["easy","normal","hard"];
+    const prior=select.value;
+    select.innerHTML=options.map(x=>`<option value="${x}">${esc(DIFF_LABEL[x]||x)}</option>`).join("");
+    select.value=options.includes(prior)?prior:(world==="chinese"?"hsk1":"normal");
+  }
+
+  function openDuelConfig(friendId=null){
+    selectedFriend=friendId?friends.find(x=>x.friend_id===friendId)||null:null;
+    const target=q("#p93ChallengeTarget");
+    if(selectedFriend){
+      show(target,true);
+      q("#p93TargetAvatar").innerHTML=avatarHTML(selectedFriend.avatar_url,selectedFriend.display_name);
+      q("#p93TargetName").textContent=selectedFriend.display_name||"เพื่อน";
+      q("#p93TargetStatus").textContent=selectedFriend.is_online?"ออนไลน์ตอนนี้":"ออฟไลน์ • คำเชิญมีอายุ 10 นาที";
+      q("#p93DuelConfigTitle").textContent=`ท้าดวล ${selectedFriend.display_name||"เพื่อน"}`;
+      q("#p93DuelCreateSubmit").textContent="สร้างห้องและส่งคำเชิญ";
+    }else{
+      show(target,false);
+      q("#p93DuelConfigTitle").textContent="สร้างห้องดวล 1v1";
+      q("#p93DuelCreateSubmit").textContent="สร้างห้องดวล";
+    }
+    q("#p93DuelConfigError").textContent="";
+    syncDifficulty();
+    show("#p93DuelConfig",true);
+  }
+
+  async function createDuel(){
+    const btn=q("#p93DuelCreateSubmit");
+    const err=q("#p93DuelConfigError");
+    err.textContent="";
+    btn.disabled=true;btn.textContent="กำลังสร้างห้อง…";
+    try{
+      const mode=q("#p93DuelMode").value;
+      const difficulty=q("#p93DuelDifficulty").value;
+      const data=await rpc("bb_create_duel_room",{
+        p_mode_code:mode,
+        p_difficulty_code:difficulty,
+        p_visibility:"private",
+        p_friend_id:selectedFriend?.friend_id||null
+      });
+      const row=Array.isArray(data)?data[0]:data;
+      const roomId=row?.room_id;
+      if(!roomId)throw new Error("สร้างห้องดวลไม่สำเร็จ");
+      activeRoomId=roomId;
+      document.dispatchEvent(new CustomEvent("pomru:room-created",{detail:{room_id:roomId}}));
+      show("#p93DuelConfig",false);
+      closeHub();
+      await touchPresence("online",roomId);
+      if(typeof legacyArenaOpen==="function")await legacyArenaOpen();
+    }catch(e){
+      err.textContent=niceError(e);
+    }finally{
+      btn.disabled=false;
+      btn.textContent=selectedFriend?"สร้างห้องและส่งคำเชิญ":"สร้างห้องดวล";
+    }
+  }
+
+  async function inviteExisting(friendId){
+    if(!inviteIntoRoomId)return;
+    const btn=q(`[data-p93-invite-existing="${CSS.escape(friendId)}"]`);
+    if(btn){btn.disabled=true;btn.textContent="กำลังเชิญ…"}
+    try{
+      await rpc("bb_invite_friend_to_room",{
+        p_room_id:inviteIntoRoomId,
+        p_friend_id:friendId
+      });
+      if(btn)btn.textContent="ส่งคำเชิญแล้ว";
+      setTimeout(()=>{
+        closeHub();
+        if(typeof legacyArenaOpen==="function")legacyArenaOpen();
+      },500);
+    }catch(e){
+      alert(niceError(e));
+      if(btn){btn.disabled=false;btn.textContent="เชิญเข้าห้อง"}
+    }
+  }
+
+  async function joinByCode(){
+    const input=q("#p93JoinCodeInput");
+    const err=q("#p93JoinError");
+    const code=String(input?.value||"").trim().toUpperCase();
+    if(!code){err.textContent="กรุณาใส่รหัสห้อง";return}
+    err.textContent="";
+    const btn=q("#p93JoinSubmit");btn.disabled=true;btn.textContent="กำลังเข้าห้อง…";
+    try{
+      const data=await rpc("bb_ranked_join_room",{p_room_code:code});
+      const row=Array.isArray(data)?data[0]:data;
+      if(!row?.room_id)throw new Error("เข้าห้องไม่สำเร็จ");
+      activeRoomId=row.room_id;
+      show("#p93JoinSheet",false);
+      closeHub();
+      await touchPresence("online",activeRoomId);
+      if(typeof legacyArenaOpen==="function")await legacyArenaOpen();
+    }catch(e){
+      err.textContent=niceError(e);
+    }finally{
+      btn.disabled=false;btn.textContent="เข้าห้องดวล";
+    }
+  }
+
+  async function respondInvite(inviteId,accept){
+    try{
+      const data=await rpc("bb_respond_room_invite",{
+        p_invite_id:inviteId,
+        p_accept:!!accept
+      });
+      if(accept){
+        const row=Array.isArray(data)?data[0]:data;
+        activeRoomId=row?.room_id||null;
+        show("#p93GlobalInvite",false);
+        closeHub();
+        if(activeRoomId)await touchPresence("online",activeRoomId);
+        if(typeof legacyArenaOpen==="function")await legacyArenaOpen();
+      }else{
+        await loadInvites();
+      }
+    }catch(e){
+      alert(niceError(e));
+    }
+  }
+
+  async function respondFriend(requestId,accept){
+    try{
+      await rpc("bb_respond_friend_request",{
+        p_request_id:requestId,
+        p_accept:!!accept
+      });
+      await loadAll();
+    }catch(e){
+      alert(niceError(e));
+    }
+  }
+
+  async function sendFriend(userId){
+    try{
+      await rpc("bb_send_friend_request",{p_user_id:userId});
+      await loadAll();
+      const query=q("#p93SearchInput")?.value||"";
+      if(query.trim().length>=2)await searchPlayers(query);
+    }catch(e){
+      alert(niceError(e));
+    }
+  }
+
+  async function removeFriend(friendId){
+    if(!confirm("ลบผู้เล่นคนนี้ออกจากรายชื่อเพื่อน?"))return;
+    try{
+      await rpc("bb_remove_friend",{p_friend_id:friendId});
+      await loadAll();
+    }catch(e){alert(niceError(e))}
+  }
+
+  async function touchPresence(status="online",roomId=activeRoomId){
+    if(!user||!getClient())return;
+    try{
+      await rpc("bb_presence_touch",{
+        p_status:status,
+        p_room_id:roomId||null
+      });
+    }catch(e){
+      console.warn("POMRU presence:",e?.message||e);
+    }
+  }
+
+  function scheduleSocialRefresh(){
+    clearTimeout(refreshTimer);
+    refreshTimer=setTimeout(()=>{
+      if(user)loadAll();
+    },220);
+  }
+
+  function startSocialRealtime(){
+    if(!client||!user)return;
+    if(socialChannel){client.removeChannel(socialChannel);socialChannel=null}
+    socialChannel=client.channel("p93-social-"+user.id+"-"+Math.random().toString(36).slice(2))
+      .on("postgres_changes",{event:"*",schema:"public",table:"bb_friend_requests"},scheduleSocialRefresh)
+      .on("postgres_changes",{event:"*",schema:"public",table:"bb_friendships"},scheduleSocialRefresh)
+      .on("postgres_changes",{event:"*",schema:"public",table:"bb_user_presence"},scheduleSocialRefresh)
+      .on("postgres_changes",{event:"*",schema:"public",table:"bb_room_invites"},scheduleSocialRefresh)
+      .subscribe();
+  }
+
+  function stopChatChannel(){
+    if(chatChannel&&client){client.removeChannel(chatChannel);chatChannel=null}
+  }
+
+  function subscribeChat(roomId){
+    stopChatChannel();
+    if(!client||!roomId)return;
+    chatChannel=client.channel("p93-duel-chat-"+roomId+"-"+Math.random().toString(36).slice(2))
+      .on("postgres_changes",{event:"INSERT",schema:"public",table:"bb_room_chat_messages",filter:`room_id=eq.${roomId}`},()=>loadChat(roomId))
+      .on("postgres_changes",{event:"*",schema:"public",table:"bb_user_presence"},()=>loadDuelState(roomId))
+      .subscribe();
+  }
+
+  async function loadDuelState(roomId=activeRoomId){
+    if(!roomId||!user)return;
+    try{
+      const rows=await rpc("bb_duel_room_state",{p_room_id:roomId})||[];
+      const me=rows.find(x=>x.side==="me")||null;
+      const opp=rows.find(x=>x.side==="opponent")||null;
+
+      if(me){
+        q("#p93MeAvatar").innerHTML=avatarHTML(me.avatar_url,me.display_name);
+        q("#p93MeName").textContent=me.display_name||"คุณ";
+        q("#p93MeRank").textContent=`แรงก์ ${rankLabel(me.ranked_tier)}`;
+        q("#p93MeOnline").textContent=me.is_online?"ออนไลน์":"เชื่อมต่ออยู่";
+        q("#p93MeReady").textContent=me.is_ready?"พร้อมแล้ว":"ยังไม่พร้อม";
+        q("#p93MeReady").classList.toggle("ready",!!me.is_ready);
+      }
+
+      const fighter=q("#p93FighterOpponent");
+      if(opp){
+        fighter?.classList.remove("waiting");
+        q("#p93OpponentAvatar").innerHTML=avatarHTML(opp.avatar_url,opp.display_name);
+        q("#p93OpponentName").textContent=opp.display_name||"คู่แข่ง";
+        q("#p93OpponentRank").textContent=`แรงก์ ${rankLabel(opp.ranked_tier)}`;
+        q("#p93OpponentOnline").textContent=opp.is_online?"ออนไลน์":relativeTime(opp.last_seen_at);
+        const dot=q("#p93OpponentOnline")?.previousElementSibling;
+        dot?.classList.toggle("offline",!opp.is_online);
+        q("#p93OpponentReady").textContent=opp.is_ready?"พร้อมแล้ว":"ยังไม่พร้อม";
+        q("#p93OpponentReady").classList.toggle("ready",!!opp.is_ready);
+      }else{
+        fighter?.classList.add("waiting");
+        q("#p93OpponentAvatar").innerHTML='<span class="p93Question">?</span>';
+        q("#p93OpponentName").textContent="กำลังรอคู่แข่ง";
+        q("#p93OpponentRank").textContent="แรงก์ —";
+        q("#p93OpponentOnline").textContent="ยังไม่มีผู้เล่น";
+        q("#p93OpponentReady").textContent="รอเข้าห้อง";
+        q("#p93OpponentReady").classList.remove("ready");
+      }
+
+      const ready=rows.filter(x=>x.is_ready).length;
+      q("#p93DuelStatus").textContent=rows.length<2?"รอคู่แข่ง":ready===2?"พร้อมดวล":"พร้อม "+ready+"/2";
+      q("#p93InviteFriendInRoom").classList.toggle("hidden",rows.length>=2);
+    }catch(e){
+      console.warn("POMRU duel state:",e?.message||e);
+    }
+  }
+
+  async function loadChat(roomId=activeRoomId){
+    if(!roomId||!user)return;
+    const box=q("#p93ChatMessages");
+    try{
+      const rows=await rpc("bb_room_chat",{p_room_id:roomId,p_limit:50})||[];
+      if(!rows.length){
+        box.innerHTML=`<div class="p93ChatEmpty">ยังไม่มีข้อความ • ทักคู่แข่งก่อนเริ่มได้เลย</div>`;
+        return;
+      }
+      box.innerHTML=rows.map(m=>`
+        <div class="p93ChatRow ${m.is_me?"me":""}">
+          ${m.is_me?"":`<div class="p93ChatMiniAvatar">${avatarHTML(m.avatar_url,m.display_name)}</div>`}
+          <div class="p93ChatBubble">${esc(m.body)}<small>${esc(m.display_name||"ผู้เล่น")}</small></div>
+        </div>
+      `).join("");
+      box.scrollTop=box.scrollHeight;
+    }catch(e){
+      console.warn("POMRU chat load:",e?.message||e);
+    }
+  }
+
+  async function sendChat(){
+    const input=q("#p93ChatInput");
+    const body=String(input?.value||"").trim();
+    if(!body||!activeRoomId)return;
+    const btn=q("#p93ChatSend");btn.disabled=true;
+    try{
+      await rpc("bb_send_room_chat",{p_room_id:activeRoomId,p_body:body});
+      input.value="";
+      await loadChat(activeRoomId);
+    }catch(e){
+      alert(niceError(e));
+    }finally{btn.disabled=false}
+  }
+
+  async function enterDuelRoom(roomId){
+    activeRoomId=roomId;
+    inviteIntoRoomId=null;
+    await touchPresence(document.hidden?"away":"online",roomId);
+    await Promise.all([loadDuelState(roomId),loadChat(roomId)]);
+    subscribeChat(roomId);
+    const form=q("#p93ChatForm");
+    form?.classList.remove("disabled");
+    if(q("#p93ChatStatus"))q("#p93ChatStatus").textContent="เปิดอยู่";
+    if(q("#p93ChatInput"))q("#p93ChatInput").disabled=false;
+  }
+
+  async function leaveDuelRoom(){
+    activeRoomId=null;
+    inviteIntoRoomId=null;
+    stopChatChannel();
+    await touchPresence(document.hidden?"away":"online",null);
+  }
+
+  function closeChatForMatch(){
+    const form=q("#p93ChatForm");
+    form?.classList.add("disabled");
+    if(q("#p93ChatStatus"))q("#p93ChatStatus").textContent="ปิดเมื่อเริ่มแข่ง";
+    if(q("#p93ChatInput"))q("#p93ChatInput").disabled=true;
+  }
+
+  function bindEvents(){
+    q("#p93FriendsTopBtn")?.addEventListener("click",()=>openHub("friends"));
+    q("#p93SocialClose")?.addEventListener("click",closeHub);
+    q("#p93RefreshFriends")?.addEventListener("click",loadAll);
+
+    q("#p93CreateCodeRoom")?.addEventListener("click",()=>openDuelConfig(null));
+    q("#p93OpenJoinCode")?.addEventListener("click",()=>{
+      q("#p93JoinError").textContent="";
+      q("#p93JoinCodeInput").value="";
+      show("#p93JoinSheet",true);
+      setTimeout(()=>q("#p93JoinCodeInput")?.focus(),60);
+    });
+
+    q("#p93DuelConfigClose")?.addEventListener("click",()=>show("#p93DuelConfig",false));
+    q("#p93JoinSheetClose")?.addEventListener("click",()=>show("#p93JoinSheet",false));
+    q("#p93DuelConfig")?.addEventListener("click",e=>{if(e.target.id==="p93DuelConfig")show("#p93DuelConfig",false)});
+    q("#p93JoinSheet")?.addEventListener("click",e=>{if(e.target.id==="p93JoinSheet")show("#p93JoinSheet",false)});
+    q("#p93DuelMode")?.addEventListener("change",syncDifficulty);
+    q("#p93DuelCreateSubmit")?.addEventListener("click",createDuel);
+    q("#p93JoinSubmit")?.addEventListener("click",joinByCode);
+    q("#p93JoinCodeInput")?.addEventListener("keydown",e=>{if(e.key==="Enter")joinByCode()});
+    q("#p93JoinCodeInput")?.addEventListener("input",e=>{e.target.value=e.target.value.toUpperCase().replace(/[^A-Z0-9-]/g,"")});
+
+    q("#p93SearchForm")?.addEventListener("submit",e=>{
+      e.preventDefault();
+      searchPlayers(q("#p93SearchInput")?.value||"");
+    });
+
+    q("#p93ChatForm")?.addEventListener("submit",e=>{e.preventDefault();sendChat()});
+
+    q("#p93InviteFriendInRoom")?.addEventListener("click",async()=>{
+      if(!activeRoomId)return;
+      inviteIntoRoomId=activeRoomId;
+      await openHub("friends");
+      inviteIntoRoomId=activeRoomId;
+      renderFriends();
+    });
+
+    q("#p93GlobalInviteAccept")?.addEventListener("click",e=>respondInvite(e.currentTarget.dataset.inviteId,true));
+    q("#p93GlobalInviteDecline")?.addEventListener("click",e=>respondInvite(e.currentTarget.dataset.inviteId,false));
+
+    document.addEventListener("click",e=>{
+      const tab=e.target.closest("[data-p93-tab]");
+      if(tab){setTab(tab.dataset.p93Tab);return}
+
+      const duel=e.target.closest("[data-p93-duel]");
+      if(duel){openDuelConfig(duel.dataset.p93Duel);return}
+
+      const existing=e.target.closest("[data-p93-invite-existing]");
+      if(existing){inviteExisting(existing.dataset.p93InviteExisting);return}
+
+      const add=e.target.closest("[data-p93-send-friend]");
+      if(add){sendFriend(add.dataset.p93SendFriend);return}
+
+      const accept=e.target.closest("[data-p93-friend-accept]");
+      if(accept){respondFriend(accept.dataset.p93FriendAccept,true);return}
+
+      const decline=e.target.closest("[data-p93-friend-decline]");
+      if(decline){respondFriend(decline.dataset.p93FriendDecline,false);return}
+
+      const remove=e.target.closest("[data-p93-remove-friend]");
+      if(remove){removeFriend(remove.dataset.p93RemoveFriend);return}
+
+      const ia=e.target.closest("[data-p93-invite-accept]");
+      if(ia){respondInvite(ia.dataset.p93InviteAccept,true);return}
+
+      const id=e.target.closest("[data-p93-invite-decline]");
+      if(id){respondInvite(id.dataset.p93InviteDecline,false);return}
+    });
+
+    document.addEventListener("pomru:duel-room-enter",e=>{
+      const id=e.detail?.room_id;
+      if(id)enterDuelRoom(id);
+    });
+    document.addEventListener("pomru:duel-room-refresh",e=>{
+      const id=e.detail?.room_id||activeRoomId;
+      if(id){
+        activeRoomId=id;
+        loadDuelState(id);
+      }
+    });
+    document.addEventListener("pomru:duel-room-left",()=>leaveDuelRoom());
+    document.addEventListener("pomru:duel-starting",closeChatForMatch);
+
+    document.addEventListener("visibilitychange",()=>{
+      if(!user)return;
+      touchPresence(document.hidden?"away":"online",activeRoomId);
+    });
+  }
+
+  async function init(){
+    legacyArenaOpen=window.bbOpenRankedArena;
+
+    // Normal calls to "Ranked Arena" now enter Social Duel first.
+    if(typeof legacyArenaOpen==="function"){
+      window.__POMRU_LEGACY_ARENA_OPEN=legacyArenaOpen;
+      window.bbOpenRankedArena=()=>openHub("friends");
+    }
+
+    bindEvents();
+    syncDifficulty();
+
+    const c=getClient();
+    if(!c)return;
+
+    await getUser();
+    if(user){
+      await touchPresence("online",null);
+      await loadAll();
+      startSocialRealtime();
+
+      if(heartbeatTimer)clearInterval(heartbeatTimer);
+      heartbeatTimer=setInterval(()=>{
+        touchPresence(document.hidden?"away":"online",activeRoomId);
+      },45000);
+    }
+
+    c.auth.onAuthStateChange((event,session)=>{
+      setTimeout(async()=>{
+        user=session?.user||null;
+        if(!user){
+          friends=[];requests=[];invites=[];
+          updateBadges();
+          show("#p93GlobalInvite",false);
+          return;
+        }
+        await touchPresence("online",activeRoomId);
+        await loadAll();
+        startSocialRealtime();
+      },50);
+    });
+  }
+
+  window.POMRUDuel={
+    openHub,
+    closeHub,
+    refresh:loadAll,
+    getFriends:()=>friends.slice(),
+    getActiveRoom:()=>activeRoomId,
+    openArenaRoom:()=>legacyArenaOpen?.()
+  };
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",init,{once:true});
+  }else init();
 })();
 </script>
 
