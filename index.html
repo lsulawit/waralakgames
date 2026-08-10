@@ -14290,6 +14290,74 @@ body.p898FeedOpen{
 }
 </style>
 
+
+<style id="pomru-v9001-ipad-stability">
+/* ============================================================
+   POMRU v90.0.1 — iPad / Safari stability
+   ============================================================ */
+
+/* Large-area blur layers are expensive on iPad Safari. */
+.bbWorldTop,
+.bbSubjectTop,
+.bbLearningTop,
+.bbCandyTop,
+.bbSetupTop,
+.bbTopupTop,
+.bbClosetTop,
+.bbShopTop,
+#p898FeedModal,
+.modal,
+#accountModal,
+#leaderboardModal{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+
+.bbWorldTop,
+.bbSubjectTop,
+.bbLearningTop,
+.bbCandyTop,
+.bbSetupTop,
+.bbTopupTop,
+.bbClosetTop,
+.bbShopTop{
+  background:rgba(255,255,255,.98)!important;
+}
+
+/* Avoid forcing a separate compositing layer for the whole pet area. */
+.bbEquippedHeroCharacter,
+#bbEquippedHeroCharacter,
+.p89BuddyStage{
+  -webkit-filter:none!important;
+  filter:none!important;
+  will-change:auto!important;
+}
+
+/* No costly paint containment on large full-screen surfaces. */
+.bbWorldHubScreen,
+.bbSubjectGamesScreen,
+.bbLearningPlayScreen,
+.bbWorldGameScreen,
+.bbSetupCandyScreen,
+#bbArena{
+  contain:none!important;
+}
+
+/* Keep shadows lighter on tablet. */
+@media (max-width:1180px){
+  .bbWorldIntro,
+  .bbSubjectIntro,
+  .bbCandyIntro,
+  .bbWorldCard,
+  .bbSubjectGameCard,
+  .bbCandyCard,
+  .bbLearningCard,
+  .bbCandySetupCard{
+    box-shadow:0 7px 18px rgba(79,54,87,.07)!important;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -27387,142 +27455,122 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
+
 <script id="pomru-v900-visual-runtime">
 (function pomruV900VisualRuntime(){
   "use strict";
 
   const $=id=>document.getElementById(id);
-
-  // UI-only emoji cleaner. It deliberately avoids gameplay boards,
-  // question content, and user-entered text.
   const emojiRx=/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}]/gu;
 
   function cleanText(el){
     if(!el)return;
-    const text=String(el.textContent||"");
-    const next=text.replace(emojiRx,"").replace(/\s{2,}/g," ").trim();
-    if(next && next!==text.trim())el.textContent=next;
-  }
-
-  function cleanStaticUI(){
-    const safeSelectors=[
-      "#bbAppHome .p89Tagline",
-      "#bbAppHome .p89MissionReward",
-      "#bbAppHome .p89Online small",
-      "#bbAppHome .p89Online b",
-      "#bbAppHome .p89Online em",
-      "#bbAppHome .p89Online strong",
-      "#bbAppModes .bbWorldTag",
-      "#bbAppSetup .bbAppStyleGrid small",
-      "#bbAppScoreInfo h2",
-      "#bbAppScoreInfo h3",
-      "#bbAppScoreInfo .bbAppInfoRows span",
-      "#bbAppInventory .bbClosetTabs button",
-      "#bbAppInventory .bbLoadoutSlots small",
-      "#bbAppShop .bbShopBrand small"
-    ];
-    safeSelectors.forEach(sel=>{
-      document.querySelectorAll(sel).forEach(cleanText);
-    });
+    const oldText=String(el.textContent||"");
+    const next=oldText.replace(emojiRx,"").replace(/\s{2,}/g," ").trim();
+    if(next && next!==oldText.trim()){
+      el.textContent=next;
+    }
   }
 
   function normalizeHome(){
-    // Legacy scripts can repaint the profile fallback with a teddy emoji.
     const avatar=$("p89ProfileAvatar");
-    if(avatar && !avatar.querySelector("img")){
-      avatar.textContent="";
+    if(avatar && !avatar.querySelector("img") && avatar.childNodes.length){
+      avatar.replaceChildren();
     }
 
-    // Ranking v89.6 can repaint old trophy/RP strings. v89.9 remains
-    // the data source, this only removes the visual emoji if a race occurs.
-    const score=$("p89MyRankScore");
-    if(score)cleanText(score);
+    cleanText($("p89MyRankScore"));
 
-    document.querySelectorAll("#p89RankRows .p89RankScore,#p89RankRows .p89RankName small")
+    document
+      .querySelectorAll("#p89RankRows .p89RankScore,#p89RankRows .p89RankName small")
       .forEach(cleanText);
   }
 
   function normalizeArena(){
-    // Until the old Ranked backend is migrated to the unified season points,
-    // keep RP as an internal legacy value and avoid showing it as another unit.
     const rp=$("bbArenaRP");
-    if(rp){
-      const parent=rp.parentElement;
-      if(parent)parent.style.display="none";
+    if(rp?.parentElement && rp.parentElement.style.display!=="none"){
+      rp.parentElement.style.display="none";
     }
 
     const me=$("bbArenaMeRank");
     if(me){
-      let t=String(me.textContent||"");
-      t=t.replace(emojiRx,"")
-         .replace(/\s*[•·]\s*[\d,.]+\s*RP\b/gi,"")
-         .replace(/\s+\d[\d,.]*\s*RP\b/gi,"")
-         .replace(/\s{2,}/g," ")
-         .trim();
-      if(t)me.textContent=t;
+      const old=String(me.textContent||"");
+      const next=old
+        .replace(emojiRx,"")
+        .replace(/\s*[•·]\s*[\d,.]+\s*RP\b/gi,"")
+        .replace(/\s+\d[\d,.]*\s*RP\b/gi,"")
+        .replace(/\s{2,}/g," ")
+        .trim();
+
+      if(next && next!==old.trim()){
+        me.textContent=next;
+      }
     }
   }
 
   function normalizeAccount(){
-    const title=$("accountTitle");
     const lead=$("accountLead");
-    if(lead){
-      lead.textContent="เล่นแบบ Guest ได้ หรือสมัครสมาชิกเพื่อเก็บแต้ม เลเวล แรงก์ เหรียญ และประวัติไว้กับบัญชีของคุณ";
+    const target="เล่นแบบ Guest ได้ หรือสมัครสมาชิกเพื่อเก็บแต้ม เลเวล แรงก์ เหรียญ และประวัติไว้กับบัญชีของคุณ";
+    if(lead && lead.textContent!==target){
+      lead.textContent=target;
     }
+
     const memberLevel=$("memberLevel");
     if(memberLevel){
-      memberLevel.textContent=String(memberLevel.textContent||"")
+      const old=String(memberLevel.textContent||"");
+      const next=old
         .replace(/\bXP\b/gi,"แต้ม")
         .replace(/\bLevel\b/gi,"เลเวล");
+      if(next!==old){
+        memberLevel.textContent=next;
+      }
     }
+
     const cloud=$("cloudStatusText");
-    if(cloud){
-      cloud.textContent="แต้ม เลเวล แรงก์ เหรียญ ความสำเร็จ และประวัติจะซิงก์กับบัญชีนี้";
+    const cloudTarget="แต้ม เลเวล แรงก์ เหรียญ ความสำเร็จ และประวัติจะซิงก์กับบัญชีนี้";
+    if(cloud && cloud.textContent!==cloudTarget){
+      cloud.textContent=cloudTarget;
     }
   }
 
   function normalizeFeeding(){
-    document.querySelectorAll("#p898FeedModal [data-p898-tab],#p898FeedSummary,#p898FeedModal button")
+    document
+      .querySelectorAll("#p898FeedModal [data-p898-tab],#p898FeedSummary,#p898FeedModal button")
       .forEach(cleanText);
   }
 
   function normalize(){
-    cleanStaticUI();
     normalizeHome();
     normalizeArena();
     normalizeAccount();
     normalizeFeeding();
   }
 
-  function observe(){
-    const targets=[
-      $("p89ProfileAvatar"),
-      $("p89RankRows"),
-      $("p89MyRankScore"),
-      $("bbArenaMeRank"),
-      $("memberLevel"),
-      $("p898FeedModal")
-    ].filter(Boolean);
-
-    targets.forEach(el=>{
-      new MutationObserver(()=>queueMicrotask(normalize))
-        .observe(el,{childList:true,subtree:true,characterData:true});
-    });
-  }
-
   function init(){
     normalize();
-    observe();
 
+    // Event-driven only.
+    // No MutationObserver and no polling in v90.0.1.
     document.addEventListener("pomru:v899-synced",normalize);
     document.addEventListener("pomru:core-synced",normalize);
     document.addEventListener("bb:profile-updated",normalize);
     document.addEventListener("bb:pet-updated",normalize);
+    document.addEventListener("pomru:progress-updated",normalize);
+
     window.addEventListener("pageshow",normalize);
 
-    // Re-run once after all legacy inline modules have initialized.
-    setTimeout(normalize,120);
-    setTimeout(normalize,500);
+    document.addEventListener("visibilitychange",()=>{
+      if(!document.hidden)normalize();
+    });
+
+    document.addEventListener("click",e=>{
+      if(e.target.closest(
+        '[data-app-go],[data-app-action],#p898FeedBtn,#p89MissionReward'
+      )){
+        setTimeout(normalize,60);
+      }
+    },true);
+
+    setTimeout(normalize,150);
   }
 
   window.POMRUVisual={
@@ -27536,6 +27584,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 })();
 </script>
+
 
 </body>
 </html>
