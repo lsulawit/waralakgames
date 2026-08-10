@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy v74 — Ranked Results & Rank Up</title>
+<title>Brain Buddy v76 — Release Control</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -8488,6 +8488,147 @@ body.bbRankedLearningPlaying .v17dock{display:none!important}
   .bbResultBottomActions{grid-template-columns:1fr}
 }
 
+
+/* ==========================================================
+   Brain Buddy v75 — Balanced Practice EXP
+   ========================================================== */
+.bbPracticeReward{
+  width:min(520px,100%);
+  margin:14px auto 15px;
+  padding:12px 14px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  text-align:left;
+  background:linear-gradient(135deg,#fff5c9,#ffe4f0 55%,#eee9ff);
+  border:1px solid #efdca7;
+  box-shadow:0 8px 20px rgba(98,68,105,.08)
+}
+.bbPracticeReward.hidden{display:none!important}
+.bbPracticeRewardIcon{
+  width:49px;height:49px;flex:0 0 49px;border-radius:16px;
+  display:grid;place-items:center;
+  background:linear-gradient(145deg,#fff3a9,#ffc84e);
+  box-shadow:inset 0 4px 5px rgba(255,255,255,.42),0 8px 14px rgba(159,111,18,.12);
+  font-size:23px
+}
+.bbPracticeRewardCopy{min-width:0;display:flex;flex-direction:column}
+.bbPracticeRewardCopy small{
+  color:#9c7421;font-size:7px;letter-spacing:.12em;font-weight:1000
+}
+.bbPracticeRewardCopy b{
+  margin-top:1px;color:#60456f;font-size:14px;font-weight:1000
+}
+.bbPracticeRewardCopy span{
+  margin-top:2px;color:#8c788f;font-size:8px;line-height:1.5;font-weight:800
+}
+.bbPracticeReward.success{
+  background:linear-gradient(135deg,#e8fff4,#fff8cf 48%,#f2ecff);
+  border-color:#bfe8d6
+}
+.bbPracticeReward.guest{
+  background:linear-gradient(135deg,#f7f3fa,#fff);
+  border-color:#e9dfee
+}
+.bbPracticeReward.error{
+  background:#fff1f5;
+  border-color:#f1c9d7
+}
+
+
+/* ==========================================================
+   Brain Buddy v76 — Game Release Control
+   ========================================================== */
+.bbReleaseLocked{
+  position:relative!important;
+  overflow:hidden!important;
+  cursor:not-allowed!important;
+  filter:saturate(.42) brightness(.98)!important;
+  transform:none!important;
+}
+.bbReleaseLocked::after{
+  content:attr(data-release-label);
+  position:absolute;
+  right:10px;
+  top:10px;
+  z-index:8;
+  max-width:70%;
+  padding:6px 9px;
+  border-radius:999px;
+  background:rgba(47,38,61,.88);
+  color:#fff;
+  box-shadow:0 7px 15px rgba(36,26,49,.18);
+  font-size:8px;
+  font-weight:1000;
+  letter-spacing:.02em;
+  pointer-events:none
+}
+.bbWorldCard.bbReleaseLocked::before,
+.bbSubjectGameCard.bbReleaseLocked::before,
+.bbAppModeCard.bbReleaseLocked::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:6;
+  background:linear-gradient(145deg,rgba(255,255,255,.17),rgba(48,38,61,.20));
+  backdrop-filter:grayscale(.25px);
+  pointer-events:none
+}
+.bbWorldCard.bbReleaseLocked .bbWorldArrow,
+.bbSubjectGameCard.bbReleaseLocked .play,
+.bbAppModeCard.bbReleaseLocked .bbCandyPlay{
+  opacity:.28!important
+}
+.bbReleaseLockIcon{
+  position:absolute;
+  z-index:9;
+  left:12px;
+  top:11px;
+  width:30px;height:30px;
+  border-radius:10px;
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.88);
+  color:#654e72;
+  box-shadow:0 6px 13px rgba(53,39,64,.13);
+  font-size:14px;
+  pointer-events:none
+}
+[data-language-choice].bbReleaseLocked{
+  opacity:.55!important;
+  filter:grayscale(.3)!important
+}
+[data-language-choice].bbReleaseLocked::after{
+  right:5px;top:5px;font-size:6px;padding:4px 6px
+}
+.bbWorldTag.bbReleaseStatus{
+  background:rgba(45,35,59,.24)!important;
+  color:#fff!important
+}
+.bbReleaseToast{
+  position:fixed;
+  left:50%;
+  bottom:95px;
+  z-index:12000;
+  width:min(420px,calc(100% - 28px));
+  transform:translate(-50%,18px);
+  opacity:0;
+  pointer-events:none;
+  transition:.22s ease;
+  padding:12px 14px;
+  border-radius:17px;
+  color:#fff;
+  background:rgba(44,34,59,.94);
+  box-shadow:0 16px 32px rgba(30,21,42,.24);
+  backdrop-filter:blur(16px)
+}
+.bbReleaseToast.show{opacity:1;transform:translate(-50%,0)}
+.bbReleaseToast b{display:block;font-size:11px}
+.bbReleaseToast span{display:block;margin-top:2px;color:#e8deed;font-size:8px;line-height:1.45}
+.bbReleaseLoadingTag{
+  opacity:.72
+}
+
 </style>
 
 <script>
@@ -9891,6 +10032,16 @@ try{
       <h2>จบรอบแล้ว!</h2>
       <strong id="bbLearningFinalScore">0</strong>
       <p id="bbLearningFinalText"></p>
+
+      <div class="bbPracticeReward hidden" id="bbPracticeReward">
+        <div class="bbPracticeRewardIcon">⭐</div>
+        <div class="bbPracticeRewardCopy">
+          <small>EXP REWARD</small>
+          <b id="bbPracticeRewardTitle">กำลังคำนวณรางวัล…</b>
+          <span id="bbPracticeRewardDetail">Brain Buddy กำลังประเมินผลงานรอบนี้</span>
+        </div>
+      </div>
+
       <div class="actions">
         <button type="button" id="bbLearningAgain">เล่นอีกครั้ง</button>
         <button type="button" class="secondary" id="bbLearningResultBack">เลือกเกมอื่น</button>
@@ -10786,7 +10937,7 @@ const ACH=[["first","🌟","ก้าวแรก","เล่นจบรอบ�
 const TEAMCOL=["#f270a7","#8874e7","#6fd4b9","#ffd56b","#66b7e8","#f09a62"];
 let cfg={style:"solo",mode:"position",diff:"easy",source:"teddy",teams:2,answer:"screen",adaptive:false,combo:true,timer:0,lives:false,daily:false};
 let draft={...cfg};let teamData=[{name:"ทีม A",emoji:"🩷",color:TEAMCOL[0]},{name:"ทีม B",emoji:"💜",color:TEAMCOL[1]},{name:"ทีม C",emoji:"💚",color:TEAMCOL[2]},{name:"ทีม D",emoji:"💛",color:TEAMCOL[3]},{name:"ทีม E",emoji:"💙",color:TEAMCOL[4]},{name:"ทีม F",emoji:"🧡",color:TEAMCOL[5]}];
-let layout=[],baseLayout=[],asked=new Set(),correct=0,score=0,combo=0,bestCombo=0,lives=3,hints=3,state="idle",targetIndex=null,pickedIndex=null,lastTarget=null,missingId=null,swapPair=[],swapPicks=[],changeIndex=null,changeAlt=null,matchFirst=null,matchLock=false,matchDone=0,sequenceOrder=[],sequencePick=[],sequencePlaying=false,teamคะแนนs=[0,0,0,0,0,0],roundStarted=false,roundComplete=false,roundXP=0,adaptiveShift=0,adaptiveWins=0,adaptiveMisses=0,timerId=null,timerEnd=0,lucky=false,customImages=[];
+let layout=[],baseLayout=[],asked=new Set(),correct=0,score=0,combo=0,bestCombo=0,lives=3,hints=3,state="idle",targetIndex=null,pickedIndex=null,lastTarget=null,missingId=null,swapPair=[],swapPicks=[],changeIndex=null,changeAlt=null,matchFirst=null,matchLock=false,matchDone=0,sequenceOrder=[],sequencePick=[],sequencePlaying=false,teamคะแนนs=[0,0,0,0,0,0],roundStarted=false,roundComplete=false,roundXP=0,roundStartedAt=0,roundAttempts=0,practiceRewardSubmitted=false,adaptiveShift=0,adaptiveWins=0,adaptiveMisses=0,timerId=null,timerEnd=0,lucky=false,customImages=[];
 let audioCtx=null,musicLoop=null,musicEnabled=false,sfxEnabled=true,musicVolume=.28,sfxVolume=.55,musicTheme="cozy",musicStep=0,themeMode="light",motionMode="full",tapCount=0,tapReset=null;
 const MUSIC={cozy:[261.6,329.6,392,329.6,293.7,349.2,440,349.2],dream:[293.7,370,440,554.4,440,370,329.6,415.3],night:[220,277.2,329.6,415.3,329.6,277.2,246.9,311.1],focus:[196,246.9,293.7,246.9,220,261.6,329.6,261.6]};
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));if(typeof CLOUD_SYNC_KEYS!=="undefined"&&CLOUD_SYNC_KEYS.has(k)&&!cloudApplying)scheduleCloudSync()}catch(e){}}function load(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}}function shuf(a,r=(window.__bbRankedRng||Math.random)){const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[x[i],x[j]]=[x[j],x[i]]}return x}function seeded(s){let x=s>>>0;return()=>{x=(x*1664525+1013904223)>>>0;return x/4294967296}}function todaySeed(){const d=new Date();return Number(`${d.getFullYear()}${String(d.getMonth()+1).padStart(2,"0")}${String(d.getDate()).padStart(2,"0")}`)}
@@ -10799,7 +10950,7 @@ function renderTarget(i){lastTarget=i;$("targetCard").innerHTML=`<div class="con
 function renderTeams(){const b=$("teamBar");if(cfg.style!=="team"){b.classList.add("hidden");b.innerHTML="";return}b.classList.remove("hidden");b.innerHTML="";for(let i=0;i<cfg.teams;i++){const t=teamData[i],d=document.createElement("div");d.className="team";d.innerHTML=`<strong><span style="color:${t.color}">●</span> ${t.emoji} ${t.name}</strong><b>${teamคะแนนs[i]||0}</b><span><button data-d="-1">−</button> <button data-d="1">+1</button></span>`;d.querySelectorAll("button").forEach(x=>x.onclick=()=>{teamคะแนนs[i]=Math.max(0,(teamคะแนนs[i]||0)+Number(x.dataset.d));renderTeams();sfx(Number(x.dataset.d)>0?"score":"tap");saveResume()});b.appendChild(d)}}
 function updateSummary(){const d=DIFF[cfg.diff],style=cfg.style==="solo"?"คนเดียว":`${cfg.teams} ทีม`,$x=`${d.cols}×${Math.ceil(d.n/d.cols)}`;$("heroSummary").textContent=`${style} • ${MODES[cfg.mode]} • ${d.label} ${$x} • ${cfg.timer?cfg.timer+" วิ":"ไม่จับเวลา"}`;$("pillMode").textContent=MODES[cfg.mode];$("pillDiff").textContent=`${d.label} • ${$x}`;$("pillStyle").textContent=style;$("pillSource").textContent=SOURCES[cfg.source];$("hintline").textContent=cfg.timer?`Timer ${cfg.timer} วินาทีเปิดอยู่`:"ไม่มีการจับเวลาโดยค่าเริ่มต้น คุณเป็นคนกำหนดจังหวะเอง"}
 function roundLayout(r=Math.random){const pool=shuf(sourcePool(),r),d=dc();if(cfg.mode==="match"){const pairs=Math.max(2,Math.floor(d.n/2)),ids=pool.slice(0,pairs);return shuf(ids.flatMap(x=>[x,x]),r)}return pool.slice(0,d.n)}
-function resetRound(r=Math.random){stopTimer();layout=roundLayout(r);baseLayout=[...layout];asked=new Set();correct=score=combo=bestCombo=0;lives=3;hints=3;targetIndex=pickedIndex=lastTarget=null;swapPair=[];swapPicks=[];changeIndex=changeAlt=null;matchFirst=null;matchLock=false;matchDone=0;sequenceOrder=[];sequencePick=[];sequencePlaying=false;teamคะแนนs=[0,0,0,0,0,0];roundXP=0;adaptiveShift=adaptiveWins=adaptiveMisses=0;lucky=false;roundStarted=true;roundComplete=false;renderTeams();updateHUD();saveResume()}
+function resetRound(r=Math.random){stopTimer();layout=roundLayout(r);baseLayout=[...layout];asked=new Set();correct=score=combo=bestCombo=0;lives=3;hints=3;targetIndex=pickedIndex=lastTarget=null;swapPair=[];swapPicks=[];changeIndex=changeAlt=null;matchFirst=null;matchLock=false;matchDone=0;sequenceOrder=[];sequencePick=[];sequencePlaying=false;teamคะแนนs=[0,0,0,0,0,0];roundXP=0;roundStartedAt=Date.now();roundAttempts=0;practiceRewardSubmitted=false;adaptiveShift=adaptiveWins=adaptiveMisses=0;lucky=false;roundStarted=true;roundComplete=false;renderTeams();updateHUD();saveResume()}
 function startRound(r=Math.random){resetRound(r);startMode();updateSummary();$("game").scrollIntoView({behavior:"smooth",block:"start"})}
 function startMode(){stopTimer();$("voiceBtn").classList.add("hidden");$("replayBtn").classList.add("hidden");$("hintBtn").classList.remove("hidden");if(cfg.mode==="position"){state="position_mem";showScene("board");renderBoard();$("boardTitle").textContent="จำภาพทั้งหมด";$("boardSub").textContent="จำรายละเอียดและตำแหน่งให้ดี";setStatus("👀","จำภาพและตำแหน่ง","เมื่อพร้อมแล้วค่อยสุ่มรูปเป้าหมาย");setMain("สุ่มรูปเป้าหมาย",positionAsk)}else if(cfg.mode==="match"){startMatch()}else if(cfg.mode==="missing"){state="missing_mem";showScene("board");renderBoard();$("boardTitle").textContent="จำว่ามีอะไรอยู่บนกระดาน";$("boardSub").textContent="เมื่อพร้อมแล้ว เกมจะซ่อนหนึ่งรายการ";setStatus("👀","จำชุดภาพ","สังเกตให้ครบทุกตัว");setMain("ซ่อนหนึ่งตัว",missingHide)}else if(cfg.mode==="swap"){state="swap_mem";layout=[...baseLayout];showScene("board");renderBoard();$("boardTitle").textContent="จำตำแหน่งทั้งหมด";$("boardSub").textContent="สองช่องจะถูกสลับหลังจากคุณพร้อม";setStatus("🔄","จำตำแหน่ง","สังเกตว่าตัวไหนอยู่ตรงไหน");setMain("สลับตำแหน่ง",swapNow)}else if(cfg.mode==="change"){state="change_mem";layout=[...baseLayout];showScene("board");renderBoard();$("boardTitle").textContent="จำรายละเอียด";$("boardSub").textContent="หนึ่งช่องจะเปลี่ยนเป็นรายการอื่น";setStatus("🔎","จำรายละเอียด","ดูทั้งภาพและตำแหน่ง");setMain("เปลี่ยนหนึ่งจุด",changeNow)}else{state="sequence_ready";showScene("board");renderBoard();$("boardTitle").textContent="เตรียมจำลำดับ";$("boardSub").textContent="เกมจะโชว์ทีละตัว แล้วให้แตะตามลำดับเดิม";setStatus("✨","เตรียมพร้อม","กดเริ่มเมื่อพร้อม");setMain("เริ่มแสดงลำดับ",sequenceStart)}saveResume()}
 function ensureAudio(){if(!audioCtx&&window.AudioContext)audioCtx=new AudioContext();if(audioCtx?.state==="suspended")audioCtx.resume()}function sfx(type="tap"){if(!sfxEnabled)return;ensureAudio();if(!audioCtx)return;const now=audioCtx.currentTime,map={tap:[520,.06],flip:[690,.08],ok:[650,.15],bad:[190,.13],score:[820,.11],done:[523,.26],hint:[440,.12],bonus:[930,.18]},[f,d]=map[type]||map.tap,o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);o.type=type==="bad"?"triangle":"sine";o.frequency.setValueAtTime(f,now);if(type==="ok"||type==="bonus")o.frequency.exponentialRampToValueAtTime(f*1.3,now+d);g.gain.setValueAtTime(.06*sfxVolume,now);g.gain.exponentialRampToValueAtTime(.001,now+d);o.start(now);o.stop(now+d)}
@@ -10809,7 +10960,7 @@ function startTimer(expire){stopTimer();if(!cfg.timer)return;$("timer").classLis
 const MODE_POINTS={position:100,match:80,missing:120,swap:150,change:130,sequence:160};
 const DIFF_MULT={easy:1,normal:1.25,hard:1.5,expert:2};
 function pointsPerCorrect(){return Math.round((MODE_POINTS[cfg.mode]||100)*(DIFF_MULT[effDiff()]||1))}
-function record(ok){if(ok){correct++;combo++;bestCombo=Math.max(bestCombo,combo);score+=pointsPerCorrect();sfx("ok")}else{combo=0;sfx("bad")}updateHUD();saveResume()}
+function record(ok){roundAttempts++;if(ok){correct++;combo++;bestCombo=Math.max(bestCombo,combo);score+=pointsPerCorrect();sfx("ok")}else{combo=0;sfx("bad")}updateHUD();saveResume()}
 function surprise(){return}
 function positionAsk(){stopTimer();if(asked.size>=qCount())return finishRound();const a=layout.map((_,i)=>i).filter(i=>!asked.has(i));if(!a.length)return finishRound();targetIndex=a[Math.floor((window.__bbRankedRng||Math.random)()*a.length)];asked.add(targetIndex);pickedIndex=null;state="position_target";renderTarget(targetIndex);showScene("target");setStatus("🧸","ดูรูปเป้าหมาย","จำว่าตัวนี้เคยอยู่ช่องไหน");setMain("พร้อมตอบ",positionAnswer);$("replayBtn").classList.add("hidden");updateHUD();sfx("flip");saveResume()}
 function bbAnswerTimer(expire){
@@ -11029,39 +11180,129 @@ function xpFromScore(sc){
 }
 function finishRound(){
   stopTimer();roundComplete=true;roundStarted=false;clearResume();showScene("result");
+
   const measurable=!(cfg.style==="team"&&cfg.mode==="position"&&cfg.answer==="voice");
-  const rate=measurable&&asked.size?Math.round(correct/asked.size*100):0;
+  const accuracyTotal=Math.max(correct,roundAttempts||asked.size||0);
+  const rate=measurable&&accuracyTotal?Math.round(correct/accuracyTotal*100):0;
   const finalคะแนน=cfg.style==="solo"?score:Math.max(...teamคะแนนs.slice(0,cfg.teams));
   const isRanked=!!window.BB_RANKED_ACTIVE;
-  roundXP=isRanked?0:(cfg.style==="solo"?xpFromScore(finalคะแนน):0);
-  if(!isRanked){const p=profile();p.xp=(p.xp||0)+roundXP;save("bb_profile",p);renderProfile();}
+  const cloudMember=!isRanked&&cfg.style==="solo"&&!!currentUser&&!!sb;
+
+  roundXP=isRanked?0:(cloudMember?0:(cfg.style==="solo"?xpFromScore(finalคะแนน):0));
+
+  if(!isRanked&&!cloudMember){
+    const p=profile();
+    p.xp=(p.xp||0)+roundXP;
+    save("bb_profile",p);
+    renderProfile();
+  }
+
   $("resultคะแนน").textContent=finalคะแนน;
   $("resultคะแนนLabel").textContent=cfg.style==="solo"?"คะแนนรอบนี้":"คะแนนทีมสูงสุด";
   $("resultCorrect").textContent=measurable?correct:"—";
   $("resultAcc").textContent=measurable?rate+"%":"ทีม";
   $("resultCombo").textContent=bestCombo;
-  $("resultXP").textContent=isRanked?"รอ RP":(cfg.style==="solo"?"+"+roundXP:"0");
-  $("resultText").textContent=isRanked?"🏆 จบการแข่งขัน Ranked แล้ว • คะแนนรอบนี้กำลังรอระบบคำนวณ RP ในขั้นถัดไป":cfg.style==="team"?"จบรอบทีมแล้ว! คะแนนทีมใช้สำหรับการแข่งขันในกิจกรรม":rate>=90?"ยอดเยี่ยมมาก! รอบนี้แม่นและสม่ำเสมอ":rate>=75?"ทำได้ดีมาก พร้อมต่อยอดความท้าทาย":"รอบนี้สร้างพื้นฐานได้ดี ลองต่ออีกหนึ่งรอบ";
+  $("resultXP").textContent=isRanked?"รอ RP":cloudMember?"…":(cfg.style==="solo"?"+"+roundXP:"0");
+
+  $("resultText").textContent=isRanked
+    ?"🏆 จบการแข่งขัน Ranked แล้ว • กำลังรอระบบคำนวณ RP"
+    :cfg.style==="team"
+      ?"จบรอบทีมแล้ว! คะแนนทีมใช้สำหรับการแข่งขันในกิจกรรม"
+      :cloudMember
+        ?"กำลังคำนวณ EXP จากโหมด ความยาก ความแม่นยำ และ Performance…"
+        :rate>=90
+          ?"ยอดเยี่ยมมาก! รอบนี้แม่นและสม่ำเสมอ"
+          :rate>=75
+            ?"ทำได้ดีมาก พร้อมต่อยอดความท้าทาย"
+            :"รอบนี้สร้างพื้นฐานได้ดี ลองต่ออีกหนึ่งรอบ";
+
   let ins;
   if(!measurable){
     const mx=Math.max(...teamคะแนนs.slice(0,cfg.teams));
     ins={title:"👥 จุดเด่น: การเล่นร่วมกันและการเรียกคืนข้อมูล",text:`รอบนี้เปิดโอกาสให้สมาชิกช่วยกันสังเกต จำ และเรียกข้อมูลกลับมาใช้ผ่านการตอบออกเสียง คะแนนทีมสูงสุด ${mx} คะแนน โดยโหมดทีมจะไม่เพิ่ม XP ส่วนตัวหรืออันดับ Cloud`,next:["ลองเพิ่มจำนวนภาพ","สลับทีมที่ตอบแต่ละข้อ","เพิ่มระดับความยาก"]};
   }else ins=insight(rate);
-  $("insightTitle").textContent=ins.title;$("insightText").textContent=ins.text;$("nexts").innerHTML=ins.next.map(x=>`<span>${x}</span>`).join("");
+
+  $("insightTitle").textContent=ins.title;
+  $("insightText").textContent=ins.text;
+  $("nexts").innerHTML=ins.next.map(x=>`<span>${x}</span>`).join("");
+
   if(isRanked){
-    window.bbRankedRoundFinished?.({score:finalคะแนน,correct,total:asked.size,accuracy:rate,bestCombo,mode:cfg.mode,difficulty:effDiff()});
+    window.bbRankedRoundFinished?.({
+      score:finalคะแนน,
+      correct,
+      total:accuracyTotal,
+      accuracy:rate,
+      bestCombo,
+      mode:cfg.mode,
+      difficulty:effDiff()
+    });
+  }else if(cloudMember&&!practiceRewardSubmitted){
+    practiceRewardSubmitted=true;
+
+    const maxScore=Math.max(1,qCount()*pointsPerCorrect());
+    const duration=Math.max(1,(Date.now()-(roundStartedAt||Date.now()))/1000);
+
+    window.bbAwardPracticeXP?.({
+      modeCode:`teddy_${cfg.mode}`,
+      difficultyCode:effDiff(),
+      rawScore:finalคะแนน,
+      maxScore,
+      correct,
+      total:accuracyTotal,
+      durationSeconds:duration,
+      completed:true
+    }).then(result=>{
+      if(result?.ok){
+        roundXP=Number(result.exp_gained||0);
+        $("resultXP").textContent=`+${roundXP}`;
+        $("resultText").textContent=
+          result.level_up
+            ? `⚡ LEVEL UP! Level ${result.old_level} → ${result.new_level} • +${roundXP} EXP`
+            : `⭐ ได้รับ +${roundXP} EXP • Performance ${Number(result.performance_score||0)}/1000`;
+
+        saveHistory(rate,finalคะแนน);
+        checkความสำเร็จs(rate);
+        renderHome();
+        renderStats();
+        renderCollection();
+      }else{
+        $("resultXP").textContent="0";
+        saveHistory(rate,finalคะแนน);
+        checkความสำเร็จs(rate);
+        renderHome();
+        renderStats();
+        renderCollection();
+      }
+    }).catch(()=>{
+      $("resultXP").textContent="0";
+      saveHistory(rate,finalคะแนน);
+      checkความสำเร็จs(rate);
+      renderHome();
+      renderStats();
+      renderCollection();
+    });
   }else{
-    saveHistory(rate,finalคะแนน);checkความสำเร็จs(rate);renderHome();renderStats();renderCollection();
+    saveHistory(rate,finalคะแนน);
+    checkความสำเร็จs(rate);
+    renderHome();
+    renderStats();
+    renderCollection();
   }
-  setStatus("🏁","จบรอบแล้ว","ดูคะแนนและ XP ที่ได้รับ แล้วเลือกความท้าทายถัดไป");
+
+  setStatus("🏁","จบรอบแล้ว","ดูคะแนนและ EXP ที่ได้รับ แล้วเลือกความท้าทายถัดไป");
+
   if(isRanked)setMain("กำลังรอผลผู้เล่นทุกคน…",()=>{},true);
   else setMain("เล่นอีกครั้ง",()=>startRound());
-  $("hintBtn").classList.add("hidden");$("voiceBtn").classList.add("hidden");$("replayBtn").classList.add("hidden");sfx("done")
+
+  $("hintBtn").classList.add("hidden");
+  $("voiceBtn").classList.add("hidden");
+  $("replayBtn").classList.add("hidden");
+  sfx("done")
 }
 function saveHistory(rate,sc){const h=hist();h.push({date:Date.now(),mode:cfg.mode,diff:effDiff(),source:cfg.source,style:cfg.style,rate,score:sc,combo:bestCombo,xp:roundXP});save("bb_history",h.slice(-80));if(cfg.style==="solo")cloudRecordGame(rate,sc)}function unlock(id){const b=badgeData();if(b[id])return;b[id]=Date.now();save("bb_badges",b);const a=ACH.find(x=>x[0]===id);if(a)toast(`🏅 ความสำเร็จ: ${a[2]}`)}function checkความสำเร็จs(rate){const h=hist();unlock("first");if(rate===100)unlock("perfect");if(bestCombo>=5)unlock("combo5");if(bestCombo>=10)unlock("combo10");const ms=new Set(h.map(x=>x.mode));if(ms.size>=4)unlock("explorer");if(ms.size>=6)unlock("allmodes");if(level(profile().xp||0)>=5)unlock("level5");if(level(profile().xp||0)>=10)unlock("level10");if(load("bb_daily_streak",0)>=3)unlock("daily3");if(cfg.source==="custom")unlock("custom");if(rate>=90)unlock("master")}
 function renderProfile(){const p=profile(),lv=level(p.xp||0);$("navName").textContent=p.name||"ผู้เล่น";$("navAvatar").textContent=p.avatar||"🧸";$("profileName").value=p.name||"";$("profileLevel").textContent=lv;$("xpBar").style.width=((p.xp||0)%500/500*100)+"%";$("xpLabel").textContent=`${(p.xp||0)%500} / 500 XP`;$("levelHud").textContent=lv}function renderHome(){const h=hist(),p=profile(),rates=h.map(x=>x.rate).filter(x=>typeof x==="number");$("homeLevel").textContent=level(p.xp||0);$("homeXP").textContent=p.xp||0;$("homeBest").textContent=h.length?Math.max(...h.map(x=>x.score||0)):0;$("homeAcc").textContent=(rates.length?Math.max(...rates):0)+"%";$("homeRounds").textContent=h.length}function renderStats(){const h=hist(),rates=h.map(x=>x.rate).filter(x=>typeof x==="number");$("statRounds").textContent=h.length;$("statBest").textContent=h.length?Math.max(...h.map(x=>x.score||0)):0;$("statAcc").textContent=(rates.length?Math.max(...rates):0)+"%";$("statCombo").textContent=h.length?Math.max(...h.map(x=>x.combo||0)):0;const last=h.filter(x=>typeof x.rate==="number").slice(-10),W=760,H=170,p=25;let svg=`<line x1="${p}" y1="${H-p}" x2="${W-p}" y2="${H-p}" stroke="rgba(136,116,231,.15)"/><line x1="${p}" y1="${p}" x2="${p}" y2="${H-p}" stroke="rgba(136,116,231,.15)"/>`;if(last.length){const pts=last.map((x,i)=>[last.length===1?W/2:p+i*((W-2*p)/(last.length-1)),H-p-(x.rate/100)*(H-2*p)]);svg+=`<polyline points="${pts.map(x=>x.join(",")).join(" ")}" fill="none" stroke="#8874e7" stroke-width="5" stroke-linecap="round"/>`;pts.forEach(q=>svg+=`<circle cx="${q[0]}" cy="${q[1]}" r="6" fill="white" stroke="#f270a7" stroke-width="4"/>`)}$("chartSvg").innerHTML=svg;const b=badgeData();$("badgeGrid").innerHTML="";ACH.forEach(a=>{const d=document.createElement("div");d.className="badge"+(b[a[0]]?"":" lock");d.innerHTML=`<span>${a[1]}</span><div><strong>${a[2]}</strong><small>${a[3]}</small></div>`;$("badgeGrid").appendChild(d)})}function renderCollection(){const lv=level(profile().xp||0);$("collection").innerHTML="";COLLECTION.forEach(([em,n,need])=>{const d=document.createElement("div");d.className="collect"+(lv>=need?"":" lock");d.innerHTML=`<span>${em}</span><div><strong>${n}</strong><small>${lv>=need?"ปลดล็อกแล้ว":`Level ${need}`}</small></div>`;if(lv>=need)d.onclick=()=>{const p=profile();p.avatar=em;save("bb_profile",p);renderProfile();toast(`เลือก ${n} แล้ว`)};$("collection").appendChild(d)})}
-function dailyCfg(){const r=seeded(todaySeed()),ms=["position","missing","swap","change","sequence"],ds=["easy","normal","normal","hard"],ss=["teddy","animals","space","food","fantasy"];return{mode:ms[Math.floor(r()*ms.length)],diff:ds[Math.floor(r()*ds.length)],source:ss[Math.floor(r()*ss.length)]}}function renderDaily(){const d=dailyCfg();$("dailyTitle").textContent=`${MODES[d.mode]} • ${DIFF[d.diff].label}`;$("dailyText").textContent=`วันนี้ใช้ชุด ${SOURCES[d.source]} และรับโบนัส +100 XP เมื่อจบรอบ`;$("dailyStreak").textContent=load("bb_daily_streak",0)}function startDaily(){const d=dailyCfg();cfg={...cfg,style:"solo",mode:d.mode,diff:d.diff,source:d.source,teams:2,answer:"screen",adaptive:false,combo:true,timer:0,lives:false,daily:true};updateSummary();startRound(seeded(todaySeed()))}function markDaily(){const today=new Date().toISOString().slice(0,10),last=load("bb_daily_last",""),st=load("bb_daily_streak",0);if(last===today)return;const y=new Date(Date.now()-86400000).toISOString().slice(0,10);save("bb_daily_streak",last===y?st+1:1);save("bb_daily_last",today);renderDaily()}
-function syncDraft(){document.querySelectorAll("[data-style]").forEach(b=>b.classList.toggle("active",b.dataset.style===draft.style));document.querySelectorAll("[data-mode]").forEach(b=>b.classList.toggle("active",b.dataset.mode===draft.mode));document.querySelectorAll("[data-diff]").forEach(b=>b.classList.toggle("active",b.dataset.diff===draft.diff));document.querySelectorAll("[data-source]").forEach(b=>b.classList.toggle("active",b.dataset.source===draft.source));document.querySelectorAll("[data-answer]").forEach(b=>b.classList.toggle("active",b.dataset.answer===draft.answer));$("adaptiveToggle").checked=draft.adaptive;$("comboToggle").checked=draft.combo;$("timerSelect").value=draft.timer;$("livesToggle").checked=draft.lives;$("teamCount").value=draft.teams;document.querySelectorAll(".teamSetting").forEach(x=>x.classList.toggle("hidden",draft.style!=="team"));$("answerBox").classList.toggle("hidden",!(draft.style==="team"&&draft.mode==="position"));$("uploadBox").classList.toggle("hidden",draft.source!=="custom");renderTeamEditor()}function openCustom(){draft={...cfg,daily:false};syncDraft();openModal("customModal")}function applyCustom(){draft.adaptive=$("adaptiveToggle").checked;draft.combo=$("comboToggle").checked;draft.timer=Number($("timerSelect").value);draft.lives=$("livesToggle").checked;draft.teams=Math.max(2,Math.min(6,Number($("teamCount").value)));if(draft.source==="custom"&&customImages.length<4){toast("กรุณาอัปโหลดอย่างน้อย 4 รูป");return}cfg={...draft,daily:false};closeModal("customModal");updateSummary();startRound()}function renderTeamEditor(){$("teamEditor").innerHTML="";for(let i=0;i<draft.teams;i++){const t=teamData[i],d=document.createElement("div");d.className="teamEdit";d.innerHTML=`<input type="color" value="${t.color}"><input class="input" value="${t.name}" maxlength="16"><input class="input" value="${t.emoji}" maxlength="2">`;const z=d.querySelectorAll("input");z[0].oninput=()=>t.color=z[0].value;z[1].oninput=()=>t.name=z[1].value||`ทีม ${String.fromCharCode(65+i)}`;z[2].oninput=()=>t.emoji=z[2].value||"⭐";$("teamEditor").appendChild(d)}}function uploads(files){const f=[...files].slice(0,20);Promise.all(f.map(file=>new Promise(res=>{const r=new FileReader();r.onload=()=>compress(r.result,res);r.readAsDataURL(file)}))).then(a=>{customImages=a.filter(Boolean);save("bb_custom",customImages);renderUploads();toast(`เพิ่มรูป ${customImages.length} รูปแล้ว`)})}function compress(src,done){const im=new Image();im.onload=()=>{const c=document.createElement("canvas"),m=360,s=Math.min(1,m/Math.max(im.width,im.height));c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext("2d").drawImage(im,0,0,c.width,c.height);done(c.toDataURL("image/jpeg",.78))};im.onerror=()=>done(null);im.src=src}function renderUploads(){$("uploadPreview").innerHTML="";customImages.forEach(x=>{const i=document.createElement("img");i.src=x;$("uploadPreview").appendChild(i)})}function saveResume(){if(!roundStarted||roundComplete)return;save("bb_resume",{cfg,layout,baseLayout,asked:[...asked],correct,score,combo,bestCombo,lives,hints,state,targetIndex,pickedIndex,missingId,swapPair,swapPicks,changeIndex,changeAlt,teamคะแนนs,adaptiveShift,customImages});$("resumeBtn").classList.remove("hidden")}function clearResume(){localStorage.removeItem("bb_resume");$("resumeBtn").classList.add("hidden")}function restoreResume(){const r=load("bb_resume",null);if(!r)return;cfg={...cfg,...r.cfg};if(cfg.source==="study")cfg.source="teddy";cfg.teams=Math.max(2,Math.min(6,Number(cfg.teams)||2));layout=r.layout||[];baseLayout=r.baseLayout||[];asked=new Set(r.asked||[]);correct=r.correct||0;score=r.score||0;combo=r.combo||0;bestCombo=r.bestCombo||0;lives=r.lives??3;hints=r.hints??3;state=r.state||"idle";targetIndex=r.targetIndex;pickedIndex=r.pickedIndex;missingId=r.missingId;swapPair=r.swapPair||[];swapPicks=r.swapPicks||[];changeIndex=r.changeIndex;changeAlt=r.changeAlt;teamคะแนนs=[...(r.teamคะแนนs||[]),0,0,0,0,0,0].slice(0,6);adaptiveShift=r.adaptiveShift||0;customImages=r.customImages||customImages;roundStarted=true;roundComplete=false;updateSummary();renderTeams();updateHUD();if(state==="position_target"){renderTarget(targetIndex);showScene("target");setMain("พร้อมตอบ",positionAnswer)}else if(state==="position_answer")positionAnswer();else startMode();$("game").scrollIntoView({behavior:"smooth"})}
+function dailyCfg(){const r=seeded(todaySeed()),ms=["position","missing","swap","change","sequence"],ds=["easy","normal","normal","hard"],ss=["teddy","animals","space","food","fantasy"];return{mode:ms[Math.floor(r()*ms.length)],diff:ds[Math.floor(r()*ds.length)],source:ss[Math.floor(r()*ss.length)]}}function renderDaily(){const d=dailyCfg();$("dailyTitle").textContent=`${MODES[d.mode]} • ${DIFF[d.diff].label}`;$("dailyText").textContent=`วันนี้ใช้ชุด ${SOURCES[d.source]} • EXP คำนวณตามโหมด ความยาก และผลงานจริง`;$("dailyStreak").textContent=load("bb_daily_streak",0)}function startDaily(){const d=dailyCfg();cfg={...cfg,style:"solo",mode:d.mode,diff:d.diff,source:d.source,teams:2,answer:"screen",adaptive:false,combo:true,timer:0,lives:false,daily:true};updateSummary();startRound(seeded(todaySeed()))}function markDaily(){const today=new Date().toISOString().slice(0,10),last=load("bb_daily_last",""),st=load("bb_daily_streak",0);if(last===today)return;const y=new Date(Date.now()-86400000).toISOString().slice(0,10);save("bb_daily_streak",last===y?st+1:1);save("bb_daily_last",today);renderDaily()}
+function syncDraft(){document.querySelectorAll("[data-style]").forEach(b=>b.classList.toggle("active",b.dataset.style===draft.style));document.querySelectorAll("[data-mode]").forEach(b=>b.classList.toggle("active",b.dataset.mode===draft.mode));document.querySelectorAll("[data-diff]").forEach(b=>b.classList.toggle("active",b.dataset.diff===draft.diff));document.querySelectorAll("[data-source]").forEach(b=>b.classList.toggle("active",b.dataset.source===draft.source));document.querySelectorAll("[data-answer]").forEach(b=>b.classList.toggle("active",b.dataset.answer===draft.answer));$("adaptiveToggle").checked=draft.adaptive;$("comboToggle").checked=draft.combo;$("timerSelect").value=draft.timer;$("livesToggle").checked=draft.lives;$("teamCount").value=draft.teams;document.querySelectorAll(".teamSetting").forEach(x=>x.classList.toggle("hidden",draft.style!=="team"));$("answerBox").classList.toggle("hidden",!(draft.style==="team"&&draft.mode==="position"));$("uploadBox").classList.toggle("hidden",draft.source!=="custom");renderTeamEditor()}function openCustom(){draft={...cfg,daily:false};syncDraft();openModal("customModal")}function applyCustom(){draft.adaptive=$("adaptiveToggle").checked;draft.combo=$("comboToggle").checked;draft.timer=Number($("timerSelect").value);draft.lives=$("livesToggle").checked;draft.teams=Math.max(2,Math.min(6,Number($("teamCount").value)));if(draft.source==="custom"&&customImages.length<4){toast("กรุณาอัปโหลดอย่างน้อย 4 รูป");return}cfg={...draft,daily:false};closeModal("customModal");updateSummary();startRound()}function renderTeamEditor(){$("teamEditor").innerHTML="";for(let i=0;i<draft.teams;i++){const t=teamData[i],d=document.createElement("div");d.className="teamEdit";d.innerHTML=`<input type="color" value="${t.color}"><input class="input" value="${t.name}" maxlength="16"><input class="input" value="${t.emoji}" maxlength="2">`;const z=d.querySelectorAll("input");z[0].oninput=()=>t.color=z[0].value;z[1].oninput=()=>t.name=z[1].value||`ทีม ${String.fromCharCode(65+i)}`;z[2].oninput=()=>t.emoji=z[2].value||"⭐";$("teamEditor").appendChild(d)}}function uploads(files){const f=[...files].slice(0,20);Promise.all(f.map(file=>new Promise(res=>{const r=new FileReader();r.onload=()=>compress(r.result,res);r.readAsDataURL(file)}))).then(a=>{customImages=a.filter(Boolean);save("bb_custom",customImages);renderUploads();toast(`เพิ่มรูป ${customImages.length} รูปแล้ว`)})}function compress(src,done){const im=new Image();im.onload=()=>{const c=document.createElement("canvas"),m=360,s=Math.min(1,m/Math.max(im.width,im.height));c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext("2d").drawImage(im,0,0,c.width,c.height);done(c.toDataURL("image/jpeg",.78))};im.onerror=()=>done(null);im.src=src}function renderUploads(){$("uploadPreview").innerHTML="";customImages.forEach(x=>{const i=document.createElement("img");i.src=x;$("uploadPreview").appendChild(i)})}function saveResume(){if(!roundStarted||roundComplete)return;save("bb_resume",{cfg,layout,baseLayout,asked:[...asked],correct,score,combo,bestCombo,lives,hints,state,targetIndex,pickedIndex,missingId,swapPair,swapPicks,changeIndex,changeAlt,teamคะแนนs,adaptiveShift,customImages,roundStartedAt,roundAttempts});$("resumeBtn").classList.remove("hidden")}function clearResume(){localStorage.removeItem("bb_resume");$("resumeBtn").classList.add("hidden")}function restoreResume(){const r=load("bb_resume",null);if(!r)return;cfg={...cfg,...r.cfg};if(cfg.source==="study")cfg.source="teddy";cfg.teams=Math.max(2,Math.min(6,Number(cfg.teams)||2));layout=r.layout||[];baseLayout=r.baseLayout||[];asked=new Set(r.asked||[]);correct=r.correct||0;score=r.score||0;combo=r.combo||0;bestCombo=r.bestCombo||0;lives=r.lives??3;hints=r.hints??3;state=r.state||"idle";targetIndex=r.targetIndex;pickedIndex=r.pickedIndex;missingId=r.missingId;swapPair=r.swapPair||[];swapPicks=r.swapPicks||[];changeIndex=r.changeIndex;changeAlt=r.changeAlt;teamคะแนนs=[...(r.teamคะแนนs||[]),0,0,0,0,0,0].slice(0,6);adaptiveShift=r.adaptiveShift||0;customImages=r.customImages||customImages;roundStartedAt=Number(r.roundStartedAt)||Date.now();roundAttempts=Number(r.roundAttempts)||Math.max(correct,asked.size);practiceRewardSubmitted=false;roundStarted=true;roundComplete=false;updateSummary();renderTeams();updateHUD();if(state==="position_target"){renderTarget(targetIndex);showScene("target");setMain("พร้อมตอบ",positionAnswer)}else if(state==="position_answer")positionAnswer();else startMode();$("game").scrollIntoView({behavior:"smooth"})}
 function openModal(id){$(id).classList.remove("hidden");$("popover").classList.add("hidden");if(id==="statsModal")renderStats();if(id==="collectionModal")renderCollection();if(id==="profileModal")renderProfile()}function closeModal(id){$(id).classList.add("hidden")}function toast(t){let x=$("toast");if(!x){x=document.createElement("div");x.id="toast";x.style.cssText="position:fixed;left:50%;bottom:20px;z-index:220;transform:translate(-50%,18px);padding:10px 14px;border-radius:999px;background:#302733;color:white;font-size:11px;font-weight:850;opacity:0;transition:.22s;box-shadow:0 14px 30px rgba(30,20,36,.22)";document.body.appendChild(x)}x.textContent=t;x.style.opacity=1;x.style.transform="translate(-50%,0)";setTimeout(()=>{x.style.opacity=0;x.style.transform="translate(-50%,18px)"},1700)}function stars(){const box=$("starfall"),cs=["✨","⭐","🌟","💗","🌸"];box.innerHTML="";for(let i=0;i<35;i++){const s=document.createElement("i");s.textContent=cs[Math.floor(Math.random()*cs.length)];s.style.left=Math.random()*100+"vw";s.style.fontSize=13+Math.random()*18+"px";s.style.animationDelay=Math.random()*.7+"s";box.appendChild(s)}setTimeout(()=>box.innerHTML="",2600)}
 function resultTextSummary(){const rate=asked.size?Math.round(correct/asked.size*100):0;return `Brain Buddy • ${profile().name||"ผู้เล่น"} • ${score} คะแนน • ${rate}% • Combo ${bestCombo}`}function resultCanvas(){const c=document.createElement("canvas");c.width=1200;c.height=675;const x=c.getContext("2d"),g=x.createLinearGradient(0,0,1200,675);g.addColorStop(0,"#fff3f9");g.addColorStop(.55,"#f1edff");g.addColorStop(1,"#e7faf4");x.fillStyle=g;x.fillRect(0,0,1200,675);x.fillStyle="#302733";x.font="900 64px sans-serif";x.fillText("Brain Buddy",70,105);x.font="700 25px sans-serif";x.fillStyle="#7a6f7e";x.fillText("MEMORY • ATTENTION • OBSERVATION",72,145);x.fillStyle="#fff";if(x.roundRect){x.beginPath();x.roundRect(65,195,1070,350,36);x.fill()}else x.fillRect(65,195,1070,350);const rate=asked.size?Math.round(correct/asked.size*100):0;x.fillStyle="#302733";x.font="900 40px sans-serif";x.fillText(profile().name||"ผู้เล่น",110,275);x.fillStyle="#7558c6";x.font="900 88px sans-serif";x.fillText(String(score),110,400);x.font="700 22px sans-serif";x.fillStyle="#7a6f7e";x.fillText("คะแนน",112,435);x.fillStyle="#f270a7";x.font="900 58px sans-serif";x.fillText(rate+"%",505,400);x.font="700 22px sans-serif";x.fillStyle="#7a6f7e";x.fillText("ความแม่นยำ",508,435);x.fillStyle="#58b99d";x.font="900 58px sans-serif";x.fillText(String(bestCombo),835,400);x.font="700 22px sans-serif";x.fillStyle="#7a6f7e";x.fillText("Best Combo",838,435);x.font="700 20px sans-serif";x.fillStyle="#8a7f8f";x.fillText("© 2026 Sulawit Songsang • Brain Buddy",70,610);return c}
 // UI events
@@ -11740,14 +11981,51 @@ window.addEventListener("load",()=>{
     try{
       const c=await getClient();
       if(!c)throw new Error("no client");
+
       const {data,error}=await c.rpc("bb_ranked_game_catalog");
       if(error)throw error;
-      if(Array.isArray(data)&&data.length)rankedCatalog=data;
-      if(status)status.textContent=`${rankedCatalog.length} เกมพร้อมเลือก`;
+
+      rankedCatalog=Array.isArray(data)?data:[];
+
+      if(status){
+        status.textContent=rankedCatalog.length
+          ? `${rankedCatalog.length} เกมพร้อมเลือก`
+          : "ยังไม่มีเกม Ranked เปิดอยู่";
+      }
+
     }catch(e){
-      rankedCatalog=[...FALLBACK_CATALOG];
-      if(status)status.textContent=`${rankedCatalog.length} เกมพร้อมเลือก`;
+      // Fallback ยังอ่านจาก Game Control โดยตรง
+      // เพื่อไม่ให้เกมที่ Admin ปิด Ranked กลับมาโผล่จาก hard-coded list
+      try{
+        const c=await getClient();
+        const {data,error}=await c
+          .from("bb_game_balance")
+          .select("mode_code,world,name_th,sort_order,ranked_enabled")
+          .eq("ranked_enabled",true)
+          .order("world",{ascending:true})
+          .order("sort_order",{ascending:true});
+
+        if(error)throw error;
+
+        rankedCatalog=(data||[]).map(x=>({
+          mode_code:x.mode_code,
+          world:x.world,
+          name_th:x.name_th,
+          sort_order:x.sort_order
+        }));
+
+        if(status){
+          status.textContent=rankedCatalog.length
+            ? `${rankedCatalog.length} เกมพร้อมเลือก`
+            : "ยังไม่มีเกม Ranked เปิดอยู่";
+        }
+
+      }catch(fallbackError){
+        rankedCatalog=[];
+        if(status)status.textContent="โหลดรายการ Ranked ไม่สำเร็จ";
+      }
     }
+
     renderRankGameChoices();
   }
 
@@ -16113,7 +16391,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let contentRows=[];
   let learning={
     subject:null,type:null,title:null,rows:[],allRows:[],index:0,score:0,correct:0,
-    answered:false,selectedTokens:[],returnScreen:"modes"
+    answered:false,selectedTokens:[],returnScreen:"modes",startedAt:0,rewardSubmitted:false
   };
 
   const labels={
@@ -16183,10 +16461,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function startLearning(subject,type,title){
     if(subject==="language")subject=lang;
-    learning={subject,type,title,rows:[],allRows:[],index:0,score:0,correct:0,answered:false,selectedTokens:[],returnScreen:returnScreenForSubject(subject)};
+    learning={subject,type,title,rows:[],allRows:[],index:0,score:0,correct:0,answered:false,selectedTokens:[],returnScreen:returnScreenForSubject(subject),startedAt:Date.now(),rewardSubmitted:false};
     q("#bbLearningSubjectLabel").textContent=labels[subject]||subject;
     q("#bbLearningGameTitle").textContent=title;
     q("#bbLearningScore").textContent="0";
+    window.bbPracticeRewardUI?.hide?.();
     q("#bbLearningResult").classList.add("hidden");
     q("#bbLearningEmpty").classList.add("hidden");
     q("#bbLearningQuestionArea").classList.remove("hidden");
@@ -16233,8 +16512,12 @@ document.addEventListener('DOMContentLoaded', () => {
     q("#bbLearningResult").classList.add("hidden");
     q("#bbLearningEmpty").classList.remove("hidden");
     const p=q("#bbLearningEmpty p");
-    if(extra&&p)p.innerHTML=`${esc(extra)}<br><br>เข้า <b>/admin → คำศัพท์ / โจทย์</b> เพื่อเพิ่มเนื้อหาเกมนี้`;
-    q("#bbLearningProgressText").textContent="ยังไม่มีโจทย์";
+    if(p){
+      p.textContent=extra
+        ? "เกมนี้ยังไม่มีเนื้อหาพร้อมเล่นในขณะนี้"
+        : "เกมนี้กำลังเตรียมเนื้อหาเพิ่มเติม";
+    }
+    q("#bbLearningProgressText").textContent="ยังไม่พร้อมเล่น";
     q("#bbLearningProgressBar").style.width="0%";
   }
 
@@ -16366,12 +16649,72 @@ document.addEventListener('DOMContentLoaded', () => {
     if(learning.index>=learning.rows.length)finish(); else renderQuestion();
   }
 
+  function genericModeCode(){
+    const type=learning.type;
+    if(learning.subject==="math"){
+      return ({
+        multiple_choice:"math_multiple_choice",
+        typing:"math_typing",
+        matching:"math_matching",
+        sentence_order:"math_sentence_order",
+        listening:"math_listening",
+        all:"math_mix"
+      })[type]||"math_multiple_choice";
+    }
+
+    if(learning.subject==="english"){
+      return ({
+        vocabulary:"english_vocabulary",
+        multiple_choice:"english_multiple_choice",
+        matching:"english_matching",
+        typing:"english_typing",
+        sentence_order:"english_sentence_order",
+        listening:"english_listening"
+      })[type]||"english_vocabulary";
+    }
+
+    return null;
+  }
+
+  function genericRoundDifficulty(){
+    const weight={easy:1,normal:2,hard:3,expert:4};
+    const names=["easy","normal","hard","expert"];
+    const values=learning.rows.map(r=>weight[r.difficulty]).filter(Boolean);
+    if(!values.length)return "normal";
+    const avg=values.reduce((a,b)=>a+b,0)/values.length;
+    return names[Math.max(0,Math.min(3,Math.round(avg)-1))];
+  }
+
   function finish(){
     q("#bbLearningQuestionArea").classList.add("hidden");
     q("#bbLearningEmpty").classList.add("hidden");
     q("#bbLearningResult").classList.remove("hidden");
     q("#bbLearningFinalScore").textContent=learning.score.toLocaleString();
     q("#bbLearningFinalText").textContent=`ตอบถูก ${learning.correct} จาก ${learning.rows.length} ข้อ • ${labels[learning.subject]||""} • ${learning.title}`;
+
+    const modeCode=genericModeCode();
+    if(!modeCode||learning.rewardSubmitted)return;
+
+    learning.rewardSubmitted=true;
+
+    const maxScore=learning.rows.reduce((sum,row)=>sum+(Number(row.base_score)||100),0);
+    const duration=Math.max(1,(Date.now()-(learning.startedAt||Date.now()))/1000);
+
+    window.bbAwardPracticeXP?.({
+      modeCode,
+      difficultyCode:genericRoundDifficulty(),
+      rawScore:learning.score,
+      maxScore,
+      correct:learning.correct,
+      total:learning.rows.length,
+      durationSeconds:duration,
+      completed:true
+    }).then(result=>{
+      if(result?.ok){
+        q("#bbLearningFinalText").textContent=
+          `ตอบถูก ${learning.correct} จาก ${learning.rows.length} ข้อ • ${labels[learning.subject]||""} • +${Number(result.exp_gained||0)} EXP`;
+      }
+    });
   }
 
   document.addEventListener("click",e=>{
@@ -16725,12 +17068,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
       game={
         mode,title,level:selectedLevel,all:rows,round,
-        index:0,score:0,correct:0,answered:false,currentMode:null
+        index:0,score:0,correct:0,answered:false,currentMode:null,
+        startedAt:Date.now(),rewardSubmitted:false
       };
 
       q("#bbLearningSubjectLabel").textContent=`ภาษาจีน • HSK ${selectedLevel}`;
       q("#bbLearningGameTitle").textContent=title;
       q("#bbLearningScore").textContent="0";
+      window.bbPracticeRewardUI?.hide?.();
       q("#bbLearningResult").classList.add("hidden");
       q("#bbLearningEmpty").classList.add("hidden");
       q("#bbLearningQuestionArea").classList.remove("hidden");
@@ -16930,6 +17275,17 @@ document.addEventListener('DOMContentLoaded', () => {
     else render();
   }
 
+  function hskModeCode(mode){
+    return ({
+      hanzi_meaning:"chinese_hanzi_meaning",
+      meaning_hanzi:"chinese_meaning_hanzi",
+      hanzi_pinyin:"chinese_hanzi_pinyin",
+      pinyin_hanzi:"chinese_pinyin_hanzi",
+      listen_hanzi:"chinese_listening",
+      mix:"chinese_mix"
+    })[mode]||"chinese_hanzi_meaning";
+  }
+
   function finish(){
     q("#bbLearningQuestionArea").classList.add("hidden");
     q("#bbLearningEmpty").classList.add("hidden");
@@ -16945,6 +17301,30 @@ document.addEventListener('DOMContentLoaded', () => {
     q("#bbLearningFinalText").textContent=
       `ตอบถูก ${game.correct} จาก ${game.round.length} ข้อ • `+
       `โหมดนี้ฝึกแล้ว ${done.toLocaleString()} / ${total.toLocaleString()} คำ`;
+
+    if(game.rewardSubmitted)return;
+    game.rewardSubmitted=true;
+
+    const maxScore=game.round.reduce((sum,row)=>sum+(Number(row.base_score)||100),0);
+    const duration=Math.max(1,(Date.now()-(game.startedAt||Date.now()))/1000);
+
+    window.bbAwardPracticeXP?.({
+      modeCode:hskModeCode(game.mode),
+      difficultyCode:`hsk${game.level}`,
+      rawScore:game.score,
+      maxScore,
+      correct:game.correct,
+      total:game.round.length,
+      durationSeconds:duration,
+      completed:true
+    }).then(result=>{
+      if(result?.ok){
+        q("#bbLearningFinalText").textContent=
+          `ตอบถูก ${game.correct} จาก ${game.round.length} ข้อ • `+
+          `ฝึกแล้ว ${done.toLocaleString()} / ${total.toLocaleString()} คำ • `+
+          `+${Number(result.exp_gained||0)} EXP`;
+      }
+    });
   }
 
   function goBack(){
@@ -18282,6 +18662,526 @@ document.addEventListener('DOMContentLoaded', () => {
     <button type="button" id="bbRankUpContinue">ไปต่อ!</button>
   </div>
 </div>
+
+
+<script>
+(function brainBuddyV75PracticeRewards(){
+  const q=s=>document.querySelector(s);
+
+  function client(){
+    if(window.__bbSupabase)return window.__bbSupabase;
+    const cfg=window.BRAIN_BUDDY_SUPABASE||{};
+    if(window.supabase&&cfg.url&&cfg.publishableKey){
+      window.__bbSupabase=window.supabase.createClient(cfg.url,cfg.publishableKey);
+      return window.__bbSupabase;
+    }
+    return null;
+  }
+
+  function setRewardUI(state,title,detail){
+    const box=q("#bbPracticeReward");
+    if(!box)return;
+
+    box.classList.remove("hidden","success","guest","error");
+    if(state)box.classList.add(state);
+
+    const t=q("#bbPracticeRewardTitle");
+    const d=q("#bbPracticeRewardDetail");
+
+    if(t)t.textContent=title||"";
+    if(d)d.textContent=detail||"";
+  }
+
+  function hideRewardUI(){
+    q("#bbPracticeReward")?.classList.add("hidden");
+  }
+
+  function syncLocalXP(result){
+    try{
+      const raw=localStorage.getItem("bb_profile");
+      const p=raw?JSON.parse(raw):{name:"ผู้เล่น",avatar:"🧸",xp:0};
+      p.xp=Number(result?.new_xp||0);
+      localStorage.setItem("bb_profile",JSON.stringify(p));
+    }catch(e){}
+
+    try{window.renderProfile?.()}catch(e){}
+    try{window.renderHome?.()}catch(e){}
+    try{window.bbSyncThaiBrainRank?.()}catch(e){}
+  }
+
+  async function award(args={}){
+    const c=client();
+
+    if(!c){
+      setRewardUI("error","ยังเชื่อมต่อ EXP ไม่สำเร็จ","ลองรีเฟรชหน้าเว็บแล้วเล่นอีกครั้ง");
+      return {ok:false,error:"no_client"};
+    }
+
+    const {data:sessionData}=await c.auth.getSession();
+    const user=sessionData?.session?.user;
+
+    if(!user){
+      setRewardUI(
+        "guest",
+        "เข้าสู่ระบบเพื่อสะสม EXP",
+        "เล่นต่อได้ตามปกติ • EXP และ Level บน Cloud จะบันทึกเมื่อใช้บัญชีสมาชิก"
+      );
+      return {ok:false,guest:true};
+    }
+
+    setRewardUI(
+      "",
+      "กำลังคำนวณ EXP…",
+      "พิจารณาโหมดเกม ระดับความยาก ความแม่นยำ และ Performance"
+    );
+
+    const payload={
+      p_mode_code:String(args.modeCode||""),
+      p_difficulty_code:String(args.difficultyCode||"normal"),
+      p_raw_score:Number(args.rawScore)||0,
+      p_max_score:Math.max(0,Number(args.maxScore)||0),
+      p_correct:Math.max(0,Number(args.correct)||0),
+      p_total:Math.max(0,Number(args.total)||0),
+      p_duration_seconds:Math.max(0,Number(args.durationSeconds)||0),
+      p_completed:args.completed!==false
+    };
+
+    const {data,error}=await c.rpc("bb_finish_game_reward",payload);
+
+    if(error){
+      console.warn("Practice EXP:",error);
+      setRewardUI("error","บันทึก EXP ไม่สำเร็จ",error.message||"กรุณาลองใหม่อีกครั้ง");
+      return {ok:false,error};
+    }
+
+    const result=Array.isArray(data)?data[0]:data;
+    if(!result){
+      setRewardUI("error","บันทึก EXP ไม่สำเร็จ","ระบบไม่ได้ส่งผลรางวัลกลับมา");
+      return {ok:false,error:"empty_result"};
+    }
+
+    syncLocalXP(result);
+
+    const detail=result.reward_detail||{};
+    const exp=Number(result.exp_gained||0);
+    const perf=Number(result.performance_score||0);
+    const repeat=Number(detail.repeat_multiplier??1);
+    const diff=Number(detail.difficulty_multiplier??1);
+
+    const extra=[];
+    extra.push(`Performance ${perf}/1000`);
+    extra.push(`ความยาก ×${diff.toFixed(2)}`);
+
+    if(repeat<1){
+      extra.push(`เล่นโหมดเดิมซ้ำ ×${repeat.toFixed(2)}`);
+    }
+
+    if(result.level_up){
+      extra.push(`⚡ LEVEL ${Number(result.old_level)} → ${Number(result.new_level)}`);
+    }else{
+      extra.push(`Level ${Number(result.new_level)}`);
+    }
+
+    setRewardUI(
+      "success",
+      `+${exp.toLocaleString()} EXP`,
+      extra.join(" • ")
+    );
+
+    return {ok:true,...result};
+  }
+
+  window.bbAwardPracticeXP=award;
+  window.bbPracticeRewardUI={
+    hide:hideRewardUI,
+    set:setRewardUI
+  };
+})();
+</script>
+
+
+<script>
+(function brainBuddyV76ReleaseControl(){
+  const q=s=>document.querySelector(s);
+
+  const MODE_MAP={
+    teddy:{
+      position:"teddy_position",
+      match:"teddy_match",
+      missing:"teddy_missing",
+      swap:"teddy_swap",
+      change:"teddy_change",
+      sequence:"teddy_sequence"
+    },
+    math:{
+      multiple_choice:"math_multiple_choice",
+      typing:"math_typing",
+      matching:"math_matching",
+      sentence_order:"math_sentence_order",
+      listening:"math_listening",
+      all:"math_mix"
+    },
+    english:{
+      vocabulary:"english_vocabulary",
+      multiple_choice:"english_multiple_choice",
+      matching:"english_matching",
+      typing:"english_typing",
+      sentence_order:"english_sentence_order",
+      listening:"english_listening"
+    },
+    chinese:{
+      hanzi_meaning:"chinese_hanzi_meaning",
+      meaning_hanzi:"chinese_meaning_hanzi",
+      hanzi_pinyin:"chinese_hanzi_pinyin",
+      pinyin_hanzi:"chinese_pinyin_hanzi",
+      listen_hanzi:"chinese_listening",
+      mix:"chinese_mix"
+    }
+  };
+
+  let rows=[];
+  let byMode=new Map();
+  let lastLoaded=0;
+  let loading=null;
+  let toastTimer=null;
+
+  function client(){
+    if(window.__bbSupabase)return window.__bbSupabase;
+    const cfg=window.BRAIN_BUDDY_SUPABASE||{};
+    if(window.supabase&&cfg.url&&cfg.publishableKey){
+      window.__bbSupabase=window.supabase.createClient(cfg.url,cfg.publishableKey);
+      return window.__bbSupabase;
+    }
+    return null;
+  }
+
+  function statusText(row){
+    if(!row)return "กำลังพัฒนา";
+    if(row.release_message&&String(row.release_message).trim()){
+      return String(row.release_message).trim();
+    }
+    if(row.release_status==="maintenance")return "ปิดปรับปรุงชั่วคราว";
+    if(row.release_status==="development")return "กำลังพัฒนา • Coming Soon";
+    return "ยังไม่พร้อมใช้งาน";
+  }
+
+  function shortStatus(row){
+    if(row?.release_status==="maintenance")return "🔧 ปิดปรับปรุง";
+    return "🔒 กำลังพัฒนา";
+  }
+
+  function showToast(title,detail){
+    let el=q("#bbReleaseToast");
+    if(!el){
+      el=document.createElement("div");
+      el.id="bbReleaseToast";
+      el.className="bbReleaseToast";
+      el.innerHTML="<b></b><span></span>";
+      document.body.appendChild(el);
+    }
+
+    el.querySelector("b").textContent=title||"เกมนี้ยังไม่พร้อม";
+    el.querySelector("span").textContent=detail||"กรุณาเลือกเกมอื่นก่อน";
+    el.classList.add("show");
+
+    clearTimeout(toastTimer);
+    toastTimer=setTimeout(()=>el.classList.remove("show"),2600);
+  }
+
+  function worldRows(world){
+    return rows.filter(x=>x.world===world);
+  }
+
+  function worldPracticeOpen(world){
+    const list=worldRows(world);
+    return list.some(x=>x.practice_enabled===true);
+  }
+
+  function worldMessage(world){
+    const list=worldRows(world);
+    const maintenance=list.find(x=>x.release_status==="maintenance");
+    if(maintenance)return statusText(maintenance);
+    const msg=list.find(x=>x.release_message);
+    return statusText(msg||list[0]);
+  }
+
+  function clearLock(el){
+    if(!el)return;
+    el.classList.remove("bbReleaseLocked");
+    el.removeAttribute("data-release-label");
+    el.removeAttribute("aria-disabled");
+    el.querySelector(":scope > .bbReleaseLockIcon")?.remove();
+  }
+
+  function lock(el,row,label=null){
+    if(!el)return;
+    el.classList.add("bbReleaseLocked");
+    el.dataset.releaseLabel=label||shortStatus(row);
+    el.setAttribute("aria-disabled","true");
+
+    if(!el.querySelector(":scope > .bbReleaseLockIcon")){
+      const icon=document.createElement("span");
+      icon.className="bbReleaseLockIcon";
+      icon.textContent=row?.release_status==="maintenance"?"🔧":"🔒";
+      el.appendChild(icon);
+    }
+  }
+
+  function applyWorldCards(){
+    const teddy=q('.bbWorldCard[data-app-go="teddy"]');
+    const math=q('.bbWorldCard[data-app-go="mathgames"]');
+    const language=q('.bbWorldCard[data-app-go="languagegames"]');
+
+    if(teddy){
+      clearLock(teddy);
+      if(!worldPracticeOpen("teddy"))lock(teddy,worldRows("teddy")[0]);
+      const tag=teddy.querySelector(".bbWorldTag");
+      if(tag){
+        tag.textContent=worldPracticeOpen("teddy")?"พร้อมเล่น":shortStatus(worldRows("teddy")[0]);
+        tag.classList.toggle("bbReleaseStatus",!worldPracticeOpen("teddy"));
+      }
+    }
+
+    if(math){
+      clearLock(math);
+      if(!worldPracticeOpen("math"))lock(math,worldRows("math")[0]);
+      const tag=math.querySelector(".bbWorldTag");
+      if(tag){
+        tag.textContent=worldPracticeOpen("math")?"ฝึกคิด • คำนวณ • แก้โจทย์":shortStatus(worldRows("math")[0]);
+        tag.classList.toggle("bbReleaseStatus",!worldPracticeOpen("math"));
+      }
+    }
+
+    if(language){
+      const anyLanguage=worldPracticeOpen("chinese")||worldPracticeOpen("english");
+      clearLock(language);
+      if(!anyLanguage)lock(language,worldRows("chinese")[0]||worldRows("english")[0]);
+
+      const tag=language.querySelector(".bbWorldTag");
+      if(tag){
+        if(worldPracticeOpen("chinese")&&worldPracticeOpen("english")){
+          tag.textContent="Chinese • English";
+          tag.classList.remove("bbReleaseStatus");
+        }else if(worldPracticeOpen("chinese")){
+          tag.textContent="Chinese พร้อมเล่น • English กำลังพัฒนา";
+          tag.classList.remove("bbReleaseStatus");
+        }else if(worldPracticeOpen("english")){
+          tag.textContent="English พร้อมเล่น";
+          tag.classList.remove("bbReleaseStatus");
+        }else{
+          tag.textContent="🔒 กำลังพัฒนา";
+          tag.classList.add("bbReleaseStatus");
+        }
+      }
+    }
+  }
+
+  function applyTeddy(){
+    document.querySelectorAll("[data-app-mode]").forEach(card=>{
+      const code=MODE_MAP.teddy[card.dataset.appMode];
+      if(!code)return;
+      const row=byMode.get(code);
+      clearLock(card);
+      if(row&&row.practice_enabled!==true)lock(card,row);
+    });
+  }
+
+  function applyMath(){
+    document.querySelectorAll('[data-learning-start][data-learning-subject="math"]').forEach(card=>{
+      const code=MODE_MAP.math[card.dataset.learningType];
+      if(!code)return;
+      const row=byMode.get(code);
+      clearLock(card);
+      if(row&&row.practice_enabled!==true)lock(card,row);
+    });
+  }
+
+  function applyChinese(){
+    document.querySelectorAll("[data-hsk-quiz]").forEach(card=>{
+      const code=MODE_MAP.chinese[card.dataset.hskQuiz];
+      if(!code)return;
+      const row=byMode.get(code);
+      clearLock(card);
+      if(row&&row.practice_enabled!==true)lock(card,row);
+    });
+  }
+
+  function applyEnglish(){
+    document.querySelectorAll('[data-learning-start][data-learning-subject="language"]').forEach(card=>{
+      const code=MODE_MAP.english[card.dataset.learningType];
+      if(!code)return;
+      const row=byMode.get(code);
+      clearLock(card);
+      if(row&&row.practice_enabled!==true)lock(card,row);
+    });
+  }
+
+  function applyLanguageTabs(){
+    document.querySelectorAll("[data-language-choice]").forEach(tab=>{
+      const world=tab.dataset.languageChoice;
+      clearLock(tab);
+      if(!worldPracticeOpen(world)){
+        const row=worldRows(world)[0];
+        lock(tab,row,shortStatus(row));
+      }
+    });
+
+    // ถ้าภาษาที่ active ถูกปิด ให้ย้ายไปภาษาที่เปิดอยู่โดยอัตโนมัติ
+    const active=q("[data-language-choice].active");
+    if(active?.classList.contains("bbReleaseLocked")){
+      const fallback=[...document.querySelectorAll("[data-language-choice]")]
+        .find(x=>!x.classList.contains("bbReleaseLocked"));
+      if(fallback)fallback.click();
+    }
+  }
+
+  function apply(){
+    applyWorldCards();
+    applyTeddy();
+    applyMath();
+    applyChinese();
+    applyEnglish();
+    applyLanguageTabs();
+
+    document.documentElement.dataset.bbReleaseReady="1";
+  }
+
+  async function load(force=false){
+    if(!force&&Date.now()-lastLoaded<8000&&rows.length){
+      apply();
+      return rows;
+    }
+    if(loading)return loading;
+
+    loading=(async()=>{
+      try{
+        const c=client();
+        if(!c)throw new Error("no_client");
+
+        const {data,error}=await c
+          .from("bb_game_balance")
+          .select("mode_code,world,name_th,practice_enabled,ranked_enabled,release_status,release_message,sort_order")
+          .order("world",{ascending:true})
+          .order("sort_order",{ascending:true});
+
+        if(error)throw error;
+
+        rows=Array.isArray(data)?data:[];
+        byMode=new Map(rows.map(x=>[x.mode_code,x]));
+        lastLoaded=Date.now();
+
+        apply();
+        return rows;
+
+      }catch(err){
+        console.warn("Game Release Control:",err);
+        return rows;
+      }finally{
+        loading=null;
+      }
+    })();
+
+    return loading;
+  }
+
+  function lockedModeFromElement(el){
+    if(!el)return null;
+
+    if(el.matches("[data-app-mode]")){
+      return MODE_MAP.teddy[el.dataset.appMode]||null;
+    }
+
+    if(el.matches('[data-learning-start][data-learning-subject="math"]')){
+      return MODE_MAP.math[el.dataset.learningType]||null;
+    }
+
+    if(el.matches('[data-learning-start][data-learning-subject="language"]')){
+      return MODE_MAP.english[el.dataset.learningType]||null;
+    }
+
+    if(el.matches("[data-hsk-quiz]")){
+      return MODE_MAP.chinese[el.dataset.hskQuiz]||null;
+    }
+
+    return null;
+  }
+
+  // Capture phase: blocks older app click handlers before they can open a closed game.
+  document.addEventListener("click",e=>{
+    const worldCard=e.target.closest(".bbWorldCard.bbReleaseLocked");
+    if(worldCard){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+
+      const go=worldCard.dataset.appGo;
+      const world=go==="teddy"?"teddy":go==="mathgames"?"math":"chinese";
+      showToast("🔒 เกมนี้ยังไม่เปิด",worldMessage(world));
+      return;
+    }
+
+    const langTab=e.target.closest("[data-language-choice].bbReleaseLocked");
+    if(langTab){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      const world=langTab.dataset.languageChoice;
+      showToast("🔒 ภาษานี้ยังไม่เปิด",worldMessage(world));
+      return;
+    }
+
+    const game=e.target.closest(
+      "[data-app-mode].bbReleaseLocked,"+
+      "[data-learning-start].bbReleaseLocked,"+
+      "[data-hsk-quiz].bbReleaseLocked"
+    );
+
+    if(game){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+
+      const code=lockedModeFromElement(game);
+      const row=byMode.get(code);
+      showToast(`🔒 ${row?.name_th||"เกมนี้ยังไม่เปิด"}`,statusText(row));
+      return;
+    }
+  },true);
+
+  // Public helper used by other UI sections if needed.
+  window.bbGameRelease={
+    refresh:()=>load(true),
+    isPracticeOpen(modeCode){
+      return byMode.get(modeCode)?.practice_enabled===true;
+    },
+    isRankedOpen(modeCode){
+      return byMode.get(modeCode)?.ranked_enabled===true;
+    },
+    get(modeCode){
+      return byMode.get(modeCode)||null;
+    }
+  };
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",()=>setTimeout(()=>load(true),220),{once:true});
+  }else{
+    setTimeout(()=>load(true),220);
+  }
+
+  // Re-check when users return to the game hub.
+  document.addEventListener("click",e=>{
+    if(e.target.closest(
+      '[data-v17="play"],'+
+      '[data-app-go="modes"],'+
+      '[data-app-go="mathgames"],'+
+      '[data-app-go="languagegames"],'+
+      '[data-app-go="teddy"]'
+    )){
+      setTimeout(()=>load(false),90);
+    }
+  });
+
+  // Admin changes become visible without requiring a full reload.
+  setInterval(()=>load(true),30000);
+})();
+</script>
 
 </body>
 </html>

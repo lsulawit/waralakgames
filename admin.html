@@ -5,8 +5,26 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#765fda">
 <meta name="author" content="Sulawit Songsang">
-<title>Brain Buddy • Admin Center v68</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<title>Brain Buddy • Admin Center v69</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+document.addEventListener("click",e=>{
+ const open=e.target.closest("[data-user-open]");
+ if(open){
+  openUserControlModal(open.dataset.userOpen);
+  return;
+ }
+
+ const quick=e.target.closest("[data-user-quick]");
+ if(quick){
+  quickUserAdjust(
+   quick.dataset.userQuick,
+   Number(quick.dataset.amount)||0
+  );
+  return;
+ }
+});
+
+</script>
 <style>
 *{box-sizing:border-box}
 :root{
@@ -630,6 +648,198 @@ button{cursor:pointer}
   .gcSwitchBox>span{margin:0}
 }
 
+
+/* ==========================================================
+   Admin v69 — User Control
+   ========================================================== */
+.userControlToolbar{margin-bottom:10px}
+.userControlNotice{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 13px;margin-bottom:11px;border-radius:17px;
+  background:linear-gradient(145deg,#edf9ff,#f5efff);
+  border:1px solid #dce9f2
+}
+.userControlNotice>span{
+  width:42px;height:42px;flex:0 0 42px;border-radius:13px;
+  display:grid;place-items:center;background:#fff;font-size:20px
+}
+.userControlNotice div{display:flex;flex-direction:column}
+.userControlNotice b{color:#55476a;font-size:10px}
+.userControlNotice small{color:#887d93;font-size:8px;margin-top:2px}
+
+.userControlSearch{
+  padding:11px;border-radius:18px;background:#f8f5fa;border:1px solid #eee5f0
+}
+.userControlSearch label{display:grid;gap:5px}
+.userControlSearch label>span{color:#7c6985;font-size:9px;font-weight:1000}
+.userSearchInput{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px}
+.userSearchInput input{
+  min-height:43px;border:1.5px solid #e7ddea;border-radius:13px;
+  padding:0 12px;background:#fff;color:#55445f;outline:none;font-size:11px
+}
+.userSearchInput input:focus{border-color:#9277e1;box-shadow:0 0 0 3px rgba(137,104,210,.08)}
+.userControlMeta{
+  display:flex;justify-content:space-between;margin:8px 3px;color:#8f7d95;font-size:8px;font-weight:850
+}
+.userControlList{display:grid;gap:7px}
+.userRow{
+  display:grid;grid-template-columns:54px minmax(0,1.4fr) repeat(4,minmax(72px,.6fr)) auto;
+  gap:8px;align-items:center;padding:9px;border-radius:17px;
+  background:#fff;border:1px solid #eee5f0
+}
+.userRow:hover{border-color:#dacbea;box-shadow:0 7px 18px rgba(75,49,89,.05)}
+.userRowAvatar{
+  width:48px;height:48px;border-radius:15px;display:grid;place-items:center;overflow:hidden;
+  background:linear-gradient(145deg,#ffe8f2,#ece7ff);font-size:22px
+}
+.userRowAvatar img{width:100%;height:100%;object-fit:cover}
+.userRowIdentity{min-width:0}
+.userRowIdentity b{
+  display:block;color:#584468;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.userRowIdentity span{
+  display:block;margin-top:2px;color:#96839b;font-size:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.userRowIdentity code{display:block;margin-top:3px;color:#ad9caf;font-size:6px}
+.userRowMetric{padding:7px;border-radius:11px;background:#faf7fb;text-align:center}
+.userRowMetric small{display:block;color:#a18fa5;font-size:6px;font-weight:900}
+.userRowMetric b{display:block;margin-top:1px;color:#614b70;font-size:10px}
+.userRowOpen{
+  min-height:38px;border:0;border-radius:11px;padding:0 11px;
+  color:#fff;background:linear-gradient(135deg,#765ed7,#d35da6);font-size:8px;font-weight:1000
+}
+
+.userControlModalCard{
+  width:min(96vw,980px)!important;max-height:93vh!important;overflow:auto!important;text-align:left!important
+}
+.userModalHeader{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:9px}
+.userModalIdentity{display:flex;align-items:center;gap:10px;min-width:0}
+.userModalAvatar{
+  width:58px;height:58px;flex:0 0 58px;border-radius:18px;display:grid;place-items:center;overflow:hidden;
+  background:linear-gradient(145deg,#ffe7f2,#eae4ff);font-size:27px
+}
+.userModalAvatar img{width:100%;height:100%;object-fit:cover}
+.userModalIdentity small{color:#9a75a2;font-size:7px;letter-spacing:.13em;font-weight:1000}
+.userModalIdentity h3{margin:1px 0;color:#543f64;font-size:21px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.userModalIdentity p{margin:1px 0 0;color:#948199;font-size:8px}
+
+.userIdStrip{
+  display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:7px;align-items:center;
+  padding:8px 10px;border-radius:13px;background:#f8f5f9
+}
+.userIdStrip span{color:#9b899f;font-size:7px;font-weight:1000}
+.userIdStrip code{min-width:0;color:#67566e;font-size:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.userIdStrip button{border:0;border-radius:8px;padding:6px 8px;background:#eee7f6;color:#705b7e;font-size:7px;font-weight:900}
+
+.userStatsGrid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:10px
+}
+.userStatsGrid article{
+  min-height:74px;padding:10px;border-radius:16px;display:flex;align-items:center;gap:8px;
+  background:#fff;border:1px solid #eee5ef
+}
+.userStatsGrid article>span{
+  width:39px;height:39px;flex:0 0 39px;border-radius:12px;display:grid;place-items:center;
+  background:#f4eef8;font-size:18px
+}
+.userStatsGrid article.coin>span{background:#fff1b9}
+.userStatsGrid article.xp>span{background:#eee8ff}
+.userStatsGrid article div{display:flex;flex-direction:column}
+.userStatsGrid small{color:#9c899f;font-size:6px;font-weight:1000}
+.userStatsGrid strong{color:#5d486a;font-size:16px;line-height:1.1}
+.userStatsGrid em{font-style:normal;color:#9c87a0;font-size:7px;margin-top:2px}
+
+.userRankGrid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:7px
+}
+.userRankGrid article{
+  padding:9px;border-radius:14px;background:linear-gradient(145deg,#faf7fc,#fff);
+  border:1px solid #eee5f0
+}
+.userRankGrid small{display:block;color:#938099;font-size:6px;font-weight:1000}
+.userRankGrid strong{display:block;margin-top:3px;color:#59436a;font-size:12px}
+.userRankGrid span{display:block;margin-top:2px;color:#87718e;font-size:7px;font-weight:850}
+
+.userQuickActions,.userAdjustPanel,.userAuditPanel{
+  margin-top:10px;padding:12px;border-radius:18px;background:#fff;border:1px solid #eee5f0
+}
+.userSectionTitle{display:flex;justify-content:space-between;align-items:center;gap:9px;margin-bottom:9px}
+.userSectionTitle small{display:block;color:#9c78a3;font-size:7px;letter-spacing:.12em;font-weight:1000}
+.userSectionTitle h4{margin:1px 0 0;color:#59436a;font-size:13px}
+.auditBadge{
+  padding:5px 8px;border-radius:999px;background:#f1ebf7;color:#725d80;font-size:7px;font-weight:900
+}
+.userQuickGroups{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.userQuickGroups>div{padding:9px;border-radius:13px;background:#faf7fb}
+.userQuickGroups>div>span{display:block;margin-bottom:6px;color:#735e80;font-size:8px;font-weight:1000}
+.userQuickGroups>div>div{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.userQuickGroups button{
+  min-height:34px;border:0;border-radius:10px;background:#e6faef;color:#347558;font-size:8px;font-weight:1000
+}
+.userQuickGroups button.minus{background:#ffe9ef;color:#a24e69}
+
+.userAdjustForm{
+  display:grid;grid-template-columns:1.2fr 1fr .75fr;gap:7px
+}
+.userAdjustForm label{display:grid;gap:4px}
+.userAdjustForm label.reason{grid-column:1/-1}
+.userAdjustForm label>span{color:#7f6d87;font-size:8px;font-weight:900}
+.userAdjustForm input,.userAdjustForm select{
+  min-height:40px;border:1px solid #e8dfeb;border-radius:11px;padding:0 9px;
+  background:#fff;color:#594860;outline:none;font-size:9px
+}
+.userAdjustForm input:focus,.userAdjustForm select:focus{
+  border-color:#9276dd;box-shadow:0 0 0 3px rgba(137,103,207,.07)
+}
+.userAdjustPreview{
+  margin-top:8px;padding:10px;border-radius:13px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  background:linear-gradient(135deg,#f4efff,#fff4f8);color:#755e81
+}
+.userAdjustPreview span{font-size:7px;font-weight:900}
+.userAdjustPreview strong{font-size:14px;color:#59426b}
+.userAdjustPreview i{font-style:normal;color:#ad93b1}
+.userAdjustPreview em{
+  margin-left:6px;padding:4px 7px;border-radius:999px;font-style:normal;
+  background:#ddfaeb;color:#32775a;font-size:8px;font-weight:1000
+}
+.userAdjustPreview em.minus{background:#ffe8ef;color:#a34c69}
+.userAdjustSubmit{width:100%;margin-top:8px;min-height:44px}
+
+.userAuditList{display:grid;gap:6px}
+.userAuditRow{
+  display:grid;grid-template-columns:90px minmax(0,1fr) auto;gap:8px;align-items:center;
+  padding:8px 9px;border-radius:12px;background:#faf7fb
+}
+.userAuditField{font-size:8px;color:#634d70;font-weight:1000}
+.userAuditMain{min-width:0}
+.userAuditMain b{display:block;color:#5c4867;font-size:8px}
+.userAuditMain span{
+  display:block;margin-top:2px;color:#97859b;font-size:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.userAuditTime{text-align:right;color:#9f8ca3;font-size:6px}
+.userAuditEmpty{padding:18px;text-align:center;color:#97849c;font-size:8px;background:#faf7fb;border-radius:12px}
+
+@media(max-width:950px){
+  .userRow{grid-template-columns:50px minmax(0,1fr) repeat(2,78px) auto}
+  .userRowMetric:nth-of-type(3),.userRowMetric:nth-of-type(4){display:none}
+  .userStatsGrid{grid-template-columns:1fr 1fr}
+  .userRankGrid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:620px){
+  .adminTabs{grid-template-columns:1fr 1fr!important}
+  .userSearchInput{grid-template-columns:1fr}
+  .userRow{grid-template-columns:45px minmax(0,1fr) auto}
+  .userRowMetric{display:none!important}
+  .userRankGrid{grid-template-columns:1fr 1fr}
+  .userQuickGroups{grid-template-columns:1fr}
+  .userQuickGroups>div>div{grid-template-columns:1fr 1fr}
+  .userAdjustForm{grid-template-columns:1fr}
+  .userAdjustForm label.reason{grid-column:auto}
+  .userAuditRow{grid-template-columns:75px minmax(0,1fr)}
+  .userAuditTime{grid-column:2;text-align:left}
+}
+
 </style>
 </head>
 <body>
@@ -644,6 +854,7 @@ button{cursor:pointer}
       <button data-admin-panel="learning">คำศัพท์ / โจทย์</button>
       <button data-admin-panel="hsk">HSK 1–6</button>
       <button data-admin-panel="games">🎮 Game Control</button>
+      <button data-admin-panel="users">👥 User Control</button>
     </div>
     <a class="back" href="/">← กลับหน้าเกม</a>
   </div>
@@ -656,7 +867,7 @@ button{cursor:pointer}
       <div>
         <span class="status">ADMIN CONTROL CENTER</span>
         <h1>ศูนย์จัดการ Brain Buddy</h1>
-        <p>จัดการตัวหมี เนื้อหา HSK และสถานะเปิด–ปิดเกมจากหน้าเดียว</p>
+        <p>จัดการตัวหมี เนื้อหา เกม สมาชิก Coins EXP และ Rank จากหน้าเดียว</p>
       </div>
       <div class="heroArt"><span class="brain"></span><span class="bear"></span><span class="book"></span></div>
     </div>
@@ -1018,6 +1229,47 @@ button{cursor:pointer}
         <div class="learnLoading">กำลังโหลดสถานะเกม…</div>
       </div>
     </section>
+
+    <!-- USER CONTROL -->
+    <section class="adminPanel" id="panel-users">
+      <div class="toolbar userControlToolbar">
+        <div>
+          <h2>👥 User Control</h2>
+          <p>ค้นหาสมาชิก เติม Coins ปรับ EXP คะแนน และ RP พร้อมบันทึกประวัติทุกครั้ง</p>
+        </div>
+        <div class="actions">
+          <button class="btn" id="userControlReload">รีเฟรช</button>
+        </div>
+      </div>
+
+      <div class="userControlNotice">
+        <span>🛡️</span>
+        <div>
+          <b>ทุกการแก้ไขถูกบันทึก Audit Log</b>
+          <small>ระบบจะเก็บ Admin ผู้แก้, ค่าเดิม, ค่าใหม่, เหตุผล และเวลาที่แก้ไข</small>
+        </div>
+      </div>
+
+      <div class="userControlSearch">
+        <label>
+          <span>ค้นหาสมาชิก</span>
+          <div class="userSearchInput">
+            <input id="userControlSearchInput" type="search"
+              placeholder="ชื่อ, Email หรือ User ID">
+            <button class="btn primary" id="userControlSearchBtn">ค้นหา</button>
+          </div>
+        </label>
+      </div>
+
+      <div class="userControlMeta">
+        <span id="userControlCount">0 สมาชิก</span>
+        <span id="userControlStatus">พร้อมใช้งาน</span>
+      </div>
+
+      <div class="userControlList" id="userControlList">
+        <div class="learnLoading">กำลังโหลดสมาชิก…</div>
+      </div>
+    </section>
   </div>
 </section>
 </main>
@@ -1126,6 +1378,180 @@ button{cursor:pointer}
         <button class="btn primary" type="submit" id="hskEditSave">บันทึกการแก้ไข</button>
       </div>
     </form>
+  </div>
+</div>
+
+
+<div class="modal hidden" id="userControlModal">
+  <div class="modalCard userControlModalCard">
+
+    <div class="userModalHeader">
+      <div class="userModalIdentity">
+        <div class="userModalAvatar" id="userModalAvatar">🧠</div>
+        <div>
+          <small>MEMBER CONTROL</small>
+          <h3 id="userModalName">ผู้เล่น</h3>
+          <p id="userModalEmail">—</p>
+        </div>
+      </div>
+      <button class="btn" type="button" id="userModalClose">ปิด</button>
+    </div>
+
+    <div class="userIdStrip">
+      <span>USER ID</span>
+      <code id="userModalId">—</code>
+      <button type="button" id="userCopyId">คัดลอก</button>
+    </div>
+
+    <section class="userStatsGrid">
+      <article class="coin">
+        <span>🪙</span>
+        <div><small>COINS</small><strong id="ucCoins">0</strong></div>
+      </article>
+      <article class="xp">
+        <span>⭐</span>
+        <div><small>EXP</small><strong id="ucXP">0</strong><em id="ucLevel">Level 1</em></div>
+      </article>
+      <article>
+        <span>🎯</span>
+        <div><small>TOTAL SCORE</small><strong id="ucTotalScore">0</strong></div>
+      </article>
+      <article>
+        <span>🏅</span>
+        <div><small>BEST SCORE</small><strong id="ucBestScore">0</strong></div>
+      </article>
+    </section>
+
+    <section class="userRankGrid">
+      <article>
+        <small>🧠 OVERALL</small>
+        <strong id="ucOverallRP">0 RP</strong>
+        <span id="ucOverallTier">🌱 มีแวว</span>
+      </article>
+      <article>
+        <small>🧸 MEMORY</small>
+        <strong id="ucMemoryRP">0 RP</strong>
+        <span id="ucMemoryTier">🌱 มีแวว</span>
+      </article>
+      <article>
+        <small>➗ MATH</small>
+        <strong id="ucMathRP">0 RP</strong>
+        <span id="ucMathTier">🌱 มีแวว</span>
+      </article>
+      <article>
+        <small>🇨🇳 CHINESE</small>
+        <strong id="ucChineseRP">0 RP</strong>
+        <span id="ucChineseTier">🌱 มีแวว</span>
+      </article>
+      <article>
+        <small>🇬🇧 ENGLISH</small>
+        <strong id="ucEnglishRP">0 RP</strong>
+        <span id="ucEnglishTier">🌱 มีแวว</span>
+      </article>
+    </section>
+
+    <section class="userQuickActions">
+      <div class="userSectionTitle">
+        <div>
+          <small>QUICK ACTION</small>
+          <h4>เติม Coins / EXP อย่างรวดเร็ว</h4>
+        </div>
+      </div>
+
+      <div class="userQuickGroups">
+        <div>
+          <span>🪙 Coins</span>
+          <div>
+            <button type="button" data-user-quick="coins" data-amount="100">+100</button>
+            <button type="button" data-user-quick="coins" data-amount="500">+500</button>
+            <button type="button" data-user-quick="coins" data-amount="1000">+1,000</button>
+            <button type="button" class="minus" data-user-quick="coins" data-amount="-100">−100</button>
+          </div>
+        </div>
+        <div>
+          <span>⭐ EXP</span>
+          <div>
+            <button type="button" data-user-quick="xp" data-amount="100">+100</button>
+            <button type="button" data-user-quick="xp" data-amount="500">+500</button>
+            <button type="button" data-user-quick="xp" data-amount="1000">+1,000</button>
+            <button type="button" class="minus" data-user-quick="xp" data-amount="-100">−100</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="userAdjustPanel">
+      <div class="userSectionTitle">
+        <div>
+          <small>MANUAL ADJUSTMENT</small>
+          <h4>แก้ไขคะแนนสมาชิก</h4>
+        </div>
+        <span class="auditBadge">📜 Audit Log</span>
+      </div>
+
+      <div class="userAdjustForm">
+        <label>
+          <span>รายการที่ต้องการแก้</span>
+          <select id="userAdjustField">
+            <option value="coins">🪙 Coins</option>
+            <option value="xp">⭐ EXP</option>
+            <option value="total_score">🎯 Total Score</option>
+            <option value="best_score">🏅 Best Score</option>
+            <option value="overall_rp">🧠 Overall RP</option>
+            <option value="memory_rp">🧸 Memory RP</option>
+            <option value="math_rp">➗ Math RP</option>
+            <option value="chinese_rp">🇨🇳 Chinese RP</option>
+            <option value="english_rp">🇬🇧 English RP</option>
+          </select>
+        </label>
+
+        <label>
+          <span>วิธีแก้ไข</span>
+          <select id="userAdjustOperation">
+            <option value="add">เพิ่ม / ลดจากค่าเดิม</option>
+            <option value="set">กำหนดค่าใหม่</option>
+          </select>
+        </label>
+
+        <label>
+          <span>จำนวน</span>
+          <input id="userAdjustAmount" type="number" step="1" value="100">
+        </label>
+
+        <label class="reason">
+          <span>เหตุผล *</span>
+          <input id="userAdjustReason" type="text"
+            placeholder="เช่น เติม Coins จากการชำระเงิน / ชดเชยระบบ / แก้คะแนนผิด">
+        </label>
+      </div>
+
+      <div class="userAdjustPreview" id="userAdjustPreview">
+        <span>ก่อนแก้</span>
+        <strong>0</strong>
+        <i>→</i>
+        <strong>100</strong>
+        <em>+100</em>
+      </div>
+
+      <button type="button" class="btn primary userAdjustSubmit" id="userAdjustSubmit">
+        ยืนยันการแก้ไข
+      </button>
+    </section>
+
+    <section class="userAuditPanel">
+      <div class="userSectionTitle">
+        <div>
+          <small>CHANGE HISTORY</small>
+          <h4>ประวัติการแก้ไขล่าสุด</h4>
+        </div>
+        <button type="button" class="btn" id="userAuditReload">รีเฟรช</button>
+      </div>
+
+      <div class="userAuditList" id="userAuditList">
+        <div class="learnLoading">กำลังโหลดประวัติ…</div>
+      </div>
+    </section>
+
   </div>
 </div>
 
@@ -1298,9 +1724,11 @@ function openPanel(name){
  $("#panel-learning").classList.toggle("active",name==="learning");
  $("#panel-hsk").classList.toggle("active",name==="hsk");
  $("#panel-games").classList.toggle("active",name==="games");
+ $("#panel-users").classList.toggle("active",name==="users");
  if(name==="learning")loadLearning();
  if(name==="hsk")Promise.all([loadHSKAdminStats(),loadHSKManager(false)]);
  if(name==="games")loadGameControl();
+ if(name==="users")loadUserControl(false);
 }
 document.querySelectorAll("[data-admin-panel]").forEach(b=>b.onclick=()=>openPanel(b.dataset.adminPanel));
 
@@ -2043,6 +2471,413 @@ async function setWorldRelease(world,kind){
 }
 
 
+
+/* ---------------- User Control ---------------- */
+let userControlRows=[];
+let selectedAdminUser=null;
+let userSearchTimer=null;
+
+const ucFieldLabels={
+ coins:"Coins",
+ xp:"EXP",
+ total_score:"Total Score",
+ best_score:"Best Score",
+ overall_rp:"Overall RP",
+ memory_rp:"Memory RP",
+ math_rp:"Math RP",
+ chinese_rp:"Chinese RP",
+ english_rp:"English RP"
+};
+
+function ucEsc(v){
+ return String(v??"").replace(/[&<>"']/g,m=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[m]));
+}
+
+function ucRank(rp){
+ rp=Math.max(0,Number(rp)||0);
+ const tiers=[
+  [20000,"🐐","GOAT สมองไทย"],
+  [15000,"👑","ระดับบอส"],
+  [11000,"💎","ตัวท็อป"],
+  [8000,"⚡","เดอะแบก"],
+  [5500,"😈","ตัวตึง"],
+  [3500,"💥","ตัวจี๊ด"],
+  [2000,"🔥","ของจริง"],
+  [1000,"🧠","หัวไว"],
+  [500,"✨","เด็กมีของ"],
+  [0,"🌱","มีแวว"]
+ ];
+ const t=tiers.find(x=>rp>=x[0])||tiers[tiers.length-1];
+ return {icon:t[1],name:t[2]};
+}
+
+function ucAvatar(row,cls="userRowAvatar"){
+ if(row?.avatar_url){
+  return `<div class="${cls}"><img src="${ucEsc(row.avatar_url)}" alt=""></div>`;
+ }
+ return `<div class="${cls}">${ucEsc(row?.avatar||"🧠")}</div>`;
+}
+
+async function loadUserControl(force=false){
+ const input=$("#userControlSearchInput");
+ const search=(input?.value||"").trim();
+
+ $("#userControlStatus").textContent="กำลังโหลด…";
+ $("#userControlList").innerHTML='<div class="learnLoading">กำลังโหลดสมาชิก…</div>';
+
+ try{
+  const {data,error}=await sb.rpc("bb_admin_search_users",{
+   p_search:search||null,
+   p_limit:50
+  });
+
+  if(error)throw error;
+
+  userControlRows=Array.isArray(data)?data:[];
+  renderUserControl();
+  $("#userControlStatus").textContent="อัปเดตแล้ว";
+
+ }catch(err){
+  console.error("User Control:",err);
+  userControlRows=[];
+  $("#userControlCount").textContent="0 สมาชิก";
+  $("#userControlStatus").textContent="โหลดไม่สำเร็จ";
+  $("#userControlList").innerHTML=
+   `<div class="learnEmpty">${ucEsc(err?.message||"โหลดสมาชิกไม่สำเร็จ")}</div>`;
+ }
+}
+
+function renderUserControl(){
+ $("#userControlCount").textContent=`${userControlRows.length.toLocaleString()} สมาชิก`;
+
+ const host=$("#userControlList");
+ if(!userControlRows.length){
+  host.innerHTML='<div class="learnEmpty">ไม่พบสมาชิกตามคำค้นหา</div>';
+  return;
+ }
+
+ host.innerHTML=userControlRows.map(row=>{
+  const rank=ucRank(row.overall_rp);
+  return `
+   <article class="userRow">
+    ${ucAvatar(row)}
+
+    <div class="userRowIdentity">
+     <b>${ucEsc(row.display_name||"ผู้เล่น")}</b>
+     <span>${ucEsc(row.email||"ไม่มี Email")}</span>
+     <code>${ucEsc(row.user_id)}</code>
+    </div>
+
+    <div class="userRowMetric">
+     <small>COINS</small>
+     <b>🪙 ${Number(row.coin_balance||0).toLocaleString()}</b>
+    </div>
+
+    <div class="userRowMetric">
+     <small>EXP / LEVEL</small>
+     <b>${Number(row.xp||0).toLocaleString()} • Lv.${Number(row.calculated_level||1)}</b>
+    </div>
+
+    <div class="userRowMetric">
+     <small>OVERALL RP</small>
+     <b>${rank.icon} ${Number(row.overall_rp||0).toLocaleString()}</b>
+    </div>
+
+    <div class="userRowMetric">
+     <small>BEST SCORE</small>
+     <b>${Number(row.best_score||0).toLocaleString()}</b>
+    </div>
+
+    <button type="button" class="userRowOpen" data-user-open="${ucEsc(row.user_id)}">
+     จัดการ
+    </button>
+   </article>`;
+ }).join("");
+}
+
+function findAdminUser(id){
+ return userControlRows.find(x=>x.user_id===id)||null;
+}
+
+function selectedValue(field){
+ const u=selectedAdminUser||{};
+ return Number(({
+  coins:u.coin_balance,
+  xp:u.xp,
+  total_score:u.total_score,
+  best_score:u.best_score,
+  overall_rp:u.overall_rp,
+  memory_rp:u.memory_rp,
+  math_rp:u.math_rp,
+  chinese_rp:u.chinese_rp,
+  english_rp:u.english_rp
+ })[field]||0);
+}
+
+function renderUserModal(){
+ const u=selectedAdminUser;
+ if(!u)return;
+
+ const av=$("#userModalAvatar");
+ if(u.avatar_url){
+  av.innerHTML=`<img src="${ucEsc(u.avatar_url)}" alt="">`;
+ }else{
+  av.textContent=u.avatar||"🧠";
+ }
+
+ $("#userModalName").textContent=u.display_name||"ผู้เล่น";
+ $("#userModalEmail").textContent=u.email||"ไม่มี Email";
+ $("#userModalId").textContent=u.user_id;
+
+ $("#ucCoins").textContent=Number(u.coin_balance||0).toLocaleString();
+ $("#ucXP").textContent=Number(u.xp||0).toLocaleString();
+ $("#ucLevel").textContent=`Level ${Number(u.calculated_level||1)}`;
+ $("#ucTotalScore").textContent=Number(u.total_score||0).toLocaleString();
+ $("#ucBestScore").textContent=Number(u.best_score||0).toLocaleString();
+
+ const rankFields=[
+  ["overall_rp","ucOverallRP","ucOverallTier"],
+  ["memory_rp","ucMemoryRP","ucMemoryTier"],
+  ["math_rp","ucMathRP","ucMathTier"],
+  ["chinese_rp","ucChineseRP","ucChineseTier"],
+  ["english_rp","ucEnglishRP","ucEnglishTier"]
+ ];
+
+ rankFields.forEach(([field,rpId,tierId])=>{
+  const rp=Number(u[field]||0),tier=ucRank(rp);
+  $("#"+rpId).textContent=`${rp.toLocaleString()} RP`;
+  $("#"+tierId).textContent=`${tier.icon} ${tier.name}`;
+ });
+
+ updateUserAdjustPreview();
+}
+
+async function openUserControlModal(id){
+ selectedAdminUser=findAdminUser(id);
+ if(!selectedAdminUser){
+  try{
+   const {data,error}=await sb.rpc("bb_admin_search_users",{
+    p_search:id,
+    p_limit:5
+   });
+   if(error)throw error;
+   selectedAdminUser=(data||[]).find(x=>x.user_id===id)||data?.[0]||null;
+  }catch(err){
+   toast(err?.message||"โหลดสมาชิกไม่สำเร็จ");
+   return;
+  }
+ }
+
+ if(!selectedAdminUser)return toast("ไม่พบสมาชิก");
+
+ $("#userAdjustField").value="coins";
+ $("#userAdjustOperation").value="add";
+ $("#userAdjustAmount").value="100";
+ $("#userAdjustReason").value="";
+
+ renderUserModal();
+ $("#userControlModal").classList.remove("hidden");
+ await loadUserAudit();
+}
+
+function closeUserControlModal(){
+ $("#userControlModal").classList.add("hidden");
+}
+
+function updateUserAdjustPreview(){
+ if(!selectedAdminUser)return;
+
+ const field=$("#userAdjustField").value;
+ const op=$("#userAdjustOperation").value;
+ const amount=Number($("#userAdjustAmount").value)||0;
+
+ const before=selectedValue(field);
+ const after=Math.max(0,op==="set"?amount:before+amount);
+ const change=after-before;
+
+ const box=$("#userAdjustPreview");
+ box.innerHTML=`
+  <span>${ucEsc(ucFieldLabels[field]||field)}</span>
+  <strong>${before.toLocaleString()}</strong>
+  <i>→</i>
+  <strong>${after.toLocaleString()}</strong>
+  <em class="${change<0?"minus":""}">${change>0?"+":""}${change.toLocaleString()}</em>`;
+}
+
+function quickUserAdjust(field,amount){
+ if(!selectedAdminUser)return;
+
+ $("#userAdjustField").value=field;
+ $("#userAdjustOperation").value="add";
+ $("#userAdjustAmount").value=String(amount);
+
+ if(!$("#userAdjustReason").value.trim()){
+  $("#userAdjustReason").value=
+   field==="coins"
+    ?"Admin เติม/ปรับ Coins"
+    :"Admin ปรับ EXP";
+ }
+
+ updateUserAdjustPreview();
+ $("#userAdjustReason").focus();
+}
+
+async function refreshSelectedAdminUser(){
+ if(!selectedAdminUser?.user_id)return;
+
+ const id=selectedAdminUser.user_id;
+ const {data,error}=await sb.rpc("bb_admin_search_users",{
+  p_search:id,
+  p_limit:5
+ });
+
+ if(error)throw error;
+
+ const fresh=(data||[]).find(x=>x.user_id===id);
+ if(fresh){
+  selectedAdminUser=fresh;
+
+  const idx=userControlRows.findIndex(x=>x.user_id===id);
+  if(idx>=0)userControlRows[idx]=fresh;
+
+  renderUserModal();
+  renderUserControl();
+ }
+}
+
+async function submitUserAdjustment(){
+ if(!selectedAdminUser)return;
+
+ const field=$("#userAdjustField").value;
+ const operation=$("#userAdjustOperation").value;
+ const amount=Number($("#userAdjustAmount").value);
+
+ const reason=$("#userAdjustReason").value.trim();
+
+ if(!Number.isFinite(amount)){
+  return toast("กรุณาใส่จำนวนที่ถูกต้อง");
+ }
+
+ if(!reason){
+  return toast("กรุณาระบุเหตุผลก่อนแก้ไข");
+ }
+
+ const before=selectedValue(field);
+ const after=Math.max(0,operation==="set"?amount:before+amount);
+ const change=after-before;
+
+ const text=
+  `${selectedAdminUser.display_name||"ผู้เล่น"}\n`+
+  `${ucFieldLabels[field]||field}: ${before.toLocaleString()} → ${after.toLocaleString()}\n`+
+  `เปลี่ยน ${change>0?"+":""}${change.toLocaleString()}\n\n`+
+  `เหตุผล: ${reason}`;
+
+ if(!confirm(`ยืนยันการแก้ไข?\n\n${text}`))return;
+
+ const btn=$("#userAdjustSubmit");
+ const old=btn.textContent;
+ btn.disabled=true;
+ btn.textContent="กำลังบันทึก…";
+
+ try{
+  const {data,error}=await sb.rpc("bb_admin_adjust_user_value",{
+   p_user_id:selectedAdminUser.user_id,
+   p_field:field,
+   p_operation:operation,
+   p_amount:Math.trunc(amount),
+   p_reason:reason
+  });
+
+  if(error)throw error;
+
+  const result=Array.isArray(data)?data[0]:data;
+  toast(
+   `${ucFieldLabels[field]||field} `+
+   `${Number(result?.before??before).toLocaleString()} → `+
+   `${Number(result?.after??after).toLocaleString()}`
+  );
+
+  await Promise.all([
+   refreshSelectedAdminUser(),
+   loadUserAudit()
+  ]);
+
+  $("#userAdjustReason").value="";
+  updateUserAdjustPreview();
+
+ }catch(err){
+  console.error("User adjustment:",err);
+  toast(err?.message||"แก้ไขข้อมูลไม่สำเร็จ");
+ }finally{
+  btn.disabled=false;
+  btn.textContent=old;
+ }
+}
+
+function auditFieldName(field){
+ return ucFieldLabels[field]||field||"ข้อมูล";
+}
+
+function formatAuditTime(value){
+ try{
+  return new Date(value).toLocaleString("th-TH",{
+   dateStyle:"short",
+   timeStyle:"short"
+  });
+ }catch(e){
+  return value||"";
+ }
+}
+
+async function loadUserAudit(){
+ const host=$("#userAuditList");
+
+ if(!selectedAdminUser?.user_id){
+  host.innerHTML='<div class="userAuditEmpty">ยังไม่ได้เลือกสมาชิก</div>';
+  return;
+ }
+
+ host.innerHTML='<div class="learnLoading">กำลังโหลดประวัติ…</div>';
+
+ try{
+  const {data,error}=await sb
+   .from("bb_admin_user_audit_log")
+   .select("id,admin_user_id,target_user_id,field_name,operation,amount,value_before,value_after,reason,created_at")
+   .eq("target_user_id",selectedAdminUser.user_id)
+   .order("created_at",{ascending:false})
+   .limit(30);
+
+  if(error)throw error;
+
+  const rows=Array.isArray(data)?data:[];
+
+  if(!rows.length){
+   host.innerHTML='<div class="userAuditEmpty">ยังไม่มีประวัติการแก้ไขจาก Admin</div>';
+   return;
+  }
+
+  host.innerHTML=rows.map(row=>{
+   const change=Number(row.value_after||0)-Number(row.value_before||0);
+   return `
+    <article class="userAuditRow">
+     <div class="userAuditField">${ucEsc(auditFieldName(row.field_name))}</div>
+     <div class="userAuditMain">
+      <b>${Number(row.value_before||0).toLocaleString()} → ${Number(row.value_after||0).toLocaleString()}
+       (${change>0?"+":""}${change.toLocaleString()})</b>
+      <span>${ucEsc(row.reason||"—")} • Admin ${ucEsc(String(row.admin_user_id||"").slice(0,8))}</span>
+     </div>
+     <time class="userAuditTime">${ucEsc(formatAuditTime(row.created_at))}</time>
+    </article>`;
+  }).join("");
+
+ }catch(err){
+  console.error("Audit log:",err);
+  host.innerHTML=`<div class="userAuditEmpty">${ucEsc(err?.message||"โหลดประวัติไม่สำเร็จ")}</div>`;
+ }
+}
+
 /* Events */
 $("#unlockBtn").onclick=unlock;
 $("#adminCode").addEventListener("keydown",e=>{if(e.key==="Enter")unlock()});
@@ -2107,6 +2942,47 @@ document.addEventListener("click",e=>{
 });
 
 $("#gameControlReload").onclick=loadGameControl;
+
+$("#userControlReload").onclick=()=>loadUserControl(true);
+$("#userControlSearchBtn").onclick=()=>loadUserControl(true);
+
+$("#userControlSearchInput").addEventListener("input",()=>{
+ clearTimeout(userSearchTimer);
+ userSearchTimer=setTimeout(()=>loadUserControl(true),350);
+});
+
+$("#userControlSearchInput").addEventListener("keydown",e=>{
+ if(e.key==="Enter"){
+  e.preventDefault();
+  loadUserControl(true);
+ }
+});
+
+$("#userModalClose").onclick=closeUserControlModal;
+
+$("#userControlModal").addEventListener("click",e=>{
+ if(e.target.id==="userControlModal")closeUserControlModal();
+});
+
+$("#userCopyId").onclick=async()=>{
+ const id=selectedAdminUser?.user_id;
+ if(!id)return;
+ try{
+  await navigator.clipboard.writeText(id);
+  toast("คัดลอก User ID แล้ว");
+ }catch(e){
+  toast(id);
+ }
+};
+
+["userAdjustField","userAdjustOperation","userAdjustAmount"].forEach(id=>{
+ $("#"+id).addEventListener("input",updateUserAdjustPreview);
+ $("#"+id).addEventListener("change",updateUserAdjustPreview);
+});
+
+$("#userAdjustSubmit").onclick=submitUserAdjustment;
+$("#userAuditReload").onclick=loadUserAudit;
+
 
 document.addEventListener("click",e=>{
  const practice=e.target.closest("[data-gc-practice]");
