@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#765fda">
 <meta name="author" content="Sulawit Songsang">
-<title>Brain Buddy • Admin Center v69</title>
+<title>Brain Buddy • Admin Center v70</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
 document.addEventListener("click",e=>{
  const open=e.target.closest("[data-user-open]");
@@ -840,6 +840,237 @@ button{cursor:pointer}
   .userAuditTime{grid-column:2;text-align:left}
 }
 
+
+/* ==========================================================
+   Admin v70 — Math Manager
+   ========================================================== */
+.mathManagerHero{
+  display:grid;
+  grid-template-columns:58px minmax(0,1fr) auto;
+  gap:12px;
+  align-items:center;
+  padding:14px;
+  margin-bottom:10px;
+  border-radius:20px;
+  background:linear-gradient(135deg,#f0ecff,#fff4da 52%,#ffeef5);
+  border:1px solid #e8dfed
+}
+.mathManagerHeroIcon{
+  width:58px;height:58px;border-radius:18px;
+  display:grid;place-items:center;
+  background:linear-gradient(145deg,#7a63db,#d65fa8);
+  color:#fff;font-size:27px;
+  box-shadow:0 9px 20px rgba(101,72,151,.17)
+}
+.mathManagerHero small{
+  color:#9b72a0;font-size:7px;letter-spacing:.13em;font-weight:1000
+}
+.mathManagerHero h3{margin:2px 0;color:#59426b;font-size:20px}
+.mathManagerHero p{margin:2px 0;color:#8e7b94;font-size:9px;line-height:1.5}
+.mathManagerHeroTotal{
+  min-width:115px;padding:10px 13px;border-radius:15px;
+  background:rgba(255,255,255,.72);text-align:center
+}
+.mathManagerHeroTotal small{display:block;color:#9a879d;font-size:7px;letter-spacing:0}
+.mathManagerHeroTotal strong{display:inline-block;color:#5d4770;font-size:26px}
+.mathManagerHeroTotal span{margin-left:3px;color:#917e98;font-size:8px;font-weight:900}
+
+.mathLevelStats{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-bottom:8px
+}
+.mathLevelStats article{
+  min-height:79px;padding:10px;border-radius:16px;
+  display:flex;align-items:center;gap:7px;
+  background:#fff;border:1px solid #eee5f0;
+  cursor:pointer;transition:.15s ease
+}
+.mathLevelStats article:hover{
+  transform:translateY(-1px);border-color:#d9c8e5;
+  box-shadow:0 7px 17px rgba(82,54,94,.06)
+}
+.mathLevelStats article>span{
+  width:36px;height:36px;flex:0 0 36px;border-radius:11px;
+  display:grid;place-items:center;background:#f5eff9;font-size:17px
+}
+.mathLevelStats article div{min-width:0}
+.mathLevelStats small{display:block;color:#9d89a2;font-size:6px;font-weight:1000}
+.mathLevelStats strong{display:block;color:#5d476d;font-size:16px;line-height:1.1}
+.mathLevelStats em{
+  display:block;margin-top:2px;color:#a18fa5;font-size:6px;font-style:normal;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+
+.mathManagerSummary{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-bottom:11px
+}
+.mathManagerSummary article{
+  padding:9px;border-radius:15px;display:flex;align-items:center;gap:7px;
+  background:linear-gradient(145deg,#fff,#faf7fc);
+  border:1px solid #eee5f0
+}
+.mathManagerSummary article>span{
+  width:34px;height:34px;flex:0 0 34px;border-radius:10px;
+  display:grid;place-items:center;background:#f3edf7;font-size:15px
+}
+.mathManagerSummary small{display:block;color:#9c8aa0;font-size:6px;font-weight:1000}
+.mathManagerSummary strong{display:inline-block;color:#5e486d;font-size:14px}
+.mathManagerSummary em{margin-left:2px;color:#a592a8;font-size:6px;font-style:normal}
+
+.mathQuestionManager{
+  padding:12px;border-radius:20px;background:#fff;border:1px solid #ede3ef
+}
+.mathQuestionManagerHead{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px
+}
+.mathQuestionManagerHead small{
+  display:block;color:#a16fa2;font-size:7px;letter-spacing:.13em;font-weight:1000
+}
+.mathQuestionManagerHead h3{margin:2px 0;color:#59426b;font-size:17px}
+.mathQuestionManagerHead p{margin:2px 0;color:#8d7a93;font-size:8px}
+
+.mathManagerFilters{
+  display:grid;grid-template-columns:145px 160px 130px minmax(180px,1fr) 125px auto;
+  gap:7px;align-items:end
+}
+.mathManagerFilters label{display:grid;gap:4px}
+.mathManagerFilters label>span{color:#806d88;font-size:8px;font-weight:900}
+.mathManagerFilters input,.mathManagerFilters select{
+  min-height:39px;border:1px solid #e7ddea;border-radius:11px;
+  padding:0 9px;background:#fff;color:#584660;font-size:8px;outline:none
+}
+.mathManagerFilters input:focus,.mathManagerFilters select:focus{
+  border-color:#9479df;box-shadow:0 0 0 3px rgba(135,104,205,.07)
+}
+.mathManagerMeta{
+  display:flex;justify-content:space-between;margin:8px 3px;
+  color:#8e7b94;font-size:8px;font-weight:850
+}
+.mathQuestionList{display:grid;gap:7px}
+
+.mathQuestionRow{
+  display:grid;
+  grid-template-columns:75px minmax(0,1.5fr) minmax(130px,.7fr) 90px 145px;
+  gap:8px;align-items:center;
+  padding:9px;border-radius:16px;background:#fff;border:1px solid #eee5f0
+}
+.mathQuestionRow.inactive{opacity:.58;background:#faf8fa}
+.mathQuestionLevel{
+  min-height:55px;padding:8px;border-radius:13px;
+  display:flex;flex-direction:column;justify-content:center;text-align:center;
+  background:linear-gradient(145deg,#f2ecff,#fff1d9)
+}
+.mathQuestionLevel b{color:#624e70;font-size:10px}
+.mathQuestionLevel small{color:#9c87a0;font-size:6px;margin-top:2px}
+.mathQuestionMain{min-width:0}
+.mathQuestionMain .topline{
+  display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-bottom:3px
+}
+.mathQuestionMain .typeBadge,.mathQuestionMain .skillBadge{
+  padding:3px 6px;border-radius:999px;font-size:6px;font-weight:1000
+}
+.mathQuestionMain .typeBadge{background:#eee8fb;color:#6e58a0}
+.mathQuestionMain .skillBadge{background:#fff1d9;color:#917028}
+.mathQuestionMain h4{
+  margin:0;color:#574262;font-size:10px;line-height:1.45;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden
+}
+.mathQuestionMain code{display:block;margin-top:3px;color:#ae9ab0;font-size:6px}
+.mathQuestionAnswer{
+  min-width:0;padding:8px;border-radius:11px;background:#faf7fb
+}
+.mathQuestionAnswer small{display:block;color:#9c899f;font-size:6px;font-weight:900}
+.mathQuestionAnswer strong{
+  display:block;margin-top:2px;color:#5e486b;font-size:9px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.mathQuestionScore{text-align:center}
+.mathQuestionScore small{display:block;color:#a18ea4;font-size:6px;font-weight:900}
+.mathQuestionScore strong{display:block;color:#614a70;font-size:11px}
+.mathQuestionActions{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.mathQuestionActions button{
+  min-height:34px;border:0;border-radius:9px;font-size:7px;font-weight:1000;cursor:pointer
+}
+.mathQuestionActions .edit{background:#eee8fb;color:#685492}
+.mathQuestionActions .toggleOn{background:#ffe8ef;color:#a24f6a}
+.mathQuestionActions .toggleOff{background:#def9eb;color:#337558}
+
+.mathEditModalCard{
+  width:min(96vw,900px)!important;
+  max-height:93vh!important;overflow:auto!important;text-align:left!important
+}
+.mathEditHeader{
+  display:flex;justify-content:space-between;align-items:flex-start;gap:10px;
+  margin-bottom:10px
+}
+.mathEditHeader small{
+  display:block;color:#a06fa1;font-size:7px;letter-spacing:.13em;font-weight:1000
+}
+.mathEditHeader h3{margin:2px 0;color:#59416a;font-size:21px}
+.mathEditHeader p{margin:2px 0;color:#958199;font-size:8px}
+.mathEditForm label{display:grid;gap:4px;margin-bottom:8px}
+.mathEditForm label>span{color:#74617e;font-size:8px;font-weight:900}
+.mathEditForm input,.mathEditForm select,.mathEditForm textarea{
+  width:100%;border:1px solid #e7ddea;border-radius:11px;
+  padding:8px 10px;background:#fff;color:#55445f;font-size:9px;outline:none
+}
+.mathEditForm input,.mathEditForm select{min-height:40px}
+.mathEditForm textarea{resize:vertical;line-height:1.5}
+.mathEditForm input:focus,.mathEditForm select:focus,.mathEditForm textarea:focus{
+  border-color:#9478df;box-shadow:0 0 0 3px rgba(137,105,207,.07)
+}
+.mathEditSection{
+  padding:11px;margin-bottom:8px;border-radius:16px;background:#faf7fb
+}
+.mathEditSectionTitle{
+  display:flex;align-items:center;gap:8px;margin-bottom:8px
+}
+.mathEditSectionTitle>span{
+  width:29px;height:29px;flex:0 0 29px;border-radius:9px;
+  display:grid;place-items:center;background:linear-gradient(145deg,#7c65db,#cf65ad);
+  color:#fff;font-size:9px;font-weight:1000
+}
+.mathEditSectionTitle b{display:block;color:#5c4669;font-size:10px}
+.mathEditSectionTitle small{display:block;color:#99869d;font-size:7px;margin-top:1px}
+.mathCheckWrap{
+  min-height:40px;padding:0 10px;border-radius:11px;background:#fff;border:1px solid #e7ddea;
+  display:flex!important;align-items:center;gap:7px
+}
+.mathCheckWrap input{width:auto!important;min-height:auto!important}
+.mathCheckWrap b{color:#624f6b;font-size:8px}
+.mathFieldHelp{color:#a08da4;font-size:7px;font-weight:700!important}
+.mathEditActions{
+  display:grid;grid-template-columns:auto 1fr auto auto;gap:7px;align-items:center;margin-top:10px
+}
+.mathDeleteBtn{
+  min-height:40px;border:0;border-radius:11px;padding:0 12px;
+  background:#ffe8ee;color:#a34d67;font-size:8px;font-weight:1000;cursor:pointer
+}
+.mathDeleteBtn.hidden{display:none}
+.mathPager{margin-top:10px}
+
+@media(max-width:1050px){
+  .mathLevelStats,.mathManagerSummary{grid-template-columns:repeat(3,1fr)}
+  .mathManagerFilters{grid-template-columns:1fr 1fr 1fr}
+  .mathManagerFilters .search{grid-column:1/3}
+  .mathQuestionRow{grid-template-columns:70px minmax(0,1fr) 120px 80px}
+  .mathQuestionActions{grid-column:2/-1}
+}
+@media(max-width:650px){
+  .mathManagerHero{grid-template-columns:50px minmax(0,1fr)}
+  .mathManagerHeroIcon{width:50px;height:50px}
+  .mathManagerHeroTotal{grid-column:1/-1}
+  .mathLevelStats,.mathManagerSummary{grid-template-columns:1fr 1fr}
+  .mathManagerFilters{grid-template-columns:1fr}
+  .mathManagerFilters .search{grid-column:auto}
+  .mathQuestionManagerHead{flex-direction:column;align-items:stretch}
+  .mathQuestionRow{grid-template-columns:60px minmax(0,1fr)}
+  .mathQuestionAnswer,.mathQuestionScore,.mathQuestionActions{grid-column:1/-1}
+  .mathQuestionActions{grid-template-columns:1fr 1fr}
+  .mathEditActions{grid-template-columns:1fr 1fr}
+  .mathEditActions>div{display:none}
+  .mathDeleteBtn{grid-column:1/-1}
+}
+
 </style>
 </head>
 <body>
@@ -853,6 +1084,7 @@ button{cursor:pointer}
       <button class="active" data-admin-panel="bears">จัดการหมี</button>
       <button data-admin-panel="learning">คำศัพท์ / โจทย์</button>
       <button data-admin-panel="hsk">HSK 1–6</button>
+      <button data-admin-panel="math">➗ Math Manager</button>
       <button data-admin-panel="games">🎮 Game Control</button>
       <button data-admin-panel="users">👥 User Control</button>
     </div>
@@ -867,7 +1099,7 @@ button{cursor:pointer}
       <div>
         <span class="status">ADMIN CONTROL CENTER</span>
         <h1>ศูนย์จัดการ Brain Buddy</h1>
-        <p>จัดการตัวหมี เนื้อหา เกม สมาชิก Coins EXP และ Rank จากหน้าเดียว</p>
+        <p>จัดการตัวหมี HSK คลังโจทย์ Math เกม สมาชิก Coins EXP และ Rank จากหน้าเดียว</p>
       </div>
       <div class="heroArt"><span class="brain"></span><span class="bear"></span><span class="book"></span></div>
     </div>
@@ -1179,6 +1411,164 @@ button{cursor:pointer}
 
     </section>
 
+
+    <!-- MATH MANAGER -->
+    <section class="adminPanel" id="panel-math">
+
+      <div class="toolbar">
+        <div>
+          <h2>➗ Math Manager</h2>
+          <p>จัดการคลังโจทย์ Math 1–6 ค้นหา แก้ไข เพิ่มข้อใหม่ เปิด–ปิด และตรวจจำนวนโจทย์</p>
+        </div>
+        <div class="actions">
+          <button class="btn" id="mathManagerReload">รีเฟรช</button>
+          <button class="btn primary" id="mathManagerNew">+ เพิ่มโจทย์ใหม่</button>
+        </div>
+      </div>
+
+      <div class="mathManagerHero">
+        <div class="mathManagerHeroIcon">➗</div>
+        <div>
+          <small>BRAIN BUDDY MATH BANK</small>
+          <h3>คลังโจทย์คณิตศาสตร์</h3>
+          <p>Math ยังสามารถล็อกไว้ใน Game Control ระหว่างตรวจสอบโจทย์ ก่อนเปิดให้ผู้เล่นจริง</p>
+        </div>
+        <div class="mathManagerHeroTotal">
+          <small>โจทย์ทั้งหมด</small>
+          <strong id="mathStatTotal">0</strong>
+          <span>ข้อ</span>
+        </div>
+      </div>
+
+      <div class="mathLevelStats" id="mathLevelStats">
+        <article data-math-stat-level="math1">
+          <span>🌱</span><div><small>MATH 1</small><strong>0</strong><em>พื้นฐานนักคิด</em></div>
+        </article>
+        <article data-math-stat-level="math2">
+          <span>⚡</span><div><small>MATH 2</small><strong>0</strong><em>นักคำนวณ</em></div>
+        </article>
+        <article data-math-stat-level="math3">
+          <span>🧠</span><div><small>MATH 3</small><strong>0</strong><em>คิดหลายขั้น</em></div>
+        </article>
+        <article data-math-stat-level="math4">
+          <span>💎</span><div><small>MATH 4</small><strong>0</strong><em>จ้าวเศษส่วน</em></div>
+        </article>
+        <article data-math-stat-level="math5">
+          <span>🔥</span><div><small>MATH 5</small><strong>0</strong><em>นักแก้สมการ</em></div>
+        </article>
+        <article data-math-stat-level="math6">
+          <span>👑</span><div><small>MATH 6</small><strong>0</strong><em>ตัวตึงคณิต</em></div>
+        </article>
+      </div>
+
+      <div class="mathManagerSummary">
+        <article>
+          <span>🟢</span>
+          <div><small>เปิดใช้งาน</small><strong id="mathStatActive">0</strong><em>ข้อ</em></div>
+        </article>
+        <article>
+          <span>🔒</span>
+          <div><small>ปิดไว้</small><strong id="mathStatInactive">0</strong><em>ข้อ</em></div>
+        </article>
+        <article>
+          <span>🎯</span>
+          <div><small>เลือกคำตอบ</small><strong id="mathStatChoice">0</strong><em>ข้อ</em></div>
+        </article>
+        <article>
+          <span>⌨️</span>
+          <div><small>พิมพ์คำตอบ</small><strong id="mathStatTyping">0</strong><em>ข้อ</em></div>
+        </article>
+        <article>
+          <span>🧩</span>
+          <div><small>จับคู่</small><strong id="mathStatMatching">0</strong><em>ข้อ</em></div>
+        </article>
+        <article>
+          <span>🎧</span>
+          <div><small>ฟังโจทย์</small><strong id="mathStatListening">0</strong><em>ข้อ</em></div>
+        </article>
+      </div>
+
+      <section class="mathQuestionManager">
+        <div class="mathQuestionManagerHead">
+          <div>
+            <small>QUESTION MANAGER</small>
+            <h3>ตรวจและแก้โจทย์</h3>
+            <p>ค้นจากโจทย์ คำตอบ Skill หรือ Question Code</p>
+          </div>
+          <button class="btn" id="mathQuestionRefresh">รีเฟรชรายการ</button>
+        </div>
+
+        <div class="mathManagerFilters">
+          <label>
+            <span>ระดับ</span>
+            <select id="mathFilterLevel">
+              <option value="">Math 1–6 ทั้งหมด</option>
+              <option value="math1">🌱 Math 1</option>
+              <option value="math2">⚡ Math 2</option>
+              <option value="math3">🧠 Math 3</option>
+              <option value="math4">💎 Math 4</option>
+              <option value="math5">🔥 Math 5</option>
+              <option value="math6">👑 Math 6</option>
+            </select>
+          </label>
+
+          <label>
+            <span>ประเภทเกม</span>
+            <select id="mathFilterType">
+              <option value="">ทุกประเภท</option>
+              <option value="multiple_choice">🎯 เลือกคำตอบ</option>
+              <option value="typing">⌨️ พิมพ์คำตอบ</option>
+              <option value="matching">🧩 จับคู่</option>
+              <option value="sentence_order">🔀 เรียงขั้นตอน</option>
+              <option value="listening">🎧 ฟังโจทย์</option>
+              <option value="mix">⚡ Mix</option>
+            </select>
+          </label>
+
+          <label>
+            <span>สถานะ</span>
+            <select id="mathFilterActive">
+              <option value="">ทั้งหมด</option>
+              <option value="true">🟢 เปิดใช้งาน</option>
+              <option value="false">🔒 ปิดไว้</option>
+            </select>
+          </label>
+
+          <label class="search">
+            <span>ค้นหา</span>
+            <input id="mathFilterSearch" type="search"
+              placeholder="เช่น 12 × 4, fraction, math4_10">
+          </label>
+
+          <label>
+            <span>จำนวนต่อหน้า</span>
+            <select id="mathPageSize">
+              <option value="50">50</option>
+              <option value="100" selected>100</option>
+              <option value="200">200</option>
+            </select>
+          </label>
+
+          <button class="btn primary" id="mathSearchBtn">ค้นหา</button>
+        </div>
+
+        <div class="mathManagerMeta">
+          <span id="mathManagerCount">0 รายการ</span>
+          <span id="mathManagerStatus">พร้อมใช้งาน</span>
+        </div>
+
+        <div class="mathQuestionList" id="mathQuestionList">
+          <div class="learnLoading">กำลังโหลดคลังโจทย์…</div>
+        </div>
+
+        <div class="hskPager mathPager">
+          <button class="btn" id="mathPrevPage">← ก่อนหน้า</button>
+          <span id="mathPageLabel">หน้า 1</span>
+          <button class="btn" id="mathNextPage">ถัดไป →</button>
+        </div>
+      </section>
+    </section>
+
     <!-- GAME CONTROL -->
     <section class="adminPanel" id="panel-games">
       <div class="toolbar">
@@ -1274,6 +1664,152 @@ button{cursor:pointer}
 </section>
 </main>
 
+
+
+<div class="modal hidden" id="mathEditModal">
+  <div class="modalCard mathEditModalCard">
+
+    <div class="mathEditHeader">
+      <div>
+        <small>MATH QUESTION EDITOR</small>
+        <h3 id="mathEditTitle">เพิ่มโจทย์ใหม่</h3>
+        <p id="mathEditCode">สร้างโจทย์สำหรับ Brain Buddy Math</p>
+      </div>
+      <button class="btn" type="button" id="mathEditClose">ปิด</button>
+    </div>
+
+    <form id="mathEditForm" class="mathEditForm">
+      <input type="hidden" id="mathEditId">
+
+      <section class="mathEditSection">
+        <div class="mathEditSectionTitle">
+          <span>1</span>
+          <div><b>ระดับและรูปแบบ</b><small>กำหนดว่าโจทย์นี้อยู่ตรงไหนของ Math World</small></div>
+        </div>
+
+        <div class="formGrid three">
+          <label>
+            <span>Math Level *</span>
+            <select id="mathEditLevel" required>
+              <option value="math1">🌱 Math 1 — พื้นฐานนักคิด</option>
+              <option value="math2">⚡ Math 2 — นักคำนวณ</option>
+              <option value="math3">🧠 Math 3 — คิดหลายขั้น</option>
+              <option value="math4">💎 Math 4 — จ้าวเศษส่วน</option>
+              <option value="math5">🔥 Math 5 — นักแก้สมการ</option>
+              <option value="math6">👑 Math 6 — ตัวตึงคณิต</option>
+            </select>
+          </label>
+
+          <label>
+            <span>ประเภทเกม *</span>
+            <select id="mathEditType" required>
+              <option value="multiple_choice">🎯 เลือกคำตอบ</option>
+              <option value="typing">⌨️ พิมพ์คำตอบ</option>
+              <option value="matching">🧩 จับคู่</option>
+              <option value="sentence_order">🔀 เรียงขั้นตอน</option>
+              <option value="listening">🎧 ฟังโจทย์</option>
+              <option value="mix">⚡ Mix</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Skill Code *</span>
+            <input id="mathEditSkill" required placeholder="เช่น addition">
+          </label>
+        </div>
+
+        <div class="formGrid three">
+          <label>
+            <span>Base Score</span>
+            <input id="mathEditScore" type="number" min="1" step="1" value="100">
+          </label>
+          <label>
+            <span>Sort Order</span>
+            <input id="mathEditSort" type="number" step="1" value="0">
+          </label>
+          <label class="mathCheckLabel">
+            <span>สถานะ</span>
+            <span class="mathCheckWrap">
+              <input id="mathEditActive" type="checkbox" checked>
+              <b>เปิดใช้งานโจทย์นี้</b>
+            </span>
+          </label>
+        </div>
+      </section>
+
+      <section class="mathEditSection">
+        <div class="mathEditSectionTitle">
+          <span>2</span>
+          <div><b>โจทย์และคำตอบ</b><small>ส่วนสำคัญที่ผู้เล่นจะเห็น</small></div>
+        </div>
+
+        <label>
+          <span>โจทย์ *</span>
+          <textarea id="mathEditPrompt" rows="4" required
+            placeholder="เช่น 12 × 4 = ?"></textarea>
+        </label>
+
+        <label>
+          <span>คำตอบที่ถูกต้อง *</span>
+          <input id="mathEditAnswer" required placeholder="เช่น 48">
+        </label>
+
+        <label>
+          <span>ตัวเลือก / ลำดับ</span>
+          <textarea id="mathEditOptions" rows="5"
+            placeholder="หนึ่งตัวเลือกต่อหนึ่งบรรทัด&#10;48&#10;42&#10;52&#10;36"></textarea>
+          <small class="mathFieldHelp">ใส่ทีละบรรทัด หรือ JSON Array เช่น ["48","42","52","36"]</small>
+        </label>
+      </section>
+
+      <section class="mathEditSection">
+        <div class="mathEditSectionTitle">
+          <span>3</span>
+          <div><b>อธิบายและช่วยผู้เล่น</b><small>ใช้หลังตอบหรือเมื่อขอ Hint</small></div>
+        </div>
+
+        <label>
+          <span>Explanation</span>
+          <textarea id="mathEditExplanation" rows="3"
+            placeholder="เช่น 12 × 4 = 48"></textarea>
+        </label>
+
+        <label>
+          <span>Hint</span>
+          <textarea id="mathEditHint" rows="2"
+            placeholder="เช่น นึกถึงตารางสูตรคูณแม่ 4"></textarea>
+        </label>
+      </section>
+
+      <section class="mathEditSection">
+        <div class="mathEditSectionTitle">
+          <span>4</span>
+          <div><b>สื่อเสริม</b><small>เว้นว่างได้</small></div>
+        </div>
+
+        <div class="formGrid two">
+          <label>
+            <span>Image URL</span>
+            <input id="mathEditImage" type="url" placeholder="https://…">
+          </label>
+
+          <label>
+            <span>Audio URL</span>
+            <input id="mathEditAudio" type="url" placeholder="https://…">
+          </label>
+        </div>
+      </section>
+
+      <div class="mathEditActions">
+        <button type="button" class="mathDeleteBtn hidden" id="mathDeleteBtn">🗑️ ลบโจทย์</button>
+        <div></div>
+        <button type="button" class="btn" id="mathEditCancel">ยกเลิก</button>
+        <button type="submit" class="btn primary" id="mathEditSave">บันทึกโจทย์</button>
+      </div>
+
+    </form>
+  </div>
+</div>
 
 <div class="modal hidden" id="hskEditModal">
   <div class="modalCard hskEditModalCard">
@@ -1723,10 +2259,12 @@ function openPanel(name){
  $("#panel-bears").classList.toggle("active",name==="bears");
  $("#panel-learning").classList.toggle("active",name==="learning");
  $("#panel-hsk").classList.toggle("active",name==="hsk");
+ $("#panel-math").classList.toggle("active",name==="math");
  $("#panel-games").classList.toggle("active",name==="games");
  $("#panel-users").classList.toggle("active",name==="users");
  if(name==="learning")loadLearning();
  if(name==="hsk")Promise.all([loadHSKAdminStats(),loadHSKManager(false)]);
+ if(name==="math")Promise.all([loadMathStats(),loadMathManager(false)]);
  if(name==="games")loadGameControl();
  if(name==="users")loadUserControl(false);
 }
@@ -2223,6 +2761,385 @@ async function toggleHSKWord(id){
  }
 }
 
+
+
+
+/* ---------------- Math Question Manager ---------------- */
+let mathManagerRows=[];
+let mathManagerPage=0;
+let mathManagerTotal=0;
+let mathManagerSearchTimer=null;
+let mathStatsRows=[];
+let mathEditingRow=null;
+
+const mathLevelInfo={
+ math1:{icon:"🌱",name:"Math 1"},
+ math2:{icon:"⚡",name:"Math 2"},
+ math3:{icon:"🧠",name:"Math 3"},
+ math4:{icon:"💎",name:"Math 4"},
+ math5:{icon:"🔥",name:"Math 5"},
+ math6:{icon:"👑",name:"Math 6"}
+};
+
+const mathTypeInfo={
+ multiple_choice:{icon:"🎯",name:"เลือกคำตอบ"},
+ typing:{icon:"⌨️",name:"พิมพ์คำตอบ"},
+ matching:{icon:"🧩",name:"จับคู่"},
+ sentence_order:{icon:"🔀",name:"เรียงขั้นตอน"},
+ listening:{icon:"🎧",name:"ฟังโจทย์"},
+ mix:{icon:"⚡",name:"Mix"}
+};
+
+function mathEsc(v){
+ return String(v??"").replace(/[&<>"']/g,m=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[m]));
+}
+
+function mathVal(id){
+ return ($("#"+id)?.value||"").trim();
+}
+
+function mathOptionsToText(options){
+ if(!options)return "";
+ if(Array.isArray(options))return options.map(x=>String(x)).join("\n");
+ return "";
+}
+
+function parseMathOptions(raw){
+ raw=String(raw||"").trim();
+ if(!raw)return null;
+
+ if(raw.startsWith("[")){
+  const arr=JSON.parse(raw);
+  if(!Array.isArray(arr))throw new Error("ตัวเลือก JSON ต้องเป็น Array");
+  return arr.map(x=>String(x).trim()).filter(Boolean);
+ }
+
+ const rows=raw.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+ return rows.length?rows:null;
+}
+
+async function loadMathStats(){
+ try{
+  const {data,error}=await sb.rpc("bb_admin_math_stats");
+  if(error)throw error;
+
+  mathStatsRows=Array.isArray(data)?data:[];
+
+  const sum=key=>mathStatsRows.reduce((n,row)=>n+Number(row[key]||0),0);
+
+  $("#mathStatTotal").textContent=sum("total").toLocaleString();
+  $("#mathStatActive").textContent=sum("active_count").toLocaleString();
+  $("#mathStatInactive").textContent=sum("inactive_count").toLocaleString();
+  $("#mathStatChoice").textContent=sum("multiple_choice").toLocaleString();
+  $("#mathStatTyping").textContent=sum("typing").toLocaleString();
+  $("#mathStatMatching").textContent=sum("matching").toLocaleString();
+  $("#mathStatListening").textContent=sum("listening").toLocaleString();
+
+  document.querySelectorAll("[data-math-stat-level]").forEach(card=>{
+   const code=card.dataset.mathStatLevel;
+   const row=mathStatsRows.find(x=>x.level_code===code);
+   const strong=card.querySelector("strong");
+   if(strong)strong.textContent=Number(row?.total||0).toLocaleString();
+  });
+
+ }catch(err){
+  console.error("Math stats:",err);
+  toast(err?.message||"อ่านสถิติ Math ไม่สำเร็จ");
+ }
+}
+
+async function loadMathManager(resetPage=false){
+ if(resetPage)mathManagerPage=0;
+
+ const pageSize=Math.max(1,Number(mathVal("mathPageSize"))||100);
+ const offset=mathManagerPage*pageSize;
+ const activeRaw=mathVal("mathFilterActive");
+
+ $("#mathManagerStatus").textContent="กำลังโหลด…";
+ $("#mathQuestionList").innerHTML='<div class="learnLoading">กำลังโหลดคลังโจทย์…</div>';
+
+ try{
+  const {data,error}=await sb.rpc("bb_admin_list_math_questions",{
+   p_level_code:mathVal("mathFilterLevel")||null,
+   p_game_type:mathVal("mathFilterType")||null,
+   p_search:mathVal("mathFilterSearch")||null,
+   p_active:activeRaw===""?null:activeRaw==="true",
+   p_limit:pageSize,
+   p_offset:offset
+  });
+
+  if(error)throw error;
+
+  mathManagerRows=Array.isArray(data)?data:[];
+  mathManagerTotal=Number(mathManagerRows[0]?.total_count||0);
+
+  renderMathManager(pageSize);
+
+ }catch(err){
+  console.error("Math manager:",err);
+  mathManagerRows=[];
+  mathManagerTotal=0;
+  $("#mathManagerCount").textContent="0 รายการ";
+  $("#mathManagerStatus").textContent="โหลดไม่สำเร็จ";
+  $("#mathQuestionList").innerHTML=
+   `<div class="learnEmpty">${mathEsc(err?.message||"โหลดโจทย์ไม่สำเร็จ")}</div>`;
+ }
+}
+
+function renderMathManager(pageSize){
+ const host=$("#mathQuestionList");
+
+ $("#mathManagerCount").textContent=
+  `${mathManagerRows.length.toLocaleString()} รายการในหน้านี้ • ทั้งหมด ${mathManagerTotal.toLocaleString()} รายการ`;
+
+ $("#mathManagerStatus").textContent="อัปเดตแล้ว";
+ $("#mathPageLabel").textContent=`หน้า ${mathManagerPage+1}`;
+
+ $("#mathPrevPage").disabled=mathManagerPage<=0;
+ $("#mathNextPage").disabled=(mathManagerPage+1)*pageSize>=mathManagerTotal;
+
+ if(!mathManagerRows.length){
+  host.innerHTML='<div class="learnEmpty">ไม่พบโจทย์ตามตัวกรองนี้</div>';
+  return;
+ }
+
+ host.innerHTML=mathManagerRows.map(row=>{
+  const level=mathLevelInfo[row.level_code]||{icon:"➗",name:row.level_code};
+  const type=mathTypeInfo[row.game_type]||{icon:"🎮",name:row.game_type};
+  const answer=String(row.answer||"—");
+
+  return `
+   <article class="mathQuestionRow ${row.active?"":"inactive"}">
+
+    <div class="mathQuestionLevel">
+     <b>${level.icon} ${mathEsc(level.name)}</b>
+     <small>#${Number(row.id)}</small>
+    </div>
+
+    <div class="mathQuestionMain">
+     <div class="topline">
+      <span class="typeBadge">${type.icon} ${mathEsc(type.name)}</span>
+      <span class="skillBadge">${mathEsc(row.skill_code||"custom")}</span>
+     </div>
+
+     <h4 title="${mathEsc(row.prompt)}">${mathEsc(row.prompt)}</h4>
+     <code>${mathEsc(row.question_code||"custom")}</code>
+    </div>
+
+    <div class="mathQuestionAnswer">
+     <small>คำตอบ</small>
+     <strong title="${mathEsc(answer)}">${mathEsc(answer)}</strong>
+    </div>
+
+    <div class="mathQuestionScore">
+     <small>คะแนน</small>
+     <strong>${Number(row.base_score||0).toLocaleString()}</strong>
+    </div>
+
+    <div class="mathQuestionActions">
+     <button class="edit" data-math-edit="${Number(row.id)}">แก้ไข</button>
+     <button class="${row.active?"toggleOn":"toggleOff"}" data-math-toggle="${Number(row.id)}">
+      ${row.active?"ปิด":"เปิด"}
+     </button>
+    </div>
+
+   </article>`;
+ }).join("");
+}
+
+function findMathRow(id){
+ return mathManagerRows.find(x=>Number(x.id)===Number(id))||null;
+}
+
+function clearMathEditor(){
+ mathEditingRow=null;
+
+ $("#mathEditId").value="";
+ $("#mathEditLevel").value="math1";
+ $("#mathEditType").value="multiple_choice";
+ $("#mathEditSkill").value="addition";
+ $("#mathEditScore").value="100";
+ $("#mathEditSort").value="0";
+ $("#mathEditActive").checked=true;
+ $("#mathEditPrompt").value="";
+ $("#mathEditAnswer").value="";
+ $("#mathEditOptions").value="";
+ $("#mathEditExplanation").value="";
+ $("#mathEditHint").value="";
+ $("#mathEditImage").value="";
+ $("#mathEditAudio").value="";
+
+ $("#mathEditTitle").textContent="เพิ่มโจทย์ใหม่";
+ $("#mathEditCode").textContent="ระบบจะสร้าง Question Code ให้อัตโนมัติ";
+ $("#mathDeleteBtn").classList.add("hidden");
+}
+
+function openMathEditor(id=null){
+ clearMathEditor();
+
+ if(id!==null){
+  const row=findMathRow(id);
+  if(!row)return toast("ไม่พบโจทย์");
+
+  mathEditingRow=row;
+
+  $("#mathEditId").value=String(row.id);
+  $("#mathEditLevel").value=row.level_code||"math1";
+  $("#mathEditType").value=row.game_type||"multiple_choice";
+  $("#mathEditSkill").value=row.skill_code||"custom";
+  $("#mathEditScore").value=String(row.base_score||100);
+  $("#mathEditSort").value=String(row.sort_order||0);
+  $("#mathEditActive").checked=row.active!==false;
+  $("#mathEditPrompt").value=row.prompt||"";
+  $("#mathEditAnswer").value=row.answer||"";
+  $("#mathEditOptions").value=mathOptionsToText(row.options);
+  $("#mathEditExplanation").value=row.explanation||"";
+  $("#mathEditHint").value=row.hint||"";
+  $("#mathEditImage").value=row.image_url||"";
+  $("#mathEditAudio").value=row.audio_url||"";
+
+  $("#mathEditTitle").textContent=`แก้โจทย์ #${Number(row.id)}`;
+  $("#mathEditCode").textContent=row.question_code||"ไม่มี Question Code";
+  $("#mathDeleteBtn").classList.remove("hidden");
+ }
+
+ $("#mathEditModal").classList.remove("hidden");
+}
+
+function closeMathEditor(){
+ $("#mathEditModal").classList.add("hidden");
+}
+
+async function saveMathEditor(){
+ const prompt=$("#mathEditPrompt").value.trim();
+ const answer=$("#mathEditAnswer").value.trim();
+ const skill=$("#mathEditSkill").value.trim();
+
+ if(!prompt)return toast("กรุณาใส่โจทย์");
+ if(!answer)return toast("กรุณาใส่คำตอบ");
+ if(!skill)return toast("กรุณาใส่ Skill Code");
+
+ let options=null;
+ try{
+  options=parseMathOptions($("#mathEditOptions").value);
+ }catch(err){
+  return toast(err.message||"รูปแบบตัวเลือกไม่ถูกต้อง");
+ }
+
+ const btn=$("#mathEditSave");
+ const old=btn.textContent;
+ btn.disabled=true;
+ btn.textContent="กำลังบันทึก…";
+
+ try{
+  const id=Number($("#mathEditId").value)||null;
+
+  const {data,error}=await sb.rpc("bb_admin_save_math_question",{
+   p_id:id,
+   p_level_code:$("#mathEditLevel").value,
+   p_skill_code:skill,
+   p_game_type:$("#mathEditType").value,
+   p_prompt:prompt,
+   p_answer:answer,
+   p_options:options,
+   p_explanation:$("#mathEditExplanation").value.trim()||null,
+   p_hint:$("#mathEditHint").value.trim()||null,
+   p_image_url:$("#mathEditImage").value.trim()||null,
+   p_audio_url:$("#mathEditAudio").value.trim()||null,
+   p_base_score:Math.max(1,Number($("#mathEditScore").value)||100),
+   p_active:$("#mathEditActive").checked,
+   p_sort_order:Number($("#mathEditSort").value)||0
+  });
+
+  if(error)throw error;
+
+  const result=Array.isArray(data)?data[0]:data;
+  closeMathEditor();
+
+  toast(id?"บันทึกการแก้ไขแล้ว ✓":`เพิ่มโจทย์ ${result?.question_code||""} แล้ว ✓`);
+
+  await Promise.all([
+   loadMathStats(),
+   loadMathManager(false)
+  ]);
+
+ }catch(err){
+  console.error("Math save:",err);
+  toast(err?.message||"บันทึกโจทย์ไม่สำเร็จ");
+ }finally{
+  btn.disabled=false;
+  btn.textContent=old;
+ }
+}
+
+async function toggleMathQuestion(id){
+ const row=findMathRow(id);
+ if(!row)return toast("ไม่พบโจทย์");
+
+ try{
+  const {error}=await sb.rpc("bb_admin_set_math_question_active",{
+   p_id:Number(id),
+   p_active:!row.active
+  });
+
+  if(error)throw error;
+
+  toast(row.active?"ปิดโจทย์นี้แล้ว":"เปิดโจทย์นี้แล้ว");
+
+  await Promise.all([
+   loadMathStats(),
+   loadMathManager(false)
+  ]);
+
+ }catch(err){
+  console.error("Math toggle:",err);
+  toast(err?.message||"เปลี่ยนสถานะไม่สำเร็จ");
+ }
+}
+
+async function deleteMathQuestion(){
+ const id=Number($("#mathEditId").value)||0;
+ if(!id)return;
+
+ const row=mathEditingRow;
+ const name=row?.question_code||`#${id}`;
+
+ if(!confirm(
+  `ลบโจทย์ ${name} ถาวร?\n\n`+
+  `${row?.prompt||""}\n\n`+
+  `หากแค่ยังไม่ต้องการใช้ แนะนำให้กด “ปิด” แทน`
+ ))return;
+
+ const btn=$("#mathDeleteBtn");
+ const old=btn.textContent;
+ btn.disabled=true;
+ btn.textContent="กำลังลบ…";
+
+ try{
+  const {error}=await sb.rpc("bb_admin_delete_math_question",{
+   p_id:id
+  });
+
+  if(error)throw error;
+
+  closeMathEditor();
+  toast("ลบโจทย์แล้ว");
+
+  await Promise.all([
+   loadMathStats(),
+   loadMathManager(false)
+  ]);
+
+ }catch(err){
+  console.error("Math delete:",err);
+  toast(err?.message||"ลบโจทย์ไม่สำเร็จ");
+ }finally{
+  btn.disabled=false;
+  btn.textContent=old;
+ }
+}
 
 
 /* ---------------- Game Release Control ---------------- */
@@ -2938,6 +3855,76 @@ document.addEventListener("click",e=>{
  if(toggle){
    toggleHSKWord(Number(toggle.dataset.hskToggle));
    return;
+ }
+});
+
+$("#mathManagerReload").onclick=()=>Promise.all([loadMathStats(),loadMathManager(false)]);
+$("#mathQuestionRefresh").onclick=()=>loadMathManager(false);
+$("#mathManagerNew").onclick=()=>openMathEditor(null);
+$("#mathSearchBtn").onclick=()=>loadMathManager(true);
+
+$("#mathFilterLevel").onchange=()=>loadMathManager(true);
+$("#mathFilterType").onchange=()=>loadMathManager(true);
+$("#mathFilterActive").onchange=()=>loadMathManager(true);
+$("#mathPageSize").onchange=()=>loadMathManager(true);
+
+$("#mathFilterSearch").addEventListener("input",()=>{
+ clearTimeout(mathManagerSearchTimer);
+ mathManagerSearchTimer=setTimeout(()=>loadMathManager(true),320);
+});
+
+$("#mathFilterSearch").addEventListener("keydown",e=>{
+ if(e.key==="Enter"){
+  e.preventDefault();
+  loadMathManager(true);
+ }
+});
+
+$("#mathPrevPage").onclick=()=>{
+ if(mathManagerPage<=0)return;
+ mathManagerPage--;
+ loadMathManager(false);
+};
+
+$("#mathNextPage").onclick=()=>{
+ const pageSize=Math.max(1,Number(mathVal("mathPageSize"))||100);
+ if((mathManagerPage+1)*pageSize>=mathManagerTotal)return;
+ mathManagerPage++;
+ loadMathManager(false);
+};
+
+$("#mathEditClose").onclick=closeMathEditor;
+$("#mathEditCancel").onclick=closeMathEditor;
+$("#mathDeleteBtn").onclick=deleteMathQuestion;
+
+$("#mathEditForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ saveMathEditor();
+});
+
+$("#mathEditModal").addEventListener("click",e=>{
+ if(e.target.id==="mathEditModal")closeMathEditor();
+});
+
+document.addEventListener("click",e=>{
+ const edit=e.target.closest("[data-math-edit]");
+ if(edit){
+  openMathEditor(Number(edit.dataset.mathEdit));
+  return;
+ }
+
+ const toggle=e.target.closest("[data-math-toggle]");
+ if(toggle){
+  toggleMathQuestion(Number(toggle.dataset.mathToggle));
+  return;
+ }
+
+ const stat=e.target.closest("[data-math-stat-level]");
+ if(stat){
+  openPanel("math");
+  $("#mathFilterLevel").value=stat.dataset.mathStatLevel;
+  loadMathManager(true);
+  return;
  }
 });
 
