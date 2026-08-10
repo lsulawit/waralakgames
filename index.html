@@ -12651,6 +12651,557 @@ body.bbCandyHome .bbCandyHomeScreen.pomruHomeScreen{
 }
 </style>
 
+
+<style id="pomru-v898-feeding-style">
+/* ============================================================
+   POMRU v89.8 — Feeding UI
+   Supabase RPCs:
+   bb_food_catalog / bb_buy_food / bb_feed_buddy
+   ============================================================ */
+
+:root{
+  --p898-pink:#ff5b9f;
+  --p898-pink2:#f23d8b;
+  --p898-purple:#7655df;
+  --p898-ink:#3f3344;
+  --p898-muted:#887a8e;
+  --p898-cream:#fffaf7;
+  --p898-line:rgba(91,63,93,.10);
+}
+
+body.p898FeedOpen{
+  overflow:hidden!important;
+  touch-action:none;
+}
+
+#p898FeedModal{
+  position:fixed;
+  inset:0;
+  z-index:85000;
+  display:grid;
+  place-items:center;
+  padding:
+    max(14px,env(safe-area-inset-top))
+    max(14px,env(safe-area-inset-right))
+    max(14px,env(safe-area-inset-bottom))
+    max(14px,env(safe-area-inset-left));
+  background:rgba(45,31,52,.48);
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transition:opacity .2s ease,visibility .2s ease;
+}
+
+#p898FeedModal.hidden{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.p898FeedSheet{
+  width:min(900px,100%);
+  max-height:min(790px,calc(100dvh - 28px));
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.78);
+  border-radius:34px;
+  background:
+    radial-gradient(circle at 88% 3%,rgba(255,196,225,.48),transparent 31%),
+    linear-gradient(180deg,#fffefd 0%,#fff6f9 100%);
+  box-shadow:
+    0 32px 90px rgba(51,32,56,.28),
+    inset 0 2px 0 rgba(255,255,255,.82);
+  transform:translateY(0) scale(1);
+  transition:transform .22s ease;
+}
+
+#p898FeedModal.hidden .p898FeedSheet{
+  transform:translateY(18px) scale(.985);
+}
+
+.p898FeedHead{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto auto;
+  align-items:center;
+  gap:12px;
+  padding:18px 19px 12px;
+  border-bottom:1px solid var(--p898-line);
+}
+
+.p898FeedTitle{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.p898FeedTitleIcon{
+  width:48px;
+  height:48px;
+  flex:0 0 48px;
+  display:grid;
+  place-items:center;
+  border-radius:17px;
+  background:linear-gradient(145deg,#ffecf5,#ffe0ee);
+  box-shadow:inset 0 0 0 1px rgba(255,90,158,.11);
+  font-size:1.65rem;
+}
+
+.p898FeedTitle small{
+  display:block;
+  color:#a36d89;
+  font-size:.61rem;
+  font-weight:950;
+  letter-spacing:.12em;
+}
+
+.p898FeedTitle h2{
+  margin:1px 0 0;
+  color:var(--p898-ink);
+  font-size:clamp(1.2rem,2.5vw,1.7rem);
+  line-height:1.05;
+}
+
+.p898FeedWallet{
+  min-height:44px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:6px 10px 6px 7px;
+  border:1px solid rgba(113,81,120,.10);
+  border-radius:16px;
+  background:#fff;
+  box-shadow:0 5px 14px rgba(62,40,68,.06);
+  color:#514358;
+  font-size:.75rem;
+  font-weight:1000;
+  white-space:nowrap;
+}
+
+.p898FeedWallet i{
+  width:29px;
+  height:29px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:linear-gradient(145deg,#ffe477,#f5b93c);
+  box-shadow:inset 0 0 0 3px rgba(255,255,255,.47);
+  color:#704d10;
+  font-style:normal;
+  font-size:.7rem;
+}
+
+.p898FeedClose{
+  width:44px;
+  height:44px;
+  border:0;
+  border-radius:15px;
+  display:grid;
+  place-items:center;
+  background:#f5eef4;
+  color:#645568;
+  font-size:1.05rem;
+  font-weight:1000;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.p898FeedTabs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  margin:12px 18px 0;
+  padding:5px;
+  border-radius:18px;
+  background:#f3edf4;
+}
+
+.p898FeedTab{
+  min-height:44px;
+  border:0;
+  border-radius:14px;
+  background:transparent;
+  color:#7d7180;
+  font-size:.76rem;
+  font-weight:1000;
+  cursor:pointer;
+}
+
+.p898FeedTab.active{
+  background:#fff;
+  color:#4a3d4f;
+  box-shadow:0 4px 13px rgba(65,43,70,.08);
+}
+
+.p898FeedSummary{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:11px 18px 0;
+  padding:10px 12px;
+  border-radius:17px;
+  background:linear-gradient(135deg,#fff0f6,#f4efff);
+  color:#64556b;
+  font-size:.7rem;
+  font-weight:850;
+}
+
+.p898FeedSummary strong{
+  color:#e6448a;
+}
+
+.p898FeedBody{
+  min-height:260px;
+  padding:13px 18px 20px;
+  overflow:auto;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+}
+
+.p898FoodGrid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:11px;
+}
+
+.p898FoodCard{
+  position:relative;
+  min-width:0;
+  padding:12px;
+  border:1px solid rgba(102,73,105,.10);
+  border-radius:24px;
+  background:rgba(255,255,255,.92);
+  box-shadow:0 8px 22px rgba(70,45,75,.065);
+}
+
+.p898FoodCard.rare::after,
+.p898FoodCard.epic::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  box-shadow:inset 0 0 0 1.5px rgba(150,104,231,.18);
+}
+.p898FoodCard.epic::after{
+  box-shadow:inset 0 0 0 1.5px rgba(255,90,160,.22);
+}
+
+.p898FoodTop{
+  display:grid;
+  grid-template-columns:72px minmax(0,1fr);
+  gap:10px;
+  align-items:center;
+}
+
+.p898FoodArt{
+  width:72px;
+  height:72px;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  border-radius:21px;
+  background:
+    radial-gradient(circle at 38% 30%,#fff 0 9%,transparent 10%),
+    linear-gradient(145deg,#fff2f7,#f3efff);
+  font-size:2.5rem;
+}
+
+.p898FoodArt img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+.p898FoodCopy{
+  min-width:0;
+}
+
+.p898FoodCopy h3{
+  margin:0;
+  overflow:hidden;
+  color:#46394b;
+  font-size:.93rem;
+  line-height:1.15;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.p898FoodCopy p{
+  min-height:2.45em;
+  margin:5px 0 0;
+  overflow:hidden;
+  color:#8b7d8e;
+  font-size:.61rem;
+  font-weight:750;
+  line-height:1.25;
+}
+
+.p898Owned{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  margin-top:6px;
+  padding:4px 7px;
+  border-radius:999px;
+  background:#fff1f7;
+  color:#d93d82;
+  font-size:.59rem;
+  font-weight:1000;
+}
+
+.p898Restore{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+  margin-top:10px;
+}
+
+.p898Restore span{
+  padding:4px 6px;
+  border-radius:999px;
+  background:#f5f2f7;
+  color:#706475;
+  font-size:.55rem;
+  font-weight:950;
+}
+
+.p898Restore span.xp{
+  background:#fff4dc;
+  color:#976318;
+}
+
+.p898FoodActions{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:6px;
+  margin-top:10px;
+}
+
+.p898FoodActions.two{
+  grid-template-columns:1.25fr .9fr;
+}
+
+.p898FoodBtn{
+  min-height:42px;
+  border:0;
+  border-radius:14px;
+  padding:7px 9px;
+  font-size:.68rem;
+  font-weight:1000;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.p898FoodBtn:disabled{
+  opacity:.55;
+  cursor:wait;
+}
+
+.p898FoodBtn.feed{
+  background:linear-gradient(180deg,var(--p898-pink),var(--p898-pink2));
+  color:#fff;
+  box-shadow:0 6px 13px rgba(232,60,133,.19);
+}
+
+.p898FoodBtn.buy{
+  background:linear-gradient(180deg,#8668ec,#6749d4);
+  color:#fff;
+  box-shadow:0 6px 13px rgba(103,73,212,.16);
+}
+
+.p898FoodBtn.secondary{
+  background:#f2edf4;
+  color:#66596a;
+}
+
+.p898Empty,
+.p898FeedLoading{
+  min-height:270px;
+  display:grid;
+  place-items:center;
+  align-content:center;
+  gap:9px;
+  padding:24px;
+  text-align:center;
+  color:#87798b;
+}
+
+.p898Empty i,
+.p898FeedLoading i{
+  font-style:normal;
+  font-size:3rem;
+}
+
+.p898Empty b,
+.p898FeedLoading b{
+  color:#4d4052;
+  font-size:1rem;
+}
+
+.p898Empty p,
+.p898FeedLoading p{
+  max-width:360px;
+  margin:0;
+  font-size:.7rem;
+  line-height:1.45;
+}
+
+.p898Empty button{
+  min-height:42px;
+  border:0;
+  border-radius:14px;
+  padding:0 15px;
+  background:linear-gradient(180deg,#8668ec,#6749d4);
+  color:#fff;
+  font-weight:1000;
+}
+
+.p898FeedToast{
+  position:absolute;
+  left:50%;
+  bottom:20px;
+  z-index:5;
+  max-width:min(520px,calc(100% - 30px));
+  padding:10px 15px;
+  border-radius:999px;
+  background:#433548;
+  color:#fff;
+  font-size:.68rem;
+  font-weight:900;
+  opacity:0;
+  pointer-events:none;
+  transform:translate(-50%,12px);
+  transition:.2s;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.p898FeedToast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+/* Food flying from the sheet to Buddy */
+.p898FlyingFood{
+  position:fixed;
+  z-index:90000;
+  width:68px;
+  height:68px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:rgba(255,255,255,.94);
+  box-shadow:0 14px 28px rgba(70,43,70,.22);
+  font-size:2.55rem;
+  pointer-events:none;
+  transform:translate(-50%,-50%) scale(.75) rotate(-9deg);
+  transition:
+    left .55s cubic-bezier(.2,.8,.25,1),
+    top .55s cubic-bezier(.2,.8,.25,1),
+    transform .55s cubic-bezier(.2,.8,.25,1),
+    opacity .18s linear .47s;
+}
+
+.p898FlyingFood.go{
+  transform:translate(-50%,-50%) scale(.35) rotate(18deg);
+  opacity:0;
+}
+
+/* Feed reaction uses transform only: avoids the old flicker issue */
+#bbEquippedHeroCharacter.p898Eating{
+  animation:p898Eat .78s cubic-bezier(.22,.8,.22,1) both!important;
+}
+
+@keyframes p898Eat{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  18%{transform:translate3d(0,-5px,0) scale(1.04,.97)}
+  38%{transform:translate3d(0,2px,0) scale(.98,1.035)}
+  58%{transform:translate3d(0,-7px,0) scale(1.055,.96)}
+  78%{transform:translate3d(0,0,0) scale(.99,1.02)}
+  100%{transform:translate3d(0,0,0) scale(1)}
+}
+
+.p898FeedBurst{
+  position:absolute;
+  z-index:40;
+  left:50%;
+  top:44%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+
+.p898FeedBurst i{
+  position:absolute;
+  left:0;
+  top:0;
+  font-style:normal;
+  font-size:1.35rem;
+  animation:p898Burst .85s ease-out forwards;
+}
+
+@keyframes p898Burst{
+  from{opacity:1;transform:translate(0,0) scale(.7)}
+  to{opacity:0;transform:translate(var(--x),var(--y)) scale(1.25)}
+}
+
+@media(max-width:760px){
+  #p898FeedModal{
+    align-items:end;
+    padding:0;
+  }
+  .p898FeedSheet{
+    width:100%;
+    max-height:min(86dvh,760px);
+    border-radius:29px 29px 0 0;
+    border-bottom:0;
+  }
+  .p898FeedHead{
+    grid-template-columns:minmax(0,1fr) auto auto;
+    padding:14px 12px 10px;
+  }
+  .p898FeedTitleIcon{
+    width:42px;height:42px;flex-basis:42px;border-radius:15px;
+  }
+  .p898FeedTitle h2{font-size:1.16rem}
+  .p898FeedWallet{min-height:40px;padding:5px 8px 5px 5px}
+  .p898FeedWallet i{width:27px;height:27px}
+  .p898FeedClose{width:40px;height:40px}
+  .p898FeedTabs{margin:10px 11px 0}
+  .p898FeedSummary{margin:9px 11px 0}
+  .p898FeedBody{padding:10px 11px calc(16px + env(safe-area-inset-bottom))}
+  .p898FoodGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .p898FoodCard{padding:9px;border-radius:20px}
+  .p898FoodTop{grid-template-columns:58px minmax(0,1fr);gap:8px}
+  .p898FoodArt{width:58px;height:58px;border-radius:17px;font-size:2rem}
+  .p898FoodCopy h3{font-size:.78rem}
+  .p898FoodCopy p{font-size:.55rem}
+}
+
+@media(max-width:390px){
+  .p898FeedTitle small{display:none}
+  .p898FoodGrid{grid-template-columns:1fr}
+}
+
+@media(prefers-reduced-motion:reduce){
+  #p898FeedModal,
+  .p898FeedSheet,
+  .p898FeedToast,
+  .p898FlyingFood{
+    transition:none!important;
+  }
+  #bbEquippedHeroCharacter.p898Eating,
+  .p898FeedBurst i{
+    animation:none!important;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -12946,7 +13497,7 @@ body.bbCandyHome .bbCandyHomeScreen.pomruHomeScreen{
     </button>
 
     <section class="p89MainActions" aria-label="กิจกรรมหลัก">
-      <button class="p89Action feed" type="button" data-app-go="shop" data-pomru-open="food"><span>🍓</span><b>ให้อาหาร</b><small>เพิ่มความอิ่ม ♥</small></button>
+      <button class="p89Action feed" type="button" id="p898FeedBtn" aria-haspopup="dialog" aria-controls="p898FeedModal"><span>🍓</span><b>ให้อาหาร</b><small>เปิดตู้เย็น Buddy ♥</small></button>
       <button class="p89Action play" type="button" data-app-go="modes"><span>🎮</span><b>เล่นเกม</b><small>รับ Coins / EXP</small></button>
       <button class="p89Action workout" type="button" id="p89WorkoutBtn"><span>🏃</span><b>ออกกำลังกาย</b><small>เพิ่มพลัง / ความสุข</small></button>
     </section>
@@ -24574,6 +25125,639 @@ document.addEventListener('DOMContentLoaded', () => {
     getMood:()=>state.mood,
     getPet:()=>state.pet
   };
+})();
+</script>
+
+
+<!-- =========================================================
+     POMRU v89.8 — Feeding Modal
+     ========================================================= -->
+<div id="p898FeedModal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="p898FeedTitle" aria-hidden="true">
+  <section class="p898FeedSheet">
+    <header class="p898FeedHead">
+      <div class="p898FeedTitle">
+        <span class="p898FeedTitleIcon">🍓</span>
+        <div>
+          <small>BUDDY KITCHEN</small>
+          <h2 id="p898FeedTitle">ครัวของ Buddy</h2>
+        </div>
+      </div>
+
+      <div class="p898FeedWallet" aria-label="POMRU Coins">
+        <i>P</i>
+        <span><b id="p898FeedCoins">0</b> Coins</span>
+      </div>
+
+      <button type="button" class="p898FeedClose" id="p898FeedClose" aria-label="ปิด">✕</button>
+    </header>
+
+    <nav class="p898FeedTabs" aria-label="เมนูอาหาร">
+      <button type="button" class="p898FeedTab active" data-p898-tab="fridge">🧊 ตู้เย็นของฉัน</button>
+      <button type="button" class="p898FeedTab" data-p898-tab="shop">🛒 ร้านอาหาร</button>
+    </nav>
+
+    <div class="p898FeedSummary" id="p898FeedSummary">
+      <span>🍓 เลือกอาหารที่ Buddy มีอยู่แล้ว</span>
+      <span>ของในตู้เย็น <strong id="p898OwnedTotal">0</strong> ชิ้น</span>
+    </div>
+
+    <div class="p898FeedBody">
+      <div class="p898FeedLoading" id="p898FeedLoading">
+        <i>🍱</i>
+        <b>กำลังเปิดครัว…</b>
+        <p>กำลังโหลดอาหารและตู้เย็นจาก POMRU Cloud</p>
+      </div>
+      <div class="p898FoodGrid hidden" id="p898FoodGrid"></div>
+    </div>
+
+    <div class="p898FeedToast" id="p898FeedToast" role="status"></div>
+  </section>
+</div>
+
+
+<script id="pomru-v898-feeding-engine">
+(function(){
+  'use strict';
+
+  const $=id=>document.getElementById(id);
+  const state={
+    catalog:[],
+    tab:'fridge',
+    user:null,
+    busy:false,
+    modalOpen:false,
+    audio:null
+  };
+
+  function client(){
+    if(window.__bbSupabase)return window.__bbSupabase;
+    const cfg=window.BRAIN_BUDDY_SUPABASE||{};
+    if(window.supabase && cfg.url && cfg.publishableKey){
+      window.__bbSupabase=window.supabase.createClient(cfg.url,cfg.publishableKey);
+      return window.__bbSupabase;
+    }
+    return null;
+  }
+
+  function esc(v){
+    return String(v??'').replace(/[&<>"']/g,m=>({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[m]));
+  }
+
+  function num(v,f=0){
+    const n=Number(v);
+    return Number.isFinite(n)?n:f;
+  }
+
+  function errorText(err){
+    const raw=String(err?.message||err||'').toLowerCase();
+    if(raw.includes('authentication_required') || raw.includes('jwt'))
+      return 'กรุณาเข้าสู่ระบบก่อนใช้งานครัว Buddy';
+    if(raw.includes('insufficient_coins'))
+      return 'POMRU Coins ไม่พอสำหรับอาหารชิ้นนี้';
+    if(raw.includes('food_not_owned'))
+      return 'อาหารชิ้นนี้หมดแล้ว ลองซื้อเพิ่มก่อนนะ';
+    if(raw.includes('food_not_found'))
+      return 'ไม่พบอาหารชิ้นนี้ กรุณารีเฟรชแล้วลองใหม่';
+    return String(err?.message||'เกิดข้อผิดพลาด กรุณาลองใหม่');
+  }
+
+  function toast(msg){
+    const el=$('p898FeedToast');
+    if(!el)return;
+    el.textContent=msg;
+    el.classList.add('show');
+    clearTimeout(toast.t);
+    toast.t=setTimeout(()=>el.classList.remove('show'),2200);
+  }
+
+  function openLogin(){
+    try{
+      if(typeof window.openModal==='function'){
+        window.openModal('accountModal');
+        return;
+      }
+      const modal=$('accountModal');
+      if(modal){
+        modal.classList.remove('hidden');
+        return;
+      }
+    }catch(_){}
+  }
+
+  async function session(){
+    const c=client();
+    if(!c)return null;
+    const {data,error}=await c.auth.getSession();
+    if(error)throw error;
+    state.user=data?.session?.user||null;
+    return state.user;
+  }
+
+  async function readWallet(){
+    const c=client();
+    if(!c||!state.user)return 0;
+    try{
+      const {data,error}=await c.from('bb_wallets')
+        .select('coin_balance')
+        .eq('user_id',state.user.id)
+        .maybeSingle();
+      if(error)throw error;
+      const coins=num(data?.coin_balance);
+      paintCoins(coins);
+      return coins;
+    }catch(_){
+      const fallback=num(String($('pomruHomeCoinBalance')?.textContent||'0').replace(/[^\d.-]/g,''));
+      paintCoins(fallback);
+      return fallback;
+    }
+  }
+
+  function paintCoins(coins){
+    const text=num(coins).toLocaleString();
+    if($('p898FeedCoins'))$('p898FeedCoins').textContent=text;
+    if($('pomruHomeCoinBalance'))$('pomruHomeCoinBalance').textContent=text;
+    if($('bbHomeCoinBalance'))$('bbHomeCoinBalance').textContent=text;
+  }
+
+  function rarity(row){
+    const r=String(row?.rarity||'common').toLowerCase();
+    return ['common','rare','epic','legendary'].includes(r)?r:'common';
+  }
+
+  function art(row){
+    const url=String(row?.image_url||'').replace(/["\n\r]/g,'');
+    if(url)return '<img src="'+esc(url)+'" alt="">';
+    return esc(row?.emoji||'🍓');
+  }
+
+  function restoreBadges(row){
+    const out=[];
+    const h=num(row?.hunger_restore);
+    const happy=num(row?.happiness_restore);
+    const energy=num(row?.energy_restore);
+    const xp=num(row?.care_xp);
+    if(h)out.push('<span>🍓 +'+h+' อิ่ม</span>');
+    if(happy)out.push('<span>💗 +'+happy+' สุข</span>');
+    if(energy)out.push('<span>⚡ +'+energy+' พลัง</span>');
+    if(xp)out.push('<span class="xp">✨ +'+xp+' Care EXP</span>');
+    return out.join('');
+  }
+
+  function foodCard(row,fridge){
+    const owned=num(row?.owned_quantity);
+    const id=num(row?.food_id);
+    const r=rarity(row);
+    const price=num(row?.price_coins);
+    const description=row?.description_th || 'อาหารสำหรับ Buddy';
+    const has=owned>0;
+
+    let actions='';
+    if(fridge){
+      actions=has
+        ? '<div class="p898FoodActions two">'+
+            '<button class="p898FoodBtn feed" type="button" data-p898-feed="'+id+'">🍽️ ให้อาหาร</button>'+
+            '<button class="p898FoodBtn secondary" type="button" data-p898-buy="'+id+'">+ ซื้อเพิ่ม</button>'+
+          '</div>'
+        : '';
+    }else{
+      actions=
+        '<div class="p898FoodActions">'+
+          '<button class="p898FoodBtn buy" type="button" data-p898-buy="'+id+'">🪙 ซื้อ '+price.toLocaleString()+' P</button>'+
+        '</div>';
+    }
+
+    return '<article class="p898FoodCard '+r+'">'+
+      '<div class="p898FoodTop">'+
+        '<div class="p898FoodArt">'+art(row)+'</div>'+
+        '<div class="p898FoodCopy">'+
+          '<h3>'+esc(row?.name_th||'อาหาร Buddy')+'</h3>'+
+          '<p>'+esc(description)+'</p>'+
+          '<span class="p898Owned">🎒 มี '+owned.toLocaleString()+' ชิ้น</span>'+
+        '</div>'+
+      '</div>'+
+      '<div class="p898Restore">'+restoreBadges(row)+'</div>'+
+      actions+
+    '</article>';
+  }
+
+  function render(){
+    const grid=$('p898FoodGrid');
+    const loading=$('p898FeedLoading');
+    if(!grid||!loading)return;
+
+    const ownedTotal=state.catalog.reduce((n,row)=>n+num(row?.owned_quantity),0);
+    if($('p898OwnedTotal'))$('p898OwnedTotal').textContent=ownedTotal.toLocaleString();
+
+    document.querySelectorAll('[data-p898-tab]').forEach(btn=>{
+      btn.classList.toggle('active',btn.dataset.p898Tab===state.tab);
+    });
+
+    const fridge=state.tab==='fridge';
+    const rows=fridge
+      ? state.catalog.filter(x=>num(x?.owned_quantity)>0)
+      : state.catalog;
+
+    const summary=$('p898FeedSummary');
+    if(summary){
+      summary.firstElementChild.textContent=fridge
+        ? '🍓 เลือกอาหารจากตู้เย็น แล้วให้ Buddy กินได้เลย'
+        : '🛒 ซื้ออาหารด้วย POMRU Coins แล้วอาหารจะเข้าตู้เย็น';
+    }
+
+    loading.classList.add('hidden');
+    grid.classList.remove('hidden');
+
+    if(!rows.length){
+      grid.innerHTML=
+        '<div class="p898Empty" style="grid-column:1/-1">'+
+          '<i>🧊</i>'+
+          '<b>ตู้เย็นยังว่างอยู่</b>'+
+          '<p>ซื้ออาหารจากร้านก่อน แล้วอาหารจะถูกเก็บไว้ในตู้เย็นของ Buddy</p>'+
+          '<button type="button" data-p898-switch-shop>ไปซื้ออาหาร</button>'+
+        '</div>';
+      return;
+    }
+
+    grid.innerHTML=rows.map(row=>foodCard(row,fridge)).join('');
+  }
+
+  async function loadCatalog(){
+    const c=client();
+    if(!c)throw new Error('เชื่อมต่อ POMRU Cloud ไม่สำเร็จ');
+
+    const loading=$('p898FeedLoading');
+    const grid=$('p898FoodGrid');
+    if(loading){
+      loading.classList.remove('hidden');
+      loading.innerHTML='<i>🍱</i><b>กำลังเปิดครัว…</b><p>กำลังโหลดอาหารและตู้เย็นจาก POMRU Cloud</p>';
+    }
+    grid?.classList.add('hidden');
+
+    const {data,error}=await c.rpc('bb_food_catalog');
+    if(error)throw error;
+    state.catalog=Array.isArray(data)?data:[];
+    render();
+    await readWallet();
+    return state.catalog;
+  }
+
+  async function open(){
+    if(state.busy)return;
+    try{
+      const user=await session();
+      if(!user){
+        openLogin();
+        return;
+      }
+
+      state.modalOpen=true;
+      document.body.classList.add('p898FeedOpen');
+      $('p898FeedModal')?.classList.remove('hidden');
+      $('p898FeedModal')?.setAttribute('aria-hidden','false');
+      state.tab='fridge';
+
+      await loadCatalog();
+      setTimeout(()=>$('p898FeedClose')?.focus(),40);
+    }catch(err){
+      close();
+      toast(errorText(err));
+    }
+  }
+
+  function close(){
+    state.modalOpen=false;
+    document.body.classList.remove('p898FeedOpen');
+    $('p898FeedModal')?.classList.add('hidden');
+    $('p898FeedModal')?.setAttribute('aria-hidden','true');
+  }
+
+  function setBusy(value,button){
+    state.busy=!!value;
+    document.querySelectorAll('#p898FeedModal button').forEach(btn=>{
+      if(btn.id==='p898FeedClose')return;
+      btn.disabled=!!value;
+    });
+    if(button && value){
+      button.dataset.oldText=button.textContent;
+      button.textContent='กำลังทำ…';
+    }else if(button?.dataset.oldText){
+      button.textContent=button.dataset.oldText;
+      delete button.dataset.oldText;
+    }
+  }
+
+  async function buy(foodId,button){
+    if(state.busy)return;
+    setBusy(true,button);
+    try{
+      const c=client();
+      if(!c)throw new Error('เชื่อมต่อ POMRU Cloud ไม่สำเร็จ');
+
+      const {data,error}=await c.rpc('bb_buy_food',{
+        p_food_id:Number(foodId),
+        p_quantity:1
+      });
+      if(error)throw error;
+
+      const row=Array.isArray(data)?data[0]:data;
+      if(row && Number.isFinite(Number(row.coin_balance)))paintCoins(row.coin_balance);
+
+      await loadCatalog();
+      toast('ซื้อ '+(row?.item_name||'อาหาร')+' สำเร็จ 🎁');
+
+      try{await window.bbLoadShop?.()}catch(_){}
+      try{await window.POMRUCoreSync?.refresh?.('food-purchase')}catch(_){}
+      sound('buy');
+    }catch(err){
+      toast(errorText(err));
+    }finally{
+      setBusy(false,button);
+      render();
+    }
+  }
+
+  function deriveMood(pet){
+    const hunger=num(pet?.hunger,100);
+    const happiness=num(pet?.happiness,100);
+    const energy=num(pet?.energy,100);
+    if(hunger<=30)return 'hungry';
+    if(energy<=25)return 'tired';
+    if(happiness<=30)return 'sad';
+    if(hunger>=82 && happiness>=82 && energy>=75)return 'great';
+    return 'happy';
+  }
+
+  function mergedPet(row){
+    let prev={};
+    try{prev=window.BrainBuddyPet?.getState?.()||{}}catch(_){}
+
+    const careXP=num(row?.care_xp,num(prev?.care_xp));
+    const gameXP=num(prev?.game_xp);
+    const target=Math.max(1,num(prev?.level_target,500));
+    const total=Math.max(0,gameXP+careXP);
+
+    const next={
+      ...prev,
+      hunger:num(row?.hunger,num(prev?.hunger,100)),
+      happiness:num(row?.happiness,num(prev?.happiness,100)),
+      energy:num(row?.energy,num(prev?.energy,100)),
+      care_xp:careXP,
+      game_xp:gameXP,
+      total_xp:total,
+      pet_level:Math.floor(total/target)+1,
+      level_target:target,
+      level_progress:total%target,
+      last_fed_at:row?.last_fed_at||new Date().toISOString()
+    };
+    next.mood=deriveMood(next);
+    return next;
+  }
+
+  function foodRow(foodId){
+    return state.catalog.find(x=>num(x?.food_id)===num(foodId))||null;
+  }
+
+  function buddyCenter(){
+    const buddy=$('bbEquippedHeroCharacter');
+    if(!buddy)return {x:innerWidth/2,y:innerHeight/2};
+    const r=buddy.getBoundingClientRect();
+    return {x:r.left+r.width/2,y:r.top+r.height*.55};
+  }
+
+  function flyFood(row,sourceButton){
+    const start=sourceButton?.getBoundingClientRect();
+    const target=buddyCenter();
+    const el=document.createElement('div');
+    el.className='p898FlyingFood';
+    el.textContent=row?.emoji||'🍓';
+    el.style.left=(start?start.left+start.width/2:innerWidth/2)+'px';
+    el.style.top=(start?start.top+start.height/2:innerHeight*.72)+'px';
+    document.body.appendChild(el);
+
+    requestAnimationFrame(()=>{
+      requestAnimationFrame(()=>{
+        el.style.left=target.x+'px';
+        el.style.top=target.y+'px';
+        el.classList.add('go');
+      });
+    });
+
+    setTimeout(()=>el.remove(),760);
+  }
+
+  function feedBurst(){
+    const center=document.querySelector('.p89PetCenter');
+    if(!center)return;
+    let layer=center.querySelector('.p898FeedBurst');
+    if(layer)layer.remove();
+    layer=document.createElement('div');
+    layer.className='p898FeedBurst';
+    const parts=['💗','✨','💕','★','♡','✨'];
+    parts.forEach((icon,i)=>{
+      const p=document.createElement('i');
+      p.textContent=icon;
+      const angle=(Math.PI*2/parts.length)*i;
+      const dist=55+(i%3)*16;
+      p.style.setProperty('--x',(Math.cos(angle)*dist)+'px');
+      p.style.setProperty('--y',(Math.sin(angle)*dist-20)+'px');
+      p.style.animationDelay=(i*35)+'ms';
+      layer.appendChild(p);
+    });
+    center.appendChild(layer);
+    setTimeout(()=>layer.remove(),1200);
+  }
+
+  function animateEat(row,sourceButton){
+    flyFood(row,sourceButton);
+    const buddy=$('bbEquippedHeroCharacter');
+    setTimeout(()=>{
+      if(buddy){
+        buddy.classList.remove('p898Eating');
+        void buddy.offsetWidth;
+        buddy.classList.add('p898Eating');
+        setTimeout(()=>buddy.classList.remove('p898Eating'),900);
+      }
+      feedBurst();
+      try{window.POMRUPetInteraction?.react?.('great')}catch(_){}
+      sound('eat');
+      haptic();
+    },440);
+  }
+
+  async function refreshPetFallback(){
+    const c=client();
+    if(!c||!state.user)return null;
+    try{
+      const {data,error}=await c.from('bb_pet_profiles')
+        .select('hunger,happiness,energy,care_xp,last_fed_at')
+        .eq('user_id',state.user.id)
+        .maybeSingle();
+      if(error)throw error;
+      return data||null;
+    }catch(_){
+      return null;
+    }
+  }
+
+  async function feed(foodId,button){
+    if(state.busy)return;
+    const selected=foodRow(foodId);
+    setBusy(true,button);
+    try{
+      const c=client();
+      if(!c)throw new Error('เชื่อมต่อ POMRU Cloud ไม่สำเร็จ');
+
+      const {data,error}=await c.rpc('bb_feed_buddy',{
+        p_food_id:Number(foodId)
+      });
+      if(error)throw error;
+
+      let row=Array.isArray(data)?data[0]:data;
+      if(!row)row=await refreshPetFallback();
+      if(!row)throw new Error('บันทึกการให้อาหารแล้ว แต่โหลดสถานะ Buddy ไม่สำเร็จ');
+
+      animateEat(selected,row ? button : null);
+      close();
+
+      const next=mergedPet(row);
+      document.dispatchEvent(new CustomEvent('bb:pet-updated',{detail:next}));
+      try{window.POMRUPetInteraction?.sync?.(next)}catch(_){}
+
+      // If Pet Core exposes an official refresh method, let it become
+      // the final source of truth after our instant visual response.
+      try{
+        if(typeof window.BrainBuddyPet?.refresh==='function'){
+          setTimeout(()=>window.BrainBuddyPet.refresh(),650);
+        }else if(typeof window.BrainBuddyPet?.load==='function'){
+          setTimeout(()=>window.BrainBuddyPet.load(),650);
+        }
+      }catch(_){}
+
+      const gain=num(row?.care_xp_gained,num(selected?.care_xp));
+      const name=row?.item_name||selected?.name_th||'อาหาร';
+      const homeToast=$('p89Toast');
+      if(homeToast){
+        homeToast.textContent='🍽️ Buddy กิน '+name+' แล้ว • +'+gain+' Care EXP';
+        homeToast.classList.add('show');
+        clearTimeout(feed.homeToastTimer);
+        feed.homeToastTimer=setTimeout(()=>homeToast.classList.remove('show'),2400);
+      }
+
+      await loadCatalog().catch(()=>{});
+    }catch(err){
+      toast(errorText(err));
+    }finally{
+      setBusy(false,button);
+      render();
+    }
+  }
+
+  function sound(kind){
+    try{
+      const Ctx=window.AudioContext||window.webkitAudioContext;
+      if(!Ctx)return;
+      if(!state.audio)state.audio=new Ctx();
+      const ctx=state.audio;
+      if(ctx.state==='suspended')ctx.resume();
+      const now=ctx.currentTime;
+      const seq=kind==='eat'?[520,660,820]:[620,760];
+      seq.forEach((freq,i)=>{
+        const o=ctx.createOscillator();
+        const g=ctx.createGain();
+        o.connect(g);g.connect(ctx.destination);
+        o.type='sine';
+        o.frequency.value=freq;
+        const t=now+i*.075;
+        g.gain.setValueAtTime(.0001,t);
+        g.gain.exponentialRampToValueAtTime(.035,t+.015);
+        g.gain.exponentialRampToValueAtTime(.0001,t+.12);
+        o.start(t);o.stop(t+.13);
+      });
+    }catch(_){}
+  }
+
+  function haptic(){
+    try{navigator.vibrate?.([18,28,18])}catch(_){}
+  }
+
+  function setTab(tab){
+    state.tab=tab==='shop'?'shop':'fridge';
+    render();
+  }
+
+  function bind(){
+    $('p898FeedBtn')?.addEventListener('click',e=>{
+      e.preventDefault();
+      e.stopPropagation();
+      open();
+    });
+
+    $('p898FeedClose')?.addEventListener('click',close);
+
+    $('p898FeedModal')?.addEventListener('click',e=>{
+      if(e.target===$('p898FeedModal'))close();
+    });
+
+    document.addEventListener('click',e=>{
+      const tab=e.target.closest('[data-p898-tab]');
+      if(tab){e.preventDefault();setTab(tab.dataset.p898Tab);return}
+
+      if(e.target.closest('[data-p898-switch-shop]')){
+        e.preventDefault();setTab('shop');return;
+      }
+
+      const buy=e.target.closest('[data-p898-buy]');
+      if(buy){e.preventDefault();buyFoodSafe(buy);return}
+
+      const feedBtn=e.target.closest('[data-p898-feed]');
+      if(feedBtn){e.preventDefault();feedFoodSafe(feedBtn);return}
+    });
+
+    document.addEventListener('keydown',e=>{
+      if(e.key==='Escape' && state.modalOpen)close();
+    });
+  }
+
+  async function buyFoodSafe(btn){
+    await buy(Number(btn.dataset.p898Buy),btn);
+  }
+
+  async function feedFoodSafe(btn){
+    await feed(Number(btn.dataset.p898Feed),btn);
+  }
+
+  function init(){
+    bind();
+    const mirror=$('pomruHomeCoinBalance');
+    if(mirror && $('p898FeedCoins')){
+      const sync=()=>{
+        const t=String(mirror.textContent||'0').trim();
+        if(t)$('p898FeedCoins').textContent=t;
+      };
+      sync();
+      new MutationObserver(sync).observe(mirror,{
+        childList:true,subtree:true,characterData:true
+      });
+    }
+  }
+
+  window.POMRUFeeding={
+    open,
+    close,
+    reload:loadCatalog,
+    getState:()=>({
+      tab:state.tab,
+      catalog:[...state.catalog],
+      user:state.user
+    })
+  };
+
+  if(document.readyState==='loading')
+    document.addEventListener('DOMContentLoaded',init,{once:true});
+  else
+    init();
 })();
 </script>
 
