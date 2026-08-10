@@ -15540,6 +15540,7 @@ body.p93SocialOpen{overflow:hidden!important}
 }
 </style>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -28341,9 +28342,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function boot(tries=0){
     if(!c()){
-      gateOpen();gateMsg("กำลังเชื่อมต่อระบบสมาชิก…");
-      if(tries<30)setTimeout(()=>boot(tries+1),120);
-      else gateMsg("เชื่อมต่อระบบสมาชิกไม่สำเร็จ กรุณารีเฟรชหน้าเว็บ");
+      gateOpen();
+      gateMsg("กำลังเชื่อมต่อระบบสมาชิก…");
+      if(tries<80){
+        setTimeout(()=>boot(tries+1),120);
+      }else{
+        gateMsg("เชื่อมต่อระบบสมาชิกไม่สำเร็จ • แตะที่นี่เพื่อลองใหม่");
+        const el=$("p92GateMessage");
+        if(el){
+          el.style.cursor="pointer";
+          el.onclick=()=>{
+            el.onclick=null;
+            el.style.cursor="";
+            boot(0);
+          };
+        }
+      }
       return;
     }
     try{
@@ -29533,6 +29547,24 @@ document.addEventListener('DOMContentLoaded', () => {
   if(document.readyState==="loading"){
     document.addEventListener("DOMContentLoaded",init,{once:true});
   }else init();
+})();
+</script>
+
+
+<script id="pomru-v9301-auth-sdk-diagnostic">
+(function(){
+  function check(){
+    const ok=!!window.supabase;
+    document.documentElement.dataset.pomruSupabaseSdk=ok?"ready":"missing";
+    if(!ok){
+      console.error("POMRU AUTH: Supabase SDK did not load.");
+    }
+  }
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",check,{once:true});
+  }else{
+    check();
+  }
 })();
 </script>
 
