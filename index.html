@@ -23915,5 +23915,280 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 </script>
 
+
+
+<!-- =========================================================
+     POMRU v89.6 — Core Identity + Ranking Sync
+     Supabase session/profile is the source of truth for members.
+     ========================================================= -->
+<script id="pomru-v896-core-sync">
+(function(){
+  'use strict';
+
+  const DEFAULT_BUDDY='/assets/buddy/default-pink-buddy.png?v=896';
+  const $=id=>document.getElementById(id);
+  const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[m]));
+
+  const state={
+    user:null,
+    profile:null,
+    memberName:'ผู้เยี่ยมชม',
+    avatarUrl:'',
+    avatarText:'',
+    board:[],
+    busy:false,
+    rerun:false
+  };
+
+  function client(){
+    if(window.__bbSupabase)return window.__bbSupabase;
+    const cfg=window.BRAIN_BUDDY_SUPABASE||{};
+    if(window.supabase && cfg.url && cfg.publishableKey){
+      window.__bbSupabase=window.supabase.createClient(cfg.url,cfg.publishableKey);
+      return window.__bbSupabase;
+    }
+    return null;
+  }
+
+  function setText(id,value){
+    const el=$(id);
+    const next=String(value??'');
+    if(el && el.textContent!==next)el.textContent=next;
+  }
+
+  function setMemberClasses(isMember){
+    document.body.classList.toggle('bbMemberMode',!!isMember);
+    document.body.classList.toggle('bbGuestMode',!isMember);
+    $('bbHomeAuthGuest')?.classList.toggle('hidden',!!isMember);
+    $('bbHomeAuthMember')?.classList.toggle('hidden',!isMember);
+    $('cloudDot')?.classList.toggle('online',!!isMember);
+  }
+
+  function paintAvatar(){
+    const dest=$('p89ProfileAvatar');
+    if(!dest)return;
+    dest.innerHTML='';
+    dest.textContent='';
+    dest.style.backgroundRepeat='no-repeat';
+    dest.style.backgroundPosition='center';
+    dest.style.backgroundSize='cover';
+
+    if(state.avatarUrl){
+      dest.style.backgroundImage='url("'+String(state.avatarUrl).replace(/["\n\r]/g,'')+'")';
+      return;
+    }
+
+    if(state.avatarText && state.avatarText!=='🖼️'){
+      dest.style.backgroundImage='';
+      dest.textContent=state.avatarText;
+      return;
+    }
+
+    dest.style.backgroundImage='url("'+DEFAULT_BUDDY+'")';
+    dest.style.backgroundSize='contain';
+  }
+
+  function applyIdentity(){
+    const member=!!state.user;
+    const name=member ? (state.memberName||'ผู้เล่น') : 'ผู้เยี่ยมชม';
+
+    setText('p89ProfileName',name);
+    setText('bbHomePlayerName',name);
+
+    if(member){
+      setText('bbV55MemberName',name);
+      setText('bbV55MemberEmail',state.user?.email||'');
+      setText('navName',name);
+      setText('bbAppPlayerName',name);
+      setText('bbSetupPlayerName',name);
+      setText('bbSetupAccountState','สมาชิก');
+      setText('cloudMini','เข้าสู่ระบบแล้ว');
+    }
+
+    setMemberClasses(member);
+    paintAvatar();
+  }
+
+  function rankAvatar(row){
+    const url=String(row?.avatar_url||'').replace(/["\n\r]/g,'');
+    if(url)return '<img src="'+esc(url)+'" alt="">';
+    return '<img src="'+DEFAULT_BUDDY+'" alt="Buddy">';
+  }
+
+  function renderBoard(){
+    const host=$('p89RankRows');
+    if(!host)return;
+
+    const rows=(state.board||[]).slice(0,3);
+    if(!rows.length){
+      host.innerHTML='<div class="rankLoading">ยังไม่มีอันดับ Ranked</div>';
+    }else{
+      host.innerHTML=rows.map((row,index)=>{
+        const pos=Number(row.rank_position)||index+1;
+        const name=esc(row.display_name||'ผู้เล่น');
+        const tier=esc((row.tier_icon||'🌱')+' '+(row.tier_name_th||'มีแวว'));
+        const rp=Number(row.rp||0).toLocaleString();
+        return '<button class="p89RankRow" type="button" data-app-action="rank">'+
+          '<span class="p89RankPos">'+pos+'</span>'+
+          '<span class="p89RankAvatar">'+rankAvatar(row)+'</span>'+
+          '<span class="p89RankName"><b>'+name+'</b><small>'+tier+'</small></span>'+
+          '<span class="p89RankScore">🏆 '+rp+'</span>'+
+        '</button>';
+      }).join('');
+    }
+
+    const me=(state.board||[]).find(row=>
+      row?.is_me===true || (!!state.user?.id && row?.user_id===state.user.id)
+    );
+
+    if(!state.user){
+      setText('p89MyRankPos','#—');
+      setText('p89MyRankName','เข้าสู่ระบบเพื่อจัดอันดับ');
+      setText('p89MyRankScore','—');
+      return;
+    }
+
+    if(!me){
+      setText('p89MyRankPos','#—');
+      setText('p89MyRankName','ยังไม่มีอันดับ');
+      setText('p89MyRankScore','เล่น Ranked');
+      return;
+    }
+
+    setText('p89MyRankPos','#'+Number(me.rank_position||0).toLocaleString());
+    setText('p89MyRankName',me.display_name||state.memberName||'อันดับของฉัน');
+    setText('p89MyRankScore','🏆 '+Number(me.rp||0).toLocaleString()+' RP');
+  }
+
+  async function readProfile(c,user){
+    if(!user)return null;
+    try{
+      const {data,error}=await c.from('profiles')
+        .select('display_name,avatar,avatar_url')
+        .eq('id',user.id)
+        .maybeSingle();
+      if(error)throw error;
+      return data||null;
+    }catch(err){
+      console.warn('POMRU profile sync:',err?.message||err);
+      return null;
+    }
+  }
+
+  async function readBoard(c){
+    try{
+      const {data,error}=await c.rpc('bb_brain_leaderboard',{
+        p_board:'overall',p_limit:500,p_offset:0
+      });
+      if(error)throw error;
+      return Array.isArray(data)?data:[];
+    }catch(err){
+      console.warn('POMRU ranking sync:',err?.message||err);
+      return [];
+    }
+  }
+
+  function deriveIdentity(user,profile){
+    if(!user){
+      state.memberName='ผู้เยี่ยมชม';
+      state.avatarUrl='';
+      state.avatarText='';
+      return;
+    }
+    const meta=user.user_metadata||{};
+    state.memberName=
+      profile?.display_name ||
+      meta.full_name || meta.name ||
+      String(user.email||'').split('@')[0] ||
+      'ผู้เล่น';
+    state.avatarUrl=profile?.avatar_url || meta.avatar_url || meta.picture || '';
+    state.avatarText=profile?.avatar || '';
+  }
+
+  async function refresh(reason='manual'){
+    if(state.busy){state.rerun=true;return state;}
+    state.busy=true;
+    try{
+      const c=client();
+      if(!c){
+        state.user=null;state.profile=null;state.board=[];
+        deriveIdentity(null,null);applyIdentity();renderBoard();
+        return state;
+      }
+
+      const {data,error}=await c.auth.getSession();
+      if(error)throw error;
+      state.user=data?.session?.user||null;
+      state.profile=state.user ? await readProfile(c,state.user) : null;
+      deriveIdentity(state.user,state.profile);
+      applyIdentity();
+
+      // Ranking is independent of login: guests can still see TOP 3.
+      state.board=await readBoard(c);
+      renderBoard();
+
+      document.dispatchEvent(new CustomEvent('pomru:core-synced',{
+        detail:{reason,user:state.user,profile:state.profile,board:state.board}
+      }));
+      return state;
+    }catch(err){
+      console.warn('POMRU core sync:',err?.message||err);
+      applyIdentity();
+      return state;
+    }finally{
+      state.busy=false;
+      if(state.rerun){state.rerun=false;setTimeout(()=>refresh('rerun'),30);}
+    }
+  }
+
+  // Legacy scripts may repaint cached Guest text after auth. We do not poll;
+  // we only repair the identity when an actual DOM/auth event occurs.
+  function installLegacyGuard(){
+    const legacy=$('bbHomePlayerName');
+    const pomru=$('p89ProfileName');
+    let queued=false;
+    const repair=()=>{
+      if(queued)return;
+      queued=true;
+      queueMicrotask(()=>{
+        queued=false;
+        if(!state.user)return;
+        const expected=state.memberName||'ผู้เล่น';
+        if(legacy && legacy.textContent!==expected)legacy.textContent=expected;
+        if(pomru && pomru.textContent!==expected)pomru.textContent=expected;
+      });
+    };
+    if(legacy)new MutationObserver(repair).observe(legacy,{childList:true,subtree:true,characterData:true});
+    if(pomru)new MutationObserver(repair).observe(pomru,{childList:true,subtree:true,characterData:true});
+  }
+
+  async function init(){
+    installLegacyGuard();
+    await refresh('init');
+    const c=client();
+    if(c?.auth?.onAuthStateChange){
+      c.auth.onAuthStateChange(()=>setTimeout(()=>refresh('auth'),80));
+    }
+  }
+
+  window.POMRUCoreSync={
+    refresh,
+    getState:()=>({
+      user:state.user,profile:state.profile,memberName:state.memberName,
+      avatarUrl:state.avatarUrl,board:[...(state.board||[])]
+    })
+  };
+
+  document.addEventListener('bb:profile-updated',()=>refresh('profile'));
+  document.addEventListener('bb:game-finished',()=>refresh('game'));
+  window.addEventListener('pageshow',()=>refresh('pageshow'),{passive:true});
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
+  else init();
+})();
+</script>
+
 </body>
 </html>
