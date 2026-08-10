@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#765fda">
 <meta name="author" content="Sulawit Songsang">
-<title>Brain Buddy • Admin Center v67</title>
+<title>Brain Buddy • Admin Center v68</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{box-sizing:border-box}
@@ -485,6 +485,151 @@ button{cursor:pointer}
   .hskEditModalCard{padding:14px}
 }
 
+
+/* ==========================================================
+   Admin v68 — Game Control
+   ========================================================== */
+.gameControlSummary{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin-bottom:10px
+}
+.gameControlSummary article{
+  min-height:78px;
+  padding:11px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  background:linear-gradient(145deg,#fff,#faf7fc);
+  border:1px solid #eee4f0
+}
+.gameControlSummary article>span{
+  width:43px;height:43px;flex:0 0 43px;border-radius:14px;
+  display:grid;place-items:center;
+  background:#f4eef8;
+  font-size:19px
+}
+.gameControlSummary article>div{display:flex;flex-direction:column}
+.gameControlSummary small{color:#927f99;font-size:8px;font-weight:900}
+.gameControlSummary strong{color:#604874;font-size:21px;font-weight:1000;line-height:1}
+.gameControlSummary em{font-style:normal;color:#a190a5;font-size:7px}
+
+.gameControlNotice{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 13px;margin-bottom:11px;border-radius:17px;
+  background:linear-gradient(145deg,#f1edff,#fff1f8);
+  border:1px solid #e6dced
+}
+.gameControlNotice>span{
+  width:42px;height:42px;flex:0 0 42px;border-radius:13px;
+  display:grid;place-items:center;background:#fff;font-size:20px
+}
+.gameControlNotice div{display:flex;flex-direction:column}
+.gameControlNotice b{color:#5d4670;font-size:10px}
+.gameControlNotice small{color:#8e7c95;font-size:8px;margin-top:2px;line-height:1.45}
+
+.gameWorldControls{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px
+}
+.gcWorldCard{
+  padding:10px;border-radius:18px;background:#fff;border:1px solid #eee5f0
+}
+.gcWorldHead{display:flex;align-items:center;gap:7px;margin-bottom:8px}
+.gcWorldIcon{
+  width:37px;height:37px;border-radius:12px;display:grid;place-items:center;
+  background:linear-gradient(145deg,#f1eaff,#ffeaf4);font-size:18px
+}
+.gcWorldHead div{min-width:0;display:flex;flex-direction:column}
+.gcWorldHead b{color:#5e4770;font-size:10px}
+.gcWorldHead small{color:#9a879f;font-size:7px}
+.gcWorldButtons{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.gcWorldButtons button{
+  min-height:34px;border:0;border-radius:10px;padding:5px;
+  font-size:8px;font-weight:1000;cursor:pointer
+}
+.gcWorldButtons .open{
+  background:#defaed;color:#347758
+}
+.gcWorldButtons .close{
+  background:#ffeaf1;color:#a04f6c
+}
+.gcWorldButtons .rankedOff{
+  grid-column:1/-1;background:#f0ebf5;color:#776783
+}
+
+.gameControlMeta{
+  display:flex;justify-content:space-between;gap:8px;
+  margin:4px 3px 7px;color:#8e7b94;font-size:8px;font-weight:850
+}
+.gameControlList{display:grid;gap:8px}
+.gcGameRow{
+  display:grid;
+  grid-template-columns:66px minmax(0,1fr) 115px 115px 145px;
+  gap:9px;align-items:center;
+  padding:10px;border-radius:18px;background:#fff;border:1px solid #eee5f0
+}
+.gcGameRow.disabledGame{background:#faf7f9}
+.gcGameIcon{
+  min-height:57px;border-radius:15px;display:grid;place-items:center;text-align:center;
+  background:linear-gradient(145deg,#7d68dc,#c968bd);color:#fff;font-size:22px
+}
+.gcGameMain{min-width:0}
+.gcGameMain small{display:block;color:#a08da4;font-size:7px;font-weight:900;text-transform:uppercase}
+.gcGameMain b{display:block;color:#59436a;font-size:11px;margin-top:1px}
+.gcGameMain em{
+  display:block;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  color:#947f99;font-size:8px;font-style:normal
+}
+.gcSwitchBox{
+  padding:8px;border-radius:13px;background:#faf7fb;border:1px solid #eee6f0
+}
+.gcSwitchBox>span{display:block;margin-bottom:5px;color:#8b7891;font-size:7px;font-weight:900}
+.gcSwitch{
+  width:100%;min-height:33px;border:0;border-radius:10px;
+  font-size:8px;font-weight:1000;cursor:pointer
+}
+.gcSwitch.on{background:#dbfaeb;color:#277456}
+.gcSwitch.off{background:#f0ebf3;color:#8a778f}
+
+.gcStatusBox{display:grid;gap:5px}
+.gcStatusBox select,.gcStatusBox input{
+  width:100%;min-height:34px;border:1px solid #e8deeb;border-radius:10px;
+  padding:5px 8px;background:#fff;color:#5e4b68;font-size:8px;outline:none
+}
+.gcStatusBox input{font-size:7px}
+.gcStatusBox select:focus,.gcStatusBox input:focus{
+  border-color:#977be3;box-shadow:0 0 0 3px rgba(131,101,202,.07)
+}
+.gcSave{
+  min-height:40px;border:0;border-radius:12px;
+  background:linear-gradient(135deg,#775eda,#d55da7);color:#fff;
+  font-size:8px;font-weight:1000;cursor:pointer
+}
+.gcSave:disabled{opacity:.5;cursor:wait}
+.gcBadge{
+  display:inline-flex;width:max-content;margin-top:5px;padding:3px 6px;border-radius:999px;
+  font-size:6px;font-weight:1000
+}
+.gcBadge.live{background:#dcfaeb;color:#34785b}
+.gcBadge.development{background:#fff2cc;color:#946a0c}
+.gcBadge.maintenance{background:#ffe9ef;color:#a14e69}
+
+@media(max-width:920px){
+  .gameControlSummary,.gameWorldControls{grid-template-columns:1fr 1fr}
+  .gcGameRow{grid-template-columns:58px minmax(0,1fr) 105px 105px}
+  .gcStatusBox{grid-column:2/-1}
+  .gcSave{grid-column:1/-1}
+}
+@media(max-width:600px){
+  .gameControlSummary,.gameWorldControls{grid-template-columns:1fr 1fr}
+  .gcGameRow{grid-template-columns:54px minmax(0,1fr)}
+  .gcSwitchBox,.gcStatusBox,.gcSave{grid-column:1/-1}
+  .gcSwitchBox{display:grid;grid-template-columns:1fr auto;align-items:center}
+  .gcSwitchBox>span{margin:0}
+}
+
 </style>
 </head>
 <body>
@@ -498,6 +643,7 @@ button{cursor:pointer}
       <button class="active" data-admin-panel="bears">จัดการหมี</button>
       <button data-admin-panel="learning">คำศัพท์ / โจทย์</button>
       <button data-admin-panel="hsk">HSK 1–6</button>
+      <button data-admin-panel="games">🎮 Game Control</button>
     </div>
     <a class="back" href="/">← กลับหน้าเกม</a>
   </div>
@@ -510,7 +656,7 @@ button{cursor:pointer}
       <div>
         <span class="status">ADMIN CONTROL CENTER</span>
         <h1>ศูนย์จัดการ Brain Buddy</h1>
-        <p>จัดการตัวหมี คำศัพท์ โจทย์ และคลัง HSK 1–6 จากหน้าเดียว</p>
+        <p>จัดการตัวหมี เนื้อหา HSK และสถานะเปิด–ปิดเกมจากหน้าเดียว</p>
       </div>
       <div class="heroArt"><span class="brain"></span><span class="bear"></span><span class="book"></span></div>
     </div>
@@ -819,6 +965,58 @@ button{cursor:pointer}
           <button class="btn" id="hskNextPage">ถัดไป →</button>
         </div>
       </section>
+
+    </section>
+
+    <!-- GAME CONTROL -->
+    <section class="adminPanel" id="panel-games">
+      <div class="toolbar">
+        <div>
+          <h2>🎮 Game Control</h2>
+          <p>เปิด–ปิด Practice และ Ranked แยกเป็นรายเกม หรือควบคุมทั้งหมวดได้ในครั้งเดียว</p>
+        </div>
+        <div class="actions">
+          <button class="btn" id="gameControlReload">รีเฟรช</button>
+        </div>
+      </div>
+
+      <div class="gameControlSummary">
+        <article>
+          <span>🟢</span>
+          <div><small>เปิดใช้งาน</small><strong id="gcLiveCount">0</strong><em>เกม</em></div>
+        </article>
+        <article>
+          <span>🛠️</span>
+          <div><small>กำลังพัฒนา</small><strong id="gcDevCount">0</strong><em>เกม</em></div>
+        </article>
+        <article>
+          <span>🔧</span>
+          <div><small>Maintenance</small><strong id="gcMaintenanceCount">0</strong><em>เกม</em></div>
+        </article>
+        <article>
+          <span>🏆</span>
+          <div><small>Ranked เปิดอยู่</small><strong id="gcRankedCount">0</strong><em>เกม</em></div>
+        </article>
+      </div>
+
+      <div class="gameControlNotice">
+        <span>🔒</span>
+        <div>
+          <b>เกมที่ยังไม่พร้อมสามารถซ่อนไว้ก่อนได้</b>
+          <small>Practice และ Ranked แยกเปิด–ปิดกันได้ เช่น เปิดให้ทดสอบโหมดปกติ แต่ยังไม่เปิด Ranked</small>
+        </div>
+      </div>
+
+      <div class="gameWorldControls" id="gameWorldControls"></div>
+
+      <div class="gameControlMeta">
+        <span id="gameControlCount">กำลังโหลด…</span>
+        <span id="gameControlStatus">พร้อมใช้งาน</span>
+      </div>
+
+      <div class="gameControlList" id="gameControlList">
+        <div class="learnLoading">กำลังโหลดสถานะเกม…</div>
+      </div>
     </section>
   </div>
 </section>
@@ -1099,8 +1297,10 @@ function openPanel(name){
  $("#panel-bears").classList.toggle("active",name==="bears");
  $("#panel-learning").classList.toggle("active",name==="learning");
  $("#panel-hsk").classList.toggle("active",name==="hsk");
+ $("#panel-games").classList.toggle("active",name==="games");
  if(name==="learning")loadLearning();
  if(name==="hsk")Promise.all([loadHSKAdminStats(),loadHSKManager(false)]);
+ if(name==="games")loadGameControl();
 }
 document.querySelectorAll("[data-admin-panel]").forEach(b=>b.onclick=()=>openPanel(b.dataset.adminPanel));
 
@@ -1596,6 +1796,253 @@ async function toggleHSKWord(id){
 }
 
 
+
+/* ---------------- Game Release Control ---------------- */
+let gameControlRows=[];
+
+const gcWorldInfo={
+  teddy:{icon:"🧸",name:"Memory",thai:"เกมหมี"},
+  math:{icon:"➗",name:"Math",thai:"คณิตศาสตร์"},
+  chinese:{icon:"🇨🇳",name:"Chinese",thai:"ภาษาจีน"},
+  english:{icon:"🇬🇧",name:"English",thai:"ภาษาอังกฤษ"}
+};
+
+const gcModeIcon={
+  teddy_position:"📍",teddy_match:"🧩",teddy_missing:"👀",teddy_change:"🔎",teddy_swap:"🔄",teddy_sequence:"🔢",
+  math_multiple_choice:"🎯",math_typing:"⌨️",math_matching:"🧩",math_sentence_order:"🧠",math_listening:"🎧",math_mix:"⚡",
+  chinese_hanzi_meaning:"汉",chinese_meaning_hanzi:"中",chinese_hanzi_pinyin:"拼",chinese_pinyin_hanzi:"字",chinese_listening:"🎧",chinese_mix:"🔥",
+  english_vocabulary:"A",english_multiple_choice:"🎯",english_matching:"🧩",english_typing:"⌨️",english_sentence_order:"🔀",english_listening:"🎧"
+};
+
+function gcEsc(v){
+ return String(v??"").replace(/[&<>"']/g,m=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[m]));
+}
+
+function updateGameControlSummary(){
+ $("#gcLiveCount").textContent=gameControlRows.filter(x=>x.release_status==="live").length;
+ $("#gcDevCount").textContent=gameControlRows.filter(x=>x.release_status==="development").length;
+ $("#gcMaintenanceCount").textContent=gameControlRows.filter(x=>x.release_status==="maintenance").length;
+ $("#gcRankedCount").textContent=gameControlRows.filter(x=>x.ranked_enabled).length;
+ $("#gameControlCount").textContent=`${gameControlRows.length.toLocaleString()} เกม`;
+}
+
+function renderWorldControls(){
+ const host=$("#gameWorldControls");
+ host.innerHTML=["teddy","math","chinese","english"].map(world=>{
+  const info=gcWorldInfo[world];
+  const rows=gameControlRows.filter(x=>x.world===world);
+  const practiceOn=rows.filter(x=>x.practice_enabled).length;
+  const rankedOn=rows.filter(x=>x.ranked_enabled).length;
+
+  return `
+   <article class="gcWorldCard">
+    <div class="gcWorldHead">
+     <div class="gcWorldIcon">${info.icon}</div>
+     <div>
+      <b>${gcEsc(info.name)} • ${gcEsc(info.thai)}</b>
+      <small>Practice ${practiceOn}/${rows.length} • Ranked ${rankedOn}/${rows.length}</small>
+     </div>
+    </div>
+    <div class="gcWorldButtons">
+     <button class="open" data-gc-world-open="${world}">เปิดทั้งหมวด</button>
+     <button class="close" data-gc-world-close="${world}">ปิดทั้งหมวด</button>
+     <button class="rankedOff" data-gc-world-ranked-off="${world}">ปิด Ranked ทั้งหมวด</button>
+    </div>
+   </article>`;
+ }).join("");
+}
+
+function renderGameControl(){
+ updateGameControlSummary();
+ renderWorldControls();
+
+ const host=$("#gameControlList");
+ if(!gameControlRows.length){
+  host.innerHTML='<div class="learnEmpty">ยังไม่มีรายการเกม</div>';
+  return;
+ }
+
+ host.innerHTML=gameControlRows.map(row=>{
+  const world=gcWorldInfo[row.world]||{icon:"🎮",name:row.world,thai:""};
+  const status=row.release_status||"live";
+  const msg=row.release_message||"";
+  const live=row.practice_enabled===true;
+
+  return `
+   <article class="gcGameRow ${live?"":"disabledGame"}" data-gc-row="${gcEsc(row.mode_code)}">
+
+    <div class="gcGameIcon">${gcEsc(gcModeIcon[row.mode_code]||world.icon)}</div>
+
+    <div class="gcGameMain">
+     <small>${gcEsc(world.name)} • ${gcEsc(row.mode_code)}</small>
+     <b>${gcEsc(row.name_th)}</b>
+     <span class="gcBadge ${gcEsc(status)}">${status==="live"?"🟢 LIVE":status==="maintenance"?"🔧 MAINTENANCE":"🛠️ DEVELOPMENT"}</span>
+     <em>${gcEsc(msg||"ไม่มีข้อความแจ้งผู้เล่น")}</em>
+    </div>
+
+    <div class="gcSwitchBox">
+     <span>เล่นปกติ</span>
+     <button class="gcSwitch ${row.practice_enabled?"on":"off"}"
+       data-gc-practice="${gcEsc(row.mode_code)}"
+       data-value="${row.practice_enabled?"1":"0"}">
+       ${row.practice_enabled?"✓ เปิด":"🔒 ปิด"}
+     </button>
+    </div>
+
+    <div class="gcSwitchBox">
+     <span>Ranked</span>
+     <button class="gcSwitch ${row.ranked_enabled?"on":"off"}"
+       data-gc-ranked="${gcEsc(row.mode_code)}"
+       data-value="${row.ranked_enabled?"1":"0"}">
+       ${row.ranked_enabled?"🏆 เปิด":"🔒 ปิด"}
+     </button>
+    </div>
+
+    <div class="gcStatusBox">
+     <select data-gc-status="${gcEsc(row.mode_code)}">
+      <option value="live" ${status==="live"?"selected":""}>🟢 เปิดใช้งาน</option>
+      <option value="development" ${status==="development"?"selected":""}>🛠️ กำลังพัฒนา</option>
+      <option value="maintenance" ${status==="maintenance"?"selected":""}>🔧 ปิดปรับปรุง</option>
+     </select>
+
+     <input data-gc-message="${gcEsc(row.mode_code)}"
+       value="${gcEsc(msg)}"
+       placeholder="ข้อความ เช่น กำลังพัฒนา • Coming Soon">
+    </div>
+
+    <button class="gcSave" data-gc-save="${gcEsc(row.mode_code)}">บันทึกเกมนี้</button>
+   </article>`;
+ }).join("");
+}
+
+async function loadGameControl(){
+ $("#gameControlStatus").textContent="กำลังโหลด…";
+ $("#gameControlList").innerHTML='<div class="learnLoading">กำลังโหลดสถานะเกม…</div>';
+
+ try{
+  const {data,error}=await sb
+   .from("bb_game_balance")
+   .select("mode_code,world,name_th,practice_enabled,ranked_enabled,release_status,release_message,sort_order")
+   .order("world",{ascending:true})
+   .order("sort_order",{ascending:true});
+
+  if(error)throw error;
+
+  gameControlRows=Array.isArray(data)?data:[];
+  renderGameControl();
+  $("#gameControlStatus").textContent="อัปเดตแล้ว";
+
+ }catch(err){
+  console.error("Game Control:",err);
+  $("#gameControlStatus").textContent="โหลดไม่สำเร็จ";
+  $("#gameControlList").innerHTML=`<div class="learnEmpty">${gcEsc(err?.message||"โหลดไม่สำเร็จ")}</div>`;
+ }
+}
+
+function gcRow(mode){
+ return gameControlRows.find(x=>x.mode_code===mode);
+}
+
+function gcToggleLocal(mode,key){
+ const row=gcRow(mode);
+ if(!row)return;
+
+ row[key]=!row[key];
+ renderGameControl();
+ $("#gameControlStatus").textContent="มีการเปลี่ยนแปลงที่ยังไม่บันทึก";
+}
+
+async function saveGameRelease(mode){
+ const row=gcRow(mode);
+ if(!row)return;
+
+ const card=document.querySelector(`[data-gc-row="${CSS.escape(mode)}"]`);
+ const status=card?.querySelector(`[data-gc-status="${CSS.escape(mode)}"]`)?.value||row.release_status||"live";
+ const message=card?.querySelector(`[data-gc-message="${CSS.escape(mode)}"]`)?.value?.trim()||null;
+ const btn=card?.querySelector(`[data-gc-save="${CSS.escape(mode)}"]`);
+
+ if(btn){btn.disabled=true;btn.textContent="กำลังบันทึก…"}
+
+ try{
+  const {error}=await sb.rpc("bb_admin_set_game_release",{
+   p_mode_code:mode,
+   p_practice_enabled:!!row.practice_enabled,
+   p_ranked_enabled:!!row.ranked_enabled,
+   p_release_status:status,
+   p_release_message:message
+  });
+
+  if(error)throw error;
+
+  toast(`บันทึก ${row.name_th} แล้ว`);
+  await loadGameControl();
+
+ }catch(err){
+  console.error("save game release:",err);
+  toast(err?.message||"บันทึกไม่สำเร็จ");
+ }finally{
+  if(btn){btn.disabled=false;btn.textContent="บันทึกเกมนี้"}
+ }
+}
+
+async function setWorldRelease(world,kind){
+ const info=gcWorldInfo[world]||{name:world};
+
+ let practice=false;
+ let ranked=false;
+ let status="development";
+ let message="กำลังพัฒนา • Coming Soon";
+
+ if(kind==="open"){
+  practice=true;
+  ranked=true;
+  status="live";
+  message=null;
+ }else if(kind==="close"){
+  practice=false;
+  ranked=false;
+ }else if(kind==="ranked_off"){
+  const rows=gameControlRows.filter(x=>x.world===world);
+  practice=rows.some(x=>x.practice_enabled);
+  ranked=false;
+
+  // ถ้ามี practice เปิดอยู่ ให้สถานะโลกยังเป็น live
+  status=practice?"live":"development";
+  message=practice?null:"กำลังพัฒนา • Coming Soon";
+ }
+
+ const text=
+  kind==="open"
+   ?`เปิด Practice + Ranked ของ ${info.name} ทั้งหมด?`
+   :kind==="close"
+    ?`ปิด ${info.name} ทั้งหมวดไว้ก่อน?`
+    :`ปิด Ranked ของ ${info.name} ทั้งหมวด แต่คง Practice ตามสถานะปัจจุบัน?`;
+
+ if(!confirm(text))return;
+
+ try{
+  const {error}=await sb.rpc("bb_admin_set_world_release",{
+   p_world:world,
+   p_practice_enabled:practice,
+   p_ranked_enabled:ranked,
+   p_release_status:status,
+   p_release_message:message
+  });
+
+  if(error)throw error;
+
+  toast(`อัปเดต ${info.name} แล้ว`);
+  await loadGameControl();
+
+ }catch(err){
+  console.error("world release:",err);
+  toast(err?.message||"อัปเดตหมวดไม่สำเร็จ");
+ }
+}
+
+
 /* Events */
 $("#unlockBtn").onclick=unlock;
 $("#adminCode").addEventListener("keydown",e=>{if(e.key==="Enter")unlock()});
@@ -1656,6 +2103,46 @@ document.addEventListener("click",e=>{
  if(toggle){
    toggleHSKWord(Number(toggle.dataset.hskToggle));
    return;
+ }
+});
+
+$("#gameControlReload").onclick=loadGameControl;
+
+document.addEventListener("click",e=>{
+ const practice=e.target.closest("[data-gc-practice]");
+ if(practice){
+  gcToggleLocal(practice.dataset.gcPractice,"practice_enabled");
+  return;
+ }
+
+ const ranked=e.target.closest("[data-gc-ranked]");
+ if(ranked){
+  gcToggleLocal(ranked.dataset.gcRanked,"ranked_enabled");
+  return;
+ }
+
+ const saveBtn=e.target.closest("[data-gc-save]");
+ if(saveBtn){
+  saveGameRelease(saveBtn.dataset.gcSave);
+  return;
+ }
+
+ const worldOpen=e.target.closest("[data-gc-world-open]");
+ if(worldOpen){
+  setWorldRelease(worldOpen.dataset.gcWorldOpen,"open");
+  return;
+ }
+
+ const worldClose=e.target.closest("[data-gc-world-close]");
+ if(worldClose){
+  setWorldRelease(worldClose.dataset.gcWorldClose,"close");
+  return;
+ }
+
+ const worldRanked=e.target.closest("[data-gc-world-ranked-off]");
+ if(worldRanked){
+  setWorldRelease(worldRanked.dataset.gcWorldRankedOff,"ranked_off");
+  return;
  }
 });
 
