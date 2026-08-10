@@ -7052,6 +7052,236 @@ body.bbContentAdminMode #bbArena{
   .bbAdminEditorActions button{min-width:0}
 }
 
+
+/* =========================================================
+   Brain Buddy v66 — Multi Game Worlds
+   ========================================================= */
+
+.bbWorldHubScreen,.bbSubjectGamesScreen,.bbLearningPlayScreen{
+  min-height:100dvh;
+  position:relative;
+  overflow:hidden;
+  padding:14px 18px 40px;
+  color:#fff;
+  isolation:isolate;
+}
+.bbWorldHubScreen{
+  background:
+    radial-gradient(circle at 14% 13%,rgba(66,151,255,.42),transparent 28rem),
+    radial-gradient(circle at 84% 16%,rgba(255,128,220,.38),transparent 24rem),
+    linear-gradient(180deg,#111c7b 0%,#3427a4 38%,#7049c6 68%,#ee88b9 100%);
+}
+.bbWorldBackdrop,.bbSubjectBg,.bbLearningPlayBg{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.bbWorldStar{position:absolute;width:13px;height:13px;border-radius:4px;transform:rotate(45deg);background:#ffe765;box-shadow:0 0 17px rgba(255,236,104,.95)}
+.bbWorldStar.a{left:26%;top:10%}.bbWorldStar.b{right:14%;top:28%}.bbWorldStar.c{left:61%;bottom:14%}
+.bbWorldBubble{position:absolute;border-radius:50%;background:radial-gradient(circle at 32% 26%,#fff,rgba(137,220,255,.36) 45%,rgba(85,105,218,.13));box-shadow:0 10px 20px rgba(20,24,100,.2)}
+.bbWorldBubble.a{width:26px;height:26px;right:28%;top:7%}.bbWorldBubble.b{width:17px;height:17px;left:8%;top:45%}.bbWorldBubble.c{width:35px;height:35px;right:7%;bottom:17%}
+.bbWorldHill{position:absolute;bottom:-90px;width:420px;height:180px;border-radius:50% 50% 0 0;background:linear-gradient(180deg,#48d6bd,#169789);opacity:.66}
+.bbWorldHill.h1{left:-80px}.bbWorldHill.h2{right:-90px}
+
+.bbWorldTop,.bbSubjectTop,.bbLearningTop{
+  position:relative;z-index:3;
+  width:min(100%,1320px);margin:0 auto 14px;
+  display:flex;align-items:center;gap:12px;
+}
+.bbWorldBack,.bbSubjectBack,.bbLearningBack{
+  width:49px;height:49px;flex:0 0 49px;border:1.5px solid rgba(255,255,255,.36);border-radius:16px;
+  display:grid;place-items:center;color:#fff;background:rgba(255,255,255,.14);
+  box-shadow:inset 0 3px 5px rgba(255,255,255,.16),0 9px 18px rgba(22,21,92,.17)
+}
+.bbWorldBack svg,.bbSubjectBack svg,.bbLearningBack svg{width:24px;height:24px}
+.bbWorldBrand,.bbSubjectBrand{display:flex;align-items:center;gap:9px;flex:1}
+.bbWorldBrand .mark{
+  width:45px;height:42px;border-radius:48% 52% 46% 49%;
+  background:linear-gradient(145deg,#ff96c2,#c867cf 58%,#8c70e5);
+  box-shadow:inset 0 4px 5px rgba(255,255,255,.33),0 8px 14px rgba(34,24,100,.18)
+}
+.bbWorldBrand div,.bbSubjectBrand div{display:flex;flex-direction:column}
+.bbWorldBrand small,.bbSubjectBrand small{font-size:.62rem;letter-spacing:.13em;font-weight:1000;color:#dcd8ff}
+.bbWorldBrand strong,.bbSubjectBrand strong{font-size:1.15rem;font-weight:1000}
+.bbWorldMiniNav{display:flex;gap:7px}
+.bbWorldMiniNav button,.bbSubjectAdminHint{
+  border:1px solid rgba(255,255,255,.28);border-radius:14px;padding:9px 12px;
+  color:#fff;background:rgba(255,255,255,.12);font-weight:900
+}
+
+.bbWorldIntro{
+  width:min(100%,1320px);margin:auto;
+  min-height:205px;padding:25px 29px;border-radius:32px;
+  display:grid;grid-template-columns:1fr .38fr;align-items:center;gap:20px;
+  background:linear-gradient(135deg,rgba(30,54,174,.76),rgba(92,48,190,.77) 52%,rgba(192,70,176,.72));
+  border:2px solid rgba(255,255,255,.23);
+  box-shadow:inset 0 5px 6px rgba(255,255,255,.12),0 18px 34px rgba(18,16,84,.24)
+}
+.bbWorldIntro .eyebrow{
+  display:inline-flex;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.13);
+  border:1px solid rgba(255,255,255,.19);font-size:.69rem;font-weight:950;color:#fff2a7
+}
+.bbWorldIntro h1{margin:10px 0 7px;font-size:clamp(2.3rem,5vw,4rem);line-height:.98;font-weight:1000}
+.bbWorldIntro p{margin:0;max-width:800px;color:#eae7ff;font-size:1rem;font-weight:650}
+.bbWorldIntroArt{position:relative;min-height:150px}
+.bbWorldIntroArt .orb{
+  position:absolute;border-radius:25px;display:grid;place-items:center;
+  color:#fff;font-size:2rem;font-weight:1000;border:2px solid rgba(255,255,255,.35);
+  box-shadow:inset 0 5px 8px rgba(255,255,255,.28),0 16px 24px rgba(25,18,83,.25)
+}
+.bbWorldIntroArt .brain{width:98px;height:92px;right:100px;top:24px;background:linear-gradient(145deg,#ff9bc9,#d25bbe)}
+.bbWorldIntroArt .math{width:76px;height:76px;right:24px;top:5px;background:linear-gradient(145deg,#ffd76a,#ee9d43)}
+.bbWorldIntroArt .lang{width:76px;height:76px;right:8px;bottom:1px;background:linear-gradient(145deg,#64d4f6,#776ce3)}
+
+.bbWorldCards{
+  width:min(100%,1320px);margin:14px auto 0;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px
+}
+.bbWorldCard{
+  min-height:205px;border:2px solid rgba(255,255,255,.38);border-radius:29px;padding:18px;
+  display:grid;grid-template-columns:105px 1fr auto;align-items:center;gap:14px;text-align:left;color:#fff;
+  box-shadow:inset 0 5px 6px rgba(255,255,255,.2),0 16px 26px rgba(20,17,78,.2);
+  transition:transform .18s ease,filter .18s ease
+}
+.bbWorldCard:hover{transform:translateY(-3px);filter:brightness(1.04)}
+.bbWorldCard.teddy{background:linear-gradient(145deg,#ff8fbd,#e858a6 65%,#bc4a9d)}
+.bbWorldCard.math{background:linear-gradient(145deg,#ffc956,#eea12e 62%,#d47b28)}
+.bbWorldCard.language{background:linear-gradient(145deg,#5dcdf4,#6b8fe7 50%,#7656d4)}
+.bbWorldCardIcon{
+  width:102px;height:102px;border-radius:28px;position:relative;display:grid;place-items:center;
+  background:rgba(255,255,255,.24);border:2px solid rgba(255,255,255,.34);
+  box-shadow:inset 0 5px 7px rgba(255,255,255,.28),0 11px 18px rgba(73,35,106,.16)
+}
+.teddyIcon .ear{position:absolute;top:18px;width:34px;height:34px;border-radius:50%;background:#ca8057}.teddyIcon .ear.l{left:17px}.teddyIcon .ear.r{right:17px}
+.teddyIcon .face{width:63px;height:61px;border-radius:48%;background:linear-gradient(145deg,#efb98b,#a86543);position:relative;z-index:2}
+.teddyIcon .face:before,.teddyIcon .face:after{content:"";position:absolute;top:22px;width:6px;height:7px;border-radius:50%;background:#35282b}.teddyIcon .face:before{left:17px}.teddyIcon .face:after{right:17px}
+.teddyIcon .face b{position:absolute;left:24px;top:34px;width:15px;height:10px;border-radius:50%;background:#f7deca}
+.mathIcon i,.mathIcon em,.mathIcon b{position:absolute;font-style:normal;font-weight:1000;color:#fff}
+.mathIcon i{left:18px;top:16px;font-size:2.1rem}.mathIcon b{right:17px;top:31px;font-size:2rem}.mathIcon em{right:21px;bottom:13px;font-size:1.8rem}
+.langIcon i,.langIcon b{position:absolute;font-style:normal;font-size:2.1rem;font-weight:1000}.langIcon i{left:17px;top:16px}.langIcon b{right:17px;bottom:14px}
+.bbWorldCardCopy{display:flex;flex-direction:column;min-width:0}
+.bbWorldCardCopy small{font-size:.67rem;letter-spacing:.12em;font-weight:1000;opacity:.82}
+.bbWorldCardCopy>b{font-size:1.65rem;line-height:1.08;font-weight:1000;margin-top:2px}
+.bbWorldCardCopy em{font-style:normal;font-size:.83rem;line-height:1.45;opacity:.9;margin:6px 0 9px}
+.bbWorldTag{align-self:flex-start;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.18);font-size:.65rem;font-weight:950}
+.bbWorldArrow{font-size:2.6rem;font-weight:300;opacity:.9}
+.bbWorldFooterNote{
+  width:min(100%,1320px);margin:12px auto 0;padding:12px 15px;border-radius:20px;
+  display:flex;align-items:center;gap:11px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18)
+}
+.bbWorldFooterNote .shield{width:39px;height:39px;border-radius:13px;background:linear-gradient(145deg,#75e1c0,#3db38e);position:relative}
+.bbWorldFooterNote .shield:after{content:"✓";position:absolute;inset:0;display:grid;place-items:center;font-weight:1000}
+.bbWorldFooterNote div{display:flex;flex-direction:column}.bbWorldFooterNote b{font-size:.83rem}.bbWorldFooterNote small{font-size:.68rem;color:#e9e4ff}
+
+/* Subject screens */
+.bbSubjectGamesScreen{
+  background:
+    radial-gradient(circle at 14% 10%,rgba(88,152,255,.42),transparent 28rem),
+    radial-gradient(circle at 84% 14%,rgba(255,137,213,.35),transparent 25rem),
+    linear-gradient(180deg,#15207c 0%,#382aa4 38%,#7350c6 68%,#ec8bb9 100%);
+}
+.bbSubjectBrand .mathMark,.bbSubjectBrand .langMark{
+  width:46px;height:46px;border-radius:15px;display:grid;place-items:center;font-size:1.5rem;font-weight:1000;
+  border:2px solid rgba(255,255,255,.32);box-shadow:inset 0 4px 5px rgba(255,255,255,.25)
+}
+.bbSubjectBrand .mathMark{background:linear-gradient(145deg,#ffd666,#e79838)}
+.bbSubjectBrand .langMark{background:linear-gradient(145deg,#69d9f6,#7869dc)}
+.bbSubjectIntro{
+  width:min(100%,1320px);margin:auto;min-height:178px;padding:22px 27px;border-radius:31px;
+  display:grid;grid-template-columns:1fr .32fr;align-items:center;gap:18px;
+  background:linear-gradient(135deg,rgba(50,55,178,.8),rgba(98,53,194,.8) 52%,rgba(192,70,177,.72));
+  border:2px solid rgba(255,255,255,.22);box-shadow:0 18px 30px rgba(19,17,82,.22)
+}
+.mathWorld .bbSubjectIntro{background:linear-gradient(135deg,rgba(226,138,38,.87),rgba(207,76,101,.83) 55%,rgba(141,72,194,.76))}
+.languageWorld .bbSubjectIntro{background:linear-gradient(135deg,rgba(55,137,210,.86),rgba(96,82,205,.83) 52%,rgba(195,78,181,.76))}
+.bbSubjectIntro small{font-size:.72rem;font-weight:950;color:#fff1a7}.bbSubjectIntro h1{margin:6px 0;font-size:clamp(2.1rem,4.5vw,3.4rem);line-height:1;font-weight:1000}.bbSubjectIntro p{margin:0;color:#eeeaff;font-weight:650}
+.bbSubjectMascot{justify-self:end;width:155px;height:125px;border-radius:35px;position:relative;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.27);box-shadow:inset 0 5px 7px rgba(255,255,255,.18)}
+.bbSubjectMascot span,.bbSubjectMascot b,.bbSubjectMascot em{position:absolute;font-style:normal;font-size:2.4rem;font-weight:1000}.bbSubjectMascot span{left:20px;top:15px}.bbSubjectMascot b{right:23px;top:34px}.bbSubjectMascot em{left:63px;bottom:13px}
+.bbLanguageSwitch{display:grid;grid-template-columns:1fr 1fr;gap:8px;justify-self:end;width:min(100%,330px)}
+.bbLanguageSwitch button{
+  min-height:105px;border:2px solid rgba(255,255,255,.22);border-radius:23px;padding:12px;
+  display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;align-items:center;gap:2px 9px;text-align:left;
+  color:#fff;background:rgba(255,255,255,.11)
+}
+.bbLanguageSwitch button.active{background:rgba(255,255,255,.25);box-shadow:inset 0 4px 5px rgba(255,255,255,.15),0 9px 18px rgba(23,19,85,.14)}
+.bbLanguageSwitch span{grid-row:1/3;width:45px;height:45px;border-radius:15px;display:grid;place-items:center;background:rgba(255,255,255,.2);font-size:1.3rem;font-weight:1000}
+.bbLanguageSwitch b{font-size:.9rem}.bbLanguageSwitch small{font-size:.65rem;color:#e7e3ff}
+
+.bbSubjectGameGrid{
+  width:min(100%,1320px);margin:12px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:10px
+}
+.bbSubjectGameCard{
+  min-height:175px;border:2px solid rgba(255,255,255,.36);border-radius:27px;padding:14px 17px;
+  display:grid;grid-template-columns:105px 1fr 65px;align-items:center;gap:15px;text-align:left;color:#fff;
+  box-shadow:inset 0 5px 7px rgba(255,255,255,.25),0 13px 22px rgba(22,17,82,.19)
+}
+.bbSubjectGameCard.rose{background:linear-gradient(145deg,#ff8fbd,#e95da8)}
+.bbSubjectGameCard.lime{background:linear-gradient(145deg,#a9e957,#5fcf2e)}
+.bbSubjectGameCard.gold{background:linear-gradient(145deg,#ffd96c,#ffb52e)}
+.bbSubjectGameCard.blue{background:linear-gradient(145deg,#6ac7fa,#408dd8)}
+.bbSubjectGameCard.purple{background:linear-gradient(145deg,#c17bed,#8d4bd5)}
+.bbSubjectGameCard.cyan{background:linear-gradient(145deg,#62d8dd,#30b9cb)}
+.bbSubjectGameCard .icon{
+  width:100px;height:100px;border-radius:28px;position:relative;display:grid;place-items:center;
+  background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.35);
+  box-shadow:inset 0 5px 7px rgba(255,255,255,.28),0 9px 15px rgba(50,27,92,.15)
+}
+.bbSubjectGameCard .copy{display:flex;flex-direction:column}.bbSubjectGameCard .copy b{font-size:1.55rem;font-weight:1000}.bbSubjectGameCard .copy small{font-size:.82rem;opacity:.9;margin:3px 0 9px}.bbSubjectGameCard .copy em{align-self:flex-start;font-style:normal;padding:5px 8px;border-radius:999px;background:rgba(66,46,100,.23);font-size:.64rem;font-weight:950}
+.bbSubjectGameCard .play{width:59px;height:59px;border-radius:19px;display:grid;place-items:center;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.36);font-size:1.4rem;box-shadow:inset 0 4px 5px rgba(255,255,255,.22)}
+.icon.choice i{position:absolute;width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.84);color:#5b4675;font-style:normal;font-weight:1000}.icon.choice i:nth-child(1){left:13px;top:15px}.icon.choice i:nth-child(2){right:13px;top:15px}.icon.choice i:nth-child(3){left:34px;bottom:14px}
+.icon.keyboard{display:grid!important;grid-template-columns:repeat(3,24px);gap:5px}.icon.keyboard i{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;background:#fff;color:#60487c;font-style:normal;font-size:.7rem;font-weight:1000}
+.icon.match i,.icon.match b{position:absolute;width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:#fff;color:#6b4d79;font-style:normal;font-weight:1000}.icon.match i{left:11px;top:18px}.icon.match b{right:11px;bottom:18px}
+.icon.order{display:flex!important;gap:4px}.icon.order i{width:25px;height:34px;border-radius:8px;display:grid;place-items:center;background:#fff;color:#5c4674;font-style:normal;font-weight:1000}
+.icon.sound .speaker{display:none}.icon.sound i{width:30px;height:44px;border-radius:9px;background:#fff;position:absolute;left:25px;top:27px}.icon.sound i:after{content:"";position:absolute;right:-19px;top:7px;border-top:15px solid transparent;border-bottom:15px solid transparent;border-left:20px solid #fff}.icon.sound b{position:absolute;width:18px;height:35px;border:4px solid #fff;border-left:0;border-radius:0 20px 20px 0;right:13px;top:32px}
+.icon.mix i,.icon.mix b,.icon.mix em{position:absolute;font-style:normal;font-size:1.8rem;font-weight:1000}.icon.mix i{left:18px;top:15px}.icon.mix b{right:17px;top:34px}.icon.mix em{left:34px;bottom:9px}
+.icon.vocab i{font-style:normal;font-size:2.3rem;font-weight:1000}
+
+/* Learning play */
+.bbLearningPlayScreen{
+  background:
+    radial-gradient(circle at 16% 10%,rgba(103,218,255,.4),transparent 27rem),
+    radial-gradient(circle at 84% 12%,rgba(255,160,218,.36),transparent 25rem),
+    linear-gradient(180deg,#17207c 0%,#392ba4 42%,#7852c6 72%,#ee90bb 100%);
+}
+.bbLearningTitle{display:flex;flex-direction:column;flex:1}.bbLearningTitle small{font-size:.62rem;letter-spacing:.13em;color:#d7d2ff;font-weight:1000}.bbLearningTitle strong{font-size:1.15rem;font-weight:1000}
+.bbLearningScore{padding:8px 13px;border-radius:17px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);text-align:right}.bbLearningScore small{display:block;font-size:.56rem;color:#dbd7ff;font-weight:900}.bbLearningScore strong{font-size:1.15rem}
+.bbLearningCard{
+  width:min(100%,980px);min-height:610px;margin:14px auto 0;padding:22px;border-radius:32px;
+  background:rgba(255,255,255,.95);color:#3f3348;border:2px solid rgba(255,255,255,.65);
+  box-shadow:0 20px 45px rgba(26,18,79,.25)
+}
+.bbLearningProgress{display:flex;align-items:center;gap:12px;color:#806d88;font-size:.74rem;font-weight:900}.bbLearningProgress>div{height:8px;flex:1;border-radius:999px;background:#eee7f2;overflow:hidden}.bbLearningProgress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ef70a8,#8a70e5);transition:width .25s ease}
+.bbLearningQuestionMeta{display:flex;gap:6px;justify-content:center;margin:26px 0 10px}.bbLearningQuestionMeta span{padding:5px 8px;border-radius:999px;background:#f3edf7;color:#80668d;font-size:.62rem;font-weight:950}
+.bbLearningCard h1{margin:5px auto 7px;max-width:800px;text-align:center;color:#5c3e72;font-size:clamp(1.9rem,4vw,3rem);line-height:1.12;font-weight:1000}.bbLearningCard #bbLearningSubPrompt{text-align:center;margin:0 auto 18px;color:#8a7891}
+.bbLearningChoices{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:780px;margin:20px auto}
+.bbLearningChoices button{min-height:78px;border:2px solid #eadff0;border-radius:19px;padding:12px;background:linear-gradient(180deg,#fff,#fcf8fd);color:#5b4669;font-size:1rem;font-weight:950;box-shadow:0 8px 16px rgba(70,48,86,.06)}
+.bbLearningChoices button.correct{border-color:#5dcc9f;background:#eafff4;color:#347a5d}.bbLearningChoices button.wrong{border-color:#ed769b;background:#fff0f4;color:#a64d69}
+.bbLearningTyping{max-width:690px;margin:22px auto;display:grid;grid-template-columns:1fr auto;gap:8px}.bbLearningTyping input{height:58px;border:2px solid #e7ddeb;border-radius:17px;padding:0 15px;outline:none;font-size:1rem}.bbLearningTyping input:focus{border-color:#9879e7;box-shadow:0 0 0 4px rgba(144,112,221,.09)}.bbLearningTyping button,.bbLearningOrder .check{border:0;border-radius:17px;padding:0 18px;color:#fff;background:linear-gradient(180deg,#9879e9,#7457cf);font-weight:1000}
+.bbLearningAudio{margin:20px auto 10px;min-height:62px;border:0;border-radius:18px;padding:10px 18px;display:flex;align-items:center;gap:10px;color:#fff;background:linear-gradient(145deg,#61cce9,#7864dc);font-weight:1000}.bbLearningAudio .speaker{width:25px;height:31px;border-radius:7px;background:#fff;position:relative}.bbLearningAudio .speaker:after{content:"";position:absolute;right:-14px;top:5px;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:15px solid #fff}
+.bbLearningOrder{max-width:800px;margin:20px auto}.bbLearningOrder .selected,.bbLearningOrder .tokens{min-height:72px;padding:10px;border-radius:17px;display:flex;flex-wrap:wrap;gap:7px;align-items:center}.bbLearningOrder .selected{background:#f7f2fa;border:2px dashed #dfd2e7;margin-bottom:9px}.bbLearningOrder .tokens{background:#fff}.bbLearningOrder .tokens button,.bbLearningOrder .selected button{border:0;border-radius:12px;padding:10px 13px;background:#eae2f5;color:#654c79;font-weight:950}.bbLearningOrder .selected button{background:#dff8ee;color:#34765c}.bbLearningOrder .check{display:block;min-height:46px;margin:10px auto 0}
+.bbLearningFeedback{max-width:760px;margin:20px auto 0;padding:15px;border-radius:20px;text-align:center;background:#f8f3fa}.bbLearningFeedback strong{font-size:1.15rem;color:#5d4074}.bbLearningFeedback p{color:#81708a;line-height:1.55}.bbLearningFeedback button{border:0;border-radius:15px;padding:11px 18px;color:#fff;background:linear-gradient(180deg,#9879e9,#7457cf);font-weight:1000}
+.bbLearningEmpty,.bbLearningResult{max-width:650px;margin:80px auto;text-align:center}.bbLearningEmpty .icon,.bbLearningResult .trophy{width:70px;height:70px;margin:auto;border-radius:22px;display:grid;place-items:center;color:#fff;background:linear-gradient(145deg,#ff91b9,#8d70e4);font-size:2rem;font-weight:1000}.bbLearningEmpty h2,.bbLearningResult h2{color:#5d4074;font-size:1.8rem;margin:10px 0 5px}.bbLearningEmpty p,.bbLearningResult p{color:#88768f;line-height:1.55}.bbLearningEmpty button,.bbLearningResult button{min-height:46px;border:0;border-radius:15px;padding:10px 17px;color:#fff;background:linear-gradient(180deg,#9879e9,#7457cf);font-weight:1000}.bbLearningResult>strong{display:block;color:#7457cf;font-size:4rem;line-height:1;margin:12px}.bbLearningResult .actions{display:flex;justify-content:center;gap:8px}.bbLearningResult button.secondary{color:#755f80;background:#f1ebf5}
+
+@media(max-width:980px){
+  .bbWorldCards{grid-template-columns:1fr}
+  .bbWorldCard{min-height:150px}
+  .bbSubjectGameGrid{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+  .bbWorldHubScreen,.bbSubjectGamesScreen,.bbLearningPlayScreen{padding:10px 9px 105px}
+  .bbWorldMiniNav{display:none}
+  .bbWorldIntro,.bbSubjectIntro{grid-template-columns:1fr;padding:19px;border-radius:25px;min-height:0}
+  .bbWorldIntroArt,.bbSubjectMascot{display:none}
+  .bbWorldIntro h1{font-size:2.4rem}
+  .bbWorldCards{gap:8px}
+  .bbWorldCard{grid-template-columns:77px 1fr 25px;padding:12px;border-radius:23px}
+  .bbWorldCardIcon{width:74px;height:74px;border-radius:21px;transform:scale(.86)}
+  .bbWorldCardCopy>b{font-size:1.25rem}.bbWorldCardCopy em{font-size:.7rem}
+  .bbSubjectGameCard{grid-template-columns:77px 1fr 45px;min-height:135px;padding:10px;border-radius:22px;gap:9px}
+  .bbSubjectGameCard .icon{width:74px;height:74px;border-radius:21px;transform:scale(.82)}
+  .bbSubjectGameCard .copy b{font-size:1.15rem}.bbSubjectGameCard .copy small{font-size:.7rem}.bbSubjectGameCard .play{width:43px;height:43px;border-radius:14px;font-size:1rem}
+  .langIntro{gap:12px}.bbLanguageSwitch{justify-self:stretch;width:100%}.bbLanguageSwitch button{min-height:75px}
+  .bbLearningCard{padding:14px;border-radius:25px;min-height:560px}
+  .bbLearningChoices{grid-template-columns:1fr;gap:7px}.bbLearningChoices button{min-height:62px}
+  .bbLearningTyping{grid-template-columns:1fr}.bbLearningTyping button{min-height:48px}
+}
+
 </style>
 
 <script>
@@ -7765,7 +7995,7 @@ try{
         <span class="copy">
           <small>เล่นแบบปกติ</small>
           <b>เล่นเกม</b>
-          <em>เลือก 1 ใน 6 เกม • สะสม XP</em>
+          <em>เกมหมี • คณิตศาสตร์ • ภาษา • หลายรูปแบบเกม</em>
         </span>
         <span class="go">➜</span>
       </button>
@@ -8130,7 +8360,252 @@ try{
   <div class="bbShopToast hidden" id="bbShopToast"></div>
 </section>
 
-<section class="bbAppScreen" id="bbAppModes" data-app-screen="modes">
+
+<section class="bbAppScreen bbWorldHubScreen" id="bbAppModes" data-app-screen="modes">
+  <div class="bbWorldBackdrop" aria-hidden="true">
+    <i class="bbWorldStar a"></i><i class="bbWorldStar b"></i><i class="bbWorldStar c"></i>
+    <i class="bbWorldBubble a"></i><i class="bbWorldBubble b"></i><i class="bbWorldBubble c"></i>
+    <span class="bbWorldHill h1"></span><span class="bbWorldHill h2"></span>
+  </div>
+
+  <header class="bbWorldTop">
+    <button class="bbWorldBack" data-app-go="home" aria-label="กลับหน้าหลัก">
+      <svg viewBox="0 0 64 64"><path d="M38 14 20 32l18 18" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="bbWorldBrand">
+      <span class="mark"></span>
+      <div><small>BRAIN BUDDY</small><strong>Game Worlds</strong></div>
+    </div>
+    <div class="bbWorldMiniNav">
+      <button data-app-action="rank">อันดับ</button>
+      <button data-app-action="profile">โปรไฟล์</button>
+    </div>
+  </header>
+
+  <section class="bbWorldIntro">
+    <div>
+      <span class="eyebrow">ขั้นที่ 1 • เลือกหมวดเกม</span>
+      <h1>วันนี้อยากเล่นอะไร?</h1>
+      <p>แต่ละหมวดมีเกมหลายรูปแบบ ใช้บัญชี XP, Brain Coins, ตัวละคร และคลังเดียวกันทั้งหมด</p>
+    </div>
+    <div class="bbWorldIntroArt" aria-hidden="true">
+      <span class="orb brain"></span>
+      <span class="orb math">÷</span>
+      <span class="orb lang">中</span>
+    </div>
+  </section>
+
+  <div class="bbWorldCards">
+    <button class="bbWorldCard teddy" data-app-go="teddy">
+      <span class="bbWorldCardIcon teddyIcon">
+        <i class="ear l"></i><i class="ear r"></i><i class="face"><b></b></i>
+      </span>
+      <span class="bbWorldCardCopy">
+        <small>MEMORY & BRAIN</small>
+        <b>เกมหมี</b>
+        <em>6 เกม • จำตำแหน่ง • จับคู่ • สังเกต • ลำดับ</em>
+        <span class="bbWorldTag">พร้อมเล่น</span>
+      </span>
+      <span class="bbWorldArrow">›</span>
+    </button>
+
+    <button class="bbWorldCard math" data-app-go="mathgames">
+      <span class="bbWorldCardIcon mathIcon">
+        <i>7</i><b>+</b><em>3</em>
+      </span>
+      <span class="bbWorldCardCopy">
+        <small>MATH QUEST</small>
+        <b>เกมคณิตศาสตร์</b>
+        <em>6 เกม • เลือกตอบ • พิมพ์ตอบ • จับคู่ • เรียงขั้นตอน</em>
+        <span class="bbWorldTag"><span id="bbMathContentCount">0</span> โจทย์จาก Admin</span>
+      </span>
+      <span class="bbWorldArrow">›</span>
+    </button>
+
+    <button class="bbWorldCard language" data-app-go="languagegames">
+      <span class="bbWorldCardIcon langIcon">
+        <i>中</i><b>A</b>
+      </span>
+      <span class="bbWorldCardCopy">
+        <small>LANGUAGE WORLD</small>
+        <b>เกมภาษา</b>
+        <em>จีน + อังกฤษ • คำศัพท์ • จับคู่ • เรียงประโยค • Listening</em>
+        <span class="bbWorldTag"><span id="bbLanguageContentCount">0</span> ข้อจาก Admin</span>
+      </span>
+      <span class="bbWorldArrow">›</span>
+    </button>
+  </div>
+
+  <section class="bbWorldFooterNote">
+    <span class="shield"></span>
+    <div><b>เนื้อหาเพิ่มได้จาก Admin</b><small>เพิ่มคำศัพท์หรือโจทย์ใหม่เมื่อไรก็ได้ โดยไม่ต้องแก้ index.html</small></div>
+  </section>
+</section>
+
+<section class="bbAppScreen bbSubjectGamesScreen mathWorld" id="bbAppMathGames" data-app-screen="mathgames">
+  <div class="bbSubjectBg" aria-hidden="true"><i></i><i></i><i></i></div>
+  <header class="bbSubjectTop">
+    <button class="bbSubjectBack" data-app-go="modes"><svg viewBox="0 0 64 64"><path d="M38 14 20 32l18 18" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <div class="bbSubjectBrand"><span class="mathMark">÷</span><div><small>MATH QUEST</small><strong>เกมคณิตศาสตร์</strong></div></div>
+    <button class="bbSubjectAdminHint" type="button" data-bb-admin-info>โจทย์จาก Admin</button>
+  </header>
+
+  <section class="bbSubjectIntro">
+    <div>
+      <small>เลือก 1 จาก 6 เกม</small>
+      <h1>ฝึกคณิตให้สนุกขึ้น</h1>
+      <p>รูปแบบเกมแต่ละแบบดึงโจทย์ที่เปิดใช้งานจาก Admin โดยอัตโนมัติ</p>
+    </div>
+    <div class="bbSubjectMascot math" aria-hidden="true">
+      <span>8</span><b>×</b><em>4</em>
+    </div>
+  </section>
+
+  <div class="bbSubjectGameGrid">
+    <button class="bbSubjectGameCard rose" data-learning-start data-learning-subject="math" data-learning-type="multiple_choice" data-learning-title="เลือกคำตอบ">
+      <span class="icon choice"><i>A</i><i>B</i><i>C</i></span>
+      <span class="copy"><b>เลือกคำตอบ</b><small>เลือกคำตอบที่ถูกจากตัวเลือก</small><em><span data-content-count="math:multiple_choice">0</span> ข้อ</em></span><span class="play">▶</span>
+    </button>
+    <button class="bbSubjectGameCard lime" data-learning-start data-learning-subject="math" data-learning-type="typing" data-learning-title="พิมพ์คำตอบ">
+      <span class="icon keyboard"><i>1</i><i>2</i><i>3</i></span>
+      <span class="copy"><b>พิมพ์คำตอบ</b><small>คำนวณแล้วกรอกคำตอบด้วยตัวเอง</small><em><span data-content-count="math:typing">0</span> ข้อ</em></span><span class="play">▶</span>
+    </button>
+    <button class="bbSubjectGameCard gold" data-learning-start data-learning-subject="math" data-learning-type="matching" data-learning-title="จับคู่สมการ">
+      <span class="icon match"><i>=</i><b>12</b></span>
+      <span class="copy"><b>จับคู่สมการ</b><small>จับโจทย์ให้ตรงกับคำตอบ</small><em><span data-content-count="math:matching">0</span> ข้อ</em></span><span class="play">▶</span>
+    </button>
+    <button class="bbSubjectGameCard blue" data-learning-start data-learning-subject="math" data-learning-type="sentence_order" data-learning-title="เรียงขั้นตอน">
+      <span class="icon order"><i>1</i><i>2</i><i>3</i></span>
+      <span class="copy"><b>เรียงขั้นตอน</b><small>เรียงลำดับคำตอบหรือขั้นตอนให้ถูก</small><em><span data-content-count="math:sentence_order">0</span> ข้อ</em></span><span class="play">▶</span>
+    </button>
+    <button class="bbSubjectGameCard purple" data-learning-start data-learning-subject="math" data-learning-type="listening" data-learning-title="โจทย์เสียง">
+      <span class="icon sound"><i></i><b></b></span>
+      <span class="copy"><b>โจทย์เสียง</b><small>ฟังโจทย์แล้วเลือกหรือพิมพ์คำตอบ</small><em><span data-content-count="math:listening">0</span> ข้อ</em></span><span class="play">▶</span>
+    </button>
+    <button class="bbSubjectGameCard cyan" data-learning-start data-learning-subject="math" data-learning-type="all" data-learning-title="Math Mix">
+      <span class="icon mix"><i>+</i><b>÷</b><em>×</em></span>
+      <span class="copy"><b>Math Mix</b><small>สุ่มโจทย์หลายรูปแบบในรอบเดียว</small><em><span data-content-count="math:all">0</span> ข้อ</em></span><span class="play">▶</span>
+    </button>
+  </div>
+</section>
+
+<section class="bbAppScreen bbSubjectGamesScreen languageWorld" id="bbAppLanguageGames" data-app-screen="languagegames">
+  <div class="bbSubjectBg" aria-hidden="true"><i></i><i></i><i></i></div>
+  <header class="bbSubjectTop">
+    <button class="bbSubjectBack" data-app-go="modes"><svg viewBox="0 0 64 64"><path d="M38 14 20 32l18 18" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <div class="bbSubjectBrand"><span class="langMark">中</span><div><small>LANGUAGE WORLD</small><strong>เกมภาษา</strong></div></div>
+    <button class="bbSubjectAdminHint" type="button" data-bb-admin-info>เนื้อหาจาก Admin</button>
+  </header>
+
+  <section class="bbSubjectIntro langIntro">
+    <div>
+      <small>เลือกภาษา แล้วเลือกเกม</small>
+      <h1 id="bbLanguageHeading">Chinese Games</h1>
+      <p>เกมรูปแบบเดียวกันใช้ได้ทั้งภาษาจีนและภาษาอังกฤษ และเพิ่มเนื้อหาจาก Admin ได้ตลอด</p>
+    </div>
+    <div class="bbLanguageSwitch" role="tablist">
+      <button class="active" type="button" data-language-choice="chinese"><span>中</span><b>ภาษาจีน</b><small id="bbChineseCount">0 ข้อ</small></button>
+      <button type="button" data-language-choice="english"><span>A</span><b>English</b><small id="bbEnglishCount">0 ข้อ</small></button>
+    </div>
+  </section>
+
+  <div class="bbSubjectGameGrid">
+    <button class="bbSubjectGameCard rose" data-learning-start data-learning-subject="language" data-learning-type="vocabulary" data-learning-title="คำศัพท์">
+      <span class="icon vocab"><i>字</i></span>
+      <span class="copy"><b>คำศัพท์</b><small>ดูคำแล้วเลือกความหมายที่ถูกต้อง</small><em><span data-language-count="vocabulary">0</span> ข้อ</em></span><span class="play">▶</span>
+    </button>
+    <button class="bbSubjectGameCard lime" data-learning-start data-learning-subject="language" data-learning-type="multiple_choice" data-learning-title="เลือกความหมาย">
+      <span class="icon choice"><i>A</i><i>B</i><i>C</i></span>
+      <span class="copy"><b>เลือกความหมาย</b><small>คำถามหลายตัวเลือกจากคลังภาษา</small><em><span data-language-count="multiple_choice">0</span> ข้อ</em></span><span class="play">▶</span>
+    </button>
+    <button class="bbSubjectGameCard gold" data-learning-start data-learning-subject="language" data-learning-type="matching" data-learning-title="จับคู่คำ">
+      <span class="icon match"><i>中</i><b>TH</b></span>
+      <span class="copy"><b>จับคู่คำ</b><small>จับคำศัพท์ให้ตรงกับคำแปล</small><em><span data-language-count="matching">0</span> ข้อ</em></span><span class="play">▶</span>
+    </button>
+    <button class="bbSubjectGameCard blue" data-learning-start data-learning-subject="language" data-learning-type="typing" data-learning-title="พิมพ์คำตอบ">
+      <span class="icon keyboard"><i>A</i><i>B</i><i>C</i></span>
+      <span class="copy"><b>พิมพ์คำตอบ</b><small>ฝึกจำและพิมพ์คำตอบด้วยตัวเอง</small><em><span data-language-count="typing">0</span> ข้อ</em></span><span class="play">▶</span>
+    </button>
+    <button class="bbSubjectGameCard purple" data-learning-start data-learning-subject="language" data-learning-type="sentence_order" data-learning-title="เรียงประโยค">
+      <span class="icon order"><i>我</i><i>爱</i><i>你</i></span>
+      <span class="copy"><b>เรียงประโยค</b><small>แตะคำตามลำดับให้เป็นประโยคที่ถูก</small><em><span data-language-count="sentence_order">0</span> ข้อ</em></span><span class="play">▶</span>
+    </button>
+    <button class="bbSubjectGameCard cyan" data-learning-start data-learning-subject="language" data-learning-type="listening" data-learning-title="ฟังแล้วตอบ">
+      <span class="icon sound"><i></i><b></b></span>
+      <span class="copy"><b>ฟังแล้วตอบ</b><small>ฟังเสียงแล้วเลือกคำตอบที่ถูกต้อง</small><em><span data-language-count="listening">0</span> ข้อ</em></span><span class="play">▶</span>
+    </button>
+  </div>
+</section>
+
+<section class="bbAppScreen bbLearningPlayScreen" id="bbAppLearningPlay" data-app-screen="learningplay">
+  <div class="bbLearningPlayBg" aria-hidden="true"><i></i><i></i><i></i></div>
+  <header class="bbLearningTop">
+    <button class="bbLearningBack" type="button" id="bbLearningBack"><svg viewBox="0 0 64 64"><path d="M38 14 20 32l18 18" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <div class="bbLearningTitle"><small id="bbLearningSubjectLabel">BRAIN BUDDY</small><strong id="bbLearningGameTitle">เกมการเรียนรู้</strong></div>
+    <div class="bbLearningScore"><small>SCORE</small><strong id="bbLearningScore">0</strong></div>
+  </header>
+
+  <section class="bbLearningCard">
+    <div class="bbLearningProgress">
+      <span id="bbLearningProgressText">ข้อ 1 / 10</span>
+      <div><i id="bbLearningProgressBar"></i></div>
+    </div>
+
+    <div id="bbLearningEmpty" class="bbLearningEmpty hidden">
+      <span class="icon">+</span>
+      <h2>ยังไม่มีโจทย์สำหรับเกมนี้</h2>
+      <p>เข้า <b>/admin → คำศัพท์ / โจทย์</b> แล้วเพิ่มเนื้อหาประเภทนี้ จากนั้นกดรีเฟรชเกมได้เลย</p>
+      <button type="button" id="bbLearningEmptyBack">กลับไปเลือกเกม</button>
+    </div>
+
+    <div id="bbLearningQuestionArea">
+      <div class="bbLearningQuestionMeta">
+        <span id="bbLearningCategory">GENERAL</span>
+        <span id="bbLearningDifficulty">ง่าย</span>
+      </div>
+
+      <button class="bbLearningAudio hidden" type="button" id="bbLearningAudio">
+        <span class="speaker"></span><b>กดเพื่อฟังโจทย์</b>
+      </button>
+
+      <h1 id="bbLearningPrompt">คำถาม</h1>
+      <p id="bbLearningSubPrompt"></p>
+
+      <div class="bbLearningChoices" id="bbLearningChoices"></div>
+
+      <div class="bbLearningTyping hidden" id="bbLearningTyping">
+        <input id="bbLearningInput" type="text" autocomplete="off" placeholder="พิมพ์คำตอบที่นี่">
+        <button type="button" id="bbLearningSubmit">ตรวจคำตอบ</button>
+      </div>
+
+      <div class="bbLearningOrder hidden" id="bbLearningOrder">
+        <div class="selected" id="bbLearningSelectedWords"></div>
+        <div class="tokens" id="bbLearningTokens"></div>
+        <button type="button" class="check" id="bbLearningCheckOrder">ตรวจลำดับ</button>
+      </div>
+
+      <div class="bbLearningFeedback hidden" id="bbLearningFeedback">
+        <strong id="bbLearningFeedbackTitle">ถูกต้อง!</strong>
+        <p id="bbLearningFeedbackText"></p>
+        <button type="button" id="bbLearningNext">ข้อต่อไป</button>
+      </div>
+    </div>
+
+    <div id="bbLearningResult" class="bbLearningResult hidden">
+      <span class="trophy">★</span>
+      <small>ROUND COMPLETE</small>
+      <h2>จบรอบแล้ว!</h2>
+      <strong id="bbLearningFinalScore">0</strong>
+      <p id="bbLearningFinalText"></p>
+      <div class="actions">
+        <button type="button" id="bbLearningAgain">เล่นอีกครั้ง</button>
+        <button type="button" class="secondary" id="bbLearningResultBack">เลือกเกมอื่น</button>
+      </div>
+    </div>
+  </section>
+</section>
+
+<section class="bbAppScreen bbWorldGameScreen" id="bbAppTeddyModes" data-app-screen="teddy">
     <div class="bbCandySky" aria-hidden="true">
       <i class="bbCandyStar s1"></i><i class="bbCandyStar s2"></i><i class="bbCandyStar s3"></i>
       <i class="bbCandyStar s4"></i><i class="bbCandyStar s5"></i><i class="bbCandyStar s6"></i>
@@ -8141,7 +8616,7 @@ try{
     </div>
 
     <header class="bbCandyTop">
-      <button class="bbCandyBack" data-app-go="home" aria-label="กลับหน้าหลัก">
+      <button class="bbCandyBack" data-app-go="modes" aria-label="กลับไปเลือกหมวดเกม">
         <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M38 14 20 32l18 18" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
 
@@ -8182,9 +8657,9 @@ try{
 
     <div class="bbCandyIntro">
       <div class="bbCandyIntroCopy">
-        <small>ขั้นที่ 1 จาก 2</small>
-        <h2>เลือกเกม</h2>
-        <p>เลือกเกมที่อยากเล่น แล้วมาฝึกสมองไปด้วยกัน!</p>
+        <small>เกมหมี • 6 รูปแบบ</small>
+        <h2>เกมหมี Brain Buddy</h2>
+        <p>เลือกเกมฝึกความจำที่อยากเล่น แล้วค่อยเลือกระดับในขั้นถัดไป</p>
       </div>
 
       <div class="bbCandyMascot3D" aria-hidden="true">
@@ -8272,9 +8747,9 @@ try{
     </header>
 
     <div class="bbSetupHero">
-      <button class="bbSetupBack" data-app-go="modes" aria-label="กลับ"></button>
+      <button class="bbSetupBack" data-app-go="teddy" aria-label="กลับ"></button>
       <div class="bbSetupHeroTitle">
-        <small>ขั้นที่ 2 จาก 2</small>
+        <small>เกมหมี • ตั้งค่าก่อนเล่น</small>
         <h2 id="bbSetupTitle">จำตำแหน่ง</h2>
         <p>เลือกความท้าทายที่เหมาะกับคุณ แล้วมาเพิ่มพลังสมองกัน!</p>
       </div>
@@ -10955,12 +11430,12 @@ window.addEventListener("load",()=>{
     if(push&&screen!==next)previous=screen;
     screen=next;
     document.querySelectorAll(".bbAppScreen").forEach(s=>s.classList.toggle("active",s===target));
-    document.body.classList.toggle("bbCandySelect",next==="modes");
+    document.body.classList.toggle("bbCandySelect",["modes","teddy","mathgames","languagegames","learningplay"].includes(next));
     document.body.classList.toggle("bbCandyHome",next==="home");
     document.body.classList.toggle("bbCandySetup",next==="setup");
     if(typeof setDockActive==="function"){
       if(next==="home")setDockActive("home");
-      else if(next==="modes"||next==="setup")setDockActive("play");
+      else if(["modes","teddy","mathgames","languagegames","learningplay","setup"].includes(next))setDockActive("play");
       else if(next==="shop"||next==="inventory"||next==="topup")setDockActive("shop");
     }
     if(next==="shop")window.bbLoadShop?.();
@@ -13703,6 +14178,363 @@ document.addEventListener('DOMContentLoaded', () => {
   }else{
     init();
   }
+})();
+</script>
+
+
+<script>
+(function brainBuddyV66Worlds(){
+  const q=s=>document.querySelector(s);
+  let lang="chinese";
+  let contentRows=[];
+  let learning={
+    subject:null,type:null,title:null,rows:[],allRows:[],index:0,score:0,correct:0,
+    answered:false,selectedTokens:[],returnScreen:"modes"
+  };
+
+  const labels={
+    chinese:"ภาษาจีน",
+    english:"English",
+    math:"คณิตศาสตร์"
+  };
+  const diff={easy:"ง่าย",normal:"ปานกลาง",hard:"ยาก",expert:"Expert"};
+
+  function client(){
+    if(window.__bbSupabase)return window.__bbSupabase;
+    const cfg=window.BRAIN_BUDDY_SUPABASE||{};
+    if(window.supabase&&cfg.url&&cfg.publishableKey){
+      window.__bbSupabase=window.supabase.createClient(cfg.url,cfg.publishableKey);
+      return window.__bbSupabase;
+    }
+    return null;
+  }
+
+  function shuffle(a){
+    const x=[...a];
+    for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]]}
+    return x;
+  }
+  function norm(v){return String(v??"").trim().toLowerCase().replace(/\s+/g," ")}
+  function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+
+  async function loadCounts(){
+    try{
+      const c=client(); if(!c)return;
+      const {data,error}=await c.from("bb_learning_content")
+        .select("id,subject,content_type")
+        .eq("is_active",true);
+      if(error)throw error;
+      contentRows=data||[];
+
+      const math=contentRows.filter(x=>x.subject==="math");
+      const chinese=contentRows.filter(x=>x.subject==="chinese");
+      const english=contentRows.filter(x=>x.subject==="english");
+
+      if(q("#bbMathContentCount"))q("#bbMathContentCount").textContent=math.length;
+      if(q("#bbLanguageContentCount"))q("#bbLanguageContentCount").textContent=chinese.length+english.length;
+      if(q("#bbChineseCount"))q("#bbChineseCount").textContent=`${chinese.length} ข้อ`;
+      if(q("#bbEnglishCount"))q("#bbEnglishCount").textContent=`${english.length} ข้อ`;
+
+      document.querySelectorAll("[data-content-count]").forEach(el=>{
+        const [s,t]=el.dataset.contentCount.split(":");
+        const n=t==="all"
+          ? contentRows.filter(x=>x.subject===s).length
+          : contentRows.filter(x=>x.subject===s&&x.content_type===t).length;
+        el.textContent=n;
+      });
+      updateLanguageCounts();
+    }catch(e){console.warn("Learning counts:",e)}
+  }
+
+  function updateLanguageCounts(){
+    if(q("#bbLanguageHeading"))q("#bbLanguageHeading").textContent=lang==="chinese"?"Chinese Games":"English Games";
+    document.querySelectorAll("[data-language-choice]").forEach(b=>b.classList.toggle("active",b.dataset.languageChoice===lang));
+    document.querySelectorAll("[data-language-count]").forEach(el=>{
+      const t=el.dataset.languageCount;
+      el.textContent=contentRows.filter(x=>x.subject===lang&&x.content_type===t).length;
+    });
+  }
+
+  function returnScreenForSubject(subject){
+    return subject==="math"?"mathgames":"languagegames";
+  }
+
+  async function startLearning(subject,type,title){
+    if(subject==="language")subject=lang;
+    learning={subject,type,title,rows:[],allRows:[],index:0,score:0,correct:0,answered:false,selectedTokens:[],returnScreen:returnScreenForSubject(subject)};
+    q("#bbLearningSubjectLabel").textContent=labels[subject]||subject;
+    q("#bbLearningGameTitle").textContent=title;
+    q("#bbLearningScore").textContent="0";
+    q("#bbLearningResult").classList.add("hidden");
+    q("#bbLearningEmpty").classList.add("hidden");
+    q("#bbLearningQuestionArea").classList.remove("hidden");
+    window.bbAppShowScreen?.("learningplay");
+
+    try{
+      const c=client();
+      if(!c)throw new Error("ยังเชื่อมต่อ Cloud ไม่สำเร็จ");
+
+      let req=c.from("bb_learning_content")
+        .select("id,subject,content_type,difficulty,category,prompt,answer,pinyin,meaning,options,explanation,example_text,image_url,audio_url,base_score")
+        .eq("subject",subject)
+        .eq("is_active",true)
+        .limit(60);
+
+      if(type!=="all")req=req.eq("content_type",type);
+
+      const {data,error}=await req;
+      if(error)throw error;
+
+      const {data:all,error:allErr}=await c.from("bb_learning_content")
+        .select("id,answer,meaning,content_type")
+        .eq("subject",subject)
+        .eq("is_active",true)
+        .limit(100);
+      if(allErr)throw allErr;
+
+      learning.rows=shuffle(data||[]).slice(0,10);
+      learning.allRows=all||[];
+
+      if(!learning.rows.length){
+        showEmpty();
+        return;
+      }
+      renderQuestion();
+    }catch(err){
+      console.warn("Start learning:",err);
+      showEmpty(err?.message);
+    }
+  }
+
+  function showEmpty(extra){
+    q("#bbLearningQuestionArea").classList.add("hidden");
+    q("#bbLearningResult").classList.add("hidden");
+    q("#bbLearningEmpty").classList.remove("hidden");
+    const p=q("#bbLearningEmpty p");
+    if(extra&&p)p.innerHTML=`${esc(extra)}<br><br>เข้า <b>/admin → คำศัพท์ / โจทย์</b> เพื่อเพิ่มเนื้อหาเกมนี้`;
+    q("#bbLearningProgressText").textContent="ยังไม่มีโจทย์";
+    q("#bbLearningProgressBar").style.width="0%";
+  }
+
+  function choiceOptions(row){
+    if(Array.isArray(row.options)&&row.options.length>=2){
+      const opts=row.options.map(String);
+      if(!opts.some(x=>norm(x)===norm(row.answer)))opts.push(String(row.answer));
+      return shuffle([...new Set(opts)]).slice(0,4);
+    }
+    const pool=learning.allRows
+      .filter(x=>x.id!==row.id)
+      .map(x=>String(x.answer||x.meaning||"").trim())
+      .filter(Boolean)
+      .filter(x=>norm(x)!==norm(row.answer));
+    return shuffle([String(row.answer),...shuffle([...new Set(pool)]).slice(0,3)]);
+  }
+
+  function clearQuestionModes(){
+    q("#bbLearningChoices").innerHTML="";
+    q("#bbLearningChoices").classList.add("hidden");
+    q("#bbLearningTyping").classList.add("hidden");
+    q("#bbLearningOrder").classList.add("hidden");
+    q("#bbLearningFeedback").classList.add("hidden");
+    q("#bbLearningAudio").classList.add("hidden");
+    q("#bbLearningInput").value="";
+    learning.selectedTokens=[];
+    q("#bbLearningSelectedWords").innerHTML="";
+    q("#bbLearningTokens").innerHTML="";
+  }
+
+  function current(){return learning.rows[learning.index]}
+
+  function renderQuestion(){
+    const row=current(); if(!row)return finish();
+    learning.answered=false; clearQuestionModes();
+
+    q("#bbLearningProgressText").textContent=`ข้อ ${learning.index+1} / ${learning.rows.length}`;
+    q("#bbLearningProgressBar").style.width=`${((learning.index)/learning.rows.length)*100}%`;
+    q("#bbLearningCategory").textContent=(row.category||row.content_type||"GENERAL").toUpperCase();
+    q("#bbLearningDifficulty").textContent=diff[row.difficulty]||row.difficulty||"";
+    q("#bbLearningPrompt").textContent=row.prompt||"";
+    q("#bbLearningSubPrompt").textContent=row.pinyin || row.meaning || "";
+
+    const type=learning.type==="all" ? row.content_type : learning.type;
+
+    if(type==="listening"){
+      if(row.audio_url){
+        q("#bbLearningAudio").classList.remove("hidden");
+        q("#bbLearningAudio").dataset.url=row.audio_url;
+        q("#bbLearningPrompt").textContent="ฟังแล้วเลือกคำตอบที่ถูกต้อง";
+      }
+      renderChoices(row);
+    }else if(type==="typing"){
+      q("#bbLearningTyping").classList.remove("hidden");
+      setTimeout(()=>q("#bbLearningInput")?.focus(),100);
+    }else if(type==="sentence_order"){
+      renderOrder(row);
+    }else{
+      renderChoices(row);
+    }
+  }
+
+  function renderChoices(row){
+    const host=q("#bbLearningChoices"); host.classList.remove("hidden");
+    const options=choiceOptions(row);
+    host.innerHTML=options.map(opt=>`<button type="button" data-learning-choice="${esc(opt)}">${esc(opt)}</button>`).join("");
+  }
+
+  function renderOrder(row){
+    let tokens=[];
+    if(norm(row.answer).includes(" ")){
+      tokens=String(row.answer).trim().split(/\s+/);
+    }else if(Array.isArray(row.options)&&row.options.length>1){
+      tokens=row.options.map(String);
+    }
+    if(tokens.length<2){
+      q("#bbLearningTyping").classList.remove("hidden");
+      return;
+    }
+
+    const host=q("#bbLearningTokens");
+    q("#bbLearningOrder").classList.remove("hidden");
+    shuffle(tokens).forEach((tok,idx)=>{
+      const b=document.createElement("button");
+      b.type="button"; b.textContent=tok; b.dataset.tokenIndex=String(idx); b.dataset.tokenValue=tok;
+      host.appendChild(b);
+    });
+  }
+
+  function showFeedback(ok,row){
+    learning.answered=true;
+    if(ok){
+      learning.correct++;
+      learning.score+=Number(row.base_score)||100;
+    }
+    q("#bbLearningScore").textContent=learning.score.toLocaleString();
+    q("#bbLearningFeedback").classList.remove("hidden");
+    q("#bbLearningFeedbackTitle").textContent=ok?"ถูกต้อง ✓":"ยังไม่ถูก";
+    q("#bbLearningFeedbackTitle").style.color=ok?"#347a5d":"#a64d69";
+    const detail=[
+      !ok?`คำตอบ: ${row.answer}`:"",
+      row.explanation||"",
+      row.example_text||""
+    ].filter(Boolean).join(" • ");
+    q("#bbLearningFeedbackText").textContent=detail|| (ok?"เก่งมาก ไปข้อต่อไปกัน":"ดูคำตอบแล้วลองข้อต่อไป");
+    q("#bbLearningProgressBar").style.width=`${((learning.index+1)/learning.rows.length)*100}%`;
+  }
+
+  function checkTyped(){
+    if(learning.answered)return;
+    const row=current(),ans=q("#bbLearningInput").value;
+    if(!ans.trim())return;
+    const ok=[row.answer,row.meaning,row.pinyin].filter(Boolean).some(x=>norm(x)===norm(ans));
+    showFeedback(ok,row);
+  }
+
+  function checkOrder(){
+    if(learning.answered)return;
+    const row=current();
+    if(!learning.selectedTokens.length)return;
+    const candidate=learning.selectedTokens.join(" ");
+    const target=String(row.answer).trim();
+    const ok=norm(candidate)===norm(target) || norm(learning.selectedTokens.join(""))===norm(target);
+    showFeedback(ok,row);
+  }
+
+  function next(){
+    learning.index++;
+    if(learning.index>=learning.rows.length)finish(); else renderQuestion();
+  }
+
+  function finish(){
+    q("#bbLearningQuestionArea").classList.add("hidden");
+    q("#bbLearningEmpty").classList.add("hidden");
+    q("#bbLearningResult").classList.remove("hidden");
+    q("#bbLearningFinalScore").textContent=learning.score.toLocaleString();
+    q("#bbLearningFinalText").textContent=`ตอบถูก ${learning.correct} จาก ${learning.rows.length} ข้อ • ${labels[learning.subject]||""} • ${learning.title}`;
+  }
+
+  document.addEventListener("click",e=>{
+    const langBtn=e.target.closest("[data-language-choice]");
+    if(langBtn){
+      lang=langBtn.dataset.languageChoice;
+      updateLanguageCounts();
+      return;
+    }
+
+    const game=e.target.closest("[data-learning-start]");
+    if(game){
+      const subject=game.dataset.learningSubject;
+      const type=game.dataset.learningType;
+      const title=game.dataset.learningTitle;
+      startLearning(subject,type,title);
+      return;
+    }
+
+    const choice=e.target.closest("[data-learning-choice]");
+    if(choice&&!learning.answered){
+      const row=current(),selected=choice.dataset.learningChoice;
+      const ok=norm(selected)===norm(row.answer);
+      document.querySelectorAll("[data-learning-choice]").forEach(b=>{
+        b.disabled=true;
+        if(norm(b.dataset.learningChoice)===norm(row.answer))b.classList.add("correct");
+      });
+      if(!ok)choice.classList.add("wrong");
+      showFeedback(ok,row);
+      return;
+    }
+
+    const token=e.target.closest("#bbLearningTokens [data-token-value]");
+    if(token&&!learning.answered){
+      learning.selectedTokens.push(token.dataset.tokenValue);
+      const b=document.createElement("button");
+      b.type="button"; b.textContent=token.dataset.tokenValue; b.dataset.selectedIndex=String(learning.selectedTokens.length-1);
+      q("#bbLearningSelectedWords").appendChild(b);
+      token.disabled=true;
+      return;
+    }
+
+    const selected=e.target.closest("#bbLearningSelectedWords [data-selected-index]");
+    if(selected&&!learning.answered){
+      const value=selected.textContent,idx=Number(selected.dataset.selectedIndex);
+      learning.selectedTokens.splice(idx,1);
+      [...q("#bbLearningTokens").querySelectorAll("button")].find(b=>b.dataset.tokenValue===value&&b.disabled)?.removeAttribute("disabled");
+      q("#bbLearningSelectedWords").innerHTML="";
+      learning.selectedTokens.forEach((v,i)=>{
+        const b=document.createElement("button");b.type="button";b.textContent=v;b.dataset.selectedIndex=String(i);q("#bbLearningSelectedWords").appendChild(b);
+      });
+      return;
+    }
+
+    if(e.target.closest("#bbLearningSubmit")){checkTyped();return}
+    if(e.target.closest("#bbLearningCheckOrder")){checkOrder();return}
+    if(e.target.closest("#bbLearningNext")){next();return}
+    if(e.target.closest("#bbLearningAudio")){
+      const url=q("#bbLearningAudio").dataset.url;if(url)new Audio(url).play().catch(()=>{});
+      return;
+    }
+    if(e.target.closest("#bbLearningBack")||e.target.closest("#bbLearningEmptyBack")||e.target.closest("#bbLearningResultBack")){
+      window.bbAppShowScreen?.(learning.returnScreen||"modes");return;
+    }
+    if(e.target.closest("#bbLearningAgain")){
+      startLearning(learning.subject,learning.type,learning.title);return;
+    }
+    if(e.target.closest("[data-bb-admin-info]")){
+      alert("เพิ่มคำศัพท์และโจทย์ได้ที่ /admin → คำศัพท์ / โจทย์");
+      return;
+    }
+  });
+
+  q("#bbLearningInput")?.addEventListener("keydown",e=>{if(e.key==="Enter")checkTyped()});
+
+  // Refresh counts when the user opens any learning world.
+  document.addEventListener("click",e=>{
+    if(e.target.closest('[data-app-go="modes"],[data-app-go="mathgames"],[data-app-go="languagegames"]')){
+      setTimeout(loadCounts,120);
+    }
+  });
+
+  window.bbReloadLearningCounts=loadCounts;
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(loadCounts,500),{once:true});
+  else setTimeout(loadCounts,500);
 })();
 </script>
 
