@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy v77 — Math World</title>
+<title>Brain Buddy v78 — English World</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -8709,6 +8709,80 @@ body.bbRankedLearningPlaying .v17dock{display:none!important}
   .bbMathLevelGrid button{min-height:82px}
 }
 
+
+/* ==========================================================
+   Brain Buddy v78 — English World A1 → C1
+   ========================================================== */
+.bbEnglishLevelChooser{
+  width:min(100%,1240px);
+  margin:0 auto 14px;
+  padding:13px;
+  border-radius:24px;
+  background:linear-gradient(145deg,rgba(255,255,255,.19),rgba(255,255,255,.10));
+  border:1px solid rgba(255,255,255,.26);
+  box-shadow:inset 0 2px 3px rgba(255,255,255,.14),0 12px 28px rgba(37,28,99,.13);
+  backdrop-filter:blur(14px)
+}
+.bbEnglishLevelChooser.hidden{display:none!important}
+.bbEnglishLevelHead{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  margin-bottom:10px;padding:0 2px
+}
+.bbEnglishLevelHead small{
+  display:block;color:rgba(255,255,255,.72);
+  font-size:7px;font-weight:1000;letter-spacing:.14em
+}
+.bbEnglishLevelHead h2{margin:2px 0 0;color:#fff;font-size:17px}
+.bbEnglishLevelHead p{margin:3px 0 0;color:rgba(255,255,255,.78);font-size:8px;font-weight:800}
+.bbEnglishBankBadge{
+  min-width:72px;padding:7px 9px;border-radius:14px;text-align:center;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.19);
+  color:rgba(255,255,255,.76);font-size:7px;font-weight:900
+}
+.bbEnglishBankBadge b{display:block;color:#fff;font-size:15px}
+.bbEnglishLevelGrid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:7px
+}
+.bbEnglishLevelGrid button{
+  position:relative;
+  min-height:92px;
+  padding:9px 7px;
+  border:1px solid rgba(255,255,255,.19);
+  border-radius:17px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.10);
+  color:#fff;
+  cursor:pointer;
+  transition:.16s ease;
+  box-shadow:inset 0 2px 3px rgba(255,255,255,.08)
+}
+.bbEnglishLevelGrid button:hover{transform:translateY(-2px);background:rgba(255,255,255,.16)}
+.bbEnglishLevelGrid button.active{
+  transform:translateY(-2px);
+  background:linear-gradient(145deg,#e8f6ff,#f2eaff 55%,#fff1cf);
+  color:#545a7a;
+  border-color:rgba(255,255,255,.8);
+  box-shadow:0 10px 20px rgba(34,28,82,.16),inset 0 3px 5px rgba(255,255,255,.55)
+}
+.bbEnglishLevelGrid button>span{font-size:20px;line-height:1}
+.bbEnglishLevelGrid button>b{margin-top:5px;font-size:9px;font-weight:1000}
+.bbEnglishLevelGrid button>small{margin-top:2px;font-size:6px;opacity:.78;font-weight:800}
+.bbEnglishLevelGrid button>em{
+  margin-top:5px;padding:3px 6px;border-radius:999px;
+  font-size:6px;font-style:normal;font-weight:1000;
+  background:rgba(255,255,255,.13)
+}
+.bbEnglishLevelGrid button.active>em{background:rgba(87,94,143,.09)}
+@media(max-width:900px){
+  .bbEnglishLevelGrid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:520px){
+  .bbEnglishLevelChooser{padding:10px}
+  .bbEnglishLevelHead{align-items:flex-start}
+  .bbEnglishLevelGrid{grid-template-columns:repeat(2,1fr)}
+  .bbEnglishLevelGrid button{min-height:82px}
+}
+
 </style>
 
 <script>
@@ -10055,30 +10129,60 @@ try{
     </button>
   </div>
 
+
+  <section class="bbEnglishLevelChooser hidden" id="bbEnglishLevelSelector">
+    <div class="bbEnglishLevelHead">
+      <div>
+        <small>ENGLISH JOURNEY • A1 → C1</small>
+        <h2>เลือกระดับภาษาอังกฤษ</h2>
+        <p id="bbEnglishSelectedLevelName">🌱 A1 • Beginner</p>
+      </div>
+      <span class="bbEnglishBankBadge"><b id="bbEnglishLevelTotal">0</b> รายการ</span>
+    </div>
+
+    <div class="bbEnglishLevelGrid">
+      <button type="button" data-english-level="a1" class="active">
+        <span>🌱</span><b>A1</b><small>Beginner</small><em data-english-level-count="a1">0 รายการ</em>
+      </button>
+      <button type="button" data-english-level="a2">
+        <span>✨</span><b>A2</b><small>Elementary</small><em data-english-level-count="a2">0 รายการ</em>
+      </button>
+      <button type="button" data-english-level="b1">
+        <span>🧠</span><b>B1</b><small>Intermediate</small><em data-english-level-count="b1">0 รายการ</em>
+      </button>
+      <button type="button" data-english-level="b2">
+        <span>🔥</span><b>B2</b><small>Upper Intermediate</small><em data-english-level-count="b2">0 รายการ</em>
+      </button>
+      <button type="button" data-english-level="c1">
+        <span>👑</span><b>C1</b><small>Advanced</small><em data-english-level-count="c1">0 รายการ</em>
+      </button>
+    </div>
+  </section>
+
   <div class="bbSubjectGameGrid bbEnglishGameGrid hidden" id="bbEnglishGameGrid">
     <button class="bbSubjectGameCard rose" data-learning-start data-learning-subject="language" data-learning-type="vocabulary" data-learning-title="Vocabulary">
       <span class="icon vocab"><i>A</i></span>
-      <span class="copy"><b>Vocabulary</b><small>ดูคำศัพท์แล้วเลือกความหมายที่ถูกต้อง</small><em>ฝึกคำศัพท์</em></span><span class="play">▶</span>
+      <span class="copy"><b>Vocabulary</b><small>ดูคำศัพท์แล้วเลือกความหมายที่ถูกต้อง</small><em><span data-content-count="english:vocabulary">0</span> รายการ</em></span><span class="play">▶</span>
     </button>
     <button class="bbSubjectGameCard lime" data-learning-start data-learning-subject="language" data-learning-type="multiple_choice" data-learning-title="Multiple Choice">
       <span class="icon choice"><i>A</i><i>B</i><i>C</i></span>
-      <span class="copy"><b>Multiple Choice</b><small>ตอบคำถามภาษาอังกฤษแบบหลายตัวเลือก</small><em>เลือกตอบ</em></span><span class="play">▶</span>
+      <span class="copy"><b>Multiple Choice</b><small>ตอบคำถามภาษาอังกฤษแบบหลายตัวเลือก</small><em><span data-content-count="english:multiple_choice">0</span> รายการ</em></span><span class="play">▶</span>
     </button>
     <button class="bbSubjectGameCard gold" data-learning-start data-learning-subject="language" data-learning-type="matching" data-learning-title="Matching">
       <span class="icon match"><i>A</i><b>TH</b></span>
-      <span class="copy"><b>Matching</b><small>จับคำศัพท์ให้ตรงกับความหมาย</small><em>จับคู่คำ</em></span><span class="play">▶</span>
+      <span class="copy"><b>Matching</b><small>จับคำศัพท์ให้ตรงกับความหมาย</small><em><span data-content-count="english:matching">0</span> รายการ</em></span><span class="play">▶</span>
     </button>
     <button class="bbSubjectGameCard blue" data-learning-start data-learning-subject="language" data-learning-type="typing" data-learning-title="Typing">
       <span class="icon keyboard"><i>A</i><i>B</i><i>C</i></span>
-      <span class="copy"><b>Typing</b><small>ฝึกพิมพ์คำตอบด้วยตัวเอง</small><em>พิมพ์ตอบ</em></span><span class="play">▶</span>
+      <span class="copy"><b>Typing</b><small>ฝึกพิมพ์คำตอบด้วยตัวเอง</small><em><span data-content-count="english:typing">0</span> รายการ</em></span><span class="play">▶</span>
     </button>
     <button class="bbSubjectGameCard purple" data-learning-start data-learning-subject="language" data-learning-type="sentence_order" data-learning-title="Sentence Order">
       <span class="icon order"><i>I</i><i>♥</i><i>U</i></span>
-      <span class="copy"><b>Sentence Order</b><small>เรียงคำให้เป็นประโยคภาษาอังกฤษที่ถูกต้อง</small><em>เรียงประโยค</em></span><span class="play">▶</span>
+      <span class="copy"><b>Sentence Order</b><small>เรียงคำให้เป็นประโยคภาษาอังกฤษที่ถูกต้อง</small><em><span data-content-count="english:sentence_order">0</span> รายการ</em></span><span class="play">▶</span>
     </button>
     <button class="bbSubjectGameCard cyan" data-learning-start data-learning-subject="language" data-learning-type="listening" data-learning-title="Listening">
       <span class="icon sound"><i></i><b></b></span>
-      <span class="copy"><b>Listening</b><small>ฟังแล้วตอบคำถามให้ถูกต้อง</small><em>ฟังแล้วตอบ</em></span><span class="play">▶</span>
+      <span class="copy"><b>Listening</b><small>ฟังแล้วตอบคำถามให้ถูกต้อง</small><em><span data-content-count="english:listening">0</span> รายการ</em></span><span class="play">▶</span>
     </button>
   </div>
 
@@ -16502,7 +16606,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let lang="chinese";
   let contentRows=[];
   let mathCountRows=[];
+  let englishCountRows=[];
   let mathLevel=localStorage.getItem("bb_math_level_v77")||"math1";
+  let englishLevel=localStorage.getItem("bb_english_level_v78")||"a1";
   let learning={
     subject:null,type:null,title:null,rows:[],allRows:[],index:0,score:0,correct:0,
     answered:false,selectedTokens:[],orderTarget:null,returnScreen:"modes",startedAt:0,rewardSubmitted:false
@@ -16515,6 +16621,14 @@ document.addEventListener('DOMContentLoaded', () => {
     math4:{icon:"💎",name:"Math 4",title:"จ้าวเศษส่วน",difficulty:"hard"},
     math5:{icon:"🔥",name:"Math 5",title:"นักแก้สมการ",difficulty:"hard"},
     math6:{icon:"👑",name:"Math 6",title:"ตัวตึงคณิต",difficulty:"expert"}
+  };
+
+  const englishLevels={
+    a1:{icon:"🌱",name:"A1",title:"Beginner",difficulty:"easy"},
+    a2:{icon:"✨",name:"A2",title:"Elementary",difficulty:"normal"},
+    b1:{icon:"🧠",name:"B1",title:"Intermediate",difficulty:"normal"},
+    b2:{icon:"🔥",name:"B2",title:"Upper Intermediate",difficulty:"hard"},
+    c1:{icon:"👑",name:"C1",title:"Advanced",difficulty:"expert"}
   };
 
   const labels={
@@ -16543,61 +16657,84 @@ document.addEventListener('DOMContentLoaded', () => {
   function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
 
   async function loadCounts(){
+    const c=client();
+    if(!c)return;
+
+    // แต่ละคลังโหลดแยกกัน เพื่อไม่ให้คลังใดคลังหนึ่งมีปัญหาแล้วตัวเลขอีกโลกกลายเป็น 0 ทั้งหมด
     try{
-      const c=client(); if(!c)return;
-
-      const [learningResult,mathResult]=await Promise.all([
-        c.from("bb_learning_content")
-          .select("id,subject,content_type")
-          .eq("active",true),
-
-        c.from("bb_math_questions")
-          .select("id,level_code,game_type")
-          .eq("active",true)
-      ]);
-
-      if(learningResult.error)throw learningResult.error;
-      if(mathResult.error)throw mathResult.error;
-
-      contentRows=learningResult.data||[];
-      mathCountRows=mathResult.data||[];
-
-      const chinese=contentRows.filter(x=>x.subject==="chinese");
-      const english=contentRows.filter(x=>x.subject==="english");
-
-      if(q("#bbMathContentCount"))q("#bbMathContentCount").textContent=mathCountRows.length;
-      if(q("#bbLanguageContentCount"))q("#bbLanguageContentCount").textContent=chinese.length+english.length;
-
-      document.querySelectorAll("[data-content-count]").forEach(el=>{
-        const [s,t]=el.dataset.contentCount.split(":");
-
-        if(s==="math"){
-          const pool=mathCountRows.filter(x=>x.level_code===mathLevel);
-          const n=t==="all"
-            ? pool.length
-            : pool.filter(x=>x.game_type===t).length;
-          el.textContent=n;
-          return;
-        }
-
-        const n=t==="all"
-          ? contentRows.filter(x=>x.subject===s).length
-          : contentRows.filter(x=>x.subject===s&&x.content_type===t).length;
-        el.textContent=n;
-      });
-
-      document.querySelectorAll("[data-math-level-count]").forEach(el=>{
-        const code=el.dataset.mathLevelCount;
-        const n=mathCountRows.filter(x=>x.level_code===code).length;
-        el.textContent=`${n.toLocaleString()} ข้อ`;
-      });
-
-      applyMathLevelUI();
-      updateLanguageCounts();
-
+      const learningResult=await c.from("bb_learning_content")
+        .select("id,subject,content_type")
+        .eq("active",true);
+      if(!learningResult.error)contentRows=learningResult.data||[];
     }catch(e){
-      console.warn("Learning counts:",e);
+      console.warn("Legacy learning counts:",e);
     }
+
+    try{
+      const mathResult=await c.from("bb_math_questions")
+        .select("id,level_code,game_type")
+        .eq("active",true);
+      if(mathResult.error)throw mathResult.error;
+      mathCountRows=mathResult.data||[];
+    }catch(e){
+      console.warn("Math counts:",e);
+      mathCountRows=[];
+    }
+
+    try{
+      const englishResult=await c.from("bb_english_content")
+        .select("id,level_code,content_type")
+        .eq("active",true);
+      if(englishResult.error)throw englishResult.error;
+      englishCountRows=englishResult.data||[];
+    }catch(e){
+      console.warn("English counts:",e);
+      englishCountRows=[];
+    }
+
+    const chinese=contentRows.filter(x=>x.subject==="chinese");
+
+    if(q("#bbMathContentCount"))q("#bbMathContentCount").textContent=mathCountRows.length.toLocaleString();
+    if(q("#bbLanguageContentCount"))q("#bbLanguageContentCount").textContent=(chinese.length+englishCountRows.length).toLocaleString();
+
+    document.querySelectorAll("[data-content-count]").forEach(el=>{
+      const [s,t]=el.dataset.contentCount.split(":");
+
+      if(s==="math"){
+        const pool=mathCountRows.filter(x=>x.level_code===mathLevel);
+        const n=t==="all" ? pool.length : pool.filter(x=>x.game_type===t).length;
+        el.textContent=n.toLocaleString();
+        return;
+      }
+
+      if(s==="english"){
+        const pool=englishCountRows.filter(x=>x.level_code===englishLevel);
+        const n=t==="all" ? pool.length : pool.filter(x=>x.content_type===t).length;
+        el.textContent=n.toLocaleString();
+        return;
+      }
+
+      const n=t==="all"
+        ? contentRows.filter(x=>x.subject===s).length
+        : contentRows.filter(x=>x.subject===s&&x.content_type===t).length;
+      el.textContent=n.toLocaleString();
+    });
+
+    document.querySelectorAll("[data-math-level-count]").forEach(el=>{
+      const code=el.dataset.mathLevelCount;
+      const n=mathCountRows.filter(x=>x.level_code===code).length;
+      el.textContent=`${n.toLocaleString()} ข้อ`;
+    });
+
+    document.querySelectorAll("[data-english-level-count]").forEach(el=>{
+      const code=el.dataset.englishLevelCount;
+      const n=englishCountRows.filter(x=>x.level_code===code).length;
+      el.textContent=`${n.toLocaleString()} รายการ`;
+    });
+
+    applyMathLevelUI();
+    applyEnglishLevelUI();
+    updateLanguageCounts();
   }
 
   function applyMathLevelUI(){
@@ -16629,13 +16766,52 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+
+  function applyEnglishLevelUI(){
+    if(!englishLevels[englishLevel])englishLevel="a1";
+    const meta=englishLevels[englishLevel];
+
+    document.querySelectorAll("[data-english-level]").forEach(btn=>{
+      btn.classList.toggle("active",btn.dataset.englishLevel===englishLevel);
+    });
+
+    if(q("#bbEnglishSelectedLevelName")){
+      q("#bbEnglishSelectedLevelName").textContent=
+        `${meta.icon} ${meta.name} • ${meta.title}`;
+    }
+
+    if(q("#bbEnglishLevelTotal")){
+      q("#bbEnglishLevelTotal").textContent=
+        englishCountRows.filter(x=>x.level_code===englishLevel).length.toLocaleString();
+    }
+
+    document.querySelectorAll('[data-content-count^="english:"]').forEach(el=>{
+      const [,type]=el.dataset.contentCount.split(":");
+      const pool=englishCountRows.filter(x=>x.level_code===englishLevel);
+      el.textContent=(
+        type==="all"
+          ? pool.length
+          : pool.filter(x=>x.content_type===type).length
+      ).toLocaleString();
+    });
+  }
+
   function updateLanguageCounts(){
     if(q("#bbLanguageHeading"))q("#bbLanguageHeading").textContent=lang==="chinese"?"Chinese Games":"English Games";
     document.querySelectorAll("[data-language-choice]").forEach(b=>b.classList.toggle("active",b.dataset.languageChoice===lang));
+    q("#bbEnglishLevelSelector")?.classList.toggle("hidden",lang!=="english");
+
     document.querySelectorAll("[data-language-count]").forEach(el=>{
       const t=el.dataset.languageCount;
-      el.textContent=contentRows.filter(x=>x.subject===lang&&x.content_type===t).length;
+      if(lang==="english"){
+        const pool=englishCountRows.filter(x=>x.level_code===englishLevel);
+        el.textContent=pool.filter(x=>x.content_type===t).length.toLocaleString();
+      }else{
+        el.textContent=contentRows.filter(x=>x.subject===lang&&x.content_type===t).length.toLocaleString();
+      }
     });
+
+    if(lang==="english")applyEnglishLevelUI();
   }
 
   function returnScreenForSubject(subject){
@@ -16707,6 +16883,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
         q("#bbLearningSubjectLabel").textContent=
           `${mathLevels[mathLevel]?.icon||"➗"} ${mathLevels[mathLevel]?.name||"Math"}`;
+
+      }else if(subject==="english"){
+        let req=c.from("bb_english_content")
+          .select("id,content_code,level_code,content_type,skill_code,word,phonetic,meaning_th,meaning_en,prompt,answer,options,example_en,example_th,explanation,hint,image_url,audio_url,base_score")
+          .eq("active",true)
+          .eq("level_code",englishLevel)
+          .limit(300);
+
+        if(type!=="all")req=req.eq("content_type",type);
+
+        const result=await req;
+        if(result.error)throw result.error;
+
+        const allResult=await c.from("bb_english_content")
+          .select("id,level_code,content_type,word,meaning_th,meaning_en,answer")
+          .eq("active",true)
+          .eq("level_code",englishLevel)
+          .limit(300);
+
+        if(allResult.error)throw allResult.error;
+
+        const meta=englishLevels[englishLevel]||englishLevels.a1;
+
+        data=(result.data||[]).map(row=>({
+          ...row,
+          subject:"english",
+          difficulty:meta.difficulty,
+          category:row.skill_code||row.content_type,
+          pinyin:row.phonetic||"",
+          meaning:row.meaning_th||row.meaning_en||"",
+          example_text:[row.example_en,row.example_th].filter(Boolean).join(" • "),
+          english_level:row.level_code
+        }));
+
+        all=(allResult.data||[]).map(row=>({
+          ...row,
+          subject:"english",
+          difficulty:meta.difficulty,
+          category:row.content_type,
+          meaning:row.meaning_th||row.meaning_en||"",
+          english_level:row.level_code
+        }));
+
+        q("#bbLearningSubjectLabel").textContent=
+          `${meta.icon} English ${meta.name}`;
 
       }else{
         let req=c.from("bb_learning_content")
@@ -16783,6 +17004,7 @@ document.addEventListener('DOMContentLoaded', () => {
     q("#bbLearningAudio").classList.add("hidden");
     q("#bbLearningAudio").dataset.url="";
     q("#bbLearningAudio").dataset.tts="";
+    q("#bbLearningAudio").dataset.lang="";
     q("#bbLearningInput").value="";
     learning.selectedTokens=[];
     learning.orderTarget=null;
@@ -16802,13 +17024,17 @@ document.addEventListener('DOMContentLoaded', () => {
     q("#bbLearningDifficulty").textContent=
       learning.subject==="math"
         ? `${mathLevels[row.math_level]?.icon||"➗"} ${mathLevels[row.math_level]?.name||""} • ${diff[row.difficulty]||row.difficulty||""}`
-        : (diff[row.difficulty]||row.difficulty||"");
+        : learning.subject==="english"
+          ? `${englishLevels[row.english_level]?.icon||"🇬🇧"} ${englishLevels[row.english_level]?.name||"English"} • ${diff[row.difficulty]||row.difficulty||""}`
+          : (diff[row.difficulty]||row.difficulty||"");
 
     q("#bbLearningPrompt").textContent=row.prompt||"";
     q("#bbLearningSubPrompt").textContent=
       learning.subject==="math"
         ? (row.hint?`💡 ${row.hint}`:"")
-        : (row.pinyin || row.meaning || "");
+        : learning.subject==="english"
+          ? (row.pinyin||"")
+          : (row.pinyin || row.meaning || "");
 
     const type=learning.type==="all" ? row.content_type : learning.type;
 
@@ -16819,12 +17045,18 @@ document.addEventListener('DOMContentLoaded', () => {
         q("#bbLearningAudio").dataset.url=row.audio_url;
       }else if(learning.subject==="math"){
         q("#bbLearningAudio").dataset.tts=row.prompt||"";
+        q("#bbLearningAudio").dataset.lang="th-TH";
+      }else if(learning.subject==="english"){
+        q("#bbLearningAudio").dataset.tts=row.word||row.prompt||row.answer||"";
+        q("#bbLearningAudio").dataset.lang="en-US";
       }
 
       q("#bbLearningPrompt").textContent=
         learning.subject==="math"
           ? "🔊 ฟังโจทย์แล้วเลือกคำตอบที่ถูกต้อง"
-          : "ฟังแล้วเลือกคำตอบที่ถูกต้อง";
+          : learning.subject==="english"
+            ? "🎧 ฟังคำศัพท์ แล้วเลือกคำที่ได้ยิน"
+            : "ฟังแล้วเลือกคำตอบที่ถูกต้อง";
 
       renderChoices(row);
     }else if(type==="typing"){
@@ -16909,7 +17141,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if(learning.answered)return;
     const row=current(),ans=q("#bbLearningInput").value;
     if(!ans.trim())return;
-    const ok=[row.answer,row.meaning,row.pinyin].filter(Boolean).some(x=>norm(x)===norm(ans));
+
+    let accepted=[row.answer,row.meaning,row.pinyin];
+    if(learning.subject==="english")accepted=[row.answer,row.word];
+    if(learning.subject==="math")accepted=[row.answer];
+
+    const ok=accepted.filter(Boolean).some(x=>norm(x)===norm(ans));
     showFeedback(ok,row);
   }
 
@@ -16980,7 +17217,9 @@ document.addEventListener('DOMContentLoaded', () => {
     q("#bbLearningFinalText").textContent=
       learning.subject==="math"
         ? `ตอบถูก ${learning.correct} จาก ${learning.rows.length} ข้อ • ${mathLevels[mathLevel]?.icon||"➗"} ${mathLevels[mathLevel]?.name||"Math"} • ${learning.title}`
-        : `ตอบถูก ${learning.correct} จาก ${learning.rows.length} ข้อ • ${labels[learning.subject]||""} • ${learning.title}`;
+        : learning.subject==="english"
+          ? `ตอบถูก ${learning.correct} จาก ${learning.rows.length} ข้อ • 🇬🇧 ${englishLevels[englishLevel]?.name||"English"} • ${learning.title}`
+          : `ตอบถูก ${learning.correct} จาก ${learning.rows.length} ข้อ • ${labels[learning.subject]||""} • ${learning.title}`;
 
     const modeCode=genericModeCode();
     if(!modeCode||learning.rewardSubmitted)return;
@@ -17004,7 +17243,9 @@ document.addEventListener('DOMContentLoaded', () => {
         q("#bbLearningFinalText").textContent=
           learning.subject==="math"
             ? `ตอบถูก ${learning.correct} จาก ${learning.rows.length} ข้อ • ${mathLevels[mathLevel]?.icon||"➗"} ${mathLevels[mathLevel]?.name||"Math"} • +${Number(result.exp_gained||0)} EXP`
-            : `ตอบถูก ${learning.correct} จาก ${learning.rows.length} ข้อ • ${labels[learning.subject]||""} • +${Number(result.exp_gained||0)} EXP`;
+            : learning.subject==="english"
+              ? `ตอบถูก ${learning.correct} จาก ${learning.rows.length} ข้อ • 🇬🇧 ${englishLevels[englishLevel]?.name||"English"} • +${Number(result.exp_gained||0)} EXP`
+              : `ตอบถูก ${learning.correct} จาก ${learning.rows.length} ข้อ • ${labels[learning.subject]||""} • +${Number(result.exp_gained||0)} EXP`;
       }
     });
   }
@@ -17015,6 +17256,14 @@ document.addEventListener('DOMContentLoaded', () => {
       mathLevel=mathLevelBtn.dataset.mathLevel;
       try{localStorage.setItem("bb_math_level_v77",mathLevel)}catch(err){}
       applyMathLevelUI();
+      return;
+    }
+
+    const englishLevelBtn=e.target.closest("[data-english-level]");
+    if(englishLevelBtn){
+      englishLevel=englishLevelBtn.dataset.englishLevel;
+      try{localStorage.setItem("bb_english_level_v78",englishLevel)}catch(err){}
+      applyEnglishLevelUI();
       return;
     }
 
@@ -17081,7 +17330,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }else if(btn.dataset.tts&&"speechSynthesis" in window){
         window.speechSynthesis.cancel();
         const utter=new SpeechSynthesisUtterance(btn.dataset.tts);
-        utter.lang="th-TH";
+        utter.lang=btn.dataset.lang||"th-TH";
         utter.rate=.88;
         window.speechSynthesis.speak(utter);
       }
@@ -17285,6 +17534,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     q("#bbHSKSelector")?.classList.toggle("hidden",activeLanguage!=="chinese");
     q("#bbHSKCoverage")?.classList.toggle("hidden",activeLanguage!=="chinese");
+    q("#bbEnglishLevelSelector")?.classList.toggle("hidden",activeLanguage!=="english");
     q("#bbChineseGameGrid")?.classList.toggle("hidden",activeLanguage!=="chinese");
     q("#bbEnglishGameGrid")?.classList.toggle("hidden",activeLanguage!=="english");
   }
