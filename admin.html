@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#765fda">
 <meta name="author" content="Sulawit Songsang">
-<title>Brain Buddy • Admin Center v70</title>
+<title>Brain Buddy • Admin Center v71</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
 document.addEventListener("click",e=>{
  const open=e.target.closest("[data-user-open]");
@@ -1071,6 +1071,240 @@ button{cursor:pointer}
   .mathDeleteBtn{grid-column:1/-1}
 }
 
+
+/* ==========================================================
+   Admin v71 — English Manager
+   ========================================================== */
+.englishManagerHero{
+  display:grid;
+  grid-template-columns:58px minmax(0,1fr) auto;
+  gap:12px;align-items:center;
+  padding:14px;margin-bottom:10px;border-radius:20px;
+  background:linear-gradient(135deg,#eaf5ff,#f1ebff 50%,#fff2d8);
+  border:1px solid #dfe8ef
+}
+.englishManagerHeroIcon{
+  width:58px;height:58px;border-radius:18px;
+  display:grid;place-items:center;
+  background:linear-gradient(145deg,#5878d6,#845fd6);
+  color:#fff;font-size:28px;font-weight:1000;
+  box-shadow:0 9px 20px rgba(62,82,153,.17)
+}
+.englishManagerHero small{
+  color:#7887a0;font-size:7px;letter-spacing:.13em;font-weight:1000
+}
+.englishManagerHero h3{margin:2px 0;color:#4f506c;font-size:20px}
+.englishManagerHero p{margin:2px 0;color:#85849a;font-size:9px;line-height:1.5}
+.englishManagerHeroTotal{
+  min-width:118px;padding:10px 13px;border-radius:15px;
+  background:rgba(255,255,255,.76);text-align:center
+}
+.englishManagerHeroTotal small{display:block;color:#9293a3;font-size:7px;letter-spacing:0}
+.englishManagerHeroTotal strong{display:inline-block;color:#555776;font-size:26px}
+.englishManagerHeroTotal span{color:#9393a5;font-size:7px;font-weight:900}
+
+.englishLevelStats{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-bottom:8px
+}
+.englishLevelStats article{
+  min-height:78px;padding:10px;border-radius:16px;
+  display:flex;align-items:center;gap:8px;
+  background:#fff;border:1px solid #e8e8f0;cursor:pointer;transition:.15s ease
+}
+.englishLevelStats article:hover{
+  transform:translateY(-1px);border-color:#cfd4eb;
+  box-shadow:0 7px 17px rgba(55,66,115,.06)
+}
+.englishLevelStats article>span{
+  width:37px;height:37px;flex:0 0 37px;border-radius:11px;
+  display:grid;place-items:center;background:#eef2ff;font-size:17px
+}
+.englishLevelStats small{display:block;color:#9191a2;font-size:6px;font-weight:1000}
+.englishLevelStats strong{display:block;color:#54556f;font-size:16px;line-height:1.1}
+.englishLevelStats em{
+  display:block;margin-top:2px;color:#9999a8;font-size:6px;font-style:normal;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+
+.englishManagerSummary{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-bottom:11px
+}
+.englishManagerSummary article{
+  padding:9px;border-radius:15px;display:flex;align-items:center;gap:7px;
+  background:linear-gradient(145deg,#fff,#f9faff);border:1px solid #e9e9f1
+}
+.englishManagerSummary article>span{
+  width:34px;height:34px;flex:0 0 34px;border-radius:10px;
+  display:grid;place-items:center;background:#eef2ff;font-size:15px
+}
+.englishManagerSummary small{display:block;color:#9393a1;font-size:6px;font-weight:1000}
+.englishManagerSummary strong{display:inline-block;color:#55566f;font-size:14px}
+.englishManagerSummary em{margin-left:2px;color:#9d9baa;font-size:6px;font-style:normal}
+
+.englishContentManager{
+  padding:12px;border-radius:20px;background:#fff;border:1px solid #e7e7ef
+}
+.englishContentManagerHead{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px
+}
+.englishContentManagerHead small{
+  display:block;color:#7487a8;font-size:7px;letter-spacing:.13em;font-weight:1000
+}
+.englishContentManagerHead h3{margin:2px 0;color:#52546c;font-size:17px}
+.englishContentManagerHead p{margin:2px 0;color:#8a899b;font-size:8px}
+
+.englishManagerFilters{
+  display:grid;
+  grid-template-columns:145px 165px 130px minmax(190px,1fr) 125px auto;
+  gap:7px;align-items:end
+}
+.englishManagerFilters label{display:grid;gap:4px}
+.englishManagerFilters label>span{color:#77788d;font-size:8px;font-weight:900}
+.englishManagerFilters input,.englishManagerFilters select{
+  min-height:39px;border:1px solid #e1e2eb;border-radius:11px;
+  padding:0 9px;background:#fff;color:#555665;font-size:8px;outline:none
+}
+.englishManagerFilters input:focus,.englishManagerFilters select:focus{
+  border-color:#728bdc;box-shadow:0 0 0 3px rgba(87,111,197,.07)
+}
+.englishManagerMeta{
+  display:flex;justify-content:space-between;margin:8px 3px;
+  color:#858697;font-size:8px;font-weight:850
+}
+.englishContentList{display:grid;gap:7px}
+
+.englishContentRow{
+  display:grid;
+  grid-template-columns:70px minmax(0,1.45fr) minmax(125px,.7fr) 95px 145px;
+  gap:8px;align-items:center;
+  padding:9px;border-radius:16px;background:#fff;border:1px solid #e8e8f0
+}
+.englishContentRow.inactive{opacity:.58;background:#fafafa}
+.englishContentLevel{
+  min-height:56px;padding:8px;border-radius:13px;
+  display:flex;flex-direction:column;justify-content:center;text-align:center;
+  background:linear-gradient(145deg,#eef4ff,#f1ebff)
+}
+.englishContentLevel b{color:#555a78;font-size:10px}
+.englishContentLevel small{color:#9696a7;font-size:6px;margin-top:2px}
+
+.englishContentMain{min-width:0}
+.englishContentMain .topline{
+  display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-bottom:3px
+}
+.englishTypeBadge,.englishSkillBadge{
+  padding:3px 6px;border-radius:999px;font-size:6px;font-weight:1000
+}
+.englishTypeBadge{background:#eaf0ff;color:#536aab}
+.englishSkillBadge{background:#fff1d8;color:#8a6b28}
+.englishContentMain h4{
+  margin:0;color:#505167;font-size:11px;line-height:1.4;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.englishContentMain p{
+  margin:2px 0 0;color:#817f90;font-size:8px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.englishContentMain code{display:block;margin-top:3px;color:#a4a3ae;font-size:6px}
+
+.englishContentAnswer{
+  min-width:0;padding:8px;border-radius:11px;background:#f8f9fd
+}
+.englishContentAnswer small{display:block;color:#9595a5;font-size:6px;font-weight:900}
+.englishContentAnswer strong{
+  display:block;margin-top:2px;color:#55566d;font-size:9px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.englishContentScore{text-align:center}
+.englishContentScore small{display:block;color:#9999a7;font-size:6px;font-weight:900}
+.englishContentScore strong{display:block;color:#565870;font-size:11px}
+
+.englishContentActions{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.englishContentActions button{
+  min-height:34px;border:0;border-radius:9px;font-size:7px;font-weight:1000;cursor:pointer
+}
+.englishContentActions .edit{background:#e9efff;color:#5369a5}
+.englishContentActions .toggleOn{background:#ffe8ef;color:#a24f6a}
+.englishContentActions .toggleOff{background:#def9eb;color:#337558}
+
+.englishEditModalCard{
+  width:min(96vw,920px)!important;max-height:93vh!important;
+  overflow:auto!important;text-align:left!important
+}
+.englishEditHeader{
+  display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px
+}
+.englishEditHeader small{
+  display:block;color:#6c82aa;font-size:7px;letter-spacing:.13em;font-weight:1000
+}
+.englishEditHeader h3{margin:2px 0;color:#50516a;font-size:21px}
+.englishEditHeader p{margin:2px 0;color:#8d8d9c;font-size:8px}
+
+.englishEditForm label{display:grid;gap:4px;margin-bottom:8px}
+.englishEditForm label>span{color:#6c6d82;font-size:8px;font-weight:900}
+.englishEditForm input,.englishEditForm select,.englishEditForm textarea{
+  width:100%;border:1px solid #dfe1ea;border-radius:11px;
+  padding:8px 10px;background:#fff;color:#50515e;font-size:9px;outline:none
+}
+.englishEditForm input,.englishEditForm select{min-height:40px}
+.englishEditForm textarea{resize:vertical;line-height:1.5}
+.englishEditForm input:focus,.englishEditForm select:focus,.englishEditForm textarea:focus{
+  border-color:#7189d7;box-shadow:0 0 0 3px rgba(79,105,191,.07)
+}
+
+.englishEditSection{
+  padding:11px;margin-bottom:8px;border-radius:16px;background:#f8f9fd
+}
+.englishEditSectionTitle{
+  display:flex;align-items:center;gap:8px;margin-bottom:8px
+}
+.englishEditSectionTitle>span{
+  width:29px;height:29px;flex:0 0 29px;border-radius:9px;
+  display:grid;place-items:center;background:linear-gradient(145deg,#5879d2,#8065d5);
+  color:#fff;font-size:9px;font-weight:1000
+}
+.englishEditSectionTitle b{display:block;color:#52536b;font-size:10px}
+.englishEditSectionTitle small{display:block;color:#9292a1;font-size:7px;margin-top:1px}
+.englishCheckWrap{
+  min-height:40px;padding:0 10px;border-radius:11px;background:#fff;border:1px solid #dfe1ea;
+  display:flex!important;align-items:center;gap:7px
+}
+.englishCheckWrap input{width:auto!important;min-height:auto!important}
+.englishCheckWrap b{color:#57586c;font-size:8px}
+.englishFieldHelp{color:#9292a1;font-size:7px;font-weight:700!important}
+
+.englishEditActions{
+  display:grid;grid-template-columns:auto 1fr auto auto;gap:7px;align-items:center;margin-top:10px
+}
+.englishDeleteBtn{
+  min-height:40px;border:0;border-radius:11px;padding:0 12px;
+  background:#ffe8ee;color:#a34d67;font-size:8px;font-weight:1000;cursor:pointer
+}
+.englishDeleteBtn.hidden{display:none}
+
+@media(max-width:1050px){
+  .englishLevelStats{grid-template-columns:repeat(3,1fr)}
+  .englishManagerSummary{grid-template-columns:repeat(3,1fr)}
+  .englishManagerFilters{grid-template-columns:1fr 1fr 1fr}
+  .englishManagerFilters .search{grid-column:1/3}
+  .englishContentRow{grid-template-columns:70px minmax(0,1fr) 120px 80px}
+  .englishContentActions{grid-column:2/-1}
+}
+@media(max-width:650px){
+  .englishManagerHero{grid-template-columns:50px minmax(0,1fr)}
+  .englishManagerHeroIcon{width:50px;height:50px}
+  .englishManagerHeroTotal{grid-column:1/-1}
+  .englishLevelStats,.englishManagerSummary{grid-template-columns:1fr 1fr}
+  .englishManagerFilters{grid-template-columns:1fr}
+  .englishManagerFilters .search{grid-column:auto}
+  .englishContentManagerHead{flex-direction:column;align-items:stretch}
+  .englishContentRow{grid-template-columns:60px minmax(0,1fr)}
+  .englishContentAnswer,.englishContentScore,.englishContentActions{grid-column:1/-1}
+  .englishEditActions{grid-template-columns:1fr 1fr}
+  .englishEditActions>div{display:none}
+  .englishDeleteBtn{grid-column:1/-1}
+}
+
 </style>
 </head>
 <body>
@@ -1085,6 +1319,7 @@ button{cursor:pointer}
       <button data-admin-panel="learning">คำศัพท์ / โจทย์</button>
       <button data-admin-panel="hsk">HSK 1–6</button>
       <button data-admin-panel="math">➗ Math Manager</button>
+      <button data-admin-panel="english">🇬🇧 English Manager</button>
       <button data-admin-panel="games">🎮 Game Control</button>
       <button data-admin-panel="users">👥 User Control</button>
     </div>
@@ -1099,7 +1334,7 @@ button{cursor:pointer}
       <div>
         <span class="status">ADMIN CONTROL CENTER</span>
         <h1>ศูนย์จัดการ Brain Buddy</h1>
-        <p>จัดการตัวหมี HSK คลังโจทย์ Math เกม สมาชิก Coins EXP และ Rank จากหน้าเดียว</p>
+        <p>จัดการตัวหมี HSK Math English เกม สมาชิก Coins EXP และ Rank จากหน้าเดียว</p>
       </div>
       <div class="heroArt"><span class="brain"></span><span class="bear"></span><span class="book"></span></div>
     </div>
@@ -1569,6 +1804,160 @@ button{cursor:pointer}
       </section>
     </section>
 
+
+    <!-- ENGLISH MANAGER -->
+    <section class="adminPanel" id="panel-english">
+
+      <div class="toolbar">
+        <div>
+          <h2>🇬🇧 English Manager</h2>
+          <p>จัดการคลังภาษาอังกฤษ A1–C1 ทั้งคำศัพท์ ความหมาย ประโยค เกมเสียง และโจทย์ฝึกภาษา</p>
+        </div>
+        <div class="actions">
+          <button class="btn" id="englishManagerReload">รีเฟรช</button>
+          <button class="btn primary" id="englishManagerNew">+ เพิ่มเนื้อหาใหม่</button>
+        </div>
+      </div>
+
+      <div class="englishManagerHero">
+        <div class="englishManagerHeroIcon">A</div>
+        <div>
+          <small>ENGLISH JOURNEY • A1 → C1</small>
+          <h3>คลัง English World</h3>
+          <p>ตรวจและปรับเนื้อหาให้พร้อมก่อนเปิด English ใน Game Control</p>
+        </div>
+        <div class="englishManagerHeroTotal">
+          <small>รายการทั้งหมด</small>
+          <strong id="englishStatTotal">0</strong>
+          <span>รายการ</span>
+        </div>
+      </div>
+
+      <div class="englishLevelStats" id="englishLevelStats">
+        <article data-english-stat-level="a1">
+          <span>🌱</span><div><small>A1</small><strong>0</strong><em>Beginner</em></div>
+        </article>
+        <article data-english-stat-level="a2">
+          <span>✨</span><div><small>A2</small><strong>0</strong><em>Elementary</em></div>
+        </article>
+        <article data-english-stat-level="b1">
+          <span>🧠</span><div><small>B1</small><strong>0</strong><em>Intermediate</em></div>
+        </article>
+        <article data-english-stat-level="b2">
+          <span>🔥</span><div><small>B2</small><strong>0</strong><em>Upper Intermediate</em></div>
+        </article>
+        <article data-english-stat-level="c1">
+          <span>👑</span><div><small>C1</small><strong>0</strong><em>Advanced</em></div>
+        </article>
+      </div>
+
+      <div class="englishManagerSummary">
+        <article>
+          <span>🟢</span>
+          <div><small>เปิดใช้งาน</small><strong id="englishStatActive">0</strong><em>รายการ</em></div>
+        </article>
+        <article>
+          <span>🔒</span>
+          <div><small>ปิดไว้</small><strong id="englishStatInactive">0</strong><em>รายการ</em></div>
+        </article>
+        <article>
+          <span>📚</span>
+          <div><small>Vocabulary</small><strong id="englishStatVocab">0</strong><em>รายการ</em></div>
+        </article>
+        <article>
+          <span>🎯</span>
+          <div><small>Choice</small><strong id="englishStatChoice">0</strong><em>รายการ</em></div>
+        </article>
+        <article>
+          <span>⌨️</span>
+          <div><small>Typing</small><strong id="englishStatTyping">0</strong><em>รายการ</em></div>
+        </article>
+        <article>
+          <span>🎧</span>
+          <div><small>Listening</small><strong id="englishStatListening">0</strong><em>รายการ</em></div>
+        </article>
+      </div>
+
+      <section class="englishContentManager">
+        <div class="englishContentManagerHead">
+          <div>
+            <small>CONTENT MANAGER</small>
+            <h3>ตรวจและแก้ English Content</h3>
+            <p>ค้นได้จาก Word, คำแปล, Prompt, Answer, Skill หรือ Content Code</p>
+          </div>
+          <button class="btn" id="englishContentRefresh">รีเฟรชรายการ</button>
+        </div>
+
+        <div class="englishManagerFilters">
+          <label>
+            <span>ระดับ</span>
+            <select id="englishFilterLevel">
+              <option value="">A1–C1 ทั้งหมด</option>
+              <option value="a1">🌱 A1 Beginner</option>
+              <option value="a2">✨ A2 Elementary</option>
+              <option value="b1">🧠 B1 Intermediate</option>
+              <option value="b2">🔥 B2 Upper Intermediate</option>
+              <option value="c1">👑 C1 Advanced</option>
+            </select>
+          </label>
+
+          <label>
+            <span>ประเภท</span>
+            <select id="englishFilterType">
+              <option value="">ทุกประเภท</option>
+              <option value="vocabulary">📚 Vocabulary</option>
+              <option value="multiple_choice">🎯 Multiple Choice</option>
+              <option value="matching">🧩 Matching</option>
+              <option value="typing">⌨️ Typing</option>
+              <option value="sentence_order">🔀 Sentence Order</option>
+              <option value="listening">🎧 Listening</option>
+            </select>
+          </label>
+
+          <label>
+            <span>สถานะ</span>
+            <select id="englishFilterActive">
+              <option value="">ทั้งหมด</option>
+              <option value="true">🟢 เปิดใช้งาน</option>
+              <option value="false">🔒 ปิดไว้</option>
+            </select>
+          </label>
+
+          <label class="search">
+            <span>ค้นหา</span>
+            <input id="englishFilterSearch" type="search"
+              placeholder="เช่น achieve, บรรลุ, a1_vocab_apple">
+          </label>
+
+          <label>
+            <span>จำนวนต่อหน้า</span>
+            <select id="englishPageSize">
+              <option value="50">50</option>
+              <option value="100" selected>100</option>
+              <option value="200">200</option>
+            </select>
+          </label>
+
+          <button class="btn primary" id="englishSearchBtn">ค้นหา</button>
+        </div>
+
+        <div class="englishManagerMeta">
+          <span id="englishManagerCount">0 รายการ</span>
+          <span id="englishManagerStatus">พร้อมใช้งาน</span>
+        </div>
+
+        <div class="englishContentList" id="englishContentList">
+          <div class="learnLoading">กำลังโหลด English Content…</div>
+        </div>
+
+        <div class="hskPager englishPager">
+          <button class="btn" id="englishPrevPage">← ก่อนหน้า</button>
+          <span id="englishPageLabel">หน้า 1</span>
+          <button class="btn" id="englishNextPage">ถัดไป →</button>
+        </div>
+      </section>
+    </section>
+
     <!-- GAME CONTROL -->
     <section class="adminPanel" id="panel-games">
       <div class="toolbar">
@@ -1665,6 +2054,209 @@ button{cursor:pointer}
 </main>
 
 
+
+
+<div class="modal hidden" id="englishEditModal">
+  <div class="modalCard englishEditModalCard">
+
+    <div class="englishEditHeader">
+      <div>
+        <small>ENGLISH CONTENT EDITOR</small>
+        <h3 id="englishEditTitle">เพิ่ม English Content</h3>
+        <p id="englishEditCode">สร้างเนื้อหาสำหรับ English World</p>
+      </div>
+      <button class="btn" type="button" id="englishEditClose">ปิด</button>
+    </div>
+
+    <form id="englishEditForm" class="englishEditForm">
+      <input type="hidden" id="englishEditId">
+
+      <section class="englishEditSection">
+        <div class="englishEditSectionTitle">
+          <span>1</span>
+          <div>
+            <b>ระดับและรูปแบบเกม</b>
+            <small>กำหนด Level, Content Type และ Skill</small>
+          </div>
+        </div>
+
+        <div class="formGrid three">
+          <label>
+            <span>English Level *</span>
+            <select id="englishEditLevel" required>
+              <option value="a1">🌱 A1 Beginner</option>
+              <option value="a2">✨ A2 Elementary</option>
+              <option value="b1">🧠 B1 Intermediate</option>
+              <option value="b2">🔥 B2 Upper Intermediate</option>
+              <option value="c1">👑 C1 Advanced</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Content Type *</span>
+            <select id="englishEditType" required>
+              <option value="vocabulary">📚 Vocabulary</option>
+              <option value="multiple_choice">🎯 Multiple Choice</option>
+              <option value="matching">🧩 Matching</option>
+              <option value="typing">⌨️ Typing</option>
+              <option value="sentence_order">🔀 Sentence Order</option>
+              <option value="listening">🎧 Listening</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Skill Code *</span>
+            <input id="englishEditSkill" required placeholder="เช่น vocabulary">
+          </label>
+        </div>
+
+        <div class="formGrid three">
+          <label>
+            <span>Base Score</span>
+            <input id="englishEditScore" type="number" min="1" step="1" value="100">
+          </label>
+
+          <label>
+            <span>Sort Order</span>
+            <input id="englishEditSort" type="number" step="1" value="0">
+          </label>
+
+          <label class="englishCheckLabel">
+            <span>สถานะ</span>
+            <span class="englishCheckWrap">
+              <input id="englishEditActive" type="checkbox" checked>
+              <b>เปิดใช้งานรายการนี้</b>
+            </span>
+          </label>
+        </div>
+      </section>
+
+      <section class="englishEditSection">
+        <div class="englishEditSectionTitle">
+          <span>2</span>
+          <div>
+            <b>Vocabulary</b>
+            <small>ข้อมูลคำศัพท์หลัก เว้นว่างได้หากเป็นโจทย์ที่ไม่ผูกกับคำเดียว</small>
+          </div>
+        </div>
+
+        <div class="formGrid two">
+          <label>
+            <span>Word</span>
+            <input id="englishEditWord" placeholder="เช่น achieve">
+          </label>
+
+          <label>
+            <span>Phonetic</span>
+            <input id="englishEditPhonetic" placeholder="เช่น /əˈtʃiːv/">
+          </label>
+        </div>
+
+        <div class="formGrid two">
+          <label>
+            <span>ความหมายภาษาไทย</span>
+            <input id="englishEditMeaningTH" placeholder="เช่น บรรลุ">
+          </label>
+
+          <label>
+            <span>Meaning in English</span>
+            <input id="englishEditMeaningEN" placeholder="to successfully reach a goal">
+          </label>
+        </div>
+      </section>
+
+      <section class="englishEditSection">
+        <div class="englishEditSectionTitle">
+          <span>3</span>
+          <div>
+            <b>Prompt และคำตอบ</b>
+            <small>ข้อความที่ผู้เล่นเห็นและคำตอบที่ระบบใช้ตรวจ</small>
+          </div>
+        </div>
+
+        <label>
+          <span>Prompt *</span>
+          <textarea id="englishEditPrompt" rows="4" required
+            placeholder='เช่น What does "achieve" mean?'></textarea>
+        </label>
+
+        <label>
+          <span>Answer *</span>
+          <input id="englishEditAnswer" required placeholder="คำตอบที่ถูกต้อง">
+        </label>
+
+        <label>
+          <span>ตัวเลือก / Tokens</span>
+          <textarea id="englishEditOptions" rows="5"
+            placeholder="หนึ่งรายการต่อหนึ่งบรรทัด&#10;บรรลุ&#10;หลีกเลี่ยง&#10;สนับสนุน&#10;เปรียบเทียบ"></textarea>
+          <small class="englishFieldHelp">ใส่ทีละบรรทัด หรือ JSON Array เช่น ["apple","book","cat"]</small>
+        </label>
+      </section>
+
+      <section class="englishEditSection">
+        <div class="englishEditSectionTitle">
+          <span>4</span>
+          <div>
+            <b>ตัวอย่างและคำอธิบาย</b>
+            <small>ช่วยให้ผู้เล่นเรียนรู้มากกว่าการตอบถูก–ผิด</small>
+          </div>
+        </div>
+
+        <label>
+          <span>Example English</span>
+          <textarea id="englishEditExampleEN" rows="2"
+            placeholder="She worked hard to achieve her goal."></textarea>
+        </label>
+
+        <label>
+          <span>ตัวอย่างภาษาไทย</span>
+          <textarea id="englishEditExampleTH" rows="2"
+            placeholder="เธอทำงานหนักเพื่อบรรลุเป้าหมาย"></textarea>
+        </label>
+
+        <label>
+          <span>Explanation</span>
+          <textarea id="englishEditExplanation" rows="3"></textarea>
+        </label>
+
+        <label>
+          <span>Hint</span>
+          <textarea id="englishEditHint" rows="2"></textarea>
+        </label>
+      </section>
+
+      <section class="englishEditSection">
+        <div class="englishEditSectionTitle">
+          <span>5</span>
+          <div>
+            <b>สื่อเสริม</b>
+            <small>สามารถใส่รูปหรือไฟล์เสียงภายหลังได้</small>
+          </div>
+        </div>
+
+        <div class="formGrid two">
+          <label>
+            <span>Image URL</span>
+            <input id="englishEditImage" type="url" placeholder="https://…">
+          </label>
+
+          <label>
+            <span>Audio URL</span>
+            <input id="englishEditAudio" type="url" placeholder="https://…">
+          </label>
+        </div>
+      </section>
+
+      <div class="englishEditActions">
+        <button type="button" class="englishDeleteBtn hidden" id="englishDeleteBtn">🗑️ ลบรายการ</button>
+        <div></div>
+        <button type="button" class="btn" id="englishEditCancel">ยกเลิก</button>
+        <button type="submit" class="btn primary" id="englishEditSave">บันทึก</button>
+      </div>
+
+    </form>
+  </div>
+</div>
 
 <div class="modal hidden" id="mathEditModal">
   <div class="modalCard mathEditModalCard">
@@ -2260,11 +2852,13 @@ function openPanel(name){
  $("#panel-learning").classList.toggle("active",name==="learning");
  $("#panel-hsk").classList.toggle("active",name==="hsk");
  $("#panel-math").classList.toggle("active",name==="math");
+ $("#panel-english").classList.toggle("active",name==="english");
  $("#panel-games").classList.toggle("active",name==="games");
  $("#panel-users").classList.toggle("active",name==="users");
  if(name==="learning")loadLearning();
  if(name==="hsk")Promise.all([loadHSKAdminStats(),loadHSKManager(false)]);
  if(name==="math")Promise.all([loadMathStats(),loadMathManager(false)]);
+ if(name==="english")Promise.all([loadEnglishStats(),loadEnglishManager(false)]);
  if(name==="games")loadGameControl();
  if(name==="users")loadUserControl(false);
 }
@@ -3142,6 +3736,428 @@ async function deleteMathQuestion(){
 }
 
 
+
+/* ---------------- English Content Manager ---------------- */
+let englishManagerRows=[];
+let englishManagerPage=0;
+let englishManagerTotal=0;
+let englishManagerSearchTimer=null;
+let englishStatsRows=[];
+let englishEditingRow=null;
+
+const englishLevelInfo={
+ a1:{icon:"🌱",name:"A1",title:"Beginner"},
+ a2:{icon:"✨",name:"A2",title:"Elementary"},
+ b1:{icon:"🧠",name:"B1",title:"Intermediate"},
+ b2:{icon:"🔥",name:"B2",title:"Upper Intermediate"},
+ c1:{icon:"👑",name:"C1",title:"Advanced"}
+};
+
+const englishTypeInfo={
+ vocabulary:{icon:"📚",name:"Vocabulary"},
+ multiple_choice:{icon:"🎯",name:"Multiple Choice"},
+ matching:{icon:"🧩",name:"Matching"},
+ typing:{icon:"⌨️",name:"Typing"},
+ sentence_order:{icon:"🔀",name:"Sentence Order"},
+ listening:{icon:"🎧",name:"Listening"}
+};
+
+function englishEsc(v){
+ return String(v??"").replace(/[&<>"']/g,m=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[m]));
+}
+
+function englishVal(id){
+ return ($("#"+id)?.value||"").trim();
+}
+
+function englishOptionsToText(options){
+ if(!options)return "";
+ if(Array.isArray(options))return options.map(x=>String(x)).join("\n");
+ return "";
+}
+
+function parseEnglishOptions(raw){
+ raw=String(raw||"").trim();
+ if(!raw)return null;
+
+ if(raw.startsWith("[")){
+  const arr=JSON.parse(raw);
+  if(!Array.isArray(arr))throw new Error("ตัวเลือก JSON ต้องเป็น Array");
+  return arr.map(x=>String(x).trim()).filter(Boolean);
+ }
+
+ const rows=raw.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+ return rows.length?rows:null;
+}
+
+async function loadEnglishStats(){
+ try{
+  const {data,error}=await sb.rpc("bb_admin_english_stats");
+  if(error)throw error;
+
+  englishStatsRows=Array.isArray(data)?data:[];
+
+  const sum=key=>englishStatsRows.reduce((n,row)=>n+Number(row[key]||0),0);
+
+  $("#englishStatTotal").textContent=sum("total").toLocaleString();
+  $("#englishStatActive").textContent=sum("active_count").toLocaleString();
+  $("#englishStatInactive").textContent=sum("inactive_count").toLocaleString();
+  $("#englishStatVocab").textContent=sum("vocabulary").toLocaleString();
+  $("#englishStatChoice").textContent=sum("multiple_choice").toLocaleString();
+  $("#englishStatTyping").textContent=sum("typing").toLocaleString();
+  $("#englishStatListening").textContent=sum("listening").toLocaleString();
+
+  document.querySelectorAll("[data-english-stat-level]").forEach(card=>{
+   const code=card.dataset.englishStatLevel;
+   const row=englishStatsRows.find(x=>x.level_code===code);
+   const strong=card.querySelector("strong");
+   if(strong)strong.textContent=Number(row?.total||0).toLocaleString();
+  });
+
+ }catch(err){
+  console.error("English stats:",err);
+  toast(err?.message||"อ่านสถิติ English ไม่สำเร็จ");
+ }
+}
+
+async function loadEnglishManager(resetPage=false){
+ if(resetPage)englishManagerPage=0;
+
+ const pageSize=Math.max(1,Number(englishVal("englishPageSize"))||100);
+ const offset=englishManagerPage*pageSize;
+ const activeRaw=englishVal("englishFilterActive");
+
+ $("#englishManagerStatus").textContent="กำลังโหลด…";
+ $("#englishContentList").innerHTML='<div class="learnLoading">กำลังโหลด English Content…</div>';
+
+ try{
+  const {data,error}=await sb.rpc("bb_admin_list_english_content",{
+   p_level_code:englishVal("englishFilterLevel")||null,
+   p_content_type:englishVal("englishFilterType")||null,
+   p_search:englishVal("englishFilterSearch")||null,
+   p_active:activeRaw===""?null:activeRaw==="true",
+   p_limit:pageSize,
+   p_offset:offset
+  });
+
+  if(error)throw error;
+
+  englishManagerRows=Array.isArray(data)?data:[];
+  englishManagerTotal=Number(englishManagerRows[0]?.total_count||0);
+
+  renderEnglishManager(pageSize);
+
+ }catch(err){
+  console.error("English manager:",err);
+  englishManagerRows=[];
+  englishManagerTotal=0;
+  $("#englishManagerCount").textContent="0 รายการ";
+  $("#englishManagerStatus").textContent="โหลดไม่สำเร็จ";
+  $("#englishContentList").innerHTML=
+    `<div class="learnEmpty">${englishEsc(err?.message||"โหลด English Content ไม่สำเร็จ")}</div>`;
+ }
+}
+
+function renderEnglishManager(pageSize){
+ const host=$("#englishContentList");
+
+ $("#englishManagerCount").textContent=
+  `${englishManagerRows.length.toLocaleString()} รายการในหน้านี้ • ทั้งหมด ${englishManagerTotal.toLocaleString()} รายการ`;
+
+ $("#englishManagerStatus").textContent="อัปเดตแล้ว";
+ $("#englishPageLabel").textContent=`หน้า ${englishManagerPage+1}`;
+
+ $("#englishPrevPage").disabled=englishManagerPage<=0;
+ $("#englishNextPage").disabled=(englishManagerPage+1)*pageSize>=englishManagerTotal;
+
+ if(!englishManagerRows.length){
+  host.innerHTML='<div class="learnEmpty">ไม่พบ English Content ตามตัวกรองนี้</div>';
+  return;
+ }
+
+ host.innerHTML=englishManagerRows.map(row=>{
+  const level=englishLevelInfo[row.level_code]||{icon:"🇬🇧",name:row.level_code,title:""};
+  const type=englishTypeInfo[row.content_type]||{icon:"🎮",name:row.content_type};
+
+  const mainWord=row.word||row.prompt||"English Content";
+  const sub=row.meaning_th||row.meaning_en||row.prompt||"";
+  const answer=String(row.answer||"—");
+
+  return `
+   <article class="englishContentRow ${row.active?"":"inactive"}">
+
+    <div class="englishContentLevel">
+     <b>${level.icon} ${englishEsc(level.name)}</b>
+     <small>#${Number(row.id)}</small>
+    </div>
+
+    <div class="englishContentMain">
+     <div class="topline">
+      <span class="englishTypeBadge">${type.icon} ${englishEsc(type.name)}</span>
+      <span class="englishSkillBadge">${englishEsc(row.skill_code||"custom")}</span>
+     </div>
+
+     <h4 title="${englishEsc(mainWord)}">${englishEsc(mainWord)}</h4>
+     <p title="${englishEsc(sub)}">${englishEsc(sub)}</p>
+     <code>${englishEsc(row.content_code||"custom")}</code>
+    </div>
+
+    <div class="englishContentAnswer">
+     <small>คำตอบ</small>
+     <strong title="${englishEsc(answer)}">${englishEsc(answer)}</strong>
+    </div>
+
+    <div class="englishContentScore">
+     <small>คะแนน</small>
+     <strong>${Number(row.base_score||0).toLocaleString()}</strong>
+    </div>
+
+    <div class="englishContentActions">
+     <button class="edit" data-english-edit="${Number(row.id)}">แก้ไข</button>
+     <button class="${row.active?"toggleOn":"toggleOff"}" data-english-toggle="${Number(row.id)}">
+      ${row.active?"ปิด":"เปิด"}
+     </button>
+    </div>
+
+   </article>`;
+ }).join("");
+}
+
+function findEnglishRow(id){
+ return englishManagerRows.find(x=>Number(x.id)===Number(id))||null;
+}
+
+function clearEnglishEditor(){
+ englishEditingRow=null;
+
+ $("#englishEditId").value="";
+ $("#englishEditLevel").value="a1";
+ $("#englishEditType").value="vocabulary";
+ $("#englishEditSkill").value="vocabulary";
+ $("#englishEditScore").value="100";
+ $("#englishEditSort").value="0";
+ $("#englishEditActive").checked=true;
+
+ $("#englishEditWord").value="";
+ $("#englishEditPhonetic").value="";
+ $("#englishEditMeaningTH").value="";
+ $("#englishEditMeaningEN").value="";
+
+ $("#englishEditPrompt").value="";
+ $("#englishEditAnswer").value="";
+ $("#englishEditOptions").value="";
+
+ $("#englishEditExampleEN").value="";
+ $("#englishEditExampleTH").value="";
+ $("#englishEditExplanation").value="";
+ $("#englishEditHint").value="";
+
+ $("#englishEditImage").value="";
+ $("#englishEditAudio").value="";
+
+ $("#englishEditTitle").textContent="เพิ่ม English Content";
+ $("#englishEditCode").textContent="ระบบจะสร้าง Content Code ให้อัตโนมัติ";
+ $("#englishDeleteBtn").classList.add("hidden");
+}
+
+function openEnglishEditor(id=null){
+ clearEnglishEditor();
+
+ if(id!==null){
+  const row=findEnglishRow(id);
+  if(!row)return toast("ไม่พบ English Content");
+
+  englishEditingRow=row;
+
+  $("#englishEditId").value=String(row.id);
+  $("#englishEditLevel").value=row.level_code||"a1";
+  $("#englishEditType").value=row.content_type||"vocabulary";
+  $("#englishEditSkill").value=row.skill_code||"custom";
+  $("#englishEditScore").value=String(row.base_score||100);
+  $("#englishEditSort").value=String(row.sort_order||0);
+  $("#englishEditActive").checked=row.active!==false;
+
+  $("#englishEditWord").value=row.word||"";
+  $("#englishEditPhonetic").value=row.phonetic||"";
+  $("#englishEditMeaningTH").value=row.meaning_th||"";
+  $("#englishEditMeaningEN").value=row.meaning_en||"";
+
+  $("#englishEditPrompt").value=row.prompt||"";
+  $("#englishEditAnswer").value=row.answer||"";
+  $("#englishEditOptions").value=englishOptionsToText(row.options);
+
+  $("#englishEditExampleEN").value=row.example_en||"";
+  $("#englishEditExampleTH").value=row.example_th||"";
+  $("#englishEditExplanation").value=row.explanation||"";
+  $("#englishEditHint").value=row.hint||"";
+
+  $("#englishEditImage").value=row.image_url||"";
+  $("#englishEditAudio").value=row.audio_url||"";
+
+  $("#englishEditTitle").textContent=`แก้ English Content #${Number(row.id)}`;
+  $("#englishEditCode").textContent=row.content_code||"ไม่มี Content Code";
+  $("#englishDeleteBtn").classList.remove("hidden");
+ }
+
+ $("#englishEditModal").classList.remove("hidden");
+}
+
+function closeEnglishEditor(){
+ $("#englishEditModal").classList.add("hidden");
+}
+
+async function saveEnglishEditor(){
+ const prompt=$("#englishEditPrompt").value.trim();
+ const answer=$("#englishEditAnswer").value.trim();
+ const skill=$("#englishEditSkill").value.trim();
+
+ if(!prompt)return toast("กรุณาใส่ Prompt");
+ if(!answer)return toast("กรุณาใส่ Answer");
+ if(!skill)return toast("กรุณาใส่ Skill Code");
+
+ let options=null;
+ try{
+  options=parseEnglishOptions($("#englishEditOptions").value);
+ }catch(err){
+  return toast(err.message||"รูปแบบตัวเลือกไม่ถูกต้อง");
+ }
+
+ const btn=$("#englishEditSave");
+ const old=btn.textContent;
+ btn.disabled=true;
+ btn.textContent="กำลังบันทึก…";
+
+ try{
+  const id=Number($("#englishEditId").value)||null;
+
+  const {data,error}=await sb.rpc("bb_admin_save_english_content",{
+   p_id:id,
+
+   p_level_code:$("#englishEditLevel").value,
+   p_content_type:$("#englishEditType").value,
+   p_skill_code:skill,
+
+   p_word:$("#englishEditWord").value.trim()||null,
+   p_phonetic:$("#englishEditPhonetic").value.trim()||null,
+
+   p_meaning_th:$("#englishEditMeaningTH").value.trim()||null,
+   p_meaning_en:$("#englishEditMeaningEN").value.trim()||null,
+
+   p_prompt:prompt,
+   p_answer:answer,
+
+   p_options:options,
+
+   p_example_en:$("#englishEditExampleEN").value.trim()||null,
+   p_example_th:$("#englishEditExampleTH").value.trim()||null,
+
+   p_explanation:$("#englishEditExplanation").value.trim()||null,
+   p_hint:$("#englishEditHint").value.trim()||null,
+
+   p_image_url:$("#englishEditImage").value.trim()||null,
+   p_audio_url:$("#englishEditAudio").value.trim()||null,
+
+   p_base_score:Math.max(1,Number($("#englishEditScore").value)||100),
+   p_active:$("#englishEditActive").checked,
+   p_sort_order:Number($("#englishEditSort").value)||0
+  });
+
+  if(error)throw error;
+
+  const result=Array.isArray(data)?data[0]:data;
+
+  closeEnglishEditor();
+
+  toast(
+   id
+    ?"บันทึก English Content แล้ว ✓"
+    :`เพิ่ม ${result?.content_code||"English Content"} แล้ว ✓`
+  );
+
+  await Promise.all([
+   loadEnglishStats(),
+   loadEnglishManager(false)
+  ]);
+
+ }catch(err){
+  console.error("English save:",err);
+  toast(err?.message||"บันทึก English Content ไม่สำเร็จ");
+ }finally{
+  btn.disabled=false;
+  btn.textContent=old;
+ }
+}
+
+async function toggleEnglishContent(id){
+ const row=findEnglishRow(id);
+ if(!row)return toast("ไม่พบ English Content");
+
+ try{
+  const {error}=await sb.rpc("bb_admin_set_english_content_active",{
+   p_id:Number(id),
+   p_active:!row.active
+  });
+
+  if(error)throw error;
+
+  toast(row.active?"ปิดรายการนี้แล้ว":"เปิดรายการนี้แล้ว");
+
+  await Promise.all([
+   loadEnglishStats(),
+   loadEnglishManager(false)
+  ]);
+
+ }catch(err){
+  console.error("English toggle:",err);
+  toast(err?.message||"เปลี่ยนสถานะไม่สำเร็จ");
+ }
+}
+
+async function deleteEnglishContent(){
+ const id=Number($("#englishEditId").value)||0;
+ if(!id)return;
+
+ const row=englishEditingRow;
+ const name=row?.content_code||`#${id}`;
+
+ if(!confirm(
+  `ลบ ${name} ถาวร?\n\n`+
+  `${row?.word||row?.prompt||""}\n\n`+
+  `หากแค่ยังไม่ต้องการใช้ แนะนำให้กด “ปิด” แทน`
+ ))return;
+
+ const btn=$("#englishDeleteBtn");
+ const old=btn.textContent;
+ btn.disabled=true;
+ btn.textContent="กำลังลบ…";
+
+ try{
+  const {error}=await sb.rpc("bb_admin_delete_english_content",{
+   p_id:id
+  });
+
+  if(error)throw error;
+
+  closeEnglishEditor();
+  toast("ลบ English Content แล้ว");
+
+  await Promise.all([
+   loadEnglishStats(),
+   loadEnglishManager(false)
+  ]);
+
+ }catch(err){
+  console.error("English delete:",err);
+  toast(err?.message||"ลบ English Content ไม่สำเร็จ");
+ }finally{
+  btn.disabled=false;
+  btn.textContent=old;
+ }
+}
+
+
 /* ---------------- Game Release Control ---------------- */
 let gameControlRows=[];
 
@@ -3855,6 +4871,76 @@ document.addEventListener("click",e=>{
  if(toggle){
    toggleHSKWord(Number(toggle.dataset.hskToggle));
    return;
+ }
+});
+
+$("#englishManagerReload").onclick=()=>Promise.all([loadEnglishStats(),loadEnglishManager(false)]);
+$("#englishContentRefresh").onclick=()=>loadEnglishManager(false);
+$("#englishManagerNew").onclick=()=>openEnglishEditor(null);
+$("#englishSearchBtn").onclick=()=>loadEnglishManager(true);
+
+$("#englishFilterLevel").onchange=()=>loadEnglishManager(true);
+$("#englishFilterType").onchange=()=>loadEnglishManager(true);
+$("#englishFilterActive").onchange=()=>loadEnglishManager(true);
+$("#englishPageSize").onchange=()=>loadEnglishManager(true);
+
+$("#englishFilterSearch").addEventListener("input",()=>{
+ clearTimeout(englishManagerSearchTimer);
+ englishManagerSearchTimer=setTimeout(()=>loadEnglishManager(true),320);
+});
+
+$("#englishFilterSearch").addEventListener("keydown",e=>{
+ if(e.key==="Enter"){
+  e.preventDefault();
+  loadEnglishManager(true);
+ }
+});
+
+$("#englishPrevPage").onclick=()=>{
+ if(englishManagerPage<=0)return;
+ englishManagerPage--;
+ loadEnglishManager(false);
+};
+
+$("#englishNextPage").onclick=()=>{
+ const pageSize=Math.max(1,Number(englishVal("englishPageSize"))||100);
+ if((englishManagerPage+1)*pageSize>=englishManagerTotal)return;
+ englishManagerPage++;
+ loadEnglishManager(false);
+};
+
+$("#englishEditClose").onclick=closeEnglishEditor;
+$("#englishEditCancel").onclick=closeEnglishEditor;
+$("#englishDeleteBtn").onclick=deleteEnglishContent;
+
+$("#englishEditForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ saveEnglishEditor();
+});
+
+$("#englishEditModal").addEventListener("click",e=>{
+ if(e.target.id==="englishEditModal")closeEnglishEditor();
+});
+
+document.addEventListener("click",e=>{
+ const edit=e.target.closest("[data-english-edit]");
+ if(edit){
+  openEnglishEditor(Number(edit.dataset.englishEdit));
+  return;
+ }
+
+ const toggle=e.target.closest("[data-english-toggle]");
+ if(toggle){
+  toggleEnglishContent(Number(toggle.dataset.englishToggle));
+  return;
+ }
+
+ const stat=e.target.closest("[data-english-stat-level]");
+ if(stat){
+  openPanel("english");
+  $("#englishFilterLevel").value=stat.dataset.englishStatLevel;
+  loadEnglishManager(true);
+  return;
  }
 });
 
