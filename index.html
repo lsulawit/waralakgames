@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy v86.2 — Auth Runtime Fix</title>
+<title>Brain Buddy v86.3 — Buddy Asset Containment Fix</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -10517,6 +10517,261 @@ body.bbAccountModalOpen{
     max-height:calc(100dvh - 16px)!important;
     padding:19px 15px!important;
     border-radius:23px!important;
+  }
+}
+
+
+/* ==========================================================
+   Brain Buddy v86.3 — BUDDY ASSET CONTAINMENT
+   Prevent any 1024x1024 character/outfit image from escaping
+   its Shop / Closet / Home preview container.
+   ========================================================== */
+
+/* SHOP HERO PREVIEW */
+.bbShopV2Hero{
+  position:relative!important;
+  overflow:hidden!important;
+  contain:paint!important;
+  isolation:isolate!important;
+}
+
+.bbShopPreviewMini{
+  position:relative!important;
+  width:240px!important;
+  max-width:100%!important;
+  height:205px!important;
+  min-height:205px!important;
+  overflow:hidden!important;
+  contain:layout paint size!important;
+  isolation:isolate!important;
+  display:grid!important;
+  place-items:center!important;
+  z-index:2!important;
+}
+
+#bbShopBuddyRender{
+  position:relative!important;
+  width:190px!important;
+  height:190px!important;
+  min-width:190px!important;
+  min-height:190px!important;
+  max-width:190px!important;
+  max-height:190px!important;
+  overflow:hidden!important;
+  contain:layout paint size!important;
+  isolation:isolate!important;
+  flex:0 0 190px!important;
+  border-radius:50%!important;
+}
+
+/* Every layered image inside Shop preview is forcibly clipped */
+#bbShopBuddyRender > img[data-buddy-preview-layer]{
+  position:absolute!important;
+  inset:0!important;
+  display:block!important;
+  width:190px!important;
+  height:190px!important;
+  min-width:0!important;
+  min-height:0!important;
+  max-width:190px!important;
+  max-height:190px!important;
+  margin:0!important;
+  padding:0!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:none!important;
+  filter:none!important;
+  box-sizing:border-box!important;
+  pointer-events:none!important;
+}
+
+#bbShopBuddyRender > img[data-buddy-preview-layer].hidden{
+  display:none!important;
+}
+
+/* CLOSET PREVIEW */
+.bbBuddyStage{
+  overflow:hidden!important;
+  contain:paint!important;
+  isolation:isolate!important;
+}
+
+#bbClosetBuddyRender{
+  position:relative!important;
+  width:300px!important;
+  height:300px!important;
+  max-width:300px!important;
+  max-height:300px!important;
+  overflow:hidden!important;
+  contain:layout paint size!important;
+  isolation:isolate!important;
+}
+
+#bbClosetBuddyRender > img[data-buddy-preview-layer]{
+  position:absolute!important;
+  inset:0!important;
+  width:300px!important;
+  height:300px!important;
+  max-width:300px!important;
+  max-height:300px!important;
+  margin:0!important;
+  padding:0!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:none!important;
+  filter:none!important;
+  box-sizing:border-box!important;
+  pointer-events:none!important;
+}
+
+#bbClosetBuddyRender > img[data-buddy-preview-layer].hidden{
+  display:none!important;
+}
+
+/* HOME BUDDY */
+#bbEquippedHeroCharacter{
+  position:relative!important;
+  width:210px!important;
+  height:190px!important;
+  max-width:210px!important;
+  max-height:190px!important;
+  overflow:hidden!important;
+  contain:layout paint size!important;
+  isolation:isolate!important;
+}
+
+#bbEquippedHeroCharacter > img{
+  position:absolute!important;
+  inset:0!important;
+  width:210px!important;
+  height:190px!important;
+  max-width:210px!important;
+  max-height:190px!important;
+  margin:0!important;
+  padding:0!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:none!important;
+  filter:none!important;
+  box-sizing:border-box!important;
+}
+
+#bbEquippedHeroCharacter > img.hidden{
+  display:none!important;
+}
+
+/* SHOP PRODUCT CARDS:
+   important because the real 1024 asset is also used as thumbnail */
+.bbShopV2Grid{
+  position:relative!important;
+  overflow:hidden!important;
+  contain:layout paint!important;
+}
+
+.bbShopV2 .bbShopItem{
+  position:relative!important;
+  min-width:0!important;
+  overflow:hidden!important;
+  contain:layout paint!important;
+}
+
+.bbShopV2 .bbShopItemArt{
+  position:relative!important;
+  width:100%!important;
+  aspect-ratio:1 / 1!important;
+  overflow:hidden!important;
+  contain:layout paint size!important;
+  isolation:isolate!important;
+}
+
+.bbShopV2 .bbShopItemArt > img{
+  position:absolute!important;
+  inset:0!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  margin:0!important;
+  padding:8px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:none!important;
+  filter:none!important;
+  box-sizing:border-box!important;
+}
+
+/* Inventory cards too */
+.bbClosetItemArt{
+  position:relative!important;
+  overflow:hidden!important;
+  contain:layout paint size!important;
+}
+.bbClosetItemArt > img{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  margin:0!important;
+  padding:7px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  box-sizing:border-box!important;
+}
+
+/* iPad / phones */
+@media(max-width:980px){
+  .bbShopPreviewMini{
+    width:210px!important;
+    height:190px!important;
+    min-height:190px!important;
+  }
+  #bbShopBuddyRender{
+    width:170px!important;
+    height:170px!important;
+    min-width:170px!important;
+    min-height:170px!important;
+    max-width:170px!important;
+    max-height:170px!important;
+    flex-basis:170px!important;
+  }
+  #bbShopBuddyRender > img[data-buddy-preview-layer]{
+    width:170px!important;
+    height:170px!important;
+    max-width:170px!important;
+    max-height:170px!important;
+  }
+}
+
+@media(max-width:720px){
+  #bbClosetBuddyRender{
+    width:245px!important;
+    height:245px!important;
+    max-width:245px!important;
+    max-height:245px!important;
+  }
+  #bbClosetBuddyRender > img[data-buddy-preview-layer]{
+    width:245px!important;
+    height:245px!important;
+    max-width:245px!important;
+    max-height:245px!important;
+  }
+}
+
+@media(max-width:420px){
+  #bbClosetBuddyRender{
+    width:220px!important;
+    height:220px!important;
+    max-width:220px!important;
+    max-height:220px!important;
+  }
+  #bbClosetBuddyRender > img[data-buddy-preview-layer]{
+    width:220px!important;
+    height:220px!important;
+    max-width:220px!important;
+    max-height:220px!important;
   }
 }
 
@@ -21802,6 +22057,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.bbSetAuthTab=setTab;
   window.bbCloseAccountModal=closeAccount;
+})();
+</script>
+
+
+<script>
+/* ==========================================================
+   Brain Buddy v86.3 — Asset containment safety
+   ========================================================== */
+(function bbV863AssetSafety(){
+  function secureBuddyImages(){
+    document.querySelectorAll(
+      '#bbShopBuddyRender img[data-buddy-preview-layer],'+
+      '#bbClosetBuddyRender img[data-buddy-preview-layer],'+
+      '#bbEquippedHeroCharacter > img'
+    ).forEach(img=>{
+      img.draggable=false;
+      img.style.pointerEvents="none";
+    });
+
+    /* Product assets must remain inside their own card. */
+    document.querySelectorAll('.bbShopV2 .bbShopItemArt, .bbClosetItemArt').forEach(box=>{
+      box.style.overflow="hidden";
+    });
+  }
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",secureBuddyImages,{once:true});
+  }else{
+    secureBuddyImages();
+  }
+
+  /* Shop/Closet HTML is rendered after Supabase returns. One lightweight
+     event is enough; no polling or animation loop is introduced. */
+  document.addEventListener("click",e=>{
+    if(e.target.closest('[data-app-go="shop"],[data-app-go="inventory"]')){
+      requestAnimationFrame(secureBuddyImages);
+    }
+  },true);
+
+  window.bbSecureBuddyImages=secureBuddyImages;
 })();
 </script>
 
