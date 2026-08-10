@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy v81 — Ranked Create Room Fix</title>
+<title>Brain Buddy v84 — Clean Stable UI</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -8839,261 +8839,6 @@ body.bbRankedLearningPlaying .v17dock{display:none!important}
 
 
 /* ==========================================================
-   Brain Buddy v80 — Responsive Polish
-   - fixes decorative blob overlapping text in Ranked Lobby
-   - improves spacing, scaling, and readability on phone/tablet/desktop
-   ========================================================== */
-
-:root{
-  --bb-max: 1280px;
-  --bb-gap: clamp(10px, 2vw, 22px);
-  --bb-card-radius: clamp(18px, 2.2vw, 28px);
-  --bb-shadow-soft: 0 10px 28px rgba(74,48,128,.10);
-  --bb-shadow-card: 0 10px 22px rgba(36,27,66,.10);
-}
-
-html, body{
-  max-width:100%;
-  overflow-x:hidden;
-}
-
-body{
-  text-wrap:pretty;
-  -webkit-font-smoothing:antialiased;
-  background:
-    radial-gradient(circle at top left, rgba(255,255,255,.18), transparent 24%),
-    linear-gradient(180deg,#7650ef 0%, #8b63f2 18%, #d88ac0 100%);
-}
-
-img, svg, canvas{
-  max-width:100%;
-  height:auto;
-}
-
-button, .btn, .card, .panel, .tile, .roomCard{
-  border-radius: var(--bb-card-radius);
-}
-
-main, .page, .screen, .app, .wrap, .container, .shell{
-  width:min(100%, var(--bb-max));
-  margin-inline:auto;
-}
-
-/* Generic large card cleanup */
-.sectionCard, .panel, .glassCard, .card, .tile, .roomCard, .leaderCard{
-  box-shadow: var(--bb-shadow-card);
-}
-
-/* Prevent long labels from colliding */
-h1,h2,h3,h4,p,span,button,small,div{
-  word-break: break-word;
-}
-
-/* Ranked / lobby floating decoration fix:
-   any decorative glow/blob inside hero/empty-state containers
-   should never sit above readable content or block taps */
-.rankDecor,
-.rankGlow,
-.rankBlob,
-.heroGlow,
-.heroOrb,
-.floatBlob,
-.decorBlob,
-.bgBlob,
-.lobbyBlob{
-  pointer-events:none !important;
-  z-index:0 !important;
-  opacity:.42 !important;
-  filter: blur(34px) saturate(112%);
-  mix-blend-mode:screen;
-}
-
-.hasDecor, .rankedLobby, .rankRoomList, .emptyState, .heroSection, .topBanner{
-  position:relative;
-  isolation:isolate;
-}
-.hasDecor > *:not(.rankDecor):not(.rankGlow):not(.rankBlob):not(.heroGlow):not(.heroOrb):not(.floatBlob):not(.decorBlob):not(.bgBlob):not(.lobbyBlob),
-.rankedLobby > *,
-.rankRoomList > *,
-.emptyState > *,
-.heroSection > *,
-.topBanner > *{
-  position:relative;
-  z-index:1;
-}
-
-/* Extra safety: pseudo element glow behind content */
-.rankRoomList::after,
-.emptyState::after{
-  content:"";
-  position:absolute;
-  right:-6%;
-  bottom:4%;
-  width:clamp(110px, 22vw, 220px);
-  height:clamp(110px, 22vw, 220px);
-  border-radius:999px;
-  background: radial-gradient(circle, rgba(126,164,255,.65), rgba(117,93,255,.36) 45%, rgba(117,93,255,0) 72%);
-  filter: blur(20px);
-  z-index:0;
-  pointer-events:none;
-  opacity:.5;
-}
-
-/* If previous glow was hard-coded inline on room section, hide it softly */
-[style*="blur"][style*="radial-gradient"],
-[style*="filter: blur"][style*="radial-gradient"]{
-  pointer-events:none;
-}
-
-/* Top area */
-.siteHeader, .topBar{
-  padding-inline: clamp(10px, 2vw, 18px);
-}
-.brandRow{
-  gap:12px;
-}
-
-/* Better card rhythm */
-.cardGrid, .grid2, .grid3, .modeGrid, .roomGrid, .statsGrid{
-  display:grid;
-  gap: var(--bb-gap);
-}
-
-/* Responsive 2-col to 1-col stacks */
-@media (min-width: 860px){
-  .grid2, .modeGrid, .statsGrid{
-    grid-template-columns: repeat(2, minmax(0,1fr));
-  }
-  .grid3{
-    grid-template-columns: repeat(3, minmax(0,1fr));
-  }
-}
-@media (max-width: 859px){
-  .grid2, .grid3, .modeGrid, .roomGrid, .statsGrid{
-    grid-template-columns: 1fr;
-  }
-}
-
-.heroCard, .bigHero, .welcomeHero{
-  display:grid;
-  grid-template-columns: 1.2fr .8fr;
-  gap: clamp(12px, 2vw, 24px);
-  align-items:center;
-}
-@media (max-width: 900px){
-  .heroCard, .bigHero, .welcomeHero{
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Buttons scale properly */
-.btn, button, .primaryBtn, .secondaryBtn, .pillBtn{
-  min-height: 46px;
-  padding: 12px 16px;
-  font-size: clamp(12px, 1.4vw, 16px);
-}
-
-/* Ranking page / lobby specific readability */
-.rankedTopStats, .topStats, .statsStrip{
-  display:grid;
-  grid-template-columns: repeat(3, minmax(0,1fr));
-  gap: var(--bb-gap);
-}
-@media (max-width: 700px){
-  .rankedTopStats, .topStats, .statsStrip{
-    grid-template-columns: 1fr;
-  }
-}
-
-.roomOpenTitle, .sectionTitle, .subTitle{
-  padding-right: clamp(16px, 12vw, 160px); /* reserve space so decorative blob won't cover title */
-}
-
-/* Empty state card */
-.emptyState, .roomEmptyState{
-  min-height: clamp(240px, 32vw, 360px);
-  padding: clamp(18px, 2vw, 28px);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
-
-/* Room action cards */
-.actionTiles, .rankActions{
-  display:grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
-  gap: var(--bb-gap);
-}
-@media (max-width: 780px){
-  .actionTiles, .rankActions{
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Safer text sizes */
-.bigTitle, .heroTitle, h1{
-  font-size: clamp(30px, 5vw, 66px) !important;
-  line-height: 1.05;
-}
-h2{
-  font-size: clamp(22px, 3.5vw, 38px);
-}
-h3{
-  font-size: clamp(18px, 2.5vw, 26px);
-}
-p, .sub, .muted{
-  font-size: clamp(12px, 1.5vw, 16px);
-}
-
-/* Improve section widths and side padding */
-.screen, .page, .app, .container, .shell{
-  padding-inline: clamp(12px, 2.2vw, 24px);
-  padding-bottom: clamp(30px, 4vw, 60px);
-}
-
-/* Tables / long leaderboard rows on small screens */
-.leaderRow, .rankingRow, .userRow{
-  display:grid;
-  grid-template-columns: auto minmax(0,1fr) auto;
-  gap: 12px;
-  align-items:center;
-}
-@media (max-width: 560px){
-  .leaderRow, .rankingRow, .userRow{
-    grid-template-columns: 1fr;
-    justify-items:start;
-  }
-}
-
-/* Make auth modal and panels feel cleaner */
-.authCard, .modalCard{
-  max-width:min(94vw, 480px);
-}
-.authField input, input, select, textarea{
-  min-height:46px;
-  font-size:16px; /* avoids iOS zoom */
-}
-
-/* Footer not too cramped */
-footer{
-  padding-bottom: max(20px, env(safe-area-inset-bottom));
-}
-
-/* Small device tune */
-@media (max-width: 480px){
-  .siteHeader, .topBar, .screen, .page, .app, .container, .shell{
-    padding-inline: 12px;
-  }
-  .btn, button{
-    min-height:44px;
-    padding:10px 14px;
-  }
-}
-
-
-/* ==========================================================
    Brain Buddy v81 — Ranked create-room modal + scroll fix
    ========================================================== */
 
@@ -9211,521 +8956,691 @@ body > #bbCreateBackdrop .bbRankGameGrid{
 
 
 /* ==========================================================
-   Brain Buddy v82 — Full Visual Refresh
-   Goals:
-   - Better readability / contrast
-   - Cleaner spacing
-   - Safer responsive behavior
-   - Softer, more premium pastel system
+   Brain Buddy v84 — CLEAN STABLE UI
+   Scoped overrides only. No generic global card mutation.
    ========================================================== */
 
 :root{
-  --bg-0:#f7f4ff;
-  --bg-1:#f3f7ff;
-  --surface:#ffffff;
-  --surface-soft:#fcfbff;
-  --surface-glass:rgba(255,255,255,.82);
-
-  --line:#e7ddff;
-  --line-strong:#d7c8ff;
-
-  --text:#2f2552;
-  --text-2:#5e537f;
-  --text-3:#897ea8;
-  --text-inverse:#ffffff;
-
-  --brand-1:#7b57ff;
-  --brand-2:#b96bff;
-  --brand-3:#ff89c3;
-  --brand-4:#ffd16e;
-  --brand-5:#8ed7ff;
-  --brand-6:#97e8c2;
-
-  --hero-grad:linear-gradient(135deg,#704bff 0%, #8f63ff 36%, #c676ff 68%, #ff92c9 100%);
-  --card-grad:linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(255,255,255,.90) 100%);
-  --pill-grad:linear-gradient(135deg,#8b65ff 0%, #b16fff 55%, #ff89c3 100%);
-  --soft-grad:linear-gradient(180deg,#fbf9ff 0%, #f6f2ff 100%);
-  --soft-grad-blue:linear-gradient(180deg,#f8fbff 0%, #eef5ff 100%);
-  --soft-grad-pink:linear-gradient(180deg,#fff8fc 0%, #fff1f8 100%);
-  --soft-grad-yellow:linear-gradient(180deg,#fffdf5 0%, #fff7dd 100%);
-  --soft-grad-green:linear-gradient(180deg,#f6fff9 0%, #ebfff5 100%);
-
-  --shadow-xs:0 2px 8px rgba(74,38,110,.05);
-  --shadow-sm:0 8px 26px rgba(68,36,105,.07);
-  --shadow-md:0 18px 48px rgba(70,35,110,.10);
-  --shadow-lg:0 28px 70px rgba(65,31,103,.14);
-
-  --radius-xs:12px;
-  --radius-sm:16px;
-  --radius-md:22px;
-  --radius-lg:30px;
-  --radius-xl:38px;
-
-  --space-1:8px;
-  --space-2:12px;
-  --space-3:16px;
-  --space-4:20px;
-  --space-5:24px;
-  --space-6:32px;
-  --space-7:40px;
-  --space-8:56px;
+  --bb84-ink:#34264f;
+  --bb84-muted:#75698a;
+  --bb84-line:#e8e0f4;
+  --bb84-surface:#ffffff;
+  --bb84-purple:#7455dc;
+  --bb84-purple2:#9c69e5;
+  --bb84-pink:#ef79ad;
+  --bb84-blue:#85c6f3;
+  --bb84-yellow:#ffd978;
+  --bb84-shadow:0 12px 32px rgba(63,40,91,.10);
 }
 
-html{
-  scroll-behavior:smooth;
-  -webkit-text-size-adjust:100%;
+/* ---------- Remove unwanted controls ---------- */
+#themeBtn,
+#musicBtn,
+#fullBtn,
+#bbHomeTheme,
+#bbHomeMusic,
+button[data-open="audioModal"],
+button[data-open="accessModal"]{
+  display:none!important;
 }
 
-body{
+/* Force one consistent light appearance. */
+body.dark{
+  color-scheme:light!important;
+}
+
+/* ---------- HOME ---------- */
+.bbCandyHomeScreen{
+  min-height:100dvh!important;
+  padding:16px clamp(12px,2vw,24px) 44px!important;
+  overflow-x:hidden!important;
+  overflow-y:visible!important;
   background:
-    radial-gradient(circle at 0% 0%, rgba(151,216,255,.55), transparent 22%),
-    radial-gradient(circle at 100% 14%, rgba(255,165,214,.48), transparent 20%),
-    radial-gradient(circle at 100% 100%, rgba(133,103,255,.18), transparent 26%),
-    linear-gradient(180deg,#f7f5ff 0%, #f4f6ff 44%, #fff5fb 100%) !important;
-  color:var(--text)!important;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+    radial-gradient(circle at 3% 0%,rgba(154,222,255,.60),transparent 27rem),
+    radial-gradient(circle at 100% 5%,rgba(255,192,224,.55),transparent 27rem),
+    linear-gradient(180deg,#f1efff 0%,#f5f6ff 45%,#fff4f9 100%)!important;
 }
 
-/* Generic readability rescue */
-body, p, span, div, small, label, li{
-  color:inherit;
+body.bbCosThemeCandy .bbCandyHomeScreen{
+  background:
+    radial-gradient(circle at 3% 0%,rgba(152,225,255,.68),transparent 25rem),
+    radial-gradient(circle at 98% 5%,rgba(255,188,222,.60),transparent 26rem),
+    linear-gradient(180deg,#f0efff 0%,#f5f3ff 48%,#fff1f7 100%)!important;
 }
 
-h1,h2,h3,h4,h5{
-  color:var(--text)!important;
-  letter-spacing:-.02em;
-  line-height:1.08!important;
-  text-wrap:balance;
+body.bbCandyHome::after{
+  display:none!important;
+  content:none!important;
 }
 
-p, .muted, .sub, .desc, .caption{
-  color:var(--text-2)!important;
-  line-height:1.5!important;
+.bbHomeSky{
+  opacity:.32!important;
+  pointer-events:none!important;
+}
+.bbHomeSky .cloud{display:none!important}
+
+.bbHomeTopbar{
+  width:min(100%,1180px)!important;
+  min-height:58px!important;
+  margin:0 auto 12px!important;
+  padding:0 4px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
 }
 
-small{
-  color:var(--text-3)!important;
+.bbHomeBrand{
+  gap:9px!important;
+}
+.bbHomeBrand .brainMark{
+  width:42px!important;
+  height:42px!important;
+  flex:0 0 42px!important;
+  border-radius:14px!important;
+  box-shadow:0 7px 18px rgba(112,67,139,.13),inset 0 3px 4px rgba(255,255,255,.55)!important;
+}
+.bbHomeBrand h1{
+  font-size:clamp(1.55rem,3.2vw,2.15rem)!important;
+  line-height:1!important;
+  text-shadow:none!important;
+  letter-spacing:-.035em!important;
+}
+.bbHomeBrand h1 .brainWord{
+  color:#ea70a9!important;
+  -webkit-text-fill-color:#ea70a9!important;
+}
+.bbHomeBrand h1 .buddyWord{
+  color:#48bfe2!important;
+  -webkit-text-fill-color:#48bfe2!important;
+}
+.bbHomeBrand h1 .brandSpark{
+  transform:scale(.8)!important;
 }
 
-/* remove glow/blur on text if present */
-*{
+/* Main home content has a fixed readable width */
+.bbHeroCard,
+.bbHomeInventoryPanel,
+.bbHomeGrid,
+.bbStatsRow,
+.bbCopyrightCard{
+  width:min(100%,1180px)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+
+/* Compact hero: no giant empty region */
+.bbHeroCard{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.5fr) 250px!important;
+  align-items:center!important;
+  gap:18px!important;
+  min-height:0!important;
+  height:auto!important;
+  padding:20px 22px!important;
+  margin-top:0!important;
+  border:1px solid rgba(255,255,255,.55)!important;
+  border-radius:28px!important;
+  background:
+    radial-gradient(circle at 85% 15%,rgba(255,207,232,.27),transparent 14rem),
+    linear-gradient(135deg,#7050d8 0%,#9260df 48%,#e273ad 100%)!important;
+  box-shadow:0 16px 38px rgba(74,48,117,.16)!important;
+  overflow:hidden!important;
+}
+body.bbCosThemeCandy .bbHeroCard{
+  background:
+    radial-gradient(circle at 85% 12%,rgba(255,218,237,.31),transparent 13rem),
+    linear-gradient(135deg,#7657dd 0%,#9d66e5 47%,#e878af 100%)!important;
+}
+
+.bbHeroText{
+  min-width:0!important;
+  position:relative!important;
+  z-index:3!important;
+}
+.bbHeroText .tag{
+  padding:6px 11px!important;
+  margin-bottom:8px!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.13)!important;
+  border:1px solid rgba(255,255,255,.22)!important;
+  color:#fff!important;
+  font-size:.68rem!important;
+  letter-spacing:.07em!important;
+}
+.bbHeroText h2{
+  margin:0 0 13px!important;
+  color:#fff!important;
+  font-size:clamp(1.75rem,4vw,2.75rem)!important;
+  line-height:1.05!important;
   text-shadow:none!important;
 }
+.bbHeroText>p{display:none!important}
 
-::selection{
-  background:rgba(123,87,255,.22);
+/* Player identity */
+.bbPlayerCard{
+  width:100%!important;
+  min-height:82px!important;
+  padding:10px 12px!important;
+  gap:11px!important;
+  border-radius:20px!important;
+  border:1px solid rgba(255,255,255,.26)!important;
+  background:rgba(255,255,255,.12)!important;
+  box-shadow:none!important;
+}
+.avatarBear{
+  width:64px!important;
+  height:64px!important;
+  flex:0 0 64px!important;
+  border-radius:19px!important;
+}
+.bbPlayerCard small{
+  font-size:.72rem!important;
+  color:rgba(255,255,255,.76)!important;
+}
+.bbPlayerCard strong{
+  font-size:clamp(1.35rem,2.5vw,1.8rem)!important;
+  color:#fff!important;
+}
+.bbPlayerCard em{
+  font-size:.76rem!important;
+  color:#fff3bd!important;
+}
+.bbEquippedCosmeticLabel{
+  margin-top:4px!important;
+  font-size:.63rem!important;
 }
 
-/* top page container cleanup */
-main, .page, .screen, .view, #app{
-  isolation:isolate;
+/* Member / Guest row */
+.bbHomeAuthCard{
+  margin-top:9px!important;
 }
-
-/* cards / panels */
-.card, .panel, .tile, .box, .module, .bbCard, .bbPanel{
-  background:var(--card-grad)!important;
-  border:1px solid rgba(215,200,255,.78)!important;
-  box-shadow:var(--shadow-sm)!important;
-  backdrop-filter:saturate(110%) blur(8px);
-}
-
-/* buttons */
-button,
-.btn,
-a.btn{
+.bbHomeAuthGuest,
+.bbHomeAuthMember{
+  min-height:59px!important;
+  padding:8px 10px!important;
   border-radius:18px!important;
-  border:1px solid rgba(208,193,255,.9)!important;
-  transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease, background .18s ease;
+  background:rgba(255,255,255,.93)!important;
+  border:1px solid rgba(255,255,255,.68)!important;
+  box-shadow:0 7px 18px rgba(55,33,84,.08)!important;
 }
-button:hover,
-.btn:hover{
-  transform:translateY(-1px);
-  box-shadow:var(--shadow-sm)!important;
+.bbAuthGuestCopy small,
+.bbAuthMemberCopy small{
+  color:#9589a4!important;
 }
-button:active,
-.btn:active{
-  transform:translateY(0);
+.bbAuthGuestCopy b,
+.bbAuthMemberCopy b,
+.bbAuthMemberCopy em{
+  color:var(--bb84-ink)!important;
 }
-button:focus-visible,
-.btn:focus-visible,
-input:focus-visible,
-select:focus-visible{
-  outline:3px solid rgba(123,87,255,.18)!important;
-  outline-offset:2px!important;
-}
-
-/* inputs */
-input, select, textarea{
-  background:#fff!important;
-  color:var(--text)!important;
-  border:1px solid var(--line-strong)!important;
-  border-radius:16px!important;
-  box-shadow:0 1px 0 rgba(255,255,255,.8), inset 0 1px 1px rgba(84,68,124,.04)!important;
-}
-input::placeholder, textarea::placeholder{
-  color:#9a8fb8!important;
+.bbAuthGuestBtns button,
+.bbAuthMemberBtns button{
+  min-height:37px!important;
+  padding:0 12px!important;
+  border-radius:12px!important;
 }
 
-/* pills / chips */
-.badge, .chip, .pill{
-  background:rgba(123,87,255,.08)!important;
-  color:var(--brand-1)!important;
-  border:1px solid rgba(123,87,255,.15)!important;
+/* Mascot stays compact and to the right */
+.bbHeroBrain{
+  min-height:185px!important;
+  height:185px!important;
+  display:grid!important;
+  place-items:center!important;
+  align-self:center!important;
+}
+.brainBody{
+  transform:scale(.76)!important;
+}
+.bbEquippedHeroCharacter{
+  width:195px!important;
+  height:180px!important;
+}
+.bbPinkBuddy3D{
+  transform:scale(.72)!important;
+}
+body.bbCosEffectSparkle .bbHeroCard::after{
+  opacity:.55!important;
+  font-size:.85rem!important;
 }
 
-/* Header / hero */
-.bbHero, .hero, .topHero, .rankHero{
-  background:var(--hero-grad)!important;
-  color:#fff!important;
-  border:1px solid rgba(255,255,255,.32)!important;
-  box-shadow:var(--shadow-lg)!important;
-}
-.bbHero *, .hero *, .topHero *, .rankHero *{
-  color:#fff!important;
-}
-.bbHero p, .hero p, .topHero p, .rankHero p{
-  color:rgba(255,255,255,.92)!important;
-}
-
-/* Stat cards inside hero should remain readable */
-.bbHero .stat, .hero .stat, .topHero .stat, .rankHero .stat,
-.bbHero .statCard, .hero .statCard, .topHero .statCard, .rankHero .statCard{
-  background:rgba(255,255,255,.14)!important;
-  border:1px solid rgba(255,255,255,.24)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.18)!important;
-}
-.bbHero .stat *, .hero .stat *, .topHero .stat *, .rankHero .stat *,
-.bbHero .statCard *, .hero .statCard *, .topHero .statCard *, .rankHero .statCard *{
-  color:#fff!important;
-}
-
-/* Ranking / room area */
-#bbArena .bbArenaGate,
-#bbArena .bbArenaLobby,
-#bbArena .bbArenaRoom,
-#bbArena .bbArenaCountdown,
-#bbArena .bbArenaResults{
-  background:transparent!important;
-  color:var(--text)!important;
-}
-
-#bbArena .bbArenaSectionTitle,
-#bbArena h2,
-#bbArena h3,
-#bbArena h4{
-  color:var(--text)!important;
-}
-
-/* stronger contrast for lobby action cards */
-#bbArena .bbArenaAction,
-#bbArena .bbArenaQuickCard,
-#bbArena .bbArenaMenuCard{
-  background:var(--surface-glass)!important;
-  border:1px solid rgba(221,212,255,.95)!important;
-  box-shadow:var(--shadow-sm)!important;
-  min-height:132px;
-}
-#bbArena .bbArenaAction p,
-#bbArena .bbArenaQuickCard p,
-#bbArena .bbArenaMenuCard p{
-  color:var(--text-2)!important;
-}
-
-/* open rooms section: prevent decorative blobs from covering text */
-#bbArena .bbOpenRoomsSection,
-#bbArena .bbRoomsArea,
-#bbArena .bbRankOpenRooms{
-  position:relative!important;
-  z-index:2!important;
-  overflow:visible!important;
-}
-#bbArena .bbOpenRoomsSection *{
-  position:relative;
-  z-index:2;
-}
-#bbArena .bbOpenRoomsSection::before,
-#bbArena .bbOpenRoomsSection::after,
-#bbArena .bbRoomsArea::before,
-#bbArena .bbRoomsArea::after{
-  opacity:.18!important;
-  filter:blur(26px)!important;
-  pointer-events:none!important;
-  z-index:0!important;
-}
-
-/* active room list card */
-#bbArena .bbRoomRow,
-#bbArena .bbRoomCard,
-#bbArena .bbLiveRoom{
+/* Inventory becomes compact immediately below hero */
+.bbHomeInventoryPanel{
+  margin-top:12px!important;
+  padding:11px!important;
+  border-radius:23px!important;
   background:rgba(255,255,255,.88)!important;
-  border:1px solid rgba(225,216,255,.95)!important;
-  box-shadow:var(--shadow-xs)!important;
+  border:1px solid rgba(231,222,244,.98)!important;
+  box-shadow:var(--bb84-shadow)!important;
+}
+.bbHomeInventoryTop{
+  gap:8px!important;
+}
+.bbHomeWalletBox,
+.bbHomeCollectionHead{
+  min-height:65px!important;
+  padding:9px 11px!important;
+  border-radius:17px!important;
+}
+.bbHomeCollectionGrid{
+  margin-top:8px!important;
+  gap:7px!important;
+}
+.bbHomeCollectionSlot{
+  min-height:61px!important;
+  padding:7px 9px!important;
+  border-radius:16px!important;
+}
+.bbHomeCollectionSlot .art{
+  width:40px!important;
+  height:40px!important;
+  flex:0 0 40px!important;
+  border-radius:12px!important;
 }
 
-/* game selection cards */
-.bbGameCard, .gameCard, .worldCard, .modeCard{
-  background:var(--surface-glass)!important;
-  border:1px solid rgba(220,210,255,.95)!important;
-  box-shadow:var(--shadow-sm)!important;
+/* Main menu cards: light, clear, no excessive 3D */
+.bbHomeGrid{
+  gap:10px!important;
+  margin-top:12px!important;
 }
-.bbGameCard .title, .gameCard .title, .worldCard .title, .modeCard .title{
-  color:var(--text)!important;
+.bbQuickCard,
+.bbShopHomeCard{
+  min-height:108px!important;
+  padding:13px!important;
+  border:1px solid rgba(226,216,242,.98)!important;
+  border-radius:22px!important;
+  box-shadow:0 9px 24px rgba(66,45,91,.08)!important;
 }
-.bbGameCard .subtitle, .gameCard .subtitle, .worldCard .subtitle, .modeCard .subtitle{
-  color:var(--text-2)!important;
+.bbQuickCard.game{
+  color:#6d3159!important;
+  background:linear-gradient(145deg,#fff7fb,#ffdbea)!important;
 }
-
-/* Question / quiz screen */
-.quizCard, .questionCard, .examCard, .playCard{
-  background:#ffffff!important;
-  border:1px solid rgba(225,217,255,.95)!important;
-  border-radius:32px!important;
-  box-shadow:var(--shadow-md)!important;
+.bbQuickCard.rank{
+  color:#315b88!important;
+  background:linear-gradient(145deg,#f8fcff,#dcedff)!important;
 }
-.quizCard .question,
-.questionCard .question,
-.examCard .question,
-.playCard .question{
-  color:var(--text)!important;
-}
-.quizCard .hint,
-.questionCard .hint,
-.examCard .hint,
-.playCard .hint{
-  color:var(--text-2)!important;
-}
-
-/* answer choices */
-.choice, .answer, .option, .quizOption{
-  background:#fff!important;
-  border:1px solid rgba(219,210,255,.95)!important;
-  color:var(--text)!important;
-  box-shadow:var(--shadow-xs)!important;
-}
-.choice:hover, .answer:hover, .option:hover, .quizOption:hover{
-  border-color:#b69bff!important;
-  background:#fcfaff!important;
-}
-.choice.correct, .answer.correct, .option.correct, .quizOption.correct{
-  background:#eefdf5!important;
-  border-color:#88d4ae!important;
-}
-.choice.wrong, .answer.wrong, .option.wrong, .quizOption.wrong{
-  background:#fff2f6!important;
-  border-color:#f2a2bf!important;
-}
-
-/* Results */
-.resultCard, .summaryCard{
-  background:rgba(255,255,255,.95)!important;
-  border:1px solid rgba(219,210,255,.95)!important;
-  box-shadow:var(--shadow-md)!important;
-}
-
-/* footer readability */
-footer, .footer{
-  color:var(--text-2)!important;
-}
-footer *,.footer *{
+.bbQuickCard small,
+.bbQuickCard b,
+.bbQuickCard em{
   color:inherit!important;
 }
-
-/* Safer type scale */
-@media (min-width:1200px){
-  h1{font-size:clamp(2.7rem,4vw,4.8rem)!important}
-  h2{font-size:clamp(2rem,2.8vw,3rem)!important}
+.bbQuickCard .icon,
+.bbShopHomeCard .bbShopHomeArt{
+  transform:scale(.82)!important;
 }
-@media (max-width:1199px){
-  h1{font-size:clamp(2.2rem,4.6vw,3.7rem)!important}
-  h2{font-size:clamp(1.7rem,3.5vw,2.4rem)!important}
-}
-@media (max-width:768px){
-  h1{font-size:clamp(1.8rem,7.2vw,3rem)!important}
-  h2{font-size:clamp(1.4rem,5.3vw,2rem)!important}
-  p, .sub, .desc{font-size:15px!important}
-}
-@media (max-width:480px){
-  h1{font-size:clamp(1.55rem,8vw,2.3rem)!important}
-  h2{font-size:clamp(1.25rem,6vw,1.75rem)!important}
-  p, .sub, .desc{font-size:14px!important}
+.bbQuickCard .go{
+  min-width:44px!important;
+  width:44px!important;
+  height:44px!important;
+  border-radius:14px!important;
+  background:rgba(255,255,255,.62)!important;
+  box-shadow:none!important;
 }
 
-/* consistent spacing + prevent cramped UI */
-section, .section, .block, .module{
-  margin-bottom:var(--space-5)!important;
+/* ---------- RANKED ---------- */
+#bbArena{
+  opacity:1!important;
+  visibility:visible!important;
+  filter:none!important;
+  backdrop-filter:none!important;
+  background:#f7f5fb!important;
+  color:#392b4a!important;
 }
-.grid, .cards, .listGrid{
-  gap:var(--space-4)!important;
+#bbArena.hidden{display:none!important}
+
+#bbArena::before,
+#bbArena::after{
+  display:none!important;
+  content:none!important;
 }
 
-/* Make images / mascots non-blocking */
-img, svg, canvas{
-  max-width:100%;
-  height:auto;
-}
-.decor, .floatingDecor, .blob, .glow, .orb{
-  pointer-events:none!important;
-  z-index:0!important;
-  opacity:.45!important;
-  filter:blur(14px)!important;
-}
-
-/* Improve top bars */
-header, .topbar, .navbar, .navShell{
-  background:rgba(255,255,255,.82)!important;
-  backdrop-filter:blur(14px) saturate(115%)!important;
-  border-bottom:1px solid rgba(228,219,255,.95)!important;
-}
-
-/* force readability on common dim labels that were too light */
-.label-light, .softText, .meta, .caption-soft{
-  color:var(--text-3)!important;
-}
-
-/* Better responsive widths for iPad / desktop */
-.pageShell, .appShell, .container, .contentWrap{
-  width:min(1220px, calc(100% - 28px))!important;
-  margin-inline:auto!important;
-}
-@media(max-width:768px){
-  .pageShell, .appShell, .container, .contentWrap{
-    width:min(100% - 16px, 760px)!important;
-  }
-}
-
-/* Prevent horizontal overflow across the app */
-body, #app, main, .page, .screen{
-  overflow-x:hidden!important;
-}
-
-/* modal / sheet polish */
-.modal, .sheet, .dialog{
-  border-radius:28px!important;
-  background:rgba(255,255,255,.98)!important;
-  border:1px solid rgba(221,212,255,.95)!important;
-  box-shadow:var(--shadow-lg)!important;
-}
-
-/* Specific text bug rescue near the line user showed */
-.hero p, .rankHero p, .bbHero p, .headlineSub, .subtitle, .heroSub{
-  color:rgba(255,255,255,.95)!important;
-  font-weight:500!important;
-  letter-spacing:0!important;
-  white-space:normal!important;
-  overflow-wrap:anywhere!important;
-}
-
-/* when text sits on very bright gradients, make background strip */
-.readabilityStrip{
-  display:inline-flex;
-  background:rgba(58,34,88,.16);
-  border:1px solid rgba(255,255,255,.16);
-  backdrop-filter:blur(6px);
-  border-radius:999px;
-  padding:8px 14px;
-}
-
-/* Safety for iframes / sticky sections */
-.sticky, [style*="position: sticky"]{
-  z-index:5;
-}
-
-
-/* ===== v83 Minimal structure + audio-ready ===== */
-:root{
-  --bb-bg:#f7f6ff;
-  --bb-card:#ffffff;
-  --bb-primary:#7b57ff;
-  --bb-primary-2:#a96cff;
-  --bb-pink:#ff8fc3;
-  --bb-text:#302555;
-  --bb-sub:#6e638e;
-  --bb-line:#e9e3ff;
-  --bb-shadow:0 14px 38px rgba(81,56,120,.08);
-}
-body{
+#bbArena .bbArenaShell{
   background:
-    radial-gradient(circle at top left, rgba(135,210,255,.24), transparent 20%),
-    radial-gradient(circle at bottom right, rgba(255,170,213,.18), transparent 18%),
-    linear-gradient(180deg,#fbfaff 0%,#f6f7ff 54%,#fff8fc 100%) !important;
-  color:var(--bb-text)!important;
+    radial-gradient(circle at 0 0,rgba(241,215,255,.42),transparent 24rem),
+    radial-gradient(circle at 100% 0,rgba(212,234,255,.45),transparent 26rem),
+    #f8f6fb!important;
+  opacity:1!important;
+  filter:none!important;
 }
-.topbar,.navbar,header,.navShell{
-  position:sticky!important; top:0; z-index:40;
-  background:rgba(255,255,255,.88)!important;
-  border-bottom:1px solid var(--bb-line)!important;
+
+#bbArena .bbArenaHeader{
+  background:rgba(255,255,255,.96)!important;
+  border-bottom:1px solid #ece5f1!important;
+  box-shadow:0 5px 18px rgba(70,49,83,.05)!important;
   backdrop-filter:blur(12px)!important;
 }
-.topbar .toggle-theme,.dark-toggle,.night-toggle,[aria-label*="dark"],[aria-label*="theme"]{
-  display:none!important;
+#bbArena .bbArenaBrand strong{
+  color:#3b2b4c!important;
 }
-button, .btn{
-  min-height:44px;
-}
-.hero,.bbHero,.rankHero,.topHero{
-  background:linear-gradient(135deg,#7b57ff 0%, #9d67ff 45%, #ff92c7 100%)!important;
-  border-radius:28px!important;
-  padding:28px!important;
-}
-.hero h1,.bbHero h1,.rankHero h1,.topHero h1{
-  font-size:clamp(1.8rem,4vw,3.4rem)!important;
-}
-.hero p,.bbHero p,.rankHero p,.topHero p{
-  max-width:48ch;
-  font-size:clamp(0.95rem,1.4vw,1.05rem)!important;
-}
-.container,.pageShell,.appShell,.contentWrap{
-  width:min(1100px, calc(100% - 24px))!important;
-}
-.card,.panel,.tile,.box,.module,.bbCard,.bbPanel{
-  border-radius:24px!important;
-}
-.bbMiniNav,.top-shortcuts,.header-actions,.theme-switcher{
-  display:none!important;
+#bbArena .bbArenaBrand span{
+  color:#807487!important;
 }
 
-/* simplify homepage visual density */
-.home-grid,.dashboard-grid,.menu-grid,.cards{
-  gap:16px!important;
+#bbArena .bbArenaMain{
+  width:min(100% - 28px,1120px)!important;
+  padding-top:18px!important;
 }
-.home-grid > *, .dashboard-grid > *, .menu-grid > *{
-  min-height:120px!important;
+
+/* Ranked hero: readable, shorter */
+#bbArena .bbArenaHero{
+  min-height:330px!important;
+  height:auto!important;
+  padding:24px 26px 112px!important;
+  border-radius:28px!important;
+  border:1px solid rgba(255,255,255,.32)!important;
+  background:
+    radial-gradient(circle at 86% 18%,rgba(255,204,231,.27),transparent 13rem),
+    linear-gradient(135deg,#6246cc 0%,#8853d7 46%,#d766a4 100%)!important;
+  box-shadow:0 17px 38px rgba(74,48,104,.16)!important;
+  color:#fff!important;
+  overflow:hidden!important;
+  opacity:1!important;
+  filter:none!important;
 }
-.hero .mascot-wrap,.hero .mascot,.bbHero .mascot,.rankHero .mascot{
-  max-width:280px!important;
+#bbArena .bbArenaHeroCopy,
+#bbArena .bbArenaHero>div:first-child{
+  max-width:55%!important;
+  position:relative!important;
+  z-index:5!important;
 }
-@media (max-width: 900px){
-  .hero,.bbHero,.rankHero,.topHero{padding:22px!important}
+#bbArena .bbArenaHero h1{
+  color:#fff!important;
+  font-size:clamp(2.7rem,6vw,4.6rem)!important;
+  line-height:.96!important;
+  text-shadow:none!important;
 }
-@media (max-width: 640px){
-  .hero,.bbHero,.rankHero,.topHero{
-    padding:18px!important;
+#bbArena .bbArenaHero p{
+  color:rgba(255,255,255,.88)!important;
+  font-size:.83rem!important;
+}
+#bbArena .bbArenaHeroStats{
+  position:absolute!important;
+  left:22px!important;
+  right:22px!important;
+  bottom:20px!important;
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:8px!important;
+  z-index:6!important;
+}
+#bbArena .bbArenaHeroStats>div{
+  min-height:67px!important;
+  padding:10px 13px!important;
+  border-radius:16px!important;
+  background:rgba(255,255,255,.12)!important;
+  border:1px solid rgba(255,255,255,.19)!important;
+  backdrop-filter:blur(5px)!important;
+}
+#bbArena .bbArenaHeroStats small,
+#bbArena .bbArenaHeroStats b{
+  color:#fff!important;
+}
+
+/* compact mascot */
+#bbArena .bbRankedMascot{
+  right:28px!important;
+  top:34px!important;
+  width:285px!important;
+  height:220px!important;
+  transform:scale(.90)!important;
+  transform-origin:center!important;
+}
+#bbArena .bbRMHalo{
+  opacity:.48!important;
+  filter:blur(8px)!important;
+}
+
+/* Ranked actions */
+#bbArena .bbArenaActions{
+  width:100%!important;
+  margin:12px 0 0!important;
+  gap:9px!important;
+  grid-template-columns:1fr 1fr 80px!important;
+}
+#bbArena .bbArenaAction,
+#bbArena .bbArenaRefresh{
+  min-height:88px!important;
+  border-radius:20px!important;
+  border:1px solid #e9e1ef!important;
+  box-shadow:0 8px 22px rgba(67,45,80,.06)!important;
+}
+#bbArena .bbArenaAction.create{
+  background:linear-gradient(145deg,#fff8fb,#ffdce9)!important;
+}
+#bbArena .bbArenaAction.join{
+  background:linear-gradient(145deg,#fbfdff,#e1efff)!important;
+}
+#bbArena .bbArenaAction b{
+  font-size:1.25rem!important;
+  color:#463451!important;
+}
+#bbArena .bbArenaAction small{
+  font-size:.72rem!important;
+  color:#7b6c82!important;
+}
+#bbArena .bbArenaRefresh{
+  background:#fff!important;
+}
+
+/* Open rooms: no huge glow or overlap */
+#bbArena .bbArenaListHead,
+#bbArena .bbArenaRooms{
+  width:100%!important;
+}
+#bbArena .bbArenaListHead{
+  position:relative!important;
+  z-index:4!important;
+  margin:20px 2px 9px!important;
+}
+#bbArena .bbArenaListHead h2{
+  font-size:1.7rem!important;
+  color:#3c2c4d!important;
+}
+#bbArena .bbArenaListHead p{
+  color:#8a7d91!important;
+}
+#bbArena .bbArenaEmpty{
+  min-height:190px!important;
+  border-radius:22px!important;
+  border:1px dashed #dcd2e5!important;
+  background:#fff!important;
+  box-shadow:0 7px 18px rgba(63,42,77,.04)!important;
+  color:#74677d!important;
+}
+#bbArena .bbArenaEmpty::before,
+#bbArena .bbArenaEmpty::after{
+  display:none!important;
+  content:none!important;
+}
+#bbArena .bbArenaRooms,
+#bbArena .bbArenaRooms *{
+  opacity:1!important;
+  filter:none!important;
+}
+
+/* Absolute guarantee that closed create-room layer cannot wash out Ranked. */
+body:not(.bbCreateRoomOpen) > #bbCreateBackdrop{
+  display:none!important;
+}
+body.bbCreateRoomOpen > #bbCreateBackdrop:not(.hidden){
+  display:flex!important;
+}
+
+/* ---------- Responsive ---------- */
+@media(max-width:1000px){
+  .bbHeroCard{
+    grid-template-columns:minmax(0,1fr) 205px!important;
+  }
+  .bbHeroBrain{
+    height:170px!important;
+    min-height:170px!important;
+  }
+  .bbEquippedHeroCharacter{
+    width:175px!important;
+    height:160px!important;
+  }
+
+  #bbArena .bbArenaHero{
+    min-height:315px!important;
+  }
+  #bbArena .bbRankedMascot{
+    width:240px!important;
+    right:15px!important;
+    transform:scale(.80)!important;
+  }
+}
+
+@media(max-width:760px){
+  .bbCandyHomeScreen{
+    padding:12px 10px calc(92px + env(safe-area-inset-bottom))!important;
+  }
+  .bbHomeTopbar{
+    min-height:50px!important;
+    margin-bottom:9px!important;
+  }
+  .bbHomeBrand .brainMark{
+    width:36px!important;height:36px!important;flex-basis:36px!important;
+  }
+  .bbHomeBrand h1{
+    font-size:1.55rem!important;
+  }
+
+  .bbHeroCard{
+    grid-template-columns:1fr 120px!important;
+    gap:9px!important;
+    padding:15px!important;
     border-radius:22px!important;
   }
-  .hero .mascot-wrap,.hero .mascot,.bbHero .mascot,.rankHero .mascot{
-    max-width:180px!important;
-    margin-inline:auto!important;
+  .bbHeroText h2{
+    font-size:1.65rem!important;
+    margin-bottom:9px!important;
   }
-  .home-grid,.dashboard-grid,.menu-grid,.cards{
+  .bbHeroText .tag{
+    font-size:.58rem!important;
+    padding:5px 8px!important;
+  }
+  .bbHeroBrain{
+    min-height:120px!important;
+    height:120px!important;
+  }
+  .brainBody{
+    transform:scale(.48)!important;
+  }
+  .bbEquippedHeroCharacter{
+    width:118px!important;
+    height:112px!important;
+  }
+  .bbPinkBuddy3D{
+    transform:scale(.46)!important;
+  }
+  .bbPlayerCard{
+    min-height:66px!important;
+    padding:7px!important;
+  }
+  .avatarBear{
+    width:49px!important;height:49px!important;flex-basis:49px!important;
+  }
+  .bbPlayerCard strong{
+    font-size:1.15rem!important;
+  }
+  .bbPlayerCard em{
+    font-size:.62rem!important;
+  }
+  .bbHomeAuthCard{
+    grid-column:1/-1!important;
+  }
+  .bbHomeAuthGuest,
+  .bbHomeAuthMember{
+    flex-wrap:wrap!important;
+  }
+
+  .bbHomeInventoryTop{
+    grid-template-columns:1fr!important;
+  }
+  .bbHomeCollectionGrid{
+    grid-template-columns:1fr 1fr!important;
+  }
+  .bbHomeGrid{
+    grid-template-columns:1fr!important;
+  }
+
+  #bbArena .bbArenaMain{
+    width:min(100% - 16px,1120px)!important;
+    padding-top:10px!important;
+  }
+  #bbArena .bbArenaHero{
+    min-height:390px!important;
+    padding:18px 16px 190px!important;
+    border-radius:22px!important;
+  }
+  #bbArena .bbArenaHeroCopy,
+  #bbArena .bbArenaHero>div:first-child{
+    max-width:100%!important;
+  }
+  #bbArena .bbArenaHero h1{
+    font-size:2.5rem!important;
+  }
+  #bbArena .bbRankedMascot{
+    width:170px!important;
+    height:140px!important;
+    right:7px!important;
+    top:145px!important;
+    transform:scale(.62)!important;
+  }
+  #bbArena .bbArenaHeroStats{
+    left:12px!important;
+    right:12px!important;
+    bottom:12px!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  }
+  #bbArena .bbArenaHeroStats>div{
+    min-height:57px!important;
+    padding:8px!important;
+  }
+  #bbArena .bbArenaActions{
+    grid-template-columns:1fr 1fr!important;
+  }
+  #bbArena .bbArenaRefresh{
+    grid-column:1/-1!important;
+    min-height:48px!important;
+  }
+}
+
+@media(max-width:480px){
+  .bbHeroCard{
+    grid-template-columns:1fr!important;
+  }
+  .bbHeroBrain{
+    position:absolute!important;
+    right:7px!important;
+    top:12px!important;
+    width:95px!important;
+    height:95px!important;
+    min-height:95px!important;
+    opacity:.40!important;
+  }
+  .bbHeroText{
+    z-index:4!important;
+  }
+  .bbHeroText h2{
+    max-width:74%!important;
+  }
+  .bbPlayerCard{
+    background:rgba(255,255,255,.16)!important;
+  }
+  .bbHomeCollectionGrid{
+    grid-template-columns:1fr!important;
+  }
+
+  #bbArena .bbArenaHero{
+    min-height:430px!important;
+  }
+  #bbArena .bbArenaHeroStats{
+    grid-template-columns:1fr!important;
+  }
+  #bbArena .bbArenaActions{
     grid-template-columns:1fr!important;
   }
 }
-
-/* remove extra floating clutter */
-.floatingDecor,.blob,.glow,.orb,.sparkle-large{
-  display:none!important;
-}
-
-/* audio status bubble */
-.bb-audio-pill{
-  position:fixed; right:16px; bottom:16px; z-index:60;
-  padding:10px 14px; border-radius:999px;
-  background:rgba(48,37,85,.82); color:#fff; font-size:13px;
-  box-shadow:0 12px 28px rgba(47,37,85,.22);
-  opacity:0; transform:translateY(6px); transition:.25s ease;
-  pointer-events:none;
-}
-.bb-audio-pill.show{opacity:1; transform:translateY(0)}
 
 </style>
 
@@ -10329,19 +10244,13 @@ try{
         <span class="brainMark"></span>
         <h1><span class="brainWord">Brain</span> <span class="buddyWord">Buddy</span><span class="brandSpark"></span></h1>
       </div>
-      <div class="bbHomeActions">
-        <button class="bbHomeIcon" data-app-action="profile" aria-label="โปรไฟล์"><span class="miniBear"></span></button>
-        <button class="bbHomeIcon homeMusicIcon" id="bbHomeMusic" aria-label="เปิดปิดเพลง"><span></span></button>
-        <button class="bbHomeIcon homeMoonIcon" id="bbHomeTheme" aria-label="เปลี่ยนธีม"><span></span></button>
-        
-      </div>
     </header>
 
     <section class="bbHeroCard">
       <div class="bbHeroText">
         <div class="tag">BRAIN BUDDY</div>
-        <h2>วันนี้อยากเล่นแบบไหน?</h2>
-        <p>เลือกสิ่งที่ต้องการแล้วไปต่อได้เลย ไม่ต้องเลื่อนหาตัวเลือกยาว ๆ</p>
+        <h2>เลือกเกมที่อยากเล่น</h2>
+        
 
         <button class="bbPlayerCard" data-app-action="profile">
           <span class="avatarBear"></span>
@@ -11479,7 +11388,7 @@ try{
 <div class="modal hidden" id="audioModal"><div class="modalCard"><button class="close" data-close="audioModal">×</button><h2>เพลง & เสียง</h2><p class="lead">แยก Music และ SFX ได้ พร้อมเพลงหลายบรรยากาศ</p><div class="settingGrid"><div class="setting full"><h3>🎵 Music Theme</h3><div class="segment" id="musicThemeSeg"><button class="chip active" data-music="cozy">Cozy</button><button class="chip" data-music="dream">Dream</button><button class="chip" data-music="night">Night</button><button class="chip" data-music="focus">Focus</button></div></div><div class="setting"><h3>Music</h3><label class="switchrow"><input type="checkbox" id="musicToggle"><span class="switch"></span><span>เปิดเพลงพื้นหลัง</span></label></div><div class="setting"><h3>SFX</h3><label class="switchrow"><input type="checkbox" id="sfxToggle" checked><span class="switch"></span><span>เสียงกด ถูก ผิด และเฉลย</span></label></div><div class="setting full"><h3>ระดับเสียงเพลง</h3><input type="range" id="musicVol" min="0" max="100" value="28"><span id="musicVolText">28%</span></div><div class="setting full"><h3>ระดับเสียงเอฟเฟกต์</h3><input type="range" id="sfxVol" min="0" max="100" value="55"><span id="sfxVolText">55%</span></div></div></div></div>
 
 <!-- Accessibility -->
-<div class="modal hidden" id="accessModal"><div class="modalCard"><button class="close" data-close="accessModal">×</button><h2>การมองเห็น & Animation</h2><p class="lead">ปรับให้เหมาะกับการมองและการใช้งานของคุณ</p><div class="settingGrid"><div class="setting"><h3>Theme</h3><div class="segment" id="themeSeg"><button class="chip active" data-theme="light">Light</button><button class="chip" data-theme="dark">Dark</button><button class="chip" data-theme="auto">Auto</button></div></div><div class="setting"><h3>Animation</h3><div class="segment" id="motionSeg"><button class="chip active" data-motion="full">เต็ม</button><button class="chip" data-motion="reduced">เบา</button><button class="chip" data-motion="off">ปิด</button></div></div><div class="setting"><h3>ตัวอักษรใหญ่</h3><label class="switchrow"><input type="checkbox" id="largeToggle"><span class="switch"></span><span>เพิ่มขนาดข้อความ</span></label></div><div class="setting"><h3>Contrast สูง</h3><label class="switchrow"><input type="checkbox" id="contrastToggle"><span class="switch"></span><span>เพิ่มความชัดของเส้นขอบ</span></label></div><div class="setting full"><h3>⌨️ Keyboard Shortcuts</h3><p>Space = ขั้นต่อไป • R = เฉลย • H = Hint • F = เต็มจอ • P = โหมดนำเกม • Esc = ปิดหน้าต่าง</p></div></div></div></div>
+<div class="modal hidden" id="accessModal"><div class="modalCard"><button class="close" data-close="accessModal">×</button><h2>การมองเห็น & Animation</h2><p class="lead">ปรับให้เหมาะกับการมองและการใช้งานของคุณ</p><div class="settingGrid"><div class="setting"><h3>Animation</h3><div class="segment" id="motionSeg"><button class="chip active" data-motion="full">เต็ม</button><button class="chip" data-motion="reduced">เบา</button><button class="chip" data-motion="off">ปิด</button></div></div><div class="setting"><h3>ตัวอักษรใหญ่</h3><label class="switchrow"><input type="checkbox" id="largeToggle"><span class="switch"></span><span>เพิ่มขนาดข้อความ</span></label></div><div class="setting"><h3>Contrast สูง</h3><label class="switchrow"><input type="checkbox" id="contrastToggle"><span class="switch"></span><span>เพิ่มความชัดของเส้นขอบ</span></label></div><div class="setting full"><h3>⌨️ Keyboard Shortcuts</h3><p>Space = ขั้นต่อไป • R = เฉลย • H = Hint • F = เต็มจอ • P = โหมดนำเกม • Esc = ปิดหน้าต่าง</p></div></div></div></div>
 
 <!-- Research -->
 <div class="modal hidden" id="researchModal"><div class="modalCard wide"><button class="close" data-close="researchModal">×</button><h2>หลักการ & งานวิจัย</h2><p class="lead">คำแนะนำหลังจบรอบอธิบาย “ผลงานในเกมนี้” และเสนอความท้าทายถัดไปแบบเชิงบวก</p><div class="research"><div><strong>Working memory</strong><p>Working memory ใช้สำหรับคงและจัดการข้อมูลชั่วคราว จึงสอดคล้องกับเกมที่ต้องจำภาพ ตำแหน่ง หรือลำดับก่อนตอบ</p></div><div><strong>Visuospatial working memory</strong><p>เกมที่ต้องจำภาพและตำแหน่งใช้กระบวนการเชิงภาพ-พื้นที่ งานฝึกวิดีโอเกมบางงานพบการพัฒนาผลงานด้าน visuospatial working memory หลังฝึก</p></div><div><strong>Computerised working-memory training</strong><p>Meta-analysis รายงานการพัฒนาผลงานบนงานฝึกและงานที่ใกล้เคียง จึงเหมาะกับการติดตามความแม่นยำและค่อย ๆ เพิ่มความยากแบบ task-specific</p></div><div><strong>Serious games</strong><p>Systematic review/meta-analysis พบศักยภาพของ serious games ต่อ working memory และ nonverbal memory ในบางกลุ่ม สนับสนุนการใช้เกมเป็นกิจกรรมฝึกที่มีส่วนร่วม</p></div></div><div class="privacy">ผลของ Brain Buddy ใช้ติดตามความก้าวหน้าในโจทย์ของเกม ไม่ใช่คะแนนวินิจฉัยหรือการวัดสติปัญญา ผู้เยี่ยมชม จะเก็บข้อมูลในอุปกรณ์นี้ ส่วนสมาชิกสามารถซิงก์โปรไฟล์ ความคืบหน้า ความสำเร็จ และประวัติผ่าน Supabase Cloud</div><div style="font-size:9px;line-height:1.75;color:var(--muted);margin-top:9px">อ้างอิง: Baddeley A. Working memory. Current Biology. 2010; Toril P et al. Video Game Training Enhances Visuospatial Working Memory and Episodic Memory in Older Adults. 2016; Syed M et al. Examining Working Memory Training for Healthy Adults. 2024; Abd-Alrazaq A et al. The Effectiveness of Serious เกม in Improving Memory Among Older Adults With Cognitive Impairment. 2022; Li G et al. Meta-analysis of computerised working memory training. 2026.</div></div></div>
@@ -12215,8 +12124,38 @@ function resetRound(r=Math.random){stopTimer();layout=roundLayout(r);baseLayout=
 function startRound(r=Math.random){resetRound(r);startMode();updateSummary();$("game").scrollIntoView({behavior:"smooth",block:"start"})}
 function startMode(){stopTimer();$("voiceBtn").classList.add("hidden");$("replayBtn").classList.add("hidden");$("hintBtn").classList.remove("hidden");if(cfg.mode==="position"){state="position_mem";showScene("board");renderBoard();$("boardTitle").textContent="จำภาพทั้งหมด";$("boardSub").textContent="จำรายละเอียดและตำแหน่งให้ดี";setStatus("👀","จำภาพและตำแหน่ง","เมื่อพร้อมแล้วค่อยสุ่มรูปเป้าหมาย");setMain("สุ่มรูปเป้าหมาย",positionAsk)}else if(cfg.mode==="match"){startMatch()}else if(cfg.mode==="missing"){state="missing_mem";showScene("board");renderBoard();$("boardTitle").textContent="จำว่ามีอะไรอยู่บนกระดาน";$("boardSub").textContent="เมื่อพร้อมแล้ว เกมจะซ่อนหนึ่งรายการ";setStatus("👀","จำชุดภาพ","สังเกตให้ครบทุกตัว");setMain("ซ่อนหนึ่งตัว",missingHide)}else if(cfg.mode==="swap"){state="swap_mem";layout=[...baseLayout];showScene("board");renderBoard();$("boardTitle").textContent="จำตำแหน่งทั้งหมด";$("boardSub").textContent="สองช่องจะถูกสลับหลังจากคุณพร้อม";setStatus("🔄","จำตำแหน่ง","สังเกตว่าตัวไหนอยู่ตรงไหน");setMain("สลับตำแหน่ง",swapNow)}else if(cfg.mode==="change"){state="change_mem";layout=[...baseLayout];showScene("board");renderBoard();$("boardTitle").textContent="จำรายละเอียด";$("boardSub").textContent="หนึ่งช่องจะเปลี่ยนเป็นรายการอื่น";setStatus("🔎","จำรายละเอียด","ดูทั้งภาพและตำแหน่ง");setMain("เปลี่ยนหนึ่งจุด",changeNow)}else{state="sequence_ready";showScene("board");renderBoard();$("boardTitle").textContent="เตรียมจำลำดับ";$("boardSub").textContent="เกมจะโชว์ทีละตัว แล้วให้แตะตามลำดับเดิม";setStatus("✨","เตรียมพร้อม","กดเริ่มเมื่อพร้อม");setMain("เริ่มแสดงลำดับ",sequenceStart)}saveResume()}
 function ensureAudio(){if(!audioCtx&&window.AudioContext)audioCtx=new AudioContext();if(audioCtx?.state==="suspended")audioCtx.resume()}function sfx(type="tap"){if(!sfxEnabled)return;ensureAudio();if(!audioCtx)return;const now=audioCtx.currentTime,map={tap:[520,.06],flip:[690,.08],ok:[650,.15],bad:[190,.13],score:[820,.11],done:[523,.26],hint:[440,.12],bonus:[930,.18]},[f,d]=map[type]||map.tap,o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);o.type=type==="bad"?"triangle":"sine";o.frequency.setValueAtTime(f,now);if(type==="ok"||type==="bonus")o.frequency.exponentialRampToValueAtTime(f*1.3,now+d);g.gain.setValueAtTime(.06*sfxVolume,now);g.gain.exponentialRampToValueAtTime(.001,now+d);o.start(now);o.stop(now+d)}
-function musicTick(){if(!musicEnabled)return;ensureAudio();if(!audioCtx)return;const ns=MUSIC[musicTheme]||MUSIC.cozy,n=audioCtx.currentTime,o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);o.type=musicTheme==="night"?"sine":"triangle";o.frequency.value=ns[musicStep++%ns.length];g.gain.setValueAtTime(.025*musicVolume,n);g.gain.exponentialRampToValueAtTime(.001,n+.55);o.start(n);o.stop(n+.55)}function startMusic(){musicEnabled=true;if(!musicLoop){musicTick();musicLoop=setInterval(musicTick,720)}saveAudio();updateMusic()}function stopMusic(){musicEnabled=false;if(musicLoop){clearInterval(musicLoop);musicLoop=null}saveAudio();updateMusic()}function saveAudio(){save("bb_audio",{musicEnabled,sfxEnabled,musicVolume,sfxVolume,musicTheme})}function restoreAudio(){const a=load("bb_audio",{});musicEnabled=!!a.musicEnabled;sfxEnabled=a.sfxEnabled!==false;musicVolume=a.musicVolume??.28;sfxVolume=a.sfxVolume??.55;musicTheme=a.musicTheme||"cozy";$("musicToggle").checked=musicEnabled;$("sfxToggle").checked=sfxEnabled;$("musicVol").value=Math.round(musicVolume*100);$("sfxVol").value=Math.round(sfxVolume*100);$("musicVolText").textContent=Math.round(musicVolume*100)+"%";$("sfxVolText").textContent=Math.round(sfxVolume*100)+"%";syncMusic();updateMusic()}function updateMusic(){$("musicBtn").textContent=musicEnabled?"🎶":"🎵"}function syncMusic(){document.querySelectorAll("[data-music]").forEach(b=>b.classList.toggle("active",b.dataset.music===musicTheme))}
-function applyTheme(mode,remember=true){themeMode=mode;let dark=mode==="dark";if(mode==="auto")dark=window.matchMedia?.("(prefers-color-scheme: dark)").matches;document.body.classList.toggle("dark",dark);$("themeBtn").textContent=dark?"☀️":"🌙";$("themeMeta").content=dark?"#171423":"#fff8fb";document.querySelectorAll("[data-theme]").forEach(b=>b.classList.toggle("active",b.dataset.theme===themeMode));if(remember)save("bb_theme",mode)}function applyMotion(mode,remember=true){motionMode=mode;document.body.classList.toggle("reduced",mode==="reduced");document.body.classList.toggle("off",mode==="off");document.querySelectorAll("[data-motion]").forEach(b=>b.classList.toggle("active",b.dataset.motion===mode));if(remember)save("bb_motion",mode)}function restoreAccess(){applyTheme(load("bb_theme","light"),false);applyMotion(load("bb_motion","full"),false);const l=load("bb_large",false),c=load("bb_contrast",false);$("largeToggle").checked=l;$("contrastToggle").checked=c;document.body.classList.toggle("large",l);document.body.classList.toggle("contrast",c)}
+function musicTick(){
+  if(!musicEnabled)return;
+  ensureAudio();
+  if(!audioCtx)return;
+  const seq=[261.63,329.63,392,523.25,440,349.23,392,329.63];
+  const n=audioCtx.currentTime;
+  const f=seq[musicStep++%seq.length];
+
+  const make=(freq,type,gain,delay,dur)=>{
+    const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+    o.connect(g);g.connect(audioCtx.destination);
+    o.type=type;o.frequency.value=freq;
+    const t=n+delay;
+    g.gain.setValueAtTime(.0001,t);
+    g.gain.linearRampToValueAtTime(gain*musicVolume,t+.035);
+    g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+    o.start(t);o.stop(t+dur+.03);
+  };
+
+  make(f,"sine",.018,0,.72);
+  if(musicStep%2===0)make(f/2,"triangle",.007,0,.95);
+}
+function startMusic(){
+  musicEnabled=true;
+  if(!musicLoop){
+    musicTick();
+    musicLoop=setInterval(musicTick,980);
+  }
+  saveAudio();
+  updateMusic();
+}function stopMusic(){musicEnabled=false;if(musicLoop){clearInterval(musicLoop);musicLoop=null}saveAudio();updateMusic()}function saveAudio(){save("bb_audio",{musicEnabled,sfxEnabled,musicVolume,sfxVolume,musicTheme})}function restoreAudio(){const a=load("bb_audio",{});musicEnabled=true;sfxEnabled=true;musicVolume=.34;sfxVolume=.62;musicTheme="cozy";if($("musicToggle"))$("musicToggle").checked=true;if($("sfxToggle"))$("sfxToggle").checked=true;if($("musicVol"))$("musicVol").value=34;if($("sfxVol"))$("sfxVol").value=62;if($("musicVolText"))$("musicVolText").textContent="34%";if($("sfxVolText"))$("sfxVolText").textContent="62%";syncMusic();updateMusic()}function updateMusic(){$("musicBtn").textContent=musicEnabled?"🎶":"🎵"}function syncMusic(){document.querySelectorAll("[data-music]").forEach(b=>b.classList.toggle("active",b.dataset.music===musicTheme))}
+function applyTheme(mode,remember=true){themeMode="light";document.body.classList.remove("dark");if($("themeMeta"))$("themeMeta").content="#f6f4ff";document.querySelectorAll("[data-theme]").forEach(b=>b.classList.toggle("active",b.dataset.theme==="light"));if(remember)save("bb_theme","light")}function applyMotion(mode,remember=true){motionMode=mode;document.body.classList.toggle("reduced",mode==="reduced");document.body.classList.toggle("off",mode==="off");document.querySelectorAll("[data-motion]").forEach(b=>b.classList.toggle("active",b.dataset.motion===mode));if(remember)save("bb_motion",mode)}function restoreAccess(){applyTheme(load("bb_theme","light"),false);applyMotion(load("bb_motion","full"),false);const l=load("bb_large",false),c=load("bb_contrast",false);$("largeToggle").checked=l;$("contrastToggle").checked=c;document.body.classList.toggle("large",l);document.body.classList.toggle("contrast",c)}
 function startTimer(expire){stopTimer();if(!cfg.timer)return;$("timer").classList.remove("hidden");const total=cfg.timer*1000;timerEnd=Date.now()+total;timerId=setInterval(()=>{const left=Math.max(0,timerEnd-Date.now());$("timerFill").style.width=(left/total*100)+"%";if(left<=0){stopTimer();expire?.()}},100)}function stopTimer(){if(timerId){clearInterval(timerId);timerId=null}$("timer").classList.add("hidden");$("timerFill").style.width="100%"}function loseLife(){if(!cfg.lives)return;lives=Math.max(0,lives-1);updateHUD();if(lives===0)setTimeout(finishRound,420)}function useHint(){if(hints<=0)return;hints--;updateHUD();sfx("hint");if(state==="position_answer"){const wrong=[...$("board").children].filter((_,i)=>i!==targetIndex);shuf(wrong).slice(0,Math.max(1,Math.floor(wrong.length/2))).forEach(x=>{x.style.opacity=.24;x.style.pointerEvents="none"})}else if(state==="swap_pick"&&swapPair.length){$("board").children[swapPair[0]]?.classList.add("selected")}else if(state==="missing_choice"){const cs=[...$("choiceGrid").children].filter(x=>!x.classList.contains("correct"));if(cs.length)cs[0].style.opacity=.25}$("hintline").textContent="Hint ถูกใช้แล้วเพื่อช่วยลดความซับซ้อนของโจทย์";saveResume()}
 const MODE_POINTS={position:100,match:80,missing:120,swap:150,change:130,sequence:160};
 const DIFF_MULT={easy:1,normal:1.25,hard:1.5,expert:2};
@@ -12574,7 +12513,7 @@ let quickTeamCount=2;
 $('quickTeamPicker').onclick=e=>{const b=e.target.closest('[data-quick-team]');if(!b)return;quickTeamCount=Number(b.dataset.quickTeam);document.querySelectorAll('[data-quick-team]').forEach(x=>x.classList.toggle('active',x===b));$('teamQuick').textContent=`เริ่มแบบ ${quickTeamCount} ทีม →`};
 $('teamQuick').onclick=()=>{cfg={...cfg,style:'team',mode:'position',diff:'easy',source:'teddy',teams:quickTeamCount,answer:'voice',adaptive:false,combo:false,timer:0,lives:false,daily:false};updateSummary();startRound()};
 $('customPlay').onclick=openCustom;$('settingsBtn').onclick=openCustom;$('resultSettings').onclick=openCustom;$('dailyBtn').onclick=startDaily;$('resumeBtn').onclick=restoreResume;$('homeBtn').onclick=()=>$('home').scrollIntoView({behavior:'smooth'});$('againBtn').onclick=()=>startRound();$('hintBtn').onclick=useHint;
-$('fullBtn').onclick=async()=>{try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen()}catch(e){}};$('themeBtn').onclick=()=>applyTheme(document.body.classList.contains('dark')?'light':'dark');$('presenterBtn').onclick=()=>{document.body.classList.toggle('presenter');$('popover').classList.add('hidden');$('game').scrollIntoView({behavior:'smooth'})};
+$('fullBtn').onclick=async()=>{try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen()}catch(e){}};$('themeBtn').onclick=()=>applyTheme('light');$('presenterBtn').onclick=()=>{document.body.classList.toggle('presenter');$('popover').classList.add('hidden');$('game').scrollIntoView({behavior:'smooth'})};
 $('musicBtn').onclick=()=>musicEnabled?stopMusic():startMusic();$('musicToggle').onchange=e=>e.target.checked?startMusic():stopMusic();$('sfxToggle').onchange=e=>{sfxEnabled=e.target.checked;saveAudio()};$('musicVol').oninput=e=>{musicVolume=Number(e.target.value)/100;$('musicVolText').textContent=e.target.value+'%';saveAudio()};$('sfxVol').oninput=e=>{sfxVolume=Number(e.target.value)/100;$('sfxVolText').textContent=e.target.value+'%';saveAudio()};$('musicThemeSeg').onclick=e=>{const b=e.target.closest('[data-music]');if(!b)return;musicTheme=b.dataset.music;syncMusic();saveAudio()};
 $('themeSeg').onclick=e=>{const b=e.target.closest('[data-theme]');if(b)applyTheme(b.dataset.theme)};$('motionSeg').onclick=e=>{const b=e.target.closest('[data-motion]');if(b)applyMotion(b.dataset.motion)};$('largeToggle').onchange=e=>{document.body.classList.toggle('large',e.target.checked);save('bb_large',e.target.checked)};$('contrastToggle').onchange=e=>{document.body.classList.toggle('contrast',e.target.checked);save('bb_contrast',e.target.checked)};
 $('styleSeg').onclick=e=>{const b=e.target.closest('[data-style]');if(!b)return;draft.style=b.dataset.style;syncDraft()};$('modeSeg').onclick=e=>{const b=e.target.closest('[data-mode]');if(!b)return;draft.mode=b.dataset.mode;syncDraft()};$('diffSeg').onclick=e=>{const b=e.target.closest('[data-diff]');if(!b)return;draft.diff=b.dataset.diff;syncDraft()};$('sourceSeg').onclick=e=>{const b=e.target.closest('[data-source]');if(!b)return;draft.source=b.dataset.source;syncDraft()};$('answerSeg').onclick=e=>{const b=e.target.closest('[data-answer]');if(!b)return;draft.answer=b.dataset.answer;syncDraft()};$('teamCount').onchange=e=>{draft.teams=Number(e.target.value);syncDraft()};$('applyCustom').onclick=applyCustom;$('randomTeam').onclick=()=>{const i=Math.floor(Math.random()*draft.teams);$('randomTeamOut').textContent=`🎲 ข้อนี้ให้ ${teamData[i].emoji} ${teamData[i].name} ตอบ`;sfx('tap')};$('upload').onchange=e=>uploads(e.target.files);
@@ -12599,7 +12538,7 @@ $('brand').onclick=()=>{tapCount++;clearTimeout(tapReset);tapReset=setTimeout(()
 (function init(){customImages=load('bb_custom',[]);
 if(cfg.source==='study')cfg.source='teddy';
 const oldResume=load('bb_resume',null);if(oldResume?.cfg?.source==='study'){oldResume.cfg.source='teddy';save('bb_resume',oldResume)}
-restoreAccess();restoreAudio();renderUploads();renderProfile();renderHome();renderStats();renderCollection();renderDaily();updateSummary();updateHUD();$('heroBear').innerHTML=teddySVG(2);const p=profile(),lv=level(p.xp||0);$('avatarSeg').innerHTML=COLLECTION.filter(x=>lv>=x[2]).map(x=>`<button class="chip ${p.avatar===x[0]?'active':''}" data-avatar="${x[0]}">${x[0]}</button>`).join('');if(load('bb_resume',null))$('resumeBtn').classList.remove('hidden');setMain('เริ่มรอบใหม่',()=>startRound());if(musicEnabled){musicEnabled=false;$('musicToggle').checked=false;updateMusic()}setupSupabase()})();
+restoreAccess();restoreAudio();renderUploads();renderProfile();renderHome();renderStats();renderCollection();renderDaily();updateSummary();updateHUD();$('heroBear').innerHTML=teddySVG(2);const p=profile(),lv=level(p.xp||0);$('avatarSeg').innerHTML=COLLECTION.filter(x=>lv>=x[2]).map(x=>`<button class="chip ${p.avatar===x[0]?'active':''}" data-avatar="${x[0]}">${x[0]}</button>`).join('');if(load('bb_resume',null))$('resumeBtn').classList.remove('hidden');setMain('เริ่มรอบใหม่',()=>startRound());setupSupabase()})();
 </script>
 
 <div class="modal hidden" id="v17AdminModal"><div class="modalcard v17admincard">
@@ -20845,274 +20784,84 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
+
+
+
 <script>
 /* ==========================================================
-   Brain Buddy v80 — runtime responsive patch
+   Brain Buddy v84 — automatic audio after first interaction
+   Browsers require a user gesture before WebAudio can start.
+   No visible music/night-mode buttons are needed.
    ========================================================== */
 (function(){
-  function applyResponsivePolish(){
-    const selectors = {
-      containers: ['body > div', '.app', '.page', '.screen', '.container', '.shell'],
-      hero: ['.hero', '.heroCard', '.welcomeHero', '.bigHero'],
-      stats: ['.topStats', '.rankedTopStats', '.statsStrip'],
-      actions: ['.rankActions', '.actionTiles'],
-      empties: ['.emptyState', '.roomEmptyState']
-    };
+  let activated=false;
 
-    // Add classes if elements exist
-    document.querySelectorAll('.hero, .heroCard, .welcomeHero, .bigHero').forEach(el=>el.classList.add('heroCard'));
-    document.querySelectorAll('.topStats, .rankedTopStats, .statsStrip').forEach(el=>el.classList.add('rankedTopStats'));
-    document.querySelectorAll('.rankActions, .actionTiles').forEach(el=>el.classList.add('actionTiles'));
-    document.querySelectorAll('.emptyState, .roomEmptyState').forEach(el=>el.classList.add('emptyState'));
-
-    // Ranked room / open rooms section
-    document.querySelectorAll('*').forEach(el=>{
-      const text = (el.textContent || '').trim();
-
-      // Empty/open room block
-      if(text.includes('ห้องที่กำลังเปิด') || text.includes('ยังไม่มีห้องเปิดอยู่')){
-        const card = el.closest('.card, .panel, section, div') || el;
-        card.classList.add('hasDecor');
-        const title = card.querySelector('h1,h2,h3,h4,.title,.sectionTitle');
-        if(title) title.classList.add('roomOpenTitle');
-
-        // find suspicious decorative absolute circle by size/shape
-        const descendants = card.querySelectorAll('div,span');
-        descendants.forEach(n=>{
-          const st = getComputedStyle(n);
-          const w = parseFloat(st.width), h = parseFloat(st.height);
-          const rounded = st.borderRadius;
-          const pos = st.position;
-          const bg = st.backgroundImage || st.background;
-          if(
-            pos === 'absolute' &&
-            w >= 60 && h >= 60 &&
-            rounded.includes('999') || rounded.includes('%')
-          ){
-            if((bg && (bg.includes('gradient') || bg.includes('rgb'))) || st.filter.includes('blur')){
-              n.classList.add('rankGlow');
-              // move a bit more outward to avoid text
-              n.style.right = '-28px';
-              n.style.bottom = '10px';
-              n.style.zIndex = '0';
-              n.style.pointerEvents = 'none';
-            }
-          }
-        });
+  function activateAudio(){
+    if(activated)return;
+    activated=true;
+    try{
+      if(typeof ensureAudio==="function")ensureAudio();
+      if(typeof startMusic==="function"){
+        if(typeof musicEnabled!=="undefined")musicEnabled=true;
+        startMusic();
       }
-    });
-
-    // Clean obvious overflow on big sections
-    document.querySelectorAll('section, .card, .panel').forEach(el=>{
-      const st = getComputedStyle(el);
-      if(st.overflowX === 'visible'){
-        el.style.overflowX = 'clip';
-      }
-      if(st.position === 'static'){
-        el.style.position = 'relative';
-      }
-    });
+      if(typeof sfx==="function")sfx("tap");
+    }catch(e){}
   }
 
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', applyResponsivePolish);
-  }else{
-    applyResponsivePolish();
+  document.addEventListener("pointerdown",activateAudio,{once:true,capture:true});
+  document.addEventListener("keydown",activateAudio,{once:true,capture:true});
+
+  /* Navigation / interface sounds outside the Teddy engine. */
+  document.addEventListener("click",e=>{
+    if(!activated || typeof sfx!=="function")return;
+
+    const el=e.target.closest("button,a,[role='button']");
+    if(!el)return;
+
+    /* Teddy gameplay already fires its own sounds. */
+    if(el.closest("#game"))return;
+
+    try{sfx("tap")}catch(err){}
+  },true);
+
+  /* Correct / incorrect effects for Math / Chinese / English practice. */
+  const feedback=document.querySelector("#bbLearningFeedbackTitle");
+  if(feedback){
+    const ob=new MutationObserver(()=>{
+      if(feedback.closest(".hidden"))return;
+      const t=(feedback.textContent||"").trim();
+      try{
+        if(/ถูกต้อง|correct/i.test(t))sfx("ok");
+        else if(/ยังไม่ถูก|incorrect|wrong/i.test(t))sfx("bad");
+      }catch(e){}
+    });
+    ob.observe(feedback,{childList:true,characterData:true,subtree:true});
   }
-  window.addEventListener('load', applyResponsivePolish);
-  window.addEventListener('resize', ()=>setTimeout(applyResponsivePolish, 60));
-})();
-</script>
 
+  /* Finish sound when practice result opens. */
+  const result=document.querySelector("#bbLearningResult");
+  if(result){
+    const ob2=new MutationObserver(()=>{
+      if(!result.classList.contains("hidden")){
+        try{sfx("done")}catch(e){}
+      }
+    });
+    ob2.observe(result,{attributes:true,attributeFilter:["class"]});
+  }
 
-<script>
-(function(){
-  function cleanVisualNoise(){
-    // Remove or soften oversized floating glows that sit on top of content
-    const arena = document.querySelector('#bbArena');
-    if(arena){
-      arena.querySelectorAll('*').forEach(el=>{
-        const cls = (el.className || '').toString();
-        const style = window.getComputedStyle(el);
-        const looksDecor =
-          /blob|glow|orb|decor|floating/i.test(cls) ||
-          ((style.position === 'absolute' || style.position === 'fixed') &&
-           parseFloat(style.opacity || '1') < 0.9 &&
-           (style.filter.includes('blur') || style.backdropFilter.includes('blur')));
-        if(looksDecor){
-          el.style.pointerEvents = 'none';
-          el.style.zIndex = '0';
-          if (parseFloat(style.opacity || '1') > 0.22) el.style.opacity = '0.18';
-        }
-      });
+  /* Defensive cleanup: never let a closed Ranked create overlay wash out the page. */
+  function cleanArenaOverlay(){
+    const backdrop=document.querySelector("#bbCreateBackdrop");
+    if(!backdrop)return;
+    if(!document.body.classList.contains("bbCreateRoomOpen")){
+      backdrop.classList.add("hidden");
     }
-
-    // Add readability strip for some hero subtitles if needed
-    document.querySelectorAll('.hero p, .rankHero p, .bbHero p').forEach(p=>{
-      if(!p.closest('.readabilityStrip') && p.textContent && p.textContent.trim().length < 120){
-        // keep plain if already readable enough, but ensure contrast
-        p.style.fontWeight = '500';
-      }
-    });
-
-    // Prevent room count chip / small labels from being covered
-    document.querySelectorAll('#bbArena .bbOpenRoomsSection, #bbArena .bbRoomsArea').forEach(sec=>{
-      sec.style.position = 'relative';
-      sec.style.zIndex = '2';
-    });
-
-    // Normalize scrolling containers
-    document.querySelectorAll('.container, .contentWrap, .pageShell').forEach(el=>{
-      el.style.maxWidth = '1220px';
-      el.style.marginInline = 'auto';
-    });
   }
-
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', cleanVisualNoise);
-  }else{
-    cleanVisualNoise();
-  }
-  window.addEventListener('load', cleanVisualNoise);
-  window.addEventListener('resize', cleanVisualNoise);
-})();
-</script>
-
-
-<script>
-(function(){
-  function q(sel,root=document){return root.querySelector(sel)}
-  function qa(sel,root=document){return [...root.querySelectorAll(sel)]}
-
-  function simplifyText(){
-    const replacements = [
-      [/วันนี้อยากเล่นแบบไหน\??/g, 'เลือกเกมที่อยากเล่น'],
-      [/เลือกสิ่งที่ต้องการแล้วไปต่อได้เลย ไม่ต้องเลื่อนหาตัวเลือกยาว ๆ/gi, 'รวมเกมฝึกสมองไว้ในหน้าเดียว เล่นง่าย ไม่รกตา'],
-      [/โปรไฟล์/gi, 'บัญชี'],
-      [/เล่นเกม/gi, 'เริ่มเล่น']
-    ];
-    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-    const nodes = [];
-    while(walker.nextNode()) nodes.push(walker.currentNode);
-    nodes.forEach(n=>{
-      let t = n.nodeValue;
-      if(!t || !t.trim()) return;
-      replacements.forEach(([rgx,val])=>{ t = t.replace(rgx,val); });
-      n.nodeValue = t;
-    });
-  }
-
-  // Hide extra buttons such as dark mode if any
-  function simplifyStructure(){
-    qa('button, a, div').forEach(el=>{
-      const txt = (el.textContent || '').trim();
-      if(/โหมดกลางคืน|กลางคืน|dark mode|night mode/i.test(txt)) el.style.display='none';
-    });
-    const top = q('header') || q('.topbar') || q('.navbar');
-    if(top) top.style.padding = '10px 0';
-  }
-
-  // WebAudio soundtrack + effects without external files
-  let ac, master, musicGain, sfxGain, started = false, oscillators = [];
-  function ensureAudio(){
-    if(started) return;
-    ac = new (window.AudioContext || window.webkitAudioContext)();
-    master = ac.createGain(); master.gain.value = 0.9; master.connect(ac.destination);
-    musicGain = ac.createGain(); musicGain.gain.value = 0.045; musicGain.connect(master);
-    sfxGain = ac.createGain(); sfxGain.gain.value = 0.15; sfxGain.connect(master);
-
-    // simple ambient pad
-    const freqs = [261.63, 329.63, 392.00]; // C major
-    freqs.forEach((f,i)=>{
-      const o = ac.createOscillator();
-      const g = ac.createGain();
-      o.type = i===0 ? 'sine' : 'triangle';
-      o.frequency.value = f/2;
-      g.gain.value = 0.0001;
-      o.connect(g); g.connect(musicGain); o.start();
-      // slow swell
-      const now = ac.currentTime;
-      g.gain.setValueAtTime(0.0001, now);
-      g.gain.linearRampToValueAtTime(0.018/(i+1), now+4+i);
-      oscillators.push({o,g});
-    });
-
-    // subtle pulse
-    setInterval(()=>{
-      if(!ac) return;
-      const now = ac.currentTime;
-      const pulse = ac.createOscillator();
-      const g = ac.createGain();
-      pulse.type = 'sine';
-      pulse.frequency.value = 660;
-      g.gain.value = 0.0001;
-      pulse.connect(g); g.connect(musicGain);
-      pulse.start(now);
-      g.gain.exponentialRampToValueAtTime(0.005, now+0.01);
-      g.gain.exponentialRampToValueAtTime(0.0001, now+0.45);
-      pulse.stop(now+0.5);
-    }, 4200);
-
-    started = true;
-    showAudioHint('เปิดเพลงประกอบและเสียงเอฟเฟกต์แล้ว');
-  }
-
-  function chirp(freq=740, dur=0.08, type='triangle', volume=0.09){
-    if(!ac) return;
-    const now = ac.currentTime;
-    const o = ac.createOscillator();
-    const g = ac.createGain();
-    o.type = type; o.frequency.setValueAtTime(freq, now);
-    o.connect(g); g.connect(sfxGain);
-    g.gain.setValueAtTime(0.0001, now);
-    g.gain.linearRampToValueAtTime(volume, now+0.01);
-    g.gain.exponentialRampToValueAtTime(0.0001, now+dur);
-    o.frequency.exponentialRampToValueAtTime(freq*1.12, now+dur);
-    o.start(now); o.stop(now+dur);
-  }
-  function playClick(){ chirp(680,0.07,'triangle',0.07); }
-  function playSuccess(){ chirp(660,0.08,'sine',0.08); setTimeout(()=>chirp(880,0.11,'sine',0.08),70); }
-  function playOpen(){ chirp(520,0.06,'triangle',0.06); setTimeout(()=>chirp(780,0.08,'triangle',0.06),55); }
-
-  function showAudioHint(msg){
-    let pill = q('.bb-audio-pill');
-    if(!pill){
-      pill = document.createElement('div');
-      pill.className = 'bb-audio-pill';
-      document.body.appendChild(pill);
-    }
-    pill.textContent = msg;
-    pill.classList.add('show');
-    clearTimeout(showAudioHint.t);
-    showAudioHint.t = setTimeout(()=>pill.classList.remove('show'), 2200);
-  }
-
-  function bindAudio(){
-    document.addEventListener('pointerdown', function first(){
-      ensureAudio();
-      document.removeEventListener('pointerdown', first);
-    }, {once:true});
-
-    document.addEventListener('click', (e)=>{
-      if(!started) return;
-      const el = e.target.closest('button, a, .btn, .card, .tile, .module');
-      if(!el) return;
-      const txt = (el.textContent || '').trim();
-      if(/สร้างห้อง|เข้าสู่ระบบ|สมัครสมาชิก|เริ่มเล่น|เล่นอีกครั้ง|create/i.test(txt)) playOpen();
-      else if(/ถูก|เสร็จ|success|complete|ชนะ/i.test(document.body.textContent||'')) playSuccess();
-      else playClick();
-    }, true);
-  }
-
-  function init(){
-    simplifyText();
-    simplifyStructure();
-    bindAudio();
-  }
-
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', init);
-  } else init();
+  cleanArenaOverlay();
+  document.addEventListener("visibilitychange",()=>{
+    if(!document.hidden)cleanArenaOverlay();
+  });
 })();
 </script>
 
