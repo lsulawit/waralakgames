@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy v78 — English World</title>
+<title>Brain Buddy v79 — Google Login</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -8783,6 +8783,60 @@ body.bbRankedLearningPlaying .v17dock{display:none!important}
   .bbEnglishLevelGrid button{min-height:82px}
 }
 
+
+/* ==========================================================
+   Brain Buddy v79 — Google Login
+   ========================================================== */
+.bbGoogleAuth{
+  width:100%;
+  min-height:48px;
+  border:1px solid #dedde4;
+  border-radius:14px;
+  background:#fff;
+  color:#3f3b44;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:11px;
+  padding:10px 14px;
+  font-size:13px;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 5px 13px rgba(45,37,51,.06);
+  transition:.16s ease;
+}
+.bbGoogleAuth:hover{
+  transform:translateY(-1px);
+  border-color:#c8c5d1;
+  box-shadow:0 8px 18px rgba(45,37,51,.09);
+}
+.bbGoogleAuth:active{transform:translateY(0)}
+.bbGoogleAuth:disabled{opacity:.62;cursor:wait;transform:none}
+.bbGoogleAuth svg{width:21px;height:21px;flex:0 0 21px}
+.bbGoogleAuthWrap{display:grid;gap:8px;margin:11px 0 2px}
+.bbGoogleAuthNote{
+  text-align:center;
+  color:#8a828d;
+  font-size:9px;
+  line-height:1.45;
+  font-weight:750;
+}
+.bbAuthEmailDivider{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#8a828d;
+  font-size:9px;
+  font-weight:850;
+  margin:12px 0;
+}
+.bbAuthEmailDivider::before,.bbAuthEmailDivider::after{
+  content:"";
+  height:1px;
+  background:#e7e4ea;
+  flex:1;
+}
+
 </style>
 
 <script>
@@ -10585,6 +10639,22 @@ try{
 
     <div id="authผู้เยี่ยมชมPanel">
       <div class="authTabs"><button class="authTab active" data-auth-tab="login">เข้าสู่ระบบ</button><button class="authTab" data-auth-tab="signup">สมัครสมาชิก</button></div>
+
+      <div class="bbGoogleAuthWrap">
+        <button class="bbGoogleAuth" type="button" id="googleAuthBtn" aria-label="ดำเนินการต่อด้วย Google">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#4285F4" d="M21.6 12.23c0-.71-.06-1.4-.18-2.07H12v3.92h5.38a4.6 4.6 0 0 1-1.99 3.02v2.54h3.22c1.89-1.74 2.99-4.3 2.99-7.41z"/>
+            <path fill="#34A853" d="M12 22c2.7 0 4.96-.89 6.61-2.41l-3.22-2.54c-.89.6-2.03.96-3.39.96-2.6 0-4.81-1.76-5.6-4.12H3.07v2.62A9.99 9.99 0 0 0 12 22z"/>
+            <path fill="#FBBC05" d="M6.4 13.89A5.99 5.99 0 0 1 6.08 12c0-.66.11-1.3.32-1.89V7.49H3.07A9.99 9.99 0 0 0 2 12c0 1.61.39 3.14 1.07 4.51l3.33-2.62z"/>
+            <path fill="#EA4335" d="M12 5.99c1.47 0 2.79.51 3.83 1.5l2.87-2.87C16.95 2.99 14.7 2 12 2a9.99 9.99 0 0 0-8.93 5.49l3.33 2.62C7.19 7.75 9.4 5.99 12 5.99z"/>
+          </svg>
+          <span>ดำเนินการต่อด้วย Google</span>
+        </button>
+        <div class="bbGoogleAuthNote">ใช้บัญชี Google เพื่อสมัครหรือเข้าสู่ระบบได้ทันที</div>
+      </div>
+
+      <div class="bbAuthEmailDivider">หรือใช้อีเมล</div>
+
       <form class="authForm" id="loginForm">
         <div class="field"><label>อีเมล</label><input id="loginEmail" type="email" autocomplete="email" required placeholder="you@example.com"></div>
         <div class="field"><label>รหัสผ่าน</label><input id="loginPassword" type="password" autocomplete="current-password" required minlength="6" placeholder="อย่างน้อย 6 ตัวอักษร"></div>
@@ -10599,7 +10669,7 @@ try{
         <button class="btn primary" type="submit">สร้างบัญชีฟรี</button>
       </form>
       <div class="authMessage" id="authMessage"></div>
-      <div class="authDivider">หรือ</div>
+      <div class="authDivider">หรือเล่นโดยไม่สมัครสมาชิก</div>
       <button class="btn" style="width:100%" id="continueผู้เยี่ยมชมBtn">เล่นต่อแบบ Guest</button>
       <div class="authFoot"><strong>ผู้เยี่ยมชม:</strong> ข้อมูลอยู่ในอุปกรณ์นี้ • <strong>สมาชิก:</strong> ซิงก์ความคืบหน้าข้ามอุปกรณ์เมื่อ Cloud เชื่อมแล้ว</div>
     </div>
@@ -10981,11 +11051,18 @@ try{
     const {data:{session}} = await client.auth.getSession(); if(!session?.user) return;
     let localProfile={};
     try{localProfile=JSON.parse(localStorage.getItem("bb_profile")||"{}")}catch(e){}
+    const meta=session.user?.user_metadata||{};
+    const googleName=meta.full_name||meta.name||session.user?.email?.split("@")[0]||"ผู้เล่น";
+    const localName=currentName() || localProfile.name || "";
+    const finalName=(!localName || localName==="ผู้เล่น") ? googleName : localName;
+    const googleAvatar=meta.avatar_url||meta.picture||"";
+    const customAvatar=currentAvatar();
+
     await client.from('profiles').upsert({
       id: session.user.id,
-      display_name: currentName() || localProfile.name || 'ผู้เล่น',
-      avatar: currentAvatar() ? '🖼️' : (localProfile.avatar || '🧸'),
-      avatar_url: currentAvatar() || null,
+      display_name: finalName || 'ผู้เล่น',
+      avatar: customAvatar ? '🖼️' : (localProfile.avatar || '🧸'),
+      avatar_url: customAvatar || googleAvatar || null,
       xp: Number(localProfile.xp)||0
     }, {onConflict:'id'});
   }
@@ -11139,8 +11216,86 @@ function memberMsg(text,type=""){const e=$("memberMessage");if(!e)return;e.textC
 function renderAccountPanel(){const setup=$("cloudSetupPanel"),guest=$("authผู้เยี่ยมชมPanel"),logged=$("authLoggedPanel"),rec=$("recoveryPanel");if(!setup)return;setup.classList.toggle("hidden",cloudConfigured);rec.classList.add("hidden");if(currentUser){guest.classList.add("hidden");logged.classList.remove("hidden");const p=profile();$("memberAvatar").textContent=p.avatar||"🧸";$("memberName").textContent=p.name||"ผู้เล่น";$("memberEmail").textContent=currentUser.email||"สมาชิก Brain Buddy";$("memberLevel").textContent=`Level ${level(p.xp||0)} • ${p.xp||0} XP`;$("migrateBox").classList.toggle("hidden",!guestSnapshotBeforeLogin||!hasผู้เยี่ยมชมProgress(guestSnapshotBeforeLogin));$("cloudStatusTitle").textContent=cloudConfigured?"บันทึกบนคลาวด์ พร้อมใช้งาน":"Cloud ยังไม่เชื่อม";$("cloudStatusText").textContent=cloudConfigured?"Level, XP, ความสำเร็จ, ประวัติ และการตั้งค่าจะซิงก์กับบัญชีนี้":"ใส่ค่า Supabase ในไฟล์ config เพื่อเปิด บันทึกบนคลาวด์"}else{guest.classList.remove("hidden");logged.classList.add("hidden")}}
 function refreshAuthHeader(){if(currentUser){const p=profile();$("navName").textContent=p.name||currentUser.email?.split("@")[0]||"สมาชิก";$("navAvatar").textContent=p.avatar||"🧸";cloudSetMini(cloudConfigured?"online":"error",cloudConfigured?"Saved":"Setup") }else{renderProfile();cloudSetMini("","ผู้เยี่ยมชม")}}
 async function signInEmail(email,password){if(!cloudConfigured){authMsg("ระบบ Cloud ยังไม่ได้เชื่อม Supabase ในไฟล์ config","bad");return}prepareผู้เยี่ยมชมBackup();authMsg("กำลังเข้าสู่ระบบ…");const {data,error}=await sb.auth.signInWithPassword({email,password});if(error){authMsg(error.message,"bad");return}authMsg("เข้าสู่ระบบสำเร็จ","good");if(data.user)await handleSignedIn(data.user)}
+
+async function signInGoogle(){
+  if(!cloudConfigured||!sb){
+    authMsg("ระบบ Google Login ยังเชื่อมไม่สำเร็จ กรุณาลองใหม่อีกครั้ง","bad");
+    return;
+  }
+
+  const btn=$("googleAuthBtn");
+  const old=btn?.innerHTML||"";
+
+  try{
+    prepareผู้เยี่ยมชมBackup();
+    localStorage.setItem("bb_google_oauth_pending","1");
+
+    if(btn){
+      btn.disabled=true;
+      btn.textContent="กำลังเปิด Google…";
+    }
+
+    authMsg("กำลังพาไปเข้าสู่ระบบด้วย Google…");
+
+    const redirectTo=location.origin+location.pathname;
+
+    const {error}=await sb.auth.signInWithOAuth({
+      provider:"google",
+      options:{
+        redirectTo,
+        queryParams:{
+          prompt:"select_account"
+        }
+      }
+    });
+
+    if(error)throw error;
+
+  }catch(err){
+    localStorage.removeItem("bb_google_oauth_pending");
+    authMsg(err?.message||"เข้าสู่ระบบด้วย Google ไม่สำเร็จ","bad");
+    if(btn){
+      btn.disabled=false;
+      btn.innerHTML=old;
+    }
+  }
+}
+
 async function signUpEmail(name,email,password){if(!cloudConfigured){authMsg("ระบบ Cloud ยังไม่ได้เชื่อม Supabase ในไฟล์ config","bad");return}prepareผู้เยี่ยมชมBackup();authMsg("กำลังสร้างบัญชี…");const {data,error}=await sb.auth.signUp({email,password,options:{data:{display_name:name,avatar:profile().avatar||"🧸"},emailRedirectTo:location.origin+location.pathname}});if(error){authMsg(error.message,"bad");return}if(data.session&&data.user){authMsg("สมัครสมาชิกและเข้าสู่ระบบแล้ว","good");await handleSignedIn(data.user)}else authMsg("สร้างบัญชีแล้ว กรุณาเปิดอีเมลเพื่อยืนยันบัญชีก่อนเข้าสู่ระบบ","good")}
-async function handleSignedIn(user){currentUser=user;localStorage.setItem("bb_account_active","1");refreshAuthHeader();renderAccountPanel();if(cloudHydratedUser!==user.id)await cloudHydrate()}
+async function handleSignedIn(user){
+  currentUser=user;
+
+  const googlePending=localStorage.getItem("bb_google_oauth_pending")==="1";
+
+  if(googlePending){
+    guestSnapshotBeforeLogin=load("bb_guest_backup",null);
+
+    try{
+      const meta=user?.user_metadata||{};
+      const p=profile();
+      const googleName=meta.full_name||meta.name||user?.email?.split("@")[0]||"";
+
+      if(googleName && (!p.name || p.name==="ผู้เล่น")){
+        localStorage.setItem("bb_profile",JSON.stringify({
+          ...p,
+          name:String(googleName).slice(0,24)
+        }));
+      }
+    }catch(e){}
+
+    localStorage.removeItem("bb_google_oauth_pending");
+  }
+
+  localStorage.setItem("bb_account_active","1");
+  refreshAuthHeader();
+  renderAccountPanel();
+
+  if(cloudHydratedUser!==user.id)await cloudHydrate();
+
+  if(googlePending){
+    setTimeout(()=>toast("เข้าสู่ระบบด้วย Google สำเร็จ ✓"),250);
+  }
+}
 async function handleSignedOut(){currentUser=null;cloudHydratedUser=null;restoreผู้เยี่ยมชมAfterLogout();refreshAuthHeader();renderAccountPanel()}
 async function setupSupabase(){cloudConfigured=cloudIsConfigured();renderAccountPanel();if(!cloudConfigured){cloudSetMini("error","Setup");return}const c=cloudConfig();sb=window.supabase.createClient(c.url,c.publishableKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});sb.auth.onAuthStateChange((event,session)=>{setTimeout(()=>{if(event==="PASSWORD_RECOVERY"){currentUser=session?.user||currentUser;$("authผู้เยี่ยมชมPanel").classList.add("hidden");$("authLoggedPanel").classList.add("hidden");$("recoveryPanel").classList.remove("hidden");openModal("accountModal")}else if(session?.user)handleSignedIn(session.user);else if(event==="SIGNED_OUT")handleSignedOut()},0)});const {data}=await sb.auth.getUser();if(data?.user)await handleSignedIn(data.user);else{refreshAuthHeader();renderAccountPanel()}}
 
@@ -11537,6 +11692,7 @@ $('saveProfile').onclick=()=>{const p=profile();p.name=$('profileName').value.tr
 
 $('accountBtn').onclick=()=>{renderAccountPanel();openModal('accountModal')};
 document.querySelectorAll('[data-auth-tab]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-auth-tab]').forEach(x=>x.classList.toggle('active',x===b));$('loginForm').classList.toggle('hidden',b.dataset.authTab!=='login');$('signupForm').classList.toggle('hidden',b.dataset.authTab!=='signup');authMsg('')});
+$('googleAuthBtn').onclick=signInGoogle;
 $('loginForm').onsubmit=async e=>{e.preventDefault();await signInEmail($('loginEmail').value.trim(),$('loginPassword').value)};
 $('signupForm').onsubmit=async e=>{e.preventDefault();const pw=$('signupPassword').value;if(pw!==$('signupConfirm').value){authMsg('รหัสผ่านทั้งสองช่องไม่ตรงกัน','bad');return}await signUpEmail($('signupName').value.trim()||'ผู้เล่น',$('signupEmail').value.trim(),pw)};
 $('forgotPasswordBtn').onclick=async()=>{if(!cloudConfigured){authMsg('ระบบ Cloud ยังไม่ได้เชื่อม Supabase','bad');return}const email=$('loginEmail').value.trim();if(!email){authMsg('กรอกอีเมลก่อน แล้วกดลืมรหัสผ่านอีกครั้ง','bad');return}const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});authMsg(error?error.message:'ส่งลิงก์ตั้งรหัสผ่านใหม่ไปทางอีเมลแล้ว',error?'bad':'good')};
