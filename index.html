@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy v86.4 — Stable Layer Renderer</title>
+<title>Brain Buddy v86.5 — Avatar Overflow Fix</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -10934,6 +10934,108 @@ body.bbAccountModalOpen{
   }
 }
 
+
+/* ==========================================================
+   Brain Buddy v86.5 — AVATAR / LOOSE ASSET HARD GUARD
+   ========================================================== */
+
+/* Tiny avatar containers must clip everything inside. */
+#navAvatar,
+#bbAppAvatar,
+.miniavatar,
+.bbAppAvatar{
+  position:relative!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  contain:layout paint!important;
+  background-size:contain!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+}
+
+/* Even if an old script somehow inserts an IMG again, it can never
+   display at its intrinsic 1024×1024 size. */
+#navAvatar > img,
+#bbAppAvatar > img,
+.miniavatar > img,
+.bbAppAvatar > img{
+  position:absolute!important;
+  inset:0!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  min-width:0!important;
+  min-height:0!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  margin:0!important;
+  padding:2px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  box-sizing:border-box!important;
+  transform:none!important;
+  filter:none!important;
+  pointer-events:none!important;
+}
+
+/* Profile avatar has an explicit fixed-size clip. */
+#navAvatar{
+  width:40px!important;
+  height:40px!important;
+  min-width:40px!important;
+  min-height:40px!important;
+  max-width:40px!important;
+  max-height:40px!important;
+  flex:0 0 40px!important;
+  border-radius:13px!important;
+}
+
+#bbAppAvatar{
+  overflow:hidden!important;
+}
+
+/* A Buddy asset can only be large inside its intended rendering canvas.
+   Normal IMG thumbnails are always constrained. */
+img[src*="/assets/buddy/"]{
+  object-fit:contain;
+  object-position:center;
+}
+
+/* Closet and Shop product thumbnail guards */
+.bbClosetItemArt,
+.bbShopItemArt{
+  overflow:hidden!important;
+}
+
+.bbClosetItemArt img[src*="/assets/buddy/"],
+.bbShopItemArt img[src*="/assets/buddy/"]{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  object-fit:contain!important;
+  transform:none!important;
+}
+
+/* Keep the intended large renderers fixed and clipped */
+#bbClosetBuddyRender{
+  overflow:hidden!important;
+  width:300px!important;
+  height:300px!important;
+  max-width:300px!important;
+  max-height:300px!important;
+}
+
+#bbShopBuddyRender{
+  overflow:hidden!important;
+}
+
+#bbEquippedHeroCharacter{
+  overflow:hidden!important;
+}
+
 </style>
 
 <script>
@@ -16270,9 +16372,23 @@ window.addEventListener("load",()=>{
     if($("#bbSetupPlayerName"))$("#bbSetupPlayerName").textContent=name;
     if($("#bbSetupAccountState"))$("#bbSetupAccountState").textContent=logged?"สมาชิก":"Guest";
 
-    const avatar=$("#bbAppAvatar"),profileImg=document.querySelector("#navAvatar img");
-    if(logged&&profileImg?.src)avatar.innerHTML=`<img src="${profileImg.src}" alt="">`;
-    else avatar.textContent=logged?(p.avatar||"🧸"):"🧸";
+    const avatar=$("#bbAppAvatar");
+    const buddyAsset=window.__bbActiveBuddyAsset||"";
+    if(avatar){
+      avatar.querySelectorAll("img").forEach(img=>img.remove());
+
+      if(logged&&buddyAsset){
+        const safe=String(buddyAsset).replace(/["\n\r]/g,"");
+        avatar.textContent="";
+        avatar.style.backgroundImage=`url("${safe}")`;
+        avatar.style.backgroundSize="contain";
+        avatar.style.backgroundPosition="center";
+        avatar.style.backgroundRepeat="no-repeat";
+      }else{
+        avatar.style.backgroundImage="";
+        avatar.textContent=logged?(p.avatar||"🧸"):"🧸";
+      }
+    }
 
     $("#bbAppLoginMini").classList.toggle("hidden",logged);
   }
@@ -21517,15 +21633,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const navAvatar=q("#navAvatar");
-    if(navAvatar){
+    const appAvatar=q("#bbAppAvatar");
+    window.__bbActiveBuddyAsset=charAsset||"";
+
+    [navAvatar,appAvatar].filter(Boolean).forEach(avatar=>{
+      avatar.querySelectorAll("img").forEach(img=>img.remove());
+
       if(charAsset){
-        navAvatar.innerHTML=`<img src="${attr(charAsset)}" alt="${attr(characterName)}">`;
-        navAvatar.dataset.bbShopAvatar="1";
-      }else if(navAvatar.dataset.bbShopAvatar==="1"){
-        navAvatar.textContent="🧸";
-        delete navAvatar.dataset.bbShopAvatar;
+        const safe=String(charAsset).replace(/["\n\r]/g,"");
+        avatar.textContent="";
+        avatar.style.backgroundImage=`url("${safe}")`;
+        avatar.style.backgroundSize="contain";
+        avatar.style.backgroundPosition="center";
+        avatar.style.backgroundRepeat="no-repeat";
+        avatar.dataset.bbShopAvatar="1";
+      }else{
+        avatar.style.backgroundImage="";
+        avatar.textContent="🧸";
+        delete avatar.dataset.bbShopAvatar;
       }
-    }
+    });
   }
 
   function renderLoadout(){
@@ -22225,6 +22352,95 @@ document.addEventListener('DOMContentLoaded', () => {
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',secure,{once:true});
   else secure();
   window.bbSecureBuddyLayers=secure;
+})();
+</script>
+
+
+<script>
+/* ==========================================================
+   Brain Buddy v86.5 — LOOSE BUDDY IMAGE SAFETY
+   No polling. Small MutationObserver only watches avatar nodes.
+   ========================================================== */
+(function bbV865LooseBuddySafety(){
+  const allowedSelector=[
+    "#bbClosetBuddyRender",
+    "#bbShopBuddyRender",
+    "#bbEquippedHeroCharacter",
+    ".bbClosetItemArt",
+    ".bbShopItemArt"
+  ].join(",");
+
+  function turnAvatarImageIntoBackground(avatar){
+    if(!avatar)return;
+
+    const img=avatar.querySelector("img");
+    if(!img?.src)return;
+
+    const src=img.src;
+    img.remove();
+
+    avatar.textContent="";
+    avatar.style.backgroundImage=`url("${String(src).replace(/["\n\r]/g,"")}")`;
+    avatar.style.backgroundSize="contain";
+    avatar.style.backgroundPosition="center";
+    avatar.style.backgroundRepeat="no-repeat";
+
+    window.__bbActiveBuddyAsset=src;
+  }
+
+  function quarantineLooseBuddyImages(){
+    document.querySelectorAll('img[src*="/assets/buddy/"]').forEach(img=>{
+      if(img.closest(allowedSelector))return;
+
+      const avatar=img.closest("#navAvatar,#bbAppAvatar,.miniavatar,.bbAppAvatar");
+      if(avatar){
+        turnAvatarImageIntoBackground(avatar);
+        return;
+      }
+
+      /* Unknown old renderer: never allow intrinsic 1024px overflow. */
+      img.style.setProperty("position","relative","important");
+      img.style.setProperty("width","100%","important");
+      img.style.setProperty("height","100%","important");
+      img.style.setProperty("max-width","100%","important");
+      img.style.setProperty("max-height","100%","important");
+      img.style.setProperty("object-fit","contain","important");
+      img.style.setProperty("transform","none","important");
+
+      const parent=img.parentElement;
+      if(parent)parent.style.setProperty("overflow","hidden","important");
+    });
+  }
+
+  function watchAvatar(id){
+    const avatar=document.getElementById(id);
+    if(!avatar)return;
+
+    turnAvatarImageIntoBackground(avatar);
+
+    const observer=new MutationObserver(()=>{
+      turnAvatarImageIntoBackground(avatar);
+    });
+
+    observer.observe(avatar,{
+      childList:true,
+      subtree:false
+    });
+  }
+
+  function init(){
+    watchAvatar("navAvatar");
+    watchAvatar("bbAppAvatar");
+    quarantineLooseBuddyImages();
+  }
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",init,{once:true});
+  }else{
+    init();
+  }
+
+  window.bbQuarantineLooseBuddyImages=quarantineLooseBuddyImages;
 })();
 </script>
 
