@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy v73 — Thai Rank Everywhere</title>
+<title>Brain Buddy v74 — Ranked Results & Rank Up</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -8259,6 +8259,235 @@ body.bbRankedLearningPlaying .v17dock{display:none!important}
   font-weight:850;
 }
 
+
+/* ==========================================================
+   Brain Buddy v74 — Ranked Result Report
+   ========================================================== */
+.bbResultsFinalV74{
+  width:min(1080px,calc(100% - 18px));
+  margin:0 auto;
+  padding:24px 0 42px!important;
+}
+.bbResultsTitleV74{
+  position:relative;overflow:hidden;
+  margin-bottom:11px;padding:24px 24px 22px;border-radius:28px;
+  text-align:left!important;color:#fff!important;
+  background:
+    radial-gradient(circle at 86% 20%,rgba(255,226,113,.38),transparent 11rem),
+    linear-gradient(135deg,#302553,#7042a0 52%,#cf61a5 100%);
+  box-shadow:0 17px 34px rgba(62,39,91,.16)
+}
+.bbResultsTitleV74::after{
+  content:"🏆";position:absolute;right:25px;top:22px;font-size:80px;
+  filter:drop-shadow(0 13px 12px rgba(35,20,59,.20));opacity:.96
+}
+.bbResultEyebrow{
+  display:block;margin:12px 0 2px;color:#dbcfea;font-size:8px;font-weight:1000;letter-spacing:.13em
+}
+.bbResultsTitleV74 h1{
+  margin:0!important;color:#fff!important;font-size:clamp(2rem,5vw,3.7rem)!important;letter-spacing:-.045em
+}
+.bbResultsTitleV74 p{margin:5px 0 0!important;max-width:650px;color:#e7dbef!important;font-size:10px!important}
+
+.bbResultMatchStamp{
+  margin:10px 0;padding:10px 13px;border-radius:16px;
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  background:#fff;border:1px solid #eee4f0;color:#725f7d
+}
+.bbResultMatchStamp span{font-size:9px;font-weight:900}
+.bbResultMatchStamp b{font-size:9px;text-align:right;color:#5e4870}
+
+.bbPodiumV74{
+  min-height:265px!important;padding:22px 14px 0!important;border-radius:28px!important;
+  background:linear-gradient(180deg,#fffdf5,#fff7fb)!important;
+  border:1px solid #f1e4e6!important;
+  box-shadow:0 12px 27px rgba(74,50,86,.07)!important
+}
+.bbPodiumV74 .bbPodiumCard{
+  border-radius:20px 20px 0 0!important;
+  background:linear-gradient(180deg,#fff,#f7f2fa)!important;
+  border:1px solid #eee2ef!important
+}
+.bbPodiumV74 .bbPodiumCard.first{
+  background:linear-gradient(180deg,#fff9dc,#ffe295)!important;
+  border-color:#f4cf62!important
+}
+.bbPodiumPerformance{
+  display:inline-flex;align-items:center;justify-content:center;
+  margin-top:4px;padding:4px 7px;border-radius:999px;
+  background:#eee9f8;color:#6f5791;font-size:7px;font-weight:1000
+}
+.bbPodiumCard.first .bbPodiumPerformance{background:#fff6c9;color:#9b700e}
+.bbPodiumDelta{font-size:8px!important;font-weight:1000!important}
+.bbPodiumDelta.positive{color:#34835d!important}
+.bbPodiumDelta.negative{color:#a74d6d!important}
+
+.bbMyRankV74{
+  margin:12px 0 0!important;padding:0!important;border-radius:28px!important;
+  overflow:hidden;background:#fff!important;border:1px solid #ebe0ef!important;
+  box-shadow:0 13px 28px rgba(67,44,83,.08)!important;color:#513f5d!important
+}
+.bbMyResultHero{
+  display:grid;grid-template-columns:100px minmax(0,1fr) auto;gap:14px;align-items:center;
+  padding:17px 19px;
+  background:linear-gradient(135deg,#f2edff,#fff0f7 60%,#fff9e1)
+}
+.bbMyResultPlace{
+  min-height:78px;border-radius:21px;display:grid;place-items:center;
+  color:#fff;background:linear-gradient(145deg,#7259d5,#c45fae);
+  box-shadow:inset 0 5px 7px rgba(255,255,255,.18);
+  font-size:27px;font-weight:1000
+}
+.bbMyResultIdentity{min-width:0}
+.bbMyResultIdentity small{font-size:7px;letter-spacing:.12em;color:#a079aa;font-weight:1000}
+.bbMyResultIdentity h2{
+  margin:2px 0 1px;color:#513c61;font-size:21px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.bbMyResultIdentity p{margin:0;color:#897590;font-size:9px}
+.bbMyResultPerformance{text-align:right}
+.bbMyResultPerformance small{display:block;color:#9c899f;font-size:7px;font-weight:1000;letter-spacing:.1em}
+.bbMyResultPerformance strong{
+  display:block;color:#62468a;font-size:30px;line-height:1;font-weight:1000
+}
+.bbMyResultPerformance span{font-size:8px;color:#a28da6}
+
+.bbMyResultRanks{
+  display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:12px
+}
+.bbResultRankCard{
+  padding:13px;border-radius:19px;background:#fbf8fc;border:1px solid #eee4f0
+}
+.bbResultRankCard.world{background:linear-gradient(145deg,#f4efff,#fff1f8)}
+.bbResultRankCardHead{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.bbResultRankCardHead span{font-size:8px;color:#8d7698;font-weight:900}
+.bbResultRankCardHead b{font-size:9px;color:#5f4671}
+.bbResultRankNumbers{
+  display:flex;align-items:center;gap:7px;margin-top:9px;flex-wrap:wrap
+}
+.bbResultRankNumbers strong{font-size:19px;color:#604776}
+.bbResultRankNumbers i{font-style:normal;color:#a58cac}
+.bbResultRPDelta{
+  margin-left:auto;padding:5px 8px;border-radius:999px;font-size:9px;font-weight:1000
+}
+.bbResultRPDelta.plus{background:#dcfff0;color:#277657}
+.bbResultRPDelta.minus{background:#ffe9f0;color:#a74b6c}
+.bbResultRPDelta.zero{background:#eeeaf2;color:#786882}
+.bbResultTierPath{
+  margin-top:7px;padding-top:7px;border-top:1px solid #eee5f0;
+  color:#83708c;font-size:8px;font-weight:850
+}
+.bbResultTierPath.rankup{color:#8d5f03;font-weight:1000}
+.bbResultBoardPosition{
+  display:inline-block;margin-top:6px;padding:4px 7px;border-radius:999px;
+  background:#eee8fa;color:#755b99;font-size:7px;font-weight:1000
+}
+
+.bbResultSectionHead{
+  display:flex;justify-content:space-between;align-items:end;gap:9px;margin:18px 3px 8px
+}
+.bbResultSectionHead small{font-size:7px;color:#a178a6;letter-spacing:.12em;font-weight:1000}
+.bbResultSectionHead h2{margin:1px 0 0;color:#513d61;font-size:18px}
+.bbResultSectionHead>span{font-size:8px;color:#8a7791;font-weight:900}
+
+.bbFullResultsV74{
+  display:grid!important;gap:6px!important;padding:0!important;background:transparent!important
+}
+.bbResultRowV74{
+  display:grid;grid-template-columns:54px 46px minmax(0,1fr) 95px 86px 85px;
+  align-items:center;gap:8px;padding:8px 10px;border-radius:17px;
+  background:#fff;border:1px solid #eee5f0;color:#5d4968
+}
+.bbResultRowV74.me{
+  background:linear-gradient(135deg,#f0eaff,#fff0f7);
+  border-color:#cbb6ed;box-shadow:0 7px 16px rgba(108,74,157,.09)
+}
+.bbResultRowV74.forfeit{opacity:.58}
+.bbResultPlaceV74{text-align:center;font-weight:1000;font-size:12px}
+.bbResultAvatarV74{
+  width:42px;height:42px;border-radius:14px;display:grid;place-items:center;overflow:hidden;
+  background:linear-gradient(145deg,#ffe8f3,#ece6ff);font-size:20px
+}
+.bbResultAvatarV74 img{width:100%;height:100%;object-fit:cover}
+.bbResultNameV74{min-width:0}
+.bbResultNameV74 b{display:block;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bbResultNameV74 small{display:block;margin-top:2px;color:#96829b;font-size:7px}
+.bbResultMetricV74{text-align:right}
+.bbResultMetricV74 small{display:block;color:#a18da5;font-size:6px;font-weight:900}
+.bbResultMetricV74 b{display:block;font-size:10px}
+.bbResultMetricV74 .plus{color:#2d805a}.bbResultMetricV74 .minus{color:#aa4e6e}
+
+.bbResultBottomActions{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px
+}
+.bbResultBoardBtn{
+  min-height:51px;border:1px solid #e6d6ed;border-radius:16px;
+  color:#6e4f88;background:linear-gradient(145deg,#f2ebff,#fff0f6);
+  font-size:10px;font-weight:1000
+}
+
+/* Rank Up */
+.bbRankUpOverlay{
+  position:fixed;inset:0;z-index:11000;display:grid;place-items:center;padding:18px;
+  background:rgba(24,16,43,.76);backdrop-filter:blur(12px)
+}
+.bbRankUpOverlay.hidden{display:none!important}
+.bbRankUpCard{
+  position:relative;z-index:2;width:min(470px,96vw);padding:28px 22px 22px;border-radius:32px;
+  text-align:center;color:#fff;
+  background:
+    radial-gradient(circle at 50% 18%,rgba(255,235,129,.42),transparent 11rem),
+    linear-gradient(145deg,#3b2a69,#7944a8 55%,#d65ba3);
+  border:1px solid rgba(255,255,255,.20);
+  box-shadow:0 34px 80px rgba(12,5,30,.45)
+}
+.bbRankUpCard>button:first-child{
+  position:absolute;right:12px;top:12px;width:34px;height:34px;border:0;border-radius:11px;
+  background:rgba(255,255,255,.10);color:#fff;font-size:18px
+}
+.bbRankUpKicker{
+  display:inline-block;padding:6px 11px;border-radius:999px;background:#ffe278;color:#7a5200;
+  font-size:9px;font-weight:1000;letter-spacing:.13em
+}
+.bbRankUpIcon{font-size:82px;margin:15px 0 0;animation:bbRankIconIn .65s cubic-bezier(.2,.9,.2,1)}
+.bbRankUpCard h2{margin:4px 0 0;font-size:35px;letter-spacing:-.04em}
+.bbRankUpCard p{margin:3px 0 12px;color:#e4d8ed;font-size:10px}
+.bbRankUpPath{
+  display:flex;align-items:center;justify-content:center;gap:9px;padding:11px;border-radius:16px;
+  background:rgba(255,255,255,.10);font-size:10px;font-weight:900
+}
+.bbRankUpPath strong{color:#ffe681;font-size:12px}
+#bbRankUpContinue{
+  width:100%;min-height:50px;margin-top:13px;border:0;border-radius:16px;
+  color:#694500;background:linear-gradient(180deg,#ffe988,#ffc94e);font-size:11px;font-weight:1000
+}
+.bbRankUpBurst{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.bbRankUpBurst i{
+  position:absolute;width:13px;height:26px;border-radius:6px;background:#ffe16c;
+  animation:bbRankConfetti 1.9s ease-out infinite
+}
+.bbRankUpBurst i:nth-child(1){left:9%;top:16%;animation-delay:.1s}
+.bbRankUpBurst i:nth-child(2){left:25%;top:7%;animation-delay:.35s}
+.bbRankUpBurst i:nth-child(3){left:45%;top:12%;animation-delay:.7s}
+.bbRankUpBurst i:nth-child(4){right:12%;top:20%;animation-delay:.25s}
+.bbRankUpBurst i:nth-child(5){right:28%;top:6%;animation-delay:.55s}
+.bbRankUpBurst i:nth-child(6){right:43%;top:18%;animation-delay:.85s}
+@keyframes bbRankIconIn{0%{transform:scale(.25) rotate(-18deg);opacity:0}70%{transform:scale(1.13) rotate(3deg)}100%{transform:scale(1);opacity:1}}
+@keyframes bbRankConfetti{0%{transform:translateY(-30px) rotate(0);opacity:0}15%{opacity:1}100%{transform:translateY(92vh) rotate(500deg);opacity:0}}
+
+@media(max-width:720px){
+  .bbResultsTitleV74::after{font-size:55px;right:14px;top:18px}
+  .bbMyResultHero{grid-template-columns:72px minmax(0,1fr)}
+  .bbMyResultPlace{min-height:64px;font-size:20px}
+  .bbMyResultPerformance{grid-column:1/-1;text-align:left;display:flex;align-items:baseline;gap:6px}
+  .bbMyResultPerformance small,.bbMyResultPerformance span{display:inline}
+  .bbMyResultPerformance strong{display:inline;font-size:25px}
+  .bbMyResultRanks{grid-template-columns:1fr}
+  .bbResultRowV74{grid-template-columns:42px 39px minmax(0,1fr) 70px}
+  .bbResultRowV74 .scoreMetric{display:none}
+  .bbResultRowV74 .worldMetric{grid-column:3;text-align:left}
+  .bbResultBottomActions{grid-template-columns:1fr}
+}
+
 </style>
 
 <script>
@@ -11220,16 +11449,37 @@ window.addEventListener("load",()=>{
           <button class="bbResultsExitBtn" id="bbResultsExit">ออกจาก Ranked ตอนนี้</button>
         </div>
 
-        <div class="bbResultsFinal hidden" id="bbResultsFinal">
-          <div class="bbResultsTitle">
-            <span class="bbRankedPill dark">🏆 FINAL RESULTS</span>
-            <h1>ผลการแข่งขัน</h1>
-            <p>อันดับถูกประกาศหลังจากผู้เล่นทุกคนเล่นจบแล้ว • ห้องการแข่งขันถูกปิดอัตโนมัติ</p>
+        <div class="bbResultsFinal hidden bbResultsFinalV74" id="bbResultsFinal">
+          <div class="bbResultsTitle bbResultsTitleV74">
+            <span class="bbRankedPill dark">🇹🇭 THAI BRAIN RANK</span>
+            <small class="bbResultEyebrow">FINAL MATCH REPORT</small>
+            <h1 id="bbResultMainTitle">ผลการแข่งขัน</h1>
+            <p id="bbResultMainSub">กำลังสรุป Performance และคะแนนแรงค์ของคุณ</p>
           </div>
-          <div class="bbPodium" id="bbPodium"></div>
-          <div class="bbMyRank" id="bbMyRank"></div>
-          <div class="bbFullResults" id="bbFullResults"></div>
-          <button class="bbArenaPrimary" id="bbResultsLobby">กลับ Ranked Lobby</button>
+
+          <div class="bbResultMatchStamp" id="bbResultMatchStamp">
+            <span>🎮 Ranked Match</span>
+            <b>กำลังอ่านข้อมูล…</b>
+          </div>
+
+          <div class="bbPodium bbPodiumV74" id="bbPodium"></div>
+
+          <section class="bbMyRank bbMyRankV74" id="bbMyRank"></section>
+
+          <div class="bbResultSectionHead">
+            <div>
+              <small>FULL RANKING</small>
+              <h2>อันดับผู้เล่นทั้งหมด</h2>
+            </div>
+            <span id="bbResultPlayerCount">0 ผู้เล่น</span>
+          </div>
+
+          <div class="bbFullResults bbFullResultsV74" id="bbFullResults"></div>
+
+          <div class="bbResultBottomActions">
+            <button class="bbResultBoardBtn" id="bbResultOpenBoard">🏆 ดูทำเนียบตัวตึง</button>
+            <button class="bbArenaPrimary" id="bbResultsLobby">กลับ Ranked Lobby</button>
+          </div>
         </div>
       </section>
 
@@ -12630,10 +12880,99 @@ window.addEventListener("load",()=>{
     return esc(row.avatar||"🧸")
   }
 
+  function fmtRPDelta(v){
+    const n=Number(v||0);
+    return n>0?`+${n}`:`${n}`;
+  }
+
+  function rpDeltaClass(v){
+    const n=Number(v||0);
+    return n>0?"plus":n<0?"minus":"zero";
+  }
+
+  function resultWorldInfo(world){
+    return ({
+      teddy:{icon:"🧸",name:"Memory"},
+      math:{icon:"➗",name:"Math"},
+      chinese:{icon:"🇨🇳",name:"Chinese"},
+      english:{icon:"🇬🇧",name:"English"}
+    })[world]||{icon:"🧠",name:"Overall"};
+  }
+
+  function thaiTierFromRP(rp){
+    rp=Math.max(0,Number(rp)||0);
+    const tiers=[
+      [20000,"🐐","GOAT สมองไทย"],
+      [15000,"👑","ระดับบอส"],
+      [11000,"💎","ตัวท็อป"],
+      [8000,"⚡","เดอะแบก"],
+      [5500,"😈","ตัวตึง"],
+      [3500,"💥","ตัวจี๊ด"],
+      [2000,"🔥","ของจริง"],
+      [1000,"🧠","หัวไว"],
+      [500,"✨","เด็กมีของ"],
+      [0,"🌱","มีแวว"]
+    ];
+    const t=tiers.find(x=>rp>=x[0])||tiers[tiers.length-1];
+    return {icon:t[1],name:t[2]};
+  }
+
+  async function fetchMyBoardPosition(board){
+    if(!client||!user?.id)return null;
+    try{
+      const {data,error}=await client.rpc("bb_brain_leaderboard",{
+        p_board:board,
+        p_limit:500,
+        p_offset:0
+      });
+      if(error)return null;
+      return (data||[]).find(x=>x.user_id===user.id)||null;
+    }catch(e){
+      return null;
+    }
+  }
+
+  let lastRankUpKey="";
+
+  function showRankUpIfNeeded(mine){
+    if(!mine||Number(mine.rp_change||0)<=0)return;
+
+    const beforeName=mine.overall_tier_before_name||thaiTierFromRP(mine.rp_before).name;
+    const beforeIcon=mine.overall_tier_before_icon||thaiTierFromRP(mine.rp_before).icon;
+    const afterName=mine.overall_tier_after_name||thaiTierFromRP(mine.rp_after).name;
+    const afterIcon=mine.overall_tier_after_icon||thaiTierFromRP(mine.rp_after).icon;
+
+    if(beforeName===afterName)return;
+
+    const key=`${activeRankedMatch?.id||""}-${user?.id||""}-${afterName}`;
+    if(lastRankUpKey===key)return;
+    lastRankUpKey=key;
+
+    $("#bbRankUpIcon").textContent=afterIcon;
+    $("#bbRankUpTitle").textContent=afterName;
+    $("#bbRankUpText").textContent=`Overall RP ${Number(mine.rp_after||0).toLocaleString()} • ${fmtRPDelta(mine.rp_change)} RP`;
+    $("#bbRankUpBefore").textContent=`${beforeIcon} ${beforeName}`;
+    $("#bbRankUpAfter").textContent=`${afterIcon} ${afterName}`;
+
+    $("#bbRankUpOverlay").classList.remove("hidden");
+    $("#bbRankUpOverlay").setAttribute("aria-hidden","false");
+  }
+
   async function refreshRankedResults(){
     if(!activeRankedMatch?.id||!client)return;
-    const {data,error}=await client.rpc("bb_ranked_match_results",{p_match_id:activeRankedMatch.id});
+
+    let data=null,error=null;
+
+    // v74 ใช้ Results v2; fallback เก่าไว้กันหน้าเว็บล่มถ้า DB deploy ช้ากว่าไฟล์
+    ({data,error}=await client.rpc("bb_ranked_match_results_v2",{p_match_id:activeRankedMatch.id}));
+
+    if(error){
+      console.warn("bb_ranked_match_results_v2 fallback:",error.message);
+      ({data,error}=await client.rpc("bb_ranked_match_results",{p_match_id:activeRankedMatch.id}));
+    }
+
     if(error){toast(errText(error));return}
+
     const rows=data||[];
     const first=rows[0]||{};
     const submitted=Number(first.submitted_count||rows.length||0);
@@ -12647,6 +12986,7 @@ window.addEventListener("load",()=>{
       if(first.wait_deadline)startRankedWaitClock(first.wait_deadline);
       return;
     }
+
     stopRankedWaitClock();
     show("#bbCreateBackdrop",false);
     show("#bbArenaJoinBar",false);
@@ -12654,39 +12994,199 @@ window.addEventListener("load",()=>{
     cleanupRankedResultsWatch();
     cleanupRoomChannel();
     stopCountdown();
+
     window.BB_RANKED_ACTIVE=false;
     window.__bbRankedRng=null;
+
     currentRoom=null;
     players=[];
+
     document.body.classList.remove("bbRankedPlaying","bbGameActive");
     try{window.bbRestoreGameplayDock?.()}catch(e){}
     document.body.classList.add("bbRankedWaiting");
-    show("#bbResultsWait",false);show("#bbResultsFinal",true);
 
-    const ordered=rows.filter(x=>x.placement!=null).sort((a,b)=>a.placement-b.placement);
+    show("#bbResultsWait",false);
+    show("#bbResultsFinal",true);
+
+    const ordered=rows
+      .filter(x=>x.placement!=null)
+      .sort((a,b)=>Number(a.placement)-Number(b.placement));
+
+    const mine=ordered.find(r=>r.user_id===user?.id);
+    const world=resultWorldInfo(first.ranked_world||mine?.ranked_world);
+    const modeText=modeLabel(first.mode_code||activeRankedMatch?.mode_code,activeRankedMatch?.mode);
+    const diffText=diffLabel(first.difficulty_code||activeRankedMatch?.difficulty_code,activeRankedMatch?.difficulty);
+
+    $("#bbResultMatchStamp").innerHTML=`
+      <span>${world.icon} ${esc(world.name)} Ranked</span>
+      <b>${esc(modeText)} • ${esc(diffText)}</b>`;
+
+    $("#bbResultPlayerCount").textContent=`${ordered.length.toLocaleString()} ผู้เล่น`;
+
+    if(mine){
+      $("#bbResultMainTitle").textContent=
+        mine.forfeited
+          ? "🏳️ จบการแข่งขัน"
+          : Number(mine.placement)===1
+            ? "🥇 เบอร์หนึ่งของแมตช์!"
+            : `🏆 อันดับ #${Number(mine.placement)}`;
+
+      $("#bbResultMainSub").textContent=
+        `Performance ${Number(mine.performance_score||0).toLocaleString()} / 1000 • ${fmtRPDelta(mine.rp_change)} Overall RP`;
+    }else{
+      $("#bbResultMainTitle").textContent="🏆 ผลการแข่งขัน";
+      $("#bbResultMainSub").textContent="ประกาศอันดับเรียบร้อยแล้ว";
+    }
+
+    // ---------------- Podium ----------------
     const top=ordered.slice(0,3);
-    const orderForPodium=[top.find(x=>x.placement===2),top.find(x=>x.placement===1),top.find(x=>x.placement===3)].filter(Boolean);
-    $("#bbPodium").innerHTML=orderForPodium.map(r=>`
-      <div class="bbPodiumCard ${r.placement===1?"first":""}">
-        <div class="bbPodiumPlace">${r.placement===1?"🥇":r.placement===2?"🥈":"🥉"}</div>
+    const orderForPodium=[
+      top.find(x=>Number(x.placement)===2),
+      top.find(x=>Number(x.placement)===1),
+      top.find(x=>Number(x.placement)===3)
+    ].filter(Boolean);
+
+    $("#bbPodium").innerHTML=orderForPodium.map(r=>{
+      const delta=Number(r.rp_change||0);
+      return `
+      <div class="bbPodiumCard ${Number(r.placement)===1?"first":""}">
+        <div class="bbPodiumPlace">${Number(r.placement)===1?"🥇":Number(r.placement)===2?"🥈":"🥉"}</div>
         <div class="bbPodiumAvatar">${resultAvatar(r)}</div>
         <b>${esc(r.display_name)}</b>
         <small class="bbPodiumScore">${Number(r.score||0).toLocaleString()} คะแนน</small>
-        ${r.forfeited?'<small class="bbResultForfeit">🏳️ ยอมแพ้ / ไม่จบ</small>':`<small>+${Number(r.rp_change||0)} RP</small>`}
-      </div>`).join("");
+        <span class="bbPodiumPerformance">🔥 Performance ${Number(r.performance_score||0)}</span>
+        ${r.forfeited
+          ? '<small class="bbResultForfeit">🏳️ ยอมแพ้ / ไม่จบ</small>'
+          : `<small class="bbPodiumDelta ${delta>=0?"positive":"negative"}">${fmtRPDelta(delta)} Overall RP</small>`
+        }
+      </div>`;
+    }).join("");
 
-    const mine=ordered.find(r=>r.user_id===user?.id);
-    $("#bbMyRank").innerHTML=mine
-      ? `อันดับของคุณ <strong>#${mine.placement}</strong> • ${Number(mine.score||0).toLocaleString()} คะแนน • <strong>+${Number(mine.rp_change||0)} RP</strong>`
-      : "ผลของคุณถูกบันทึกแล้ว";
+    // ---------------- My report ----------------
+    if(mine){
+      const beforeOverall={
+        icon:mine.overall_tier_before_icon||thaiTierFromRP(mine.rp_before).icon,
+        name:mine.overall_tier_before_name||thaiTierFromRP(mine.rp_before).name
+      };
+      const afterOverall={
+        icon:mine.overall_tier_after_icon||thaiTierFromRP(mine.rp_after).icon,
+        name:mine.overall_tier_after_name||thaiTierFromRP(mine.rp_after).name
+      };
+      const beforeWorld={
+        icon:mine.world_tier_before_icon||thaiTierFromRP(mine.world_rp_before).icon,
+        name:mine.world_tier_before_name||thaiTierFromRP(mine.world_rp_before).name
+      };
+      const afterWorld={
+        icon:mine.world_tier_after_icon||thaiTierFromRP(mine.world_rp_after).icon,
+        name:mine.world_tier_after_name||thaiTierFromRP(mine.world_rp_after).name
+      };
 
-    $("#bbFullResults").innerHTML=ordered.map(r=>`
-      <div class="bbResultRow">
-        <strong>${r.placement<=3?(r.placement===1?"🥇":r.placement===2?"🥈":"🥉"):"#"+r.placement}</strong>
-        <span class="bbResultName">${esc(r.display_name)}</span>
-        <span class="bbResultScore">${Number(r.score||0).toLocaleString()} คะแนน</span>
-        <span class="bbResultRP">${r.forfeited?"🏳️ ไม่จบ":"+"+Number(r.rp_change||0)+" RP"}</span>
-      </div>`).join("");
+      const [overallPos,worldPos]=await Promise.all([
+        fetchMyBoardPosition("overall"),
+        fetchMyBoardPosition(mine.ranked_world||"teddy")
+      ]);
+
+      const overallUp=beforeOverall.name!==afterOverall.name;
+      const worldUp=beforeWorld.name!==afterWorld.name;
+
+      $("#bbMyRank").innerHTML=`
+        <div class="bbMyResultHero">
+          <div class="bbMyResultPlace">#${Number(mine.placement)}</div>
+
+          <div class="bbMyResultIdentity">
+            <small>YOUR MATCH RESULT</small>
+            <h2>${esc(mine.display_name||"ผู้เล่น")}</h2>
+            <p>${mine.forfeited?"🏳️ ยอมแพ้ / ไม่จบ":`${Number(mine.correct_answers||0)} / ${Number(mine.total_answers||0)} ข้อถูก • ${Number(mine.score||0).toLocaleString()} คะแนน`}</p>
+          </div>
+
+          <div class="bbMyResultPerformance">
+            <small>PERFORMANCE</small>
+            <strong>${Number(mine.performance_score||0)}</strong>
+            <span>/ 1000</span>
+          </div>
+        </div>
+
+        <div class="bbMyResultRanks">
+          <article class="bbResultRankCard">
+            <div class="bbResultRankCardHead">
+              <span>🧠 OVERALL RANK</span>
+              <b>${afterOverall.icon} ${esc(afterOverall.name)}</b>
+            </div>
+            <div class="bbResultRankNumbers">
+              <strong>${Number(mine.rp_before||0).toLocaleString()}</strong>
+              <i>→</i>
+              <strong>${Number(mine.rp_after||0).toLocaleString()} RP</strong>
+              <span class="bbResultRPDelta ${rpDeltaClass(mine.rp_change)}">${fmtRPDelta(mine.rp_change)}</span>
+            </div>
+            <div class="bbResultTierPath ${overallUp?"rankup":""}">
+              ${beforeOverall.icon} ${esc(beforeOverall.name)} → ${afterOverall.icon} ${esc(afterOverall.name)}
+            </div>
+            ${overallPos?`<span class="bbResultBoardPosition">🇹🇭 Brain Buddy Overall #${Number(overallPos.rank_position).toLocaleString()}</span>`:""}
+          </article>
+
+          <article class="bbResultRankCard world">
+            <div class="bbResultRankCardHead">
+              <span>${world.icon} ${esc(world.name.toUpperCase())} RANK</span>
+              <b>${afterWorld.icon} ${esc(afterWorld.name)}</b>
+            </div>
+            <div class="bbResultRankNumbers">
+              <strong>${Number(mine.world_rp_before||0).toLocaleString()}</strong>
+              <i>→</i>
+              <strong>${Number(mine.world_rp_after||0).toLocaleString()} RP</strong>
+              <span class="bbResultRPDelta ${rpDeltaClass(mine.world_rp_change)}">${fmtRPDelta(mine.world_rp_change)}</span>
+            </div>
+            <div class="bbResultTierPath ${worldUp?"rankup":""}">
+              ${beforeWorld.icon} ${esc(beforeWorld.name)} → ${afterWorld.icon} ${esc(afterWorld.name)}
+            </div>
+            ${worldPos?`<span class="bbResultBoardPosition">${world.icon} ${esc(world.name)} #${Number(worldPos.rank_position).toLocaleString()}</span>`:""}
+          </article>
+        </div>`;
+
+      showRankUpIfNeeded(mine);
+
+    }else{
+      $("#bbMyRank").innerHTML=
+        '<div class="bbBrainBoardLoading">ผลของคุณถูกบันทึกแล้ว</div>';
+    }
+
+    // ---------------- Full Ranking ----------------
+    $("#bbFullResults").innerHTML=ordered.map(r=>{
+      const delta=Number(r.rp_change||0);
+      const worldDelta=Number(r.world_rp_change||0);
+      const place=Number(r.placement||0);
+      const medal=place===1?"🥇":place===2?"🥈":place===3?"🥉":`#${place}`;
+
+      return `
+      <div class="bbResultRowV74 ${r.user_id===user?.id?"me":""} ${r.forfeited?"forfeit":""}">
+        <strong class="bbResultPlaceV74">${medal}</strong>
+        <div class="bbResultAvatarV74">${resultAvatar(r)}</div>
+
+        <span class="bbResultNameV74">
+          <b>${esc(r.display_name)}${r.user_id===user?.id?" • คุณ":""}</b>
+          <small>${r.forfeited?"🏳️ ไม่จบ":`${Number(r.correct_answers||0)}/${Number(r.total_answers||0)} ข้อถูก`}</small>
+        </span>
+
+        <span class="bbResultMetricV74">
+          <small>PERFORMANCE</small>
+          <b>${Number(r.performance_score||0)}</b>
+        </span>
+
+        <span class="bbResultMetricV74 scoreMetric">
+          <small>SCORE</small>
+          <b>${Number(r.score||0).toLocaleString()}</b>
+        </span>
+
+        <span class="bbResultMetricV74 worldMetric">
+          <small>OVERALL RP</small>
+          <b class="${delta>=0?"plus":"minus"}">${fmtRPDelta(delta)}</b>
+          <small>${world.icon} ${fmtRPDelta(worldDelta)}</small>
+        </span>
+      </div>`;
+    }).join("");
+
+    // Refresh any rank display elsewhere
+    try{window.bbSyncThaiBrainRank?.()}catch(e){}
+    try{window.bbBrainLeaderboard?.refresh?.()}catch(e){}
   }
 
   function watchRankedResults(){
@@ -12748,9 +13248,13 @@ window.addEventListener("load",()=>{
         p_correct_answers:Number(result.correct)||0,
         p_total_answers:Number(result.total)||0,
         p_average_answer_ms:
-          result.mode==="match" && Number(window.__bbRankedMatchElapsedMs)>0
-            ? Math.round(Number(window.__bbRankedMatchElapsedMs))
-            : null
+          Number(result.averageAnswerMs)>0
+            ? Math.round(Number(result.averageAnswerMs))
+            : (
+                result.mode==="match" && Number(window.__bbRankedMatchElapsedMs)>0
+                  ? Math.round(Number(window.__bbRankedMatchElapsedMs))
+                  : null
+              )
       });
       if(error)throw error;
       const status=data?.[0]||{};
@@ -12767,6 +13271,24 @@ window.addEventListener("load",()=>{
   };
 
   $("#bbRankedForfeitBtn")?.addEventListener("click",forfeitRankedMatch);
+
+  const closeRankUp=()=>{
+    $("#bbRankUpOverlay")?.classList.add("hidden");
+    $("#bbRankUpOverlay")?.setAttribute("aria-hidden","true");
+  };
+
+  $("#bbRankUpClose")?.addEventListener("click",closeRankUp);
+  $("#bbRankUpContinue")?.addEventListener("click",closeRankUp);
+  $("#bbRankUpOverlay")?.addEventListener("click",e=>{
+    if(e.target.id==="bbRankUpOverlay")closeRankUp();
+  });
+
+  $("#bbResultOpenBoard")?.addEventListener("click",()=>{
+    closeRankUp();
+    show("#bbArenaResults",false);
+    show("#bbArenaLobby",true);
+    window.bbBrainLeaderboard?.open?.();
+  });
 
   $("#bbResultsExit")?.addEventListener("click",async()=>{
     cleanupRankedResultsWatch();cleanupRoomChannel();stopCountdown();
@@ -17740,6 +18262,26 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(sync,5000);
 })();
 </script>
+
+
+<div class="bbRankUpOverlay hidden" id="bbRankUpOverlay" aria-hidden="true">
+  <div class="bbRankUpBurst" aria-hidden="true">
+    <i></i><i></i><i></i><i></i><i></i><i></i>
+  </div>
+  <div class="bbRankUpCard">
+    <button type="button" id="bbRankUpClose">×</button>
+    <span class="bbRankUpKicker">⚡ RANK UP!</span>
+    <div class="bbRankUpIcon" id="bbRankUpIcon">😈</div>
+    <h2 id="bbRankUpTitle">ตัวตึง</h2>
+    <p id="bbRankUpText">แรงค์ใหม่ของคุณ</p>
+    <div class="bbRankUpPath">
+      <span id="bbRankUpBefore">💥 ตัวจี๊ด</span>
+      <b>→</b>
+      <strong id="bbRankUpAfter">😈 ตัวตึง</strong>
+    </div>
+    <button type="button" id="bbRankUpContinue">ไปต่อ!</button>
+  </div>
+</div>
 
 </body>
 </html>
