@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy v80 — Responsive Polish</title>
+<title>Brain Buddy v81 — Ranked Create Room Fix</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -9092,6 +9092,641 @@ footer{
   }
 }
 
+
+/* ==========================================================
+   Brain Buddy v81 — Ranked create-room modal + scroll fix
+   ========================================================== */
+
+/* The create-room layer is teleported to <body> at runtime.
+   This avoids iOS/Safari fixed-position quirks inside a scrolling fixed arena. */
+body > #bbCreateBackdrop{
+  position:fixed!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100dvh!important;
+  z-index:9000!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:
+    max(14px,env(safe-area-inset-top))
+    max(14px,env(safe-area-inset-right))
+    max(14px,env(safe-area-inset-bottom))
+    max(14px,env(safe-area-inset-left))!important;
+  overflow:auto!important;
+  overscroll-behavior:contain!important;
+  -webkit-overflow-scrolling:touch!important;
+  background:rgba(35,26,45,.44)!important;
+  backdrop-filter:blur(13px) saturate(115%)!important;
+}
+
+body > #bbCreateBackdrop.hidden{
+  display:none!important;
+}
+
+body > #bbCreateBackdrop .bbArenaSheet{
+  position:relative!important;
+  width:min(620px,100%)!important;
+  max-height:calc(100dvh - 28px)!important;
+  margin:auto!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior:contain!important;
+  -webkit-overflow-scrolling:touch!important;
+  padding:24px!important;
+  border-radius:30px!important;
+  border:1px solid rgba(255,255,255,.82)!important;
+  background:rgba(255,255,255,.97)!important;
+  box-shadow:
+    0 28px 90px rgba(49,31,67,.25),
+    inset 0 2px 4px rgba(255,255,255,.8)!important;
+  transform:none!important;
+}
+
+body > #bbCreateBackdrop .bbArenaSheetX{
+  position:sticky!important;
+  float:right!important;
+  top:0!important;
+  right:0!important;
+  z-index:5!important;
+  margin:-4px -4px 4px 8px!important;
+  width:40px!important;
+  height:40px!important;
+  border-radius:14px!important;
+  background:#fff!important;
+  box-shadow:0 7px 18px rgba(70,50,90,.10)!important;
+}
+
+body.bbCreateRoomOpen{
+  overflow:hidden!important;
+  touch-action:none!important;
+}
+
+/* Keep form controls comfortably tappable and prevent iOS zoom. */
+body > #bbCreateBackdrop input,
+body > #bbCreateBackdrop select,
+body > #bbCreateBackdrop button{
+  font-size:16px!important;
+}
+
+body > #bbCreateBackdrop .bbRankWorlds,
+body > #bbCreateBackdrop .bbRankGameGrid{
+  min-width:0!important;
+}
+
+@media(max-width:640px){
+  body > #bbCreateBackdrop{
+    padding:
+      max(8px,env(safe-area-inset-top))
+      8px
+      max(8px,env(safe-area-inset-bottom))
+      8px!important;
+  }
+
+  body > #bbCreateBackdrop .bbArenaSheet{
+    width:100%!important;
+    max-height:calc(100dvh - 16px)!important;
+    padding:18px 14px 20px!important;
+    border-radius:24px!important;
+  }
+
+  body > #bbCreateBackdrop .bbArenaSheet h2{
+    font-size:24px!important;
+    line-height:1.1!important;
+  }
+
+  body > #bbCreateBackdrop .bbRankWorlds{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+
+  body > #bbCreateBackdrop .bbRankGameGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+
+/* Room screen always starts cleanly at the top after creation/join. */
+#bbArena .bbArenaRoom{
+  scroll-margin-top:82px!important;
+}
+
+
+/* ==========================================================
+   Brain Buddy v82 — Full Visual Refresh
+   Goals:
+   - Better readability / contrast
+   - Cleaner spacing
+   - Safer responsive behavior
+   - Softer, more premium pastel system
+   ========================================================== */
+
+:root{
+  --bg-0:#f7f4ff;
+  --bg-1:#f3f7ff;
+  --surface:#ffffff;
+  --surface-soft:#fcfbff;
+  --surface-glass:rgba(255,255,255,.82);
+
+  --line:#e7ddff;
+  --line-strong:#d7c8ff;
+
+  --text:#2f2552;
+  --text-2:#5e537f;
+  --text-3:#897ea8;
+  --text-inverse:#ffffff;
+
+  --brand-1:#7b57ff;
+  --brand-2:#b96bff;
+  --brand-3:#ff89c3;
+  --brand-4:#ffd16e;
+  --brand-5:#8ed7ff;
+  --brand-6:#97e8c2;
+
+  --hero-grad:linear-gradient(135deg,#704bff 0%, #8f63ff 36%, #c676ff 68%, #ff92c9 100%);
+  --card-grad:linear-gradient(180deg, rgba(255,255,255,.96) 0%, rgba(255,255,255,.90) 100%);
+  --pill-grad:linear-gradient(135deg,#8b65ff 0%, #b16fff 55%, #ff89c3 100%);
+  --soft-grad:linear-gradient(180deg,#fbf9ff 0%, #f6f2ff 100%);
+  --soft-grad-blue:linear-gradient(180deg,#f8fbff 0%, #eef5ff 100%);
+  --soft-grad-pink:linear-gradient(180deg,#fff8fc 0%, #fff1f8 100%);
+  --soft-grad-yellow:linear-gradient(180deg,#fffdf5 0%, #fff7dd 100%);
+  --soft-grad-green:linear-gradient(180deg,#f6fff9 0%, #ebfff5 100%);
+
+  --shadow-xs:0 2px 8px rgba(74,38,110,.05);
+  --shadow-sm:0 8px 26px rgba(68,36,105,.07);
+  --shadow-md:0 18px 48px rgba(70,35,110,.10);
+  --shadow-lg:0 28px 70px rgba(65,31,103,.14);
+
+  --radius-xs:12px;
+  --radius-sm:16px;
+  --radius-md:22px;
+  --radius-lg:30px;
+  --radius-xl:38px;
+
+  --space-1:8px;
+  --space-2:12px;
+  --space-3:16px;
+  --space-4:20px;
+  --space-5:24px;
+  --space-6:32px;
+  --space-7:40px;
+  --space-8:56px;
+}
+
+html{
+  scroll-behavior:smooth;
+  -webkit-text-size-adjust:100%;
+}
+
+body{
+  background:
+    radial-gradient(circle at 0% 0%, rgba(151,216,255,.55), transparent 22%),
+    radial-gradient(circle at 100% 14%, rgba(255,165,214,.48), transparent 20%),
+    radial-gradient(circle at 100% 100%, rgba(133,103,255,.18), transparent 26%),
+    linear-gradient(180deg,#f7f5ff 0%, #f4f6ff 44%, #fff5fb 100%) !important;
+  color:var(--text)!important;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+
+/* Generic readability rescue */
+body, p, span, div, small, label, li{
+  color:inherit;
+}
+
+h1,h2,h3,h4,h5{
+  color:var(--text)!important;
+  letter-spacing:-.02em;
+  line-height:1.08!important;
+  text-wrap:balance;
+}
+
+p, .muted, .sub, .desc, .caption{
+  color:var(--text-2)!important;
+  line-height:1.5!important;
+}
+
+small{
+  color:var(--text-3)!important;
+}
+
+/* remove glow/blur on text if present */
+*{
+  text-shadow:none!important;
+}
+
+::selection{
+  background:rgba(123,87,255,.22);
+}
+
+/* top page container cleanup */
+main, .page, .screen, .view, #app{
+  isolation:isolate;
+}
+
+/* cards / panels */
+.card, .panel, .tile, .box, .module, .bbCard, .bbPanel{
+  background:var(--card-grad)!important;
+  border:1px solid rgba(215,200,255,.78)!important;
+  box-shadow:var(--shadow-sm)!important;
+  backdrop-filter:saturate(110%) blur(8px);
+}
+
+/* buttons */
+button,
+.btn,
+a.btn{
+  border-radius:18px!important;
+  border:1px solid rgba(208,193,255,.9)!important;
+  transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease, background .18s ease;
+}
+button:hover,
+.btn:hover{
+  transform:translateY(-1px);
+  box-shadow:var(--shadow-sm)!important;
+}
+button:active,
+.btn:active{
+  transform:translateY(0);
+}
+button:focus-visible,
+.btn:focus-visible,
+input:focus-visible,
+select:focus-visible{
+  outline:3px solid rgba(123,87,255,.18)!important;
+  outline-offset:2px!important;
+}
+
+/* inputs */
+input, select, textarea{
+  background:#fff!important;
+  color:var(--text)!important;
+  border:1px solid var(--line-strong)!important;
+  border-radius:16px!important;
+  box-shadow:0 1px 0 rgba(255,255,255,.8), inset 0 1px 1px rgba(84,68,124,.04)!important;
+}
+input::placeholder, textarea::placeholder{
+  color:#9a8fb8!important;
+}
+
+/* pills / chips */
+.badge, .chip, .pill{
+  background:rgba(123,87,255,.08)!important;
+  color:var(--brand-1)!important;
+  border:1px solid rgba(123,87,255,.15)!important;
+}
+
+/* Header / hero */
+.bbHero, .hero, .topHero, .rankHero{
+  background:var(--hero-grad)!important;
+  color:#fff!important;
+  border:1px solid rgba(255,255,255,.32)!important;
+  box-shadow:var(--shadow-lg)!important;
+}
+.bbHero *, .hero *, .topHero *, .rankHero *{
+  color:#fff!important;
+}
+.bbHero p, .hero p, .topHero p, .rankHero p{
+  color:rgba(255,255,255,.92)!important;
+}
+
+/* Stat cards inside hero should remain readable */
+.bbHero .stat, .hero .stat, .topHero .stat, .rankHero .stat,
+.bbHero .statCard, .hero .statCard, .topHero .statCard, .rankHero .statCard{
+  background:rgba(255,255,255,.14)!important;
+  border:1px solid rgba(255,255,255,.24)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18)!important;
+}
+.bbHero .stat *, .hero .stat *, .topHero .stat *, .rankHero .stat *,
+.bbHero .statCard *, .hero .statCard *, .topHero .statCard *, .rankHero .statCard *{
+  color:#fff!important;
+}
+
+/* Ranking / room area */
+#bbArena .bbArenaGate,
+#bbArena .bbArenaLobby,
+#bbArena .bbArenaRoom,
+#bbArena .bbArenaCountdown,
+#bbArena .bbArenaResults{
+  background:transparent!important;
+  color:var(--text)!important;
+}
+
+#bbArena .bbArenaSectionTitle,
+#bbArena h2,
+#bbArena h3,
+#bbArena h4{
+  color:var(--text)!important;
+}
+
+/* stronger contrast for lobby action cards */
+#bbArena .bbArenaAction,
+#bbArena .bbArenaQuickCard,
+#bbArena .bbArenaMenuCard{
+  background:var(--surface-glass)!important;
+  border:1px solid rgba(221,212,255,.95)!important;
+  box-shadow:var(--shadow-sm)!important;
+  min-height:132px;
+}
+#bbArena .bbArenaAction p,
+#bbArena .bbArenaQuickCard p,
+#bbArena .bbArenaMenuCard p{
+  color:var(--text-2)!important;
+}
+
+/* open rooms section: prevent decorative blobs from covering text */
+#bbArena .bbOpenRoomsSection,
+#bbArena .bbRoomsArea,
+#bbArena .bbRankOpenRooms{
+  position:relative!important;
+  z-index:2!important;
+  overflow:visible!important;
+}
+#bbArena .bbOpenRoomsSection *{
+  position:relative;
+  z-index:2;
+}
+#bbArena .bbOpenRoomsSection::before,
+#bbArena .bbOpenRoomsSection::after,
+#bbArena .bbRoomsArea::before,
+#bbArena .bbRoomsArea::after{
+  opacity:.18!important;
+  filter:blur(26px)!important;
+  pointer-events:none!important;
+  z-index:0!important;
+}
+
+/* active room list card */
+#bbArena .bbRoomRow,
+#bbArena .bbRoomCard,
+#bbArena .bbLiveRoom{
+  background:rgba(255,255,255,.88)!important;
+  border:1px solid rgba(225,216,255,.95)!important;
+  box-shadow:var(--shadow-xs)!important;
+}
+
+/* game selection cards */
+.bbGameCard, .gameCard, .worldCard, .modeCard{
+  background:var(--surface-glass)!important;
+  border:1px solid rgba(220,210,255,.95)!important;
+  box-shadow:var(--shadow-sm)!important;
+}
+.bbGameCard .title, .gameCard .title, .worldCard .title, .modeCard .title{
+  color:var(--text)!important;
+}
+.bbGameCard .subtitle, .gameCard .subtitle, .worldCard .subtitle, .modeCard .subtitle{
+  color:var(--text-2)!important;
+}
+
+/* Question / quiz screen */
+.quizCard, .questionCard, .examCard, .playCard{
+  background:#ffffff!important;
+  border:1px solid rgba(225,217,255,.95)!important;
+  border-radius:32px!important;
+  box-shadow:var(--shadow-md)!important;
+}
+.quizCard .question,
+.questionCard .question,
+.examCard .question,
+.playCard .question{
+  color:var(--text)!important;
+}
+.quizCard .hint,
+.questionCard .hint,
+.examCard .hint,
+.playCard .hint{
+  color:var(--text-2)!important;
+}
+
+/* answer choices */
+.choice, .answer, .option, .quizOption{
+  background:#fff!important;
+  border:1px solid rgba(219,210,255,.95)!important;
+  color:var(--text)!important;
+  box-shadow:var(--shadow-xs)!important;
+}
+.choice:hover, .answer:hover, .option:hover, .quizOption:hover{
+  border-color:#b69bff!important;
+  background:#fcfaff!important;
+}
+.choice.correct, .answer.correct, .option.correct, .quizOption.correct{
+  background:#eefdf5!important;
+  border-color:#88d4ae!important;
+}
+.choice.wrong, .answer.wrong, .option.wrong, .quizOption.wrong{
+  background:#fff2f6!important;
+  border-color:#f2a2bf!important;
+}
+
+/* Results */
+.resultCard, .summaryCard{
+  background:rgba(255,255,255,.95)!important;
+  border:1px solid rgba(219,210,255,.95)!important;
+  box-shadow:var(--shadow-md)!important;
+}
+
+/* footer readability */
+footer, .footer{
+  color:var(--text-2)!important;
+}
+footer *,.footer *{
+  color:inherit!important;
+}
+
+/* Safer type scale */
+@media (min-width:1200px){
+  h1{font-size:clamp(2.7rem,4vw,4.8rem)!important}
+  h2{font-size:clamp(2rem,2.8vw,3rem)!important}
+}
+@media (max-width:1199px){
+  h1{font-size:clamp(2.2rem,4.6vw,3.7rem)!important}
+  h2{font-size:clamp(1.7rem,3.5vw,2.4rem)!important}
+}
+@media (max-width:768px){
+  h1{font-size:clamp(1.8rem,7.2vw,3rem)!important}
+  h2{font-size:clamp(1.4rem,5.3vw,2rem)!important}
+  p, .sub, .desc{font-size:15px!important}
+}
+@media (max-width:480px){
+  h1{font-size:clamp(1.55rem,8vw,2.3rem)!important}
+  h2{font-size:clamp(1.25rem,6vw,1.75rem)!important}
+  p, .sub, .desc{font-size:14px!important}
+}
+
+/* consistent spacing + prevent cramped UI */
+section, .section, .block, .module{
+  margin-bottom:var(--space-5)!important;
+}
+.grid, .cards, .listGrid{
+  gap:var(--space-4)!important;
+}
+
+/* Make images / mascots non-blocking */
+img, svg, canvas{
+  max-width:100%;
+  height:auto;
+}
+.decor, .floatingDecor, .blob, .glow, .orb{
+  pointer-events:none!important;
+  z-index:0!important;
+  opacity:.45!important;
+  filter:blur(14px)!important;
+}
+
+/* Improve top bars */
+header, .topbar, .navbar, .navShell{
+  background:rgba(255,255,255,.82)!important;
+  backdrop-filter:blur(14px) saturate(115%)!important;
+  border-bottom:1px solid rgba(228,219,255,.95)!important;
+}
+
+/* force readability on common dim labels that were too light */
+.label-light, .softText, .meta, .caption-soft{
+  color:var(--text-3)!important;
+}
+
+/* Better responsive widths for iPad / desktop */
+.pageShell, .appShell, .container, .contentWrap{
+  width:min(1220px, calc(100% - 28px))!important;
+  margin-inline:auto!important;
+}
+@media(max-width:768px){
+  .pageShell, .appShell, .container, .contentWrap{
+    width:min(100% - 16px, 760px)!important;
+  }
+}
+
+/* Prevent horizontal overflow across the app */
+body, #app, main, .page, .screen{
+  overflow-x:hidden!important;
+}
+
+/* modal / sheet polish */
+.modal, .sheet, .dialog{
+  border-radius:28px!important;
+  background:rgba(255,255,255,.98)!important;
+  border:1px solid rgba(221,212,255,.95)!important;
+  box-shadow:var(--shadow-lg)!important;
+}
+
+/* Specific text bug rescue near the line user showed */
+.hero p, .rankHero p, .bbHero p, .headlineSub, .subtitle, .heroSub{
+  color:rgba(255,255,255,.95)!important;
+  font-weight:500!important;
+  letter-spacing:0!important;
+  white-space:normal!important;
+  overflow-wrap:anywhere!important;
+}
+
+/* when text sits on very bright gradients, make background strip */
+.readabilityStrip{
+  display:inline-flex;
+  background:rgba(58,34,88,.16);
+  border:1px solid rgba(255,255,255,.16);
+  backdrop-filter:blur(6px);
+  border-radius:999px;
+  padding:8px 14px;
+}
+
+/* Safety for iframes / sticky sections */
+.sticky, [style*="position: sticky"]{
+  z-index:5;
+}
+
+
+/* ===== v83 Minimal structure + audio-ready ===== */
+:root{
+  --bb-bg:#f7f6ff;
+  --bb-card:#ffffff;
+  --bb-primary:#7b57ff;
+  --bb-primary-2:#a96cff;
+  --bb-pink:#ff8fc3;
+  --bb-text:#302555;
+  --bb-sub:#6e638e;
+  --bb-line:#e9e3ff;
+  --bb-shadow:0 14px 38px rgba(81,56,120,.08);
+}
+body{
+  background:
+    radial-gradient(circle at top left, rgba(135,210,255,.24), transparent 20%),
+    radial-gradient(circle at bottom right, rgba(255,170,213,.18), transparent 18%),
+    linear-gradient(180deg,#fbfaff 0%,#f6f7ff 54%,#fff8fc 100%) !important;
+  color:var(--bb-text)!important;
+}
+.topbar,.navbar,header,.navShell{
+  position:sticky!important; top:0; z-index:40;
+  background:rgba(255,255,255,.88)!important;
+  border-bottom:1px solid var(--bb-line)!important;
+  backdrop-filter:blur(12px)!important;
+}
+.topbar .toggle-theme,.dark-toggle,.night-toggle,[aria-label*="dark"],[aria-label*="theme"]{
+  display:none!important;
+}
+button, .btn{
+  min-height:44px;
+}
+.hero,.bbHero,.rankHero,.topHero{
+  background:linear-gradient(135deg,#7b57ff 0%, #9d67ff 45%, #ff92c7 100%)!important;
+  border-radius:28px!important;
+  padding:28px!important;
+}
+.hero h1,.bbHero h1,.rankHero h1,.topHero h1{
+  font-size:clamp(1.8rem,4vw,3.4rem)!important;
+}
+.hero p,.bbHero p,.rankHero p,.topHero p{
+  max-width:48ch;
+  font-size:clamp(0.95rem,1.4vw,1.05rem)!important;
+}
+.container,.pageShell,.appShell,.contentWrap{
+  width:min(1100px, calc(100% - 24px))!important;
+}
+.card,.panel,.tile,.box,.module,.bbCard,.bbPanel{
+  border-radius:24px!important;
+}
+.bbMiniNav,.top-shortcuts,.header-actions,.theme-switcher{
+  display:none!important;
+}
+
+/* simplify homepage visual density */
+.home-grid,.dashboard-grid,.menu-grid,.cards{
+  gap:16px!important;
+}
+.home-grid > *, .dashboard-grid > *, .menu-grid > *{
+  min-height:120px!important;
+}
+.hero .mascot-wrap,.hero .mascot,.bbHero .mascot,.rankHero .mascot{
+  max-width:280px!important;
+}
+@media (max-width: 900px){
+  .hero,.bbHero,.rankHero,.topHero{padding:22px!important}
+}
+@media (max-width: 640px){
+  .hero,.bbHero,.rankHero,.topHero{
+    padding:18px!important;
+    border-radius:22px!important;
+  }
+  .hero .mascot-wrap,.hero .mascot,.bbHero .mascot,.rankHero .mascot{
+    max-width:180px!important;
+    margin-inline:auto!important;
+  }
+  .home-grid,.dashboard-grid,.menu-grid,.cards{
+    grid-template-columns:1fr!important;
+  }
+}
+
+/* remove extra floating clutter */
+.floatingDecor,.blob,.glow,.orb,.sparkle-large{
+  display:none!important;
+}
+
+/* audio status bubble */
+.bb-audio-pill{
+  position:fixed; right:16px; bottom:16px; z-index:60;
+  padding:10px 14px; border-radius:999px;
+  background:rgba(48,37,85,.82); color:#fff; font-size:13px;
+  box-shadow:0 12px 28px rgba(47,37,85,.22);
+  opacity:0; transform:translateY(6px); transition:.25s ease;
+  pointer-events:none;
+}
+.bb-audio-pill.show{opacity:1; transform:translateY(0)}
+
 </style>
 
 <script>
@@ -12447,6 +13082,40 @@ window.addEventListener("load",()=>{
 
   function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
   function show(id,on=true){const e=$(id);if(e)e.classList.toggle("hidden",!on)}
+
+  function arenaScrollTop(behavior="auto"){
+    const arena=$("#bbArena");
+    if(!arena)return;
+    try{arena.scrollTo({top:0,left:0,behavior})}
+    catch(e){arena.scrollTop=0}
+  }
+
+  function ensureCreateBackdropOnBody(){
+    const backdrop=$("#bbCreateBackdrop");
+    if(backdrop && backdrop.parentElement!==document.body){
+      document.body.appendChild(backdrop);
+    }
+    return backdrop;
+  }
+
+  function openCreateRoomSheet(){
+    const backdrop=ensureCreateBackdropOnBody();
+    if(!backdrop)return;
+    document.body.classList.add("bbCreateRoomOpen");
+    backdrop.classList.remove("hidden");
+    requestAnimationFrame(()=>{
+      const sheet=backdrop.querySelector(".bbArenaSheet");
+      if(sheet)sheet.scrollTop=0;
+      $("#bbCreateName")?.focus({preventScroll:true});
+    });
+  }
+
+  function closeCreateRoomSheet(){
+    const backdrop=$("#bbCreateBackdrop");
+    backdrop?.classList.add("hidden");
+    document.body.classList.remove("bbCreateRoomOpen");
+  }
+
   function toast(t){const e=$("#bbArenaToast");if(!e)return;e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),1800)}
   function errText(e){
     const m=String(e?.message||e||"");
@@ -12671,6 +13340,7 @@ window.addEventListener("load",()=>{
     arena.setAttribute("aria-hidden","false");
     arena.style.pointerEvents="";
     document.body.style.overflow="hidden";
+    arenaScrollTop("auto");
 
     show("#bbArenaGate",false);
     show("#bbArenaRoom",false);
@@ -12828,6 +13498,7 @@ window.addEventListener("load",()=>{
   }
 
   function closeArena(){document.body.classList.remove("bbArenaOpen");
+    closeCreateRoomSheet();
     $("#bbArena").classList.add("hidden");$("#bbArena").setAttribute("aria-hidden","true");document.body.style.overflow="";
     cleanupRoomChannel();cleanupLobbyChannel();stopCountdown();
     try{
@@ -12948,8 +13619,10 @@ window.addEventListener("load",()=>{
       const roomId=data?.[0]?.room_id;
       if(!roomId)throw new Error("สร้างห้องไม่สำเร็จ");
 
-      show("#bbCreateBackdrop",false);
+      closeCreateRoomSheet();
       await enterRoom(roomId);
+      arenaScrollTop("auto");
+      requestAnimationFrame(()=>arenaScrollTop("auto"));
       toast(`${modeLabel(modeCode)} • สร้างห้องแล้ว`);
     }catch(x){
       e.textContent=errText(x);
@@ -12964,14 +13637,21 @@ window.addEventListener("load",()=>{
     try{
       const c=await getClient();const {data,error}=await c.rpc("bb_ranked_join_room",{p_room_code:code});if(error)throw error;
       const roomId=data?.[0]?.room_id;if(!roomId)throw new Error("เข้าห้องไม่สำเร็จ");
-      show("#bbArenaJoinBar",false);$("#bbArenaJoinCode").value="";await enterRoom(roomId);toast("เข้าห้องแล้ว");
+      show("#bbArenaJoinBar",false);$("#bbArenaJoinCode").value="";
+      await enterRoom(roomId);
+      arenaScrollTop("auto");
+      requestAnimationFrame(()=>arenaScrollTop("auto"));
+      toast("เข้าห้องแล้ว");
     }catch(x){toast(errText(x))}
   }
 
   async function enterRoom(roomId){
     cleanupLobbyChannel();currentRoom={id:roomId};
     show("#bbArenaLobby",false);show("#bbArenaGate",false);show("#bbArenaRoom",true);show("#bbArenaCountdown",false);
-    await refreshRoom();subscribeRoom();
+    arenaScrollTop("auto");
+    await refreshRoom();
+    subscribeRoom();
+    requestAnimationFrame(()=>arenaScrollTop("auto"));
   }
   async function refreshRoom(){
     if(window.BB_RANKED_ACTIVE||document.body.classList.contains("bbRankedPlaying"))return;
@@ -13160,10 +13840,12 @@ window.addEventListener("load",()=>{
     $("#bbCreateError").textContent="";
     renderRankGameChoices();
     loadRankedCatalog();
-    show("#bbCreateBackdrop",true);
+    openCreateRoomSheet();
   });
-  $("#bbCreateClose")?.addEventListener("click",()=>show("#bbCreateBackdrop",false));
-  $("#bbCreateBackdrop")?.addEventListener("click",e=>{if(e.target.id==="bbCreateBackdrop")show("#bbCreateBackdrop",false)});
+  $("#bbCreateClose")?.addEventListener("click",closeCreateRoomSheet);
+  $("#bbCreateBackdrop")?.addEventListener("click",e=>{
+    if(e.target.id==="bbCreateBackdrop")closeCreateRoomSheet();
+  });
   $("#bbCreateSubmit")?.addEventListener("click",createRoom);
   $("#bbPeopleMinus")?.addEventListener("click",()=>people(Number($("#bbCreateMax").value)-1));
   $("#bbPeoplePlus")?.addEventListener("click",()=>people(Number($("#bbCreateMax").value)+1));
@@ -13177,6 +13859,12 @@ window.addEventListener("load",()=>{
   $("#bbRoomReadyBtn")?.addEventListener("click",toggleReady);
   $("#bbRoomStartBtn")?.addEventListener("click",startMatch);
   $("#bbRoomCopy")?.addEventListener("click",async()=>{const code=currentRoom?.room_code||"";try{await navigator.clipboard.writeText(code);toast("คัดลอกรหัสห้องแล้ว")}catch(e){prompt("คัดลอกรหัสห้อง",code)}});
+  document.addEventListener("keydown",e=>{
+    if(e.key==="Escape" && !$("#bbCreateBackdrop")?.classList.contains("hidden")){
+      closeCreateRoomSheet();
+    }
+  });
+
 
   // ---------- Ranked actual gameplay ----------
   let rankedAutoTimer=null, rankedClockTimer=null, activeRankedMatch=null;
@@ -20233,6 +20921,198 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   window.addEventListener('load', applyResponsivePolish);
   window.addEventListener('resize', ()=>setTimeout(applyResponsivePolish, 60));
+})();
+</script>
+
+
+<script>
+(function(){
+  function cleanVisualNoise(){
+    // Remove or soften oversized floating glows that sit on top of content
+    const arena = document.querySelector('#bbArena');
+    if(arena){
+      arena.querySelectorAll('*').forEach(el=>{
+        const cls = (el.className || '').toString();
+        const style = window.getComputedStyle(el);
+        const looksDecor =
+          /blob|glow|orb|decor|floating/i.test(cls) ||
+          ((style.position === 'absolute' || style.position === 'fixed') &&
+           parseFloat(style.opacity || '1') < 0.9 &&
+           (style.filter.includes('blur') || style.backdropFilter.includes('blur')));
+        if(looksDecor){
+          el.style.pointerEvents = 'none';
+          el.style.zIndex = '0';
+          if (parseFloat(style.opacity || '1') > 0.22) el.style.opacity = '0.18';
+        }
+      });
+    }
+
+    // Add readability strip for some hero subtitles if needed
+    document.querySelectorAll('.hero p, .rankHero p, .bbHero p').forEach(p=>{
+      if(!p.closest('.readabilityStrip') && p.textContent && p.textContent.trim().length < 120){
+        // keep plain if already readable enough, but ensure contrast
+        p.style.fontWeight = '500';
+      }
+    });
+
+    // Prevent room count chip / small labels from being covered
+    document.querySelectorAll('#bbArena .bbOpenRoomsSection, #bbArena .bbRoomsArea').forEach(sec=>{
+      sec.style.position = 'relative';
+      sec.style.zIndex = '2';
+    });
+
+    // Normalize scrolling containers
+    document.querySelectorAll('.container, .contentWrap, .pageShell').forEach(el=>{
+      el.style.maxWidth = '1220px';
+      el.style.marginInline = 'auto';
+    });
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', cleanVisualNoise);
+  }else{
+    cleanVisualNoise();
+  }
+  window.addEventListener('load', cleanVisualNoise);
+  window.addEventListener('resize', cleanVisualNoise);
+})();
+</script>
+
+
+<script>
+(function(){
+  function q(sel,root=document){return root.querySelector(sel)}
+  function qa(sel,root=document){return [...root.querySelectorAll(sel)]}
+
+  function simplifyText(){
+    const replacements = [
+      [/วันนี้อยากเล่นแบบไหน\??/g, 'เลือกเกมที่อยากเล่น'],
+      [/เลือกสิ่งที่ต้องการแล้วไปต่อได้เลย ไม่ต้องเลื่อนหาตัวเลือกยาว ๆ/gi, 'รวมเกมฝึกสมองไว้ในหน้าเดียว เล่นง่าย ไม่รกตา'],
+      [/โปรไฟล์/gi, 'บัญชี'],
+      [/เล่นเกม/gi, 'เริ่มเล่น']
+    ];
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while(walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(n=>{
+      let t = n.nodeValue;
+      if(!t || !t.trim()) return;
+      replacements.forEach(([rgx,val])=>{ t = t.replace(rgx,val); });
+      n.nodeValue = t;
+    });
+  }
+
+  // Hide extra buttons such as dark mode if any
+  function simplifyStructure(){
+    qa('button, a, div').forEach(el=>{
+      const txt = (el.textContent || '').trim();
+      if(/โหมดกลางคืน|กลางคืน|dark mode|night mode/i.test(txt)) el.style.display='none';
+    });
+    const top = q('header') || q('.topbar') || q('.navbar');
+    if(top) top.style.padding = '10px 0';
+  }
+
+  // WebAudio soundtrack + effects without external files
+  let ac, master, musicGain, sfxGain, started = false, oscillators = [];
+  function ensureAudio(){
+    if(started) return;
+    ac = new (window.AudioContext || window.webkitAudioContext)();
+    master = ac.createGain(); master.gain.value = 0.9; master.connect(ac.destination);
+    musicGain = ac.createGain(); musicGain.gain.value = 0.045; musicGain.connect(master);
+    sfxGain = ac.createGain(); sfxGain.gain.value = 0.15; sfxGain.connect(master);
+
+    // simple ambient pad
+    const freqs = [261.63, 329.63, 392.00]; // C major
+    freqs.forEach((f,i)=>{
+      const o = ac.createOscillator();
+      const g = ac.createGain();
+      o.type = i===0 ? 'sine' : 'triangle';
+      o.frequency.value = f/2;
+      g.gain.value = 0.0001;
+      o.connect(g); g.connect(musicGain); o.start();
+      // slow swell
+      const now = ac.currentTime;
+      g.gain.setValueAtTime(0.0001, now);
+      g.gain.linearRampToValueAtTime(0.018/(i+1), now+4+i);
+      oscillators.push({o,g});
+    });
+
+    // subtle pulse
+    setInterval(()=>{
+      if(!ac) return;
+      const now = ac.currentTime;
+      const pulse = ac.createOscillator();
+      const g = ac.createGain();
+      pulse.type = 'sine';
+      pulse.frequency.value = 660;
+      g.gain.value = 0.0001;
+      pulse.connect(g); g.connect(musicGain);
+      pulse.start(now);
+      g.gain.exponentialRampToValueAtTime(0.005, now+0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, now+0.45);
+      pulse.stop(now+0.5);
+    }, 4200);
+
+    started = true;
+    showAudioHint('เปิดเพลงประกอบและเสียงเอฟเฟกต์แล้ว');
+  }
+
+  function chirp(freq=740, dur=0.08, type='triangle', volume=0.09){
+    if(!ac) return;
+    const now = ac.currentTime;
+    const o = ac.createOscillator();
+    const g = ac.createGain();
+    o.type = type; o.frequency.setValueAtTime(freq, now);
+    o.connect(g); g.connect(sfxGain);
+    g.gain.setValueAtTime(0.0001, now);
+    g.gain.linearRampToValueAtTime(volume, now+0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, now+dur);
+    o.frequency.exponentialRampToValueAtTime(freq*1.12, now+dur);
+    o.start(now); o.stop(now+dur);
+  }
+  function playClick(){ chirp(680,0.07,'triangle',0.07); }
+  function playSuccess(){ chirp(660,0.08,'sine',0.08); setTimeout(()=>chirp(880,0.11,'sine',0.08),70); }
+  function playOpen(){ chirp(520,0.06,'triangle',0.06); setTimeout(()=>chirp(780,0.08,'triangle',0.06),55); }
+
+  function showAudioHint(msg){
+    let pill = q('.bb-audio-pill');
+    if(!pill){
+      pill = document.createElement('div');
+      pill.className = 'bb-audio-pill';
+      document.body.appendChild(pill);
+    }
+    pill.textContent = msg;
+    pill.classList.add('show');
+    clearTimeout(showAudioHint.t);
+    showAudioHint.t = setTimeout(()=>pill.classList.remove('show'), 2200);
+  }
+
+  function bindAudio(){
+    document.addEventListener('pointerdown', function first(){
+      ensureAudio();
+      document.removeEventListener('pointerdown', first);
+    }, {once:true});
+
+    document.addEventListener('click', (e)=>{
+      if(!started) return;
+      const el = e.target.closest('button, a, .btn, .card, .tile, .module');
+      if(!el) return;
+      const txt = (el.textContent || '').trim();
+      if(/สร้างห้อง|เข้าสู่ระบบ|สมัครสมาชิก|เริ่มเล่น|เล่นอีกครั้ง|create/i.test(txt)) playOpen();
+      else if(/ถูก|เสร็จ|success|complete|ชนะ/i.test(document.body.textContent||'')) playSuccess();
+      else playClick();
+    }, true);
+  }
+
+  function init(){
+    simplifyText();
+    simplifyStructure();
+    bindAudio();
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else init();
 })();
 </script>
 
