@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy v86.5 — Avatar Overflow Fix</title>
+<title>Brain Buddy v86.6 — Clean Buddy Core</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -5754,168 +5754,11 @@ body.bbCosEffectSparkle.bbRankedPlaying .gameCard::before{
   object-fit:contain;
 }
 
-body.bbHeroUsesBear #bbDefaultHeroMascot{
-  display:none!important;
-}
-body.bbHeroUsesBear #bbEquippedHeroCharacter{
-  display:grid!important;
-}
-
-body.bbHeroUsesBear.bbHeroBearHasImage #bbPinkBuddy3D{
-  display:none!important;
-}
 body.bbHeroUsesBear.bbHeroBearHasImage #bbEquippedHeroCharacterImg{
   display:block!important;
 }
 
-/* CSS Pink Buddy fallback when shop item has no image_url yet */
-.bbPinkBuddy3D{
-  width:215px;
-  height:215px;
-  position:relative;
-}
-
-.bbPinkBuddy3D .ear{
-  position:absolute;
-  top:19px;
-  width:61px;
-  height:61px;
-  border-radius:50%;
-  background:linear-gradient(145deg,#ffc4dd,#ed74ad);
-  box-shadow:
-    inset 8px 8px 10px rgba(255,255,255,.42),
-    inset -7px -9px 10px rgba(172,54,113,.18);
-}
-.bbPinkBuddy3D .ear.left{left:24px}
-.bbPinkBuddy3D .ear.right{right:24px}
-
-.bbPinkBuddy3D .head{
-  position:absolute;
-  left:43px;
-  top:29px;
-  width:130px;
-  height:118px;
-  border-radius:48% 48% 45% 45%;
-  background:linear-gradient(145deg,#ffd4e7,#f58dbb 58%,#dd5e9b);
-  box-shadow:
-    inset 12px 10px 12px rgba(255,255,255,.43),
-    inset -10px -13px 14px rgba(151,45,99,.16);
-  z-index:4;
-}
-.bbPinkBuddy3D .head .eye{
-  position:absolute;
-  top:48px;
-  width:13px;
-  height:16px;
-  border-radius:50%;
-  background:#2b2230;
-  box-shadow:inset 3px 3px 0 rgba(255,255,255,.55);
-}
-.bbPinkBuddy3D .head .eye.left{left:36px}
-.bbPinkBuddy3D .head .eye.right{right:36px}
-.bbPinkBuddy3D .head .muzzle{
-  position:absolute;
-  left:41px;
-  top:65px;
-  width:49px;
-  height:35px;
-  border-radius:50%;
-  background:#fff0e9;
-}
-.bbPinkBuddy3D .head .nose{
-  position:absolute;
-  left:57px;
-  top:69px;
-  width:18px;
-  height:13px;
-  border-radius:50% 50% 55% 55%;
-  background:#40303b;
-  z-index:2;
-}
-.bbPinkBuddy3D .head .mouth{
-  position:absolute;
-  left:58px;
-  top:81px;
-  width:17px;
-  height:9px;
-  border-bottom:3px solid #5d384a;
-  border-radius:0 0 15px 15px;
-  z-index:2;
-}
-.bbPinkBuddy3D .head .blush{
-  position:absolute;
-  top:72px;
-  width:19px;
-  height:10px;
-  border-radius:50%;
-  background:rgba(255,108,154,.45);
-}
-.bbPinkBuddy3D .head .blush.left{left:15px}
-.bbPinkBuddy3D .head .blush.right{right:15px}
-
-.bbPinkBuddy3D .body{
-  position:absolute;
-  left:57px;
-  top:117px;
-  width:101px;
-  height:82px;
-  border-radius:48% 48% 42% 42%;
-  background:linear-gradient(145deg,#f9aed0,#df679f);
-  box-shadow:
-    inset 9px 8px 10px rgba(255,255,255,.32),
-    inset -8px -10px 11px rgba(140,39,87,.12);
-  z-index:2;
-}
-
-.bbPinkBuddy3D .arm,
-.bbPinkBuddy3D .leg{
-  position:absolute;
-  background:linear-gradient(145deg,#f7a6c9,#d96198);
-  box-shadow:inset 5px 5px 7px rgba(255,255,255,.26);
-}
-.bbPinkBuddy3D .arm{
-  top:124px;
-  width:43px;
-  height:67px;
-  border-radius:28px;
-  z-index:1;
-}
-.bbPinkBuddy3D .arm.left{left:31px;transform:rotate(15deg)}
-.bbPinkBuddy3D .arm.right{right:31px;transform:rotate(-15deg)}
-.bbPinkBuddy3D .leg{
-  bottom:3px;
-  width:55px;
-  height:44px;
-  border-radius:50%;
-  z-index:3;
-}
-.bbPinkBuddy3D .leg.left{left:44px}
-.bbPinkBuddy3D .leg.right{right:44px}
-
-.bbPinkBuddy3D .heart{
-  position:absolute;
-  left:87px;
-  top:142px;
-  width:42px;
-  height:38px;
-  transform:rotate(45deg);
-  border-radius:10px 0 12px 0;
-  background:linear-gradient(145deg,#8e72f0,#6f51d3);
-  z-index:5;
-  box-shadow:inset 4px 4px 5px rgba(255,255,255,.32),0 6px 10px rgba(69,40,120,.18);
-}
-.bbPinkBuddy3D .heart::before,
-.bbPinkBuddy3D .heart::after{
-  content:"";
-  position:absolute;
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  background:inherit;
-}
-.bbPinkBuddy3D .heart::before{left:-21px;top:0}
-.bbPinkBuddy3D .heart::after{left:0;top:-21px}
-
+/* v86.6: old CSS-drawn Home Buddy removed */
 @media(max-width:900px){
   .bbHomeInventoryTop{
     grid-template-columns:1fr;
@@ -5927,10 +5770,7 @@ body.bbHeroUsesBear.bbHeroBearHasImage #bbEquippedHeroCharacterImg{
     width:230px;
     height:205px;
   }
-  .bbPinkBuddy3D{
-    transform:scale(.88);
   }
-}
 
 @media(max-width:640px){
   .bbHomeInventoryPanel{
@@ -5965,10 +5805,7 @@ body.bbHeroUsesBear.bbHeroBearHasImage #bbEquippedHeroCharacterImg{
     width:205px;
     height:185px;
   }
-  .bbPinkBuddy3D{
-    transform:scale(.78);
   }
-}
 
 
 /* =========================================================
@@ -9195,9 +9032,6 @@ body.bbCosThemeCandy .bbHeroCard{
   width:195px!important;
   height:180px!important;
 }
-.bbPinkBuddy3D{
-  transform:scale(.72)!important;
-}
 body.bbCosEffectSparkle .bbHeroCard::after{
   opacity:.55!important;
   font-size:.85rem!important;
@@ -9529,9 +9363,6 @@ body.bbCreateRoomOpen > #bbCreateBackdrop:not(.hidden){
     width:118px!important;
     height:112px!important;
   }
-  .bbPinkBuddy3D{
-    transform:scale(.46)!important;
-  }
   .bbPlayerCard{
     min-height:66px!important;
     padding:7px!important;
@@ -9688,7 +9519,6 @@ body.bbCreateRoomOpen > #bbCreateBackdrop:not(.hidden){
 
 /* Decorative elements that remain are fully static. */
 .bbCandyHomeScreen .brainBody,
-.bbCandyHomeScreen .bbPinkBuddy3D,
 .bbCandyHomeScreen .bbEquippedHeroCharacter,
 #bbArena .bbRankedMascot,
 #bbArena .bbRMBrain{
@@ -9976,9 +9806,7 @@ body.bbCosEffectSparkle{
 .bbBuddyAccessoryLayer{z-index:40!important}
 .bbBuddyHatLayer{z-index:50!important}
 .bbBuddyEffectLayer{z-index:60!important}
-.bbBuddyLayer.hidden,.bbBuddyBaseImage:not([src]){display:none!important}
-#bbPinkBuddy3D{z-index:9!important}
-
+.bbBuddyLayer.hidden,.bbBuddyBaseImage.hidden{display:none!important}
 .bbHomeCollectionSlot .art.outfit{
   display:grid!important;
   place-items:center!important;
@@ -10133,66 +9961,7 @@ body.bbCosEffectSparkle{
 .bbClosetLayer.effect{z-index:60}
 .bbClosetLayer.hidden{display:none}
 
-.bbClosetPinkBuddy{
-  position:relative;
-  width:190px;height:220px;
-  z-index:9;
-  filter:drop-shadow(0 13px 13px rgba(89,50,85,.16))
-}
-.bbBuddyRender.small .bbClosetPinkBuddy{transform:scale(.70)}
-.bbClosetPinkBuddy .ear{
-  position:absolute;top:22px;width:60px;height:60px;border-radius:50%;
-  background:linear-gradient(145deg,#ffb9d5,#ef7dac);
-  border:5px solid #f58db7
-}
-.bbClosetPinkBuddy .ear::after{
-  content:"";position:absolute;inset:11px;border-radius:50%;background:#ffd8e7
-}
-.bbClosetPinkBuddy .ear.left{left:18px}.bbClosetPinkBuddy .ear.right{right:18px}
-.bbClosetPinkBuddy .head{
-  position:absolute;left:30px;top:38px;width:130px;height:116px;border-radius:48% 48% 45% 45%;
-  background:linear-gradient(145deg,#ffc5dc,#ee87b0);
-  border:5px solid #f18ab4;z-index:3
-}
-.bbClosetPinkBuddy .eye{
-  position:absolute;top:43px;width:10px;height:15px;border-radius:50%;background:#4b324c
-}
-.bbClosetPinkBuddy .eye.left{left:36px}.bbClosetPinkBuddy .eye.right{right:36px}
-.bbClosetPinkBuddy .muzzle{
-  position:absolute;left:50%;top:60px;transform:translateX(-50%);
-  width:54px;height:42px;border-radius:48%;background:#ffe9f0
-}
-.bbClosetPinkBuddy .nose{
-  position:absolute;left:50%;top:66px;transform:translateX(-50%);
-  width:13px;height:10px;border-radius:50%;background:#73485e;z-index:4
-}
-.bbClosetPinkBuddy .mouth{
-  position:absolute;left:50%;top:77px;transform:translateX(-50%);
-  width:20px;height:10px;border-bottom:3px solid #89526e;border-radius:50%;z-index:4
-}
-.bbClosetPinkBuddy .blush{
-  position:absolute;top:66px;width:20px;height:9px;border-radius:50%;background:rgba(255,107,153,.38)
-}
-.bbClosetPinkBuddy .blush.left{left:16px}.bbClosetPinkBuddy .blush.right{right:16px}
-.bbClosetPinkBuddy .body{
-  position:absolute;left:47px;top:135px;width:96px;height:76px;border-radius:46% 46% 40% 40%;
-  background:linear-gradient(145deg,#ffbad3,#ed80aa);border:5px solid #ef89b1
-}
-.bbClosetPinkBuddy .arm{
-  position:absolute;top:143px;width:35px;height:70px;border-radius:40px;background:#f296bb;z-index:1
-}
-.bbClosetPinkBuddy .arm.left{left:28px;transform:rotate(16deg)}
-.bbClosetPinkBuddy .arm.right{right:28px;transform:rotate(-16deg)}
-.bbClosetPinkBuddy .leg{
-  position:absolute;top:187px;width:39px;height:37px;border-radius:50%;background:#ee86ae
-}
-.bbClosetPinkBuddy .leg.left{left:49px}.bbClosetPinkBuddy .leg.right{right:49px}
-.bbClosetPinkBuddy .heart{
-  position:absolute;left:50%;top:154px;transform:translateX(-50%);z-index:5;
-  width:25px;height:22px;
-}
-.bbClosetPinkBuddy .heart::before{content:"♥";color:#fff;font-size:25px}
-
+/* v86.6: old CSS-drawn Closet/Shop Buddy removed */
 .bbBuddyStageLabel{
   position:absolute;left:14px;right:14px;bottom:13px;z-index:5;
   display:flex;justify-content:space-between;align-items:center;gap:10px;
@@ -10361,7 +10130,6 @@ body.bbCosEffectSparkle{
   .bbClosetPreviewCard,.bbClosetInventory{padding:12px;border-radius:22px}
   .bbBuddyStage{min-height:285px}
   .bbBuddyRender{width:245px;height:245px}
-  .bbClosetPinkBuddy{transform:scale(.86)}
   .bbLoadoutSlots{grid-template-columns:repeat(4,minmax(0,1fr))}
   .bbClosetGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .bbShopV2Hero{grid-template-columns:1fr;padding:18px;border-radius:23px}
@@ -10832,8 +10600,6 @@ body.bbAccountModalOpen{
 #bbHomeBuddyAccessory{z-index:40!important}
 #bbHomeBuddyHat{z-index:50!important}
 #bbHomeBuddyEffect{z-index:60!important}
-#bbPinkBuddy3D{z-index:9!important}
-
 /* CLOSET */
 .bbBuddyStage{
   position:relative!important;
@@ -11034,6 +10800,58 @@ img[src*="/assets/buddy/"]{
 
 #bbEquippedHeroCharacter{
   overflow:hidden!important;
+}
+
+
+/* ==========================================================
+   Brain Buddy v86.6 — CLEAN BUDDY CORE
+   Only the real PNG Buddy is used as the visual character base.
+   ========================================================== */
+
+#bbEquippedHeroCharacter{
+  display:grid!important;
+  place-items:center!important;
+  overflow:hidden!important;
+}
+
+#bbEquippedHeroCharacterImg{
+  display:block!important;
+  background-size:contain!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+}
+
+/* Real Pink Buddy replaces the old brown CSS avatar. */
+.bbPlayerCard .avatarBear{
+  overflow:hidden!important;
+  background-size:contain!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  background-color:rgba(255,255,255,.18)!important;
+}
+
+.bbPlayerCard .avatarBear::before,
+.bbPlayerCard .avatarBear::after{
+  display:none!important;
+}
+
+/* Retired fallback hook cannot accidentally appear. */
+[data-buddy-css-default]{
+  display:none!important;
+}
+
+/* Canonical character layers */
+#bbClosetBuddyRender .bbClosetLayer.character,
+#bbShopBuddyRender .bbClosetLayer.character{
+  display:block;
+  background-size:contain!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+}
+
+#bbEquippedHeroCharacterImg:not(.hidden){
+  opacity:1!important;
+  visibility:visible!important;
 }
 
 </style>
@@ -11700,25 +11518,7 @@ try{
           <span class="bbBuddyLayer bbBuddyAccessoryLayer hidden" id="bbHomeBuddyAccessory" role="img" aria-label=""></span>
           <span class="bbBuddyLayer bbBuddyHatLayer hidden" id="bbHomeBuddyHat" role="img" aria-label=""></span>
           <span class="bbBuddyLayer bbBuddyEffectLayer hidden" id="bbHomeBuddyEffect" role="img" aria-label=""></span>
-          <div class="bbPinkBuddy3D" id="bbPinkBuddy3D">
-            <span class="ear left"></span>
-            <span class="ear right"></span>
-            <span class="head">
-              <i class="eye left"></i>
-              <i class="eye right"></i>
-              <i class="muzzle"></i>
-              <i class="nose"></i>
-              <i class="mouth"></i>
-              <i class="blush left"></i>
-              <i class="blush right"></i>
-            </span>
-            <span class="body"></span>
-            <span class="arm left"></span>
-            <span class="arm right"></span>
-            <span class="leg left"></span>
-            <span class="leg right"></span>
-            <span class="heart"></span>
-          </div>
+          
         </div>
 
         <i class="spark a"></i><i class="spark b"></i><i class="spark c"></i>
@@ -12011,18 +11811,7 @@ try{
       <div class="bbBuddyStage">
         <div class="bbBuddyStageGlow"></div>
         <div class="bbBuddyRender" id="bbClosetBuddyRender">
-          <div class="bbClosetPinkBuddy" data-buddy-css-default>
-            <span class="ear left"></span><span class="ear right"></span>
-            <span class="head">
-              <i class="eye left"></i><i class="eye right"></i>
-              <i class="muzzle"></i><i class="nose"></i><i class="mouth"></i>
-              <i class="blush left"></i><i class="blush right"></i>
-            </span>
-            <span class="body"></span>
-            <span class="arm left"></span><span class="arm right"></span>
-            <span class="leg left"></span><span class="leg right"></span>
-            <span class="heart"></span>
-          </div>
+          
           <span class="bbClosetLayer character hidden" data-buddy-preview-layer="character" role="img" aria-label=""></span>
           <span class="bbClosetLayer skin hidden" data-buddy-preview-layer="skin" role="img" aria-label=""></span>
           <span class="bbClosetLayer outfit hidden" data-buddy-preview-layer="outfit" role="img" aria-label=""></span>
@@ -12109,18 +11898,7 @@ try{
 
     <div class="bbShopPreviewMini">
       <div class="bbBuddyRender small" id="bbShopBuddyRender">
-        <div class="bbClosetPinkBuddy" data-buddy-css-default>
-          <span class="ear left"></span><span class="ear right"></span>
-          <span class="head">
-            <i class="eye left"></i><i class="eye right"></i>
-            <i class="muzzle"></i><i class="nose"></i><i class="mouth"></i>
-            <i class="blush left"></i><i class="blush right"></i>
-          </span>
-          <span class="body"></span>
-          <span class="arm left"></span><span class="arm right"></span>
-          <span class="leg left"></span><span class="leg right"></span>
-          <span class="heart"></span>
-        </div>
+        
         <span class="bbClosetLayer character hidden" data-buddy-preview-layer="character" role="img" aria-label=""></span>
         <span class="bbClosetLayer skin hidden" data-buddy-preview-layer="skin" role="img" aria-label=""></span>
         <span class="bbClosetLayer outfit hidden" data-buddy-preview-layer="outfit" role="img" aria-label=""></span>
@@ -21577,19 +21355,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  const BB_DEFAULT_BUDDY_ASSET="/assets/buddy/default-pink-buddy.png";
+
+  function displayCharacterItem(){
+    const character=loadoutItem("character");
+    const src=assetOf(character)||BB_DEFAULT_BUDDY_ASSET;
+
+    return {
+      ...(character||{}),
+      name:character?.name||"Pink Buddy",
+      asset_url:src
+    };
+  }
+
   function renderBuddyInto(root){
     if(!root)return;
 
-    const character=loadoutItem("character");
-    const charAsset=assetOf(character);
-    const cssDefault=q("[data-buddy-css-default]",root);
-
+    const character=displayCharacterItem();
     const characterLayer=q('[data-buddy-preview-layer="character"]',root);
     if(characterLayer)renderImageLayer(characterLayer,character);
-
-    if(cssDefault){
-      cssDefault.classList.toggle("hidden",!!charAsset);
-    }
 
     ["skin","outfit","accessory","hat","effect"].forEach(slot=>{
       renderImageLayer(q(`[data-buddy-preview-layer="${slot}"]`,root),loadoutItem(slot));
@@ -21598,17 +21382,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderHomeBuddy(){
     const hero=q("#bbEquippedHeroCharacter");
-    const pink=q("#bbPinkBuddy3D");
     const base=q("#bbEquippedHeroCharacterImg");
     if(hero)hero.classList.remove("hidden");
     q("#bbDefaultHeroMascot")?.classList.add("hidden");
 
-    const character=loadoutItem("character");
+    const character=displayCharacterItem();
     const charAsset=assetOf(character);
 
     renderImageLayer(base,character);
-
-    pink?.classList.toggle("hidden",!!charAsset);
 
     const homeMap={
       skin:"#bbHomeBuddySkin",
@@ -21634,9 +21415,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const navAvatar=q("#navAvatar");
     const appAvatar=q("#bbAppAvatar");
-    window.__bbActiveBuddyAsset=charAsset||"";
+    const playerAvatar=q(".bbPlayerCard .avatarBear");
+    window.__bbActiveBuddyAsset=charAsset||BB_DEFAULT_BUDDY_ASSET;
 
-    [navAvatar,appAvatar].filter(Boolean).forEach(avatar=>{
+    [navAvatar,appAvatar,playerAvatar].filter(Boolean).forEach(avatar=>{
       avatar.querySelectorAll("img").forEach(img=>img.remove());
 
       if(charAsset){
@@ -21648,9 +21430,12 @@ document.addEventListener('DOMContentLoaded', () => {
         avatar.style.backgroundRepeat="no-repeat";
         avatar.dataset.bbShopAvatar="1";
       }else{
-        avatar.style.backgroundImage="";
-        avatar.textContent="🧸";
-        delete avatar.dataset.bbShopAvatar;
+        avatar.textContent="";
+        avatar.style.backgroundImage=`url("${BB_DEFAULT_BUDDY_ASSET}")`;
+        avatar.style.backgroundSize="contain";
+        avatar.style.backgroundPosition="center";
+        avatar.style.backgroundRepeat="no-repeat";
+        avatar.dataset.bbShopAvatar="1";
       }
     });
   }
@@ -22441,6 +22226,67 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   window.bbQuarantineLooseBuddyImages=quarantineLooseBuddyImages;
+})();
+</script>
+
+
+<script>
+/* ==========================================================
+   Brain Buddy v86.6 — Default Buddy safety
+   ========================================================== */
+(function bbV866DefaultBuddySafety(){
+  const DEFAULT="/assets/buddy/default-pink-buddy.png";
+
+  function setBackground(el,src=DEFAULT){
+    if(!el)return;
+    const safe=String(src||DEFAULT).replace(/["\n\r]/g,"");
+    el.style.backgroundImage=`url("${safe}")`;
+    el.style.backgroundSize="contain";
+    el.style.backgroundPosition="center";
+    el.style.backgroundRepeat="no-repeat";
+  }
+
+  function ensureDefaultBuddy(){
+    const base=document.getElementById("bbEquippedHeroCharacterImg");
+    const host=document.getElementById("bbEquippedHeroCharacter");
+
+    if(base){
+      if(!base.style.backgroundImage || base.style.backgroundImage==="none"){
+        setBackground(base,window.__bbActiveBuddyAsset||DEFAULT);
+      }
+      base.classList.remove("hidden");
+    }
+
+    host?.classList.remove("hidden");
+
+    const active=window.__bbActiveBuddyAsset||DEFAULT;
+
+    document.querySelectorAll(
+      "#navAvatar,#bbAppAvatar,.bbPlayerCard .avatarBear"
+    ).forEach(avatar=>{
+      avatar.querySelectorAll("img").forEach(img=>img.remove());
+      avatar.textContent="";
+      setBackground(avatar,active);
+      avatar.dataset.bbShopAvatar="1";
+    });
+  }
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",ensureDefaultBuddy,{once:true});
+  }else{
+    ensureDefaultBuddy();
+  }
+
+  window.addEventListener("load",ensureDefaultBuddy,{once:true});
+  window.addEventListener("pageshow",ensureDefaultBuddy);
+
+  document.addEventListener("click",e=>{
+    if(e.target.closest('[data-app-go="home"],#bbV55AccountBtn,[data-app-action="profile"]')){
+      requestAnimationFrame(ensureDefaultBuddy);
+    }
+  },true);
+
+  window.bbEnsureDefaultBuddy=ensureDefaultBuddy;
 })();
 </script>
 
