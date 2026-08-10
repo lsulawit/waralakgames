@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#765fda">
 <meta name="author" content="Sulawit Songsang">
-<title>Brain Buddy • Admin Center</title>
+<title>Brain Buddy • Admin Center v66</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{box-sizing:border-box}
@@ -269,6 +269,121 @@ button{cursor:pointer}
   .formGrid.three,.formGrid.two{grid-template-columns:1fr}.mediaPreview{grid-template-columns:1fr}
   .editorActions{display:grid;grid-template-columns:1fr 1fr}.editorActions button{min-width:0}
 }
+
+/* HSK library */
+.hskOverview{
+  display:grid;
+  grid-template-columns:190px 190px minmax(0,1fr);
+  gap:9px;
+  margin-bottom:12px
+}
+.hskOverview article{
+  min-height:92px;
+  padding:13px;
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:linear-gradient(145deg,#fff,#faf6fd);
+  border:1px solid #eee4f0
+}
+.hskOverview article.wide{
+  display:block;
+  padding:13px 15px
+}
+.hskOverviewIcon{
+  width:48px;height:48px;flex:0 0 48px;border-radius:16px;
+  display:grid;place-items:center;color:#fff;font-size:1.15rem;font-weight:1000;
+  background:linear-gradient(145deg,#ff8db8,#dc5b99);
+  box-shadow:inset 0 4px 5px rgba(255,255,255,.25),0 8px 13px rgba(105,52,97,.12)
+}
+.hskOverviewIcon.active{background:linear-gradient(145deg,#65d3aa,#41a97e)}
+.hskOverview article>div:not(.hskImportState){display:flex;flex-direction:column}
+.hskOverview small{color:#917d98;font-size:10px;font-weight:850}
+.hskOverview strong{color:#5d4371;font-size:1.35rem;font-weight:1000;line-height:1.05}
+.hskOverview em{color:#9a879f;font-size:9px;font-style:normal}
+.hskImportState{display:flex;flex-direction:column}
+.hskImportState small{letter-spacing:.12em;color:#a16fa3;font-weight:1000}
+.hskImportState strong{margin-top:2px;font-size:1rem}
+.hskImportState em{margin-top:2px}
+.hskImportProgress{
+  height:9px;margin-top:10px;border-radius:999px;overflow:hidden;background:#eee7f2
+}
+.hskImportProgress i{
+  display:block;width:0;height:100%;border-radius:inherit;
+  background:linear-gradient(90deg,#6edbb9,#ffd764,#ef78ac);
+  transition:width .25s ease
+}
+
+.hskLevelList{display:grid;gap:8px}
+.hskLevelRow{
+  display:grid;
+  grid-template-columns:125px minmax(0,1fr) 145px;
+  align-items:center;
+  gap:12px;
+  padding:11px;
+  border-radius:19px;
+  border:1px solid #eee5f0;
+  background:#fff
+}
+.hskLevelBadge{
+  min-height:64px;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  color:#fff;background:linear-gradient(145deg,#8773e7,#b06ed9);
+  box-shadow:inset 0 4px 5px rgba(255,255,255,.18)
+}
+.hskLevelBadge b{font-size:.9rem;font-weight:1000}
+.hskLevelBadge small{font-size:.58rem;color:#eee9ff;font-weight:850}
+.hskLevelInfo{min-width:0}
+.hskLevelInfo>small{display:block;color:#99869e;font-size:9px;font-weight:850}
+.hskLevelInfo>strong{display:block;color:#5e4472;font-size:1rem;font-weight:1000}
+.hskLevelInfo>div{
+  height:7px;margin-top:6px;border-radius:999px;overflow:hidden;background:#f0e9f3
+}
+.hskLevelInfo i{
+  display:block;width:0;height:100%;border-radius:inherit;
+  background:linear-gradient(90deg,#7860dc,#e06eac)
+}
+.hskLevelImportBtn{
+  min-height:42px;
+  color:#7257a8;
+  background:#f1ebfa
+}
+.hskLevelImportBtn:disabled,
+#hskImportAllBtn:disabled{
+  opacity:.55;cursor:wait
+}
+.hskSourceNote{
+  margin-top:12px;padding:11px 13px;border-radius:17px;
+  display:flex;align-items:center;gap:10px;
+  background:linear-gradient(145deg,#f2efff,#fff2f8);
+  border:1px solid #e8def1
+}
+.hskSourceNote>span{
+  width:43px;height:35px;border-radius:11px;display:grid;place-items:center;
+  color:#fff;background:linear-gradient(145deg,#6fcfec,#7b68dc);
+  font-size:9px;font-weight:1000
+}
+.hskSourceNote div{display:flex;flex-direction:column}
+.hskSourceNote b{color:#5f4775;font-size:11px}
+.hskSourceNote small{color:#8c7a94;font-size:9px}
+
+@media(max-width:800px){
+  .hskOverview{grid-template-columns:1fr 1fr}
+  .hskOverview article.wide{grid-column:1/-1}
+  .hskLevelRow{grid-template-columns:100px minmax(0,1fr) 125px}
+}
+@media(max-width:560px){
+  .hskOverview{grid-template-columns:1fr 1fr}
+  .hskLevelRow{
+    grid-template-columns:83px minmax(0,1fr);
+    gap:8px
+  }
+  .hskLevelRow .hskLevelImportBtn{
+    grid-column:1/-1;width:100%
+  }
+  .hskLevelBadge{min-height:57px}
+}
+
 </style>
 </head>
 <body>
@@ -281,6 +396,7 @@ button{cursor:pointer}
     <div class="adminTabs" id="adminTabs">
       <button class="active" data-admin-panel="bears">จัดการหมี</button>
       <button data-admin-panel="learning">คำศัพท์ / โจทย์</button>
+      <button data-admin-panel="hsk">HSK 1–6</button>
     </div>
     <a class="back" href="/">← กลับหน้าเกม</a>
   </div>
@@ -293,7 +409,7 @@ button{cursor:pointer}
       <div>
         <span class="status">ADMIN CONTROL CENTER</span>
         <h1>ศูนย์จัดการ Brain Buddy</h1>
-        <p>จัดการตัวหมีในเกม และเพิ่มคำศัพท์/โจทย์ภาษาจีน ภาษาอังกฤษ และคณิตศาสตร์จากหน้าเดียว</p>
+        <p>จัดการตัวหมี คำศัพท์ โจทย์ และคลัง HSK 1–6 จากหน้าเดียว</p>
       </div>
       <div class="heroArt"><span class="brain"></span><span class="bear"></span><span class="book"></span></div>
     </div>
@@ -440,6 +556,110 @@ button{cursor:pointer}
             <button type="submit" class="save" id="saveLearnBtn">บันทึกเนื้อหา</button>
           </div>
         </form>
+      </div>
+
+    </section>
+
+    <!-- HSK 1-6 -->
+    <section class="adminPanel" id="panel-hsk">
+      <div class="toolbar">
+        <div>
+          <h2>คลังคำศัพท์ HSK 1–6</h2>
+          <p>นำเข้าคำศัพท์เข้าสู่ฐานข้อมูล Brain Buddy และตรวจจำนวนคำในแต่ละระดับ</p>
+        </div>
+        <div class="actions">
+          <button class="btn" id="hskReloadBtn">รีเฟรชจำนวนคำ</button>
+          <button class="btn primary" id="hskImportAllBtn">นำเข้า HSK 1–6 ทั้งหมด</button>
+        </div>
+      </div>
+
+      <div class="hskOverview">
+        <article>
+          <span class="hskOverviewIcon">中</span>
+          <div><small>คำศัพท์ในฐานข้อมูล</small><strong id="hskDbTotal">0</strong><em>คำ</em></div>
+        </article>
+        <article>
+          <span class="hskOverviewIcon active">✓</span>
+          <div><small>เปิดใช้งาน</small><strong id="hskDbActive">0</strong><em>คำ</em></div>
+        </article>
+        <article class="wide">
+          <div class="hskImportState">
+            <small>IMPORT STATUS</small>
+            <strong id="hskImportStatus">พร้อมนำเข้า</strong>
+            <em id="hskImportDetail">เลือกนำเข้าทั้งหมดหรือทีละระดับได้</em>
+          </div>
+          <div class="hskImportProgress"><i id="hskImportProgressBar"></i></div>
+        </article>
+      </div>
+
+      <div class="hskLevelList" id="hskLevelList">
+        <article class="hskLevelRow" data-hsk-admin-level="1">
+          <div class="hskLevelBadge"><b>HSK 1</b><small>150 คำ</small></div>
+          <div class="hskLevelInfo">
+            <small>คำสะสมในฐานข้อมูล</small>
+            <strong><span data-hsk-db-count="1">0</span> / 150</strong>
+            <div><i data-hsk-row-progress="1"></i></div>
+          </div>
+          <button class="btn hskLevelImportBtn" data-hsk-import-level="1">นำเข้า HSK 1</button>
+        </article>
+
+        <article class="hskLevelRow" data-hsk-admin-level="2">
+          <div class="hskLevelBadge"><b>HSK 2</b><small>300 คำ</small></div>
+          <div class="hskLevelInfo">
+            <small>คำสะสมในฐานข้อมูล</small>
+            <strong><span data-hsk-db-count="2">0</span> / 300</strong>
+            <div><i data-hsk-row-progress="2"></i></div>
+          </div>
+          <button class="btn hskLevelImportBtn" data-hsk-import-level="2">นำเข้า HSK 2</button>
+        </article>
+
+        <article class="hskLevelRow" data-hsk-admin-level="3">
+          <div class="hskLevelBadge"><b>HSK 3</b><small>600 คำ</small></div>
+          <div class="hskLevelInfo">
+            <small>คำสะสมในฐานข้อมูล</small>
+            <strong><span data-hsk-db-count="3">0</span> / 600</strong>
+            <div><i data-hsk-row-progress="3"></i></div>
+          </div>
+          <button class="btn hskLevelImportBtn" data-hsk-import-level="3">นำเข้า HSK 3</button>
+        </article>
+
+        <article class="hskLevelRow" data-hsk-admin-level="4">
+          <div class="hskLevelBadge"><b>HSK 4</b><small>1,200 คำ</small></div>
+          <div class="hskLevelInfo">
+            <small>คำสะสมในฐานข้อมูล</small>
+            <strong><span data-hsk-db-count="4">0</span> / 1,200</strong>
+            <div><i data-hsk-row-progress="4"></i></div>
+          </div>
+          <button class="btn hskLevelImportBtn" data-hsk-import-level="4">นำเข้า HSK 4</button>
+        </article>
+
+        <article class="hskLevelRow" data-hsk-admin-level="5">
+          <div class="hskLevelBadge"><b>HSK 5</b><small>2,500 คำ</small></div>
+          <div class="hskLevelInfo">
+            <small>คำสะสมในฐานข้อมูล</small>
+            <strong><span data-hsk-db-count="5">0</span> / 2,500</strong>
+            <div><i data-hsk-row-progress="5"></i></div>
+          </div>
+          <button class="btn hskLevelImportBtn" data-hsk-import-level="5">นำเข้า HSK 5</button>
+        </article>
+
+        <article class="hskLevelRow" data-hsk-admin-level="6">
+          <div class="hskLevelBadge"><b>HSK 6</b><small>5,000 คำ</small></div>
+          <div class="hskLevelInfo">
+            <small>คำสะสมในฐานข้อมูล</small>
+            <strong><span data-hsk-db-count="6">0</span> / 5,000</strong>
+            <div><i data-hsk-row-progress="6"></i></div>
+          </div>
+          <button class="btn hskLevelImportBtn" data-hsk-import-level="6">นำเข้า HSK 6</button>
+        </article>
+      </div>
+
+      <div class="hskSourceNote">
+        <span>DATA</span>
+        <div>
+          <b>HSK 2.0 • Levels 1–6</b>
+          <small>นำเข้า Hanzi, Traditional, Pinyin และความหมายภาษาอังกฤษเข้าสู่คลัง Brain Buddy</small>
+        </div>
       </div>
     </section>
   </div>
@@ -613,7 +833,9 @@ function openPanel(name){
  document.querySelectorAll("[data-admin-panel]").forEach(b=>b.classList.toggle("active",b.dataset.adminPanel===name));
  $("#panel-bears").classList.toggle("active",name==="bears");
  $("#panel-learning").classList.toggle("active",name==="learning");
+ $("#panel-hsk").classList.toggle("active",name==="hsk");
  if(name==="learning")loadLearning();
+ if(name==="hsk")loadHSKAdminStats();
 }
 document.querySelectorAll("[data-admin-panel]").forEach(b=>b.onclick=()=>openPanel(b.dataset.adminPanel));
 
@@ -719,6 +941,196 @@ async function doDelete(){
  if(error){toast(error.message);return}$("#deleteModal").classList.add("hidden");deleteItem=null;toast("ลบเนื้อหาแล้ว");await loadLearning();
 }
 
+
+/* ---------------- HSK 1-6 database importer ---------------- */
+const HSK_TARGET={1:150,2:300,3:600,4:1200,5:2500,6:5000};
+const HSK_SOURCE_BASE="https://raw.githubusercontent.com/drkameleon/complete-hsk-vocabulary/main/wordlists/inclusive/old";
+let hskImportBusy=false;
+
+function hskSetStatus(title,detail="",percent=null){
+ const a=$("#hskImportStatus"),b=$("#hskImportDetail"),bar=$("#hskImportProgressBar");
+ if(a)a.textContent=title;
+ if(b)b.textContent=detail;
+ if(bar&&percent!==null)bar.style.width=Math.max(0,Math.min(100,percent))+"%";
+}
+
+function hskButtonsBusy(busy){
+ hskImportBusy=busy;
+ const all=$("#hskImportAllBtn");if(all)all.disabled=busy;
+ document.querySelectorAll("[data-hsk-import-level]").forEach(btn=>btn.disabled=busy);
+}
+
+function hskParseSourceEntry(entry,level,index){
+ const forms=Array.isArray(entry?.forms)?entry.forms:[];
+ const form=forms.find(f=>f?.transcriptions?.pinyin&&Array.isArray(f?.meanings)&&f.meanings.length)
+   || forms.find(f=>f?.transcriptions?.pinyin)
+   || forms[0]
+   || {};
+ const pinyin=String(form?.transcriptions?.pinyin||"").trim();
+ const meanings=Array.isArray(form?.meanings)?form.meanings.filter(Boolean):[];
+ const meaning=String(meanings[0]||"").trim();
+ const simplified=String(entry?.simplified||"").trim();
+ const traditional=String(form?.traditional||"").trim();
+
+ if(!simplified||!pinyin||!meaning)return null;
+
+ return {
+   hsk_level:Number(level),
+   simplified,
+   traditional:traditional||null,
+   pinyin,
+   meaning_en:meaning
+ };
+}
+
+async function hskFetchInclusive(level){
+ const r=await fetch(`${HSK_SOURCE_BASE}/${level}.json`,{cache:"no-store"});
+ if(!r.ok)throw new Error(`โหลด HSK ${level} ไม่สำเร็จ (${r.status})`);
+ const data=await r.json();
+ if(!Array.isArray(data))throw new Error(`ข้อมูล HSK ${level} ไม่ถูกต้อง`);
+ return data;
+}
+
+async function hskFetchExclusiveLevels(maxLevel){
+ const rows=[];
+ const seen=new Set();
+
+ for(let level=1;level<=maxLevel;level++){
+   hskSetStatus(
+     `กำลังเตรียม HSK ${level}`,
+     `กำลังดาวน์โหลดรายการคำศัพท์ระดับ ${level}`,
+     ((level-1)/Math.max(1,maxLevel))*25
+   );
+
+   const data=await hskFetchInclusive(level);
+
+   for(let i=0;i<data.length;i++){
+     const row=hskParseSourceEntry(data[i],level,i+1);
+     if(!row)continue;
+
+     // The inclusive list contains all previous levels.
+     // Assign the word to the first level where it appears.
+     const key=`${row.simplified}\u0000${row.pinyin}`;
+     if(seen.has(key))continue;
+     seen.add(key);
+     rows.push(row);
+   }
+ }
+ return rows;
+}
+
+async function hskImportRows(rows,label){
+ const batchSize=200;
+ let processed=0;
+
+ for(let offset=0;offset<rows.length;offset+=batchSize){
+   const batch=rows.slice(offset,offset+batchSize);
+   const {data,error}=await sb.rpc("bb_admin_import_hsk_batch",{p_rows:batch});
+   if(error)throw error;
+
+   processed+=batch.length;
+   const pct=25+(processed/Math.max(1,rows.length))*70;
+   hskSetStatus(
+     `กำลังนำเข้า ${label}`,
+     `${processed.toLocaleString()} / ${rows.length.toLocaleString()} คำ`,
+     pct
+   );
+ }
+ return processed;
+}
+
+async function importHSKToLevel(maxLevel){
+ if(hskImportBusy)return;
+ hskButtonsBusy(true);
+
+ try{
+   const {data:isAdmin,error:adminErr}=await sb.rpc("bb_is_admin");
+   if(adminErr)throw adminErr;
+   if(isAdmin!==true)throw new Error("บัญชีนี้ไม่มีสิทธิ์ Learning Content Admin");
+
+   hskSetStatus("กำลังเริ่มนำเข้า",`HSK 1–${maxLevel}`,2);
+
+   const rows=await hskFetchExclusiveLevels(maxLevel);
+   if(!rows.length)throw new Error("ไม่พบข้อมูลคำศัพท์สำหรับนำเข้า");
+
+   const processed=await hskImportRows(rows,`HSK 1–${maxLevel}`);
+
+   hskSetStatus(
+     "นำเข้าสำเร็จ ✓",
+     `${processed.toLocaleString()} คำถูกประมวลผล`,
+     100
+   );
+
+   toast(`นำเข้า HSK 1–${maxLevel} สำเร็จ`);
+   await loadHSKAdminStats();
+
+ }catch(err){
+   console.error("HSK import:",err);
+   hskSetStatus("นำเข้าไม่สำเร็จ",err?.message||"กรุณาลองใหม่",0);
+   toast(err?.message||"นำเข้า HSK ไม่สำเร็จ");
+ }finally{
+   hskButtonsBusy(false);
+ }
+}
+
+async function loadHSKAdminStats(){
+ const totalEl=$("#hskDbTotal"),activeEl=$("#hskDbActive");
+ if(!totalEl||!activeEl)return;
+
+ try{
+   hskSetStatus(
+     hskImportBusy?"กำลังนำเข้า…":"กำลังตรวจสอบ",
+     "กำลังอ่านจำนวนคำในฐานข้อมูล",
+     hskImportBusy?null:0
+   );
+
+   const {count:total,error:totalErr}=await sb
+     .from("bb_hsk_vocabulary")
+     .select("id",{count:"exact",head:true});
+
+   if(totalErr)throw totalErr;
+
+   const {count:active,error:activeErr}=await sb
+     .from("bb_hsk_vocabulary")
+     .select("id",{count:"exact",head:true})
+     .eq("is_active",true);
+
+   if(activeErr)throw activeErr;
+
+   totalEl.textContent=(total||0).toLocaleString();
+   activeEl.textContent=(active||0).toLocaleString();
+
+   for(let level=1;level<=6;level++){
+     const {count,error}=await sb
+       .from("bb_hsk_vocabulary")
+       .select("id",{count:"exact",head:true})
+       .lte("hsk_level",level);
+
+     if(error)throw error;
+
+     const target=HSK_TARGET[level];
+     const value=count||0;
+     const countEl=document.querySelector(`[data-hsk-db-count="${level}"]`);
+     const progress=document.querySelector(`[data-hsk-row-progress="${level}"]`);
+
+     if(countEl)countEl.textContent=value.toLocaleString();
+     if(progress)progress.style.width=`${Math.min(100,(value/target)*100)}%`;
+   }
+
+   if(!hskImportBusy){
+     hskSetStatus(
+       total>0?"ฐานข้อมูลพร้อมใช้งาน":"ยังไม่มีคำศัพท์",
+       total>0?`${Number(total).toLocaleString()} คำในคลัง Brain Buddy`:"กดนำเข้า HSK 1–6 ทั้งหมดเพื่อเริ่มต้น",
+       total>0?100:0
+     );
+   }
+ }catch(err){
+   console.error("HSK stats:",err);
+   hskSetStatus("อ่านข้อมูลไม่สำเร็จ",err?.message||"กรุณาลองใหม่",0);
+ }
+}
+
+
 /* Events */
 $("#unlockBtn").onclick=unlock;
 $("#adminCode").addEventListener("keydown",e=>{if(e.key==="Enter")unlock()});
@@ -739,6 +1151,18 @@ $("#learnForm").addEventListener("submit",e=>{e.preventDefault();saveLearning()}
 $("#learnReloadBtn").onclick=loadLearning;$("#learnFilterRefresh").onclick=loadLearning;
 $("#learnSubjectFilter").onchange=loadLearning;$("#learnTypeFilter").onchange=loadLearning;$("#learnStatusFilter").onchange=renderLearning;
 $("#learnSearch").addEventListener("input",()=>{clearTimeout(searchTimer);searchTimer=setTimeout(loadLearning,300)});
+
+$("#hskReloadBtn").onclick=loadHSKAdminStats;
+$("#hskImportAllBtn").onclick=()=>{
+ if(confirm("นำเข้าคำศัพท์ HSK 1–6 ทั้งหมดเข้าสู่ฐานข้อมูล Brain Buddy?"))importHSKToLevel(6);
+};
+document.querySelectorAll("[data-hsk-import-level]").forEach(btn=>{
+ btn.addEventListener("click",()=>{
+   const level=Number(btn.dataset.hskImportLevel)||1;
+   if(confirm(`นำเข้าคำศัพท์สะสม HSK 1–${level}?`))importHSKToLevel(level);
+ });
+});
+
 $("#fImage").addEventListener("input",updateMediaPreview);$("#fAudio").addEventListener("input",updateMediaPreview);
 $("#audioPreviewBtn").onclick=()=>{const u=$("#audioPreviewBtn").dataset.url;if(u)new Audio(u).play().catch(()=>toast("เล่นเสียงไม่ได้"))};
 
