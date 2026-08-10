@@ -12497,6 +12497,160 @@ body.bbCandyHome .bbCandyHomeScreen.pomruHomeScreen{
 }
 </style>
 
+
+<style id="pomru-v897-interaction-style">
+/* ============================================================
+   POMRU v89.7 — BUDDY INTERACTION ENGINE
+   Presentation only. No wallet/pet-database mutations here.
+   ============================================================ */
+
+/* Buddy owns a stable interaction layer. */
+.p89PetCenter{overflow:visible!important}
+.p89BuddyStage{
+  transform-origin:center bottom!important;
+  backface-visibility:hidden!important;
+  -webkit-backface-visibility:hidden!important;
+  animation:p897IdleHappy 4.8s ease-in-out infinite!important;
+}
+#bbEquippedHeroCharacter{
+  position:relative!important;
+  touch-action:manipulation!important;
+  user-select:none!important;
+  -webkit-user-select:none!important;
+  cursor:pointer!important;
+  outline:none!important;
+}
+#bbEquippedHeroCharacter:focus-visible{
+  border-radius:42%!important;
+  box-shadow:0 0 0 5px rgba(126,83,232,.22)!important;
+}
+
+/* Mood-specific idle movement. Deliberately subtle to avoid Safari flicker. */
+#pomruPetHome[data-p897-mood="great"] .p89BuddyStage,
+#pomruPetHome[data-p897-mood="happy"] .p89BuddyStage{
+  animation-name:p897IdleHappy!important;
+}
+#pomruPetHome[data-p897-mood="hungry"] .p89BuddyStage{
+  animation-name:p897IdleHungry!important;
+  animation-duration:3.8s!important;
+}
+#pomruPetHome[data-p897-mood="sad"] .p89BuddyStage{
+  animation-name:p897IdleSad!important;
+  animation-duration:5.4s!important;
+}
+#pomruPetHome[data-p897-mood="tired"] .p89BuddyStage{
+  animation-name:p897IdleTired!important;
+  animation-duration:6.2s!important;
+}
+
+@keyframes p897IdleHappy{
+  0%,100%{transform:translate3d(0,0,0) rotate(0deg) scale(1)}
+  50%{transform:translate3d(0,-6px,0) rotate(.25deg) scale(1.012)}
+}
+@keyframes p897IdleHungry{
+  0%,100%{transform:translate3d(0,0,0) rotate(-.35deg) scale(1)}
+  50%{transform:translate3d(0,-3px,0) rotate(.35deg) scale(1.005)}
+}
+@keyframes p897IdleSad{
+  0%,100%{transform:translate3d(0,1px,0) rotate(0) scale(.997)}
+  50%{transform:translate3d(0,-2px,0) rotate(-.2deg) scale(1)}
+}
+@keyframes p897IdleTired{
+  0%,100%{transform:translate3d(0,2px,0) scale(.996)}
+  50%{transform:translate3d(0,-1px,0) scale(1.002)}
+}
+
+/* Tap/reaction animations are applied to the inner character so idle can continue on stage. */
+#bbEquippedHeroCharacter.p897ReactHappy{animation:p897ReactHappy .56s cubic-bezier(.18,.89,.32,1.22) both!important}
+#bbEquippedHeroCharacter.p897ReactHungry{animation:p897ReactHungry .58s ease both!important}
+#bbEquippedHeroCharacter.p897ReactTired{animation:p897ReactTired .64s ease both!important}
+#bbEquippedHeroCharacter.p897ReactSad{animation:p897ReactSad .62s ease both!important}
+#bbEquippedHeroCharacter.p897Curious{animation:p897Curious .72s ease both!important}
+
+@keyframes p897ReactHappy{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  30%{transform:translate3d(0,-18px,0) scale(1.055,.965)}
+  58%{transform:translate3d(0,3px,0) scale(.985,1.025)}
+  78%{transform:translate3d(0,-5px,0) scale(1.015,.99)}
+  100%{transform:translate3d(0,0,0) scale(1)}
+}
+@keyframes p897ReactHungry{
+  0%,100%{transform:translate3d(0,0,0) rotate(0)}
+  25%{transform:translate3d(-7px,0,0) rotate(-1.2deg)}
+  50%{transform:translate3d(7px,0,0) rotate(1.2deg)}
+  75%{transform:translate3d(-3px,0,0) rotate(-.5deg)}
+}
+@keyframes p897ReactTired{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  45%{transform:translate3d(0,4px,0) scale(1.018,.97)}
+  70%{transform:translate3d(0,-2px,0) scale(.994,1.01)}
+}
+@keyframes p897ReactSad{
+  0%,100%{transform:translate3d(0,0,0) rotate(0)}
+  35%{transform:translate3d(0,2px,0) rotate(-1.1deg) scale(.99)}
+  70%{transform:translate3d(0,0,0) rotate(.65deg) scale(1.005)}
+}
+@keyframes p897Curious{
+  0%,100%{transform:translate3d(0,0,0) rotate(0)}
+  35%{transform:translate3d(-3px,-2px,0) rotate(-1.35deg) scale(1.008)}
+  68%{transform:translate3d(3px,-1px,0) rotate(.75deg) scale(1.004)}
+}
+
+/* FX particles are real DOM elements, not a continuously animated background. */
+.p897FxLayer{
+  position:absolute;
+  z-index:30;
+  left:50%;
+  top:50%;
+  width:min(360px,80vw);
+  height:min(410px,52vh);
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+  overflow:visible;
+}
+.p897Particle{
+  position:absolute;
+  left:50%;
+  top:55%;
+  font-size:22px;
+  line-height:1;
+  opacity:0;
+  filter:drop-shadow(0 4px 5px rgba(126,69,100,.16));
+  animation:p897ParticleFly var(--dur,900ms) cubic-bezier(.2,.7,.25,1) forwards;
+}
+@keyframes p897ParticleFly{
+  0%{opacity:0;transform:translate3d(var(--x0,0),0,0) scale(.5) rotate(0deg)}
+  18%{opacity:1}
+  100%{opacity:0;transform:translate3d(var(--x1,0),var(--y1,-110px),0) scale(1.15) rotate(var(--rot,10deg))}
+}
+
+/* Speech reacts as one compact game element. */
+.p89Speech.p897Speaking{animation:p897SpeechPop .28s ease both!important}
+@keyframes p897SpeechPop{
+  0%{opacity:.68;transform:translateY(4px) scale(.96)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+
+/* Small visual cue: the stat most responsible for mood gains emphasis. */
+#pomruPetHome[data-p897-mood="hungry"] .p89Vital.hungry,
+#pomruPetHome[data-p897-mood="tired"] .p89Vital.energy,
+#pomruPetHome[data-p897-mood="sad"] .p89Vital.happy{
+  box-shadow:0 8px 22px rgba(126,83,232,.12),0 0 0 2px rgba(255,119,176,.13)!important;
+}
+
+@media (prefers-reduced-motion:reduce){
+  .p89BuddyStage{animation:none!important}
+  #bbEquippedHeroCharacter.p897ReactHappy,
+  #bbEquippedHeroCharacter.p897ReactHungry,
+  #bbEquippedHeroCharacter.p897ReactTired,
+  #bbEquippedHeroCharacter.p897ReactSad,
+  #bbEquippedHeroCharacter.p897Curious,
+  .p89Speech.p897Speaking,
+  .p897Particle{animation:none!important}
+  .p897Particle{display:none!important}
+}
+</style>
+
 </head>
 <body>
 
@@ -23888,32 +24042,6 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
-<script id="pomru-v895-hero-interaction">
-(function(){
-  'use strict';
-  function bind(){
-    const buddy=document.getElementById('bbEquippedHeroCharacter');
-    if(!buddy || buddy.dataset.p895Bound==='1')return;
-    buddy.dataset.p895Bound='1';
-    const bounce=()=>{
-      buddy.classList.remove('p895Tap');
-      void buddy.offsetWidth;
-      buddy.classList.add('p895Tap');
-      window.setTimeout(()=>buddy.classList.remove('p895Tap'),480);
-    };
-    buddy.addEventListener('pointerup',bounce,{passive:true});
-    buddy.setAttribute('role','button');
-    buddy.setAttribute('tabindex','0');
-    buddy.setAttribute('aria-label','แตะ Pink Buddy');
-    buddy.addEventListener('keydown',(e)=>{
-      if(e.key==='Enter' || e.key===' '){e.preventDefault();bounce();}
-    });
-  }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind,{once:true});
-  else bind();
-  window.addEventListener('pageshow',bind);
-})();
-</script>
 
 
 
@@ -24187,6 +24315,265 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
   else init();
+})();
+</script>
+
+
+<script id="pomru-v897-interaction-engine">
+(function(){
+  'use strict';
+
+  const $=id=>document.getElementById(id);
+  const root=()=>document.getElementById('pomruPetHome');
+  const buddy=()=>document.getElementById('bbEquippedHeroCharacter');
+  const speech=()=>document.getElementById('pomruPetSpeech');
+  const reduced=()=>window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches===true;
+
+  const state={
+    pet:null,
+    mood:'happy',
+    idleTimer:0,
+    speechTimer:0,
+    audioCtx:null,
+    lastTap:0
+  };
+
+  const phrases={
+    great:[
+      ['เย้~ 💕','วันนี้ Buddy ฟิตสุด ๆ ไปเล่นเกมกัน!'],
+      ['แฮปปี้มาก! ✨','อยากอยู่กับเธอทั้งวันเลย'],
+      ['พร้อมลุย! 🎮','วันนี้ต้องเก็บ EXP ให้ได้เยอะ ๆ']
+    ],
+    happy:[
+      ['แฮปปี้~','วันนี้เล่นด้วยกันนะ'],
+      ['ฮึบ! 💗','แตะอีกทีสิ ชอบจัง'],
+      ['ไปกันไหม~','เล่นเกมแล้วเก็บ Coins กัน!']
+    ],
+    hungry:[
+      ['หิวแล้ว~ 🍓','ขอของกินหน่อยน้า'],
+      ['ท้องร้องแล้ว','แวะร้านอาหารให้ Buddy หน่อย'],
+      ['อยากกินของอร่อย','มีสตรอว์เบอร์รีไหมนะ?']
+    ],
+    tired:[
+      ['เริ่มเหนื่อยแล้ว~ ⚡','พักก่อนแล้วค่อยเล่นกันนะ'],
+      ['พลังใกล้หมด','วันนี้ใช้พลังไปเยอะเลย'],
+      ['ง่วงนิด ๆ','ขอพักแป๊บนึงนะ']
+    ],
+    sad:[
+      ['เหงาจัง~ 🥺','มาเล่นด้วยกันหน่อย'],
+      ['ขอกอดหน่อยได้ไหม','แตะ Buddy อีกทีนะ 💗'],
+      ['คิดถึงจัง','เล่นเกมด้วยกันแล้วจะดีขึ้นแน่']
+    ]
+  };
+
+  function number(v,fallback=0){
+    const n=Number(v);
+    return Number.isFinite(n)?n:fallback;
+  }
+
+  function deriveMood(pet){
+    if(!pet)return 'happy';
+    const hunger=number(pet.hunger,100);
+    const happiness=number(pet.happiness,100);
+    const energy=number(pet.energy,100);
+    if(hunger<=30)return 'hungry';
+    if(energy<=25)return 'tired';
+    if(happiness<=30)return 'sad';
+    if(hunger>=82 && happiness>=82 && energy>=75)return 'great';
+    return pet.mood && phrases[pet.mood] ? pet.mood : 'happy';
+  }
+
+  function pick(list){return list[Math.floor(Math.random()*list.length)]}
+
+  function say(pair){
+    const el=speech();
+    if(!el||!pair)return;
+    el.innerHTML='<b>'+escapeHtml(pair[0])+'</b><span>'+escapeHtml(pair[1])+'</span>';
+    el.classList.remove('p897Speaking');
+    void el.offsetWidth;
+    el.classList.add('p897Speaking');
+    window.setTimeout(()=>el.classList.remove('p897Speaking'),320);
+  }
+
+  function escapeHtml(v){
+    return String(v??'').replace(/[&<>"']/g,m=>({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[m]));
+  }
+
+  function syncPet(pet,announce=false){
+    if(!pet)return;
+    state.pet=pet;
+    const next=deriveMood(pet);
+    const changed=next!==state.mood;
+    state.mood=next;
+    const r=root();
+    if(r)r.dataset.p897Mood=next;
+    if(announce||changed)say(pick(phrases[next]||phrases.happy));
+    scheduleIdle();
+    scheduleSpeech();
+  }
+
+  function currentPet(){
+    try{return window.BrainBuddyPet?.getState?.()||state.pet}catch(_){return state.pet}
+  }
+
+  function ensureFx(){
+    const center=document.querySelector('.p89PetCenter');
+    if(!center)return null;
+    let layer=center.querySelector('.p897FxLayer');
+    if(!layer){
+      layer=document.createElement('div');
+      layer.className='p897FxLayer';
+      layer.setAttribute('aria-hidden','true');
+      center.appendChild(layer);
+    }
+    return layer;
+  }
+
+  function particles(mood){
+    if(reduced())return;
+    const layer=ensureFx();
+    if(!layer)return;
+    const icons=mood==='hungry'?['🍓','♡','✨']:
+      mood==='tired'?['✨','💤','♡']:
+      mood==='sad'?['💗','♡','✨']:['💗','💕','✨','♡'];
+    const count=mood==='great'?7:5;
+    for(let i=0;i<count;i++){
+      const p=document.createElement('i');
+      p.className='p897Particle';
+      p.textContent=pick(icons);
+      const side=(i%2===0?-1:1);
+      const spread=24+Math.random()*75;
+      p.style.setProperty('--x0',(side*(4+Math.random()*16))+'px');
+      p.style.setProperty('--x1',(side*spread)+'px');
+      p.style.setProperty('--y1',(-72-Math.random()*105)+'px');
+      p.style.setProperty('--rot',((Math.random()-.5)*36)+'deg');
+      p.style.setProperty('--dur',(760+Math.random()*420)+'ms');
+      p.style.animationDelay=(i*45)+'ms';
+      layer.appendChild(p);
+      window.setTimeout(()=>p.remove(),1500);
+    }
+  }
+
+  function haptic(){
+    try{navigator.vibrate?.(16)}catch(_){}
+  }
+
+  function sound(kind='happy'){
+    try{
+      const Ctx=window.AudioContext||window.webkitAudioContext;
+      if(!Ctx)return;
+      if(!state.audioCtx)state.audioCtx=new Ctx();
+      const ctx=state.audioCtx;
+      if(ctx.state==='suspended')ctx.resume();
+      const now=ctx.currentTime;
+      const o=ctx.createOscillator();
+      const g=ctx.createGain();
+      o.connect(g);g.connect(ctx.destination);
+      const map={happy:[620,820],great:[700,980],hungry:[420,520],sad:[330,390],tired:[360,300]};
+      const [a,b]=map[kind]||map.happy;
+      o.type='sine';
+      o.frequency.setValueAtTime(a,now);
+      o.frequency.exponentialRampToValueAtTime(Math.max(80,b),now+.13);
+      g.gain.setValueAtTime(.0001,now);
+      g.gain.exponentialRampToValueAtTime(.045,now+.02);
+      g.gain.exponentialRampToValueAtTime(.0001,now+.18);
+      o.start(now);o.stop(now+.19);
+    }catch(_){}
+  }
+
+  function animate(className,duration=700){
+    const el=buddy();
+    if(!el||reduced())return;
+    ['p897ReactHappy','p897ReactHungry','p897ReactTired','p897ReactSad','p897Curious','p895Tap'].forEach(c=>el.classList.remove(c));
+    void el.offsetWidth;
+    el.classList.add(className);
+    window.setTimeout(()=>el.classList.remove(className),duration);
+  }
+
+  function react(source='tap'){
+    const now=Date.now();
+    if(now-state.lastTap<260)return;
+    state.lastTap=now;
+    const pet=currentPet();
+    if(pet)syncPet(pet,false);
+    const mood=state.mood;
+    const cls={hungry:'p897ReactHungry',tired:'p897ReactTired',sad:'p897ReactSad'}[mood]||'p897ReactHappy';
+    animate(cls,700);
+    particles(mood);
+    haptic();
+    sound(mood);
+    say(pick(phrases[mood]||phrases.happy));
+    try{document.dispatchEvent(new CustomEvent('pomru:buddy-react',{detail:{mood,source,pet:state.pet}}))}catch(_){}
+  }
+
+  function scheduleIdle(){
+    clearTimeout(state.idleTimer);
+    if(reduced()||document.hidden)return;
+    const delay=9000+Math.random()*7000;
+    state.idleTimer=window.setTimeout(()=>{
+      if(!document.hidden){
+        animate('p897Curious',760);
+        if(Math.random()<.35)particles(state.mood);
+      }
+      scheduleIdle();
+    },delay);
+  }
+
+  function scheduleSpeech(){
+    clearTimeout(state.speechTimer);
+    if(document.hidden)return;
+    const delay=14000+Math.random()*9000;
+    state.speechTimer=window.setTimeout(()=>{
+      const pet=currentPet();
+      if(pet)syncPet(pet,false);
+      say(pick(phrases[state.mood]||phrases.happy));
+      scheduleSpeech();
+    },delay);
+  }
+
+  function bind(){
+    const el=buddy();
+    if(!el||el.dataset.p897Bound==='1')return;
+    el.dataset.p897Bound='1';
+    el.setAttribute('role','button');
+    el.setAttribute('tabindex','0');
+    el.setAttribute('aria-label','แตะ Buddy เพื่อเล่นด้วย');
+    el.addEventListener('pointerup',()=>react('pointer'),{passive:true});
+    el.addEventListener('keydown',e=>{
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();react('keyboard')}
+    });
+  }
+
+  function boot(){
+    bind();
+    ensureFx();
+    const pet=currentPet();
+    if(pet)syncPet(pet,true);
+    else{
+      const r=root();if(r)r.dataset.p897Mood='happy';
+      say(pick(phrases.happy));
+      scheduleIdle();scheduleSpeech();
+    }
+  }
+
+  document.addEventListener('bb:pet-updated',e=>syncPet(e.detail,true));
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden){clearTimeout(state.idleTimer);clearTimeout(state.speechTimer)}
+    else{scheduleIdle();scheduleSpeech()}
+  });
+  window.addEventListener('pageshow',()=>{bind();const p=currentPet();if(p)syncPet(p,false)});
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});
+  else boot();
+
+  window.POMRUPetInteraction={
+    react,
+    sync:()=>{const p=currentPet();if(p)syncPet(p,true);return p||null},
+    getMood:()=>state.mood,
+    getPet:()=>state.pet
+  };
 })();
 </script>
 
