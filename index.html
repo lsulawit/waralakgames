@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy v85.1 — Flicker Final Fix</title>
+<title>Brain Buddy v86.1 — Auth Touch Fix</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -9945,6 +9945,581 @@ body.bbCosEffectSparkle{
   transition:none!important;
 }
 
+
+/* ==========================================================
+   Brain Buddy v86 — Default Buddy + Closet + Shop 2.0
+   Static by design: no infinite animation.
+   ========================================================== */
+
+/* -------- HOME LAYERED BUDDY -------- */
+.bbEquippedHeroCharacter{
+  position:relative!important;
+  width:210px!important;
+  height:190px!important;
+  display:grid!important;
+  place-items:center!important;
+}
+.bbEquippedHeroCharacter.hidden{display:none!important}
+
+.bbBuddyBaseImage,
+.bbBuddyLayer{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  pointer-events:none!important;
+}
+.bbBuddyBaseImage{z-index:10!important}
+.bbBuddySkinLayer{z-index:20!important}
+.bbBuddyOutfitLayer{z-index:30!important}
+.bbBuddyAccessoryLayer{z-index:40!important}
+.bbBuddyHatLayer{z-index:50!important}
+.bbBuddyEffectLayer{z-index:60!important}
+.bbBuddyLayer.hidden,.bbBuddyBaseImage:not([src]){display:none!important}
+#bbPinkBuddy3D{z-index:9!important}
+
+.bbHomeCollectionSlot .art.outfit{
+  display:grid!important;
+  place-items:center!important;
+  font-size:1.45rem!important;
+  background:linear-gradient(145deg,#fff,#f3eaff)!important;
+}
+
+/* -------- CLOSET -------- */
+.bbClosetScreen{
+  min-height:100dvh;
+  padding:18px clamp(12px,2.2vw,26px) 110px;
+  background:linear-gradient(180deg,#f4f1ff 0%,#f8f7ff 48%,#fff7fb 100%);
+  color:#34264f;
+}
+.bbClosetTop,.bbClosetLayout,.bbClosetGuest{
+  width:min(1180px,100%);
+  margin-inline:auto;
+}
+.bbClosetTop{
+  min-height:62px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:14px;
+}
+.bbClosetBack{
+  width:46px;height:46px;flex:0 0 46px;
+  border:1px solid #e6ddf4;
+  border-radius:15px;
+  background:#fff;
+  color:#6b50af;
+  font-size:2rem;
+  line-height:1;
+  box-shadow:0 7px 18px rgba(72,48,99,.06);
+}
+.bbClosetBrand{
+  min-width:0;flex:1;
+  display:flex;align-items:center;gap:10px;
+}
+.bbClosetBrandIcon{
+  width:45px;height:45px;display:grid;place-items:center;
+  border-radius:15px;background:linear-gradient(145deg,#fff1f7,#e9eeff);
+  font-size:1.45rem;
+}
+.bbClosetBrand small{display:block;font-size:.64rem;font-weight:1000;letter-spacing:.13em;color:#9b72a8}
+.bbClosetBrand h2{margin:1px 0 0;font-size:1.6rem;color:#45335d}
+.bbClosetWallet{
+  min-height:49px;
+  display:flex;align-items:center;gap:8px;
+  padding:7px 11px;
+  border:1px solid #eadff1;border-radius:17px;
+  background:#fff;
+}
+.bbClosetWallet .bbCoinGlyph{
+  width:31px;height:31px;display:grid;place-items:center;
+  border-radius:50%;background:linear-gradient(145deg,#ffe989,#ffbe55);
+  color:#8c5414;font-weight:1000;
+}
+.bbClosetWallet span:nth-child(2){display:flex;flex-direction:column;text-align:left}
+.bbClosetWallet small{font-size:.58rem;color:#978ba1}
+.bbClosetWallet strong{font-size:.94rem;color:#5b4371}
+.bbClosetWallet>b{font-size:1.1rem;color:#8962bd}
+
+.bbClosetGuest{
+  margin-bottom:12px;padding:13px 15px;
+  display:flex;align-items:center;gap:12px;
+  border:1px solid #eadff3;border-radius:20px;background:#fff;
+}
+.bbClosetGuest.hidden{display:none}
+.bbClosetGuest .icon{
+  width:45px;height:45px;border-radius:14px;background:#f6f1ff;
+  display:grid;place-items:center;font-size:1.25rem
+}
+.bbClosetGuest>div{flex:1}
+.bbClosetGuest strong{display:block;color:#4e3965}
+.bbClosetGuest p{margin:3px 0 0;color:#82758b;font-size:.78rem}
+.bbClosetGuest button{
+  min-height:40px;padding:0 14px;border:0;border-radius:13px;
+  background:#7958d5;color:#fff;font-weight:900
+}
+
+.bbClosetLayout{
+  display:grid;
+  grid-template-columns:minmax(330px,.82fr) minmax(0,1.18fr);
+  gap:14px;
+  align-items:start;
+}
+.bbClosetPreviewCard,
+.bbClosetInventory{
+  border:1px solid #e9e1f2;
+  border-radius:28px;
+  background:#fff;
+  box-shadow:0 13px 34px rgba(65,44,88,.07);
+}
+.bbClosetPreviewCard{
+  position:sticky;top:12px;
+  padding:17px;
+}
+.bbClosetPreviewHead{
+  display:flex;justify-content:space-between;gap:12px;align-items:flex-start
+}
+.bbClosetPreviewHead small,
+.bbClosetInventoryHead small{
+  color:#a071ad;font-size:.62rem;font-weight:1000;letter-spacing:.13em
+}
+.bbClosetPreviewHead h1{
+  margin:3px 0 5px;color:#432f59;font-size:1.6rem
+}
+.bbClosetPreviewHead p{
+  margin:0;max-width:40ch;color:#87798f;font-size:.75rem;line-height:1.45
+}
+.bbClosetOwned{
+  flex:0 0 auto;padding:8px 10px;border-radius:14px;
+  background:#f6f1ff;color:#8263ad;font-size:.64rem;text-align:center
+}
+.bbClosetOwned b{display:block;font-size:1.15rem}
+
+.bbBuddyStage{
+  position:relative;
+  min-height:355px;
+  margin-top:12px;
+  border-radius:24px;
+  overflow:hidden;
+  display:grid;place-items:center;
+  background:
+    radial-gradient(circle at 50% 70%,rgba(255,255,255,.96),transparent 27%),
+    linear-gradient(150deg,#e8efff 0%,#f1e7ff 48%,#ffe7f1 100%);
+  border:1px solid #e5dcf1;
+}
+.bbBuddyStageGlow{
+  position:absolute;left:50%;bottom:47px;transform:translateX(-50%);
+  width:220px;height:36px;border-radius:50%;
+  background:rgba(88,64,119,.12);
+  filter:blur(7px)
+}
+.bbBuddyRender{
+  position:relative;
+  width:300px;height:300px;
+  display:grid;place-items:center;
+  z-index:3
+}
+.bbBuddyRender.small{width:190px;height:190px}
+.bbClosetLayer{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:contain;pointer-events:none
+}
+.bbClosetLayer.character{z-index:10}
+.bbClosetLayer.skin{z-index:20}
+.bbClosetLayer.outfit{z-index:30}
+.bbClosetLayer.accessory{z-index:40}
+.bbClosetLayer.hat{z-index:50}
+.bbClosetLayer.effect{z-index:60}
+.bbClosetLayer.hidden{display:none}
+
+.bbClosetPinkBuddy{
+  position:relative;
+  width:190px;height:220px;
+  z-index:9;
+  filter:drop-shadow(0 13px 13px rgba(89,50,85,.16))
+}
+.bbBuddyRender.small .bbClosetPinkBuddy{transform:scale(.70)}
+.bbClosetPinkBuddy .ear{
+  position:absolute;top:22px;width:60px;height:60px;border-radius:50%;
+  background:linear-gradient(145deg,#ffb9d5,#ef7dac);
+  border:5px solid #f58db7
+}
+.bbClosetPinkBuddy .ear::after{
+  content:"";position:absolute;inset:11px;border-radius:50%;background:#ffd8e7
+}
+.bbClosetPinkBuddy .ear.left{left:18px}.bbClosetPinkBuddy .ear.right{right:18px}
+.bbClosetPinkBuddy .head{
+  position:absolute;left:30px;top:38px;width:130px;height:116px;border-radius:48% 48% 45% 45%;
+  background:linear-gradient(145deg,#ffc5dc,#ee87b0);
+  border:5px solid #f18ab4;z-index:3
+}
+.bbClosetPinkBuddy .eye{
+  position:absolute;top:43px;width:10px;height:15px;border-radius:50%;background:#4b324c
+}
+.bbClosetPinkBuddy .eye.left{left:36px}.bbClosetPinkBuddy .eye.right{right:36px}
+.bbClosetPinkBuddy .muzzle{
+  position:absolute;left:50%;top:60px;transform:translateX(-50%);
+  width:54px;height:42px;border-radius:48%;background:#ffe9f0
+}
+.bbClosetPinkBuddy .nose{
+  position:absolute;left:50%;top:66px;transform:translateX(-50%);
+  width:13px;height:10px;border-radius:50%;background:#73485e;z-index:4
+}
+.bbClosetPinkBuddy .mouth{
+  position:absolute;left:50%;top:77px;transform:translateX(-50%);
+  width:20px;height:10px;border-bottom:3px solid #89526e;border-radius:50%;z-index:4
+}
+.bbClosetPinkBuddy .blush{
+  position:absolute;top:66px;width:20px;height:9px;border-radius:50%;background:rgba(255,107,153,.38)
+}
+.bbClosetPinkBuddy .blush.left{left:16px}.bbClosetPinkBuddy .blush.right{right:16px}
+.bbClosetPinkBuddy .body{
+  position:absolute;left:47px;top:135px;width:96px;height:76px;border-radius:46% 46% 40% 40%;
+  background:linear-gradient(145deg,#ffbad3,#ed80aa);border:5px solid #ef89b1
+}
+.bbClosetPinkBuddy .arm{
+  position:absolute;top:143px;width:35px;height:70px;border-radius:40px;background:#f296bb;z-index:1
+}
+.bbClosetPinkBuddy .arm.left{left:28px;transform:rotate(16deg)}
+.bbClosetPinkBuddy .arm.right{right:28px;transform:rotate(-16deg)}
+.bbClosetPinkBuddy .leg{
+  position:absolute;top:187px;width:39px;height:37px;border-radius:50%;background:#ee86ae
+}
+.bbClosetPinkBuddy .leg.left{left:49px}.bbClosetPinkBuddy .leg.right{right:49px}
+.bbClosetPinkBuddy .heart{
+  position:absolute;left:50%;top:154px;transform:translateX(-50%);z-index:5;
+  width:25px;height:22px;
+}
+.bbClosetPinkBuddy .heart::before{content:"♥";color:#fff;font-size:25px}
+
+.bbBuddyStageLabel{
+  position:absolute;left:14px;right:14px;bottom:13px;z-index:5;
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:8px 11px;border-radius:14px;background:rgba(255,255,255,.88);
+  border:1px solid rgba(255,255,255,.9)
+}
+.bbBuddyStageLabel strong{color:#513b69;font-size:.86rem}
+.bbBuddyStageLabel span{color:#947f9c;font-size:.66rem}
+
+.bbLoadoutSlots{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-top:9px
+}
+.bbLoadoutSlots button{
+  min-height:72px;padding:7px;border:1px solid #ebe3f3;border-radius:16px;background:#faf9fd;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  color:#5a456f
+}
+.bbLoadoutSlots button.active{border-color:#a984df;background:#f5efff}
+.bbLoadoutSlots button span{font-size:1rem}
+.bbLoadoutSlots button small{font-size:.53rem;color:#9d8aa6;text-transform:uppercase}
+.bbLoadoutSlots button b{
+  width:100%;font-size:.63rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+
+.bbClosetInventory{padding:17px;min-width:0}
+.bbClosetInventoryHead{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:11px
+}
+.bbClosetInventoryHead h2{margin:2px 0;color:#44315a;font-size:1.45rem}
+.bbClosetInventoryHead p{margin:2px 0;color:#927f9b;font-size:.7rem}
+.bbClosetInventoryHead>button{
+  min-height:40px;padding:0 13px;border:0;border-radius:13px;
+  background:#7554d2;color:#fff;font-size:.74rem;font-weight:900
+}
+.bbClosetTabs,.bbShopV2Tabs{
+  display:flex;gap:6px;overflow-x:auto;padding:2px 1px 8px;
+  scrollbar-width:none
+}
+.bbClosetTabs::-webkit-scrollbar,.bbShopV2Tabs::-webkit-scrollbar{display:none}
+.bbClosetTabs button,.bbShopV2Tabs button{
+  flex:0 0 auto;min-height:35px;padding:0 11px;
+  border:1px solid #e8def1;border-radius:999px;background:#fff;
+  color:#74627d;font-size:.68rem;font-weight:850
+}
+.bbClosetTabs button.active,.bbShopV2Tabs button.active{
+  border-color:#9a78d7;background:#7857d5;color:#fff
+}
+.bbClosetGrid{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px
+}
+.bbClosetItem{
+  min-width:0;padding:8px;border:1px solid #ebe4f1;border-radius:20px;background:#fff
+}
+.bbClosetItem.active{border-color:#9c7add;background:#fbf8ff}
+.bbClosetItemArt{
+  position:relative;aspect-ratio:1;border-radius:15px;overflow:hidden;
+  display:grid;place-items:center;background:linear-gradient(145deg,#f5f5ff,#fff3f8)
+}
+.bbClosetItemArt img{width:100%;height:100%;object-fit:contain}
+.bbClosetItemArt .fallback{font-size:2rem}
+.bbClosetBadge{
+  position:absolute;left:6px;top:6px;padding:4px 6px;border-radius:999px;
+  background:rgba(255,255,255,.9);font-size:.52rem;font-weight:900;color:#765c83
+}
+.bbClosetUsing{
+  position:absolute;right:6px;top:6px;padding:4px 6px;border-radius:999px;
+  background:#7554d2;color:#fff;font-size:.52rem;font-weight:900
+}
+.bbClosetItemCopy{padding:8px 2px 2px}
+.bbClosetItemCopy h3{margin:0;color:#513d65;font-size:.83rem}
+.bbClosetItemCopy p{
+  margin:3px 0 7px;color:#918099;font-size:.62rem;line-height:1.35;
+  min-height:2.6em
+}
+.bbClosetAction{
+  width:100%;min-height:37px;border:0;border-radius:12px;
+  background:#7454d1;color:#fff;font-size:.68rem;font-weight:900
+}
+.bbClosetAction.remove{background:#f2edf6;color:#725e7b}
+.bbClosetAction.default{background:#eee9f3;color:#85738c}
+
+.bbInventoryLoading,.bbInventoryEmpty{
+  grid-column:1/-1;min-height:150px;border:1px dashed #ddd3e5;border-radius:18px;
+  display:grid;place-items:center;text-align:center;padding:18px;color:#85758f;background:#fcfbfd
+}
+
+/* -------- SHOP 2.0 -------- */
+.bbShopV2{
+  min-height:100dvh!important;
+  padding:18px clamp(12px,2.2vw,26px) 110px!important;
+  background:linear-gradient(180deg,#f5f1ff 0%,#faf8ff 46%,#fff6fa 100%)!important;
+}
+.bbShopV2Top,.bbShopV2Hero,.bbStarterRewardV2,.bbShopV2Body,#bbShopLogin{
+  width:min(1180px,100%)!important;margin-left:auto!important;margin-right:auto!important
+}
+.bbShopV2Top .bbShopBrand{color:#4a365f!important}
+.bbShopV2Top .bbShopBrand small{color:#9676a1!important}
+.bbShopV2Top .bbShopBrand h2{color:#4a365f!important}
+.bbShopV2Hero{
+  min-height:225px;padding:22px 26px;border-radius:28px;
+  display:grid;grid-template-columns:minmax(0,1.35fr) minmax(220px,.65fr);gap:18px;align-items:center;
+  background:linear-gradient(135deg,#6c4fd1,#9a63df 53%,#e777ad);
+  box-shadow:0 15px 38px rgba(68,43,105,.13);overflow:hidden
+}
+.bbShopV2HeroCopy>span{font-size:.62rem;font-weight:1000;letter-spacing:.14em;color:#f5ddff}
+.bbShopV2HeroCopy h1{margin:5px 0 7px;color:#fff!important;font-size:clamp(1.8rem,3.7vw,2.8rem)}
+.bbShopV2HeroCopy p{margin:0;max-width:55ch;color:rgba(255,255,255,.88)!important;font-size:.82rem}
+.bbShopV2HeroCopy button{
+  margin-top:13px;min-height:41px;padding:0 14px;border:1px solid rgba(255,255,255,.30);
+  border-radius:13px;background:rgba(255,255,255,.16);color:#fff;font-weight:900
+}
+.bbShopPreviewMini{display:grid;place-items:center;min-height:190px}
+.bbShopPreviewMini .bbBuddyRender{
+  border-radius:50%;background:rgba(255,255,255,.11)
+}
+.bbStarterRewardV2{margin-top:10px}
+.bbShopV2Body{
+  margin-top:10px;padding:16px;border:1px solid #e9e0f0;border-radius:27px;
+  background:#fff;box-shadow:0 10px 30px rgba(68,47,82,.06)
+}
+.bbShopV2Toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.bbShopV2Toolbar small{font-size:.61rem;letter-spacing:.13em;font-weight:1000;color:#9e70a4}
+.bbShopV2Toolbar h2{margin:2px 0;color:#49355d;font-size:1.45rem}
+.bbShopV2Owned{
+  padding:7px 11px;border-radius:14px;background:#f5f0ff;text-align:center;color:#8565ad
+}
+.bbShopV2Owned span{display:block;font-size:.55rem}.bbShopV2Owned b{font-size:1.1rem}
+.bbShopV2Grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+
+.bbShopV2 .bbShopItem{
+  padding:8px!important;border:1px solid #eae2ef!important;border-radius:21px!important;
+  background:#fff!important;box-shadow:0 7px 20px rgba(62,44,75,.05)!important
+}
+.bbShopV2 .bbShopItemArt{
+  position:relative!important;aspect-ratio:1!important;border-radius:16px!important;
+  background:linear-gradient(145deg,#f5f5ff,#fff3f8)!important
+}
+.bbShopV2 .bbShopItemCopy h4{color:#503b65!important}
+.bbShopV2 .bbShopItemCopy p{color:#8c7a94!important}
+.bbShopRarity{
+  position:absolute;left:7px;bottom:7px;padding:4px 7px;border-radius:999px;
+  font-size:.52rem;font-weight:1000;text-transform:uppercase
+}
+.bbShopRarity.common{background:#f2f0f4;color:#726a77}
+.bbShopRarity.rare{background:#e7f3ff;color:#477daf}
+.bbShopRarity.epic{background:#f1e8ff;color:#8050b7}
+.bbShopRarity.legendary{background:#fff0c7;color:#9a6415}
+.bbShopDefault{
+  position:absolute;right:7px;bottom:7px;padding:4px 7px;border-radius:999px;
+  background:#fff;color:#7354b0;font-size:.52rem;font-weight:1000
+}
+
+@media(max-width:980px){
+  .bbClosetLayout{grid-template-columns:1fr}
+  .bbClosetPreviewCard{position:relative;top:auto}
+  .bbBuddyStage{min-height:330px}
+  .bbClosetGrid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .bbShopV2Grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+@media(max-width:720px){
+  .bbClosetScreen,.bbShopV2{padding:10px 9px 105px!important}
+  .bbClosetBrand h2{font-size:1.25rem}
+  .bbClosetWallet{padding:6px 8px}
+  .bbClosetWallet small{display:none}
+  .bbClosetLayout{gap:9px}
+  .bbClosetPreviewCard,.bbClosetInventory{padding:12px;border-radius:22px}
+  .bbBuddyStage{min-height:285px}
+  .bbBuddyRender{width:245px;height:245px}
+  .bbClosetPinkBuddy{transform:scale(.86)}
+  .bbLoadoutSlots{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .bbClosetGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bbShopV2Hero{grid-template-columns:1fr;padding:18px;border-radius:23px}
+  .bbShopPreviewMini{display:none}
+  .bbShopV2Grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:420px){
+  .bbClosetTop{gap:7px}
+  .bbClosetBrandIcon{display:none}
+  .bbClosetWallet .bbCoinGlyph{display:none}
+  .bbBuddyStage{min-height:260px}
+  .bbBuddyRender{width:220px;height:220px}
+  .bbLoadoutSlots{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+
+/* ==========================================================
+   Brain Buddy v86.1 — AUTH TOUCH FIX
+   The account modal must always be the top interactive layer.
+   ========================================================== */
+
+/* Account modal is deliberately above Admin/Ranked/Learning overlays. */
+#accountModal{
+  position:fixed!important;
+  inset:0!important;
+  z-index:70000!important;
+  display:grid!important;
+  place-items:center!important;
+
+  padding:
+    max(12px,env(safe-area-inset-top))
+    max(12px,env(safe-area-inset-right))
+    max(12px,env(safe-area-inset-bottom))
+    max(12px,env(safe-area-inset-left))!important;
+
+  overflow:auto!important;
+  overscroll-behavior:contain!important;
+  -webkit-overflow-scrolling:touch!important;
+
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+
+  background:rgba(35,25,44,.67)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+#accountModal.hidden{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+}
+
+/* The white card itself is the click/touch layer. */
+#accountModal .modalcard{
+  position:relative!important;
+  z-index:70001!important;
+
+  width:min(650px,100%)!important;
+  max-height:calc(100dvh - 24px)!important;
+
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior:contain!important;
+  -webkit-overflow-scrolling:touch!important;
+
+  pointer-events:auto!important;
+  touch-action:pan-y!important;
+
+  isolation:isolate!important;
+  transform:none!important;
+}
+
+/* Every auth control must remain directly interactive. */
+#accountModal .modalcard *,
+#accountModal button,
+#accountModal input,
+#accountModal form,
+#accountModal label,
+#accountModal .authTab,
+#accountModal .bbGoogleAuth{
+  pointer-events:auto!important;
+}
+
+#accountModal button,
+#accountModal input,
+#accountModal .authTab,
+#accountModal .bbGoogleAuth{
+  touch-action:manipulation!important;
+  -webkit-tap-highlight-color:rgba(116,84,210,.10);
+}
+
+/* Do not let an invisible pseudo-element become a touch surface. */
+#accountModal::before,
+#accountModal::after,
+#accountModal .modalcard::before,
+#accountModal .modalcard::after{
+  pointer-events:none!important;
+}
+
+/* While account modal is open, no other body-level UI may steal taps.
+   #accountModal is restored immediately below. */
+body.bbAccountModalOpen > *:not(#accountModal):not(script):not(style){
+  pointer-events:none!important;
+}
+
+body.bbAccountModalOpen > #accountModal,
+body.bbAccountModalOpen > #accountModal *{
+  pointer-events:auto!important;
+}
+
+body.bbAccountModalOpen{
+  overflow:hidden!important;
+}
+
+/* Inputs: avoid Safari zoom/focus weirdness. */
+#accountModal input{
+  min-height:52px!important;
+  font-size:16px!important;
+  -webkit-user-select:text!important;
+  user-select:text!important;
+}
+
+/* Clear button target size */
+#accountModal .x{
+  z-index:70002!important;
+  min-width:42px!important;
+  width:42px!important;
+  min-height:42px!important;
+  height:42px!important;
+}
+
+/* Google target size */
+#accountModal #googleAuthBtn{
+  min-height:52px!important;
+}
+
+/* Phone */
+@media(max-width:640px){
+  #accountModal{
+    align-items:flex-start!important;
+    padding-top:max(8px,env(safe-area-inset-top))!important;
+    padding-left:8px!important;
+    padding-right:8px!important;
+  }
+
+  #accountModal .modalcard{
+    margin:auto!important;
+    width:100%!important;
+    max-height:calc(100dvh - 16px)!important;
+    padding:19px 15px!important;
+    border-radius:23px!important;
+  }
+}
+
 </style>
 
 <script>
@@ -10593,7 +11168,7 @@ try{
         </div>
       </div>
       <div class="bbHeroBrain" aria-hidden="true">
-        <div class="brainBody" id="bbDefaultHeroMascot">
+        <div class="brainBody hidden" id="bbDefaultHeroMascot">
           <span class="eye left"></span>
           <span class="eye right"></span>
           <span class="blush b1"></span>
@@ -10602,8 +11177,13 @@ try{
           <span class="hand"></span>
         </div>
 
-        <div class="bbEquippedHeroCharacter hidden" id="bbEquippedHeroCharacter">
-          <img id="bbEquippedHeroCharacterImg" alt="">
+        <div class="bbEquippedHeroCharacter" id="bbEquippedHeroCharacter">
+          <img id="bbEquippedHeroCharacterImg" alt="" class="bbBuddyBaseImage">
+          <img class="bbBuddyLayer bbBuddySkinLayer hidden" id="bbHomeBuddySkin" alt="">
+          <img class="bbBuddyLayer bbBuddyOutfitLayer hidden" id="bbHomeBuddyOutfit" alt="">
+          <img class="bbBuddyLayer bbBuddyAccessoryLayer hidden" id="bbHomeBuddyAccessory" alt="">
+          <img class="bbBuddyLayer bbBuddyHatLayer hidden" id="bbHomeBuddyHat" alt="">
+          <img class="bbBuddyLayer bbBuddyEffectLayer hidden" id="bbHomeBuddyEffect" alt="">
           <div class="bbPinkBuddy3D" id="bbPinkBuddy3D">
             <span class="ear left"></span>
             <span class="ear right"></span>
@@ -10651,21 +11231,21 @@ try{
       </div>
 
       <div class="bbHomeCollectionGrid" id="bbHomeCollectionGrid">
-        <button type="button" class="bbHomeCollectionSlot" data-app-go="inventory" data-inventory-open="bear" data-home-cosmetic-type="bear">
+        <button type="button" class="bbHomeCollectionSlot" data-app-go="inventory" data-inventory-open="character" data-home-cosmetic-slot="character">
           <span class="art bear"></span>
-          <span class="copy"><small>หมี</small><b>ยังไม่ได้ใช้</b></span>
+          <span class="copy"><small>BUDDY</small><b>Pink Buddy</b></span>
         </button>
-        <button type="button" class="bbHomeCollectionSlot" data-app-go="inventory" data-inventory-open="theme" data-home-cosmetic-type="theme">
-          <span class="art theme"></span>
-          <span class="copy"><small>ธีม</small><b>ยังไม่ได้ใช้</b></span>
+        <button type="button" class="bbHomeCollectionSlot" data-app-go="inventory" data-inventory-open="outfit" data-home-cosmetic-slot="outfit">
+          <span class="art outfit">👕</span>
+          <span class="copy"><small>OUTFIT</small><b>ยังไม่ได้ใส่ชุด</b></span>
         </button>
-        <button type="button" class="bbHomeCollectionSlot" data-app-go="inventory" data-inventory-open="frame" data-home-cosmetic-type="frame">
-          <span class="art frame"></span>
-          <span class="copy"><small>กรอบ</small><b>ยังไม่ได้ใช้</b></span>
-        </button>
-        <button type="button" class="bbHomeCollectionSlot" data-app-go="inventory" data-inventory-open="effect" data-home-cosmetic-type="effect">
+        <button type="button" class="bbHomeCollectionSlot" data-app-go="inventory" data-inventory-open="effect" data-home-cosmetic-slot="effect">
           <span class="art effect"></span>
-          <span class="copy"><small>เอฟเฟกต์</small><b>ยังไม่ได้ใช้</b></span>
+          <span class="copy"><small>EFFECT</small><b>ไม่มีเอฟเฟกต์</b></span>
+        </button>
+        <button type="button" class="bbHomeCollectionSlot" data-app-go="inventory" data-inventory-open="frame" data-home-cosmetic-slot="frame">
+          <span class="art frame"></span>
+          <span class="copy"><small>FRAME</small><b>ไม่มีกรอบ</b></span>
         </button>
       </div>
     </section>
@@ -10703,7 +11283,7 @@ try{
         <span class="copy">
           <small>BRAIN COINS</small>
           <b>ร้านค้า Brain Buddy</b>
-          <em>สะสมเหรียญ • ปลดล็อกหมี ธีม กรอบ และเอฟเฟกต์</em>
+          <em>ตัวละคร • สกิน • ชุด • หมวก • Accessory • เอฟเฟกต์</em>
         </span>
         <span class="go">➜</span>
       </button>
@@ -10872,175 +11452,213 @@ try{
   <div class="bbTopupToast hidden" id="bbTopupToast"></div>
 </section>
 
-<section class="bbAppScreen bbInventoryScreen" id="bbAppInventory" data-app-screen="inventory">
-  <div class="bbInventorySky" aria-hidden="true">
-    <i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i>
-    <i class="spark s1"></i><i class="spark s2"></i><i class="spark s3"></i>
-  </div>
 
-  <header class="bbInventoryTop">
-    <button class="bbInventoryBack" type="button" data-app-go="home" aria-label="กลับหน้าหลัก">
-      <svg viewBox="0 0 64 64" aria-hidden="true">
-        <path d="M38 14 20 32l18 18" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
+<section class="bbAppScreen bbInventoryScreen bbClosetScreen" id="bbAppInventory" data-app-screen="inventory">
+  <header class="bbClosetTop">
+    <button class="bbClosetBack" type="button" data-app-go="home" aria-label="กลับหน้าหลัก">‹</button>
 
-    <div class="bbInventoryBrand">
-      <span class="bbInventoryChest" aria-hidden="true"></span>
+    <div class="bbClosetBrand">
+      <span class="bbClosetBrandIcon">🧸</span>
       <div>
-        <small>MY COLLECTION</small>
-        <h2>คลังของฉัน</h2>
+        <small>BUDDY CLOSET</small>
+        <h2>ห้องแต่งตัว</h2>
       </div>
     </div>
 
-    <button class="bbInventoryWallet bbInventoryWalletTopup" type="button" data-app-go="topup">
-      <span class="coin">B</span>
-      <span class="bbInventoryWalletText">
-        <small>Brain Coins</small>
-        <strong id="bbInventoryBalance">—</strong>
-      </span>
-      <span class="plus">+</span>
+    <button class="bbClosetWallet" type="button" data-app-go="topup">
+      <span class="bbCoinGlyph">B</span>
+      <span><small>Brain Coins</small><strong id="bbInventoryBalance">—</strong></span>
+      <b>+</b>
     </button>
   </header>
 
-  <section class="bbInventoryHero">
+  <section class="bbClosetGuest hidden" id="bbInventoryGuest">
+    <span class="icon">🔐</span>
     <div>
-      <span class="pill">YOUR COSMETICS</span>
-      <h1>ของที่คุณเป็นเจ้าของ</h1>
-      <p>เลือกใช้หรือถอดหมี ธีม กรอบ และเอฟเฟกต์ได้จากที่นี่ โดยไม่ต้องกลับไปค้นหาในร้านค้า</p>
-    </div>
-
-    <div class="bbInventoryStats">
-      <div><small>มีทั้งหมด</small><strong id="bbInventoryOwnedCount">0</strong><span>ชิ้น</span></div>
-      <div><small>กำลังใช้</small><strong id="bbInventoryEquippedCount">0</strong><span>ชิ้น</span></div>
-    </div>
-  </section>
-
-  <section class="bbInventoryGuest hidden" id="bbInventoryGuest">
-    <div class="icon"></div>
-    <div>
-      <strong>เข้าสู่ระบบเพื่อดูคลังของคุณ</strong>
-      <p>ของที่ซื้อ Brain Coins และของที่กำลังใช้งานจะถูกเก็บไว้กับบัญชี</p>
+      <strong>เข้าสู่ระบบเพื่อเก็บชุดของ Buddy</strong>
+      <p>Guest ยังเห็น Default Pink Buddy ได้ แต่การซื้อและแต่งตัวจะบันทึกกับบัญชีสมาชิก</p>
     </div>
     <button type="button" id="bbInventoryLoginBtn">เข้าสู่ระบบ</button>
   </section>
 
-  <section class="bbInventoryBody" id="bbInventoryBody">
-    <div class="bbInventoryToolbar">
-      <div class="bbInventoryTabs" role="tablist" aria-label="หมวดสินค้าในคลัง">
-        <button class="active" type="button" data-inventory-filter="all">ทั้งหมด</button>
-        <button type="button" data-inventory-filter="bear">หมี</button>
-        <button type="button" data-inventory-filter="theme">ธีม</button>
-        <button type="button" data-inventory-filter="frame">กรอบ</button>
-        <button type="button" data-inventory-filter="effect">เอฟเฟกต์</button>
+  <main class="bbClosetLayout" id="bbInventoryBody">
+    <section class="bbClosetPreviewCard">
+      <div class="bbClosetPreviewHead">
+        <div>
+          <small>LIVE PREVIEW</small>
+          <h1>แต่ง Buddy ของคุณ</h1>
+          <p>ของแต่งแต่ละชิ้นซ้อนเป็น Layer เดียวกัน จึงเปลี่ยนชุดได้โดยไม่เปลี่ยนตัวละครหลัก</p>
+        </div>
+        <span class="bbClosetOwned"><b id="bbInventoryOwnedCount">0</b> ชิ้น</span>
       </div>
 
-      <button class="bbInventoryGoShop" type="button" data-app-go="shop">ไปที่ร้านค้า</button>
-    </div>
+      <div class="bbBuddyStage">
+        <div class="bbBuddyStageGlow"></div>
+        <div class="bbBuddyRender" id="bbClosetBuddyRender">
+          <div class="bbClosetPinkBuddy" data-buddy-css-default>
+            <span class="ear left"></span><span class="ear right"></span>
+            <span class="head">
+              <i class="eye left"></i><i class="eye right"></i>
+              <i class="muzzle"></i><i class="nose"></i><i class="mouth"></i>
+              <i class="blush left"></i><i class="blush right"></i>
+            </span>
+            <span class="body"></span>
+            <span class="arm left"></span><span class="arm right"></span>
+            <span class="leg left"></span><span class="leg right"></span>
+            <span class="heart"></span>
+          </div>
+          <img class="bbClosetLayer character hidden" data-buddy-preview-layer="character" alt="">
+          <img class="bbClosetLayer skin hidden" data-buddy-preview-layer="skin" alt="">
+          <img class="bbClosetLayer outfit hidden" data-buddy-preview-layer="outfit" alt="">
+          <img class="bbClosetLayer accessory hidden" data-buddy-preview-layer="accessory" alt="">
+          <img class="bbClosetLayer hat hidden" data-buddy-preview-layer="hat" alt="">
+          <img class="bbClosetLayer effect hidden" data-buddy-preview-layer="effect" alt="">
+        </div>
 
-    <div class="bbInventoryGrid" id="bbInventoryGrid" aria-live="polite">
-      <div class="bbInventoryLoading">กำลังโหลดคลังของคุณ…</div>
-    </div>
-  </section>
+        <div class="bbBuddyStageLabel">
+          <strong id="bbClosetBuddyName">Pink Buddy</strong>
+          <span id="bbClosetBuddyLook">Default Look</span>
+        </div>
+      </div>
+
+      <div class="bbLoadoutSlots" id="bbLoadoutSlots">
+        <button data-closet-slot="character"><span>🧸</span><small>Buddy</small><b>Pink Buddy</b></button>
+        <button data-closet-slot="skin"><span>🎨</span><small>Skin</small><b>Default</b></button>
+        <button data-closet-slot="outfit"><span>👕</span><small>Outfit</small><b>ไม่ได้ใส่</b></button>
+        <button data-closet-slot="hat"><span>🎩</span><small>Hat</small><b>ไม่ได้ใส่</b></button>
+        <button data-closet-slot="accessory"><span>🕶️</span><small>Accessory</small><b>ไม่ได้ใส่</b></button>
+        <button data-closet-slot="effect"><span>✨</span><small>Effect</small><b>ไม่ได้ใส่</b></button>
+        <button data-closet-slot="frame"><span>🖼️</span><small>Frame</small><b>Default</b></button>
+        <button data-closet-slot="theme"><span>🌈</span><small>Theme</small><b>Default</b></button>
+      </div>
+    </section>
+
+    <section class="bbClosetInventory">
+      <div class="bbClosetInventoryHead">
+        <div>
+          <small>MY ITEMS</small>
+          <h2>ของที่ฉันมี</h2>
+          <p><span id="bbInventoryEquippedCount">0</span> ชิ้นกำลังใช้งาน</p>
+        </div>
+        <button type="button" data-app-go="shop">+ ไปที่ร้านค้า</button>
+      </div>
+
+      <div class="bbClosetTabs" role="tablist">
+        <button class="active" type="button" data-inventory-filter="all">ทั้งหมด</button>
+        <button type="button" data-inventory-filter="character">🧸 Buddy</button>
+        <button type="button" data-inventory-filter="skin">🎨 Skin</button>
+        <button type="button" data-inventory-filter="outfit">👕 ชุด</button>
+        <button type="button" data-inventory-filter="hat">🎩 หมวก</button>
+        <button type="button" data-inventory-filter="accessory">🕶️ Accessory</button>
+        <button type="button" data-inventory-filter="effect">✨ Effect</button>
+        <button type="button" data-inventory-filter="frame">🖼️ Frame</button>
+        <button type="button" data-inventory-filter="theme">🌈 Theme</button>
+      </div>
+
+      <div class="bbClosetGrid" id="bbInventoryGrid" aria-live="polite">
+        <div class="bbInventoryLoading">กำลังเปิดตู้เสื้อผ้า…</div>
+      </div>
+    </section>
+  </main>
 
   <div class="bbInventoryToast hidden" id="bbInventoryToast"></div>
 </section>
 
-<section class="bbAppScreen bbShopScreen" id="bbAppShop" data-app-screen="shop">
-  <div class="bbShopSky" aria-hidden="true">
-    <i class="bbShopBubble b1"></i>
-    <i class="bbShopBubble b2"></i>
-    <i class="bbShopBubble b3"></i>
-    <i class="bbShopSpark sp1"></i>
-    <i class="bbShopSpark sp2"></i>
-    <i class="bbShopSpark sp3"></i>
-  </div>
 
-  <header class="bbShopTop">
+<section class="bbAppScreen bbShopScreen bbShopV2" id="bbAppShop" data-app-screen="shop">
+  <header class="bbShopTop bbShopV2Top">
     <button class="bbShopBack" data-app-go="home" aria-label="กลับหน้าหลัก">
-      <svg viewBox="0 0 64 64" aria-hidden="true">
-        <path d="M38 14 20 32l18 18" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M38 14 20 32l18 18" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
 
     <div class="bbShopBrand">
       <span class="bbShopBagMini" aria-hidden="true"></span>
-      <div>
-        <small>BRAIN BUDDY</small>
-        <h2>ร้านค้า</h2>
-      </div>
+      <div><small>BRAIN BUDDY</small><h2>Buddy Shop</h2></div>
     </div>
 
     <button class="bbShopWallet bbShopWalletTopup" type="button" data-app-go="topup">
       <span class="bbCoinGlyph" aria-hidden="true">B</span>
-      <span class="bbShopWalletText">
-        <small>Brain Coins</small>
-        <strong id="bbShopBalance">—</strong>
-      </span>
+      <span class="bbShopWalletText"><small>Brain Coins</small><strong id="bbShopBalance">—</strong></span>
       <span class="bbShopWalletPlus">+</span>
     </button>
   </header>
 
-  <section class="bbShopHero">
-    <div class="bbShopHeroCopy">
-      <span class="bbShopPill">COSMETIC SHOP</span>
-      <h1>แต่ง Brain Buddy<br>ให้เป็นสไตล์ของคุณ</h1>
-      <p>ของในร้านเป็นของตกแต่ง ไม่เพิ่มคะแนนและไม่เพิ่ม RP ในสนามจัดอันดับ</p>
+  <section class="bbShopV2Hero">
+    <div class="bbShopV2HeroCopy">
+      <span>SHOP 2.0</span>
+      <h1>สร้าง Buddy ในแบบของคุณ</h1>
+      <p>เปลี่ยนตัวละคร สกิน ชุด หมวก และเอฟเฟกต์ได้อย่างอิสระ ของแต่งไม่มีผลต่อคะแนนหรือ RP</p>
+      <button type="button" data-app-go="inventory">เปิดห้องแต่งตัว →</button>
     </div>
-    <div class="bbShopHeroArt" aria-hidden="true">
-      <div class="bbGiftBox">
-        <span class="lid"></span>
-        <span class="ribbon"></span>
-        <span class="star a"></span>
-        <span class="star b"></span>
+
+    <div class="bbShopPreviewMini">
+      <div class="bbBuddyRender small" id="bbShopBuddyRender">
+        <div class="bbClosetPinkBuddy" data-buddy-css-default>
+          <span class="ear left"></span><span class="ear right"></span>
+          <span class="head">
+            <i class="eye left"></i><i class="eye right"></i>
+            <i class="muzzle"></i><i class="nose"></i><i class="mouth"></i>
+            <i class="blush left"></i><i class="blush right"></i>
+          </span>
+          <span class="body"></span>
+          <span class="arm left"></span><span class="arm right"></span>
+          <span class="leg left"></span><span class="leg right"></span>
+          <span class="heart"></span>
+        </div>
+        <img class="bbClosetLayer character hidden" data-buddy-preview-layer="character" alt="">
+        <img class="bbClosetLayer skin hidden" data-buddy-preview-layer="skin" alt="">
+        <img class="bbClosetLayer outfit hidden" data-buddy-preview-layer="outfit" alt="">
+        <img class="bbClosetLayer accessory hidden" data-buddy-preview-layer="accessory" alt="">
+        <img class="bbClosetLayer hat hidden" data-buddy-preview-layer="hat" alt="">
+        <img class="bbClosetLayer effect hidden" data-buddy-preview-layer="effect" alt="">
       </div>
     </div>
   </section>
 
-  <section class="bbStarterReward" id="bbStarterReward">
-    <div class="bbStarterRewardArt" aria-hidden="true">
-      <span class="gift"></span>
-      <span class="coin c1">B</span>
-      <span class="coin c2">B</span>
-      <span class="spark s1"></span>
-      <span class="spark s2"></span>
-    </div>
+  <section class="bbStarterReward bbStarterRewardV2" id="bbStarterReward">
+    <div class="bbStarterRewardArt" aria-hidden="true"><span class="gift"></span></div>
     <div class="bbStarterRewardCopy">
       <small>WELCOME BONUS</small>
-      <h3>รับฟรี 500 Brain Coins</h3>
-      <p>โบนัสต้อนรับสำหรับสมาชิก รับได้ 1 ครั้งต่อบัญชี</p>
+      <h3>โบนัสต้อนรับสมาชิก</h3>
+      <p>รับ Brain Coins ฟรีได้ 1 ครั้งต่อบัญชี</p>
     </div>
-    <button class="bbStarterRewardBtn" id="bbClaimStarterCoins">
-      รับ 500 Coins
-    </button>
+    <button class="bbStarterRewardBtn" id="bbClaimStarterCoins">รับโบนัส</button>
   </section>
 
   <section class="bbShopLogin hidden" id="bbShopLogin">
     <div class="bbShopLoginIcon" aria-hidden="true"></div>
-    <div>
-      <strong>เข้าสู่ระบบเพื่อเปิดร้านค้า</strong>
-      <p>Brain Coins และสินค้าที่ซื้อจะผูกกับบัญชีของคุณ</p>
-    </div>
+    <div><strong>เข้าสู่ระบบเพื่อซื้อของแต่ง</strong><p>Coins และของที่ซื้อจะเก็บไว้กับบัญชีของคุณ</p></div>
     <button id="bbShopLoginBtn">เข้าสู่ระบบ</button>
   </section>
 
-  <section class="bbShopBody" id="bbShopBody">
-    <div class="bbShopSectionHead">
+  <section class="bbShopBody bbShopV2Body" id="bbShopBody">
+    <div class="bbShopV2Toolbar">
       <div>
-        <small>ITEM COLLECTION</small>
-        <h3>สินค้าทั้งหมด</h3>
+        <small>COSMETIC COLLECTION</small>
+        <h2>เลือกของแต่ง</h2>
       </div>
-      <button class="bbShopRefresh" id="bbShopRefresh">รีเฟรช</button>
+      <div class="bbShopV2Owned"><span>ของที่มี</span><b id="bbShopOwnedCount">0</b></div>
     </div>
 
-    <div class="bbShopGrid" id="bbShopGrid" aria-live="polite">
-      <div class="bbShopLoading">กำลังโหลดร้านค้า…</div>
+    <div class="bbShopV2Tabs" role="tablist">
+      <button class="active" data-shop-filter="all">ทั้งหมด</button>
+      <button data-shop-filter="character">🧸 Buddy</button>
+      <button data-shop-filter="skin">🎨 Skin</button>
+      <button data-shop-filter="outfit">👕 ชุด</button>
+      <button data-shop-filter="hat">🎩 หมวก</button>
+      <button data-shop-filter="accessory">🕶️ Accessory</button>
+      <button data-shop-filter="effect">✨ Effect</button>
+      <button data-shop-filter="frame">🖼️ Frame</button>
+      <button data-shop-filter="theme">🌈 Theme</button>
+    </div>
+
+    <div class="bbShopGrid bbShopV2Grid" id="bbShopGrid" aria-live="polite">
+      <div class="bbShopLoading">กำลังโหลด Buddy Shop…</div>
     </div>
   </section>
 
   <div class="bbShopToast hidden" id="bbShopToast"></div>
 </section>
-
 
 <section class="bbAppScreen bbWorldHubScreen" id="bbAppModes" data-app-screen="modes">
   <div class="bbWorldBackdrop" aria-hidden="true">
@@ -15454,405 +16072,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
-<script>
-(function brainBuddyV53Shop(){
-  const $=s=>document.querySelector(s);
-  let shopBusy=false;
 
-  function shopClient(){
-    if(window.__bbSupabase)return window.__bbSupabase;
-    const c=window.BRAIN_BUDDY_SUPABASE||{};
-    if(window.supabase&&c.url&&c.publishableKey){
-      window.__bbSupabase=window.supabase.createClient(c.url,c.publishableKey);
-      return window.__bbSupabase;
-    }
-    return null;
-  }
-
-  function shopToast(message){
-    const t=$("#bbShopToast");
-    if(!t)return;
-    t.textContent=message;
-    t.classList.remove("hidden");
-    clearTimeout(t.__timer);
-    t.__timer=setTimeout(()=>t.classList.add("hidden"),2300);
-  }
-
-  function esc(v){
-    return String(v??"").replace(/[&<>"']/g,m=>({
-      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-    }[m]));
-  }
-
-  const typeName={
-    bear:"หมี",
-    theme:"ธีม",
-    frame:"กรอบ",
-    effect:"เอฟเฟกต์"
-  };
-
-  async function refreshStarterReward(){
-    const card=$("#bbStarterReward");
-    const btn=$("#bbClaimStarterCoins");
-    if(!card||!btn)return;
-
-    try{
-      const c=shopClient();
-      if(!c)return;
-
-      const {data:sessionData}=await c.auth.getSession();
-      const user=sessionData?.session?.user;
-
-      if(!user){
-        card.classList.remove("claimed");
-        btn.disabled=false;
-        btn.textContent="เข้าสู่ระบบเพื่อรับ";
-        return;
-      }
-
-      const {data,error}=await c
-        .from("bb_reward_claims")
-        .select("reward_code")
-        .eq("user_id",user.id)
-        .eq("reward_code","starter_500")
-        .maybeSingle();
-
-      if(error)throw error;
-
-      if(data){
-        card.classList.add("claimed");
-        btn.disabled=true;
-        btn.textContent="รับแล้ว ✓";
-      }else{
-        card.classList.remove("claimed");
-        btn.disabled=false;
-        btn.textContent="รับ 500 Coins";
-      }
-    }catch(err){
-      console.warn("Starter reward status:",err);
-    }
-  }
-
-  async function claimStarterCoins(){
-    const c=shopClient();
-    const btn=$("#bbClaimStarterCoins");
-    if(!c||!btn)return;
-
-    const {data:sessionData}=await c.auth.getSession();
-    const user=sessionData?.session?.user;
-
-    if(!user){
-      shopToast("กรุณาเข้าสู่ระบบก่อนรับ Brain Coins");
-      if(typeof openModal==="function")openModal("accountModal");
-      return;
-    }
-
-    btn.disabled=true;
-    btn.textContent="กำลังรับ…";
-
-    try{
-      const {data,error}=await c.rpc("bb_claim_starter_coins");
-      if(error)throw error;
-
-      const result=Array.isArray(data)?data[0]:data;
-
-      if(result?.already_claimed){
-        shopToast("บัญชีนี้รับ Starter Bonus แล้ว");
-      }else{
-        shopToast("รับ 500 Brain Coins สำเร็จ 🎁");
-      }
-
-      await Promise.all([
-        loadShop(),
-        refreshStarterReward()
-      ]);
-      try{await window.bbLoadHomeInventory?.()}catch(e){}
-    }catch(err){
-      console.error("Claim starter coins:",err);
-      shopToast(String(err?.message||"รับ Brain Coins ไม่สำเร็จ"));
-      btn.disabled=false;
-      btn.textContent="รับ 500 Coins";
-    }
-  }
-
-  async function loadShop(){
-    if(shopBusy)return;
-    const grid=$("#bbShopGrid"), login=$("#bbShopLogin"), body=$("#bbShopBody"), bal=$("#bbShopBalance");
-    if(!grid||!login||!body||!bal)return;
-
-    shopBusy=true;
-    grid.innerHTML='<div class="bbShopLoading">กำลังโหลดร้านค้า…</div>';
-
-    try{
-      const c=shopClient();
-      if(!c)throw new Error("ยังเชื่อมต่อระบบ Cloud ไม่สำเร็จ");
-
-      const {data:sessionData,error:sessionError}=await c.auth.getSession();
-      if(sessionError)throw sessionError;
-      const user=sessionData?.session?.user;
-
-      if(!user){
-        bal.textContent="—";
-        login.classList.remove("hidden");
-        body.classList.add("hidden");
-        return;
-      }
-
-      login.classList.add("hidden");
-      body.classList.remove("hidden");
-
-      const [walletRes,itemsRes,ownedRes,equippedRes]=await Promise.all([
-        c.from("bb_wallets")
-          .select("coin_balance")
-          .eq("user_id",user.id)
-          .maybeSingle(),
-
-        c.from("bb_shop_items")
-          .select("id,item_code,item_type,name,description,price_coins,image_url,sort_order")
-          .eq("is_active",true)
-          .order("sort_order",{ascending:true})
-          .order("id",{ascending:true}),
-
-        c.from("bb_user_items")
-          .select("item_id")
-          .eq("user_id",user.id),
-
-        c.from("bb_equipped_items")
-          .select("item_type,item_id")
-          .eq("user_id",user.id)
-      ]);
-
-      if(walletRes.error)throw walletRes.error;
-      if(itemsRes.error)throw itemsRes.error;
-      if(ownedRes.error)throw ownedRes.error;
-      if(equippedRes.error)throw equippedRes.error;
-
-      const balance=Number(walletRes.data?.coin_balance)||0;
-      bal.textContent=balance.toLocaleString();
-
-      const owned=new Set((ownedRes.data||[]).map(x=>Number(x.item_id)));
-      const equipped=new Map((equippedRes.data||[]).map(x=>[String(x.item_type),Number(x.item_id)]));
-      const items=itemsRes.data||[];
-
-      if(!items.length){
-        grid.innerHTML='<div class="bbShopEmpty">ยังไม่มีสินค้าในร้าน</div>';
-        return;
-      }
-
-      grid.innerHTML=items.map(item=>{
-        const has=owned.has(Number(item.id));
-        const isEquipped=equipped.get(String(item.item_type))===Number(item.id);
-
-        const image=item.image_url
-          ? `<img src="${esc(item.image_url)}" alt="${esc(item.name)}" loading="lazy">`
-          : `<span class="fallback ${esc(item.item_type)}" aria-hidden="true"></span>`;
-
-        return `
-          <article class="bbShopItem">
-            <div class="bbShopItemArt">
-              ${image}
-              <span class="bbShopType">${esc(typeName[item.item_type]||item.item_type)}</span>
-              ${has?'<span class="bbShopOwned">มีแล้ว</span>':""}
-            </div>
-
-            <div class="bbShopItemCopy">
-              <h4>${esc(item.name)}</h4>
-              <p>${esc(item.description||"สินค้า Brain Buddy")}</p>
-
-              ${has ? `
-                <div class="bbOwnedStatus">ซื้อแล้ว • อยู่ในคลังของคุณ</div>
-                <button
-                  class="bbShopEquip bbShopEquipPrimary ${isEquipped?"active":""}"
-                  ${isEquipped
-                    ? `data-shop-unequip="${Number(item.id)}"`
-                    : `data-shop-equip="${Number(item.id)}"`
-                  }
-                >
-                  ${isEquipped?"ถอดออก":"ใช้เลย"}
-                </button>
-              ` : `
-                <button class="bbShopBuy" data-shop-buy="${Number(item.id)}">
-                  <span class="miniCoin">B</span>
-                  <span>${Number(item.price_coins||0).toLocaleString()} Coins</span>
-                </button>
-              `}
-            </div>
-          </article>
-        `;
-      }).join("");
-
-    }catch(err){
-      console.error("Brain Buddy Shop:",err);
-      grid.innerHTML=`<div class="bbShopEmpty">โหลดร้านค้าไม่สำเร็จ<br><small>${esc(err?.message||"กรุณาลองใหม่")}</small></div>`;
-    }finally{
-      shopBusy=false;
-      refreshStarterReward();
-    }
-  }
-
-  async function unequipItem(itemId,button){
-    if(shopBusy||!itemId)return;
-
-    const c=shopClient();
-    if(!c)return shopToast("ยังเชื่อมต่อระบบ Cloud ไม่สำเร็จ");
-
-    const original=button?.innerHTML||"";
-    if(button){
-      button.disabled=true;
-      button.textContent="กำลังถอด…";
-    }
-
-    try{
-      const {data,error}=await c.rpc("bb_unequip_shop_item",{p_item_id:Number(itemId)});
-      if(error)throw error;
-
-      const result=Array.isArray(data)?data[0]:data;
-      shopToast(`ถอด ${result?.item_name||"สินค้า"} แล้ว`);
-
-      try{
-        localStorage.removeItem(`bb_equipped_${result?.item_type||"item"}`);
-      }catch(e){}
-
-      await loadShop();
-      try{await window.bbApplyEquippedCosmetics?.()}catch(e){}
-      try{await window.bbLoadHomeInventory?.()}catch(e){}
-    }catch(err){
-      console.error("Brain Buddy Shop unequip:",err);
-      shopToast(String(err?.message||"ถอดสินค้าไม่สำเร็จ"));
-
-      if(button){
-        button.disabled=false;
-        button.innerHTML=original;
-      }
-    }
-  }
-
-  async function equipItem(itemId,button){
-    if(shopBusy||!itemId)return;
-
-    const c=shopClient();
-    if(!c)return shopToast("ยังเชื่อมต่อระบบ Cloud ไม่สำเร็จ");
-
-    const original=button?.innerHTML||"";
-    if(button){
-      button.disabled=true;
-      button.textContent="กำลังใช้…";
-    }
-
-    try{
-      const {data,error}=await c.rpc("bb_equip_shop_item",{p_item_id:Number(itemId)});
-      if(error)throw error;
-
-      const result=Array.isArray(data)?data[0]:data;
-      shopToast(`กำลังใช้ ${result?.item_name||"สินค้า"} ✓`);
-
-      try{
-        localStorage.setItem(
-          `bb_equipped_${result?.item_type||"item"}`,
-          String(result?.item_id||itemId)
-        );
-      }catch(e){}
-
-      await loadShop();
-      try{await window.bbApplyEquippedCosmetics?.()}catch(e){}
-      try{await window.bbLoadHomeInventory?.()}catch(e){}
-    }catch(err){
-      console.error("Brain Buddy Shop equip:",err);
-      shopToast(String(err?.message||"ใช้งานสินค้าไม่สำเร็จ"));
-
-      if(button){
-        button.disabled=false;
-        button.innerHTML=original;
-      }
-    }
-  }
-
-  async function buyItem(itemId,button){
-    if(shopBusy||!itemId)return;
-
-    const c=shopClient();
-    if(!c)return shopToast("ยังเชื่อมต่อระบบ Cloud ไม่สำเร็จ");
-
-    const original=button?.innerHTML||"";
-    if(button){
-      button.disabled=true;
-      button.textContent="กำลังซื้อ…";
-    }
-
-    try{
-      const {data,error}=await c.rpc("bb_buy_shop_item",{p_item_id:Number(itemId)});
-      if(error)throw error;
-
-      const result=Array.isArray(data)?data[0]:data;
-      shopToast(`ซื้อ ${result?.item_name||"สินค้า"} สำเร็จ`);
-      await loadShop();
-      try{await window.bbLoadHomeInventory?.()}catch(e){}
-    }catch(err){
-      console.error("Brain Buddy Shop buy:",err);
-      const msg=String(err?.message||"ซื้อสินค้าไม่สำเร็จ");
-      if(/Brain Coins|ไม่เพียงพอ/i.test(msg))shopToast("Brain Coins ไม่เพียงพอ");
-      else if(/มีสินค้านี้แล้ว/i.test(msg))shopToast("คุณมีสินค้านี้แล้ว");
-      else shopToast(msg);
-      if(button){
-        button.disabled=false;
-        button.innerHTML=original;
-      }
-    }
-  }
-
-  document.addEventListener("click",e=>{
-    if(e.target.closest("#bbClaimStarterCoins")){
-      e.preventDefault();
-      claimStarterCoins();
-      return;
-    }
-
-    const unequip=e.target.closest("[data-shop-unequip]");
-    if(unequip){
-      e.preventDefault();
-      unequipItem(Number(unequip.dataset.shopUnequip),unequip);
-      return;
-    }
-
-    const equip=e.target.closest("[data-shop-equip]");
-    if(equip){
-      e.preventDefault();
-      equipItem(Number(equip.dataset.shopEquip),equip);
-      return;
-    }
-
-    const buy=e.target.closest("[data-shop-buy]");
-    if(buy){
-      e.preventDefault();
-      buyItem(Number(buy.dataset.shopBuy),buy);
-      return;
-    }
-
-    if(e.target.closest("#bbShopRefresh")){
-      e.preventDefault();
-      loadShop();
-      return;
-    }
-
-    if(e.target.closest("#bbShopLoginBtn")){
-      e.preventDefault();
-      if(typeof openModal==="function"){
-        openModal("accountModal");
-      }else{
-        $("#accountModal")?.classList.remove("hidden");
-      }
-    }
-  });
-
-  window.bbLoadShop=async function(){
-    await loadShop();
-    await refreshStarterReward();
-    try{await window.bbApplyEquippedCosmetics?.()}catch(e){}
-  };
-
-  window.addEventListener("bb:auth-changed",window.bbLoadShop);
-})();
-</script>
 
 
 <script>
@@ -16090,657 +16310,13 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
-<script>
-(function brainBuddyV851AtomicCosmetics(){
-  const CLASSES=[
-    "bbCosBearPink",
-    "bbCosThemeCandy",
-    "bbCosFrameStar",
-    "bbCosEffectSparkle",
-    "bbHasEquippedBearImage"
-  ];
 
-  const q=s=>document.querySelector(s);
-  let busy=false;
-  let appliedSignature=null;
 
-  function getClient(){
-    if(window.__bbSupabase)return window.__bbSupabase;
-    const cfg=window.BRAIN_BUDDY_SUPABASE||{};
-    if(window.supabase&&cfg.url&&cfg.publishableKey){
-      window.__bbSupabase=window.supabase.createClient(cfg.url,cfg.publishableKey);
-      return window.__bbSupabase;
-    }
-    return null;
-  }
 
-  function escAttr(v){
-    return String(v??"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-  }
 
-  async function preloadImage(url){
-    if(!url)return;
-    try{
-      await new Promise(resolve=>{
-        const img=new Image();
-        let done=false;
-        const finish=()=>{if(done)return;done=true;resolve()};
-        img.onload=finish;
-        img.onerror=finish;
-        img.src=url;
-        if(img.complete)finish();
-        setTimeout(finish,2500);
-      });
-    }catch(e){}
-  }
 
-  function makeState(user,equipped,items){
-    const byId=new Map((items||[]).map(x=>[Number(x.id),x]));
-    const classes=[];
-    const names=[];
-    let bearImage="";
-    let bearName="Buddy";
 
-    for(const eq of equipped||[]){
-      const item=byId.get(Number(eq.item_id));
-      if(!item)continue;
-      names.push(item.name||"");
 
-      if(item.item_code==="bear_pink_01")classes.push("bbCosBearPink");
-      if(item.item_code==="theme_candy_01")classes.push("bbCosThemeCandy");
-      if(item.item_code==="frame_star_01")classes.push("bbCosFrameStar");
-      if(item.item_code==="effect_sparkle_01")classes.push("bbCosEffectSparkle");
-
-      if(item.item_type==="bear" && item.image_url){
-        classes.push("bbHasEquippedBearImage");
-        bearImage=String(item.image_url);
-        bearName=item.name||"Buddy";
-      }
-    }
-
-    classes.sort();
-    const signature=JSON.stringify({
-      user:user?.id||null,
-      classes,
-      names:[...names].sort(),
-      bearImage
-    });
-
-    return {classes,names,bearImage,bearName,signature};
-  }
-
-  function commitState(state){
-    if(state.signature===appliedSignature)return false;
-
-    // All DOM changes occur synchronously only AFTER every query has completed.
-    // The browser therefore paints one final state instead of showing a blank/default
-    // cosmetics frame while network requests are still running.
-    document.body.classList.remove(...CLASSES);
-    if(state.classes.length)document.body.classList.add(...state.classes);
-
-    if(state.bearImage){
-      document.documentElement.style.setProperty(
-        "--bb-equipped-bear-image",
-        `url("${state.bearImage.replace(/"/g,"%22")}")`
-      );
-    }else{
-      document.documentElement.style.removeProperty("--bb-equipped-bear-image");
-    }
-
-    const label=q("#bbEquippedCosmeticLabel");
-    if(label){
-      if(state.names.length){
-        label.textContent="กำลังใช้: "+state.names.join(" • ");
-        label.classList.remove("hidden");
-      }else{
-        label.textContent="";
-        label.classList.add("hidden");
-      }
-    }
-
-    for(const el of [q("#navAvatar"),q("#bbAppAvatar")]){
-      if(!el)continue;
-      if(state.bearImage){
-        const url=escAttr(state.bearImage);
-        const name=escAttr(state.bearName);
-        if(el.dataset.bbShopAvatar!=="1" || el.querySelector("img")?.src!==state.bearImage){
-          el.innerHTML=`<img src="${url}" alt="${name}">`;
-        }
-        el.dataset.bbShopAvatar="1";
-      }else if(el.dataset.bbShopAvatar==="1"){
-        // Clear only when the NEW, fully-loaded state confirms there is no bear image.
-        el.textContent="🧸";
-        delete el.dataset.bbShopAvatar;
-      }
-    }
-
-    appliedSignature=state.signature;
-    return true;
-  }
-
-  async function applyEquippedCosmetics(){
-    if(busy)return;
-    busy=true;
-
-    try{
-      const c=getClient();
-      if(!c)return; // transient client failure must NEVER erase the current UI
-
-      const {data:sessionData,error:sessionError}=await c.auth.getSession();
-      if(sessionError)throw sessionError;
-      const user=sessionData?.session?.user||null;
-
-      if(!user){
-        commitState(makeState(null,[],[]));
-        return;
-      }
-
-      const {data:equipped,error:eqErr}=await c
-        .from("bb_equipped_items")
-        .select("item_type,item_id")
-        .eq("user_id",user.id);
-      if(eqErr)throw eqErr;
-
-      const ids=[...new Set((equipped||[]).map(x=>Number(x.item_id)).filter(Boolean))];
-      let items=[];
-
-      if(ids.length){
-        const {data,error:itemErr}=await c
-          .from("bb_shop_items")
-          .select("id,item_code,item_type,name,image_url")
-          .in("id",ids);
-        if(itemErr)throw itemErr;
-        items=data||[];
-      }
-
-      const state=makeState(user,equipped||[],items);
-      if(state.bearImage && state.signature!==appliedSignature){
-        await preloadImage(state.bearImage);
-      }
-      commitState(state);
-
-    }catch(err){
-      // IMPORTANT: keep the last known-good cosmetics on transient network errors.
-      console.warn("Brain Buddy cosmetics retained after sync error:",err);
-    }finally{
-      busy=false;
-    }
-  }
-
-  window.bbApplyEquippedCosmetics=applyEquippedCosmetics;
-
-  // Event-driven only. Shop/inventory functions already call this after a confirmed change.
-  window.addEventListener("bb:auth-changed",()=>setTimeout(applyEquippedCosmetics,80));
-
-  if(document.readyState==="loading"){
-    document.addEventListener("DOMContentLoaded",()=>setTimeout(applyEquippedCosmetics,380),{once:true});
-  }else{
-    setTimeout(applyEquippedCosmetics,380);
-  }
-})();
-</script>
-
-
-<script>
-(function brainBuddyV61HomeInventory(){
-  const q=s=>document.querySelector(s);
-  let busy=false;
-
-  function client(){
-    if(window.__bbSupabase)return window.__bbSupabase;
-    const cfg=window.BRAIN_BUDDY_SUPABASE||{};
-    if(window.supabase&&cfg.url&&cfg.publishableKey){
-      window.__bbSupabase=window.supabase.createClient(cfg.url,cfg.publishableKey);
-      return window.__bbSupabase;
-    }
-    return null;
-  }
-
-  function setGuestHomeInventory(){
-    const balance=q("#bbHomeCoinBalance");
-    const count=q("#bbHomeOwnedCount");
-    if(balance)balance.textContent="—";
-    if(count)count.textContent="เข้าสู่ระบบเพื่อดูคลัง";
-
-    document.querySelectorAll("[data-home-cosmetic-type]").forEach(slot=>{
-      slot.classList.remove("equipped");
-      const b=slot.querySelector(".copy b");
-      if(b)b.textContent="ยังไม่ได้ใช้";
-    });
-
-    document.body.classList.remove("bbHeroUsesBear","bbHeroBearHasImage");
-
-    const hero=q("#bbEquippedHeroCharacter");
-    if(hero)hero.classList.add("hidden");
-
-    const img=q("#bbEquippedHeroCharacterImg");
-    if(img){
-      img.removeAttribute("src");
-      img.alt="";
-    }
-  }
-
-  async function loadHomeInventory(){
-    if(busy)return;
-    busy=true;
-
-    try{
-      const c=client();
-      if(!c){
-        setGuestHomeInventory();
-        return;
-      }
-
-      const {data:sessionData}=await c.auth.getSession();
-      const user=sessionData?.session?.user;
-
-      if(!user){
-        setGuestHomeInventory();
-        return;
-      }
-
-      const [walletRes, ownedRes, equippedRes]=await Promise.all([
-        c.from("bb_wallets")
-          .select("coin_balance")
-          .eq("user_id",user.id)
-          .maybeSingle(),
-
-        c.from("bb_user_items")
-          .select("item_id")
-          .eq("user_id",user.id),
-
-        c.from("bb_equipped_items")
-          .select("item_type,item_id")
-          .eq("user_id",user.id)
-      ]);
-
-      if(walletRes.error)throw walletRes.error;
-      if(ownedRes.error)throw ownedRes.error;
-      if(equippedRes.error)throw equippedRes.error;
-
-      const balance=Number(walletRes.data?.coin_balance)||0;
-      const owned=(ownedRes.data||[]);
-      const equipped=(equippedRes.data||[]);
-
-      const balEl=q("#bbHomeCoinBalance");
-      const countEl=q("#bbHomeOwnedCount");
-      if(balEl)balEl.textContent=balance.toLocaleString();
-      if(countEl)countEl.textContent=`${owned.length.toLocaleString()} ชิ้น`;
-
-      const eqIds=equipped.map(x=>Number(x.item_id)).filter(Boolean);
-      let itemMap=new Map();
-
-      if(eqIds.length){
-        const {data:items,error:itemErr}=await c
-          .from("bb_shop_items")
-          .select("id,item_type,name,item_code,image_url")
-          .in("id",eqIds);
-
-        if(itemErr)throw itemErr;
-        itemMap=new Map((items||[]).map(x=>[Number(x.id),x]));
-      }
-
-      document.querySelectorAll("[data-home-cosmetic-type]").forEach(slot=>{
-        const type=slot.dataset.homeCosmeticType;
-        const eq=equipped.find(x=>String(x.item_type)===String(type));
-        const item=eq?itemMap.get(Number(eq.item_id)):null;
-        const nameEl=slot.querySelector(".copy b");
-
-        slot.classList.toggle("equipped",!!item);
-        if(nameEl)nameEl.textContent=item?.name||"ยังไม่ได้ใช้";
-      });
-
-      // Hero mascot: an equipped bear should replace the pink brain mascot.
-      const bearEq=equipped.find(x=>x.item_type==="bear");
-      const bear=bearEq?itemMap.get(Number(bearEq.item_id)):null;
-
-      const hero=q("#bbEquippedHeroCharacter");
-      const heroImg=q("#bbEquippedHeroCharacterImg");
-
-      if(bear){
-        document.body.classList.add("bbHeroUsesBear");
-        hero?.classList.remove("hidden");
-
-        if(bear.image_url){
-          document.body.classList.add("bbHeroBearHasImage");
-          if(heroImg){
-            heroImg.src=bear.image_url;
-            heroImg.alt=bear.name||"Buddy";
-          }
-        }else{
-          document.body.classList.remove("bbHeroBearHasImage");
-          if(heroImg){
-            heroImg.removeAttribute("src");
-            heroImg.alt="";
-          }
-        }
-      }else{
-        document.body.classList.remove("bbHeroUsesBear","bbHeroBearHasImage");
-        hero?.classList.add("hidden");
-        if(heroImg){
-          heroImg.removeAttribute("src");
-          heroImg.alt="";
-        }
-      }
-
-    }catch(err){
-      console.warn("Brain Buddy Home inventory:",err);
-    }finally{
-      busy=false;
-    }
-  }
-
-  window.bbLoadHomeInventory=loadHomeInventory;
-
-  // Sync after shop equip / unequip / purchase interactions.
-  document.addEventListener("click",e=>{
-    if(
-      e.target.closest("[data-shop-equip]") ||
-      e.target.closest("[data-shop-unequip]") ||
-      e.target.closest("[data-shop-buy]") ||
-      e.target.closest("#bbClaimStarterCoins")
-    ){
-      setTimeout(loadHomeInventory,450);
-      setTimeout(loadHomeInventory,1100);
-    }
-  });
-
-  window.addEventListener("bb:auth-changed",()=>{
-    setTimeout(loadHomeInventory,120);
-  });
-
-  if(document.readyState==="loading"){
-    document.addEventListener("DOMContentLoaded",()=>{
-      setTimeout(loadHomeInventory,500);
-    },{once:true});
-  }else{
-    setTimeout(loadHomeInventory,500);
-  }
-
-  setTimeout(loadHomeInventory,1600);
-})();
-</script>
-
-
-<script>
-(function brainBuddyV62Inventory(){
-  const q=s=>document.querySelector(s);
-  let filter="all";
-  let busy=false;
-  let cache={items:[],equipped:new Map(),balance:0};
-
-  const typeName={bear:"หมี",theme:"ธีม",frame:"กรอบ",effect:"เอฟเฟกต์"};
-
-  function client(){
-    if(window.__bbSupabase)return window.__bbSupabase;
-    const cfg=window.BRAIN_BUDDY_SUPABASE||{};
-    if(window.supabase&&cfg.url&&cfg.publishableKey){
-      window.__bbSupabase=window.supabase.createClient(cfg.url,cfg.publishableKey);
-      return window.__bbSupabase;
-    }
-    return null;
-  }
-
-  function esc(v){
-    return String(v??"").replace(/[&<>"']/g,m=>({
-      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-    }[m]));
-  }
-
-  function toast(msg){
-    const t=q("#bbInventoryToast");
-    if(!t)return;
-    t.textContent=msg;
-    t.classList.remove("hidden");
-    clearTimeout(t.__timer);
-    t.__timer=setTimeout(()=>t.classList.add("hidden"),2200);
-  }
-
-  function setFilter(next){
-    filter=["all","bear","theme","frame","effect"].includes(next)?next:"all";
-    document.querySelectorAll("[data-inventory-filter]").forEach(btn=>{
-      btn.classList.toggle("active",btn.dataset.inventoryFilter===filter);
-    });
-    render();
-  }
-
-  function render(){
-    const grid=q("#bbInventoryGrid");
-    if(!grid)return;
-
-    const visible=filter==="all"
-      ? cache.items
-      : cache.items.filter(item=>item.item_type===filter);
-
-    if(!visible.length){
-      grid.innerHTML=`
-        <div class="bbInventoryEmpty">
-          <strong>${cache.items.length?"ยังไม่มีของในหมวดนี้":"คลังของคุณยังว่างอยู่"}</strong>
-          <span>${cache.items.length?"ลองเลือกหมวดอื่นได้เลย":"ไปเลือกรับหรือซื้อของตกแต่งในร้านค้าได้เลย"}</span>
-          ${cache.items.length?"":'<button type="button" data-app-go="shop">ไปที่ร้านค้า</button>'}
-        </div>
-      `;
-      return;
-    }
-
-    grid.innerHTML=visible.map(item=>{
-      const equippedId=cache.equipped.get(item.item_type);
-      const isEquipped=Number(equippedId)===Number(item.id);
-      const art=item.image_url
-        ? `<img src="${esc(item.image_url)}" alt="${esc(item.name)}" loading="lazy">`
-        : `<span class="fallback ${esc(item.item_type)}" aria-hidden="true"></span>`;
-
-      return `
-        <article class="bbInventoryItem ${isEquipped?"equipped":""}">
-          <div class="bbInventoryItemArt">
-            ${art}
-            <span class="bbInventoryType">${esc(typeName[item.item_type]||item.item_type)}</span>
-            ${isEquipped?'<span class="bbInventoryUsing">กำลังใช้ ✓</span>':""}
-          </div>
-
-          <div class="bbInventoryItemCopy">
-            <h4>${esc(item.name)}</h4>
-            <p>${esc(item.description||"ของตกแต่ง Brain Buddy")}</p>
-            <button
-              type="button"
-              class="bbInventoryAction ${isEquipped?"remove":""}"
-              ${isEquipped
-                ? `data-inventory-unequip="${Number(item.id)}"`
-                : `data-inventory-equip="${Number(item.id)}"`
-              }
-            >
-              ${isEquipped?"ถอดออก":"ใช้เลย"}
-            </button>
-          </div>
-        </article>
-      `;
-    }).join("");
-  }
-
-  async function loadInventory(){
-    if(busy)return;
-    busy=true;
-
-    const grid=q("#bbInventoryGrid");
-    const body=q("#bbInventoryBody");
-    const guest=q("#bbInventoryGuest");
-    if(grid)grid.innerHTML='<div class="bbInventoryLoading">กำลังโหลดคลังของคุณ…</div>';
-
-    try{
-      const c=client();
-      if(!c)throw new Error("ยังเชื่อมต่อ Cloud ไม่สำเร็จ");
-
-      const {data:sessionData}=await c.auth.getSession();
-      const user=sessionData?.session?.user;
-
-      if(!user){
-        guest?.classList.remove("hidden");
-        body?.classList.add("hidden");
-        q("#bbInventoryBalance").textContent="—";
-        q("#bbInventoryOwnedCount").textContent="0";
-        q("#bbInventoryEquippedCount").textContent="0";
-        cache={items:[],equipped:new Map(),balance:0};
-        return;
-      }
-
-      guest?.classList.add("hidden");
-      body?.classList.remove("hidden");
-
-      const [walletRes,ownedRes,equippedRes]=await Promise.all([
-        c.from("bb_wallets")
-          .select("coin_balance")
-          .eq("user_id",user.id)
-          .maybeSingle(),
-
-        c.from("bb_user_items")
-          .select("item_id,acquired_at")
-          .eq("user_id",user.id)
-          .order("acquired_at",{ascending:false}),
-
-        c.from("bb_equipped_items")
-          .select("item_type,item_id")
-          .eq("user_id",user.id)
-      ]);
-
-      if(walletRes.error)throw walletRes.error;
-      if(ownedRes.error)throw ownedRes.error;
-      if(equippedRes.error)throw equippedRes.error;
-
-      const ids=(ownedRes.data||[]).map(x=>Number(x.item_id)).filter(Boolean);
-      let shopItems=[];
-
-      if(ids.length){
-        const {data,error}=await c
-          .from("bb_shop_items")
-          .select("id,item_code,item_type,name,description,image_url,sort_order")
-          .in("id",ids);
-
-        if(error)throw error;
-
-        const order=new Map(ids.map((id,index)=>[id,index]));
-        shopItems=(data||[]).sort(
-          (a,b)=>(order.get(Number(a.id))??9999)-(order.get(Number(b.id))??9999)
-        );
-      }
-
-      cache={
-        items:shopItems,
-        equipped:new Map((equippedRes.data||[]).map(x=>[String(x.item_type),Number(x.item_id)])),
-        balance:Number(walletRes.data?.coin_balance)||0
-      };
-
-      q("#bbInventoryBalance").textContent=cache.balance.toLocaleString();
-      q("#bbInventoryOwnedCount").textContent=cache.items.length.toLocaleString();
-      q("#bbInventoryEquippedCount").textContent=cache.equipped.size.toLocaleString();
-
-      render();
-
-    }catch(err){
-      console.error("Brain Buddy Inventory:",err);
-      if(grid){
-        grid.innerHTML=`
-          <div class="bbInventoryEmpty">
-            <strong>โหลดคลังไม่สำเร็จ</strong>
-            <span>${esc(err?.message||"กรุณาลองใหม่")}</span>
-          </div>
-        `;
-      }
-    }finally{
-      busy=false;
-    }
-  }
-
-  async function equip(itemId,button){
-    const c=client();
-    if(!c||!itemId)return;
-
-    const original=button?.textContent||"ใช้เลย";
-    if(button){button.disabled=true;button.textContent="กำลังใช้…"}
-
-    try{
-      const {data,error}=await c.rpc("bb_equip_shop_item",{p_item_id:Number(itemId)});
-      if(error)throw error;
-
-      const result=Array.isArray(data)?data[0]:data;
-      toast(`กำลังใช้ ${result?.item_name||"สินค้า"} ✓`);
-
-      await loadInventory();
-      try{await window.bbApplyEquippedCosmetics?.()}catch(e){}
-      try{await window.bbLoadHomeInventory?.()}catch(e){}
-    }catch(err){
-      console.error("Inventory equip:",err);
-      toast(String(err?.message||"ใช้งานสินค้าไม่สำเร็จ"));
-      if(button){button.disabled=false;button.textContent=original}
-    }
-  }
-
-  async function unequip(itemId,button){
-    const c=client();
-    if(!c||!itemId)return;
-
-    const original=button?.textContent||"ถอดออก";
-    if(button){button.disabled=true;button.textContent="กำลังถอด…"}
-
-    try{
-      const {data,error}=await c.rpc("bb_unequip_shop_item",{p_item_id:Number(itemId)});
-      if(error)throw error;
-
-      const result=Array.isArray(data)?data[0]:data;
-      toast(`ถอด ${result?.item_name||"สินค้า"} แล้ว`);
-
-      await loadInventory();
-      try{await window.bbApplyEquippedCosmetics?.()}catch(e){}
-      try{await window.bbLoadHomeInventory?.()}catch(e){}
-    }catch(err){
-      console.error("Inventory unequip:",err);
-      toast(String(err?.message||"ถอดสินค้าไม่สำเร็จ"));
-      if(button){button.disabled=false;button.textContent=original}
-    }
-  }
-
-  // Home collection slots open the inventory already filtered to that type.
-  document.addEventListener("click",e=>{
-    const open=e.target.closest("[data-inventory-open]");
-    if(open){
-      setFilter(open.dataset.inventoryOpen);
-    }
-
-    const filterBtn=e.target.closest("[data-inventory-filter]");
-    if(filterBtn){
-      e.preventDefault();
-      setFilter(filterBtn.dataset.inventoryFilter);
-      return;
-    }
-
-    const eq=e.target.closest("[data-inventory-equip]");
-    if(eq){
-      e.preventDefault();
-      equip(Number(eq.dataset.inventoryEquip),eq);
-      return;
-    }
-
-    const un=e.target.closest("[data-inventory-unequip]");
-    if(un){
-      e.preventDefault();
-      unequip(Number(un.dataset.inventoryUnequip),un);
-      return;
-    }
-
-    if(e.target.closest("#bbInventoryLoginBtn")){
-      e.preventDefault();
-      if(typeof openModal==="function")openModal("accountModal");
-      else q("#accountModal")?.classList.remove("hidden");
-    }
-  },true);
-
-  window.bbLoadInventory=loadInventory;
-  window.bbInventorySetFilter=setFilter;
-
-  window.addEventListener("bb:auth-changed",()=>{
-    setTimeout(loadInventory,120);
-  });
-})();
-</script>
 
 
 <script>
@@ -21231,6 +20807,810 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener("pageshow",stabilize,{passive:true});
   window.addEventListener("orientationchange",()=>setTimeout(stabilize,120),{passive:true});
+})();
+</script>
+
+
+<script>
+(function brainBuddyV86Cosmetics(){
+  const q=(s,r=document)=>r.querySelector(s);
+  const qa=(s,r=document)=>[...r.querySelectorAll(s)];
+
+  const VALID_SLOTS=["character","skin","outfit","hat","accessory","effect","frame","theme"];
+  const TYPE_TO_SLOT={
+    bear:"character",character:"character",skin:"skin",outfit:"outfit",hat:"hat",
+    accessory:"accessory",effect:"effect",frame:"frame",theme:"theme"
+  };
+  const SLOT_META={
+    character:{icon:"🧸",name:"Buddy",empty:"Pink Buddy"},
+    skin:{icon:"🎨",name:"Skin",empty:"Default"},
+    outfit:{icon:"👕",name:"ชุด",empty:"ไม่ได้ใส่"},
+    hat:{icon:"🎩",name:"หมวก",empty:"ไม่ได้ใส่"},
+    accessory:{icon:"🕶️",name:"Accessory",empty:"ไม่ได้ใส่"},
+    effect:{icon:"✨",name:"Effect",empty:"ไม่ได้ใส่"},
+    frame:{icon:"🖼️",name:"Frame",empty:"Default"},
+    theme:{icon:"🌈",name:"Theme",empty:"Default"}
+  };
+  const TYPE_LABEL={
+    bear:"Buddy",character:"Buddy",skin:"Skin",outfit:"ชุด",hat:"หมวก",
+    accessory:"Accessory",effect:"Effect",frame:"Frame",theme:"Theme"
+  };
+  const FALLBACK_ICON={
+    character:"🧸",skin:"🎨",outfit:"👕",hat:"🎩",accessory:"🕶️",
+    effect:"✨",frame:"🖼️",theme:"🌈"
+  };
+
+  let shopFilter="all";
+  let closetFilter="all";
+  let busy=false;
+  let state={
+    user:null,balance:0,items:[],owned:new Set(),loadout:new Map(),signature:""
+  };
+
+  function client(){
+    if(window.__bbSupabase)return window.__bbSupabase;
+    const cfg=window.BRAIN_BUDDY_SUPABASE||{};
+    if(window.supabase&&cfg.url&&cfg.publishableKey){
+      window.__bbSupabase=window.supabase.createClient(cfg.url,cfg.publishableKey);
+      return window.__bbSupabase;
+    }
+    return null;
+  }
+
+  function esc(v){
+    return String(v??"").replace(/[&<>"']/g,m=>({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    }[m]));
+  }
+
+  function attr(v){return esc(v)}
+
+  function slotOf(item){
+    return item?.slot_type || TYPE_TO_SLOT[item?.item_type] || null;
+  }
+
+  function assetOf(item){
+    return item?.asset_url || item?.image_url || item?.thumbnail_url || "";
+  }
+
+  function thumbOf(item){
+    return item?.thumbnail_url || item?.image_url || item?.asset_url || "";
+  }
+
+  function byId(id){
+    return state.items.find(x=>Number(x.id)===Number(id))||null;
+  }
+
+  function loadoutItem(slot){
+    return state.loadout.get(slot)||null;
+  }
+
+  function shopToast(msg){
+    const t=q("#bbShopToast");
+    if(!t)return;
+    t.textContent=msg;
+    t.classList.remove("hidden");
+    clearTimeout(t.__timer);
+    t.__timer=setTimeout(()=>t.classList.add("hidden"),2100);
+  }
+
+  function closetToast(msg){
+    const t=q("#bbInventoryToast");
+    if(!t)return;
+    t.textContent=msg;
+    t.classList.remove("hidden");
+    clearTimeout(t.__timer);
+    t.__timer=setTimeout(()=>t.classList.add("hidden"),2100);
+  }
+
+  async function preload(urls){
+    await Promise.all(
+      [...new Set(urls.filter(Boolean))].map(url=>new Promise(resolve=>{
+        const im=new Image();
+        im.onload=im.onerror=()=>resolve();
+        im.src=url;
+      }))
+    );
+  }
+
+  async function ensureDefault(c,user){
+    if(!user)return;
+    try{
+      const {error}=await c.rpc("bb_ensure_default_buddy");
+      if(error)throw error;
+    }catch(err){
+      console.warn("Default Buddy:",err);
+    }
+  }
+
+  async function fetchState(){
+    if(busy)return state;
+    busy=true;
+
+    try{
+      const c=client();
+      if(!c)throw new Error("ยังเชื่อมต่อ Cloud ไม่สำเร็จ");
+
+      const {data:sessionData,error:sessionError}=await c.auth.getSession();
+      if(sessionError)throw sessionError;
+
+      const user=sessionData?.session?.user||null;
+
+      if(!user){
+        state={user:null,balance:0,items:[],owned:new Set(),loadout:new Map(),signature:"guest"};
+        commitAll();
+        return state;
+      }
+
+      await ensureDefault(c,user);
+
+      const [walletRes,itemsRes,ownedRes,loadoutRes]=await Promise.all([
+        c.from("bb_wallets")
+          .select("coin_balance")
+          .eq("user_id",user.id)
+          .maybeSingle(),
+
+        c.from("bb_shop_items")
+          .select("id,item_code,item_type,slot_type,name,description,price_coins,image_url,asset_url,thumbnail_url,rarity,is_default,is_limited,collection_name,layer_order,metadata,sort_order")
+          .eq("is_active",true)
+          .order("sort_order",{ascending:true})
+          .order("id",{ascending:true}),
+
+        c.from("bb_user_items")
+          .select("item_id")
+          .eq("user_id",user.id),
+
+        c.rpc("bb_my_cosmetic_loadout")
+      ]);
+
+      if(walletRes.error)throw walletRes.error;
+      if(itemsRes.error)throw itemsRes.error;
+      if(ownedRes.error)throw ownedRes.error;
+      if(loadoutRes.error)throw loadoutRes.error;
+
+      const items=itemsRes.data||[];
+      const owned=new Set((ownedRes.data||[]).map(x=>Number(x.item_id)));
+      const loadout=new Map();
+
+      (loadoutRes.data||[]).forEach(row=>{
+        loadout.set(row.slot_type,{
+          ...row,
+          slot_type:row.slot_type
+        });
+      });
+
+      const signature=JSON.stringify({
+        uid:user.id,
+        balance:Number(walletRes.data?.coin_balance)||0,
+        owned:[...owned].sort((a,b)=>a-b),
+        loadout:[...loadout.entries()].map(([k,v])=>[k,v.item_id]).sort()
+      });
+
+      const next={
+        user,
+        balance:Number(walletRes.data?.coin_balance)||0,
+        items,
+        owned,
+        loadout,
+        signature
+      };
+
+      const urls=[...loadout.values()].map(assetOf);
+      await preload(urls);
+
+      state=next;
+      commitAll();
+      return state;
+
+    }catch(err){
+      console.warn("Brain Buddy v86 cosmetics:",err);
+      shopToast(String(err?.message||"โหลดของแต่งไม่สำเร็จ"));
+      return state;
+    }finally{
+      busy=false;
+    }
+  }
+
+  function resetKnownThemeClasses(){
+    document.body.classList.remove(
+      "bbCosThemeCandy","bbCosFrameStar","bbCosEffectSparkle",
+      "bbCosBearPink","bbHasEquippedBearImage","bbHeroBearHasImage"
+    );
+  }
+
+  function applyKnownThemeClasses(){
+    resetKnownThemeClasses();
+
+    const codes=[...state.loadout.values()].map(x=>x.item_code);
+
+    if(codes.includes("theme_candy_01"))document.body.classList.add("bbCosThemeCandy");
+    if(codes.includes("frame_star_01"))document.body.classList.add("bbCosFrameStar");
+    if(codes.includes("effect_sparkle_01"))document.body.classList.add("bbCosEffectSparkle");
+  }
+
+  function renderImageLayer(el,item){
+    if(!el)return;
+    const src=assetOf(item);
+
+    if(src){
+      if(el.getAttribute("src")!==src)el.setAttribute("src",src);
+      el.alt=item?.name||"";
+      el.classList.remove("hidden");
+    }else{
+      el.removeAttribute("src");
+      el.alt="";
+      el.classList.add("hidden");
+    }
+  }
+
+  function renderBuddyInto(root){
+    if(!root)return;
+
+    const character=loadoutItem("character");
+    const charAsset=assetOf(character);
+    const cssDefault=q("[data-buddy-css-default]",root);
+
+    const characterLayer=q('[data-buddy-preview-layer="character"]',root);
+    if(characterLayer)renderImageLayer(characterLayer,character);
+
+    if(cssDefault){
+      cssDefault.classList.toggle("hidden",!!charAsset);
+    }
+
+    ["skin","outfit","accessory","hat","effect"].forEach(slot=>{
+      renderImageLayer(q(`[data-buddy-preview-layer="${slot}"]`,root),loadoutItem(slot));
+    });
+  }
+
+  function renderHomeBuddy(){
+    const hero=q("#bbEquippedHeroCharacter");
+    const pink=q("#bbPinkBuddy3D");
+    const base=q("#bbEquippedHeroCharacterImg");
+    if(hero)hero.classList.remove("hidden");
+    q("#bbDefaultHeroMascot")?.classList.add("hidden");
+
+    const character=loadoutItem("character");
+    const charAsset=assetOf(character);
+
+    if(base){
+      if(charAsset){
+        if(base.getAttribute("src")!==charAsset)base.setAttribute("src",charAsset);
+        base.alt=character?.name||"Buddy";
+        base.classList.remove("hidden");
+      }else{
+        base.removeAttribute("src");
+        base.alt="";
+        base.classList.add("hidden");
+      }
+    }
+
+    pink?.classList.toggle("hidden",!!charAsset);
+
+    const homeMap={
+      skin:"#bbHomeBuddySkin",
+      outfit:"#bbHomeBuddyOutfit",
+      accessory:"#bbHomeBuddyAccessory",
+      hat:"#bbHomeBuddyHat",
+      effect:"#bbHomeBuddyEffect"
+    };
+    Object.entries(homeMap).forEach(([slot,selector])=>{
+      renderImageLayer(q(selector),loadoutItem(slot));
+    });
+
+    const characterName=character?.name||"Pink Buddy";
+    const activeNames=[...state.loadout.values()].map(x=>x.name).filter(Boolean);
+
+    const label=q("#bbEquippedCosmeticLabel");
+    if(label){
+      label.textContent=activeNames.length
+        ? "Look: "+activeNames.join(" • ")
+        : "Look: Pink Buddy";
+      label.classList.remove("hidden");
+    }
+
+    const navAvatar=q("#navAvatar");
+    if(navAvatar){
+      if(charAsset){
+        navAvatar.innerHTML=`<img src="${attr(charAsset)}" alt="${attr(characterName)}">`;
+        navAvatar.dataset.bbShopAvatar="1";
+      }else if(navAvatar.dataset.bbShopAvatar==="1"){
+        navAvatar.textContent="🧸";
+        delete navAvatar.dataset.bbShopAvatar;
+      }
+    }
+  }
+
+  function renderLoadout(){
+    qa("[data-closet-slot]").forEach(btn=>{
+      const slot=btn.dataset.closetSlot;
+      const item=loadoutItem(slot);
+      const b=q("b",btn);
+      if(b)b.textContent=item?.name||SLOT_META[slot]?.empty||"Default";
+      btn.classList.toggle("active",!!item || slot==="character");
+    });
+
+    const char=loadoutItem("character");
+    const name=q("#bbClosetBuddyName");
+    const look=q("#bbClosetBuddyLook");
+    if(name)name.textContent=char?.name||"Pink Buddy";
+
+    const lookNames=["skin","outfit","hat","accessory","effect"]
+      .map(s=>loadoutItem(s)?.name)
+      .filter(Boolean);
+
+    if(look)look.textContent=lookNames.length?lookNames.join(" • "):"Default Look";
+
+    renderBuddyInto(q("#bbClosetBuddyRender"));
+    renderBuddyInto(q("#bbShopBuddyRender"));
+  }
+
+  function renderHomeSummary(){
+    const bal=q("#bbHomeCoinBalance");
+    const count=q("#bbHomeOwnedCount");
+    if(bal)bal.textContent=state.user?state.balance.toLocaleString():"—";
+    if(count)count.textContent=state.user?`${state.owned.size.toLocaleString()} ชิ้น`:"Default Buddy";
+
+    qa("[data-home-cosmetic-slot]").forEach(slotEl=>{
+      const slot=slotEl.dataset.homeCosmeticSlot;
+      const item=loadoutItem(slot);
+      const b=q(".copy b",slotEl);
+      const fallback=SLOT_META[slot]?.empty||"Default";
+      if(b)b.textContent=item?.name||fallback;
+      slotEl.classList.toggle("equipped",!!item || slot==="character");
+    });
+  }
+
+  function commitAll(){
+    applyKnownThemeClasses();
+    renderHomeBuddy();
+    renderHomeSummary();
+    renderLoadout();
+    renderShop();
+    renderCloset();
+
+    const shopBal=q("#bbShopBalance");
+    const invBal=q("#bbInventoryBalance");
+    const shopOwned=q("#bbShopOwnedCount");
+    const invOwned=q("#bbInventoryOwnedCount");
+    const invEq=q("#bbInventoryEquippedCount");
+
+    if(shopBal)shopBal.textContent=state.user?state.balance.toLocaleString():"—";
+    if(invBal)invBal.textContent=state.user?state.balance.toLocaleString():"—";
+    if(shopOwned)shopOwned.textContent=state.owned.size.toLocaleString();
+    if(invOwned)invOwned.textContent=state.owned.size.toLocaleString();
+    if(invEq)invEq.textContent=state.loadout.size.toLocaleString();
+
+    q("#bbShopLogin")?.classList.toggle("hidden",!!state.user);
+    q("#bbShopBody")?.classList.toggle("hidden",!state.user);
+
+    q("#bbInventoryGuest")?.classList.toggle("hidden",!!state.user);
+    // Guest may preview Default Buddy, but owned grid requires a member.
+    q("#bbInventoryBody")?.classList.remove("hidden");
+  }
+
+  function emptyCard(message,shop=false){
+    return `<div class="${shop?"bbShopEmpty":"bbInventoryEmpty"}">${esc(message)}</div>`;
+  }
+
+  function filteredItems(which){
+    const filter=which==="shop"?shopFilter:closetFilter;
+    let list=which==="shop"?state.items:state.items.filter(x=>state.owned.has(Number(x.id)));
+
+    if(filter!=="all"){
+      list=list.filter(item=>slotOf(item)===filter);
+    }
+
+    return list;
+  }
+
+  function shopArt(item){
+    const src=thumbOf(item);
+    if(src)return `<img src="${attr(src)}" alt="${attr(item.name)}" loading="lazy">`;
+    return `<span class="fallback" style="font-size:2.2rem">${FALLBACK_ICON[slotOf(item)]||"🎁"}</span>`;
+  }
+
+  function renderShop(){
+    const grid=q("#bbShopGrid");
+    if(!grid)return;
+
+    qa("[data-shop-filter]").forEach(btn=>{
+      btn.classList.toggle("active",btn.dataset.shopFilter===shopFilter);
+    });
+
+    if(!state.user){
+      grid.innerHTML=emptyCard("เข้าสู่ระบบเพื่อเปิด Buddy Shop",true);
+      return;
+    }
+
+    const list=filteredItems("shop");
+    if(!list.length){
+      grid.innerHTML=emptyCard("ยังไม่มีสินค้าในหมวดนี้ — เราจะเพิ่มคอลเลกชันใหม่ในขั้นต่อไป",true);
+      return;
+    }
+
+    grid.innerHTML=list.map(item=>{
+      const id=Number(item.id);
+      const slot=slotOf(item);
+      const has=state.owned.has(id);
+      const equipped=Number(loadoutItem(slot)?.item_id)===id;
+      const rarity=item.rarity||"common";
+
+      let action="";
+      if(has){
+        if(equipped){
+          if(slot==="character" && item.is_default){
+            action=`<button class="bbShopEquip bbShopEquipPrimary active" disabled>กำลังใช้ Default ✓</button>`;
+          }else{
+            action=`<button class="bbShopEquip bbShopEquipPrimary active" data-v86-unequip="${slot}">ถอดออก</button>`;
+          }
+        }else{
+          action=`<button class="bbShopEquip bbShopEquipPrimary" data-v86-equip="${id}">ใส่เลย</button>`;
+        }
+      }else{
+        action=`
+          <button class="bbShopBuy" data-v86-buy="${id}">
+            <span class="miniCoin">B</span>
+            <span>${Number(item.price_coins||0).toLocaleString()} Coins</span>
+          </button>`;
+      }
+
+      return `
+        <article class="bbShopItem">
+          <div class="bbShopItemArt">
+            ${shopArt(item)}
+            <span class="bbShopType">${esc(TYPE_LABEL[item.item_type]||SLOT_META[slot]?.name||item.item_type)}</span>
+            ${has?'<span class="bbShopOwned">มีแล้ว</span>':""}
+            <span class="bbShopRarity ${esc(rarity)}">${esc(rarity)}</span>
+            ${item.is_default?'<span class="bbShopDefault">DEFAULT</span>':""}
+          </div>
+          <div class="bbShopItemCopy">
+            <h4>${esc(item.name)}</h4>
+            <p>${esc(item.description||"ของตกแต่งสำหรับ Brain Buddy")}</p>
+            ${action}
+          </div>
+        </article>`;
+    }).join("");
+  }
+
+  function renderCloset(){
+    const grid=q("#bbInventoryGrid");
+    if(!grid)return;
+
+    qa("[data-inventory-filter]").forEach(btn=>{
+      btn.classList.toggle("active",btn.dataset.inventoryFilter===closetFilter);
+    });
+
+    if(!state.user){
+      grid.innerHTML=`
+        <div class="bbInventoryEmpty">
+          <div>
+            <strong>🧸 Default Pink Buddy พร้อมใช้งาน</strong><br>
+            <small>เข้าสู่ระบบเพื่อสะสมและเปลี่ยนชุด</small>
+          </div>
+        </div>`;
+      return;
+    }
+
+    const list=filteredItems("closet");
+    if(!list.length){
+      grid.innerHTML=emptyCard("ยังไม่มีของในหมวดนี้ ลองดูที่ Buddy Shop");
+      return;
+    }
+
+    grid.innerHTML=list.map(item=>{
+      const id=Number(item.id);
+      const slot=slotOf(item);
+      const equipped=Number(loadoutItem(slot)?.item_id)===id;
+      const src=thumbOf(item);
+      const art=src
+        ? `<img src="${attr(src)}" alt="${attr(item.name)}" loading="lazy">`
+        : `<span class="fallback">${FALLBACK_ICON[slot]||"🎁"}</span>`;
+
+      let button="";
+      if(equipped){
+        if(slot==="character" && item.is_default){
+          button=`<button class="bbClosetAction default" disabled>Default Buddy ✓</button>`;
+        }else{
+          button=`<button class="bbClosetAction remove" data-v86-unequip="${slot}">ถอดออก</button>`;
+        }
+      }else{
+        button=`<button class="bbClosetAction" data-v86-equip="${id}">ใส่เลย</button>`;
+      }
+
+      return `
+        <article class="bbClosetItem ${equipped?"active":""}">
+          <div class="bbClosetItemArt">
+            ${art}
+            <span class="bbClosetBadge">${esc(SLOT_META[slot]?.name||slot)}</span>
+            ${equipped?'<span class="bbClosetUsing">ใช้อยู่ ✓</span>':""}
+          </div>
+          <div class="bbClosetItemCopy">
+            <h3>${esc(item.name)}</h3>
+            <p>${esc(item.description||"ของแต่ง Brain Buddy")}</p>
+            ${button}
+          </div>
+        </article>`;
+    }).join("");
+  }
+
+  async function equip(id,button){
+    if(!state.user)return;
+    const c=client();
+    if(!c)return;
+
+    const old=button?.textContent||"";
+    if(button){button.disabled=true;button.textContent="กำลังใส่…"}
+
+    try{
+      const {data,error}=await c.rpc("bb_equip_cosmetic_v2",{p_item_id:Number(id)});
+      if(error)throw error;
+      const result=Array.isArray(data)?data[0]:data;
+      closetToast(`ใส่ ${result?.item_name||"ของแต่ง"} แล้ว ✓`);
+      shopToast(`ใส่ ${result?.item_name||"ของแต่ง"} แล้ว ✓`);
+      await fetchState();
+      try{if(typeof sfx==="function")sfx("ok")}catch(e){}
+    }catch(err){
+      closetToast(String(err?.message||"ใส่ของแต่งไม่สำเร็จ"));
+      shopToast(String(err?.message||"ใส่ของแต่งไม่สำเร็จ"));
+      if(button){button.disabled=false;button.textContent=old}
+    }
+  }
+
+  async function unequip(slot,button){
+    if(!state.user||!VALID_SLOTS.includes(slot))return;
+    const c=client();
+    if(!c)return;
+
+    const old=button?.textContent||"";
+    if(button){button.disabled=true;button.textContent="กำลังถอด…"}
+
+    try{
+      const {error}=await c.rpc("bb_unequip_cosmetic_v2",{p_slot_type:slot});
+      if(error)throw error;
+      closetToast(slot==="character"?"กลับเป็น Default Pink Buddy แล้ว":"ถอดออกแล้ว");
+      shopToast(slot==="character"?"กลับเป็น Default Pink Buddy แล้ว":"ถอดออกแล้ว");
+      await fetchState();
+      try{if(typeof sfx==="function")sfx("tap")}catch(e){}
+    }catch(err){
+      closetToast(String(err?.message||"ถอดของแต่งไม่สำเร็จ"));
+      shopToast(String(err?.message||"ถอดของแต่งไม่สำเร็จ"));
+      if(button){button.disabled=false;button.textContent=old}
+    }
+  }
+
+  async function buy(id,button){
+    if(!state.user)return;
+    const c=client();
+    if(!c)return;
+
+    const old=button?.innerHTML||"";
+    if(button){button.disabled=true;button.textContent="กำลังซื้อ…"}
+
+    try{
+      const {data,error}=await c.rpc("bb_buy_shop_item",{p_item_id:Number(id)});
+      if(error)throw error;
+      const result=Array.isArray(data)?data[0]:data;
+      shopToast(`ซื้อ ${result?.item_name||"สินค้า"} สำเร็จ 🎁`);
+      await fetchState();
+      try{if(typeof sfx==="function")sfx("done")}catch(e){}
+    }catch(err){
+      const msg=String(err?.message||"ซื้อสินค้าไม่สำเร็จ");
+      shopToast(/ไม่เพียงพอ|Brain Coins/i.test(msg)?"Brain Coins ไม่เพียงพอ":msg);
+      if(button){button.disabled=false;button.innerHTML=old}
+    }
+  }
+
+  async function refreshStarter(){
+    const card=q("#bbStarterReward");
+    const btn=q("#bbClaimStarterCoins");
+    if(!card||!btn)return;
+
+    if(!state.user){
+      btn.disabled=false;
+      btn.textContent="เข้าสู่ระบบเพื่อรับ";
+      card.classList.remove("claimed");
+      return;
+    }
+
+    try{
+      const c=client();
+      const {data,error}=await c
+        .from("bb_reward_claims")
+        .select("reward_code")
+        .eq("user_id",state.user.id)
+        .in("reward_code",["starter_100","starter_500"])
+        .limit(1);
+
+      if(error)throw error;
+
+      const claimed=!!data?.length;
+      card.classList.toggle("claimed",claimed);
+      btn.disabled=claimed;
+      btn.textContent=claimed?"รับแล้ว ✓":"รับโบนัส";
+    }catch(e){}
+  }
+
+  async function claimStarter(){
+    if(!state.user){
+      if(typeof openModal==="function")openModal("accountModal");
+      return;
+    }
+    const c=client();
+    const btn=q("#bbClaimStarterCoins");
+    if(!c||!btn)return;
+
+    const old=btn.textContent;
+    btn.disabled=true;btn.textContent="กำลังรับ…";
+
+    try{
+      const {error}=await c.rpc("bb_claim_starter_coins");
+      if(error)throw error;
+      shopToast("รับโบนัสต้อนรับแล้ว 🎁");
+      await fetchState();
+      await refreshStarter();
+    }catch(err){
+      shopToast(String(err?.message||"รับโบนัสไม่สำเร็จ"));
+      btn.disabled=false;btn.textContent=old;
+    }
+  }
+
+  function setShopFilter(next){
+    shopFilter=next==="all"||VALID_SLOTS.includes(next)?next:"all";
+    renderShop();
+  }
+
+  function setClosetFilter(next){
+    closetFilter=next==="all"||VALID_SLOTS.includes(next)?next:"all";
+    renderCloset();
+  }
+
+  document.addEventListener("click",e=>{
+    const sf=e.target.closest("[data-shop-filter]");
+    if(sf){e.preventDefault();setShopFilter(sf.dataset.shopFilter);return}
+
+    const cf=e.target.closest("[data-inventory-filter]");
+    if(cf){e.preventDefault();setClosetFilter(cf.dataset.inventoryFilter);return}
+
+    const slot=e.target.closest("[data-closet-slot]");
+    if(slot){
+      e.preventDefault();
+      setClosetFilter(slot.dataset.closetSlot);
+      q("#bbInventoryGrid")?.scrollIntoView({behavior:"smooth",block:"start"});
+      return;
+    }
+
+    const open=e.target.closest("[data-inventory-open]");
+    if(open)setClosetFilter(open.dataset.inventoryOpen);
+
+    const eq=e.target.closest("[data-v86-equip]");
+    if(eq){e.preventDefault();equip(Number(eq.dataset.v86Equip),eq);return}
+
+    const un=e.target.closest("[data-v86-unequip]");
+    if(un){e.preventDefault();unequip(un.dataset.v86Unequip,un);return}
+
+    const buyBtn=e.target.closest("[data-v86-buy]");
+    if(buyBtn){e.preventDefault();buy(Number(buyBtn.dataset.v86Buy),buyBtn);return}
+
+    if(e.target.closest("#bbClaimStarterCoins")){
+      e.preventDefault();claimStarter();return
+    }
+
+    if(e.target.closest("#bbShopLoginBtn,#bbInventoryLoginBtn")){
+      e.preventDefault();
+      if(typeof openModal==="function")openModal("accountModal");
+      return;
+    }
+  },true);
+
+  window.bbLoadShop=async()=>{
+    await fetchState();
+    await refreshStarter();
+  };
+  window.bbLoadInventory=fetchState;
+  window.bbLoadHomeInventory=fetchState;
+  window.bbApplyEquippedCosmetics=fetchState;
+  window.bbApplyEquippedCosmeticsV2=fetchState;
+  window.bbInventorySetFilter=setClosetFilter;
+
+  window.addEventListener("bb:auth-changed",()=>setTimeout(fetchState,100));
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",()=>setTimeout(fetchState,420),{once:true});
+  }else{
+    setTimeout(fetchState,420);
+  }
+})();
+</script>
+
+
+<script>
+/* ==========================================================
+   Brain Buddy v86.1 — Account Modal Portal
+   Event-driven only. No polling.
+   ========================================================== */
+(function brainBuddyAuthTouchFix(){
+  const modal=document.getElementById("accountModal");
+  if(!modal)return;
+
+  /* Escape every old stacking context. Moving an element keeps all
+     event listeners already attached directly to its descendants. */
+  if(modal.parentElement!==document.body){
+    document.body.appendChild(modal);
+  }
+
+  modal.setAttribute("role","dialog");
+  modal.setAttribute("aria-modal","true");
+
+  let oldBodyOverflow="";
+
+  function sync(){
+    const open=!modal.classList.contains("hidden");
+
+    document.body.classList.toggle("bbAccountModalOpen",open);
+
+    if(open){
+      oldBodyOverflow=document.body.style.overflow||"";
+      document.body.style.overflow="hidden";
+
+      modal.style.setProperty("pointer-events","auto","important");
+
+      requestAnimationFrame(()=>{
+        const card=modal.querySelector(".modalcard");
+        if(card)card.scrollTop=0;
+      });
+    }else{
+      document.body.style.overflow=oldBodyOverflow;
+    }
+  }
+
+  /* Follow every existing openModal()/closeModal()/auth script,
+     without replacing its business logic. */
+  const observer=new MutationObserver(sync);
+  observer.observe(modal,{
+    attributes:true,
+    attributeFilter:["class"]
+  });
+
+  /* Backdrop tap closes; card taps stay inside. */
+  modal.addEventListener("click",e=>{
+    if(e.target===modal){
+      modal.classList.add("hidden");
+    }
+  });
+
+  /* Defensive close handler: works even if an old data-close binding
+     was lost during a future DOM refactor. */
+  modal.addEventListener("click",e=>{
+    const close=e.target.closest('[data-close="accountModal"],#accountModal .x');
+    if(!close)return;
+    e.preventDefault();
+    modal.classList.add("hidden");
+  },true);
+
+  /* iPad: stop a stray touch from falling through to the page. */
+  modal.addEventListener("touchstart",e=>{
+    if(!modal.classList.contains("hidden")){
+      e.stopPropagation();
+    }
+  },{passive:true});
+
+  sync();
+
+  /* Public helper for newer UI. */
+  window.bbOpenAccountModal=function(tab="login"){
+    if(modal.parentElement!==document.body)document.body.appendChild(modal);
+
+    modal.classList.remove("hidden");
+
+    document.querySelectorAll("[data-auth-tab]").forEach(btn=>{
+      btn.classList.toggle("active",btn.dataset.authTab===tab);
+    });
+
+    document.getElementById("loginForm")?.classList.toggle("hidden",tab!=="login");
+    document.getElementById("signupForm")?.classList.toggle("hidden",tab!=="signup");
+
+    sync();
+  };
 })();
 </script>
 
