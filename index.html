@@ -14289,6 +14289,361 @@ body.bbCandySelect #bbAppModes.p911AdventureScreen::after{
     bottom:13px;
   }
 }
+
+
+/* ============================================================
+   v91.2 HOME ACTION BAR POLISH
+   Goal: softer, more premium, clearer hierarchy, more "game UI"
+   ============================================================ */
+
+/* Better room spacing for mobile home */
+@media (max-width:760px){
+  .p89Room{
+    padding-bottom:118px !important;
+  }
+  .p89PetCenter{
+    bottom:168px !important;
+  }
+}
+
+/* Turn the action area into one soft floating control bar */
+.p911HomeActions{
+  position:absolute !important;
+  left:50% !important;
+  transform:translateX(-50%) !important;
+  width:min(920px,calc(100% - 24px)) !important;
+  padding:10px !important;
+  box-sizing:border-box !important;
+  border-radius:30px !important;
+  background:linear-gradient(180deg,rgba(255,244,250,.92),rgba(255,233,243,.92)) !important;
+  border:1px solid rgba(216,172,193,.45) !important;
+  box-shadow:
+    0 16px 32px rgba(138,92,116,.18),
+    inset 0 1px 0 rgba(255,255,255,.95) !important;
+  backdrop-filter: blur(8px);
+}
+
+.p911HomeActions .p89Action{
+  position:relative;
+  min-height:84px !important;
+  border-radius:24px !important;
+  padding:10px 6px 9px !important;
+  border:1px solid rgba(255,255,255,.55) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.55),
+    0 8px 14px rgba(110,77,95,.14) !important;
+  transition:transform .15s ease, box-shadow .18s ease, filter .18s ease;
+  overflow:hidden;
+}
+
+.p911HomeActions .p89Action::before{
+  content:"";
+  position:absolute;
+  left:10px; right:10px; top:6px;
+  height:32%;
+  border-radius:999px;
+  background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,0));
+  pointer-events:none;
+}
+
+.p911HomeActions .p89Action:active{
+  transform:translateY(2px) scale(.985);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.4),
+    0 4px 8px rgba(110,77,95,.10) !important;
+}
+
+/* clearer hierarchy */
+.p911HomeActions .p89Action.play{
+  transform:translateY(-4px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.48),
+    0 14px 22px rgba(99,76,196,.28) !important;
+}
+.p911HomeActions .p89Action.createRoom{
+  transform:translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.48),
+    0 12px 20px rgba(80,150,214,.22) !important;
+}
+
+.p911HomeActions .p89Action.feed{
+  background:linear-gradient(180deg,#ff6fb2 0%, #f55196 100%) !important;
+}
+.p911HomeActions .p89Action.play{
+  background:linear-gradient(180deg,#8d71ff 0%, #6f53ea 100%) !important;
+}
+.p911HomeActions .p89Action.createRoom{
+  background:linear-gradient(180deg,#6fbaf3 0%, #4f95dc 100%) !important;
+}
+.p911HomeActions .p89Action.inventory{
+  background:linear-gradient(180deg,#9d7ef1 0%, #8160df 100%) !important;
+}
+.p911HomeActions .p89Action.shop{
+  background:linear-gradient(180deg,#f58ab4 0%, #eb6f9f 100%) !important;
+}
+
+.p911HomeActions .p89Action b{
+  font-size:15px !important;
+  letter-spacing:-.02em;
+  line-height:1.05;
+  text-shadow:0 1px 0 rgba(0,0,0,.08);
+}
+.p911HomeActions .p89Action small{
+  font-size:8px !important;
+  opacity:.92;
+  letter-spacing:.01em;
+}
+
+/* cleaner icons */
+.p911HomeActions .p900ActionIcon,
+.p911HomeActions .p911ActionIcon{
+  width:32px !important;
+  height:32px !important;
+  margin-bottom:2px;
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,.12));
+}
+
+/* Feed icon already exists, slightly polish */
+.p911HomeActions .feedIcon{
+  transform:scale(1.02);
+}
+
+/* Play icon */
+.p911HomeActions .playIcon{
+  transform:scale(1.02);
+}
+
+/* custom icons refined */
+.p911HomeActions .createRoomIcon::before{
+  width:23px;height:16px;
+  border:3px solid currentColor;
+  border-radius:8px;
+}
+.p911HomeActions .createRoomIcon::after{
+  content:"+";
+  position:absolute;
+  font-size:18px;
+  font-weight:1000;
+  line-height:1;
+  transform:translateY(-1px);
+}
+
+.p911HomeActions .inventoryIcon::before{
+  width:22px;height:17px;
+  border:3px solid currentColor;
+  border-radius:5px 5px 9px 9px;
+}
+.p911HomeActions .inventoryIcon::after{
+  content:"";
+  position:absolute;
+  top:2px;
+  width:12px;height:5px;
+  border:3px solid currentColor;
+  border-bottom:0;
+  border-radius:8px 8px 0 0;
+}
+
+.p911HomeActions .shopIcon::before{
+  width:23px;height:16px;
+  border:3px solid currentColor;
+  border-radius:0 0 7px 7px;
+  transform:translateY(4px);
+}
+.p911HomeActions .shopIcon::after{
+  content:"";
+  position:absolute;
+  top:3px;
+  width:26px;height:8px;
+  border-radius:7px 7px 4px 4px;
+  border-top:3px solid currentColor;
+  border-left:3px solid currentColor;
+  border-right:3px solid currentColor;
+}
+
+/* MOBILE POLISH */
+@media (max-width:760px){
+  .p911HomeActions{
+    width:calc(100% - 14px) !important;
+    bottom:18px !important;
+    padding:7px !important;
+    border-radius:24px !important;
+    gap:6px !important;
+  }
+
+  .p911HomeActions .p89Action{
+    min-height:78px !important;
+    padding:8px 3px 7px !important;
+    border-radius:19px !important;
+  }
+
+  .p911HomeActions .p89Action.play{
+    transform:translateY(-3px);
+  }
+  .p911HomeActions .p89Action.createRoom{
+    transform:translateY(-1px);
+  }
+
+  .p911HomeActions .p89Action b{
+    font-size:10px !important;
+  }
+  .p911HomeActions .p89Action small{
+    display:block !important;
+    font-size:6px !important;
+    line-height:1.05;
+    white-space:normal !important;
+    text-overflow:clip !important;
+    overflow:visible !important;
+    max-width:46px !important;
+    margin-inline:auto;
+  }
+
+  .p911HomeActions .p900ActionIcon,
+  .p911HomeActions .p911ActionIcon{
+    width:24px !important;
+    height:24px !important;
+    margin-bottom:1px;
+  }
+}
+
+/* ultra small width */
+@media (max-width:420px){
+  .p911HomeActions{
+    gap:4px !important;
+    padding:6px !important;
+  }
+  .p911HomeActions .p89Action{
+    min-height:74px !important;
+    border-radius:17px !important;
+  }
+  .p911HomeActions .p89Action b{
+    font-size:9px !important;
+  }
+  .p911HomeActions .p89Action small{
+    font-size:5.5px !important;
+    max-width:42px !important;
+  }
+}
+</style>
+
+
+<style id="pomru-v92-simplify-auth-profile">
+/* Remove old/unused systems from the playable product */
+#customModal,
+.teamQuickCard,
+#teamQuick,
+.teamSetting,
+[data-style="team"],
+#bbAppTeamChoice,
+#bbAppTeamPicker,
+#continueผู้เยี่ยมชมBtn,
+.premiumHero,
+.profileShell{
+  display:none!important;
+}
+
+/* Math: keep Multiple Choice / Typing / Mix */
+#bbAppMathGames [data-learning-type="matching"],
+#bbAppMathGames [data-learning-type="sentence_order"],
+#bbAppMathGames [data-learning-type="listening"]{
+  display:none!important;
+}
+
+/* Chinese: keep vocabulary / pinyin / listening / mix */
+#bbChineseGameGrid [data-hsk-quiz="meaning_hanzi"],
+#bbChineseGameGrid [data-hsk-quiz="pinyin_hanzi"]{
+  display:none!important;
+}
+
+/* English: keep vocabulary / typing / listening / mix.
+   Existing page did not have Mix; runtime injects it below. */
+#bbEnglishGameGrid [data-learning-type="multiple_choice"],
+#bbEnglishGameGrid [data-learning-type="matching"],
+#bbEnglishGameGrid [data-learning-type="sentence_order"]{
+  display:none!important;
+}
+
+.p92MemoryGrid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+#bbAppMathGames .p91GameGrid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+#bbChineseGameGrid,#bbEnglishGameGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+
+/* Gate */
+.p92MemberGate{
+  position:fixed;inset:0;z-index:220000;
+  display:grid;place-items:center;
+  padding:max(12px,env(safe-area-inset-top)) 12px max(12px,env(safe-area-inset-bottom));
+  box-sizing:border-box;
+  background:
+    radial-gradient(circle at 14% 4%,rgba(255,215,232,.82),transparent 29rem),
+    radial-gradient(circle at 88% 1%,rgba(189,232,255,.78),transparent 31rem),
+    linear-gradient(180deg,#fffafd,#fff3f8 60%,#fff8ef);
+}
+.p92MemberGate.hidden{display:none!important}
+body.p92Locked{overflow:hidden!important}
+.p92GateShell{
+  position:relative;width:min(930px,100%);min-height:min(650px,calc(100dvh - 24px));
+  display:grid;grid-template-columns:minmax(0,1fr) 405px;align-items:center;
+  overflow:hidden;border:1px solid rgba(111,79,96,.10);border-radius:36px;
+  background:rgba(255,255,255,.72);box-shadow:0 28px 75px rgba(92,62,79,.14)
+}
+.p92GateShell::before{
+  content:"";position:absolute;left:6%;top:8%;width:47%;height:43%;
+  border:17px solid rgba(255,255,255,.92);border-radius:22px;
+  background:linear-gradient(#8bdcff 0 58%,#b8e8b5 59% 100%);
+}
+.p92GateBuddy{position:relative;z-index:2;align-self:end;height:500px;display:grid;place-items:end center}
+.p92GateBuddy img{max-width:400px;max-height:470px;object-fit:contain;filter:drop-shadow(0 16px 13px rgba(92,55,74,.10))}
+.p92GateCard{
+  position:relative;z-index:4;margin:18px;padding:27px;
+  border:1px solid rgba(111,79,96,.10);border-radius:29px;background:rgba(255,255,255,.98);
+  box-shadow:0 17px 43px rgba(82,56,74,.12)
+}
+.p92GateBrand{display:flex;align-items:center;gap:10px}
+.p92GateBrand>span{width:43px;height:43px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(145deg,#ffe4ef,#eee8ff);color:#d94b88;font-weight:1000}
+.p92GateBrand b{display:block;color:#7150bd;font-size:22px;line-height:1}.p92GateBrand small{display:block;margin-top:3px;color:#9a7788;font-size:7px}
+.p92GateTitle{margin:18px 0 15px}.p92GateTitle>small{color:#c55e87;font-size:8px;font-weight:1000;letter-spacing:.1em}
+.p92GateTitle h1{margin:6px 0;color:#493848;font-size:38px;line-height:.97;letter-spacing:-.055em}
+.p92GateTitle p{margin:8px 0 0;color:#82727d;font-size:10px;line-height:1.5}
+.p92GateTabs{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:5px;border-radius:14px;background:#f6f1f4}
+.p92GateTabs button{min-height:40px;border:0;border-radius:10px;background:transparent;color:#7c6975;font-size:10px;font-weight:950}
+.p92GateTabs button.active{background:#fff;color:#674d9c;box-shadow:0 5px 13px rgba(86,59,76,.06)}
+.p92Google{width:100%;min-height:48px;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid rgba(111,79,96,.11);border-radius:14px;background:#fff;color:#554954;font-size:10px;font-weight:900}
+.p92Google svg{width:20px;height:20px}
+.p92Or{display:flex;align-items:center;gap:8px;margin:11px 0;color:#a28f99;font-size:7px}.p92Or::before,.p92Or::after{content:"";height:1px;flex:1;background:rgba(111,79,96,.10)}
+.p92GateForm{display:grid;gap:8px}.p92GateForm.hidden{display:none!important}
+.p92GateForm label>span{display:block;margin-bottom:4px;color:#75646f;font-size:8px;font-weight:900}
+.p92GateForm input{width:100%;min-height:46px;padding:0 12px;box-sizing:border-box;border:1px solid rgba(111,79,96,.13);border-radius:13px;background:#fff;color:#493949;font-size:16px;outline:0}
+.p92GateForm input:focus{border-color:rgba(117,84,204,.38);box-shadow:0 0 0 4px rgba(117,84,204,.08)}
+.p92Primary{min-height:47px;border:0;border-radius:14px;background:linear-gradient(180deg,#825fe2,#6d50cf);color:#fff;font-size:11px;font-weight:1000}
+.p92Link{min-height:30px;border:0;background:transparent;color:#7c61ae;font-size:8px;font-weight:900}
+.p92GateMessage{min-height:16px;margin-top:7px;color:#b65071;font-size:8px}.p92GateMessage.good{color:#3c9667}
+.p92GateFoot{margin:4px 0 0;color:#a18f98;font-size:7px;line-height:1.4}
+
+/* Profile center */
+.p92ProfileModal{z-index:150000!important}
+.p92ProfileCard{width:min(880px,calc(100% - 24px))!important;max-height:calc(100dvh - 28px)!important;overflow:auto!important;padding:23px!important;border-radius:30px!important}
+.p92ProfileHero{display:flex;align-items:center;gap:15px;padding-right:44px}
+.p92AvatarPreview{width:82px;height:82px;flex:0 0 82px;overflow:hidden;border:5px solid #fff;border-radius:25px;background:#fff0f6;box-shadow:0 8px 19px rgba(91,61,79,.11)}
+.p92AvatarPreview img{width:100%;height:100%;object-fit:cover}
+.p92ProfileHero small{color:#a16f87;font-size:8px;font-weight:1000;letter-spacing:.12em}
+.p92ProfileHero h2{margin:3px 0!important;font-size:27px!important}.p92ProfileHero p{margin:0;color:#887985;font-size:9px}
+.p92ProfileGrid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:17px}
+.p92ProfileSection{padding:16px;border:1px solid rgba(111,79,96,.10);border-radius:21px;background:#fff}
+.p92ProfileSettings{grid-column:1/-1}.p92ProfileSection h3{margin:0 0 11px;color:#4f3f4e;font-size:16px}
+.p92Field{display:block;margin-top:8px}.p92Field>span{display:block;margin-bottom:4px;color:#756570;font-size:8px;font-weight:900}.p92Field input{width:100%;box-sizing:border-box}
+.p92PhotoButtons{display:flex;gap:7px;margin-top:10px}.p92PhotoButtons button{min-height:38px;padding:0 10px;border:0;border-radius:12px;background:#7657d2;color:#fff;font-size:8px;font-weight:950}.p92PhotoButtons .secondary{background:#f2edf1;color:#6d5d68}
+.p92LevelBox{display:grid;grid-template-columns:65px 1fr;gap:11px;align-items:center}.p92LevelBox>b{font-size:50px;color:#7151bd;text-align:center}.p92LevelBox span{display:block;color:#85737e;font-size:8px;font-weight:900}
+.p92Xp{height:9px;margin-top:6px;border-radius:999px;background:#eee8ef;overflow:hidden}.p92Xp i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ef609b,#7657d5)}.p92LevelBox small{display:block;margin-top:4px;color:#95828e;font-size:7px}
+.p92ProgressPair{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}.p92ProgressPair>div{padding:9px;border-radius:13px;background:#faf7fa}.p92ProgressPair small{display:block;color:#9a8792;font-size:7px}.p92ProgressPair b{display:block;margin-top:3px;font-size:13px}
+.p92Switch{min-height:52px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid rgba(111,79,96,.08)}.p92Switch:first-of-type{border-top:0}.p92Switch b{display:block;color:#5b4b58;font-size:10px}.p92Switch small{display:block;margin-top:2px;color:#94818c;font-size:7px}.p92Switch input{width:22px;height:22px;accent-color:#7657d3}
+.p92ProfileActions{display:flex;justify-content:flex-end;gap:8px;margin-top:13px}
+body.p92HideSpeech .p89Speech{display:none!important}
+
+@media(max-width:760px){
+  .p92MemoryGrid,#bbAppMathGames .p91GameGrid,#bbChineseGameGrid,#bbEnglishGameGrid{grid-template-columns:1fr!important}
+  .p92GateShell{display:block;min-height:calc(100dvh - 18px);border-radius:27px}.p92GateShell::before{display:none}.p92GateBuddy{position:absolute;right:-20px;top:24px;width:160px;height:185px;opacity:.28}.p92GateCard{margin:8px;padding:20px;min-height:calc(100dvh - 34px);box-sizing:border-box}.p92GateTitle{padding-right:70px}.p92GateTitle h1{font-size:34px}
+  .p92ProfileGrid{grid-template-columns:1fr}.p92ProfileSettings{grid-column:auto}.p92PhotoButtons{flex-direction:column}.p92ProfileActions{flex-direction:column}.p92ProfileActions .btn{width:100%}
+}
 </style>
 
 </head>
@@ -15519,21 +15874,29 @@ body.bbCandySelect #bbAppModes.p911AdventureScreen::after{
   <main class="p91Page">
     <section class="p91SubjectHero memory">
       <div>
-        <span class="p91Eyebrow">6 รูปแบบ</span>
+        <span class="p91Eyebrow">3 เกมหลัก</span>
         <h1>ฝึกความจำแบบเล่นจริง</h1>
-        <p>เลือกทักษะที่อยากฝึก แล้วค่อยเลือกระดับก่อนเริ่มเกม</p>
+        <p>เลือกเกมที่อยากฝึก แล้วเลือกระดับ ระบบจะกำหนดเวลาให้เหมาะสมอัตโนมัติ</p>
       </div>
       <div class="p91HeroBuddy mini" aria-hidden="true"><img src="/assets/buddy/default-pink-buddy.png?v=910" alt=""></div>
     </section>
 
-    <section class="p91GameGrid memoryGrid">
-      <button class="p91GameCard rose" data-app-mode="position"><span class="p91GameIcon">POS</span><span><b>จำตำแหน่ง</b><small>จำว่าตัวละครอยู่ช่องไหน</small><em>100 แต้ม/ข้อ</em></span><i>›</i></button>
-      <button class="p91GameCard green" data-app-mode="match"><span class="p91GameIcon">PAIR</span><span><b>จับคู่</b><small>เปิดหาภาพที่เหมือนกัน</small><em>80 แต้ม/คู่</em></span><i>›</i></button>
-      <button class="p91GameCard sand" data-app-mode="missing"><span class="p91GameIcon">MISS</span><span><b>ตัวไหนหาย</b><small>หาว่าตัวไหนหายไป</small><em>120 แต้ม/ข้อ</em></span><i>›</i></button>
-      <button class="p91GameCard blue" data-app-mode="swap"><span class="p91GameIcon">SWAP</span><span><b>สลับที่</b><small>หาตำแหน่งที่ถูกสลับ</small><em>150 แต้ม/ข้อ</em></span><i>›</i></button>
-      <button class="p91GameCard lavender" data-app-mode="change"><span class="p91GameIcon">DIFF</span><span><b>อะไรเปลี่ยน</b><small>สังเกตสิ่งที่เปลี่ยนจากเดิม</small><em>130 แต้ม/ข้อ</em></span><i>›</i></button>
-      <button class="p91GameCard aqua" data-app-mode="sequence"><span class="p91GameIcon">1–4</span><span><b>จำลำดับ</b><small>จำและตอบตามลำดับ</small><em>160 แต้ม/ข้อ</em></span><i>›</i></button>
-    </section>
+    
+<section class="p91GameGrid memoryGrid p92MemoryGrid">
+  <button class="p91GameCard rose" data-app-mode="position">
+    <span class="p91GameIcon">POS</span>
+    <span><b>จำตำแหน่ง</b><small>ดูภาพให้ดี แล้วจำว่าตัวไหนอยู่ตรงไหน</small><em>เวลาอัตโนมัติ</em></span><i>›</i>
+  </button>
+  <button class="p91GameCard green" data-app-mode="match">
+    <span class="p91GameIcon">PAIR</span>
+    <span><b>จับคู่</b><small>เปิดไพ่และจำตำแหน่ง เพื่อหาคู่ให้ครบ</small><em>ความจำ + ความเร็ว</em></span><i>›</i>
+  </button>
+  <button class="p91GameCard blue" data-app-mode="sequence">
+    <span class="p91GameIcon">1–4</span>
+    <span><b>จำลำดับ</b><small>ดูตามลำดับ แล้วตอบกลับให้ถูกต้อง</small><em>Working memory</em></span><i>›</i>
+  </button>
+</section>
+
   </main>
 </section>
 
@@ -15559,9 +15922,9 @@ body.bbCandySelect #bbAppModes.p911AdventureScreen::after{
     <div class="bbSetupHero">
       <button class="bbSetupBack" data-app-go="teddy" aria-label="กลับ"></button>
       <div class="bbSetupHeroTitle">
-        <small>เกมหมี • ตั้งค่าก่อนเล่น</small>
+        <small>MEMORY • ก่อนเริ่มเกม</small>
         <h2 id="bbSetupTitle">จำตำแหน่ง</h2>
-        <p>เลือกความท้าทายที่เหมาะกับคุณ แล้วมาเพิ่มพลังสมองกัน!</p>
+        <p>เลือกเพียงระดับเดียว ส่วนเวลาและรูปแบบการเล่น POMRU จัดให้อัตโนมัติ</p>
       </div>
       <div class="bbSetupPlayerMini">
         <span class="bearMini"></span>
@@ -15585,26 +15948,6 @@ body.bbCandySelect #bbAppModes.p911AdventureScreen::after{
             <span class="brainBlob hard"></span>
             <b>ยาก</b><small>4×4</small><em>×1.5</em>
           </button>
-          <button class="diff-expert" data-app-diff="expert">
-            <span class="brainBlob expert"></span>
-            <b>Expert</b><small>5×5</small><em>×2.0</em>
-          </button>
-        </div>
-      </div>
-
-      <div class="bbAppSetupBlock">
-        <div class="bbAppSetupLabel"><b>รูปแบบการเล่น</b><small id="bbAppStyleNote">คนเดียวสะสมแต้มได้</small></div>
-        <div class="bbAppStyleGrid">
-          <button class="active" data-app-style="solo">
-            <span class="peopleIcon solo"></span><b>คนเดียว</b><small>เก็บแต้มและเหรียญ</small>
-          </button>
-          <button data-app-style="team" id="bbAppTeamChoice">
-            <span class="peopleIcon team"></span><b>เล่นเป็นทีม</b><small>แข่งขันกับเพื่อนกันเลย!</small>
-          </button>
-        </div>
-        <div class="bbAppTeamPicker hidden" id="bbAppTeamPicker">
-          <small>จำนวนทีม</small>
-          <div><button class="active" data-app-teams="2">2</button><button data-app-teams="3">3</button><button data-app-teams="4">4</button><button data-app-teams="5">5</button><button data-app-teams="6">6</button></div>
         </div>
       </div>
 
@@ -15672,7 +16015,68 @@ body.bbCandySelect #bbAppModes.p911AdventureScreen::after{
 </div><div class="modalActions"><button class="btn" data-close="customModal">ยกเลิก</button><button class="btn primary" id="applyCustom">ใช้การตั้งค่าและเริ่ม</button></div></div></div>
 
 <!-- Profile -->
-<div class="modal hidden" id="profileModal"><div class="modalCard"><button class="close" data-close="profileModal">×</button><h2>โปรไฟล์</h2><p class="lead">ตั้งชื่อ เลือก Avatar และดู Level ของคุณ ข้อมูลอยู่ในเครื่องนี้</p><div class="settingGrid"><div class="setting"><h3>ชื่อเล่น</h3><input class="input" id="profileName" maxlength="24" placeholder="ชื่อผู้เล่น"></div><div class="setting"><h3>Avatar</h3><div class="segment" id="avatarSeg"></div></div><div class="setting full"><h3>⭐ Level & XP</h3><div style="display:flex;gap:12px;align-items:center"><b id="profileLevel" style="font-size:42px">1</b><div style="flex:1"><div style="height:9px;border-radius:999px;background:rgba(136,116,231,.10);overflow:hidden"><i id="xpBar" style="display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--purple))"></i></div><div id="xpLabel" style="font-size:9px;color:var(--muted);margin-top:4px">0 / 500 XP</div></div></div></div></div><div class="modalActions"><button class="btn primary" id="saveProfile">บันทึก</button></div></div></div>
+
+<div class="modal hidden p92ProfileModal" id="profileModal">
+  <div class="modalCard p92ProfileCard">
+    <button class="close" data-close="profileModal">×</button>
+
+    <div class="p92ProfileHero">
+      <div class="p92AvatarPreview" id="p92ProfileAvatar">
+        <img src="/assets/buddy/default-pink-buddy.png?v=920" alt="">
+      </div>
+      <div>
+        <small>POMRU PROFILE</small>
+        <h2>โปรไฟล์ของฉัน</h2>
+        <p>จัดการชื่อ รูปโปรไฟล์ และการตั้งค่าที่ใช้เล่นเกม</p>
+      </div>
+    </div>
+
+    <div class="p92ProfileGrid">
+      <section class="p92ProfileSection">
+        <h3>ข้อมูลผู้เล่น</h3>
+        <label class="p92Field"><span>ชื่อที่แสดง</span><input class="input" id="profileName" maxlength="24" placeholder="ชื่อผู้เล่น"></label>
+        <label class="p92Field"><span>อีเมล</span><input class="input" id="p92ProfileEmail" readonly></label>
+
+        <div class="p92PhotoButtons">
+          <input id="p92ProfilePhotoInput" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+          <button type="button" id="p92ChooseProfilePhoto">เปลี่ยนรูปโปรไฟล์</button>
+          <button type="button" class="secondary" id="p92UseBuddyAvatar">ใช้รูป Buddy</button>
+        </div>
+        <div class="hidden" id="avatarSeg" aria-hidden="true"></div>
+      </section>
+
+      <section class="p92ProfileSection">
+        <h3>ความคืบหน้า</h3>
+        <div class="p92LevelBox">
+          <b id="profileLevel">1</b>
+          <div>
+            <span>เลเวล</span>
+            <div class="p92Xp"><i id="xpBar"></i></div>
+            <small id="xpLabel">0 / 500 แต้ม</small>
+          </div>
+        </div>
+        <div class="p92ProgressPair">
+          <div><small>แรงก์</small><b id="p92ProfileRank">มือใหม่</b></div>
+          <div><small>เหรียญ</small><b id="p92ProfileCoins">0</b></div>
+        </div>
+      </section>
+
+      <section class="p92ProfileSection p92ProfileSettings">
+        <h3>การตั้งค่า</h3>
+        <label class="p92Switch"><span><b>เพลงพื้นหลัง</b><small>เพลงระหว่างเล่น</small></span><input id="p92MusicToggle" type="checkbox"></label>
+        <label class="p92Switch"><span><b>เสียงเอฟเฟกต์</b><small>เสียงกด ตอบถูก และตอบผิด</small></span><input id="p92SfxToggle" type="checkbox"></label>
+        <label class="p92Switch"><span><b>ลดแอนิเมชัน</b><small>ช่วยให้เครื่องทำงานลื่นขึ้น</small></span><input id="p92MotionToggle" type="checkbox"></label>
+        <label class="p92Switch"><span><b>ตัวอักษรใหญ่</b><small>เพิ่มขนาดข้อความ</small></span><input id="p92LargeToggle" type="checkbox"></label>
+        <label class="p92Switch"><span><b>คำพูด Buddy</b><small>แสดงข้อความเหนือ Buddy</small></span><input id="p92SpeechToggle" type="checkbox"></label>
+      </section>
+    </div>
+
+    <div class="p92ProfileActions">
+      <button class="btn primary" id="saveProfile">บันทึกโปรไฟล์</button>
+      <button class="btn" type="button" id="p92SignOut">ออกจากระบบ</button>
+    </div>
+  </div>
+</div>
 
 <!-- Stats -->
 <div class="modal hidden" id="statsModal"><div class="modalCard wide"><button class="close" data-close="statsModal">×</button><h2>สถิติ & ความสำเร็จ</h2><p class="lead">ดูพัฒนาการจากรอบที่เล่นบนอุปกรณ์นี้</p><div class="dashGrid"><div class="dash"><b id="statRounds">0</b><span>รอบทั้งหมด</span></div><div class="dash"><b id="statBest">0</b><span>คะแนนสูงสุด</span></div><div class="dash"><b id="statAcc">0%</b><span>แม่นยำสูงสุด</span></div><div class="dash"><b id="statCombo">0</b><span>Combo สูงสุด</span></div></div><div class="chart"><div style="font-size:11px;font-weight:900">ความแม่นยำ 10 รอบล่าสุด</div><svg id="chartSvg" viewBox="0 0 760 170"></svg></div><div class="badgeGrid" id="badgeGrid"></div><div class="modalActions"><button class="btn" id="clearStats">ล้างประวัติ</button></div></div></div>
@@ -15691,7 +16095,7 @@ body.bbCandySelect #bbAppModes.p911AdventureScreen::after{
 
 
 <!-- Help -->
-<div class="modal hidden" id="helpModal"><div class="modalCard"><button class="close" data-close="helpModal">×</button><h2>วิธีเล่น</h2><p class="lead">กติกาหลักสั้น ๆ: ดู → จำ → ตอบ → ดูเฉลย แล้วค่อยไปข้อต่อไป</p><div class="settingGrid"><div class="setting"><h3>1. สังเกต</h3><p>ดูภาพ สี รายละเอียด และตำแหน่งบนกระดานให้ครบ</p></div><div class="setting"><h3>2. จดจำ</h3><p>ใช้วิธีจำที่ถนัด เช่น จำเป็นแถว เป็นคู่ หรือจัดกลุ่มภาพ</p></div><div class="setting"><h3>3. ตอบโจทย์</h3><p>แต่ละโหมดจะให้ทายตำแหน่ง หาคู่ หาสิ่งที่หาย สังเกตการสลับ/เปลี่ยน หรือจำลำดับ</p></div><div class="setting"><h3>4. ดูเฉลย</h3><p>เฉลยจะแสดงคำตอบชัดเจน จากนั้นกดไปข้อต่อไปตามจังหวะของคุณเอง</p></div><div class="setting full"><h3>เริ่มอย่างไรดี?</h3><p>ครั้งแรกแนะนำ เล่นด่วน ซึ่งเริ่มที่ 2×2 และไม่จับเวลา เมื่อรู้สึกคล่องค่อยเปลี่ยนเป็น 3×3 หรือเปิด Adaptive Difficulty</p></div></div></div></div>
+<div class="modal hidden" id="helpModal"><div class="modalCard"><button class="close" data-close="helpModal">×</button><h2>วิธีเล่น</h2><p class="lead">กติกาหลักสั้น ๆ: ดู → จำ → ตอบ → ดูเฉลย แล้วค่อยไปข้อต่อไป</p><div class="settingGrid"><div class="setting"><h3>1. สังเกต</h3><p>ดูภาพ สี รายละเอียด และตำแหน่งบนกระดานให้ครบ</p></div><div class="setting"><h3>2. จดจำ</h3><p>ใช้วิธีจำที่ถนัด เช่น จำเป็นแถว เป็นคู่ หรือจัดกลุ่มภาพ</p></div><div class="setting"><h3>3. ตอบโจทย์</h3><p>เกมความจำหลักมี 3 แบบ: จำตำแหน่ง จับคู่ และจำลำดับ</p></div><div class="setting"><h3>4. ดูเฉลย</h3><p>เฉลยจะแสดงคำตอบชัดเจน จากนั้นกดไปข้อต่อไปตามจังหวะของคุณเอง</p></div><div class="setting full"><h3>เริ่มอย่างไรดี?</h3><p>ครั้งแรกแนะนำ เล่นด่วน ซึ่งเริ่มที่ 2×2 และไม่จับเวลา เมื่อรู้สึกคล่องค่อยเปลี่ยนเป็น 3×3 หรือเปิด Adaptive Difficulty</p></div></div></div></div>
 
 
 <div class="modal hidden" id="leaderboardModal">
@@ -15727,7 +16131,7 @@ body.bbCandySelect #bbAppModes.p911AdventureScreen::after{
   <div class="modalcard" style="width:min(540px,100%)">
     <button class="x" data-close="accountModal">×</button>
     <h2 id="accountTitle">เข้าสู่ระบบ / สมัครสมาชิก</h2>
-    <p class="lead" id="accountLead">เล่นแบบ Guest ได้ตามปกติ หรือสมัครสมาชิกเพื่อเก็บแต้ม เลเวล แรงก์ เหรียญ และประวัติไว้กับบัญชี</p>
+    <p class="lead" id="accountLead">เข้าสู่ระบบเพื่อเก็บแต้ม เลเวล แรงก์ เหรียญ Buddy และประวัติไว้กับบัญชี</p>
 
     <div id="cloudSetupPanel" class="setupCloud hidden">
       <strong>ระบบ Cloud พร้อมในโค้ดแล้ว แต่ยังต้องเชื่อม Supabase</strong>
@@ -16805,7 +17209,7 @@ function finishRound(){
 function saveHistory(rate,sc){const h=hist();h.push({date:Date.now(),mode:cfg.mode,diff:effDiff(),source:cfg.source,style:cfg.style,rate,score:sc,combo:bestCombo,xp:roundXP});save("bb_history",h.slice(-80));if(cfg.style==="solo")cloudRecordGame(rate,sc)}function unlock(id){const b=badgeData();if(b[id])return;b[id]=Date.now();save("bb_badges",b);const a=ACH.find(x=>x[0]===id);if(a)toast(`🏅 ความสำเร็จ: ${a[2]}`)}function checkความสำเร็จs(rate){const h=hist();unlock("first");if(rate===100)unlock("perfect");if(bestCombo>=5)unlock("combo5");if(bestCombo>=10)unlock("combo10");const ms=new Set(h.map(x=>x.mode));if(ms.size>=4)unlock("explorer");if(ms.size>=6)unlock("allmodes");if(level(profile().xp||0)>=5)unlock("level5");if(level(profile().xp||0)>=10)unlock("level10");if(load("bb_daily_streak",0)>=3)unlock("daily3");if(cfg.source==="custom")unlock("custom");if(rate>=90)unlock("master")}
 function renderProfile(){const p=profile(),lv=level(p.xp||0);$("navName").textContent=p.name||"ผู้เล่น";$("navAvatar").textContent=p.avatar||"🧸";$("profileName").value=p.name||"";$("profileLevel").textContent=lv;$("xpBar").style.width=((p.xp||0)%500/500*100)+"%";$("xpLabel").textContent=`${(p.xp||0)%500} / 500 แต้ม`;$("levelHud").textContent=lv}function renderHome(){const h=hist(),p=profile(),rates=h.map(x=>x.rate).filter(x=>typeof x==="number");$("homeLevel").textContent=level(p.xp||0);$("homeXP").textContent=p.xp||0;$("homeBest").textContent=h.length?Math.max(...h.map(x=>x.score||0)):0;$("homeAcc").textContent=(rates.length?Math.max(...rates):0)+"%";$("homeRounds").textContent=h.length}function renderStats(){const h=hist(),rates=h.map(x=>x.rate).filter(x=>typeof x==="number");$("statRounds").textContent=h.length;$("statBest").textContent=h.length?Math.max(...h.map(x=>x.score||0)):0;$("statAcc").textContent=(rates.length?Math.max(...rates):0)+"%";$("statCombo").textContent=h.length?Math.max(...h.map(x=>x.combo||0)):0;const last=h.filter(x=>typeof x.rate==="number").slice(-10),W=760,H=170,p=25;let svg=`<line x1="${p}" y1="${H-p}" x2="${W-p}" y2="${H-p}" stroke="rgba(136,116,231,.15)"/><line x1="${p}" y1="${p}" x2="${p}" y2="${H-p}" stroke="rgba(136,116,231,.15)"/>`;if(last.length){const pts=last.map((x,i)=>[last.length===1?W/2:p+i*((W-2*p)/(last.length-1)),H-p-(x.rate/100)*(H-2*p)]);svg+=`<polyline points="${pts.map(x=>x.join(",")).join(" ")}" fill="none" stroke="#8874e7" stroke-width="5" stroke-linecap="round"/>`;pts.forEach(q=>svg+=`<circle cx="${q[0]}" cy="${q[1]}" r="6" fill="white" stroke="#f270a7" stroke-width="4"/>`)}$("chartSvg").innerHTML=svg;const b=badgeData();$("badgeGrid").innerHTML="";ACH.forEach(a=>{const d=document.createElement("div");d.className="badge"+(b[a[0]]?"":" lock");d.innerHTML=`<span>${a[1]}</span><div><strong>${a[2]}</strong><small>${a[3]}</small></div>`;$("badgeGrid").appendChild(d)})}function renderCollection(){const lv=level(profile().xp||0);$("collection").innerHTML="";COLLECTION.forEach(([em,n,need])=>{const d=document.createElement("div");d.className="collect"+(lv>=need?"":" lock");d.innerHTML=`<span>${em}</span><div><strong>${n}</strong><small>${lv>=need?"ปลดล็อกแล้ว":`Level ${need}`}</small></div>`;if(lv>=need)d.onclick=()=>{const p=profile();p.avatar=em;save("bb_profile",p);renderProfile();toast(`เลือก ${n} แล้ว`)};$("collection").appendChild(d)})}
 function dailyCfg(){const r=seeded(todaySeed()),ms=["position","missing","swap","change","sequence"],ds=["easy","normal","normal","hard"],ss=["teddy","animals","space","food","fantasy"];return{mode:ms[Math.floor(r()*ms.length)],diff:ds[Math.floor(r()*ds.length)],source:ss[Math.floor(r()*ss.length)]}}function renderDaily(){const d=dailyCfg();$("dailyTitle").textContent=`${MODES[d.mode]} • ${DIFF[d.diff].label}`;$("dailyText").textContent=`วันนี้ใช้ชุด ${SOURCES[d.source]} • แต้มคำนวณตามโหมด ความยาก และผลงานจริง`;$("dailyStreak").textContent=load("bb_daily_streak",0)}function startDaily(){const d=dailyCfg();cfg={...cfg,style:"solo",mode:d.mode,diff:d.diff,source:d.source,teams:2,answer:"screen",adaptive:false,combo:true,timer:0,lives:false,daily:true};updateSummary();startRound(seeded(todaySeed()))}function markDaily(){const today=new Date().toISOString().slice(0,10),last=load("bb_daily_last",""),st=load("bb_daily_streak",0);if(last===today)return;const y=new Date(Date.now()-86400000).toISOString().slice(0,10);save("bb_daily_streak",last===y?st+1:1);save("bb_daily_last",today);renderDaily()}
-function syncDraft(){document.querySelectorAll("[data-style]").forEach(b=>b.classList.toggle("active",b.dataset.style===draft.style));document.querySelectorAll("[data-mode]").forEach(b=>b.classList.toggle("active",b.dataset.mode===draft.mode));document.querySelectorAll("[data-diff]").forEach(b=>b.classList.toggle("active",b.dataset.diff===draft.diff));document.querySelectorAll("[data-source]").forEach(b=>b.classList.toggle("active",b.dataset.source===draft.source));document.querySelectorAll("[data-answer]").forEach(b=>b.classList.toggle("active",b.dataset.answer===draft.answer));$("adaptiveToggle").checked=draft.adaptive;$("comboToggle").checked=draft.combo;$("timerSelect").value=draft.timer;$("livesToggle").checked=draft.lives;$("teamCount").value=draft.teams;document.querySelectorAll(".teamSetting").forEach(x=>x.classList.toggle("hidden",draft.style!=="team"));$("answerBox").classList.toggle("hidden",!(draft.style==="team"&&draft.mode==="position"));$("uploadBox").classList.toggle("hidden",draft.source!=="custom");renderTeamEditor()}function openCustom(){draft={...cfg,daily:false};syncDraft();openModal("customModal")}function applyCustom(){draft.adaptive=$("adaptiveToggle").checked;draft.combo=$("comboToggle").checked;draft.timer=Number($("timerSelect").value);draft.lives=$("livesToggle").checked;draft.teams=Math.max(2,Math.min(6,Number($("teamCount").value)));if(draft.source==="custom"&&customImages.length<4){toast("กรุณาอัปโหลดอย่างน้อย 4 รูป");return}cfg={...draft,daily:false};closeModal("customModal");updateSummary();startRound()}function renderTeamEditor(){$("teamEditor").innerHTML="";for(let i=0;i<draft.teams;i++){const t=teamData[i],d=document.createElement("div");d.className="teamEdit";d.innerHTML=`<input type="color" value="${t.color}"><input class="input" value="${t.name}" maxlength="16"><input class="input" value="${t.emoji}" maxlength="2">`;const z=d.querySelectorAll("input");z[0].oninput=()=>t.color=z[0].value;z[1].oninput=()=>t.name=z[1].value||`ทีม ${String.fromCharCode(65+i)}`;z[2].oninput=()=>t.emoji=z[2].value||"⭐";$("teamEditor").appendChild(d)}}function uploads(files){const f=[...files].slice(0,20);Promise.all(f.map(file=>new Promise(res=>{const r=new FileReader();r.onload=()=>compress(r.result,res);r.readAsDataURL(file)}))).then(a=>{customImages=a.filter(Boolean);save("bb_custom",customImages);renderUploads();toast(`เพิ่มรูป ${customImages.length} รูปแล้ว`)})}function compress(src,done){const im=new Image();im.onload=()=>{const c=document.createElement("canvas"),m=360,s=Math.min(1,m/Math.max(im.width,im.height));c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext("2d").drawImage(im,0,0,c.width,c.height);done(c.toDataURL("image/jpeg",.78))};im.onerror=()=>done(null);im.src=src}function renderUploads(){$("uploadPreview").innerHTML="";customImages.forEach(x=>{const i=document.createElement("img");i.src=x;$("uploadPreview").appendChild(i)})}function saveResume(){if(!roundStarted||roundComplete)return;save("bb_resume",{cfg,layout,baseLayout,asked:[...asked],correct,score,combo,bestCombo,lives,hints,state,targetIndex,pickedIndex,missingId,swapPair,swapPicks,changeIndex,changeAlt,teamคะแนนs,adaptiveShift,customImages,roundStartedAt,roundAttempts});$("resumeBtn").classList.remove("hidden")}function clearResume(){localStorage.removeItem("bb_resume");$("resumeBtn").classList.add("hidden")}function restoreResume(){const r=load("bb_resume",null);if(!r)return;cfg={...cfg,...r.cfg};if(cfg.source==="study")cfg.source="teddy";cfg.teams=Math.max(2,Math.min(6,Number(cfg.teams)||2));layout=r.layout||[];baseLayout=r.baseLayout||[];asked=new Set(r.asked||[]);correct=r.correct||0;score=r.score||0;combo=r.combo||0;bestCombo=r.bestCombo||0;lives=r.lives??3;hints=r.hints??3;state=r.state||"idle";targetIndex=r.targetIndex;pickedIndex=r.pickedIndex;missingId=r.missingId;swapPair=r.swapPair||[];swapPicks=r.swapPicks||[];changeIndex=r.changeIndex;changeAlt=r.changeAlt;teamคะแนนs=[...(r.teamคะแนนs||[]),0,0,0,0,0,0].slice(0,6);adaptiveShift=r.adaptiveShift||0;customImages=r.customImages||customImages;roundStartedAt=Number(r.roundStartedAt)||Date.now();roundAttempts=Number(r.roundAttempts)||Math.max(correct,asked.size);practiceRewardSubmitted=false;roundStarted=true;roundComplete=false;updateSummary();renderTeams();updateHUD();if(state==="position_target"){renderTarget(targetIndex);showScene("target");setMain("พร้อมตอบ",positionAnswer)}else if(state==="position_answer")positionAnswer();else startMode();$("game").scrollIntoView({behavior:"smooth"})}
+function syncDraft(){document.querySelectorAll("[data-style]").forEach(b=>b.classList.toggle("active",b.dataset.style===draft.style));document.querySelectorAll("[data-mode]").forEach(b=>b.classList.toggle("active",b.dataset.mode===draft.mode));document.querySelectorAll("[data-diff]").forEach(b=>b.classList.toggle("active",b.dataset.diff===draft.diff));document.querySelectorAll("[data-source]").forEach(b=>b.classList.toggle("active",b.dataset.source===draft.source));document.querySelectorAll("[data-answer]").forEach(b=>b.classList.toggle("active",b.dataset.answer===draft.answer));$("adaptiveToggle").checked=draft.adaptive;$("comboToggle").checked=draft.combo;$("timerSelect").value=draft.timer;$("livesToggle").checked=draft.lives;$("teamCount").value=draft.teams;document.querySelectorAll(".teamSetting").forEach(x=>x.classList.toggle("hidden",draft.style!=="team"));$("answerBox").classList.toggle("hidden",!(draft.style==="team"&&draft.mode==="position"));$("uploadBox").classList.toggle("hidden",draft.source!=="custom");renderTeamEditor()}function openCustom(){draft={...cfg,daily:false};syncDraft();openModal("customModal")}function applyCustom(){draft.adaptive=$("adaptiveToggle").checked;draft.combo=$("comboToggle").checked;draft.timer=Number($("timerSelect").value);draft.lives=$("livesToggle").checked;draft.teams=Math.max(2,Math.min(6,Number($("teamCount").value)));if(draft.source==="custom"&&customImages.length<4){toast("กรุณาอัปโหลดอย่างน้อย 4 รูป");return}cfg={...draft,daily:false};closeModal("customModal");updateSummary();startRound()}function renderTeamEditor(){$("teamEditor").innerHTML="";for(let i=0;i<draft.teams;i++){const t=teamData[i],d=document.createElement("div");d.className="teamEdit";d.innerHTML=`<input type="color" value="${t.color}"><input class="input" value="${t.name}" maxlength="16"><input class="input" value="${t.emoji}" maxlength="2">`;const z=d.querySelectorAll("input");z[0].oninput=()=>t.color=z[0].value;z[1].oninput=()=>t.name=z[1].value||`ทีม ${String.fromCharCode(65+i)}`;z[2].oninput=()=>t.emoji=z[2].value||"⭐";$("teamEditor").appendChild(d)}}function uploads(files){const f=[...files].slice(0,20);Promise.all(f.map(file=>new Promise(res=>{const r=new FileReader();r.onload=()=>compress(r.result,res);r.readAsDataURL(file)}))).then(a=>{customImages=a.filter(Boolean);save("bb_custom",customImages);renderUploads();toast(`เพิ่มรูป ${customImages.length} รูปแล้ว`)})}function compress(src,done){const im=new Image();im.onload=()=>{const c=document.createElement("canvas"),m=360,s=Math.min(1,m/Math.max(im.width,im.height));c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext("2d").drawImage(im,0,0,c.width,c.height);done(c.toDataURL("image/jpeg",.78))};im.onerror=()=>done(null);im.src=src}function renderUploads(){$("uploadPreview").innerHTML="";customImages.forEach(x=>{const i=document.createElement("img");i.src=x;$("uploadPreview").appendChild(i)})}function saveResume(){if(!roundStarted||roundComplete)return;save("bb_resume",{cfg,layout,baseLayout,asked:[...asked],correct,score,combo,bestCombo,lives,hints,state,targetIndex,pickedIndex,missingId,swapPair,swapPicks,changeIndex,changeAlt,teamคะแนนs,adaptiveShift,customImages,roundStartedAt,roundAttempts});$("resumeBtn").classList.remove("hidden")}function clearResume(){localStorage.removeItem("bb_resume");$("resumeBtn").classList.add("hidden")}function restoreResume(){const r=load("bb_resume",null);if(!r)return;cfg={...cfg,...r.cfg};if(cfg.source==="study")cfg.source="teddy";cfg.style="solo";cfg.teams=1;if(!["position","match","sequence"].includes(cfg.mode))cfg.mode="position";layout=r.layout||[];baseLayout=r.baseLayout||[];asked=new Set(r.asked||[]);correct=r.correct||0;score=r.score||0;combo=r.combo||0;bestCombo=r.bestCombo||0;lives=r.lives??3;hints=r.hints??3;state=r.state||"idle";targetIndex=r.targetIndex;pickedIndex=r.pickedIndex;missingId=r.missingId;swapPair=r.swapPair||[];swapPicks=r.swapPicks||[];changeIndex=r.changeIndex;changeAlt=r.changeAlt;teamคะแนนs=[...(r.teamคะแนนs||[]),0,0,0,0,0,0].slice(0,6);adaptiveShift=r.adaptiveShift||0;customImages=r.customImages||customImages;roundStartedAt=Number(r.roundStartedAt)||Date.now();roundAttempts=Number(r.roundAttempts)||Math.max(correct,asked.size);practiceRewardSubmitted=false;roundStarted=true;roundComplete=false;updateSummary();renderTeams();updateHUD();if(state==="position_target"){renderTarget(targetIndex);showScene("target");setMain("พร้อมตอบ",positionAnswer)}else if(state==="position_answer")positionAnswer();else startMode();$("game").scrollIntoView({behavior:"smooth"})}
 function openModal(id){$(id).classList.remove("hidden");$("popover").classList.add("hidden");if(id==="statsModal")renderStats();if(id==="collectionModal")renderCollection();if(id==="profileModal")renderProfile()}function closeModal(id){$(id).classList.add("hidden")}function toast(t){let x=$("toast");if(!x){x=document.createElement("div");x.id="toast";x.style.cssText="position:fixed;left:50%;bottom:20px;z-index:220;transform:translate(-50%,18px);padding:10px 14px;border-radius:999px;background:#302733;color:white;font-size:11px;font-weight:850;opacity:0;transition:.22s;box-shadow:0 14px 30px rgba(30,20,36,.22)";document.body.appendChild(x)}x.textContent=t;x.style.opacity=1;x.style.transform="translate(-50%,0)";setTimeout(()=>{x.style.opacity=0;x.style.transform="translate(-50%,18px)"},1700)}function stars(){const box=$("starfall"),cs=["✨","⭐","🌟","💗","🌸"];box.innerHTML="";for(let i=0;i<35;i++){const s=document.createElement("i");s.textContent=cs[Math.floor(Math.random()*cs.length)];s.style.left=Math.random()*100+"vw";s.style.fontSize=13+Math.random()*18+"px";s.style.animationDelay=Math.random()*.7+"s";box.appendChild(s)}setTimeout(()=>box.innerHTML="",2600)}
 function resultTextSummary(){const rate=asked.size?Math.round(correct/asked.size*100):0;return `Brain Buddy • ${profile().name||"ผู้เล่น"} • ${score} คะแนน • ${rate}% • Combo ${bestCombo}`}function resultCanvas(){const c=document.createElement("canvas");c.width=1200;c.height=675;const x=c.getContext("2d"),g=x.createLinearGradient(0,0,1200,675);g.addColorStop(0,"#fff3f9");g.addColorStop(.55,"#f1edff");g.addColorStop(1,"#e7faf4");x.fillStyle=g;x.fillRect(0,0,1200,675);x.fillStyle="#302733";x.font="900 64px sans-serif";x.fillText("Brain Buddy",70,105);x.font="700 25px sans-serif";x.fillStyle="#7a6f7e";x.fillText("MEMORY • ATTENTION • OBSERVATION",72,145);x.fillStyle="#fff";if(x.roundRect){x.beginPath();x.roundRect(65,195,1070,350,36);x.fill()}else x.fillRect(65,195,1070,350);const rate=asked.size?Math.round(correct/asked.size*100):0;x.fillStyle="#302733";x.font="900 40px sans-serif";x.fillText(profile().name||"ผู้เล่น",110,275);x.fillStyle="#7558c6";x.font="900 88px sans-serif";x.fillText(String(score),110,400);x.font="700 22px sans-serif";x.fillStyle="#7a6f7e";x.fillText("คะแนน",112,435);x.fillStyle="#f270a7";x.font="900 58px sans-serif";x.fillText(rate+"%",505,400);x.font="700 22px sans-serif";x.fillStyle="#7a6f7e";x.fillText("ความแม่นยำ",508,435);x.fillStyle="#58b99d";x.font="900 58px sans-serif";x.fillText(String(bestCombo),835,400);x.font="700 22px sans-serif";x.fillStyle="#7a6f7e";x.fillText("Best Combo",838,435);x.font="700 20px sans-serif";x.fillStyle="#8a7f8f";x.fillText("© 2026 Sulawit Songsang • Brain Buddy",70,610);return c}
 // UI events
@@ -19152,8 +19556,8 @@ window.addEventListener("load",()=>{
 <script>
 (function brainBuddyV23AppStyle(){
   const $=s=>document.querySelector(s);
-  const MODE={position:{name:"📍 จำตำแหน่ง",team:true},match:{name:"🧩 จับคู่"},missing:{name:"👀 ตัวไหนหาย"},swap:{name:"🔄 สลับที่"},change:{name:"🔎 อะไรเปลี่ยน"},sequence:{name:"🔢 จำลำดับ"}};
-  const DIFF={easy:{name:"ง่าย 2×2"},normal:{name:"ปานกลาง 3×3"},hard:{name:"ยาก 4×4"},expert:{name:"Expert"}};
+  const MODE={position:{name:"จำตำแหน่ง"},match:{name:"จับคู่"},sequence:{name:"จำลำดับ"}};
+  const DIFF={easy:{name:"ง่าย 2×2"},normal:{name:"ปานกลาง 3×3"},hard:{name:"ยาก 4×4"}};
   let screen="home",previous="home",selectedMode="position",selectedDiff="easy",selectedStyle="solo",selectedTeams=2;
   document.body.classList.add("bbCandyHome");
 
@@ -19241,19 +19645,19 @@ window.addEventListener("load",()=>{
   }
 
   function syncSetup(){
-    const mode=MODE[selectedMode]||MODE.position;
-    $("#bbSetupTitle").textContent=mode.name;$("#bbSetupSummary").textContent=`${mode.name} • ${DIFF[selectedDiff].name}`;
-    $("#bbSetupSummary2").textContent=`${selectedStyle==="solo"?"คนเดียว":selectedTeams+" ทีม"} • หมี Brain Buddy`;
+    if(!MODE[selectedMode])selectedMode="position";
+    if(!DIFF[selectedDiff])selectedDiff="easy";
+    selectedStyle="solo";
+    selectedTeams=1;
+    const mode=MODE[selectedMode];
+    const title=$("#bbSetupTitle"),sum=$("#bbSetupSummary"),sum2=$("#bbSetupSummary2");
+    if(title)title.textContent=mode.name;
+    if(sum)sum.textContent=`${mode.name} • ${DIFF[selectedDiff].name}`;
+    if(sum2)sum2.textContent="คนเดียว • ระบบจับเวลาอัตโนมัติ";
     document.querySelectorAll("[data-app-diff]").forEach(b=>b.classList.toggle("active",b.dataset.appDiff===selectedDiff));
-    document.querySelectorAll("[data-app-style]").forEach(b=>b.classList.toggle("active",b.dataset.appStyle===selectedStyle));
-    document.querySelectorAll("[data-app-teams]").forEach(b=>b.classList.toggle("active",Number(b.dataset.appTeams)===selectedTeams));
-    const teamBtn=$("#bbAppTeamChoice"),teamPicker=$("#bbAppTeamPicker"),note=$("#bbAppStyleNote"),canTeam=!!mode.team;
-    teamBtn.disabled=!canTeam;if(!canTeam&&selectedStyle==="team")selectedStyle="solo";
-    teamPicker.classList.toggle("hidden",selectedStyle!=="team");
-    note.textContent=canTeam?"คนเดียวสะสม XP • ทีมใช้สำหรับกิจกรรม":"โหมดนี้เล่นคนเดียวเพื่อเก็บแต้มและเหรียญ";
   }
 
-  function chooseMode(mode){selectedMode=mode;if(!(MODE[mode]||{}).team)selectedStyle="solo";showScreen("setup")}
+  function chooseMode(mode){selectedMode=MODE[mode]?mode:"position";selectedStyle="solo";selectedTeams=1;showScreen("setup")}
   function bbRestoreMobileDock(){
     document.body.classList.remove("bbGameActive");
     const mobileDock=document.querySelector(".v17dock");
@@ -19267,7 +19671,10 @@ window.addEventListener("load",()=>{
   window.bbRestoreMobileDock=bbRestoreMobileDock;
 
   function startNormalGame(){
-    cfg={...cfg,style:selectedStyle,mode:selectedMode,diff:selectedDiff,source:"teddy",teams:selectedTeams,answer:selectedStyle==="team"?"voice":"screen",adaptive:false,combo:false,timer:0,lives:false,daily:false};
+    const autoTime={position:{easy:20,normal:15,hard:12},match:{easy:20,normal:16,hard:13},sequence:{easy:22,normal:17,hard:14}};
+    const seconds=autoTime[selectedMode]?.[selectedDiff]||15;
+    selectedStyle="solo";selectedTeams=1;
+    cfg={...cfg,style:"solo",mode:selectedMode,diff:selectedDiff,source:"teddy",teams:1,answer:"screen",adaptive:false,combo:true,timer:seconds,lives:false,daily:false};
     updateSummary();
     document.body.classList.add("bbAppPlaying","bbGameActive");
     const mobileDock=document.querySelector(".v17dock");
@@ -27371,6 +27778,320 @@ document.addEventListener('DOMContentLoaded', () => {
   }else{
     init();
   }
+})();
+</script>
+
+
+<div class="p92MemberGate" id="p92MemberGate">
+  <div class="p92GateShell">
+    <div class="p92GateBuddy" aria-hidden="true">
+      <img src="/assets/buddy/default-pink-buddy.png?v=920" alt="">
+    </div>
+
+    <section class="p92GateCard">
+      <div class="p92GateBrand"><span>P</span><div><b>POMRU</b><small>เล่น • เรียน • เติบโตไปด้วยกัน</small></div></div>
+      <div class="p92GateTitle"><small>ยินดีต้อนรับ</small><h1>เข้าบัญชีก่อน<br>เริ่มเล่น</h1><p>แต้ม เลเวล แรงก์ เหรียญ Buddy และประวัติจะอยู่กับบัญชีของคุณ</p></div>
+
+      <div class="p92GateTabs">
+        <button type="button" class="active" data-p92-tab="login">เข้าสู่ระบบ</button>
+        <button type="button" data-p92-tab="signup">สมัครสมาชิก</button>
+      </div>
+
+      <button class="p92Google" id="p92GoogleLogin" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="#4285F4" d="M21.6 12.23c0-.71-.06-1.4-.18-2.07H12v3.92h5.38a4.6 4.6 0 0 1-1.99 3.02v2.54h3.22c1.89-1.74 2.99-4.3 2.99-7.41z"/>
+          <path fill="#34A853" d="M12 22c2.7 0 4.96-.89 6.61-2.41l-3.22-2.54c-.89.6-2.03.96-3.39.96-2.6 0-4.81-1.76-5.6-4.12H3.07v2.62A9.99 9.99 0 0 0 12 22z"/>
+          <path fill="#FBBC05" d="M6.4 13.89A5.99 5.99 0 0 1 6.08 12c0-.66.11-1.3.32-1.89V7.49H3.07A9.99 9.99 0 0 0 2 12c0 1.61.39 3.14 1.07 4.51l3.33-2.62z"/>
+          <path fill="#EA4335" d="M12 5.99c1.47 0 2.79.51 3.83 1.5l2.87-2.87C16.95 2.99 14.7 2 12 2a9.99 9.99 0 0 0-8.93 5.49l3.33 2.62C7.19 7.75 9.4 5.99 12 5.99z"/>
+        </svg>
+        <span>ดำเนินการต่อด้วย Google</span>
+      </button>
+
+      <div class="p92Or"><span>หรือใช้อีเมล</span></div>
+
+      <form class="p92GateForm" id="p92LoginForm">
+        <label><span>อีเมล</span><input id="p92LoginEmail" type="email" required autocomplete="email" placeholder="you@example.com"></label>
+        <label><span>รหัสผ่าน</span><input id="p92LoginPassword" type="password" required minlength="6" autocomplete="current-password" placeholder="รหัสผ่าน"></label>
+        <button type="submit" class="p92Primary">เข้าสู่ระบบ</button>
+        <button type="button" class="p92Link" id="p92Forgot">ลืมรหัสผ่าน?</button>
+      </form>
+
+      <form class="p92GateForm hidden" id="p92SignupForm">
+        <label><span>ชื่อที่ใช้ในเกม</span><input id="p92SignupName" maxlength="24" required placeholder="เช่น Lucky"></label>
+        <label><span>อีเมล</span><input id="p92SignupEmail" type="email" required autocomplete="email" placeholder="you@example.com"></label>
+        <label><span>รหัสผ่าน</span><input id="p92SignupPassword" type="password" required minlength="6" autocomplete="new-password" placeholder="อย่างน้อย 6 ตัวอักษร"></label>
+        <label><span>ยืนยันรหัสผ่าน</span><input id="p92SignupConfirm" type="password" required minlength="6" autocomplete="new-password" placeholder="พิมพ์อีกครั้ง"></label>
+        <button type="submit" class="p92Primary">สร้างบัญชี</button>
+      </form>
+
+      <div class="p92GateMessage" id="p92GateMessage"></div>
+      <p class="p92GateFoot">ไม่มีโหมด Guest เพื่อให้แต้มและอันดับของผู้เล่นผูกกับบัญชีเดียวอย่างชัดเจน</p>
+    </section>
+  </div>
+</div>
+
+
+<script id="pomru-v92-member-runtime">
+(function(){
+  "use strict";
+  const $=id=>document.getElementById(id);
+  let client=null,user=null,pendingAvatar=null;
+
+  function c(){
+    if(client)return client;
+    if(window.__bbSupabase)return client=window.__bbSupabase;
+    if(window.sb?.auth)return client=window.sb;
+    const cfg=window.BRAIN_BUDDY_SUPABASE||{};
+    if(window.supabase&&cfg.url&&cfg.publishableKey){
+      client=window.supabase.createClient(cfg.url,cfg.publishableKey);
+      window.__bbSupabase=client;
+    }
+    return client;
+  }
+
+  function parse(key,def){
+    try{const v=localStorage.getItem(key);return v==null?def:JSON.parse(v)}catch(_){return def}
+  }
+
+  function gateMsg(t,type=""){
+    const el=$("p92GateMessage");if(!el)return;
+    el.textContent=t||"";el.className="p92GateMessage"+(type?" "+type:"");
+  }
+
+  function gateOpen(){
+    document.body.classList.add("p92Locked");
+    $("p92MemberGate")?.classList.remove("hidden");
+  }
+  function gateClose(){
+    document.body.classList.remove("p92Locked");
+    $("p92MemberGate")?.classList.add("hidden");
+    try{window.bbAppShowScreen?.("home",false)}catch(_){}
+    setTimeout(()=>{try{window.POMRUCoreSync?.refresh?.("member")}catch(_){};try{window.POMRUProgress?.refresh?.("member")}catch(_){}},50);
+  }
+
+  async function ensureProfile(u,name=""){
+    if(!u||!c())return;
+    let row=null;
+    try{
+      const r=await c().from("profiles").select("id,display_name,avatar_url,xp").eq("id",u.id).maybeSingle();
+      row=r.data||null;
+    }catch(_){}
+    const meta=u.user_metadata||{};
+    const display=String(name||row?.display_name||meta.display_name||meta.full_name||meta.name||u.email?.split("@")[0]||"ผู้เล่น").trim().slice(0,24);
+    try{
+      if(!row)await c().from("profiles").upsert({id:u.id,display_name:display},{onConflict:"id"});
+      else if(name&&row.display_name!==display)await c().from("profiles").update({display_name:display}).eq("id",u.id);
+    }catch(_){}
+    try{
+      const lp=parse("bb_profile",{});
+      lp.name=display;
+      if(row?.xp!=null)lp.xp=Number(row.xp)||0;
+      localStorage.setItem("bb_profile",JSON.stringify(lp));
+    }catch(_){}
+  }
+
+  async function sessionChanged(session){
+    user=session?.user||null;
+    if(!user){gateOpen();return}
+    await ensureProfile(user);
+    gateClose();
+    renderProfile();
+  }
+
+  async function boot(tries=0){
+    if(!c()){
+      gateOpen();gateMsg("กำลังเชื่อมต่อระบบสมาชิก…");
+      if(tries<30)setTimeout(()=>boot(tries+1),120);
+      else gateMsg("เชื่อมต่อระบบสมาชิกไม่สำเร็จ กรุณารีเฟรชหน้าเว็บ");
+      return;
+    }
+    try{
+      const {data,error}=await c().auth.getSession();
+      if(error)throw error;
+      await sessionChanged(data?.session||null);
+      c().auth.onAuthStateChange((evt,s)=>setTimeout(()=>sessionChanged(s),30));
+    }catch(e){gateOpen();gateMsg(e?.message||"ตรวจสอบบัญชีไม่สำเร็จ")}
+  }
+
+  function setTab(tab){
+    document.querySelectorAll("[data-p92-tab]").forEach(b=>b.classList.toggle("active",b.dataset.p92Tab===tab));
+    $("p92LoginForm")?.classList.toggle("hidden",tab!=="login");
+    $("p92SignupForm")?.classList.toggle("hidden",tab!=="signup");
+    gateMsg("");
+  }
+
+  async function compress(file){
+    return new Promise((resolve,reject)=>{
+      const r=new FileReader();
+      r.onerror=reject;
+      r.onload=()=>{
+        const img=new Image();
+        img.onerror=reject;
+        img.onload=()=>{
+          const s=256,cv=document.createElement("canvas"),ctx=cv.getContext("2d");
+          cv.width=s;cv.height=s;
+          const k=Math.max(s/img.width,s/img.height),w=img.width*k,h=img.height*k;
+          ctx.drawImage(img,(s-w)/2,(s-h)/2,w,h);
+          resolve(cv.toDataURL("image/jpeg",.76));
+        };
+        img.src=r.result;
+      };
+      r.readAsDataURL(file);
+    });
+  }
+
+  function renderProfile(){
+    if(!user)return;
+    const prog=window.POMRUProgress?.getState?.()?.progress||{};
+    if($("p92ProfileEmail"))$("p92ProfileEmail").value=user.email||"";
+    if($("p92ProfileRank"))$("p92ProfileRank").textContent=prog.rank_name||"มือใหม่";
+    if($("p92ProfileCoins"))$("p92ProfileCoins").textContent=Number(prog.coins||0).toLocaleString();
+
+    const a=$("p92ProfileAvatar");
+    const url=pendingAvatar||prog.avatar_url||user.user_metadata?.avatar_url||user.user_metadata?.picture||"";
+    if(a)a.innerHTML=url?'<img src="'+String(url).replace(/"/g,"&quot;")+'" alt="">':'<img src="/assets/buddy/default-pink-buddy.png?v=920" alt="">';
+
+    const audio=parse("bb_audio",{});
+    if($("p92MusicToggle"))$("p92MusicToggle").checked=audio.musicEnabled!==false;
+    if($("p92SfxToggle"))$("p92SfxToggle").checked=audio.sfxEnabled!==false;
+    if($("p92MotionToggle"))$("p92MotionToggle").checked=parse("bb_motion","full")!=="full";
+    if($("p92LargeToggle"))$("p92LargeToggle").checked=!!parse("bb_large",false);
+    if($("p92SpeechToggle"))$("p92SpeechToggle").checked=parse("p92_speech",true)!==false;
+  }
+
+  async function saveProfile(){
+    if(!user||!c())return;
+    const name=String($("profileName")?.value||"").trim().slice(0,24);
+    if(!name){alert("กรุณาตั้งชื่อผู้เล่น");return}
+
+    const update={display_name:name};
+    if(pendingAvatar!==null)update.avatar_url=pendingAvatar||null;
+
+    const {error}=await c().from("profiles").update(update).eq("id",user.id);
+    if(error){alert("บันทึกโปรไฟล์ไม่สำเร็จ: "+error.message);return}
+
+    try{
+      const meta={...(user.user_metadata||{}),display_name:name,full_name:name};
+      if(pendingAvatar!==null){meta.avatar_url=pendingAvatar||null;meta.picture=pendingAvatar||null}
+      await c().auth.updateUser({data:meta});
+    }catch(_){}
+
+    const audio=parse("bb_audio",{});
+    audio.musicEnabled=$("p92MusicToggle")?.checked!==false;
+    audio.sfxEnabled=$("p92SfxToggle")?.checked!==false;
+    localStorage.setItem("bb_audio",JSON.stringify(audio));
+
+    const reduced=!!$("p92MotionToggle")?.checked;
+    localStorage.setItem("bb_motion",JSON.stringify(reduced?"reduced":"full"));
+    const large=!!$("p92LargeToggle")?.checked;
+    localStorage.setItem("bb_large",JSON.stringify(large));
+    const speech=$("p92SpeechToggle")?.checked!==false;
+    localStorage.setItem("p92_speech",JSON.stringify(speech));
+
+    document.body.classList.toggle("p92HideSpeech",!speech);
+    document.body.classList.toggle("large",large);
+    try{typeof applyMotion==="function"&&applyMotion(reduced?"reduced":"full")}catch(_){}
+    try{
+      if(typeof sfxEnabled!=="undefined")sfxEnabled=audio.sfxEnabled;
+      if(typeof musicEnabled!=="undefined")musicEnabled=audio.musicEnabled;
+      if(audio.musicEnabled){typeof startMusic==="function"&&startMusic()}else{typeof stopMusic==="function"&&stopMusic()}
+      typeof saveAudio==="function"&&saveAudio();
+    }catch(_){}
+
+    try{
+      const lp=parse("bb_profile",{});
+      lp.name=name;localStorage.setItem("bb_profile",JSON.stringify(lp));
+    }catch(_){}
+
+    pendingAvatar=null;
+    try{await window.POMRUProgress?.refresh?.("profile")}catch(_){}
+    try{window.POMRUCoreSync?.refresh?.("profile")}catch(_){}
+    $("profileModal")?.classList.add("hidden");
+  }
+
+  function injectEnglishMix(){
+    const grid=$("bbEnglishGameGrid");
+    if(!grid||grid.querySelector('[data-learning-type="all"]'))return;
+    const b=document.createElement("button");
+    b.className="p91GameCard aqua";
+    b.setAttribute("data-learning-start","");
+    b.dataset.learningSubject="language";
+    b.dataset.learningType="all";
+    b.dataset.learningTitle="English Mix";
+    b.innerHTML='<span class="p91GameIcon">MIX</span><span><b>English Mix</b><small>สุ่มคำศัพท์ การพิมพ์ และการฟังในรอบเดียว</small><em>เล่นแบบรวม</em></span><i>›</i>';
+    grid.appendChild(b);
+  }
+
+  function bind(){
+    document.querySelectorAll("[data-p92-tab]").forEach(b=>b.addEventListener("click",()=>setTab(b.dataset.p92Tab)));
+
+    $("p92LoginForm")?.addEventListener("submit",async e=>{
+      e.preventDefault();gateMsg("กำลังเข้าสู่ระบบ…");
+      try{
+        const {data,error}=await c().auth.signInWithPassword({email:$("p92LoginEmail").value.trim(),password:$("p92LoginPassword").value});
+        if(error)throw error;await sessionChanged(data.session);gateMsg("");
+      }catch(err){gateMsg(err?.message||"เข้าสู่ระบบไม่สำเร็จ")}
+    });
+
+    $("p92SignupForm")?.addEventListener("submit",async e=>{
+      e.preventDefault();
+      const name=$("p92SignupName").value.trim(),email=$("p92SignupEmail").value.trim(),pw=$("p92SignupPassword").value,cf=$("p92SignupConfirm").value;
+      if(pw!==cf){gateMsg("รหัสผ่านทั้งสองช่องไม่ตรงกัน");return}
+      gateMsg("กำลังสร้างบัญชี…");
+      try{
+        const {data,error}=await c().auth.signUp({email,password:pw,options:{data:{display_name:name,full_name:name}}});
+        if(error)throw error;
+        if(data?.session?.user){await ensureProfile(data.session.user,name);await sessionChanged(data.session)}
+        else{setTab("login");$("p92LoginEmail").value=email;gateMsg("สร้างบัญชีแล้ว กรุณายืนยันอีเมลก่อนเข้าสู่ระบบ","good")}
+      }catch(err){gateMsg(err?.message||"สมัครสมาชิกไม่สำเร็จ")}
+    });
+
+    $("p92GoogleLogin")?.addEventListener("click",async()=>{
+      try{
+        const {error}=await c().auth.signInWithOAuth({provider:"google",options:{redirectTo:location.origin+location.pathname}});
+        if(error)throw error;
+      }catch(err){gateMsg(err?.message||"เปิด Google ไม่สำเร็จ")}
+    });
+
+    $("p92Forgot")?.addEventListener("click",async()=>{
+      const email=$("p92LoginEmail").value.trim();
+      if(!email){gateMsg("กรอกอีเมลก่อน");return}
+      try{
+        const {error}=await c().auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});
+        if(error)throw error;gateMsg("ส่งลิงก์ตั้งรหัสผ่านใหม่แล้ว","good")
+      }catch(err){gateMsg(err?.message||"ส่งอีเมลไม่สำเร็จ")}
+    });
+
+    $("p92ChooseProfilePhoto")?.addEventListener("click",()=>$("p92ProfilePhotoInput")?.click());
+    $("p92ProfilePhotoInput")?.addEventListener("change",async e=>{
+      const file=e.target.files?.[0];if(!file)return;
+      if(file.size>8*1024*1024){alert("รูปต้องไม่เกิน 8 MB");return}
+      try{pendingAvatar=await compress(file);renderProfile()}catch(_){alert("อ่านรูปไม่สำเร็จ")}
+    });
+    $("p92UseBuddyAvatar")?.addEventListener("click",()=>{pendingAvatar="";renderProfile()});
+
+    if($("saveProfile"))$("saveProfile").onclick=saveProfile;
+    $("p92SignOut")?.addEventListener("click",async()=>{await c()?.auth.signOut({scope:"local"});$("profileModal")?.classList.add("hidden");gateOpen()});
+
+    document.addEventListener("click",e=>{
+      if(e.target.closest('[data-app-action="profile"],#openProfileFromAccount'))setTimeout(renderProfile,30);
+    },true);
+
+    document.addEventListener("pomru:v899-synced",renderProfile);
+    document.addEventListener("pomru:progress-updated",renderProfile);
+  }
+
+  function init(){
+    injectEnglishMix();
+    const speech=parse("p92_speech",true)!==false;
+    document.body.classList.toggle("p92HideSpeech",!speech);
+    gateOpen();bind();boot();
+  }
+
+  window.POMRUMember={renderProfile,gateOpen,gateClose};
+
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});
+  else init();
 })();
 </script>
 
