@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy v86.1 — Auth Touch Fix</title>
+<title>Brain Buddy v86.2 — Auth Runtime Fix</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -12346,6 +12346,8 @@ try{
   </div>
 </div>
 
+<div id="themeSeg" hidden aria-hidden="true"></div>
+
 <div class="modal hidden" id="accountModal">
   <div class="modalcard" style="width:min(540px,100%)">
     <button class="x" data-close="accountModal">×</button>
@@ -13440,7 +13442,7 @@ $('teamQuick').onclick=()=>{cfg={...cfg,style:'team',mode:'position',diff:'easy'
 $('customPlay').onclick=openCustom;$('settingsBtn').onclick=openCustom;$('resultSettings').onclick=openCustom;$('dailyBtn').onclick=startDaily;$('resumeBtn').onclick=restoreResume;$('homeBtn').onclick=()=>$('home').scrollIntoView({behavior:'smooth'});$('againBtn').onclick=()=>startRound();$('hintBtn').onclick=useHint;
 $('fullBtn').onclick=async()=>{try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen()}catch(e){}};$('themeBtn').onclick=()=>applyTheme('light');$('presenterBtn').onclick=()=>{document.body.classList.toggle('presenter');$('popover').classList.add('hidden');$('game').scrollIntoView({behavior:'smooth'})};
 $('musicBtn').onclick=()=>musicEnabled?stopMusic():startMusic();$('musicToggle').onchange=e=>e.target.checked?startMusic():stopMusic();$('sfxToggle').onchange=e=>{sfxEnabled=e.target.checked;saveAudio()};$('musicVol').oninput=e=>{musicVolume=Number(e.target.value)/100;$('musicVolText').textContent=e.target.value+'%';saveAudio()};$('sfxVol').oninput=e=>{sfxVolume=Number(e.target.value)/100;$('sfxVolText').textContent=e.target.value+'%';saveAudio()};$('musicThemeSeg').onclick=e=>{const b=e.target.closest('[data-music]');if(!b)return;musicTheme=b.dataset.music;syncMusic();saveAudio()};
-$('themeSeg').onclick=e=>{const b=e.target.closest('[data-theme]');if(b)applyTheme(b.dataset.theme)};$('motionSeg').onclick=e=>{const b=e.target.closest('[data-motion]');if(b)applyMotion(b.dataset.motion)};$('largeToggle').onchange=e=>{document.body.classList.toggle('large',e.target.checked);save('bb_large',e.target.checked)};$('contrastToggle').onchange=e=>{document.body.classList.toggle('contrast',e.target.checked);save('bb_contrast',e.target.checked)};
+$('themeSeg')&&($('themeSeg').onclick=e=>{const b=e.target.closest('[data-theme]');if(b)applyTheme(b.dataset.theme)});$('motionSeg').onclick=e=>{const b=e.target.closest('[data-motion]');if(b)applyMotion(b.dataset.motion)};$('largeToggle').onchange=e=>{document.body.classList.toggle('large',e.target.checked);save('bb_large',e.target.checked)};$('contrastToggle').onchange=e=>{document.body.classList.toggle('contrast',e.target.checked);save('bb_contrast',e.target.checked)};
 $('styleSeg').onclick=e=>{const b=e.target.closest('[data-style]');if(!b)return;draft.style=b.dataset.style;syncDraft()};$('modeSeg').onclick=e=>{const b=e.target.closest('[data-mode]');if(!b)return;draft.mode=b.dataset.mode;syncDraft()};$('diffSeg').onclick=e=>{const b=e.target.closest('[data-diff]');if(!b)return;draft.diff=b.dataset.diff;syncDraft()};$('sourceSeg').onclick=e=>{const b=e.target.closest('[data-source]');if(!b)return;draft.source=b.dataset.source;syncDraft()};$('answerSeg').onclick=e=>{const b=e.target.closest('[data-answer]');if(!b)return;draft.answer=b.dataset.answer;syncDraft()};$('teamCount').onchange=e=>{draft.teams=Number(e.target.value);syncDraft()};$('applyCustom').onclick=applyCustom;$('randomTeam').onclick=()=>{const i=Math.floor(Math.random()*draft.teams);$('randomTeamOut').textContent=`🎲 ข้อนี้ให้ ${teamData[i].emoji} ${teamData[i].name} ตอบ`;sfx('tap')};$('upload').onchange=e=>uploads(e.target.files);
 $('saveProfile').onclick=()=>{const p=profile();p.name=$('profileName').value.trim()||'ผู้เล่น';const sel=$('avatarSeg').querySelector('.active');if(sel)p.avatar=sel.dataset.avatar;save('bb_profile',p);renderProfile();closeModal('profileModal');toast('บันทึกโปรไฟล์แล้ว')};$('avatarSeg').onclick=e=>{const b=e.target.closest('[data-avatar]');if(!b)return;document.querySelectorAll('[data-avatar]').forEach(x=>x.classList.toggle('active',x===b))};$('clearStats').onclick=async()=>{localStorage.removeItem('bb_history');localStorage.removeItem('bb_badges');renderStats();renderHome();if(currentUser)await cloudClearStats();scheduleCloudSync();toast('ล้างประวัติแล้ว')};
 
@@ -21611,6 +21613,195 @@ document.addEventListener('DOMContentLoaded', () => {
 
     sync();
   };
+})();
+</script>
+
+
+<script>
+/* ==========================================================
+   Brain Buddy v86.2 — INDEPENDENT AUTH EVENT RESCUE
+   ========================================================== */
+(function brainBuddyAuthRuntimeFix(){
+  const modal=document.getElementById("accountModal");
+  if(!modal)return;
+
+  const byId=id=>document.getElementById(id);
+
+  function message(text,type=""){
+    const el=byId("authMessage");
+    if(!el)return;
+    el.textContent=text||"";
+    el.className="authMessage"+(type?" "+type:"");
+  }
+
+  function setTab(tab){
+    modal.querySelectorAll("[data-auth-tab]").forEach(btn=>{
+      btn.classList.toggle("active",btn.dataset.authTab===tab);
+    });
+
+    byId("loginForm")?.classList.toggle("hidden",tab!=="login");
+    byId("signupForm")?.classList.toggle("hidden",tab!=="signup");
+
+    const title=byId("accountTitle");
+    const lead=byId("accountLead");
+
+    if(title){
+      title.textContent=tab==="signup"
+        ?"สมัครสมาชิก Brain Buddy"
+        :"เข้าสู่ระบบ Brain Buddy";
+    }
+
+    if(lead){
+      lead.textContent=tab==="signup"
+        ?"สร้างบัญชีเพื่อเก็บ Brain Coins, XP, คะแนน และความคืบหน้าของคุณ"
+        :"เข้าสู่ระบบเพื่อใช้ Brain Coins และความคืบหน้าของคุณ";
+    }
+
+    message("");
+  }
+
+  function closeAccount(){
+    modal.classList.add("hidden");
+    document.body.classList.remove("bbAccountModalOpen");
+    document.body.style.removeProperty("overflow");
+  }
+
+  /* Tabs */
+  modal.querySelectorAll("[data-auth-tab]").forEach(btn=>{
+    btn.onclick=e=>{
+      e.preventDefault();
+      setTab(btn.dataset.authTab||"login");
+    };
+  });
+
+  /* Google */
+  const google=byId("googleAuthBtn");
+  if(google){
+    google.onclick=async e=>{
+      e.preventDefault();
+
+      try{
+        if(typeof signInGoogle==="function"){
+          await signInGoogle();
+        }else{
+          message("ระบบ Google Login ยังโหลดไม่สำเร็จ กรุณารีเฟรชหน้าแล้วลองใหม่","bad");
+        }
+      }catch(err){
+        message(err?.message||"Google Login ไม่สำเร็จ","bad");
+      }
+    };
+  }
+
+  /* Email login */
+  const loginForm=byId("loginForm");
+  if(loginForm){
+    loginForm.onsubmit=async e=>{
+      e.preventDefault();
+
+      const email=(byId("loginEmail")?.value||"").trim();
+      const password=byId("loginPassword")?.value||"";
+
+      try{
+        if(typeof signInEmail==="function"){
+          await signInEmail(email,password);
+        }else{
+          message("ระบบเข้าสู่ระบบยังโหลดไม่สำเร็จ","bad");
+        }
+      }catch(err){
+        message(err?.message||"เข้าสู่ระบบไม่สำเร็จ","bad");
+      }
+    };
+  }
+
+  /* Signup */
+  const signupForm=byId("signupForm");
+  if(signupForm){
+    signupForm.onsubmit=async e=>{
+      e.preventDefault();
+
+      const name=(byId("signupName")?.value||"").trim()||"ผู้เล่น";
+      const email=(byId("signupEmail")?.value||"").trim();
+      const pw=byId("signupPassword")?.value||"";
+      const confirmPw=byId("signupConfirm")?.value||"";
+
+      if(pw!==confirmPw){
+        message("รหัสผ่านทั้งสองช่องไม่ตรงกัน","bad");
+        return;
+      }
+
+      try{
+        if(typeof signUpEmail==="function"){
+          await signUpEmail(name,email,pw);
+        }else{
+          message("ระบบสมัครสมาชิกยังโหลดไม่สำเร็จ","bad");
+        }
+      }catch(err){
+        message(err?.message||"สมัครสมาชิกไม่สำเร็จ","bad");
+      }
+    };
+  }
+
+  /* Forgot password */
+  const forgot=byId("forgotPasswordBtn");
+  if(forgot){
+    forgot.onclick=async e=>{
+      e.preventDefault();
+
+      const email=(byId("loginEmail")?.value||"").trim();
+
+      if(!email){
+        message("กรอกอีเมลก่อน แล้วกดลืมรหัสผ่านอีกครั้ง","bad");
+        return;
+      }
+
+      try{
+        const client=window.__bbSupabase || window.sb;
+        if(!client)throw new Error("Cloud ยังไม่พร้อม");
+
+        const {error}=await client.auth.resetPasswordForEmail(email,{
+          redirectTo:location.origin+location.pathname
+        });
+
+        if(error)throw error;
+        message("ส่งลิงก์ตั้งรหัสผ่านใหม่ไปทางอีเมลแล้ว","good");
+
+      }catch(err){
+        message(err?.message||"ส่งอีเมลไม่สำเร็จ","bad");
+      }
+    };
+  }
+
+  /* Guest */
+  const guest=byId("continueผู้เยี่ยมชมBtn");
+  if(guest){
+    guest.onclick=e=>{
+      e.preventDefault();
+      closeAccount();
+    };
+  }
+
+  /* Close */
+  const close=modal.querySelector('[data-close="accountModal"],.x');
+  if(close){
+    close.onclick=e=>{
+      e.preventDefault();
+      closeAccount();
+    };
+  }
+
+  /* Backdrop */
+  modal.onclick=e=>{
+    if(e.target===modal)closeAccount();
+  };
+
+  /* iPad */
+  modal.querySelectorAll("button,input").forEach(el=>{
+    el.style.touchAction="manipulation";
+    el.style.pointerEvents="auto";
+  });
+
+  window.bbSetAuthTab=setTab;
+  window.bbCloseAccountModal=closeAccount;
 })();
 </script>
 
