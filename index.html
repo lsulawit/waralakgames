@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>POMRU • ผมรู้ — Pet Game</title>
+<title>POMRU • ผมรู้ — v89.1</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -11292,33 +11292,422 @@ try{
 .p89PetCenter{position:absolute;z-index:4;left:50%;top:255px;bottom:220px;width:min(440px,38vw);transform:translateX(-50%);display:flex;align-items:flex-end;justify-content:center}.p89BuddyStage{position:relative;width:min(360px,30vw);height:min(390px,40vh);display:grid;place-items:end center}.p89BuddyStage #bbEquippedHeroCharacter{position:relative!important;width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;max-width:none!important;max-height:none!important;overflow:visible!important;contain:layout paint!important}.p89BuddyStage #bbEquippedHeroCharacterImg,.p89BuddyStage #bbHomeBuddySkin,.p89BuddyStage #bbHomeBuddyOutfit,.p89BuddyStage #bbHomeBuddyAccessory,.p89BuddyStage #bbHomeBuddyHat,.p89BuddyStage #bbHomeBuddyEffect{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;background-size:contain!important;background-position:center bottom!important;background-repeat:no-repeat!important}.p89Speech{position:absolute;z-index:6;right:-80px;top:26%;min-width:150px;padding:12px 14px;border-radius:28px;background:#fff;box-shadow:0 8px 20px rgba(75,51,70,.1);text-align:center}.p89Speech:after{content:"";position:absolute;left:8px;bottom:-11px;border:12px solid transparent;border-top-color:#fff;transform:rotate(18deg)}.p89Speech b,.p89Speech span{display:block}.p89Speech b{font-size:15px}.p89Speech span{font-size:10px;color:#806979;margin-top:2px}
 .p89Online{right:24px;bottom:230px;width:290px;min-height:90px;border-radius:22px;padding:10px;display:grid;grid-template-columns:64px 1fr;align-items:center;text-align:left;color:#4f3f79;background:linear-gradient(135deg,#f0eaff,#ffe5f5);cursor:pointer}.onlineArt{grid-row:1/3;width:58px;height:58px;border-radius:16px;background:#fff;display:grid;place-items:center;font-size:30px}.p89Online span:nth-child(2) small,.p89Online span:nth-child(2) b,.p89Online span:nth-child(2) em{display:block}.p89Online small{font-size:8px;color:#9b75b2;font-weight:1000}.p89Online b{font-size:15px}.p89Online em{font-style:normal;font-size:9px;color:#806c8d}.p89Online strong{grid-column:2;margin-top:4px;padding:7px 10px;border-radius:11px;background:#7554dc;color:white;text-align:center;font-size:10px}
 .p89MainActions{position:absolute;z-index:12;left:50%;bottom:120px;transform:translateX(-50%);display:grid;grid-template-columns:repeat(3,160px);gap:10px}.p89Action{min-height:93px;border:0;border-radius:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;color:#fff;box-shadow:0 9px 0 rgba(92,44,87,.18),0 16px 27px rgba(88,55,75,.12)}.p89Action span{font-size:35px;line-height:1}.p89Action b{font-size:18px;margin-top:4px}.p89Action small{font-size:9px;font-weight:800;opacity:.9}.p89Action.feed{background:linear-gradient(#ff74b1,#f14491)}.p89Action.play{background:linear-gradient(#8b6bf0,#6846d5)}.p89Action.workout{background:linear-gradient(#ffc54b,#f4a629)}.p89Action:active{transform:translateY(3px)}
-.p89Dock{position:absolute;z-index:30;left:24px;right:24px;bottom:14px;height:86px;padding:7px 10px;border:1px solid rgba(93,62,83,.09);border-radius:26px;display:grid;grid-template-columns:repeat(5,1fr);background:rgba(255,255,255,.94);box-shadow:0 14px 34px rgba(78,51,75,.14);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}.p89Dock button{border:0;border-radius:18px;background:transparent;color:#523b52;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer}.p89Dock button.active{background:linear-gradient(#ffdeeb,#ffc8dc);color:#c93178}.p89Dock span{font-size:27px}.p89Dock b{font-size:11px}.p89Toast{position:fixed;z-index:9999;left:50%;bottom:112px;transform:translate(-50%,20px);padding:10px 16px;border-radius:999px;background:#3d3047;color:#fff;font-size:12px;font-weight:850;opacity:0;pointer-events:none;transition:.22s}.p89Toast.show{opacity:1;transform:translate(-50%,0)}
+.p89Toast{position:fixed;z-index:9999;left:50%;bottom:112px;transform:translate(-50%,20px);padding:10px 16px;border-radius:999px;background:#3d3047;color:#fff;font-size:12px;font-weight:850;opacity:0;pointer-events:none;transition:.22s}.p89Toast.show{opacity:1;transform:translate(-50%,0)}
 /* compact iPad / landscape */
-@media(max-width:1100px){.p89Room{padding:14px 16px 108px}.p89Tagline{font-size:11px;padding:9px 14px}.p89MissionCard{left:16px;top:180px;width:245px}.p89RankCard{right:16px;top:180px;width:255px}.p89BuddyCard{left:16px;bottom:210px;width:220px}.p89Online{right:16px;bottom:210px;width:250px}.p89PetCenter{top:245px;bottom:210px}.p89MainActions{bottom:104px;grid-template-columns:repeat(3,142px)}.p89Dock{left:14px;right:14px;bottom:8px;height:76px}.p89Dock span{font-size:23px}.p89Dock b{font-size:10px}}
+@media(max-width:1100px){.p89Room{padding:14px 16px 108px}.p89Tagline{font-size:11px;padding:9px 14px}.p89MissionCard{left:16px;top:180px;width:245px}.p89RankCard{right:16px;top:180px;width:255px}.p89BuddyCard{left:16px;bottom:210px;width:220px}.p89Online{right:16px;bottom:210px;width:250px}.p89PetCenter{top:245px;bottom:210px}.p89MainActions{bottom:104px;grid-template-columns:repeat(3,142px)}}
 /* phones: cards become compact drawers beneath pet; still one-screen-ish */
-@media(max-width:760px){.p89Room{min-height:900px;padding:10px 10px 98px}.p89Topbar{grid-template-columns:1fr auto}.p89Tagline{display:none}.p89TopActions{gap:5px}.p89Profile{grid-template-columns:31px 65px}.p89Profile .gear{display:none}.p89Logo{font-size:26px}.p89Thai{font-size:8px}.p89Vitals{width:100%;gap:5px;margin-top:12px}.p89Vital{grid-template-columns:35px 1fr;grid-template-rows:auto auto;padding:6px 7px;border-radius:15px}.vIcon{grid-row:1/3;width:35px;height:35px;font-size:19px}.vCopy small{font-size:8px}.vTrack{height:9px}.p89Window{top:130px;width:65vw;height:180px;border-width:10px}.p89Curtain{top:110px;height:240px;width:24%}.p89CurtainL{left:12%}.p89CurtainR{right:12%}.p89MissionCard,.p89RankCard,.p89BuddyCard,.p89Online{display:none}.p89PetCenter{top:225px;bottom:250px;width:100%}.p89BuddyStage{width:min(300px,72vw);height:360px}.p89Speech{right:8%;top:15%;min-width:125px}.p89MainActions{bottom:96px;width:calc(100% - 16px);grid-template-columns:repeat(3,1fr);gap:6px}.p89Action{min-height:78px;border-radius:18px}.p89Action span{font-size:27px}.p89Action b{font-size:14px}.p89Action small{font-size:7px}.p89Dock{position:fixed;left:8px;right:8px;bottom:max(6px,env(safe-area-inset-bottom));height:74px;border-radius:22px}.p89Dock span{font-size:22px}.p89Dock b{font-size:8px}}
+@media(max-width:760px){.p89Room{min-height:900px;padding:10px 10px 98px}.p89Topbar{grid-template-columns:1fr auto}.p89Tagline{display:none}.p89TopActions{gap:5px}.p89Profile{grid-template-columns:31px 65px}.p89Profile .gear{display:none}.p89Logo{font-size:26px}.p89Thai{font-size:8px}.p89Vitals{width:100%;gap:5px;margin-top:12px}.p89Vital{grid-template-columns:35px 1fr;grid-template-rows:auto auto;padding:6px 7px;border-radius:15px}.vIcon{grid-row:1/3;width:35px;height:35px;font-size:19px}.vCopy small{font-size:8px}.vTrack{height:9px}.p89Window{top:130px;width:65vw;height:180px;border-width:10px}.p89Curtain{top:110px;height:240px;width:24%}.p89CurtainL{left:12%}.p89CurtainR{right:12%}.p89MissionCard,.p89RankCard,.p89BuddyCard,.p89Online{display:none}.p89PetCenter{top:225px;bottom:250px;width:100%}.p89BuddyStage{width:min(300px,72vw);height:360px}.p89Speech{right:8%;top:15%;min-width:125px}.p89MainActions{bottom:96px;width:calc(100% - 16px);grid-template-columns:repeat(3,1fr);gap:6px}.p89Action{min-height:78px;border-radius:18px}.p89Action span{font-size:27px}.p89Action b{font-size:14px}.p89Action small{font-size:7px}}
 @media(max-width:390px){.p89Profile{display:none}.p89Coins{height:42px}.p89Crown{display:none}.p89Brand{grid-template-columns:1fr}.p89Thai{justify-self:start}.p89PetCenter{top:215px}.p89BuddyStage{width:78vw;height:340px}.p89Speech{top:10%;right:2%}.p89Action small{display:none}}
 @media(prefers-reduced-motion:reduce){.p89Toast,.vTrack i{transition:none!important}}
+</style>
+<style id="pomru-v891-responsive-fix">
+/* ============================================================
+   POMRU v89.2 — iPad / responsive composition fix
+   - no side-card overlap on short landscape screens
+   - use full available width instead of legacy 1180px home cap
+   - center Buddy vertically on tall portrait screens
+   - show % + status bars clearly
+   - preserve all existing systems / IDs / Supabase logic
+   ============================================================ */
+
+/* Legacy Brain Buddy home used an !important 1180px cap.
+   POMRU pet room should own the full game viewport. */
+body.bbCandyHome .bbCandyHomeScreen.pomruHomeScreen{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+  min-height:100dvh!important;
+  background:transparent!important;
+}
+body.bbCandyHome .bbAppShell{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+}
+
+#pomruPetHome.pomruV89{
+  width:100%;
+  min-height:100dvh;
+  overflow:hidden;
+}
+
+.p89Room{
+  width:min(100%,1440px)!important;
+  margin:0 auto!important;
+  min-height:100dvh!important;
+  box-sizing:border-box;
+}
+
+/* Pet is the visual hero. Do not pin it to the bottom of a huge area. */
+.p89PetCenter{
+  align-items:center!important;
+}
+
+/* Status card: icon + label/% on first row, real progress bar on second. */
+.p89Vital{
+  grid-template-columns:54px minmax(0,1fr)!important;
+  grid-template-rows:auto auto!important;
+}
+.p89Vital .vIcon{
+  grid-column:1!important;
+  grid-row:1/3!important;
+}
+.p89Vital .vCopy{
+  grid-column:2!important;
+  grid-row:1!important;
+  min-width:0;
+  display:flex!important;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.p89Vital .vCopy strong{
+  display:block!important;
+  flex:0 0 auto;
+  font-size:11px;
+  font-weight:1000;
+  color:#564052;
+}
+.p89Vital .vTrack{
+  grid-column:2!important;
+  grid-row:2!important;
+  width:100%;
+  min-width:0;
+}
+
+/* Use the actual Buddy artwork everywhere rather than the old teddy emoji. */
+.miniBuddy{
+  overflow:hidden!important;
+  padding:3px;
+}
+.miniBuddy img,
+.p89RankAvatar img{
+  display:block;
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+}
+
+/* ---------------- iPad portrait / tall tablet ---------------- */
+@media (min-width:761px) and (max-width:1180px) and (min-height:901px){
+  .p89Room{
+    padding:14px 18px 112px!important;
+  }
+  .p89Topbar{
+    gap:10px;
+  }
+  .p89Tagline{
+    padding:9px 15px!important;
+    font-size:11px!important;
+  }
+  .p89Vitals{
+    width:min(790px,82%)!important;
+    gap:12px!important;
+    margin-top:18px!important;
+  }
+  .p89MissionCard{
+    left:20px!important;
+    top:195px!important;
+    width:255px!important;
+  }
+  .p89RankCard{
+    right:20px!important;
+    top:195px!important;
+    width:270px!important;
+  }
+  .p89PetCenter{
+    top:265px!important;
+    bottom:285px!important;
+    width:min(430px,44vw)!important;
+    align-items:center!important;
+  }
+  .p89BuddyStage{
+    width:min(350px,35vw)!important;
+    height:min(430px,37vh)!important;
+  }
+  .p89Speech{
+    top:6%!important;
+    right:-3%!important;
+  }
+  .p89BuddyCard{
+    left:20px!important;
+    bottom:238px!important;
+    width:245px!important;
+  }
+  .p89Online{
+    right:20px!important;
+    bottom:238px!important;
+    width:275px!important;
+  }
+  .p89MainActions{
+    bottom:112px!important;
+    grid-template-columns:repeat(3,150px)!important;
+  }
+  
+  .p89Floor{top:49%!important}
+  .p89Rug{bottom:175px!important}
+}
+
+/* ---------------- iPad / laptop landscape with limited height ----------------
+   This is the layout that was overlapping in the screenshot.
+   Shrink side information as a group while keeping every feature visible. */
+@media (min-width:761px) and (max-height:900px){
+  .p89Room{
+    padding:10px 14px 88px!important;
+    min-height:720px!important;
+  }
+  .p89Topbar{
+    gap:8px!important;
+  }
+  .p89Logo{
+    font-size:clamp(24px,2.4vw,34px)!important;
+  }
+  .p89Crown{font-size:19px!important}
+  .p89Thai{font-size:9px!important;padding:2px 9px!important}
+  .p89Tagline{
+    padding:8px 14px!important;
+    font-size:10px!important;
+  }
+  .p89Coins,.p89Profile{height:42px!important}
+  .p89Coins .coin{width:30px!important;height:30px!important}
+  .p89Coins .plus{width:27px!important;height:27px!important}
+  .p89Profile{grid-template-columns:31px minmax(62px,1fr) 20px!important}
+  .p89Profile .avatar{width:31px!important;height:31px!important}
+
+  .p89Vitals{
+    width:min(720px,62%)!important;
+    margin-top:9px!important;
+    gap:10px!important;
+  }
+  .p89Vital{
+    grid-template-columns:40px minmax(0,1fr)!important;
+    padding:6px 9px 7px!important;
+    border-radius:17px!important;
+  }
+  .p89Vital .vIcon{
+    width:40px!important;
+    height:40px!important;
+    font-size:22px!important;
+  }
+  .p89Vital .vCopy small,
+  .p89Vital .vCopy strong{font-size:8px!important}
+  .p89Vital .vTrack{height:9px!important;margin-top:3px!important}
+
+  .p89Window{
+    top:92px!important;
+    width:min(34vw,390px)!important;
+    height:min(28vw,260px)!important;
+    border-width:12px!important;
+  }
+  .p89Curtain{
+    top:74px!important;
+    height:285px!important;
+  }
+
+  .p89MissionCard{
+    left:12px!important;
+    top:145px!important;
+    width:250px!important;
+    transform:scale(.82)!important;
+    transform-origin:top left!important;
+  }
+  .p89RankCard{
+    right:12px!important;
+    top:145px!important;
+    width:270px!important;
+    transform:scale(.82)!important;
+    transform-origin:top right!important;
+  }
+  .p89BuddyCard{
+    left:12px!important;
+    bottom:164px!important;
+    width:235px!important;
+    transform:scale(.80)!important;
+    transform-origin:bottom left!important;
+  }
+  .p89Online{
+    right:12px!important;
+    bottom:164px!important;
+    width:270px!important;
+    transform:scale(.80)!important;
+    transform-origin:bottom right!important;
+  }
+
+  .p89PetCenter{
+    top:170px!important;
+    bottom:170px!important;
+    width:min(390px,34vw)!important;
+    align-items:center!important;
+  }
+  .p89BuddyStage{
+    width:min(300px,26vw)!important;
+    height:min(330px,42vh)!important;
+  }
+  .p89Speech{
+    top:7%!important;
+    right:-8%!important;
+    transform:scale(.86);
+    transform-origin:right top;
+  }
+  .p89Rug{
+    bottom:118px!important;
+    width:min(430px,38vw)!important;
+    height:112px!important;
+  }
+  .p89Plant{bottom:140px!important;font-size:48px!important}
+
+  .p89MainActions{
+    bottom:78px!important;
+    grid-template-columns:repeat(3,132px)!important;
+    gap:8px!important;
+  }
+  .p89Action{
+    min-height:70px!important;
+    border-radius:19px!important;
+    box-shadow:0 6px 0 rgba(92,44,87,.18),0 11px 20px rgba(88,55,75,.11)!important;
+  }
+  .p89Action span{font-size:26px!important}
+  .p89Action b{font-size:14px!important;margin-top:2px!important}
+  .p89Action small{font-size:7px!important}
+
+  
+  
+  
+  
+  .p89Floor{top:48%!important}
+}
+
+/* ---------------- phones ----------------
+   Keep pet first; supporting dashboards are accessible from dock buttons.
+   Do not squeeze desktop cards until text becomes unreadable. */
+@media (max-width:760px){
+  body.bbCandyHome .bbCandyHomeScreen.pomruHomeScreen{
+    min-height:100dvh!important;
+  }
+  .p89Room{
+    width:100%!important;
+    min-height:100dvh!important;
+    padding:10px 9px calc(88px + env(safe-area-inset-bottom))!important;
+  }
+  .p89Vitals{
+    width:100%!important;
+  }
+  .p89Vital{
+    grid-template-columns:33px minmax(0,1fr)!important;
+  }
+  .p89Vital .vIcon{
+    width:33px!important;
+    height:33px!important;
+  }
+  .p89Vital .vCopy strong{font-size:7px!important}
+  .p89Vital .vTrack{height:7px!important}
+  .p89PetCenter{
+    top:190px!important;
+    bottom:205px!important;
+    align-items:center!important;
+  }
+  .p89BuddyStage{
+    width:min(285px,70vw)!important;
+    height:min(340px,42vh)!important;
+  }
+  .p89MainActions{
+    bottom:82px!important;
+  }
+  
+}
+
+@media (prefers-reduced-motion:reduce){
+  .p89MissionCard,.p89RankCard,.p89BuddyCard,.p89Online{
+    transition:none!important;
+  }
+}
+</style>
+
+
+
+<style id="pomru-v892-clean-navigation">
+/* ============================================================
+   POMRU v89.2 — CLEAN NAVIGATION
+   - removed legacy Brain Buddy desktop nav from DOM
+   - removed POMRU bottom dock from DOM
+   - reclaim bottom space for the three real game actions
+   ============================================================ */
+
+/* No global legacy navigation should reserve visual space. */
+body{padding-top:0!important}
+
+/* Desktop / large tablet */
+.p89Room{
+  padding-bottom:26px!important;
+}
+.p89MainActions{
+  bottom:24px!important;
+}
+.p89BuddyCard{
+  bottom:132px!important;
+}
+.p89Online{
+  bottom:132px!important;
+}
+.p89PetCenter{
+  bottom:122px!important;
+}
+.p89Rug{
+  bottom:74px!important;
+}
+.p89Plant{
+  bottom:92px!important;
+}
+.p89Toast{
+  bottom:104px!important;
+}
+
+/* iPad portrait */
+@media (min-width:761px) and (max-width:1180px) and (min-height:901px){
+  .p89Room{padding:14px 18px 28px!important}
+  .p89BuddyCard{bottom:138px!important}
+  .p89Online{bottom:138px!important}
+  .p89PetCenter{bottom:145px!important}
+  .p89MainActions{bottom:26px!important}
+  .p89Rug{bottom:82px!important}
+}
+
+/* iPad / laptop landscape */
+@media (min-width:761px) and (max-height:900px){
+  .p89Room{padding:10px 14px 18px!important}
+  .p89BuddyCard{bottom:94px!important}
+  .p89Online{bottom:94px!important}
+  .p89PetCenter{bottom:102px!important}
+  .p89MainActions{bottom:14px!important}
+  .p89Rug{bottom:55px!important}
+  .p89Plant{bottom:72px!important}
+  .p89Toast{bottom:92px!important}
+}
+
+/* Phones: actions become the permanent bottom controls. */
+@media (max-width:760px){
+  .p89Room{
+    padding:10px 9px calc(18px + env(safe-area-inset-bottom))!important;
+  }
+  .p89PetCenter{
+    bottom:112px!important;
+  }
+  .p89MainActions{
+    bottom:calc(12px + env(safe-area-inset-bottom))!important;
+  }
+  .p89Toast{
+    bottom:calc(102px + env(safe-area-inset-bottom))!important;
+  }
+}
 </style>
 
 </head>
 <body>
 
-<nav class="v17bar bbCandyDesktopNav"><div class="v17barin">
- <div class="v17brand bbNavBrand">
-   <span class="bbNavBrain" aria-hidden="true"></span>
-   <strong><i>Brain</i> <b>Buddy</b></strong>
-   <span class="bbNavSpark" aria-hidden="true"></span>
- </div>
- <div class="v17tabs">
-  <button class="v17b" data-v17="home"><i class="bbNavIcon home"></i><span>หน้าแรก</span></button>
-  <button class="v17b play" data-v17="play"><i class="bbNavIcon play"></i><span>เล่นเกม</span></button>
-  <button class="v17b rank" data-v17="rank"><i class="bbNavIcon rank"></i><span>อันดับผู้เล่น</span></button>
-  <button class="v17b bbArenaNavBtn arena" data-v17="arena"><i class="bbNavIcon arena"></i><span>สนามจัดอันดับ</span></button>
-  <button class="v17b shop" data-v17="shop"><i class="bbNavIcon shop"></i><span>ร้านค้า</span></button>
-  <button class="v17b profile" data-v17="profile"><i class="bbNavIcon profile"></i><span>โปรไฟล์</span></button>
- </div>
-</div></nav>
+
 <section class="bbPlayerStatus" aria-label="สถานะผู้เล่น">
   <div class="bbPlayerStatusInner">
     <div class="v17hud">
@@ -11588,7 +11977,7 @@ try{
 
     <section class="p89BuddyCard">
       <div class="buddyCardHead"><span>🎟️ Buddy ของฉัน</span><button type="button" data-app-go="inventory">?</button></div>
-      <div class="buddyCardBody"><span class="miniBuddy">🧸</span><div><b id="p89PetName">Pink Buddy</b><strong id="p89BuddyLevel">Level 1</strong><div class="xpTrack"><i id="p89XpBar"></i></div><small id="p89XpText">0 / 500 EXP</small></div></div>
+      <div class="buddyCardBody"><span class="miniBuddy"><img src="/assets/buddy/default-pink-buddy.png?v=891" alt="Pink Buddy"></span><div><b id="p89PetName">Pink Buddy</b><strong id="p89BuddyLevel">Level 1</strong><div class="xpTrack"><i id="p89XpBar"></i></div><small id="p89XpText">0 / 500 EXP</small></div></div>
       <button type="button" class="dress" data-app-go="inventory">👕 แต่งตัว</button>
     </section>
 
@@ -11615,13 +12004,7 @@ try{
       <button class="p89Action workout" type="button" id="p89WorkoutBtn"><span>🏃</span><b>ออกกำลังกาย</b><small>เพิ่มพลัง / ความสุข</small></button>
     </section>
 
-    <nav class="p89Dock" aria-label="เมนูหลัก">
-      <button class="active" type="button" data-app-go="home"><span>🏠</span><b>หน้าแรก</b></button>
-      <button type="button" data-app-go="modes"><span>🎮</span><b>เล่นเกม</b></button>
-      <button type="button" data-app-action="rank"><span>🏆</span><b>จัดอันดับ</b></button>
-      <button type="button" data-app-go="inventory"><span>🎒</span><b>คลังของฉัน</b></button>
-      <button type="button" data-app-go="shop"><span>🛍️</span><b>ร้านค้า</b></button>
-    </nav>
+    
   </section>
   <div class="p89Toast" id="p89Toast" role="status"></div>
 </main>
@@ -22652,8 +23035,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function setPct(bar,pct,text){const p=clamp(pct);if($(bar))$(bar).style.width=p+'%';if($(text))$(text).textContent=Math.round(p)+'%'}
   function renderPet(s){if(!s)return;setPct('p89HappyBar',s.happiness,'p89HappyPct');setPct('p89HungerBar',s.hunger,'p89HungerPct');setPct('p89EnergyBar',s.energy,'p89EnergyPct');if($('p89PetName'))$('p89PetName').textContent=s.pet_name||'Pink Buddy';if($('p89BuddyLevel'))$('p89BuddyLevel').textContent='Level '+(s.pet_level||1);if($('p89ProfileLevel'))$('p89ProfileLevel').textContent='Lv.'+(s.pet_level||1);const progress=Number(s.level_progress)||0,target=Number(s.level_target)||500;if($('p89XpBar'))$('p89XpBar').style.width=Math.min(100,(progress/target)*100)+'%';if($('p89XpText'))$('p89XpText').textContent=progress.toLocaleString()+' / '+target.toLocaleString()+' EXP';if($('pomruHomeCoinBalance'))$('pomruHomeCoinBalance').textContent=(Number(s.coin_balance)||0).toLocaleString();const speech=$('pomruPetSpeech');if(speech){const map={hungry:['หิวแล้ว~','ขอของกินหน่อยน้า'],sad:['เหงาจัง~','มาเล่นด้วยกันหน่อย'],tired:['ง่วงแล้ว~','พักพลังกันหน่อย'],great:['แฮปปี้~','วันนี้พร้อมลุยสุด ๆ'],happy:['แฮปปี้~','วันนี้เล่นด้วยกันนะ']};const m=map[s.mood]||map.happy;speech.innerHTML='<b>'+m[0]+'</b><span>'+m[1]+'</span>'}}
   function syncText(oldId,newId,transform){const a=$(oldId),b=$(newId);if(!a||!b)return;const run=()=>{let v=safe(a.textContent).trim();if(transform)v=transform(v);if(v)b.textContent=v};run();new MutationObserver(run).observe(a,{subtree:true,childList:true,characterData:true})}
-  function syncProfile(){syncText('bbHomePlayerName','p89ProfileName',v=>v||'ผู้เล่น');syncText('bbHomeCoinBalance','pomruHomeCoinBalance',v=>v==='—'?'0':v);const old=$('navAvatar');const dest=$('p89ProfileAvatar');if(old&&dest){const run=()=>{dest.innerHTML='';dest.style.backgroundImage=old.style.backgroundImage||'';dest.style.backgroundSize='contain';dest.style.backgroundPosition='center';dest.style.backgroundRepeat='no-repeat';if(!dest.style.backgroundImage)dest.textContent='🧸'};run();new MutationObserver(run).observe(old,{childList:true,subtree:true,attributes:true,attributeFilter:['style']})}}
-  function parseRanks(){const src=$('bbHomeTop10List'),dest=$('p89RankRows');if(!src||!dest)return;const rows=[...src.querySelectorAll('.bbHomeTop10Row')].slice(0,3);if(!rows.length){dest.innerHTML='<div class="rankLoading">เล่นเกมเพื่อเริ่มจัดอันดับ</div>';return}dest.innerHTML=rows.map((r,i)=>{const name=r.querySelector('.bbHomeTop10Name b')?.textContent?.trim()||'ผู้เล่น';const sub=r.querySelector('.bbHomeTop10Name small')?.textContent?.trim()||'';const score=r.querySelector('.bbHomeTop10Score b')?.textContent?.trim()||'0';const av=r.querySelector('.bbHomeTop10Avatar img');return '<button class="p89RankRow" type="button" data-app-action="rank"><span class="p89RankPos">'+(i+1)+'</span><span class="p89RankAvatar">'+(av?'<img src="'+av.src+'" alt="">':'🧸')+'</span><span class="p89RankName"><b>'+name.replace(/[<>]/g,'')+'</b><small>'+sub.replace(/[<>]/g,'')+'</small></span><span class="p89RankScore">🏆 '+score.replace(/[<>]/g,'')+'</span></button>'}).join('')}
+  function syncProfile(){syncText('bbHomePlayerName','p89ProfileName',v=>v||'ผู้เล่น');syncText('bbHomeCoinBalance','pomruHomeCoinBalance',v=>v==='—'?'0':v);const old=$('navAvatar');const dest=$('p89ProfileAvatar');if(old&&dest){const run=()=>{dest.innerHTML='';dest.style.backgroundImage=old.style.backgroundImage||'';dest.style.backgroundSize='contain';dest.style.backgroundPosition='center';dest.style.backgroundRepeat='no-repeat';if(!dest.style.backgroundImage){dest.textContent='';dest.style.backgroundImage='url(\"/assets/buddy/default-pink-buddy.png?v=891\")'}};run();new MutationObserver(run).observe(old,{childList:true,subtree:true,attributes:true,attributeFilter:['style']})}}
+  function parseRanks(){const src=$('bbHomeTop10List'),dest=$('p89RankRows');if(!src||!dest)return;const rows=[...src.querySelectorAll('.bbHomeTop10Row')].slice(0,3);if(!rows.length){dest.innerHTML='<div class="rankLoading">เล่นเกมเพื่อเริ่มจัดอันดับ</div>';return}dest.innerHTML=rows.map((r,i)=>{const name=r.querySelector('.bbHomeTop10Name b')?.textContent?.trim()||'ผู้เล่น';const sub=r.querySelector('.bbHomeTop10Name small')?.textContent?.trim()||'';const score=r.querySelector('.bbHomeTop10Score b')?.textContent?.trim()||'0';const av=r.querySelector('.bbHomeTop10Avatar img');return '<button class="p89RankRow" type="button" data-app-action="rank"><span class="p89RankPos">'+(i+1)+'</span><span class="p89RankAvatar">'+(av?'<img src="'+av.src+'" alt="">':'<img src="/assets/buddy/default-pink-buddy.png?v=891" alt="Buddy">')+'</span><span class="p89RankName"><b>'+name.replace(/[<>]/g,'')+'</b><small>'+sub.replace(/[<>]/g,'')+'</small></span><span class="p89RankScore">🏆 '+score.replace(/[<>]/g,'')+'</span></button>'}).join('')}
   function watchRanks(){const src=$('bbHomeTop10List');if(!src)return;parseRanks();new MutationObserver(parseRanks).observe(src,{subtree:true,childList:true,characterData:true})}
   function init(){syncProfile();watchRanks();try{const s=window.BrainBuddyPet?.getState?.();if(s)renderPet(s)}catch(_){}const ex=$('p89WorkoutBtn');if(ex)ex.addEventListener('click',()=>toast('🏃 ระบบออกกำลังกายกำลังเป็น Step ถัดไป'));document.addEventListener('bb:pet-updated',e=>renderPet(e.detail));}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
