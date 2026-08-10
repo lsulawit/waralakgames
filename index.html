@@ -7663,6 +7663,154 @@ body.bbContentAdminMode #bbArena{
   }
 }
 
+
+/* ==========================================================
+   v70 — THAI BRAIN RANK / Multi-game Arena selector
+   ========================================================== */
+.bbRankDisclaimer{
+  display:inline-block;
+  margin-top:8px;
+  padding:5px 9px;
+  border-radius:999px;
+  background:rgba(255,255,255,.13);
+  color:rgba(255,255,255,.82);
+  font-size:9px;
+  font-weight:800
+}
+.bbRankWorldLabel,.bbRankGameLabel{
+  margin-top:14px;
+  color:#725f80;
+  font-size:10px;
+  font-weight:1000
+}
+.bbRankGameLabel{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px
+}
+.bbRankGameLabel small{
+  color:#a18fa8;
+  font-size:8px;
+  font-weight:800
+}
+.bbRankWorlds{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+  margin-top:7px
+}
+.bbRankWorlds button{
+  min-width:0;
+  padding:10px 6px;
+  border:1.5px solid #eee4f3;
+  border-radius:16px;
+  background:linear-gradient(145deg,#fff,#faf7fc);
+  color:#705c7c;
+  display:grid;
+  place-items:center;
+  gap:1px;
+  cursor:pointer;
+  box-shadow:0 5px 13px rgba(80,53,92,.05);
+  transition:.18s ease
+}
+.bbRankWorlds button span{font-size:21px;line-height:1.05}
+.bbRankWorlds button b{font-size:10px;font-weight:1000}
+.bbRankWorlds button small{font-size:8px;color:#a08fa5;font-weight:800}
+.bbRankWorlds button.active{
+  border-color:#8d6ee6;
+  background:linear-gradient(145deg,#8f75e9,#c36bc8);
+  color:#fff;
+  transform:translateY(-1px);
+  box-shadow:0 9px 18px rgba(117,75,190,.22)
+}
+.bbRankWorlds button.active small{color:rgba(255,255,255,.78)}
+.bbRankGameGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+  margin-top:7px
+}
+.bbRankGameChoice{
+  min-height:68px;
+  padding:9px;
+  border:1.5px solid #eee4f1;
+  border-radius:15px;
+  background:#fff;
+  text-align:left;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:2px;
+  cursor:pointer;
+  transition:.18s ease
+}
+.bbRankGameChoice i{font-style:normal;font-size:18px}
+.bbRankGameChoice b{
+  color:#604970;
+  font-size:10px;
+  font-weight:1000;
+  line-height:1.25
+}
+.bbRankGameChoice small{
+  color:#a08fa5;
+  font-size:8px;
+  font-weight:800
+}
+.bbRankGameChoice.active{
+  border-color:#e66eaa;
+  background:linear-gradient(145deg,#fff0f7,#f4edff);
+  box-shadow:0 7px 16px rgba(194,85,148,.13)
+}
+.bbRankGameChoice.active b{color:#a14e82}
+.bbRankDifficultyRow{margin-top:10px}
+.bbRankSelectedCard{
+  min-height:66px;
+  padding:9px 11px;
+  border-radius:15px;
+  background:linear-gradient(135deg,#30294d,#644597);
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:center
+}
+.bbRankSelectedCard small{
+  color:#d9ceff;
+  font-size:7px;
+  letter-spacing:.13em;
+  font-weight:1000
+}
+.bbRankSelectedCard b{
+  margin-top:2px;
+  font-size:11px;
+  line-height:1.25
+}
+.bbRankSelectedCard span{
+  color:#ffe4f1;
+  font-size:8px;
+  margin-top:2px;
+  font-weight:800
+}
+.bbRankWorldTag{
+  display:inline-flex!important;
+  align-items:center;
+  gap:4px
+}
+.bbArenaRoomCard .bbArenaTags span.rankNew{
+  background:linear-gradient(135deg,#f3eaff,#ffe9f4);
+  color:#77528c
+}
+.bbRankTierThai{
+  display:inline-flex;
+  align-items:center;
+  gap:4px
+}
+
+@media(max-width:640px){
+  .bbRankWorlds{grid-template-columns:repeat(2,1fr)}
+  .bbRankGameGrid{grid-template-columns:repeat(2,1fr)}
+}
+
 </style>
 
 <script>
@@ -10407,7 +10555,7 @@ window.addEventListener("load",()=>{
       <div class="bbArenaMe">
         <span class="bbArenaOnline">● LIVE</span>
         <div class="bbArenaMeAvatar" id="bbArenaMeAvatar">🧸</div>
-        <div><small id="bbArenaMeName">ผู้เล่น</small><b id="bbArenaMeRank">🌱 Bronze • 0 RP</b></div>
+        <div><small id="bbArenaMeName">ผู้เล่น</small><b id="bbArenaMeRank">🌱 มีแวว • 0 RP</b></div>
       </div>
     </header>
 
@@ -10422,9 +10570,10 @@ window.addEventListener("load",()=>{
       <section class="bbArenaLobby hidden" id="bbArenaLobby">
         <div class="bbArenaHero">
           <div class="bbArenaHeroCopy">
-            <span class="bbRankedPill dark">โหมดแข่งขัน</span>
-            <h1>สนามแข่งขันออนไลน์</h1>
-            <p>สร้างห้องของคุณ หรือเข้าห้องที่กำลังรอผู้เล่นได้ทันที</p>
+            <span class="bbRankedPill dark">🇹🇭 THAI BRAIN RANK</span>
+            <h1>จัดอันดับตัวตึงสมองไทย</h1>
+            <p>เลือกสายที่ถนัด สร้างห้อง และขึ้นอันดับการแข่งขันของ Brain Buddy</p>
+            <small class="bbRankDisclaimer">อันดับการแข่งขันภายใน Brain Buddy • ไม่ใช่การวัด IQ</small>
           </div>
 
           <div class="bbRankedMascot" aria-hidden="true">
@@ -10561,26 +10710,32 @@ window.addEventListener("load",()=>{
       <p>ตั้งค่าห้อง Ranked ของคุณ ผู้เล่นสามารถเข้าร่วมได้สูงสุด 100 คน</p>
 
       <label class="bbArenaField"><span>ชื่อห้อง</span><input id="bbCreateName" maxlength="40" placeholder="เช่น ห้อง Lucky Challenge"></label>
-      <div class="bbArenaForm2">
-        <label class="bbArenaField"><span>เกม</span>
-          <select id="bbCreateMode">
-            <option value="position">📍 จำตำแหน่ง</option>
-            <option value="match">🧩 จับคู่</option>
-            <option value="missing">👀 ตัวไหนหาย</option>
-            <option value="swap">🔄 สลับที่</option>
-            <option value="change">🔎 อะไรเปลี่ยน</option>
-            <option value="sequence">🔢 จำลำดับ</option>
-          </select>
-        </label>
-        <label class="bbArenaField"><span>ระดับ</span>
-          <select id="bbCreateDiff">
-            <option value="easy">ง่าย 2×2</option>
-            <option value="normal" selected>ปานกลาง 3×3</option>
-            <option value="hard">ยาก 4×4</option>
-            <option value="expert">Expert</option>
-          </select>
-        </label>
+      <div class="bbRankWorldLabel">เลือกสายแข่งขัน</div>
+      <div class="bbRankWorlds" id="bbRankWorlds">
+        <button type="button" class="active" data-rank-world="teddy"><span>🧸</span><b>Memory</b><small>เกมหมี</small></button>
+        <button type="button" data-rank-world="math"><span>➗</span><b>Math</b><small>คณิตศาสตร์</small></button>
+        <button type="button" data-rank-world="chinese"><span>🇨🇳</span><b>Chinese</b><small>ภาษาจีน</small></button>
+        <button type="button" data-rank-world="english"><span>🇬🇧</span><b>English</b><small>ภาษาอังกฤษ</small></button>
       </div>
+
+      <div class="bbRankGameLabel">
+        <span>เลือกเกม</span>
+        <small id="bbRankCatalogStatus">กำลังเตรียมรายการเกม…</small>
+      </div>
+      <div class="bbRankGameGrid" id="bbRankGameGrid"></div>
+
+      <div class="bbArenaForm2 bbRankDifficultyRow">
+        <label class="bbArenaField"><span>ระดับการแข่งขัน</span>
+          <select id="bbCreateDiff"></select>
+        </label>
+        <div class="bbRankSelectedCard">
+          <small>MATCH</small>
+          <b id="bbRankSelectedGame">📍 จำตำแหน่ง</b>
+          <span id="bbRankSelectedDiff">ปกติ</span>
+        </div>
+      </div>
+
+      <input type="hidden" id="bbCreateMode" value="teddy_position">
 
       <label class="bbArenaField"><span>จำนวนผู้เล่นสูงสุด</span>
         <div class="bbPeoplePicker">
@@ -10610,9 +10765,33 @@ window.addEventListener("load",()=>{
 <script>
 (function brainBuddyRankedArenaV21(){
   const $=s=>document.querySelector(s);
-  const MODE={position:"📍 จำตำแหน่ง",match:"🧩 จับคู่",missing:"👀 ตัวไหนหาย",swap:"🔄 สลับที่",change:"🔎 อะไรเปลี่ยน",sequence:"🔢 จำลำดับ"};
-  const DIFF={easy:"ง่าย 2×2",normal:"ปานกลาง 3×3",hard:"ยาก 4×4",expert:"Expert"};
+  const LEGACY_MODE={position:"📍 จำตำแหน่ง",match:"🧩 จับคู่",missing:"👀 ตัวไหนหาย",swap:"🔄 สลับที่",change:"🔎 อะไรเปลี่ยน",sequence:"🔢 จำลำดับ"};
+  const WORLD={
+    teddy:{name:"Memory",thai:"เกมหมี",icon:"🧸"},
+    math:{name:"Math",thai:"คณิตศาสตร์",icon:"➗"},
+    chinese:{name:"Chinese",thai:"ภาษาจีน",icon:"🇨🇳"},
+    english:{name:"English",thai:"ภาษาอังกฤษ",icon:"🇬🇧"}
+  };
+  const MODE_ICON={
+    teddy_position:"📍",teddy_match:"🧩",teddy_missing:"👀",teddy_swap:"🔄",teddy_change:"🔎",teddy_sequence:"🔢",
+    math_multiple_choice:"🎯",math_typing:"⌨️",math_matching:"🧩",math_sentence_order:"🧠",math_listening:"🎧",math_mix:"⚡",
+    chinese_hanzi_meaning:"汉",chinese_meaning_hanzi:"中",chinese_hanzi_pinyin:"拼",chinese_pinyin_hanzi:"字",chinese_listening:"🎧",chinese_mix:"🔥",
+    english_vocabulary:"A",english_multiple_choice:"🎯",english_matching:"🧩",english_typing:"⌨️",english_sentence_order:"🔀",english_listening:"🎧"
+  };
+  const FALLBACK_CATALOG=[
+    ["teddy_position","teddy","จำตำแหน่ง",1],["teddy_match","teddy","จับคู่",2],["teddy_missing","teddy","ตัวไหนหาย",3],["teddy_change","teddy","อะไรเปลี่ยน",4],["teddy_swap","teddy","สลับที่",5],["teddy_sequence","teddy","จำลำดับ",6],
+    ["math_multiple_choice","math","เลือกคำตอบ",1],["math_typing","math","พิมพ์คำตอบ",2],["math_matching","math","จับคู่",3],["math_sentence_order","math","เรียงขั้นตอน",4],["math_listening","math","โจทย์เสียง",5],["math_mix","math","Math Mix",6],
+    ["chinese_hanzi_meaning","chinese","汉字 → ความหมาย",1],["chinese_meaning_hanzi","chinese","ความหมาย → 汉字",2],["chinese_hanzi_pinyin","chinese","汉字 → Pinyin",3],["chinese_pinyin_hanzi","chinese","Pinyin → 汉字",4],["chinese_listening","chinese","ฟัง → 汉字",5],["chinese_mix","chinese","HSK Mix",6],
+    ["english_vocabulary","english","Vocabulary",1],["english_multiple_choice","english","เลือกคำตอบ",2],["english_matching","english","จับคู่คำศัพท์",3],["english_typing","english","พิมพ์คำตอบ",4],["english_sentence_order","english","เรียงประโยค",5],["english_listening","english","Listening",6]
+  ].map(x=>({mode_code:x[0],world:x[1],name_th:x[2],sort_order:x[3]}));
+
+  const DIFF={
+    easy:"ง่าย",normal:"ปกติ",hard:"ยาก",expert:"Expert",
+    hsk1:"HSK 1",hsk2:"HSK 2",hsk3:"HSK 3",hsk4:"HSK 4",hsk5:"HSK 5",hsk6:"HSK 6"
+  };
+
   let client=null,user=null,profile=null,currentRoom=null,players=[],roomChannel=null,lobbyChannel=null,countdownTimer=null,countdownLaunchTimer=null,visibility="public",lobbyRefreshTimer=null;
+  let rankedCatalog=[...FALLBACK_CATALOG],selectedRankWorld="teddy",selectedRankMode="teddy_position";
 
   function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
   function show(id,on=true){const e=$(id);if(e)e.classList.toggle("hidden",!on)}
@@ -10625,6 +10804,10 @@ window.addEventListener("load",()=>{
       room_name_required:"กรุณาตั้งชื่อห้อง",
       room_name_too_long:"ชื่อห้องยาวเกินไป",
       invalid_max_players:"จำนวนผู้เล่นต้องอยู่ระหว่าง 2–100 คน",
+      invalid_ranked_game:"เกมนี้ยังไม่เปิด Ranked",
+      invalid_difficulty:"ไม่พบระดับการแข่งขันนี้",
+      chinese_requires_hsk_level:"เกมภาษาจีนต้องเลือกระดับ HSK 1–6",
+      game_requires_standard_difficulty:"เกมนี้ต้องเลือก Easy / Normal / Hard / Expert",
       room_not_found:"ไม่พบห้องนี้",
       room_not_waiting:"ห้องนี้เริ่มแข่งขันแล้ว",
       already_in_another_room:"คุณอยู่ในห้อง Ranked อื่นอยู่แล้ว",
@@ -10659,18 +10842,130 @@ window.addEventListener("load",()=>{
     profile=pr.data||{id:user.id,display_name:user.email?.split("@")[0]||"ผู้เล่น",avatar:"🧸",ranked_points:0,ranked_games:0,ranked_wins:0,ranked_tier:"Bronze"};
     return user;
   }
+  function brainRank(rp){
+    rp=Math.max(0,Number(rp)||0);
+    const tiers=[
+      [20000,"🐐","GOAT สมองไทย"],
+      [15000,"👑","ระดับบอส"],
+      [11000,"💎","ตัวท็อป"],
+      [8000,"⚡","เดอะแบก"],
+      [5500,"😈","ตัวตึง"],
+      [3500,"💥","ตัวจี๊ด"],
+      [2000,"🔥","ของจริง"],
+      [1000,"🧠","หัวไว"],
+      [500,"✨","เด็กมีของ"],
+      [0,"🌱","มีแวว"]
+    ];
+    const t=tiers.find(x=>rp>=x[0])||tiers[tiers.length-1];
+    return {min:t[0],icon:t[1],name:t[2]};
+  }
   function renderMe(){
     const p=profile||{};
+    const rp=Number(p.ranked_points||0),rank=brainRank(rp);
     $("#bbArenaMeName").textContent=p.display_name||"ผู้เล่น";
-    $("#bbArenaMeRank").textContent=`${rankEmoji(p.ranked_tier)} ${p.ranked_tier||"Bronze"} • ${Number(p.ranked_points||0).toLocaleString()} RP`;
-    $("#bbArenaRP").textContent=`${Number(p.ranked_points||0).toLocaleString()} RP`;
+    $("#bbArenaMeRank").textContent=`${rank.icon} ${rank.name} • ${rp.toLocaleString()} RP`;
+    $("#bbArenaRP").textContent=`${rp.toLocaleString()} RP`;
     $("#bbArenaGames").textContent=Number(p.ranked_games||0).toLocaleString();
     $("#bbArenaWins").textContent=Number(p.ranked_wins||0).toLocaleString();
     const a=$("#bbArenaMeAvatar");
     if(p.avatar_url)a.innerHTML=`<img src="${esc(p.avatar_url)}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">`;
     else a.textContent=p.avatar||"🧸";
   }
-  function rankEmoji(r){return ({Bronze:"🌱",Silver:"✨",Gold:"🏆",Platinum:"🌌",Diamond:"💎",Master:"👑"})[r]||"🌱"}
+  function rankEmoji(r){return brainRank(0).icon}
+
+  function modeInfo(code,legacy=null){
+    const item=rankedCatalog.find(x=>x.mode_code===code);
+    if(item)return item;
+    if(legacy&&LEGACY_MODE[legacy]){
+      return {mode_code:"teddy_"+legacy,world:"teddy",name_th:LEGACY_MODE[legacy].replace(/^[^\s]+\s*/,""),sort_order:99};
+    }
+    return {mode_code:code||legacy||"teddy_position",world:"teddy",name_th:code||legacy||"เกม",sort_order:99};
+  }
+
+  function modeLabel(code,legacy=null){
+    const info=modeInfo(code,legacy);
+    return `${MODE_ICON[info.mode_code]||WORLD[info.world]?.icon||"🎮"} ${info.name_th}`;
+  }
+
+  function diffLabel(code,legacy=null){
+    return DIFF[code]||DIFF[legacy]||code||legacy||"ปกติ";
+  }
+
+  function roomModeCode(r){
+    return r?.mode_code || (r?.mode ? "teddy_"+r.mode : "teddy_position");
+  }
+
+  function roomDiffCode(r){
+    return r?.difficulty_code || r?.difficulty || "normal";
+  }
+
+  function difficultyOptions(world){
+    if(world==="chinese"){
+      return ["hsk1","hsk2","hsk3","hsk4","hsk5","hsk6"];
+    }
+    return ["easy","normal","hard","expert"];
+  }
+
+  function syncRankDifficulty(){
+    const select=$("#bbCreateDiff");
+    if(!select)return;
+    const options=difficultyOptions(selectedRankWorld);
+    const prior=select.value;
+    select.innerHTML=options.map(code=>`<option value="${code}">${esc(DIFF[code]||code)}</option>`).join("");
+    if(options.includes(prior))select.value=prior;
+    else select.value=selectedRankWorld==="chinese"?"hsk1":"normal";
+    syncRankSelectedSummary();
+  }
+
+  function syncRankSelectedSummary(){
+    const info=modeInfo(selectedRankMode);
+    const diff=$("#bbCreateDiff")?.value || (selectedRankWorld==="chinese"?"hsk1":"normal");
+    if($("#bbCreateMode"))$("#bbCreateMode").value=selectedRankMode;
+    if($("#bbRankSelectedGame"))$("#bbRankSelectedGame").textContent=modeLabel(selectedRankMode);
+    if($("#bbRankSelectedDiff"))$("#bbRankSelectedDiff").textContent=diffLabel(diff);
+  }
+
+  function renderRankGameChoices(){
+    document.querySelectorAll("[data-rank-world]").forEach(btn=>{
+      btn.classList.toggle("active",btn.dataset.rankWorld===selectedRankWorld);
+    });
+
+    const list=rankedCatalog
+      .filter(x=>x.world===selectedRankWorld)
+      .sort((a,b)=>(Number(a.sort_order)||0)-(Number(b.sort_order)||0));
+
+    if(!list.some(x=>x.mode_code===selectedRankMode)){
+      selectedRankMode=list[0]?.mode_code || "teddy_position";
+    }
+
+    const host=$("#bbRankGameGrid");
+    if(host){
+      host.innerHTML=list.map(item=>`
+        <button type="button" class="bbRankGameChoice ${item.mode_code===selectedRankMode?"active":""}" data-rank-mode="${esc(item.mode_code)}">
+          <i>${esc(MODE_ICON[item.mode_code]||WORLD[item.world]?.icon||"🎮")}</i>
+          <b>${esc(item.name_th)}</b>
+          <small>${esc(WORLD[item.world]?.thai||item.world)}</small>
+        </button>`).join("");
+    }
+
+    syncRankDifficulty();
+  }
+
+  async function loadRankedCatalog(){
+    const status=$("#bbRankCatalogStatus");
+    try{
+      const c=await getClient();
+      if(!c)throw new Error("no client");
+      const {data,error}=await c.rpc("bb_ranked_game_catalog");
+      if(error)throw error;
+      if(Array.isArray(data)&&data.length)rankedCatalog=data;
+      if(status)status.textContent=`${rankedCatalog.length} เกมพร้อมเลือก`;
+    }catch(e){
+      rankedCatalog=[...FALLBACK_CATALOG];
+      if(status)status.textContent=`${rankedCatalog.length} เกมพร้อมเลือก`;
+    }
+    renderRankGameChoices();
+  }
 
   async function openArena(){
     document.body.classList.add("bbArenaOpen");
@@ -10886,16 +11181,57 @@ window.addEventListener("load",()=>{
     const c=await getClient();if(!c||!user)return;
     const {data,error}=await c.rpc("bb_ranked_lobby");
     if(error){renderLobbyError(errText(error));return}
-    const rooms=data||[];
+
+    let rooms=Array.isArray(data)?data:[];
+
+    // bb_ranked_lobby เป็น RPC เดิม จึงเติม mode_code / difficulty_code
+    // จาก ranked_rooms เพื่อให้ Lobby แสดงเกม v2 ได้ถูกต้อง
+    if(rooms.length){
+      const codes=rooms.map(r=>r.room_code).filter(Boolean);
+      if(codes.length){
+        const meta=await c.from("ranked_rooms")
+          .select("room_code,mode_code,difficulty_code,mode,difficulty")
+          .in("room_code",codes);
+        if(!meta.error&&meta.data){
+          const map=new Map(meta.data.map(x=>[x.room_code,x]));
+          rooms=rooms.map(r=>({...r,...(map.get(r.room_code)||{})}));
+        }
+      }
+    }
+
     $("#bbArenaLobbyCount").textContent=`${rooms.length} ห้อง`;
     const box=$("#bbArenaRooms");
-    if(!rooms.length){box.innerHTML='<div class="bbArenaEmpty"><span>🧸</span><b>ยังไม่มีห้องเปิดอยู่</b><small>สร้างห้องแรกแล้วชวนเพื่อนมาแข่งขันได้เลย</small></div>';return}
+
+    if(!rooms.length){
+      box.innerHTML='<div class="bbArenaEmpty"><span>🧠</span><b>ยังไม่มีห้องเปิดอยู่</b><small>สร้างห้องแรกแล้วชวนเพื่อนมาแข่งขันได้เลย</small></div>';
+      return;
+    }
+
     box.innerHTML=rooms.map(r=>{
       const count=Number(r.player_count||0),max=Number(r.max_players||0),full=count>=max;
+      const code=roomModeCode(r),info=modeInfo(code,r.mode),world=WORLD[info.world]||WORLD.teddy;
+      const diff=roomDiffCode(r);
+      const hostRP=Number(r.host_rp||0),hostRank=brainRank(hostRP);
+
       return `<article class="bbArenaRoomCard">
-        <div class="bbArenaRoomCardTop"><div><h3>${esc(r.room_name)}</h3><div class="bbArenaHost">Host: ${esc(r.host_name)} • ${rankEmoji(r.host_rank)} ${esc(r.host_rank||"Bronze")} ${Number(r.host_rp||0).toLocaleString()} RP</div></div><span class="live">● WAITING</span></div>
-        <div class="bbArenaTags"><span>${esc(MODE[r.mode]||r.mode)}</span><span>${esc(DIFF[r.difficulty]||r.difficulty)}</span><span>🏅 Ranked</span></div>
-        <div class="bbArenaRoomFooter"><span class="bbArenaPeople">👥 ${count}/${max} คน</span><button class="bbArenaJoinBtn" data-join-code="${esc(r.room_code)}" ${full?"disabled":""}>${full?"ห้องเต็ม":"เข้าร่วม"}</button></div>
+        <div class="bbArenaRoomCardTop">
+          <div>
+            <h3>${esc(r.room_name)}</h3>
+            <div class="bbArenaHost">Host: ${esc(r.host_name)} • ${hostRank.icon} ${esc(hostRank.name)} ${hostRP.toLocaleString()} RP</div>
+          </div>
+          <span class="live">● WAITING</span>
+        </div>
+
+        <div class="bbArenaTags">
+          <span class="rankNew bbRankWorldTag">${esc(world.icon)} ${esc(world.name)}</span>
+          <span>${esc(modeLabel(code,r.mode))}</span>
+          <span>${esc(diffLabel(diff,r.difficulty))}</span>
+        </div>
+
+        <div class="bbArenaRoomFooter">
+          <span class="bbArenaPeople">👥 ${count}/${max} คน</span>
+          <button class="bbArenaJoinBtn" data-join-code="${esc(r.room_code)}" ${full?"disabled":""}>${full?"ห้องเต็ม":"เข้าร่วม"}</button>
+        </div>
       </article>`;
     }).join("");
   }
@@ -10905,17 +11241,33 @@ window.addEventListener("load",()=>{
     const e=$("#bbCreateError");e.textContent="";
     const name=$("#bbCreateName").value.trim();
     const max=Math.max(2,Math.min(100,Number($("#bbCreateMax").value)||20));
+    const modeCode=selectedRankMode||$("#bbCreateMode").value;
+    const diffCode=$("#bbCreateDiff").value;
     const btn=$("#bbCreateSubmit");btn.disabled=true;btn.textContent="กำลังสร้างห้อง…";
+
     try{
       const c=await getClient();
-      const {data,error}=await c.rpc("bb_ranked_create_room_v29",{
-        p_room_name:name,p_mode:$("#bbCreateMode").value,p_difficulty:$("#bbCreateDiff").value,p_max_players:max,p_visibility:visibility
+      const {data,error}=await c.rpc("bb_ranked_create_room_v2",{
+        p_room_name:name,
+        p_mode_code:modeCode,
+        p_difficulty_code:diffCode,
+        p_max_players:max,
+        p_visibility:visibility
       });
       if(error)throw error;
-      const roomId=data?.[0]?.room_id;if(!roomId)throw new Error("สร้างห้องไม่สำเร็จ");
-      show("#bbCreateBackdrop",false);await enterRoom(roomId);toast("สร้างห้องแล้ว");
-    }catch(x){e.textContent=errText(x)}
-    finally{btn.disabled=false;btn.textContent="สร้างห้อง Ranked"}
+
+      const roomId=data?.[0]?.room_id;
+      if(!roomId)throw new Error("สร้างห้องไม่สำเร็จ");
+
+      show("#bbCreateBackdrop",false);
+      await enterRoom(roomId);
+      toast(`${modeLabel(modeCode)} • สร้างห้องแล้ว`);
+    }catch(x){
+      e.textContent=errText(x);
+    }finally{
+      btn.disabled=false;
+      btn.textContent="สร้างห้อง Ranked";
+    }
   }
 
   async function joinByCode(code){
@@ -10952,7 +11304,8 @@ window.addEventListener("load",()=>{
     const r=currentRoom;if(!r)return;
     $("#bbRoomName").textContent=r.room_name;
     $("#bbRoomCode").textContent=r.room_code;
-    $("#bbRoomMeta").textContent=`${MODE[r.mode]||r.mode} • ${DIFF[r.difficulty]||r.difficulty} • ${r.visibility==="private"?"🔒 ห้องมีรหัส":"🌐 ห้องสาธารณะ"} • สูงสุด ${r.max_players} คน`;
+    const actualMode=roomModeCode(r),actualDiff=roomDiffCode(r),actualInfo=modeInfo(actualMode,r.mode),actualWorld=WORLD[actualInfo.world]||WORLD.teddy;
+    $("#bbRoomMeta").textContent=`${actualWorld.icon} ${actualWorld.name} • ${modeLabel(actualMode,r.mode)} • ${diffLabel(actualDiff,r.difficulty)} • ${r.visibility==="private"?"🔒 ห้องมีรหัส":"🌐 ห้องสาธารณะ"} • สูงสุด ${r.max_players} คน`;
     const n=players.length,max=Number(r.max_players)||100,ready=players.filter(x=>x.is_ready).length;
     $("#bbRoomCount").textContent=`${n}/${max}`;$("#bbRoomProgressFill").style.width=`${Math.min(100,n/max*100)}%`;
     $("#bbRoomReadyCount").textContent=`${ready}/${n} พร้อม`;
@@ -10961,7 +11314,8 @@ window.addEventListener("load",()=>{
     $("#bbRoomPlayers").innerHTML=players.map(p=>{
       const pr=p.profile||{},isHost=p.user_id===r.host_id;
       const av=pr.avatar_url?`<img src="${esc(pr.avatar_url)}" alt="">`:esc(pr.avatar||"🧸");
-      return `<div class="bbPlayerTile"><div class="bbPlayerAvatar">${av}</div><div class="bbPlayerText"><b>${esc(pr.display_name||"ผู้เล่น")}${isHost?" 👑":""}${p.user_id===user.id?" • คุณ":""}</b><small>${rankEmoji(pr.ranked_tier)} ${esc(pr.ranked_tier||"Bronze")} • ${Number(pr.ranked_points||0).toLocaleString()} RP</small></div><span class="bbReadyBadge ${p.is_ready?"yes":""}">${p.is_ready?"✓ พร้อม":"รอ"}</span></div>`;
+      const prRP=Number(pr.ranked_points||0),prRank=brainRank(prRP);
+      return `<div class="bbPlayerTile"><div class="bbPlayerAvatar">${av}</div><div class="bbPlayerText"><b>${esc(pr.display_name||"ผู้เล่น")}${isHost?" 👑":""}${p.user_id===user.id?" • คุณ":""}</b><small>${prRank.icon} ${esc(prRank.name)} • ${prRP.toLocaleString()} RP</small></div><span class="bbReadyBadge ${p.is_ready?"yes":""}">${p.is_ready?"✓ พร้อม":"รอ"}</span></div>`;
     }).join("");
     const rb=$("#bbRoomReadyBtn"),sbBtn=$("#bbRoomStartBtn");
     if(host){
@@ -11008,11 +11362,27 @@ window.addEventListener("load",()=>{
     catch(x){toast(errText(x))}
   }
   async function startMatch(){
-    const btn=$("#bbRoomStartBtn");btn.disabled=true;btn.textContent="กำลังเริ่ม…";
+    const btn=$("#bbRoomStartBtn");
+    const code=roomModeCode(currentRoom);
+
+    // Teddy ใช้ engine Ranked เดิมได้ทันที
+    // เกมการเรียนจะต่อ Ranked engine ในรุ่นถัดไป เพื่อไม่ให้เปิดเกม Teddy ผิดโหมด
+    if(!code.startsWith("teddy_")){
+      toast("โหมดนี้ถูกเลือกและบันทึกใน Ranked แล้ว • ระบบแข่งขันของเกมนี้จะเปิดในอัปเดตถัดไป");
+      return;
+    }
+
+    btn.disabled=true;btn.textContent="กำลังเริ่ม…";
     try{
-      const {data,error}=await client.rpc("bb_ranked_start_match",{p_room_id:currentRoom.id});if(error)throw error;
-      if(data?.[0])startCountdown(data[0]);
-    }catch(x){toast(errText(x));btn.disabled=false;btn.textContent="▶ เล่นเลย"}
+      const {data,error}=await client.rpc("bb_ranked_start_match_v2",{p_room_id:currentRoom.id});
+      if(error)throw error;
+      if(data?.[0]){
+        const row=data[0];
+        startCountdown({...row,id:row.match_id});
+      }
+    }catch(x){
+      toast(errText(x));btn.disabled=false;btn.textContent="▶ เล่นเลย";
+    }
   }
   async function loadLatestMatch(){
     if(!currentRoom?.id||!client)return;
@@ -11058,7 +11428,9 @@ window.addEventListener("load",()=>{
       const sec=Math.ceil(left/1000);
       $("#bbCountdownNumber").textContent=sec>3?"•":String(sec);
       $("#bbCountdownLabel").textContent=sec>3?"เตรียมตัวให้พร้อม":"เริ่มใน";
-      $("#bbCountdownSub").textContent=`${MODE[match.mode]||match.mode} • ${DIFF[match.difficulty]||match.difficulty} • Server Sync`;
+      const mCode=match.mode_code || (match.mode?"teddy_"+match.mode:null);
+      const dCode=match.difficulty_code || match.difficulty;
+      $("#bbCountdownSub").textContent=`${modeLabel(mCode,match.mode)} • ${diffLabel(dCode,match.difficulty)} • Server Sync`;
     };
 
     tick();
@@ -11071,7 +11443,24 @@ window.addEventListener("load",()=>{
     const join=e.target.closest("[data-join-code]");if(join){joinByCode(join.dataset.joinCode);return}
     const mx=e.target.closest("[data-max]");if(mx){people(mx.dataset.max);return}
     const vis=e.target.closest("[data-vis]");if(vis){visibility=vis.dataset.vis;document.querySelectorAll("[data-vis]").forEach(b=>b.classList.toggle("active",b===vis));return}
+
+    const world=e.target.closest("[data-rank-world]");
+    if(world){
+      selectedRankWorld=world.dataset.rankWorld||"teddy";
+      renderRankGameChoices();
+      return;
+    }
+
+    const gameChoice=e.target.closest("[data-rank-mode]");
+    if(gameChoice){
+      selectedRankMode=gameChoice.dataset.rankMode||"teddy_position";
+      document.querySelectorAll("[data-rank-mode]").forEach(b=>b.classList.toggle("active",b===gameChoice));
+      syncRankSelectedSummary();
+      return;
+    }
   });
+
+  $("#bbCreateDiff")?.addEventListener("change",syncRankSelectedSummary);
   $("#bbOpenArena")?.addEventListener("click",openArena);
   $("#bbArenaClose")?.addEventListener("click",closeArena);
   $("#bbArenaLogin")?.addEventListener("click",()=>{closeArena();document.getElementById("v16LoginBtn")?.click()});
@@ -11626,7 +12015,11 @@ window.addEventListener("load",()=>{
     const hud=document.getElementById("bbRankedGameHud");
     if(hud)hud.classList.remove("hidden");
     const modeText=document.getElementById("bbRankedGameMode");
-    if(modeText)modeText.textContent=`${MODE[match.mode]||match.mode} • ${DIFF[match.difficulty]||match.difficulty}`;
+    if(modeText){
+      const mCode=match.mode_code || (match.mode?"teddy_"+match.mode:null);
+      const dCode=match.difficulty_code || match.difficulty;
+      modeText.textContent=`${modeLabel(mCode,match.mode)} • ${diffLabel(dCode,match.difficulty)}`;
+    }
 
     cfg={
       ...cfg,
