@@ -8896,12 +8896,12 @@ try{
       <span id="bbHSKSelectedTotal">HSK 1 • 150 คำ</span>
     </div>
     <div class="bbHSKLevelGrid">
-      <button class="active" type="button" data-hsk-level="1"><b>HSK 1</b><small>150 คำ</small></button>
-      <button type="button" data-hsk-level="2"><b>HSK 2</b><small>300 คำ</small></button>
-      <button type="button" data-hsk-level="3"><b>HSK 3</b><small>600 คำ</small></button>
-      <button type="button" data-hsk-level="4"><b>HSK 4</b><small>1,200 คำ</small></button>
-      <button type="button" data-hsk-level="5"><b>HSK 5</b><small>2,500 คำ</small></button>
-      <button type="button" data-hsk-level="6"><b>HSK 6</b><small>5,000 คำ</small></button>
+      <button class="active" type="button" data-hsk-level="1"><b>HSK 1</b><small>กำลังโหลด…</small></button>
+      <button type="button" data-hsk-level="2"><b>HSK 2</b><small>กำลังโหลด…</small></button>
+      <button type="button" data-hsk-level="3"><b>HSK 3</b><small>กำลังโหลด…</small></button>
+      <button type="button" data-hsk-level="4"><b>HSK 4</b><small>กำลังโหลด…</small></button>
+      <button type="button" data-hsk-level="5"><b>HSK 5</b><small>กำลังโหลด…</small></button>
+      <button type="button" data-hsk-level="6"><b>HSK 6</b><small>กำลังโหลด…</small></button>
     </div>
   </section>
 
@@ -8909,10 +8909,10 @@ try{
     <div class="bbHSKCoverageCopy">
       <small>VOCABULARY COVERAGE</small>
       <strong><span id="bbHSKCoverageSeen">0</span> / <span id="bbHSKCoverageTotal">150</span> คำ</strong>
-      <em>คำที่เคยฝึกในระดับนี้</em>
+      <em>คำที่เคยฝึกจากคลัง HSK ของ Brain Buddy</em>
     </div>
     <div class="bbHSKCoverageBar"><i id="bbHSKCoverageBar"></i></div>
-    <div class="bbHSKCoverageNote">รอบละ 20 ข้อ • ไม่ซ้ำจนกว่าจะครบทุกคำ</div>
+    <div class="bbHSKCoverageNote">รอบละ 20 ข้อ • ไล่คำใหม่ก่อนวนซ้ำ</div>
   </section>
 
   <div class="bbSubjectGameGrid bbChineseGameGrid" id="bbChineseGameGrid">
@@ -14982,20 +14982,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
 <script>
-(function brainBuddyV68CompleteHSK(){
+(function brainBuddyV69SupabaseHSK(){
   const q=s=>document.querySelector(s);
 
-  const EXPECTED={1:150,2:300,3:600,4:1200,5:2500,6:5000};
   const ROUND_SIZE=20;
-  const PRIMARY_BASE="https://raw.githubusercontent.com/drkameleon/complete-hsk-vocabulary/main/wordlists/inclusive/old";
-  const FALLBACK_BASE="https://raw.githubusercontent.com/plaktos/hsk_csv/master";
+  const EXPECTED={1:150,2:300,3:600,4:1200,5:2500,6:5000};
 
   let selectedLevel=1;
   let activeLanguage="chinese";
-  let dataCache=new Map();
+  let levelCache=new Map();
   let game=null;
   let loading=false;
+
+  function client(){
+    if(window.__bbSupabase)return window.__bbSupabase;
+    const cfg=window.BRAIN_BUDDY_SUPABASE||{};
+    if(window.supabase&&cfg.url&&cfg.publishableKey){
+      window.__bbSupabase=window.supabase.createClient(cfg.url,cfg.publishableKey);
+      return window.__bbSupabase;
+    }
+    return null;
+  }
 
   function shuffle(a){
     const x=[...a];
@@ -15014,15 +15023,12 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/\s+/g," ");
   }
 
-  function cleanMeaning(v){
-    let s=String(v||"").trim();
-    s=s.replace(/\s+/g," ");
-    if(s.length>120)s=s.slice(0,117)+"…";
-    return s;
+  function clean(v){
+    return String(v??"").trim().replace(/\s+/g," ");
   }
 
-  function wordKey(row){
-    return `${row.hanzi}|${row.pinyin}`;
+  function rowKey(row){
+    return String(row.id);
   }
 
   function getJSON(key,fallback){
@@ -15037,105 +15043,27 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function masterSeen(){
-    return new Set(getJSON("bb_hsk_master_seen_v68",[]));
+    return new Set(getJSON("bb_hsk_master_seen_v69",[]));
   }
 
   function addMasterSeen(row){
     const s=masterSeen();
-    s.add(wordKey(row));
-    setJSON("bb_hsk_master_seen_v68",[...s]);
+    s.add(rowKey(row));
+    setJSON("bb_hsk_master_seen_v69",[...s]);
   }
 
   function modeSeen(level,mode){
-    return new Set(getJSON(`bb_hsk_mode_seen_v68_${level}_${mode}`,[]));
+    return new Set(getJSON(`bb_hsk_mode_seen_v69_${level}_${mode}`,[]));
   }
 
   function addModeSeen(level,mode,row){
     const s=modeSeen(level,mode);
-    s.add(wordKey(row));
-    setJSON(`bb_hsk_mode_seen_v68_${level}_${mode}`,[...s]);
+    s.add(rowKey(row));
+    setJSON(`bb_hsk_mode_seen_v69_${level}_${mode}`,[...s]);
   }
 
   function resetModeSeen(level,mode){
-    try{localStorage.removeItem(`bb_hsk_mode_seen_v68_${level}_${mode}`)}catch(e){}
-  }
-
-  function parseCompleteEntry(entry,index,level){
-    const forms=Array.isArray(entry?.forms)?entry.forms:[];
-    const preferred=forms.find(f=>f?.transcriptions?.pinyin&&Array.isArray(f?.meanings)&&f.meanings.length) || forms[0] || {};
-    const pinyin=preferred?.transcriptions?.pinyin||"";
-    const meanings=Array.isArray(preferred?.meanings)?preferred.meanings.filter(Boolean):[];
-    const meaning=cleanMeaning(meanings[0]||"");
-    const hanzi=String(entry?.simplified||"").trim();
-
-    if(!hanzi||!pinyin||!meaning)return null;
-
-    return {
-      id:`hsk2-${level}-${index}-${hanzi}`,
-      hanzi,
-      pinyin:String(pinyin).trim(),
-      meaning,
-      meanings:meanings.slice(0,4).map(cleanMeaning),
-      level,
-      base_score:100+((level-1)*10)
-    };
-  }
-
-  function parseCSVLine(line,level,index){
-    line=String(line||"").trim();
-    if(!line)return null;
-    const a=line.indexOf(",");
-    if(a<1)return null;
-    const b=line.indexOf(",",a+1);
-    if(b<0)return null;
-
-    const hanzi=line.slice(0,a).trim().replace(/^"|"$/g,"");
-    const pinyin=line.slice(a+1,b).trim().replace(/^"|"$/g,"");
-    let meaning=line.slice(b+1).trim();
-    if(meaning.startsWith('"')&&meaning.endsWith('"'))meaning=meaning.slice(1,-1);
-    meaning=cleanMeaning(meaning.replace(/""/g,'"'));
-
-    if(!hanzi||!pinyin||!meaning)return null;
-    return {
-      id:`fallback-${level}-${index}-${hanzi}`,
-      hanzi,pinyin,meaning,meanings:[meaning],level,
-      base_score:100+((level-1)*10)
-    };
-  }
-
-  async function loadPrimary(level){
-    const url=`${PRIMARY_BASE}/${level}.json`;
-    const r=await fetch(url,{cache:"force-cache"});
-    if(!r.ok)throw new Error(`HSK data ${r.status}`);
-    const json=await r.json();
-    if(!Array.isArray(json))throw new Error("HSK data invalid");
-
-    return json
-      .map((entry,index)=>parseCompleteEntry(entry,index+1,level))
-      .filter(Boolean);
-  }
-
-  async function loadFallback(level){
-    const all=[];
-    for(let lv=1;lv<=level;lv++){
-      const r=await fetch(`${FALLBACK_BASE}/hsk${lv}.csv`,{cache:"force-cache"});
-      if(!r.ok)throw new Error(`HSK fallback ${r.status}`);
-      const text=await r.text();
-      text.split(/\r?\n/).forEach((line,index)=>{
-        const row=parseCSVLine(line,lv,index+1);
-        if(row)all.push(row);
-      });
-    }
-    return all;
-  }
-
-  function dedupe(rows){
-    const map=new Map();
-    for(const row of rows){
-      const k=wordKey(row);
-      if(!map.has(k))map.set(k,row);
-    }
-    return [...map.values()];
+    try{localStorage.removeItem(`bb_hsk_mode_seen_v69_${level}_${mode}`)}catch(e){}
   }
 
   function showLoadBadge(text){
@@ -15154,52 +15082,63 @@ document.addEventListener('DOMContentLoaded', () => {
     q("#bbHSKLoadingBadge")?.classList.add("hidden");
   }
 
-  async function loadLevel(level){
+  async function fetchAllRowsForLevel(level){
+    const c=client();
+    if(!c)throw new Error("เชื่อมต่อฐานข้อมูลไม่สำเร็จ");
+
+    const pageSize=1000;
+    let from=0;
+    let rows=[];
+
+    while(true){
+      const {data,error}=await c
+        .from("bb_hsk_vocabulary")
+        .select("id,hsk_level,simplified,traditional,pinyin,meaning_en,meaning_th,example_zh,example_pinyin,example_en,example_th,image_url,audio_url,is_active")
+        .eq("is_active",true)
+        .lte("hsk_level",level)
+        .order("hsk_level",{ascending:true})
+        .order("id",{ascending:true})
+        .range(from,from+pageSize-1);
+
+      if(error)throw error;
+
+      const batch=Array.isArray(data)?data:[];
+      rows.push(...batch);
+
+      if(batch.length<pageSize)break;
+      from+=pageSize;
+    }
+
+    return rows.map(row=>({
+      ...row,
+      hanzi:clean(row.simplified),
+      pinyin:clean(row.pinyin),
+      meaning:clean(row.meaning_th)||clean(row.meaning_en),
+      meaning_en:clean(row.meaning_en),
+      meaning_th:clean(row.meaning_th),
+      level:Number(row.hsk_level)||1,
+      base_score:100+(((Number(row.hsk_level)||1)-1)*10)
+    })).filter(row=>row.hanzi&&row.pinyin&&row.meaning);
+  }
+
+  async function loadLevel(level,force=false){
     level=Math.max(1,Math.min(6,Number(level)||1));
-    if(dataCache.has(level))return dataCache.get(level);
+    if(!force&&levelCache.has(level))return levelCache.get(level);
 
-    showLoadBadge(`กำลังโหลดคำศัพท์ HSK ${level}…`);
+    showLoadBadge(`กำลังโหลด HSK ${level} จาก Brain Buddy…`);
+
     try{
-      let rows;
-      try{
-        rows=await loadPrimary(level);
-      }catch(primaryErr){
-        console.warn("Primary HSK source failed, using fallback",primaryErr);
-        rows=await loadFallback(level);
-      }
-
-      rows=dedupe(rows);
-      dataCache.set(level,rows);
+      const rows=await fetchAllRowsForLevel(level);
+      levelCache.set(level,rows);
       return rows;
     }finally{
       hideLoadBadge();
     }
   }
 
-  async function updateCoverage(){
-    const totalExpected=EXPECTED[selectedLevel]||0;
-    q("#bbHSKCoverageTotal").textContent=totalExpected.toLocaleString();
-    q("#bbHSKSelectedTotal").textContent=`HSK ${selectedLevel} • ${totalExpected.toLocaleString()} คำ`;
-    document.querySelectorAll("[data-hsk-complete-label]").forEach(el=>{
-      el.textContent=`ครบ ${totalExpected.toLocaleString()} คำ`;
-    });
-
-    try{
-      const rows=await loadLevel(selectedLevel);
-      const seen=masterSeen();
-      const count=rows.filter(row=>seen.has(wordKey(row))).length;
-      const total=rows.length||totalExpected;
-      q("#bbHSKCoverageSeen").textContent=count.toLocaleString();
-      q("#bbHSKCoverageTotal").textContent=total.toLocaleString();
-      q("#bbHSKCoverageBar").style.width=`${total?Math.min(100,(count/total)*100):0}%`;
-      q("#bbHSKSelectedTotal").textContent=`HSK ${selectedLevel} • ${total.toLocaleString()} คำ`;
-      document.querySelectorAll("[data-hsk-complete-label]").forEach(el=>{
-        el.textContent=`ครบ ${total.toLocaleString()} คำ`;
-      });
-    }catch(e){
-      q("#bbHSKCoverageSeen").textContent="0";
-      q("#bbHSKCoverageBar").style.width="0%";
-    }
+  async function refreshAll(){
+    levelCache.clear();
+    await updateCoverage(true);
   }
 
   function updateLanguageView(){
@@ -15207,11 +15146,54 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.toggle("active",btn.dataset.languageChoice===activeLanguage);
     });
 
-    q("#bbLanguageHeading").textContent=activeLanguage==="chinese"?"Chinese Games":"English Games";
+    q("#bbLanguageHeading").textContent=
+      activeLanguage==="chinese"?"Chinese Games":"English Games";
+
     q("#bbHSKSelector")?.classList.toggle("hidden",activeLanguage!=="chinese");
     q("#bbHSKCoverage")?.classList.toggle("hidden",activeLanguage!=="chinese");
     q("#bbChineseGameGrid")?.classList.toggle("hidden",activeLanguage!=="chinese");
     q("#bbEnglishGameGrid")?.classList.toggle("hidden",activeLanguage!=="english");
+  }
+
+  async function updateCoverage(force=false){
+    const expected=EXPECTED[selectedLevel]||0;
+    q("#bbHSKSelectedTotal").textContent=`HSK ${selectedLevel}`;
+    document.querySelectorAll("[data-hsk-complete-label]").forEach(el=>{
+      el.textContent=`กำลังโหลด…`;
+    });
+
+    try{
+      const rows=await loadLevel(selectedLevel,force);
+      const seen=masterSeen();
+      const seenCount=rows.filter(row=>seen.has(rowKey(row))).length;
+      const total=rows.length;
+
+      q("#bbHSKCoverageSeen").textContent=seenCount.toLocaleString();
+      q("#bbHSKCoverageTotal").textContent=total.toLocaleString();
+      q("#bbHSKCoverageBar").style.width=
+        `${total?Math.min(100,(seenCount/total)*100):0}%`;
+
+      q("#bbHSKSelectedTotal").textContent=
+        `HSK ${selectedLevel} • ${total.toLocaleString()} คำพร้อมเล่น`;
+
+      document.querySelectorAll("[data-hsk-complete-label]").forEach(el=>{
+        el.textContent=`${total.toLocaleString()} คำ`;
+      });
+
+      const levelBtn=document.querySelector(`[data-hsk-level="${selectedLevel}"] small`);
+      if(levelBtn)levelBtn.textContent=`${total.toLocaleString()} คำ`;
+
+    }catch(err){
+      console.warn("HSK coverage:",err);
+      q("#bbHSKCoverageSeen").textContent="0";
+      q("#bbHSKCoverageTotal").textContent="0";
+      q("#bbHSKCoverageBar").style.width="0%";
+      q("#bbHSKSelectedTotal").textContent=
+        `HSK ${selectedLevel} • โหลดไม่สำเร็จ`;
+      document.querySelectorAll("[data-hsk-complete-label]").forEach(el=>{
+        el.textContent=`HSK ${selectedLevel}`;
+      });
+    }
   }
 
   function distractorPool(rows,row,field){
@@ -15220,7 +15202,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const seen=new Set([target]);
 
     for(const r of shuffle(rows)){
-      const value=String(r[field]||"").trim();
+      const value=clean(r[field]);
       const n=norm(value);
       if(!value||seen.has(n))continue;
       seen.add(n);
@@ -15232,7 +15214,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function nextRoundRows(rows,level,mode){
     let seen=modeSeen(level,mode);
-    let unseen=rows.filter(row=>!seen.has(wordKey(row)));
+    let unseen=rows.filter(row=>!seen.has(rowKey(row)));
 
     if(!unseen.length){
       resetModeSeen(level,mode);
@@ -15243,7 +15225,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function randomMode(){
-    return shuffle(["hanzi_meaning","meaning_hanzi","hanzi_pinyin","pinyin_hanzi","listen_hanzi"])[0];
+    return shuffle([
+      "hanzi_meaning",
+      "meaning_hanzi",
+      "hanzi_pinyin",
+      "pinyin_hanzi",
+      "listen_hanzi"
+    ])[0];
   }
 
   async function start(mode,title){
@@ -15252,12 +15240,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try{
       const rows=await loadLevel(selectedLevel);
-      if(!rows.length)throw new Error("ไม่พบคำศัพท์ HSK");
+      if(!rows.length)throw new Error("ยังไม่มีคำศัพท์ในระดับนี้");
 
       const round=nextRoundRows(rows,selectedLevel,mode);
+
       game={
-        mode,title,level:selectedLevel,all:rows,round,index:0,score:0,correct:0,
-        answered:false,currentMode:null
+        mode,title,level:selectedLevel,all:rows,round,
+        index:0,score:0,correct:0,answered:false,currentMode:null
       };
 
       q("#bbLearningSubjectLabel").textContent=`ภาษาจีน • HSK ${selectedLevel}`;
@@ -15269,6 +15258,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       window.bbAppShowScreen?.("learningplay");
       render();
+
     }catch(err){
       console.warn("HSK start:",err);
       window.bbAppShowScreen?.("learningplay");
@@ -15276,7 +15266,8 @@ document.addEventListener('DOMContentLoaded', () => {
       q("#bbLearningResult").classList.add("hidden");
       q("#bbLearningEmpty").classList.remove("hidden");
       q("#bbLearningEmptyTitle").textContent="โหลดคำศัพท์ไม่สำเร็จ";
-      q("#bbLearningEmptyText").textContent="ตรวจสอบอินเทอร์เน็ตแล้วลองอีกครั้ง";
+      q("#bbLearningEmptyText").textContent=
+        "กรุณาตรวจสอบอินเทอร์เน็ต แล้วลองเข้าเกมใหม่อีกครั้ง";
     }finally{
       loading=false;
     }
@@ -15296,8 +15287,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function setQuestion(row,mode){
-    const category=`HSK ${row.level}`;
-    q("#bbLearningCategory").textContent=category;
+    q("#bbLearningCategory").textContent=`HSK ${row.level}`;
     q("#bbLearningDifficulty").textContent=`ระดับ ${game.level}`;
 
     if(mode==="hanzi_meaning"){
@@ -15305,29 +15295,35 @@ document.addEventListener('DOMContentLoaded', () => {
       q("#bbLearningSubPrompt").textContent=row.pinyin;
       return {field:"meaning",answer:row.meaning};
     }
+
     if(mode==="meaning_hanzi"){
       q("#bbLearningPrompt").textContent=row.meaning;
-      q("#bbLearningSubPrompt").textContent="เลือกคำภาษาจีนที่ตรงกับความหมาย";
+      q("#bbLearningSubPrompt").textContent=
+        row.meaning_th?"เลือกคำภาษาจีนที่ตรงกับความหมายภาษาไทย":"เลือกคำภาษาจีนที่ตรงกับความหมาย";
       return {field:"hanzi",answer:row.hanzi};
     }
+
     if(mode==="hanzi_pinyin"){
       q("#bbLearningPrompt").textContent=row.hanzi;
       q("#bbLearningSubPrompt").textContent="เลือก Pinyin ที่ถูกต้อง";
       return {field:"pinyin",answer:row.pinyin};
     }
+
     if(mode==="pinyin_hanzi"){
       q("#bbLearningPrompt").textContent=row.pinyin;
       q("#bbLearningSubPrompt").textContent="เลือกคำภาษาจีนที่ตรงกับ Pinyin";
       return {field:"hanzi",answer:row.hanzi};
     }
+
     if(mode==="listen_hanzi"){
       q("#bbLearningPrompt").textContent="ฟังแล้วเลือกคำที่ได้ยิน";
       q("#bbLearningSubPrompt").textContent=`HSK ${game.level}`;
       q("#bbLearningAudio").classList.remove("hidden");
       q("#bbLearningAudio b").textContent="กดเพื่อฟังอีกครั้ง";
-      setTimeout(()=>speak(row.hanzi),250);
+      setTimeout(()=>playAudio(row),250);
       return {field:"hanzi",answer:row.hanzi};
     }
+
     return {field:"meaning",answer:row.meaning};
   }
 
@@ -15343,6 +15339,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }catch(e){}
   }
 
+  function playAudio(row){
+    if(row?.audio_url){
+      try{
+        const audio=new Audio(row.audio_url);
+        audio.play().catch(()=>speak(row.hanzi));
+      }catch(e){
+        speak(row.hanzi);
+      }
+    }else{
+      speak(row.hanzi);
+    }
+  }
+
   function render(){
     const row=current();
     if(!row){finish();return}
@@ -15353,23 +15362,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const mode=game.mode==="mix"?randomMode():game.mode;
     game.currentMode=mode;
 
-    q("#bbLearningProgressText").textContent=`ข้อ ${game.index+1} / ${game.round.length}`;
-    q("#bbLearningProgressBar").style.width=`${(game.index/game.round.length)*100}%`;
+    q("#bbLearningProgressText").textContent=
+      `ข้อ ${game.index+1} / ${game.round.length}`;
+    q("#bbLearningProgressBar").style.width=
+      `${(game.index/game.round.length)*100}%`;
 
     const spec=setQuestion(row,mode);
     game.answer=spec.answer;
     game.answerField=spec.field;
 
-    const opts=shuffle([
+    const options=shuffle([
       spec.answer,
       ...distractorPool(game.all,row,spec.field)
     ]).slice(0,4);
 
     const host=q("#bbLearningChoices");
     host.classList.remove("hidden");
-    host.innerHTML=opts.map(opt=>
+    host.innerHTML=options.map(opt=>
       `<button type="button" data-hsk-answer="${encodeURIComponent(opt)}">${String(opt)
-        .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
         .replace(/"/g,"&quot;")}</button>`
     ).join("");
   }
@@ -15381,9 +15394,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function feedback(ok){
     if(game.answered)return;
+
     game.answered=true;
     const row=current();
-
     markSeen(row);
 
     if(ok){
@@ -15395,15 +15408,30 @@ document.addEventListener('DOMContentLoaded', () => {
     q("#bbLearningFeedback").classList.remove("hidden");
     q("#bbLearningFeedbackTitle").textContent=ok?"ถูกต้อง ✓":"ยังไม่ถูก";
     q("#bbLearningFeedbackTitle").style.color=ok?"#347a5d":"#a64d69";
-    q("#bbLearningFeedbackText").textContent=
-      `${row.hanzi} • ${row.pinyin} • ${row.meaning}`;
-    q("#bbLearningProgressBar").style.width=`${((game.index+1)/game.round.length)*100}%`;
+
+    const meaningDisplay=row.meaning_th
+      ? `${row.meaning_th} • ${row.meaning_en}`
+      : row.meaning_en;
+
+    const explanation=[
+      row.hanzi,
+      row.pinyin,
+      meaningDisplay,
+      row.example_zh||"",
+      row.example_th||row.example_en||""
+    ].filter(Boolean).join(" • ");
+
+    q("#bbLearningFeedbackText").textContent=explanation;
+
+    q("#bbLearningProgressBar").style.width=
+      `${((game.index+1)/game.round.length)*100}%`;
 
     updateCoverage();
   }
 
   function answer(button){
     if(!game||game.answered)return;
+
     const selected=decodeURIComponent(button.dataset.hskAnswer||"");
     const ok=norm(selected)===norm(game.answer);
 
@@ -15412,6 +15440,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const value=decodeURIComponent(btn.dataset.hskAnswer||"");
       if(norm(value)===norm(game.answer))btn.classList.add("correct");
     });
+
     if(!ok)button.classList.add("wrong");
     feedback(ok);
   }
@@ -15426,7 +15455,9 @@ document.addEventListener('DOMContentLoaded', () => {
     q("#bbLearningQuestionArea").classList.add("hidden");
     q("#bbLearningEmpty").classList.add("hidden");
     q("#bbLearningResult").classList.remove("hidden");
-    q("#bbLearningFinalScore").textContent=(game?.score||0).toLocaleString();
+
+    q("#bbLearningFinalScore").textContent=
+      (game?.score||0).toLocaleString();
 
     const seen=modeSeen(game.level,game.mode);
     const total=game.all.length;
@@ -15453,12 +15484,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const levelBtn=e.target.closest("[data-hsk-level]");
     if(levelBtn){
-      selectedLevel=Math.max(1,Math.min(6,Number(levelBtn.dataset.hskLevel)||1));
+      selectedLevel=Math.max(
+        1,
+        Math.min(6,Number(levelBtn.dataset.hskLevel)||1)
+      );
+
       document.querySelectorAll("[data-hsk-level]").forEach(btn=>{
-        btn.classList.toggle("active",Number(btn.dataset.hskLevel)===selectedLevel);
+        btn.classList.toggle(
+          "active",
+          Number(btn.dataset.hskLevel)===selectedLevel
+        );
       });
+
       updateCoverage();
-      loadLevel(selectedLevel).catch(()=>{});
       return;
     }
 
@@ -15481,7 +15519,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(e.target.closest("#bbLearningAudio")&&game&&game.currentMode==="listen_hanzi"){
       e.preventDefault();
       e.stopImmediatePropagation();
-      speak(current().hanzi);
+      playAudio(current());
       return;
     }
 
@@ -15495,7 +15533,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if(e.target.closest("#bbLearningAgain")&&game){
       e.preventDefault();
       e.stopImmediatePropagation();
-      const mode=game.mode,title=game.title;
+      const mode=game.mode;
+      const title=game.title;
       game=null;
       start(mode,title);
       return;
@@ -15503,9 +15542,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if(
       game &&
-      (e.target.closest("#bbLearningBack") ||
-       e.target.closest("#bbLearningEmptyBack") ||
-       e.target.closest("#bbLearningResultBack"))
+      (
+        e.target.closest("#bbLearningBack") ||
+        e.target.closest("#bbLearningEmptyBack") ||
+        e.target.closest("#bbLearningResultBack")
+      )
     ){
       e.preventDefault();
       e.stopImmediatePropagation();
@@ -15514,19 +15555,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   },true);
 
-  // Hide HSK UI when English is selected and pre-load HSK 1.
   updateLanguageView();
   updateCoverage();
-  setTimeout(()=>loadLevel(1).catch(()=>{}),350);
 
   window.bbHSKComplete={
     loadLevel,
+    refresh:refreshAll,
     getSelectedLevel:()=>selectedLevel,
-    expected:EXPECTED,
-    refresh:updateCoverage
+    expected:EXPECTED
   };
 })();
 </script>
+
 
 </body>
 </html>
