@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy v85 — Stability Reset</title>
+<title>Brain Buddy v85.1 — Flicker Final Fix</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -9920,6 +9920,31 @@ body.bbCreateRoomOpen > #bbCreateBackdrop:not(.hidden){
   }
 }
 
+
+/* ==========================================================
+   Brain Buddy v85.1 — Flicker Final Fix
+   The actual flicker source was a cosmetics state race, not scrolling.
+   ========================================================== */
+body,
+.bbCandyHomeScreen,
+.bbHeroCard,
+.avatarBear,
+.bbPlayerCard,
+#navAvatar,
+#bbAppAvatar{
+  transition:none!important;
+}
+
+/* Never fade the whole Home when body classes are updated. */
+body.bbMemberMode,
+body.bbGuestMode,
+body.bbCosBearPink,
+body.bbCosThemeCandy,
+body.bbCosFrameStar,
+body.bbCosEffectSparkle{
+  transition:none!important;
+}
+
 </style>
 
 <script>
@@ -10288,7 +10313,7 @@ try{
    if(a==="rank")rank();
    if(a==="profile")profile();
  });
- window.addEventListener("load",()=>{hud();setInterval(hud,2500)});
+ window.addEventListener("load",hud);document.addEventListener("bb:profile-updated",hud);
 })();
 
 </script>
@@ -12096,10 +12121,14 @@ try{
     });
   };
 
-  const mo = new MutationObserver(()=>boot());
+  const mo = new MutationObserver(()=>{
+    boot();
+    const modal=document.querySelector('.authCard,.authModal,.memberModal');
+    if(modal?.dataset.enhanced==='1')mo.disconnect();
+  });
   mo.observe(document.documentElement,{childList:true,subtree:true});
-  window.addEventListener('load',()=>setTimeout(boot,500));
-  setTimeout(boot,900);
+  window.addEventListener('load',()=>setTimeout(()=>{boot();const modal=document.querySelector('.authCard,.authModal,.memberModal');if(modal?.dataset.enhanced==='1')mo.disconnect()},500));
+  setTimeout(()=>{boot();const modal=document.querySelector('.authCard,.authModal,.memberModal');if(modal?.dataset.enhanced==='1')mo.disconnect()},900);
 })();
 
 
@@ -12164,7 +12193,7 @@ try{
     document.getElementById('profileName')?.addEventListener('click', async ()=>{ setTimeout(syncProfileToCloud,300); setTimeout(renderCloudLeaderboard,500); });
   }
   function patchStatPersistence(){ const stats=getJSON(STATS_KEY,{xp:0,bestScore:0,bestCombo:0,games:0,wins:0,total_score:0}); window.__bbSubmitCloudResult=submitCloudResult; setJSON(STATS_KEY, stats); }
-  window.addEventListener('load', ()=>{ setTimeout(async()=>{ mountEntryGuide(); patchProfileUploader(); patchStatPersistence(); await syncProfileToCloud(); await renderCloudLeaderboard(); setInterval(syncProfileToCloud,30000); }, 1100); });
+  window.addEventListener('load', ()=>{ setTimeout(async()=>{ mountEntryGuide(); patchProfileUploader(); patchStatPersistence(); await syncProfileToCloud(); await renderCloudLeaderboard(); }, 1100); });
 })();
 
 </script>
@@ -12871,7 +12900,7 @@ window.__bbReloadBearAssets=bbLoadCloudBearAssets;
 window.addEventListener("load",()=>{
   setTimeout(bbLoadCloudBearAssets,250);
   setTimeout(bbLoadCloudBearAssets,1500);
-  setInterval(bbLoadCloudBearAssets,45000);
+  // v85.1: cloud bear assets load on startup/manual refresh only; periodic repaint removed.
 });
 </script>
 
@@ -15300,7 +15329,9 @@ window.addEventListener("load",()=>{
   $("#bbAppStartBtn")?.addEventListener("click",startNormalGame);
   $("#bbAppGameBack")?.addEventListener("click",()=>returnToMenu(false));
   $("#bbAppLoginMini")?.addEventListener("click",()=>{$("#v16LoginBtn")?.click();if(!$("#v16LoginBtn")&&typeof openModal==="function")openModal("accountModal")});
-  window.addEventListener("load",()=>{showScreen("home",false);syncSetup();syncPlayer();setInterval(syncPlayer,3000)});
+  window.addEventListener("load",()=>{showScreen("home",false);syncSetup();syncPlayer()});
+  window.addEventListener("bb:auth-changed",()=>setTimeout(syncPlayer,100));
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden)syncPlayer()});
 })();
 </script>
 
@@ -15416,9 +15447,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(!document.hidden)setTimeout(syncGameplayDock,50);
   });
 
-  setInterval(()=>{
-    if(gameplayIsActive())hideGameplayDock();
-  },500);
+  // v85.1: MutationObserver + lifecycle events are sufficient; 500ms polling removed.
 
   window.addEventListener("load",syncGameplayDock);
 })();
@@ -15967,8 +15996,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if(user)await setMemberUI(c,user);
       else setGuestUI();
 
-      // Shop should immediately reflect whether this is Guest or Member.
-      try{window.bbLoadShop?.()}catch(e){}
+      // Shop is loaded on demand / auth-change. Avoid cascading cosmetics reloads from auth UI sync.
     }catch(err){
       console.warn("Brain Buddy auth UI:",err);
       setGuestUI();
@@ -16048,7 +16076,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // authenticated identity / Guest state after those paint cycles.
     setTimeout(syncAuthUI,500);
     setTimeout(syncAuthUI,1500);
-    setInterval(syncAuthUI,4000);
+    // v85.1: auth UI is event-driven; periodic repaint polling removed.
   }
 
   window.bbV55SyncAuthUI=syncAuthUI;
@@ -16063,7 +16091,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 <script>
-(function brainBuddyV59Cosmetics(){
+(function brainBuddyV851AtomicCosmetics(){
   const CLASSES=[
     "bbCosBearPink",
     "bbCosThemeCandy",
@@ -16072,8 +16100,9 @@ document.addEventListener('DOMContentLoaded', () => {
     "bbHasEquippedBearImage"
   ];
 
-  let busy=false;
   const q=s=>document.querySelector(s);
+  let busy=false;
+  let appliedSignature=null;
 
   function getClient(){
     if(window.__bbSupabase)return window.__bbSupabase;
@@ -16085,22 +16114,108 @@ document.addEventListener('DOMContentLoaded', () => {
     return null;
   }
 
-  function clearCosmetics(){
+  function escAttr(v){
+    return String(v??"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  }
+
+  async function preloadImage(url){
+    if(!url)return;
+    try{
+      await new Promise(resolve=>{
+        const img=new Image();
+        let done=false;
+        const finish=()=>{if(done)return;done=true;resolve()};
+        img.onload=finish;
+        img.onerror=finish;
+        img.src=url;
+        if(img.complete)finish();
+        setTimeout(finish,2500);
+      });
+    }catch(e){}
+  }
+
+  function makeState(user,equipped,items){
+    const byId=new Map((items||[]).map(x=>[Number(x.id),x]));
+    const classes=[];
+    const names=[];
+    let bearImage="";
+    let bearName="Buddy";
+
+    for(const eq of equipped||[]){
+      const item=byId.get(Number(eq.item_id));
+      if(!item)continue;
+      names.push(item.name||"");
+
+      if(item.item_code==="bear_pink_01")classes.push("bbCosBearPink");
+      if(item.item_code==="theme_candy_01")classes.push("bbCosThemeCandy");
+      if(item.item_code==="frame_star_01")classes.push("bbCosFrameStar");
+      if(item.item_code==="effect_sparkle_01")classes.push("bbCosEffectSparkle");
+
+      if(item.item_type==="bear" && item.image_url){
+        classes.push("bbHasEquippedBearImage");
+        bearImage=String(item.image_url);
+        bearName=item.name||"Buddy";
+      }
+    }
+
+    classes.sort();
+    const signature=JSON.stringify({
+      user:user?.id||null,
+      classes,
+      names:[...names].sort(),
+      bearImage
+    });
+
+    return {classes,names,bearImage,bearName,signature};
+  }
+
+  function commitState(state){
+    if(state.signature===appliedSignature)return false;
+
+    // All DOM changes occur synchronously only AFTER every query has completed.
+    // The browser therefore paints one final state instead of showing a blank/default
+    // cosmetics frame while network requests are still running.
     document.body.classList.remove(...CLASSES);
-    document.documentElement.style.removeProperty("--bb-equipped-bear-image");
+    if(state.classes.length)document.body.classList.add(...state.classes);
+
+    if(state.bearImage){
+      document.documentElement.style.setProperty(
+        "--bb-equipped-bear-image",
+        `url("${state.bearImage.replace(/"/g,"%22")}")`
+      );
+    }else{
+      document.documentElement.style.removeProperty("--bb-equipped-bear-image");
+    }
 
     const label=q("#bbEquippedCosmeticLabel");
     if(label){
-      label.textContent="";
-      label.classList.add("hidden");
+      if(state.names.length){
+        label.textContent="กำลังใช้: "+state.names.join(" • ");
+        label.classList.remove("hidden");
+      }else{
+        label.textContent="";
+        label.classList.add("hidden");
+      }
     }
 
     for(const el of [q("#navAvatar"),q("#bbAppAvatar")]){
-      if(el?.dataset?.bbShopAvatar==="1"){
-        el.innerHTML="🧸";
+      if(!el)continue;
+      if(state.bearImage){
+        const url=escAttr(state.bearImage);
+        const name=escAttr(state.bearName);
+        if(el.dataset.bbShopAvatar!=="1" || el.querySelector("img")?.src!==state.bearImage){
+          el.innerHTML=`<img src="${url}" alt="${name}">`;
+        }
+        el.dataset.bbShopAvatar="1";
+      }else if(el.dataset.bbShopAvatar==="1"){
+        // Clear only when the NEW, fully-loaded state confirms there is no bear image.
+        el.textContent="🧸";
         delete el.dataset.bbShopAvatar;
       }
     }
+
+    appliedSignature=state.signature;
+    return true;
   }
 
   async function applyEquippedCosmetics(){
@@ -16109,17 +16224,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try{
       const c=getClient();
+      if(!c)return; // transient client failure must NEVER erase the current UI
 
-      if(!c){
-        clearCosmetics();
-        return;
-      }
-
-      const {data:sessionData}=await c.auth.getSession();
-      const user=sessionData?.session?.user;
+      const {data:sessionData,error:sessionError}=await c.auth.getSession();
+      if(sessionError)throw sessionError;
+      const user=sessionData?.session?.user||null;
 
       if(!user){
-        clearCosmetics();
+        commitState(makeState(null,[],[]));
         return;
       }
 
@@ -16127,73 +16239,29 @@ document.addEventListener('DOMContentLoaded', () => {
         .from("bb_equipped_items")
         .select("item_type,item_id")
         .eq("user_id",user.id);
-
       if(eqErr)throw eqErr;
 
-      const ids=(equipped||[])
-        .map(x=>Number(x.item_id))
-        .filter(Boolean);
+      const ids=[...new Set((equipped||[]).map(x=>Number(x.item_id)).filter(Boolean))];
+      let items=[];
 
-      clearCosmetics();
-
-      if(!ids.length)return;
-
-      const {data:items,error:itemErr}=await c
-        .from("bb_shop_items")
-        .select("id,item_code,item_type,name,image_url")
-        .in("id",ids);
-
-      if(itemErr)throw itemErr;
-
-      const byId=new Map((items||[]).map(x=>[Number(x.id),x]));
-      const equippedNames=[];
-
-      for(const eq of equipped||[]){
-        const item=byId.get(Number(eq.item_id));
-        if(!item)continue;
-
-        equippedNames.push(item.name);
-
-        if(item.item_code==="bear_pink_01"){
-          document.body.classList.add("bbCosBearPink");
-        }
-        if(item.item_code==="theme_candy_01"){
-          document.body.classList.add("bbCosThemeCandy");
-        }
-        if(item.item_code==="frame_star_01"){
-          document.body.classList.add("bbCosFrameStar");
-        }
-        if(item.item_code==="effect_sparkle_01"){
-          document.body.classList.add("bbCosEffectSparkle");
-        }
-
-        if(item.item_type==="bear" && item.image_url){
-          document.body.classList.add("bbHasEquippedBearImage");
-          document.documentElement.style.setProperty(
-            "--bb-equipped-bear-image",
-            `url("${String(item.image_url).replace(/"/g,"%22")}")`
-          );
-
-          const safeUrl=String(item.image_url).replace(/"/g,"&quot;");
-          const safeName=String(item.name||"Buddy").replace(/"/g,"&quot;");
-
-          for(const el of [q("#navAvatar"),q("#bbAppAvatar")]){
-            if(el){
-              el.innerHTML=`<img src="${safeUrl}" alt="${safeName}">`;
-              el.dataset.bbShopAvatar="1";
-            }
-          }
-        }
+      if(ids.length){
+        const {data,error:itemErr}=await c
+          .from("bb_shop_items")
+          .select("id,item_code,item_type,name,image_url")
+          .in("id",ids);
+        if(itemErr)throw itemErr;
+        items=data||[];
       }
 
-      const label=q("#bbEquippedCosmeticLabel");
-      if(label && equippedNames.length){
-        label.textContent="กำลังใช้: "+equippedNames.join(" • ");
-        label.classList.remove("hidden");
+      const state=makeState(user,equipped||[],items);
+      if(state.bearImage && state.signature!==appliedSignature){
+        await preloadImage(state.bearImage);
       }
+      commitState(state);
 
     }catch(err){
-      console.warn("Brain Buddy cosmetics:",err);
+      // IMPORTANT: keep the last known-good cosmetics on transient network errors.
+      console.warn("Brain Buddy cosmetics retained after sync error:",err);
     }finally{
       busy=false;
     }
@@ -16201,26 +16269,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.bbApplyEquippedCosmetics=applyEquippedCosmetics;
 
-  document.addEventListener("click",e=>{
-    if(e.target.closest("[data-shop-equip]") || e.target.closest("[data-shop-unequip]")){
-      setTimeout(applyEquippedCosmetics,500);
-      setTimeout(applyEquippedCosmetics,1200);
-    }
-  });
-
-  window.addEventListener("bb:auth-changed",()=>{
-    setTimeout(applyEquippedCosmetics,120);
-  });
+  // Event-driven only. Shop/inventory functions already call this after a confirmed change.
+  window.addEventListener("bb:auth-changed",()=>setTimeout(applyEquippedCosmetics,80));
 
   if(document.readyState==="loading"){
-    document.addEventListener("DOMContentLoaded",()=>{
-      setTimeout(applyEquippedCosmetics,500);
-    },{once:true});
+    document.addEventListener("DOMContentLoaded",()=>setTimeout(applyEquippedCosmetics,380),{once:true});
   }else{
-    setTimeout(applyEquippedCosmetics,500);
+    setTimeout(applyEquippedCosmetics,380);
   }
-
-  setTimeout(applyEquippedCosmetics,1600);
 })();
 </script>
 
@@ -20516,7 +20572,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.addEventListener("click",()=>setTimeout(sync,280));
-  setInterval(sync,5000);
+  // v85.1: rank sync runs on load/click/reward events; 5s polling removed.
 })();
 </script>
 
@@ -20584,6 +20640,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try{window.renderProfile?.()}catch(e){}
     try{window.renderHome?.()}catch(e){}
     try{window.bbSyncThaiBrainRank?.()}catch(e){}
+    try{document.dispatchEvent(new CustomEvent("bb:profile-updated"))}catch(e){}
   }
 
   async function award(args={}){
@@ -21056,7 +21113,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Admin changes become visible without requiring a full reload.
-  setInterval(()=>load(true),30000);
+  // v85.1: release status refreshes when entering game hubs; 30s polling removed.
 })();
 </script>
 
