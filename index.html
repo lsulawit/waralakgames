@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>POMRU • ผมรู้</title>
+<title>POMRU • ผมรู้ — Pet Game</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -11271,6 +11271,36 @@ try{
 }
 </style>
 
+
+<style id="pomru-v89-style">
+/* POMRU v89 — responsive pet-sim home */
+.pomruHomeScreen{padding:0!important;background:#fff8fb!important;overflow-x:hidden!important}
+#pomruPetHome.pomruV89{--ink:#42283e;--muted:#806b7e;--pink:#ff4f9a;--pink2:#ff83ba;--violet:#7d59e8;--blue:#59baf6;--gold:#ffbd38;--cream:#fffaf2;min-height:100dvh;color:var(--ink);font-family:inherit;background:linear-gradient(180deg,#fff9fb,#f9efff);}
+.p89Room{position:relative;width:min(100%,1440px);min-height:100dvh;margin:auto;overflow:hidden;isolation:isolate;padding:18px 24px 122px;background:linear-gradient(180deg,#fff9fb 0 52%,#fff1e2 52% 100%)}
+.p89RoomSky{position:absolute;z-index:-9;inset:0 0 44% 0;background:radial-gradient(circle at 50% 24%,rgba(155,223,255,.8),transparent 18rem),linear-gradient(180deg,#fff8fb 0%,#ffe8f0 80%)}
+.p89Window{position:absolute;z-index:-7;top:78px;left:50%;transform:translateX(-50%);width:min(39vw,480px);height:min(33vw,360px);border:18px solid #fff;border-radius:8px;background:linear-gradient(#8edbff,#dff6ff 70%,#9bd980);box-shadow:0 10px 35px rgba(87,67,81,.1);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:10px;padding:0}
+.p89Window i{background:rgba(255,255,255,.08);border:0}.p89Window:before,.p89Window:after{content:"";position:absolute;background:#fff;z-index:2}.p89Window:before{width:12px;top:0;bottom:0;left:50%;transform:translateX(-50%)}.p89Window:after{height:12px;left:0;right:0;top:50%;transform:translateY(-50%)}
+.p89Curtain{position:absolute;z-index:-5;top:55px;width:22%;height:390px;background:linear-gradient(90deg,#ffacd0,#ffd8e7 44%,#ffb9d7 70%,#ffe1ec);filter:drop-shadow(0 8px 14px rgba(133,69,99,.12));border-radius:0 0 45% 30%}.p89CurtainL{left:22%}.p89CurtainR{right:22%;transform:scaleX(-1)}
+.p89Floor{position:absolute;z-index:-8;left:-8%;right:-8%;top:52%;bottom:-10%;background:repeating-linear-gradient(90deg,transparent 0 120px,rgba(148,91,45,.1) 121px 123px),repeating-linear-gradient(0deg,transparent 0 64px,rgba(148,91,45,.08) 65px 67px),linear-gradient(180deg,#ffd9b0,#efb77c);transform:perspective(900px) rotateX(60deg);transform-origin:top center}
+.p89Rug{position:absolute;z-index:-4;left:50%;bottom:160px;width:min(540px,48vw);height:150px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,#ffe1ec 0 42%,#ffc5dc 44% 70%,#ffb3d2);box-shadow:0 18px 35px rgba(138,69,96,.12)}
+.p89Plant{position:absolute;z-index:-3;font-size:64px;bottom:190px}.p89PlantL{left:28%}.p89PlantR{right:27%}.p89Shelf{position:absolute;z-index:-4;left:9%;top:310px;width:140px;height:78px;border-bottom:12px solid #d7a77a;display:flex;justify-content:center;align-items:flex-end;gap:20px;font-size:38px}
+.p89Topbar{position:relative;z-index:20;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px}.p89Brand{justify-self:start;border:0;background:transparent;display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;align-items:center;column-gap:8px;color:inherit;cursor:pointer}.p89Crown{grid-row:1/3;font-size:24px;color:#ffc33f;filter:drop-shadow(0 2px 1px #a66d0d)}.p89Logo{font-size:clamp(24px,3vw,44px);line-height:.92;font-weight:1000;letter-spacing:-.05em;color:#fff;-webkit-text-stroke:5px #7041c5;paint-order:stroke fill;filter:drop-shadow(0 5px 0 #d6418b) drop-shadow(0 8px 8px rgba(78,44,113,.25))}.p89Thai{justify-self:center;padding:2px 12px;border-radius:8px;background:#dda56d;color:#58341d;font-size:11px;font-weight:1000}.p89Tagline{justify-self:center;padding:11px 24px;border:2px solid rgba(125,89,232,.15);border-radius:999px;background:rgba(255,255,255,.9);color:#5d4db8;font-size:13px;font-weight:950;box-shadow:0 9px 22px rgba(99,70,139,.09)}.p89TopActions{justify-self:end;display:flex;gap:10px}.p89Coins,.p89Profile{border:1px solid rgba(101,61,93,.08);background:rgba(255,255,255,.92);box-shadow:0 8px 22px rgba(101,61,93,.1);cursor:pointer}.p89Coins{height:48px;border-radius:20px;padding:5px 8px;display:flex;align-items:center;gap:7px}.p89Coins .coin{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(#ffe776,#f8b62d);box-shadow:inset 0 0 0 4px rgba(255,255,255,.4);font-weight:1000}.p89Coins b{font-size:15px}.p89Coins .plus{width:30px;height:30px;border-radius:12px;display:grid;place-items:center;background:#7755d9;color:#fff;font-size:22px}.p89Profile{height:48px;border-radius:18px;padding:5px 9px;display:grid;grid-template-columns:36px minmax(70px,1fr) 24px;align-items:center;gap:7px;text-align:left}.p89Profile .avatar{width:36px;height:36px;border-radius:13px;display:grid;place-items:center;background:#ffe4ef}.profileCopy{min-width:0}.profileCopy small,.profileCopy b{display:block}.profileCopy small{font-size:8px;color:#9e7c8f}.profileCopy b{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.gear{font-size:17px;color:#6d5b85}
+.p89Vitals{position:relative;z-index:10;margin:24px auto 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;width:min(980px,76%)}.p89Vital{display:grid;grid-template-columns:54px 1fr auto;grid-template-rows:auto auto;align-items:center;gap:2px 10px;padding:8px 13px 10px;border:2px solid rgba(120,80,170,.2);border-radius:22px;background:rgba(255,255,255,.93);box-shadow:0 8px 0 rgba(104,78,137,.1),0 13px 24px rgba(84,52,91,.08)}.vIcon{grid-row:1/3;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#fff;font-size:31px;box-shadow:inset 0 0 0 5px rgba(255,255,255,.6),0 4px 12px rgba(62,45,72,.12)}.happy .vIcon{color:#ff4f9a;background:#ffd6e8}.hungry .vIcon{background:#dff3ff}.energy .vIcon{background:#fff3cf}.vCopy small{display:block;font-size:10px;font-weight:900}.vCopy strong{display:none}.vTrack{align-self:center;height:15px;border-radius:999px;background:#e6e3ed;overflow:hidden;box-shadow:inset 0 2px 4px rgba(75,55,82,.08)}.vTrack i{display:block;height:100%;width:100%;border-radius:inherit;transition:width .25s ease}.happy .vTrack i{background:linear-gradient(90deg,#ff6aae,#ff94c4)}.hungry .vTrack i{background:linear-gradient(90deg,#ffb92f,#ffd15a)}.energy .vTrack i{background:linear-gradient(90deg,#48d879,#7de091)}
+.p89MissionCard,.p89RankCard,.p89BuddyCard,.p89Online{position:absolute;z-index:8;background:rgba(255,255,255,.94);border:2px solid rgba(121,78,152,.11);box-shadow:0 12px 28px rgba(86,53,82,.12);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}.p89MissionCard{left:24px;top:195px;width:270px;padding:14px;border-radius:26px;background:linear-gradient(180deg,#fffdf6,#fff6df)}.cardHead{display:flex;align-items:center;gap:9px}.cardHead>span:first-child{font-size:24px}.cardHead div{flex:1}.cardHead small{font-size:8px;color:#a48168;font-weight:1000;letter-spacing:.12em}.cardHead h3{margin:0;font-size:18px}.cardHead .heart{color:#ff5f9e;font-size:23px}.cardHead button{border:0;border-radius:12px;background:#fff;padding:6px 8px;font-size:10px;font-weight:900;color:#645370}.missionRow{display:grid;grid-template-columns:30px 1fr 44px;align-items:center;gap:7px;padding:9px 0;border-bottom:1px solid rgba(120,86,68,.08)}.missionRow .mi{font-size:20px}.missionRow b{font-size:11px}.missionRow>span:last-child{text-align:right}.missionRow strong,.missionRow small{display:block}.missionRow strong{font-size:10px}.missionRow small{margin-top:2px;color:#c58b17;font-size:9px;font-weight:900}.miniTrack{height:6px;margin-top:5px;border-radius:999px;background:#e9e4e9;overflow:hidden}.miniTrack i{display:block;height:100%;background:#ff72aa}.p89MissionReward{width:100%;height:42px;margin-top:10px;border:0;border-radius:15px;background:linear-gradient(#ff5da3,#ef3d8b);color:#fff;font-weight:1000;font-size:14px;box-shadow:0 5px 0 #c82970}.p89MissionReward:disabled{opacity:.6}
+.p89RankCard{right:24px;top:195px;width:290px;padding:14px;border-radius:26px;background:linear-gradient(180deg,#f3efff,#fbf9ff)}.p89RankRows{margin-top:10px;display:grid;gap:7px}.rankLoading{padding:20px;text-align:center;color:#8a7b91;font-size:11px}.p89RankRow{display:grid;grid-template-columns:27px 34px 1fr auto;align-items:center;gap:7px;padding:6px 7px;border-radius:12px;background:#fff;box-shadow:0 3px 9px rgba(92,68,105,.06)}.p89RankPos{width:27px;height:27px;border-radius:50%;display:grid;place-items:center;background:#f3eff9;font-size:10px;font-weight:1000}.p89RankRow:nth-child(1) .p89RankPos{background:#ffe57c}.p89RankRow:nth-child(2) .p89RankPos{background:#e5e7ef}.p89RankRow:nth-child(3) .p89RankPos{background:#ffd0a5}.p89RankAvatar{width:32px;height:32px;border-radius:11px;overflow:hidden;display:grid;place-items:center;background:#ffe5ef;font-size:17px}.p89RankAvatar img{width:100%;height:100%;object-fit:cover}.p89RankName{min-width:0}.p89RankName b,.p89RankName small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.p89RankName b{font-size:11px}.p89RankName small{font-size:8px;color:#9a889c}.p89RankScore{font-size:10px;font-weight:1000;color:#9e6c11}.p89MyRank{margin-top:9px;width:100%;height:40px;border:0;border-radius:14px;display:grid;grid-template-columns:45px 1fr auto;align-items:center;gap:7px;padding:0 10px;background:#ebe6ff;color:#453759;text-align:left}.p89MyRank span{font-weight:1000}.p89MyRank b{font-size:10px}.p89MyRank strong{font-size:10px;color:#714fc8}
+.p89BuddyCard{left:24px;bottom:230px;width:250px;padding:11px;border-radius:22px;border-color:rgba(36,158,230,.25);background:linear-gradient(180deg,#f1fbff,#ecf7ff)}.buddyCardHead{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:1000;color:#2686c8}.buddyCardHead button{width:24px;height:24px;border-radius:50%;border:0;background:#fff;color:#2686c8;font-weight:1000}.buddyCardBody{display:grid;grid-template-columns:62px 1fr;gap:8px;align-items:center;margin-top:8px}.miniBuddy{width:62px;height:62px;border-radius:15px;background:#ffe8f1;display:grid;place-items:center;font-size:34px}.buddyCardBody b,.buddyCardBody strong,.buddyCardBody small{display:block}.buddyCardBody b{font-size:14px}.buddyCardBody strong{color:#317bc5;font-size:12px}.xpTrack{height:7px;margin-top:5px;border-radius:999px;background:#d7e7ef;overflow:hidden}.xpTrack i{display:block;height:100%;width:0;background:linear-gradient(90deg,#39b6f1,#53d3ca)}.buddyCardBody small{margin-top:3px;font-size:8px;color:#6b7982}.dress{width:100%;height:34px;margin-top:8px;border:0;border-radius:12px;background:#fff;color:#3876aa;font-size:11px;font-weight:1000}
+.p89PetCenter{position:absolute;z-index:4;left:50%;top:255px;bottom:220px;width:min(440px,38vw);transform:translateX(-50%);display:flex;align-items:flex-end;justify-content:center}.p89BuddyStage{position:relative;width:min(360px,30vw);height:min(390px,40vh);display:grid;place-items:end center}.p89BuddyStage #bbEquippedHeroCharacter{position:relative!important;width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;max-width:none!important;max-height:none!important;overflow:visible!important;contain:layout paint!important}.p89BuddyStage #bbEquippedHeroCharacterImg,.p89BuddyStage #bbHomeBuddySkin,.p89BuddyStage #bbHomeBuddyOutfit,.p89BuddyStage #bbHomeBuddyAccessory,.p89BuddyStage #bbHomeBuddyHat,.p89BuddyStage #bbHomeBuddyEffect{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;background-size:contain!important;background-position:center bottom!important;background-repeat:no-repeat!important}.p89Speech{position:absolute;z-index:6;right:-80px;top:26%;min-width:150px;padding:12px 14px;border-radius:28px;background:#fff;box-shadow:0 8px 20px rgba(75,51,70,.1);text-align:center}.p89Speech:after{content:"";position:absolute;left:8px;bottom:-11px;border:12px solid transparent;border-top-color:#fff;transform:rotate(18deg)}.p89Speech b,.p89Speech span{display:block}.p89Speech b{font-size:15px}.p89Speech span{font-size:10px;color:#806979;margin-top:2px}
+.p89Online{right:24px;bottom:230px;width:290px;min-height:90px;border-radius:22px;padding:10px;display:grid;grid-template-columns:64px 1fr;align-items:center;text-align:left;color:#4f3f79;background:linear-gradient(135deg,#f0eaff,#ffe5f5);cursor:pointer}.onlineArt{grid-row:1/3;width:58px;height:58px;border-radius:16px;background:#fff;display:grid;place-items:center;font-size:30px}.p89Online span:nth-child(2) small,.p89Online span:nth-child(2) b,.p89Online span:nth-child(2) em{display:block}.p89Online small{font-size:8px;color:#9b75b2;font-weight:1000}.p89Online b{font-size:15px}.p89Online em{font-style:normal;font-size:9px;color:#806c8d}.p89Online strong{grid-column:2;margin-top:4px;padding:7px 10px;border-radius:11px;background:#7554dc;color:white;text-align:center;font-size:10px}
+.p89MainActions{position:absolute;z-index:12;left:50%;bottom:120px;transform:translateX(-50%);display:grid;grid-template-columns:repeat(3,160px);gap:10px}.p89Action{min-height:93px;border:0;border-radius:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;color:#fff;box-shadow:0 9px 0 rgba(92,44,87,.18),0 16px 27px rgba(88,55,75,.12)}.p89Action span{font-size:35px;line-height:1}.p89Action b{font-size:18px;margin-top:4px}.p89Action small{font-size:9px;font-weight:800;opacity:.9}.p89Action.feed{background:linear-gradient(#ff74b1,#f14491)}.p89Action.play{background:linear-gradient(#8b6bf0,#6846d5)}.p89Action.workout{background:linear-gradient(#ffc54b,#f4a629)}.p89Action:active{transform:translateY(3px)}
+.p89Dock{position:absolute;z-index:30;left:24px;right:24px;bottom:14px;height:86px;padding:7px 10px;border:1px solid rgba(93,62,83,.09);border-radius:26px;display:grid;grid-template-columns:repeat(5,1fr);background:rgba(255,255,255,.94);box-shadow:0 14px 34px rgba(78,51,75,.14);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}.p89Dock button{border:0;border-radius:18px;background:transparent;color:#523b52;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer}.p89Dock button.active{background:linear-gradient(#ffdeeb,#ffc8dc);color:#c93178}.p89Dock span{font-size:27px}.p89Dock b{font-size:11px}.p89Toast{position:fixed;z-index:9999;left:50%;bottom:112px;transform:translate(-50%,20px);padding:10px 16px;border-radius:999px;background:#3d3047;color:#fff;font-size:12px;font-weight:850;opacity:0;pointer-events:none;transition:.22s}.p89Toast.show{opacity:1;transform:translate(-50%,0)}
+/* compact iPad / landscape */
+@media(max-width:1100px){.p89Room{padding:14px 16px 108px}.p89Tagline{font-size:11px;padding:9px 14px}.p89MissionCard{left:16px;top:180px;width:245px}.p89RankCard{right:16px;top:180px;width:255px}.p89BuddyCard{left:16px;bottom:210px;width:220px}.p89Online{right:16px;bottom:210px;width:250px}.p89PetCenter{top:245px;bottom:210px}.p89MainActions{bottom:104px;grid-template-columns:repeat(3,142px)}.p89Dock{left:14px;right:14px;bottom:8px;height:76px}.p89Dock span{font-size:23px}.p89Dock b{font-size:10px}}
+/* phones: cards become compact drawers beneath pet; still one-screen-ish */
+@media(max-width:760px){.p89Room{min-height:900px;padding:10px 10px 98px}.p89Topbar{grid-template-columns:1fr auto}.p89Tagline{display:none}.p89TopActions{gap:5px}.p89Profile{grid-template-columns:31px 65px}.p89Profile .gear{display:none}.p89Logo{font-size:26px}.p89Thai{font-size:8px}.p89Vitals{width:100%;gap:5px;margin-top:12px}.p89Vital{grid-template-columns:35px 1fr;grid-template-rows:auto auto;padding:6px 7px;border-radius:15px}.vIcon{grid-row:1/3;width:35px;height:35px;font-size:19px}.vCopy small{font-size:8px}.vTrack{height:9px}.p89Window{top:130px;width:65vw;height:180px;border-width:10px}.p89Curtain{top:110px;height:240px;width:24%}.p89CurtainL{left:12%}.p89CurtainR{right:12%}.p89MissionCard,.p89RankCard,.p89BuddyCard,.p89Online{display:none}.p89PetCenter{top:225px;bottom:250px;width:100%}.p89BuddyStage{width:min(300px,72vw);height:360px}.p89Speech{right:8%;top:15%;min-width:125px}.p89MainActions{bottom:96px;width:calc(100% - 16px);grid-template-columns:repeat(3,1fr);gap:6px}.p89Action{min-height:78px;border-radius:18px}.p89Action span{font-size:27px}.p89Action b{font-size:14px}.p89Action small{font-size:7px}.p89Dock{position:fixed;left:8px;right:8px;bottom:max(6px,env(safe-area-inset-bottom));height:74px;border-radius:22px}.p89Dock span{font-size:22px}.p89Dock b{font-size:8px}}
+@media(max-width:390px){.p89Profile{display:none}.p89Coins{height:42px}.p89Crown{display:none}.p89Brand{grid-template-columns:1fr}.p89Thai{justify-self:start}.p89PetCenter{top:215px}.p89BuddyStage{width:78vw;height:340px}.p89Speech{top:10%;right:2%}.p89Action small{display:none}}
+@media(prefers-reduced-motion:reduce){.p89Toast,.vTrack i{transition:none!important}}
+</style>
+
 </head>
 <body>
 
@@ -11489,71 +11519,82 @@ try{
   
 <section class="bbAppScreen active pomruHomeScreen" id="bbAppHome" data-app-screen="home">
 
-  <main id="pomruPetHome" data-pet-mood="happy">
-    <div class="pomruRoom">
-      <div class="pomruSkirting" aria-hidden="true"></div>
+  <main id="pomruPetHome" class="pomruV89" data-pet-mood="happy">
+  <section class="p89Room" aria-label="ห้องของ Buddy">
+    <div class="p89RoomSky" aria-hidden="true"></div>
+    <div class="p89Curtain p89CurtainL" aria-hidden="true"></div>
+    <div class="p89Curtain p89CurtainR" aria-hidden="true"></div>
+    <div class="p89Window" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="p89Plant p89PlantL" aria-hidden="true">🌿</div>
+    <div class="p89Plant p89PlantR" aria-hidden="true">🪴</div>
+    <div class="p89Shelf" aria-hidden="true"><span>🧸</span><span>📚</span></div>
+    <div class="p89Floor" aria-hidden="true"></div>
+    <div class="p89Rug" aria-hidden="true"></div>
 
-      <header class="pomruGameTop">
-        <button
-          type="button"
-          class="pomruMiniBrand"
-          data-app-action="profile"
-          aria-label="โปรไฟล์ผู้เล่น"
-          style="border:0;background:transparent;padding:0;text-align:left;color:inherit"
-        >
-          <span class="pomruMiniLogo">ผม</span>
-          <span class="pomruMiniBrandText">
-            <strong>POMRU</strong>
-            <small>ผมรู้ • เล่น เรียน เลี้ยง Buddy</small>
-          </span>
+    <header class="p89Topbar">
+      <button class="p89Brand" type="button" data-app-action="profile" aria-label="โปรไฟล์">
+        <span class="p89Crown">♛</span>
+        <span class="p89Logo">POMRU</span>
+        <span class="p89Thai">ผมรู้</span>
+      </button>
+
+      <div class="p89Tagline">💗 เล่น • เรียน • เลี้ยง Buddy 🌱</div>
+
+      <div class="p89TopActions">
+        <button class="p89Coins" type="button" data-app-go="topup">
+          <span class="coin">P</span><b id="pomruHomeCoinBalance">0</b><span class="plus">+</span>
         </button>
-
-        <button
-          type="button"
-          class="pomruWallet"
-          data-app-go="topup"
-          aria-label="ดู POMRU Coins"
-          style="border:0;color:inherit"
-        >
-          <span class="pomruWalletCoin">P</span>
-          <b><span id="pomruHomeCoinBalance">0</span> Coins</b>
+        <button class="p89Profile" type="button" data-app-action="profile">
+          <span class="avatar" id="p89ProfileAvatar">🧸</span>
+          <span class="profileCopy"><small id="p89ProfileLevel">Lv.1</small><b id="p89ProfileName">ผู้เยี่ยมชม</b></span>
+          <span class="gear">⚙</span>
         </button>
-      </header>
-
-      <section class="pomruStatusRow" aria-label="สถานะ Buddy">
-        <div class="pomruStat" data-pomru-stat="happiness">
-          <div class="pomruStatHearts" id="pomruHappyHearts" aria-hidden="true">
-            <span>♥</span><span>♥</span><span>♥</span>
-          </div>
-          <span class="pomruStatName">HAPPY</span>
-        </div>
-
-        <div class="pomruStat" data-pomru-stat="hunger">
-          <div class="pomruStatHearts" id="pomruHungerHearts" aria-hidden="true">
-            <span>♥</span><span>♥</span><span>♥</span>
-          </div>
-          <span class="pomruStatName">HUNGRY</span>
-        </div>
-
-        <div class="pomruStat" data-pomru-stat="energy">
-          <div class="pomruStatHearts" id="pomruEnergyHearts" aria-hidden="true">
-            <span>♥</span><span>♥</span><span>♥</span>
-          </div>
-          <span class="pomruStatName">ENERGY</span>
-        </div>
-      </section>
-
-      <div class="pomruWindow" aria-hidden="true">
-        <div class="pomruBlind"></div>
       </div>
+    </header>
 
-      <section class="pomruPetStage" aria-label="ห้องของ Buddy">
-        <p class="pomruSpeech" id="pomruPetSpeech">
-          วันนี้ <strong>Buddy</strong> อารมณ์ดี 💕
-        </p>
+    <section class="p89Vitals" aria-label="สถานะ Buddy">
+      <article class="p89Vital happy">
+        <span class="vIcon">♥</span>
+        <span class="vCopy"><small>ความสุข</small><strong id="p89HappyPct">100%</strong></span>
+        <div class="vTrack"><i id="p89HappyBar"></i></div>
+      </article>
+      <article class="p89Vital hungry">
+        <span class="vIcon">🍓</span>
+        <span class="vCopy"><small>ความอิ่ม</small><strong id="p89HungerPct">100%</strong></span>
+        <div class="vTrack"><i id="p89HungerBar"></i></div>
+      </article>
+      <article class="p89Vital energy">
+        <span class="vIcon">⚡</span>
+        <span class="vCopy"><small>พลัง</small><strong id="p89EnergyPct">100%</strong></span>
+        <div class="vTrack"><i id="p89EnergyBar"></i></div>
+      </article>
+    </section>
 
-        <div class="pomruPetWrap" aria-label="Buddy ของฉัน">
-          <div class="bbEquippedHeroCharacter" id="bbEquippedHeroCharacter">
+    <aside class="p89MissionCard">
+      <div class="cardHead"><span>🗓️</span><div><small>DAILY</small><h3>ภารกิจวันนี้</h3></div><span class="heart">♥</span></div>
+      <div class="missionRow"><span class="mi">🎮</span><div><b>เล่นเกม 1 ครั้ง</b><div class="miniTrack"><i style="width:0%"></i></div></div><span><strong>0/1</strong><small>+20</small></span></div>
+      <div class="missionRow"><span class="mi">🍓</span><div><b>ให้อาหาร Buddy</b><div class="miniTrack"><i style="width:0%"></i></div></div><span><strong>0/1</strong><small>+10</small></span></div>
+      <div class="missionRow"><span class="mi">🏃</span><div><b>ออกกำลังกาย</b><div class="miniTrack"><i style="width:0%"></i></div></div><span><strong>0/1</strong><small>+10</small></span></div>
+      <button type="button" class="p89MissionReward" id="p89MissionReward" disabled>🎁 รับรางวัล</button>
+    </aside>
+
+    <aside class="p89RankCard">
+      <div class="cardHead"><span>🏆</span><div><small>RANKING</small><h3>อันดับวันนี้</h3></div><button type="button" data-app-action="rank">ดูทั้งหมด ›</button></div>
+      <div class="p89RankRows" id="p89RankRows">
+        <div class="rankLoading">กำลังโหลดอันดับ…</div>
+      </div>
+      <button class="p89MyRank" type="button" data-app-action="rank"><span id="p89MyRankPos">#—</span><b id="p89MyRankName">อันดับของฉัน</b><strong id="p89MyRankScore">—</strong></button>
+    </aside>
+
+    <section class="p89BuddyCard">
+      <div class="buddyCardHead"><span>🎟️ Buddy ของฉัน</span><button type="button" data-app-go="inventory">?</button></div>
+      <div class="buddyCardBody"><span class="miniBuddy">🧸</span><div><b id="p89PetName">Pink Buddy</b><strong id="p89BuddyLevel">Level 1</strong><div class="xpTrack"><i id="p89XpBar"></i></div><small id="p89XpText">0 / 500 EXP</small></div></div>
+      <button type="button" class="dress" data-app-go="inventory">👕 แต่งตัว</button>
+    </section>
+
+    <section class="p89PetCenter">
+      <div class="p89Speech" id="pomruPetSpeech"><b>แฮปปี้~</b><span>วันนี้เล่นด้วยกันนะ</span></div>
+      <div class="p89BuddyStage"><div class="bbEquippedHeroCharacter" id="bbEquippedHeroCharacter">
           <span id="bbEquippedHeroCharacterImg" class="bbBuddyBaseImage hidden" role="img" aria-label=""></span>
           <span class="bbBuddyLayer bbBuddySkinLayer hidden" id="bbHomeBuddySkin" role="img" aria-label=""></span>
           <span class="bbBuddyLayer bbBuddyOutfitLayer hidden" id="bbHomeBuddyOutfit" role="img" aria-label=""></span>
@@ -11561,47 +11602,29 @@ try{
           <span class="bbBuddyLayer bbBuddyHatLayer hidden" id="bbHomeBuddyHat" role="img" aria-label=""></span>
           <span class="bbBuddyLayer bbBuddyEffectLayer hidden" id="bbHomeBuddyEffect" role="img" aria-label=""></span>
           
-        </div>
-        </div>
+        </div></div>
+    </section>
 
-        <button type="button" class="pomruLevelCTA" data-app-go="modes">
-          <span class="pomruLevelBadge">EXP</span>
-          <span class="pomruLevelCopy">
-            <small>BUDDY LEVEL</small>
-            <b id="pomruPetLevel">LEVEL 1</b>
-          </span>
-          <span class="pomruPlayTri" aria-hidden="true"></span>
-        </button>
-      </section>
+    <button class="p89Online" type="button" data-app-action="arena">
+      <span class="onlineArt">🏆</span><span><small>ONLINE</small><b>แข่งขันออนไลน์</b><em>สร้างห้อง • แข่งกับเพื่อน</em></span><strong>เข้าร่วมเลย ›</strong>
+    </button>
 
-      <nav class="pomruPetDock" aria-label="เมนูหลัก">
-        <button type="button" class="pomruDockBtn" data-app-go="shop" data-pomru-open="food">
-          <span class="pomruDockIcon">🍓</span>
-          <span>อาหาร</span>
-        </button>
+    <section class="p89MainActions" aria-label="กิจกรรมหลัก">
+      <button class="p89Action feed" type="button" data-app-go="shop" data-pomru-open="food"><span>🍓</span><b>ให้อาหาร</b><small>เพิ่มความอิ่ม ♥</small></button>
+      <button class="p89Action play" type="button" data-app-go="modes"><span>🎮</span><b>เล่นเกม</b><small>รับ Coins / EXP</small></button>
+      <button class="p89Action workout" type="button" id="p89WorkoutBtn"><span>🏃</span><b>ออกกำลังกาย</b><small>เพิ่มพลัง / ความสุข</small></button>
+    </section>
 
-        <button type="button" class="pomruDockBtn" data-app-go="modes">
-          <span class="pomruDockIcon">🎮</span>
-          <span>เล่นเกม</span>
-        </button>
-
-        <button type="button" class="pomruDockBtn" data-app-action="arena">
-          <span class="pomruDockIcon">🏆</span>
-          <span>จัดอันดับ</span>
-        </button>
-
-        <button type="button" class="pomruDockBtn" data-app-go="inventory">
-          <span class="pomruDockIcon">🏠</span>
-          <span>คลังของฉัน</span>
-        </button>
-
-        <button type="button" class="pomruDockBtn" data-app-go="shop">
-          <span class="pomruDockIcon">🛍️</span>
-          <span>ร้านค้า</span>
-        </button>
-      </nav>
-    </div>
-  </main>
+    <nav class="p89Dock" aria-label="เมนูหลัก">
+      <button class="active" type="button" data-app-go="home"><span>🏠</span><b>หน้าแรก</b></button>
+      <button type="button" data-app-go="modes"><span>🎮</span><b>เล่นเกม</b></button>
+      <button type="button" data-app-action="rank"><span>🏆</span><b>จัดอันดับ</b></button>
+      <button type="button" data-app-go="inventory"><span>🎒</span><b>คลังของฉัน</b></button>
+      <button type="button" data-app-go="shop"><span>🛍️</span><b>ร้านค้า</b></button>
+    </nav>
+  </section>
+  <div class="p89Toast" id="p89Toast" role="status"></div>
+</main>
 
   <!--
     Compatibility layer:
@@ -22615,6 +22638,25 @@ document.addEventListener('DOMContentLoaded', () => {
       if(state)renderPet(state);
     }catch(_){}
   }
+})();
+</script>
+
+
+<script id="pomru-v89-bridge">
+(function(){
+  'use strict';
+  const $=id=>document.getElementById(id);
+  const clamp=n=>Math.max(0,Math.min(100,Number(n)||0));
+  const safe=t=>String(t??'');
+  function toast(msg){const el=$('p89Toast');if(!el)return;el.textContent=msg;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),1700)}
+  function setPct(bar,pct,text){const p=clamp(pct);if($(bar))$(bar).style.width=p+'%';if($(text))$(text).textContent=Math.round(p)+'%'}
+  function renderPet(s){if(!s)return;setPct('p89HappyBar',s.happiness,'p89HappyPct');setPct('p89HungerBar',s.hunger,'p89HungerPct');setPct('p89EnergyBar',s.energy,'p89EnergyPct');if($('p89PetName'))$('p89PetName').textContent=s.pet_name||'Pink Buddy';if($('p89BuddyLevel'))$('p89BuddyLevel').textContent='Level '+(s.pet_level||1);if($('p89ProfileLevel'))$('p89ProfileLevel').textContent='Lv.'+(s.pet_level||1);const progress=Number(s.level_progress)||0,target=Number(s.level_target)||500;if($('p89XpBar'))$('p89XpBar').style.width=Math.min(100,(progress/target)*100)+'%';if($('p89XpText'))$('p89XpText').textContent=progress.toLocaleString()+' / '+target.toLocaleString()+' EXP';if($('pomruHomeCoinBalance'))$('pomruHomeCoinBalance').textContent=(Number(s.coin_balance)||0).toLocaleString();const speech=$('pomruPetSpeech');if(speech){const map={hungry:['หิวแล้ว~','ขอของกินหน่อยน้า'],sad:['เหงาจัง~','มาเล่นด้วยกันหน่อย'],tired:['ง่วงแล้ว~','พักพลังกันหน่อย'],great:['แฮปปี้~','วันนี้พร้อมลุยสุด ๆ'],happy:['แฮปปี้~','วันนี้เล่นด้วยกันนะ']};const m=map[s.mood]||map.happy;speech.innerHTML='<b>'+m[0]+'</b><span>'+m[1]+'</span>'}}
+  function syncText(oldId,newId,transform){const a=$(oldId),b=$(newId);if(!a||!b)return;const run=()=>{let v=safe(a.textContent).trim();if(transform)v=transform(v);if(v)b.textContent=v};run();new MutationObserver(run).observe(a,{subtree:true,childList:true,characterData:true})}
+  function syncProfile(){syncText('bbHomePlayerName','p89ProfileName',v=>v||'ผู้เล่น');syncText('bbHomeCoinBalance','pomruHomeCoinBalance',v=>v==='—'?'0':v);const old=$('navAvatar');const dest=$('p89ProfileAvatar');if(old&&dest){const run=()=>{dest.innerHTML='';dest.style.backgroundImage=old.style.backgroundImage||'';dest.style.backgroundSize='contain';dest.style.backgroundPosition='center';dest.style.backgroundRepeat='no-repeat';if(!dest.style.backgroundImage)dest.textContent='🧸'};run();new MutationObserver(run).observe(old,{childList:true,subtree:true,attributes:true,attributeFilter:['style']})}}
+  function parseRanks(){const src=$('bbHomeTop10List'),dest=$('p89RankRows');if(!src||!dest)return;const rows=[...src.querySelectorAll('.bbHomeTop10Row')].slice(0,3);if(!rows.length){dest.innerHTML='<div class="rankLoading">เล่นเกมเพื่อเริ่มจัดอันดับ</div>';return}dest.innerHTML=rows.map((r,i)=>{const name=r.querySelector('.bbHomeTop10Name b')?.textContent?.trim()||'ผู้เล่น';const sub=r.querySelector('.bbHomeTop10Name small')?.textContent?.trim()||'';const score=r.querySelector('.bbHomeTop10Score b')?.textContent?.trim()||'0';const av=r.querySelector('.bbHomeTop10Avatar img');return '<button class="p89RankRow" type="button" data-app-action="rank"><span class="p89RankPos">'+(i+1)+'</span><span class="p89RankAvatar">'+(av?'<img src="'+av.src+'" alt="">':'🧸')+'</span><span class="p89RankName"><b>'+name.replace(/[<>]/g,'')+'</b><small>'+sub.replace(/[<>]/g,'')+'</small></span><span class="p89RankScore">🏆 '+score.replace(/[<>]/g,'')+'</span></button>'}).join('')}
+  function watchRanks(){const src=$('bbHomeTop10List');if(!src)return;parseRanks();new MutationObserver(parseRanks).observe(src,{subtree:true,childList:true,characterData:true})}
+  function init(){syncProfile();watchRanks();try{const s=window.BrainBuddyPet?.getState?.();if(s)renderPet(s)}catch(_){}const ex=$('p89WorkoutBtn');if(ex)ex.addEventListener('click',()=>toast('🏃 ระบบออกกำลังกายกำลังเป็น Step ถัดไป'));document.addEventListener('bb:pet-updated',e=>renderPet(e.detail));}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
 </script>
 
