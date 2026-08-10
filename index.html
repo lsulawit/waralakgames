@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>Brain Buddy v43 — Thai สนามจัดอันดับ Polish</title>
+<title>Brain Buddy v72 — ทำเนียบตัวตึง</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -8005,6 +8005,245 @@ body.bbRankedLearningPlaying .v17dock{display:none!important}
   .bbRLFooter{flex-direction:column;text-align:center}
 }
 
+
+/* ==========================================================
+   Brain Buddy v72 — ทำเนียบตัวตึงประเทศไทย
+   ========================================================== */
+#bbArena .bbArenaActions{
+  grid-template-columns:1fr 1fr 1fr 86px!important;
+}
+#bbArena .bbArenaAction.leaderboard{
+  border-color:#f3d68b!important;
+  background:linear-gradient(145deg,#fff8dd,#ffe69a 55%,#ffd25f)!important;
+}
+#bbArena .bbArenaAction.leaderboard i{
+  background:linear-gradient(145deg,#fff9d9,#ffd864)!important;
+  font-size:24px!important;
+}
+#bbArena .bbArenaAction.leaderboard b{color:#805100!important}
+#bbArena .bbArenaAction.leaderboard small{color:#9a721d!important}
+
+.bbBrainBoard{
+  width:min(1180px,calc(100% - 30px));
+  margin:0 auto;
+  padding:8px 0 54px;
+}
+.bbBrainBoard.hidden{display:none!important}
+
+.bbBrainBoardHero{
+  position:relative;
+  min-height:290px;
+  border-radius:34px;
+  padding:30px;
+  overflow:hidden;
+  color:#fff;
+  background:
+    radial-gradient(circle at 88% 15%,rgba(255,232,151,.45),transparent 14rem),
+    radial-gradient(circle at 75% 80%,rgba(255,113,192,.38),transparent 18rem),
+    linear-gradient(135deg,#2f2256 0%,#5f37a0 45%,#b14f9d 75%,#ee78b6 100%);
+  box-shadow:0 22px 45px rgba(63,38,91,.18);
+}
+.bbBrainBoardHero::after{
+  content:"";position:absolute;width:300px;height:300px;border-radius:50%;
+  right:-80px;bottom:-150px;background:rgba(255,255,255,.08)
+}
+.bbBrainBoardHeroCopy{position:relative;z-index:2;max-width:68%}
+.bbBrainBoardBack{
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:12px;padding:8px 11px;
+  color:#fff;background:rgba(255,255,255,.10);
+  font-size:9px;font-weight:900;cursor:pointer
+}
+.bbBrainBoardEyebrow{
+  display:block;width:max-content;margin-top:27px;padding:6px 10px;border-radius:999px;
+  background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.16);
+  font-size:8px;font-weight:1000;letter-spacing:.08em
+}
+.bbBrainBoardHero h1{
+  margin:8px 0 4px;font-size:clamp(2.5rem,5vw,4.5rem);line-height:.98;
+  letter-spacing:-.055em
+}
+.bbBrainBoardHero p{margin:10px 0 0;color:#eee5f4;font-size:12px;font-weight:750}
+.bbBrainBoardHero small{display:block;margin-top:8px;color:#d9cde5;font-size:8px;font-weight:750}
+
+.bbBrainBoardCup{
+  position:absolute;z-index:2;right:62px;top:54px;width:240px;height:210px;
+  display:grid;place-items:center
+}
+.bbBrainBoardCup>span{
+  position:relative;z-index:2;font-size:118px;
+  filter:drop-shadow(0 20px 16px rgba(46,20,78,.32))
+}
+.bbBrainBoardCup>i{
+  position:absolute;width:190px;height:190px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,238,154,.72),rgba(255,192,93,.20) 45%,transparent 70%)
+}
+
+.bbBrainBoardTabs{
+  position:sticky;top:78px;z-index:20;
+  display:grid;grid-template-columns:repeat(5,1fr);gap:7px;
+  margin:14px 0;padding:8px;border-radius:21px;
+  background:rgba(255,255,255,.88);backdrop-filter:blur(18px);
+  border:1px solid rgba(123,91,151,.12);
+  box-shadow:0 10px 25px rgba(66,45,84,.08)
+}
+.bbBrainBoardTabs button{
+  min-height:55px;border:0;border-radius:15px;
+  background:transparent;color:#6d5a79;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  font-weight:950
+}
+.bbBrainBoardTabs button span{font-size:17px}
+.bbBrainBoardTabs button b{font-size:10px}
+.bbBrainBoardTabs button.active{
+  color:#fff;
+  background:linear-gradient(135deg,#7056d2,#d85fa8);
+  box-shadow:0 8px 15px rgba(110,72,188,.19)
+}
+
+.bbBrainBoardTitleRow{
+  display:flex;justify-content:space-between;align-items:end;gap:12px;
+  margin:24px 4px 12px
+}
+.bbBrainBoardTitleRow small,.bbBrainTopListHead small{
+  color:#a17bab;font-size:8px;letter-spacing:.12em;font-weight:1000
+}
+.bbBrainBoardTitleRow h2,.bbBrainTopListHead h2{
+  margin:2px 0 0;color:#4e3963;font-size:22px;letter-spacing:-.03em
+}
+.bbBrainBoardLive{
+  min-width:120px;padding:9px 12px;border-radius:15px;text-align:right;
+  background:#fff;border:1px solid #eee4f1
+}
+.bbBrainBoardLive span{display:block;color:#38a979;font-size:7px;font-weight:1000}
+.bbBrainBoardLive b{display:block;color:#604a70;font-size:11px;margin-top:2px}
+
+.bbBrainPodiumWrap{
+  padding:23px 18px 0;border-radius:30px;
+  background:
+    radial-gradient(circle at 50% 0,rgba(255,234,142,.50),transparent 17rem),
+    linear-gradient(180deg,#fffdf4,#fff6fb);
+  border:1px solid #f1e5e2;
+  box-shadow:0 13px 28px rgba(76,53,88,.07)
+}
+.bbBrainPodium{
+  min-height:295px;display:grid;grid-template-columns:1fr 1.15fr 1fr;
+  gap:10px;align-items:end
+}
+.bbBrainPodiumSlot{
+  position:relative;display:flex;flex-direction:column;align-items:center;
+  min-width:0
+}
+.bbBrainPodiumAvatar{
+  width:74px;height:74px;border-radius:24px;display:grid;place-items:center;overflow:hidden;
+  background:linear-gradient(145deg,#ffe8f3,#eee7ff);
+  border:4px solid #fff;box-shadow:0 12px 21px rgba(68,45,82,.15);font-size:32px
+}
+.bbBrainPodiumSlot.first .bbBrainPodiumAvatar{
+  width:92px;height:92px;border-radius:29px;
+  box-shadow:0 0 0 4px #ffd85c,0 17px 29px rgba(118,73,5,.20)
+}
+.bbBrainPodiumAvatar img{width:100%;height:100%;object-fit:cover}
+.bbBrainPodiumMedal{font-size:27px;margin-top:-8px;position:relative;z-index:2}
+.bbBrainPodiumName{
+  width:100%;margin-top:4px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  color:#513d60;font-size:11px;font-weight:1000
+}
+.bbBrainPodiumTier{font-size:8px;color:#8b7693;font-weight:850}
+.bbBrainPodiumRP{margin-top:3px;font-size:14px;font-weight:1000;color:#6c4e86}
+.bbBrainPodiumBase{
+  width:100%;margin-top:9px;border-radius:17px 17px 0 0;display:grid;place-items:center;
+  color:#fff;font-size:27px;font-weight:1000;
+  box-shadow:inset 0 5px 7px rgba(255,255,255,.25)
+}
+.bbBrainPodiumSlot.second .bbBrainPodiumBase{height:82px;background:linear-gradient(180deg,#b9bdd1,#8a91aa)}
+.bbBrainPodiumSlot.first .bbBrainPodiumBase{height:128px;background:linear-gradient(180deg,#ffd85c,#f1aa25)}
+.bbBrainPodiumSlot.third .bbBrainPodiumBase{height:60px;background:linear-gradient(180deg,#df9b68,#ae663d)}
+
+.bbBrainMyRank{
+  margin-top:13px;border-radius:24px;padding:14px;
+  background:linear-gradient(135deg,#332952,#684698 55%,#a85198);
+  color:#fff;box-shadow:0 13px 30px rgba(71,42,99,.14)
+}
+.bbBrainMyRankCard{
+  display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;gap:11px;align-items:center
+}
+.bbBrainMyRankPos{
+  min-width:72px;text-align:center;font-size:25px;font-weight:1000;color:#ffe686
+}
+.bbBrainMyRankAvatar,.bbBrainListAvatar{
+  width:49px;height:49px;border-radius:16px;display:grid;place-items:center;overflow:hidden;
+  background:rgba(255,255,255,.17);font-size:23px
+}
+.bbBrainMyRankAvatar img,.bbBrainListAvatar img{width:100%;height:100%;object-fit:cover}
+.bbBrainMyRankInfo{min-width:0;display:flex;flex-direction:column}
+.bbBrainMyRankInfo small{font-size:7px;letter-spacing:.08em;color:#d6c9e7;font-weight:1000}
+.bbBrainMyRankInfo b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bbBrainMyRankInfo span{font-size:9px;color:#e7dcec;margin-top:2px}
+.bbBrainMyRankRP{text-align:right}
+.bbBrainMyRankRP b{display:block;font-size:19px}
+.bbBrainMyRankRP small{font-size:8px;color:#e1d4e9}
+
+.bbBrainTopListWrap{
+  margin-top:14px;padding:17px;border-radius:28px;background:#fff;
+  border:1px solid #eee5f0;box-shadow:0 13px 30px rgba(69,48,80,.06)
+}
+.bbBrainTopListHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
+.bbBrainTopListHead button{
+  border:1px solid #e9e0ec;border-radius:12px;padding:8px 11px;background:#faf7fb;color:#725e7e;
+  font-size:9px;font-weight:900
+}
+.bbBrainTopList{display:grid;gap:6px}
+.bbBrainListRow{
+  display:grid;grid-template-columns:54px 48px minmax(0,1fr) auto;gap:9px;align-items:center;
+  min-height:64px;padding:7px 10px;border-radius:17px;background:#fbf9fc;border:1px solid #f0e8f2
+}
+.bbBrainListRow.me{
+  background:linear-gradient(135deg,#f1ebff,#fff0f7);border-color:#c9b4ef;
+  box-shadow:0 7px 16px rgba(112,79,164,.10)
+}
+.bbBrainListPos{text-align:center;color:#785f85;font-size:14px;font-weight:1000}
+.bbBrainListPos.top1{color:#aa6d00}.bbBrainListPos.top2{color:#70778c}.bbBrainListPos.top3{color:#a6603d}
+.bbBrainListInfo{min-width:0;display:flex;flex-direction:column}
+.bbBrainListInfo b{font-size:11px;color:#503e5b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bbBrainListInfo span{font-size:8px;color:#8c7a94;margin-top:2px;font-weight:800}
+.bbBrainListRP{text-align:right}
+.bbBrainListRP b{display:block;font-size:13px;color:#694c7f}
+.bbBrainListRP small{display:block;font-size:7px;color:#9a899f}
+.bbBrainBoardLoading,.bbBrainBoardEmpty{
+  grid-column:1/-1;min-height:130px;border-radius:18px;display:grid;place-items:center;
+  color:#8b7993;font-size:10px;font-weight:850;background:#faf7fb
+}
+
+@media (min-width:700px) and (max-width:1100px){
+  #bbArena .bbArenaActions{grid-template-columns:1fr 1fr!important}
+  #bbArena .bbArenaRefresh{grid-column:auto!important;width:auto!important}
+  .bbBrainBoardHeroCopy{max-width:63%}
+  .bbBrainBoardCup{right:24px}
+}
+@media(max-width:699px){
+  #bbArena .bbArenaActions{grid-template-columns:1fr!important}
+  .bbBrainBoard{width:calc(100% - 16px)}
+  .bbBrainBoardHero{min-height:385px;padding:18px}
+  .bbBrainBoardHeroCopy{max-width:100%}
+  .bbBrainBoardCup{right:0;top:184px;width:180px;height:170px}
+  .bbBrainBoardCup>span{font-size:82px}
+  .bbBrainBoardTabs{
+    top:62px;grid-template-columns:repeat(5,1fr);gap:3px;padding:5px;border-radius:15px
+  }
+  .bbBrainBoardTabs button{min-height:51px;display:grid;place-items:center;gap:0}
+  .bbBrainBoardTabs button span{font-size:16px}.bbBrainBoardTabs button b{font-size:7px}
+  .bbBrainPodiumWrap{padding:18px 7px 0}
+  .bbBrainPodium{gap:3px;min-height:270px}
+  .bbBrainPodiumAvatar{width:56px;height:56px;border-radius:18px}
+  .bbBrainPodiumSlot.first .bbBrainPodiumAvatar{width:68px;height:68px;border-radius:21px}
+  .bbBrainPodiumName{font-size:8px}.bbBrainPodiumTier{font-size:6px}.bbBrainPodiumRP{font-size:10px}
+  .bbBrainMyRankCard{grid-template-columns:55px 43px minmax(0,1fr)}
+  .bbBrainMyRankRP{grid-column:1/-1;text-align:left;padding-left:4px}
+  .bbBrainListRow{grid-template-columns:42px 42px minmax(0,1fr)}
+  .bbBrainListRP{grid-column:3;text-align:left;margin-top:-4px}
+}
+
 </style>
 
 <script>
@@ -10800,6 +11039,9 @@ window.addEventListener("load",()=>{
           <button class="bbArenaAction join" id="bbArenaJoinOpen">
             <i>🔑</i><span><b>เข้าด้วยรหัส</b><small>มีรหัส BB-XXXXXX จากเพื่อน</small></span>
           </button>
+          <button class="bbArenaAction leaderboard" id="bbBrainBoardOpen">
+            <i>🏆</i><span><b>ทำเนียบตัวตึง</b><small>Overall และอันดับแยกทุกสาย</small></span>
+          </button>
           <button class="bbArenaRefresh" id="bbArenaRefresh">↻</button>
         </div>
 
@@ -10816,6 +11058,65 @@ window.addEventListener("load",()=>{
         <div class="bbArenaRooms" id="bbArenaRooms">
           <div class="bbArenaEmpty"><span>🧸</span><b>กำลังโหลดห้อง…</b></div>
         </div>
+      </section>
+
+
+      <section class="bbBrainBoard hidden" id="bbBrainBoard">
+        <div class="bbBrainBoardHero">
+          <div class="bbBrainBoardHeroCopy">
+            <button type="button" class="bbBrainBoardBack" id="bbBrainBoardBack">← กลับสนามแข่งขัน</button>
+            <span class="bbBrainBoardEyebrow">🇹🇭 THAI BRAIN RANK</span>
+            <h1>ทำเนียบตัวตึงประเทศไทย</h1>
+            <p>อันดับผู้เล่นจากการแข่งขันใน Brain Buddy แยกตามทักษะที่แต่ละคนถนัด</p>
+            <small>เป็นอันดับการแข่งขันภายใน Brain Buddy • ไม่ใช่ผลวัด IQ หรืออันดับประชากรทั้งประเทศ</small>
+          </div>
+          <div class="bbBrainBoardCup" aria-hidden="true">
+            <span>🏆</span>
+            <i></i>
+          </div>
+        </div>
+
+        <div class="bbBrainBoardTabs" id="bbBrainBoardTabs">
+          <button type="button" class="active" data-brain-board="overall"><span>🧠</span><b>Overall</b></button>
+          <button type="button" data-brain-board="teddy"><span>🧸</span><b>Memory</b></button>
+          <button type="button" data-brain-board="math"><span>➗</span><b>Math</b></button>
+          <button type="button" data-brain-board="chinese"><span>🇨🇳</span><b>Chinese</b></button>
+          <button type="button" data-brain-board="english"><span>🇬🇧</span><b>English</b></button>
+        </div>
+
+        <div class="bbBrainBoardTitleRow">
+          <div>
+            <small id="bbBrainBoardKicker">OVERALL RANKING</small>
+            <h2 id="bbBrainBoardTitle">🧠 ตัวตึงรวมทุกสาย</h2>
+          </div>
+          <div class="bbBrainBoardLive">
+            <span>● LIVE</span>
+            <b id="bbBrainBoardTotal">0 ผู้เล่น</b>
+          </div>
+        </div>
+
+        <section class="bbBrainPodiumWrap">
+          <div class="bbBrainPodium" id="bbBrainPodium">
+            <div class="bbBrainBoardLoading">กำลังโหลดอันดับ…</div>
+          </div>
+        </section>
+
+        <section class="bbBrainMyRank" id="bbBrainMyRank">
+          <div class="bbBrainBoardLoading">กำลังค้นหาอันดับของคุณ…</div>
+        </section>
+
+        <section class="bbBrainTopListWrap">
+          <div class="bbBrainTopListHead">
+            <div>
+              <small>TOP 100</small>
+              <h2 id="bbBrainTopListTitle">อันดับผู้เล่น</h2>
+            </div>
+            <button type="button" id="bbBrainBoardRefresh">↻ รีเฟรช</button>
+          </div>
+          <div class="bbBrainTopList" id="bbBrainTopList">
+            <div class="bbBrainBoardLoading">กำลังโหลด Top 100…</div>
+          </div>
+        </section>
       </section>
 
       <section class="bbArenaRoom hidden" id="bbArenaRoom">
@@ -17037,6 +17338,257 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+})();
+</script>
+
+
+<script>
+(function brainBuddyV72Leaderboard(){
+  const q=s=>document.querySelector(s);
+
+  const BOARDS={
+    overall:{icon:"🧠",title:"ตัวตึงรวมทุกสาย",kicker:"OVERALL RANKING"},
+    teddy:{icon:"🧸",title:"ตัวตึงสาย Memory",kicker:"MEMORY RANKING"},
+    math:{icon:"➗",title:"ตัวตึงสาย Math",kicker:"MATH RANKING"},
+    chinese:{icon:"🇨🇳",title:"ตัวตึงสาย Chinese",kicker:"CHINESE RANKING"},
+    english:{icon:"🇬🇧",title:"ตัวตึงสาย English",kicker:"ENGLISH RANKING"}
+  };
+
+  let board="overall";
+  let loading=false;
+  let cache=new Map();
+
+  function client(){
+    if(window.__bbSupabase)return window.__bbSupabase;
+    const cfg=window.BRAIN_BUDDY_SUPABASE||{};
+    if(window.supabase&&cfg.url&&cfg.publishableKey){
+      window.__bbSupabase=window.supabase.createClient(cfg.url,cfg.publishableKey);
+      return window.__bbSupabase;
+    }
+    return null;
+  }
+
+  function esc(v){
+    return String(v??"").replace(/[&<>"']/g,m=>({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    }[m]))
+  }
+
+  function avatar(row,cls){
+    if(row?.avatar_url){
+      return `<div class="${cls}"><img src="${esc(row.avatar_url)}" alt=""></div>`;
+    }
+    return `<div class="${cls}">${esc(row?.avatar||"🧠")}</div>`;
+  }
+
+  function specialTitle(pos){
+    pos=Number(pos)||0;
+    if(pos===1)return "🐐 เบอร์หนึ่งของสนาม";
+    if(pos<=3)return "👑 TOP 3";
+    if(pos<=10)return "🔥 TOP 10";
+    if(pos<=100)return "⚡ TOP 100";
+    return "🧠 ผู้ท้าชิง";
+  }
+
+  async function fetchBoard(force=false){
+    if(!force&&cache.has(board))return cache.get(board);
+
+    const c=client();
+    if(!c)throw new Error("เชื่อมต่ออันดับไม่สำเร็จ");
+
+    // 500 ทำให้เราหาตำแหน่งของผู้เล่นเองได้ไกลกว่า Top 100
+    const {data,error}=await c.rpc("bb_brain_leaderboard",{
+      p_board:board,
+      p_limit:500,
+      p_offset:0
+    });
+
+    if(error)throw error;
+    const rows=Array.isArray(data)?data:[];
+    cache.set(board,rows);
+    return rows;
+  }
+
+  function renderPodium(rows){
+    const host=q("#bbBrainPodium");
+    const top=rows.slice(0,3);
+
+    if(!top.length){
+      host.innerHTML='<div class="bbBrainBoardEmpty">ยังไม่มีผู้เล่นที่มีอันดับในสายนี้</div>';
+      return;
+    }
+
+    const map={
+      1:{cls:"first",medal:"🥇",base:"1"},
+      2:{cls:"second",medal:"🥈",base:"2"},
+      3:{cls:"third",medal:"🥉",base:"3"}
+    };
+
+    const ordered=[top[1],top[0],top[2]].filter(Boolean);
+
+    host.innerHTML=ordered.map(row=>{
+      const pos=Number(row.rank_position)||0;
+      const cfg=map[pos]||map[3];
+      return `
+        <article class="bbBrainPodiumSlot ${cfg.cls}">
+          ${avatar(row,"bbBrainPodiumAvatar")}
+          <span class="bbBrainPodiumMedal">${cfg.medal}</span>
+          <b class="bbBrainPodiumName">${esc(row.display_name||"ผู้เล่น")}</b>
+          <span class="bbBrainPodiumTier">${esc(row.tier_icon||"🌱")} ${esc(row.tier_name_th||"มีแวว")}</span>
+          <strong class="bbBrainPodiumRP">${Number(row.rp||0).toLocaleString()} RP</strong>
+          <div class="bbBrainPodiumBase">${cfg.base}</div>
+        </article>`;
+    }).join("");
+  }
+
+  function renderMe(rows){
+    const host=q("#bbBrainMyRank");
+    const me=rows.find(x=>x.is_me===true);
+
+    if(!me){
+      host.innerHTML=`
+        <div class="bbBrainMyRankCard">
+          <div class="bbBrainMyRankPos">—</div>
+          <div class="bbBrainMyRankAvatar">🧠</div>
+          <div class="bbBrainMyRankInfo">
+            <small>YOUR RANK</small>
+            <b>ยังไม่มีอันดับในสายนี้</b>
+            <span>เล่น Ranked ในสายนี้เพื่อขึ้นทำเนียบ</span>
+          </div>
+        </div>`;
+      return;
+    }
+
+    host.innerHTML=`
+      <div class="bbBrainMyRankCard">
+        <div class="bbBrainMyRankPos">#${Number(me.rank_position).toLocaleString()}</div>
+        ${avatar(me,"bbBrainMyRankAvatar")}
+        <div class="bbBrainMyRankInfo">
+          <small>YOUR RANK • ${specialTitle(me.rank_position)}</small>
+          <b>${esc(me.display_name||"ผู้เล่น")}</b>
+          <span>${esc(me.tier_icon||"🌱")} ${esc(me.tier_name_th||"มีแวว")} • ${Number(me.games||0).toLocaleString()} Games • ${Number(me.wins||0).toLocaleString()} Wins</span>
+        </div>
+        <div class="bbBrainMyRankRP">
+          <b>${Number(me.rp||0).toLocaleString()} RP</b>
+          <small>Best streak ${Number(me.best_streak||0).toLocaleString()}</small>
+        </div>
+      </div>`;
+  }
+
+  function renderList(rows){
+    const host=q("#bbBrainTopList");
+    const top100=rows.slice(0,100);
+
+    if(!top100.length){
+      host.innerHTML='<div class="bbBrainBoardEmpty">ยังไม่มีอันดับให้แสดง</div>';
+      return;
+    }
+
+    host.innerHTML=top100.map(row=>{
+      const pos=Number(row.rank_position)||0;
+      const posCls=pos<=3?`top${pos}`:"";
+      return `
+        <article class="bbBrainListRow ${row.is_me?"me":""}">
+          <div class="bbBrainListPos ${posCls}">#${pos}</div>
+          ${avatar(row,"bbBrainListAvatar")}
+          <div class="bbBrainListInfo">
+            <b>${esc(row.display_name||"ผู้เล่น")}${row.is_me?" • คุณ":""}</b>
+            <span>${esc(row.tier_icon||"🌱")} ${esc(row.tier_name_th||"มีแวว")} • ${Number(row.games||0).toLocaleString()} เกม • ${Number(row.wins||0).toLocaleString()} ชนะ • Top 3 ${Number(row.top3||0).toLocaleString()}</span>
+          </div>
+          <div class="bbBrainListRP">
+            <b>${Number(row.rp||0).toLocaleString()} RP</b>
+            <small>${specialTitle(pos)}</small>
+          </div>
+        </article>`;
+    }).join("");
+  }
+
+  async function load(force=false){
+    if(loading)return;
+    loading=true;
+
+    const meta=BOARDS[board]||BOARDS.overall;
+    q("#bbBrainBoardKicker").textContent=meta.kicker;
+    q("#bbBrainBoardTitle").textContent=`${meta.icon} ${meta.title}`;
+    q("#bbBrainTopListTitle").textContent=`Top 100 • ${meta.title}`;
+
+    q("#bbBrainPodium").innerHTML='<div class="bbBrainBoardLoading">กำลังโหลด TOP 3…</div>';
+    q("#bbBrainMyRank").innerHTML='<div class="bbBrainBoardLoading">กำลังค้นหาอันดับของคุณ…</div>';
+    q("#bbBrainTopList").innerHTML='<div class="bbBrainBoardLoading">กำลังโหลด Top 100…</div>';
+
+    try{
+      const rows=await fetchBoard(force);
+      const total=rows[0]?.total_players ?? 0;
+      q("#bbBrainBoardTotal").textContent=`${Number(total).toLocaleString()} ผู้เล่น`;
+
+      renderPodium(rows);
+      renderMe(rows);
+      renderList(rows);
+
+    }catch(err){
+      console.error("Brain leaderboard:",err);
+      const msg=esc(err?.message||"โหลดอันดับไม่สำเร็จ");
+      q("#bbBrainPodium").innerHTML=`<div class="bbBrainBoardEmpty">${msg}</div>`;
+      q("#bbBrainMyRank").innerHTML=`<div class="bbBrainBoardLoading">ไม่สามารถอ่านอันดับของคุณได้</div>`;
+      q("#bbBrainTopList").innerHTML=`<div class="bbBrainBoardEmpty">กรุณาลองรีเฟรชอีกครั้ง</div>`;
+      q("#bbBrainBoardTotal").textContent="—";
+    }finally{
+      loading=false;
+    }
+  }
+
+  function showBoard(){
+    q("#bbArenaLobby")?.classList.add("hidden");
+    q("#bbArenaRoom")?.classList.add("hidden");
+    q("#bbArenaCountdown")?.classList.add("hidden");
+    q("#bbArenaResults")?.classList.add("hidden");
+    q("#bbBrainBoard")?.classList.remove("hidden");
+    q("#bbBrainBoard")?.scrollIntoView({block:"start"});
+    load(false);
+  }
+
+  function backLobby(){
+    q("#bbBrainBoard")?.classList.add("hidden");
+    q("#bbArenaLobby")?.classList.remove("hidden");
+    const arena=q("#bbArena");
+    if(arena)arena.scrollTo({top:0,behavior:"smooth"});
+  }
+
+  document.addEventListener("click",e=>{
+    if(e.target.closest("#bbBrainBoardOpen")){
+      showBoard();
+      return;
+    }
+
+    if(e.target.closest("#bbBrainBoardBack")){
+      backLobby();
+      return;
+    }
+
+    if(e.target.closest("#bbBrainBoardRefresh")){
+      cache.delete(board);
+      load(true);
+      return;
+    }
+
+    const tab=e.target.closest("[data-brain-board]");
+    if(tab){
+      board=tab.dataset.brainBoard||"overall";
+      document.querySelectorAll("[data-brain-board]").forEach(btn=>{
+        btn.classList.toggle("active",btn===tab);
+      });
+      load(false);
+    }
+  },true);
+
+  // expose a tiny hook so Ranked results can refresh the board cache later
+  window.bbBrainLeaderboard={
+    refresh(){
+      cache.clear();
+      if(!q("#bbBrainBoard")?.classList.contains("hidden"))load(true);
+    },
+    open:showBoard
+  };
 })();
 </script>
 
