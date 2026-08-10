@@ -1,0 +1,299 @@
+
+/* ==============================================================
+   Brain Buddy v87 — PET CORE
+   New pet features are isolated from the legacy app.
+   No infinite animation. No polling. Mobile-first.
+   ============================================================== */
+
+.bbPetHomeCard{
+  width:100%;
+  margin:14px 0;
+  padding:15px;
+  border:1px solid rgba(120,84,170,.13);
+  border-radius:25px;
+  background:
+    radial-gradient(circle at 90% 15%,rgba(255,207,229,.52),transparent 25%),
+    linear-gradient(145deg,#fff 0%,#fbf7ff 48%,#fff8fb 100%);
+  box-shadow:0 10px 30px rgba(67,45,91,.06);
+  color:#443157;
+}
+
+.bbPetHomeHead,
+.bbPetProgressRow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.bbPetHomeTitle{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  min-width:0;
+}
+
+.bbPetHomeIcon{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  flex:0 0 42px;
+  border-radius:14px;
+  background:linear-gradient(145deg,#ffe8f3,#ebe7ff);
+  font-size:1.18rem;
+}
+
+.bbPetHomeTitle small{
+  display:block;
+  color:#a078aa;
+  font-size:.56rem;
+  font-weight:1000;
+  letter-spacing:.14em;
+}
+
+.bbPetHomeTitle strong{
+  display:block;
+  margin-top:1px;
+  color:#473359;
+  font-size:1.08rem;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.bbPetLevelPill{
+  flex:0 0 auto;
+  padding:7px 11px;
+  border-radius:14px;
+  background:#f0eaff;
+  text-align:center;
+}
+
+.bbPetLevelPill small{
+  display:block;
+  font-size:.48rem;
+  font-weight:1000;
+  color:#9177a5;
+  letter-spacing:.09em;
+}
+
+.bbPetLevelPill b{
+  display:block;
+  margin-top:1px;
+  font-size:.96rem;
+  color:#6547a1;
+}
+
+.bbPetStatusGrid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+  margin-top:11px;
+}
+
+.bbPetStatus{
+  min-width:0;
+  padding:9px 10px;
+  border-radius:16px;
+  background:#faf8fc;
+  border:1px solid #eee6f3;
+}
+
+.bbPetStatusTop{
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+
+.bbPetStatusTop>span{
+  font-size:.8rem;
+}
+
+.bbPetStatusTop small{
+  flex:1;
+  min-width:0;
+  color:#786a80;
+  font-size:.58rem;
+  font-weight:850;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.bbPetStatusTop b{
+  color:#594369;
+  font-size:.62rem;
+}
+
+.bbPetBar,
+.bbPetXpBar{
+  position:relative;
+  overflow:hidden;
+  height:6px;
+  margin-top:7px;
+  border-radius:999px;
+  background:#ece7ef;
+}
+
+.bbPetBar i,
+.bbPetXpBar i{
+  position:absolute;
+  inset:0 auto 0 0;
+  width:0;
+  max-width:100%;
+  border-radius:inherit;
+  transition:width .28s ease;
+}
+
+.bbPetStatus.happy .bbPetBar i{
+  background:linear-gradient(90deg,#f283ba,#ff9acb);
+}
+
+.bbPetStatus.hunger .bbPetBar i{
+  background:linear-gradient(90deg,#f5b858,#ffc86c);
+}
+
+.bbPetStatus.energy .bbPetBar i{
+  background:linear-gradient(90deg,#6dc9bd,#83dcca);
+}
+
+.bbPetProgressRow{
+  margin-top:10px;
+  padding-top:10px;
+  border-top:1px solid #eee8f2;
+}
+
+.bbPetXpBlock{
+  flex:1;
+  min-width:0;
+}
+
+.bbPetXpCopy{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  align-items:flex-end;
+}
+
+.bbPetXpCopy span{
+  color:#533d66;
+  font-size:.69rem;
+  font-weight:900;
+}
+
+.bbPetXpCopy small{
+  color:#998a9f;
+  font-size:.55rem;
+  text-align:right;
+}
+
+.bbPetXpBar{
+  height:7px;
+  margin-top:6px;
+}
+
+.bbPetXpBar i{
+  background:linear-gradient(90deg,#7c58da,#dc7ac2);
+}
+
+.bbPetHomeActions{
+  display:flex;
+  gap:6px;
+  flex:0 0 auto;
+}
+
+.bbPetHomeActions button{
+  min-height:39px;
+  padding:0 11px;
+  border:1px solid #e7dff0;
+  border-radius:13px;
+  background:#fff;
+  color:#634d73;
+  font-size:.64rem;
+  font-weight:900;
+}
+
+.bbPetHomeActions button.primary{
+  border-color:#7655d3;
+  background:#7655d3;
+  color:#fff;
+}
+
+.bbPetCloudNote{
+  margin-top:8px;
+  padding:7px 9px;
+  border-radius:11px;
+  background:#faf8fc;
+  color:#92849a;
+  font-size:.55rem;
+  text-align:center;
+}
+
+.bbPetCloudNote.hidden{display:none}
+
+.bbPetHomeCard[data-pet-mood="hungry"] .bbPetHomeIcon{
+  background:linear-gradient(145deg,#fff0db,#fff7ef);
+}
+
+.bbPetHomeCard[data-pet-mood="sad"] .bbPetHomeIcon{
+  background:linear-gradient(145deg,#eef1ff,#f5f3ff);
+}
+
+@media(max-width:720px){
+  .bbPetHomeCard{
+    margin:9px 0;
+    padding:12px;
+    border-radius:21px;
+  }
+
+  .bbPetStatusGrid{
+    gap:6px;
+  }
+
+  .bbPetStatus{
+    padding:8px 7px;
+  }
+
+  .bbPetProgressRow{
+    align-items:stretch;
+    flex-direction:column;
+  }
+
+  .bbPetHomeActions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    width:100%;
+  }
+
+  .bbPetHomeActions button{
+    width:100%;
+  }
+}
+
+@media(max-width:400px){
+  .bbPetStatusTop small{
+    font-size:.52rem;
+  }
+
+  .bbPetStatusTop b{
+    font-size:.56rem;
+  }
+
+  .bbPetXpCopy{
+    display:block;
+  }
+
+  .bbPetXpCopy small{
+    display:block;
+    margin-top:2px;
+    text-align:left;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .bbPetBar i,
+  .bbPetXpBar i{
+    transition:none!important;
+  }
+}
