@@ -17089,6 +17089,39 @@ body.bbRankedPlaying .p951GameChat{
 }
 </style>
 
+
+<style id="pomru-v952-reliable-chat-style">
+/* Chat visibility must not depend on one custom event only. */
+body.bbRankedPlaying #p951GameChat,
+body.bbGameActive.bbRankedPlaying #p951GameChat{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  pointer-events:none!important;
+}
+
+body.bbRankedPlaying #p951GameChat .p951ChatFab,
+body.bbRankedPlaying #p951GameChat .p951ChatDrawer{
+  pointer-events:auto!important;
+}
+
+body.bbRankedPlaying #p951ChatFab{
+  display:flex!important;
+}
+
+/* Never expose the old Ranked pre-match lounge during recovery. */
+body.p951RankedQuickStart #bbArenaRoom,
+body.p951RankedQuickStart #bbArenaCountdown,
+body.p951RankedQuickStart #bbArenaLobby{
+  display:none!important;
+}
+
+/* Tiny non-blocking connection state on Match Found. */
+#p94MatchedGame{
+  min-height:18px;
+}
+</style>
+
 </head>
 <body>
 
@@ -20267,7 +20300,12 @@ window.addEventListener("load",()=>{
   }
 
   async function enterRoom(roomId){
-    cleanupLobbyChannel();currentRoom={id:roomId};
+    cleanupLobbyChannel();
+    currentRoom={id:roomId};
+
+    if(document.body.classList.contains("p951RankedQuickStart")){
+      window.POMRU_RANKED_ROOM_ID=roomId;
+    }
     show("#bbArenaLobby",false);show("#bbArenaGate",false);show("#bbArenaRoom",true);show("#bbArenaCountdown",false);
     arenaScrollTop("auto");
     await refreshRoom();
@@ -20650,6 +20688,17 @@ window.addEventListener("load",()=>{
     tick();
     countdownTimer=setInterval(tick,100);
   }
+
+  // v95.2 watchdog recovery hooks.
+  // These are intentionally narrow wrappers around the canonical
+  // Ranked engine rather than a second game engine.
+  window.POMRUInternalStartRankedCountdown=function(match){
+    return startCountdown(match);
+  };
+
+  window.POMRUInternalLoadLatestRankedMatch=function(){
+    return loadLatestMatch();
+  };
 
   function people(v){v=Math.max(2,Math.min(100,Number(v)||20));$("#bbCreateMax").value=v;document.querySelectorAll("[data-max]").forEach(b=>b.classList.toggle("active",Number(b.dataset.max)===v));}
   document.addEventListener("click",e=>{
@@ -21349,6 +21398,10 @@ window.addEventListener("load",()=>{
           await window.bbLaunchRankedLearning(
             activeRankedMatch
           );
+
+          document.body.classList.remove(
+            "p951RankedQuickStart"
+          );
         }catch(e){
           console.error(
             "POMRU Ranked Learning launch:",
@@ -21403,8 +21456,14 @@ window.addEventListener("load",()=>{
       block:"start"
     });
 
+    document.body.classList.remove("p951RankedQuickStart");
+
     toast("⚔️ เริ่มการแข่งขัน!");
   }
+
+  window.POMRUInternalLaunchRanked=function(match){
+    return launchRankedGame(match);
+  };
 
   let rankedResultChannel=null,rankedResultPoll=null,rankedWaitClockTimer=null,rankedWaitDeadline=null;
 
@@ -32121,6 +32180,18 @@ document.addEventListener('DOMContentLoaded', () => {
         matched=true;
         stopPoll();
 
+        window.POMRU_RANKED_ROOM_ID=row.room_id;
+        window.POMRU_RANKED_ROOM_CODE=row.room_code||null;
+        window.POMRU_RANKED_HOST_ID=row.host_user_id||null;
+        window.POMRU_RANKED_MATCHMAKING_RESULT={...row};
+
+        document.dispatchEvent(
+          new CustomEvent(
+            "pomru:ranked-match-found",
+            {detail:{...row}}
+          )
+        );
+
         const progress=window.POMRUProgress?.getState?.()?.progress||{};
 
         $("p94MatchMeName").textContent=
@@ -33001,10 +33072,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function currentRoomId(fallback=null){
     return fallback
+      ||window.POMRU_RANKED_ROOM_ID
       ||window.__bbRankedMatch?.room_id
       ||window.POMRUDuel?.getActiveRoom?.()
       ||roomId
       ||null;
+  }
+
+  async function resolveRoomId(){
+    roomId=currentRoomId(roomId);
+
+    if(roomId)return roomId;
+
+    const c=client();
+    const matchId=
+      window.__bbRankedMatch?.id
+      ||window.__bbRankedMatch?.match_id
+      ||null;
+
+    if(c&&matchId){
+      try{
+        const {data,error}=await c
+          .from("ranked_matches")
+          .select("room_id")
+          .eq("id",matchId)
+          .maybeSingle();
+
+        if(!error&&data?.room_id){
+          roomId=data.room_id;
+          window.POMRU_RANKED_ROOM_ID=roomId;
+          return roomId;
+        }
+      }catch(_){}
+    }
+
+    return null;
   }
 
   async function rpc(name,args={}){
@@ -33038,7 +33140,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if(drawerOpen){
       unread=0;
       badge();
-      load();
+
+      Promise.resolve()
+        .then(()=>resolveRoomId())
+        .then(()=>load())
+        .catch(()=>{});
+
       setTimeout(
         ()=>$("p951ChatInput")?.focus(),
         50
@@ -33137,14 +33244,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function start(id=null){
-    await getUser();
-
-    roomId=currentRoomId(id);
-
-    if(!user||!roomId)return;
-
+    // Show the control first. Room resolution can finish a moment later.
     const root=$("p951GameChat");
     root?.classList.remove("hidden");
+
+    await getUser();
+
+    roomId=currentRoomId(id)
+      ||await resolveRoomId();
+
+    if(!user||!roomId){
+      console.warn(
+        "POMRU chat: Ranked room id is not ready yet"
+      );
+      return;
+    }
 
     unread=0;
     badge();
@@ -33168,9 +33282,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const input=$("p951ChatInput");
     const body=String(input?.value||"").trim();
 
-    roomId=currentRoomId(roomId);
+    roomId=currentRoomId(roomId)
+      ||await resolveRoomId();
 
-    if(!body||!roomId)return;
+    if(!body)return;
+
+    if(!roomId){
+      alert("กำลังเชื่อมต่อแชทกับห้องแข่งขัน กรุณาลองอีกครั้ง");
+      return;
+    }
 
     const btn=$("p951ChatSend");
     if(btn)btn.disabled=true;
@@ -33252,6 +33372,377 @@ document.addEventListener('DOMContentLoaded', () => {
   }else{
     bind();
   }
+})();
+</script>
+
+
+<script id="pomru-v952-ranked-watchdog-runtime">
+(function(){
+  "use strict";
+
+  const $=id=>document.getElementById(id);
+
+  let timer=null;
+  let startedAt=0;
+  let busy=false;
+  let row=null;
+  let user=null;
+  let attempts=0;
+
+  function client(){
+    return window.__bbSupabase||window.sb||null;
+  }
+
+  function stop(){
+    if(timer){
+      clearInterval(timer);
+      timer=null;
+    }
+
+    busy=false;
+    attempts=0;
+  }
+
+  async function getUser(){
+    if(user)return user;
+
+    const c=client();
+    if(!c?.auth)return null;
+
+    try{
+      const {data}=await c.auth.getUser();
+      user=data?.user||null;
+    }catch(_){
+      user=null;
+    }
+
+    return user;
+  }
+
+  function gameIsVisible(){
+    if(
+      window.BB_RANKED_ACTIVE
+      &&document.body.classList.contains("bbRankedPlaying")
+    ){
+      return true;
+    }
+
+    const learning=document.getElementById("bbRankedLearning");
+    if(
+      learning
+      &&!learning.classList.contains("hidden")
+    ){
+      return true;
+    }
+
+    return false;
+  }
+
+  function setStatus(text){
+    const status=$("p94RankedStatusPill");
+    if(status)status.textContent=text;
+
+    const sub=$("p94MatchedGame");
+    if(sub&&row){
+      const game=
+        row.game_name
+        ||"เกมจัดอันดับ";
+
+      const level=
+        row.level_label
+        ||row.content_level
+        ||"";
+
+      sub.textContent=
+        `${game}${level?" • "+level:""} • ${text}`;
+    }
+  }
+
+  async function ensureReady(c,roomId){
+    try{
+      await c.rpc(
+        "bb_ranked_set_ready",
+        {
+          p_room_id:roomId,
+          p_ready:true
+        }
+      );
+    }catch(_){}
+  }
+
+  async function latestMatch(c,roomId){
+    try{
+      const {data,error}=await c
+        .from("ranked_matches")
+        .select("*")
+        .eq("room_id",roomId)
+        .order("created_at",{ascending:false})
+        .limit(1)
+        .maybeSingle();
+
+      if(error)return null;
+      return data||null;
+    }catch(_){
+      return null;
+    }
+  }
+
+  async function roomMeta(c,roomId){
+    try{
+      const {data,error}=await c
+        .from("ranked_rooms")
+        .select("id,status,host_id,ranked_subject_code,ranked_rule_tier,ranked_content_level")
+        .eq("id",roomId)
+        .maybeSingle();
+
+      if(error)return null;
+      return data||null;
+    }catch(_){
+      return null;
+    }
+  }
+
+  async function tick(){
+    if(busy)return;
+
+    if(gameIsVisible()){
+      stop();
+
+      // Event may have been missed, so force Chat boot once more.
+      window.POMRUInGameChat?.refresh?.();
+
+      const chat=document.getElementById("p951GameChat");
+      chat?.classList.remove("hidden");
+      return;
+    }
+
+    const c=client();
+    if(!c||!row?.room_id)return;
+
+    busy=true;
+    attempts++;
+
+    try{
+      const me=await getUser();
+      const roomId=row.room_id;
+
+      window.POMRU_RANKED_ROOM_ID=roomId;
+
+      await ensureReady(c,roomId);
+
+      let match=await latestMatch(c,roomId);
+      const room=await roomMeta(c,roomId);
+
+      if(match && (
+        match.status==="countdown"
+        ||match.status==="playing"
+      )){
+        setStatus("กำลังเปิดเกม");
+
+        const hydrated={
+          ...row,
+          ...match,
+          id:match.id,
+          ranked_subject_code:
+            room?.ranked_subject_code
+            ||row.subject_code
+            ||null,
+          ranked_rule_tier:
+            room?.ranked_rule_tier
+            ||row.rule_tier
+            ||null,
+          ranked_content_level:
+            room?.ranked_content_level
+            ||row.content_level
+            ||null
+        };
+
+        if(
+          typeof window.POMRUInternalStartRankedCountdown==="function"
+        ){
+          window.POMRUInternalStartRankedCountdown(
+            hydrated
+          );
+        }
+
+        return;
+      }
+
+      // If both clients reached the room but the legacy auto-start callback
+      // was missed by Safari, allow the actual Host to start it here.
+      if(
+        room?.status==="waiting"
+        &&me?.id
+        &&(
+          me.id===room.host_id
+          ||me.id===row.host_user_id
+        )
+      ){
+        try{
+          const {data,error}=await c.rpc(
+            "bb_ranked_start_match_v2",
+            {p_room_id:roomId}
+          );
+
+          if(!error&&data?.[0]){
+            const m=data[0];
+
+            const hydrated={
+              ...row,
+              ...m,
+              id:m.match_id||m.id,
+              ranked_subject_code:
+                room?.ranked_subject_code
+                ||row.subject_code
+                ||null,
+              ranked_rule_tier:
+                room?.ranked_rule_tier
+                ||row.rule_tier
+                ||null,
+              ranked_content_level:
+                room?.ranked_content_level
+                ||row.content_level
+                ||null
+            };
+
+            setStatus("กำลังเปิดเกม");
+
+            window.POMRUInternalStartRankedCountdown?.(
+              hydrated
+            );
+
+            return;
+          }
+        }catch(_){}
+      }
+
+      const elapsed=Date.now()-startedAt;
+
+      if(elapsed>12000){
+        setStatus("กำลังเชื่อมต่อเกมอีกครั้ง");
+
+        // Re-open the internal room engine without showing its lounge.
+        try{
+          if(window.POMRUDuel?.openArenaRoom){
+            await window.POMRUDuel.openArenaRoom();
+          }
+        }catch(_){}
+      }else if(elapsed>5000){
+        setStatus("กำลังซิงก์เกม");
+      }
+
+    }catch(e){
+      console.warn(
+        "POMRU ranked watchdog:",
+        e?.message||e
+      );
+    }finally{
+      busy=false;
+    }
+  }
+
+  function begin(detail){
+    if(!detail?.room_id)return;
+
+    stop();
+
+    row={...detail};
+    startedAt=Date.now();
+
+    window.POMRU_RANKED_ROOM_ID=row.room_id;
+    window.POMRU_RANKED_MATCHMAKING_RESULT={...row};
+
+    document.body.classList.add(
+      "p951RankedQuickStart"
+    );
+
+    setStatus("กำลังซิงก์เกม");
+
+    timer=setInterval(tick,450);
+    tick();
+  }
+
+  function bootChatIfPlaying(){
+    if(!gameIsVisible())return;
+
+    const chat=document.getElementById("p951GameChat");
+    chat?.classList.remove("hidden");
+
+    window.POMRUInGameChat?.refresh?.();
+  }
+
+  document.addEventListener(
+    "pomru:ranked-match-found",
+    e=>begin(e.detail||{})
+  );
+
+  document.addEventListener(
+    "pomru:ranked-game-started",
+    ()=>{
+      stop();
+      setTimeout(bootChatIfPlaying,0);
+      setTimeout(bootChatIfPlaying,250);
+      setTimeout(bootChatIfPlaying,900);
+    }
+  );
+
+  // iOS/Safari may suspend timers or miss an event when returning
+  // from another tab. These lifecycle hooks recover the state.
+  document.addEventListener(
+    "visibilitychange",
+    ()=>{
+      if(!document.hidden){
+        setTimeout(bootChatIfPlaying,80);
+
+        if(
+          !gameIsVisible()
+          &&window.POMRU_RANKED_MATCHMAKING_RESULT?.room_id
+        ){
+          begin(
+            window.POMRU_RANKED_MATCHMAKING_RESULT
+          );
+        }
+      }
+    }
+  );
+
+  window.addEventListener(
+    "pageshow",
+    ()=>{
+      setTimeout(bootChatIfPlaying,120);
+    }
+  );
+
+  // Mutation observer is the final UI fallback:
+  // when bbRankedPlaying is added, Chat becomes visible even if
+  // the custom event did not fire.
+  const observer=new MutationObserver(()=>{
+    if(
+      document.body.classList.contains("bbRankedPlaying")
+    ){
+      bootChatIfPlaying();
+    }
+  });
+
+  observer.observe(
+    document.body,
+    {
+      attributes:true,
+      attributeFilter:["class"]
+    }
+  );
+
+  window.POMRURankedWatchdog={
+    restart(){
+      const saved=
+        window.POMRU_RANKED_MATCHMAKING_RESULT;
+
+      if(saved?.room_id){
+        begin(saved);
+      }
+    },
+    stop
+  };
 })();
 </script>
 
