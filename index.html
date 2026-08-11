@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>POMRU • ผมรู้ — v97.3.2 Skin UX + Ranked Content Fix</title>
+<title>POMRU • ผมรู้ — v97.3.3 Skin UX + Ranked Content Fix</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -36105,24 +36105,29 @@ document.addEventListener('DOMContentLoaded', () => {
       if(!jr?.room_id)throw new Error("ranked_join_failed");
     }
 
-    for(let attempt=0;attempt<8;attempt++){
-      if(!sameSearch(generation))throw new Error("ranked_search_superseded");
+    // v97.3.3 — once the server has returned a reciprocal matched payload,
+    // do not keep the user trapped on SEARCHING while the second browser is
+    // still joining its room row. Verify our own membership, mark ready, then
+    // hand the room to the direct Ranked bridge which waits for both players.
+    players=await loadCandidatePlayers(row.room_id);
+    ids=new Set(players.map(p=>p.user_id));
 
-      players=await loadCandidatePlayers(row.room_id);
-      ids=new Set(players.map(p=>p.user_id));
-
-      if(ids.has(user.id)&&ids.has(row.opponent_id)){
-        return {room,players};
-      }
-
-      if(Date.now()-candidateSince>12000){
-        throw new Error("ranked_candidate_stale");
-      }
-
-      await sleep(220+attempt*70);
+    if(!ids.has(user.id)){
+      throw new Error("ranked_candidate_pending");
     }
 
-    throw new Error("ranked_candidate_pending");
+    try{
+      await rpc("bb_ranked_set_ready",{
+        p_room_id:row.room_id,
+        p_ready:true
+      });
+    }catch(_){}
+
+    return {
+      room,
+      players,
+      opponent_pending:!ids.has(row.opponent_id)
+    };
   }
 
   async function recycleStaleCandidate(generation){
@@ -36303,7 +36308,7 @@ document.addEventListener('DOMContentLoaded', () => {
         $("p94MatchedGame").textContent=
           `${row.game_name||modeName(row.mode_code)} • ${row.level_label||row.content_level||""} • กำลังซิงก์เกม`;
 
-        setTimeout(async()=>{
+        setTimeout(()=>{
           if(
             generation!==searchGeneration
             ||!window.POMRU_RANKED_MATCHMAKING_RESULT?.room_id
@@ -36313,12 +36318,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
           try{localStorage.removeItem("bb_ranked_waiting_match")}catch(_){}
 
-          if(window.POMRUDuel?.openArenaRoom){
-            await window.POMRUDuel.openArenaRoom();
-          }else if(window.__POMRU_LEGACY_ARENA_OPEN){
-            await window.__POMRU_LEGACY_ARENA_OPEN();
-          }
-        },120);
+          // v97.3.3: Ranked matchmaking no longer depends on opening the
+          // legacy Arena/Lobby UI. The direct bridge owns ready → start → game.
+          window.POMRURankedBridge?.start?.(
+            window.POMRU_RANKED_MATCHMAKING_RESULT
+          );
+        },60);
       }
 
     }catch(e){
@@ -46152,6 +46157,267 @@ window.POMRUV973=Object.freeze({version:"97.3",feature:"single-image-battle-feel
 <script id="pomru-v9732-marker">
 window.POMRUV9732=Object.freeze({version:"97.3.2",characterModel:"one-pomru-buddy",colorSkins:true,legacyCharactersVisible:false,rankedFixRequired:"pomru-v97-3-2-ranked-content-fix.sql"});
 </script>
+
+
+
+<!-- ==========================================================
+     POMRU v97.3.3 — HOME GAME HUB + DIRECT RANKED TRANSITION
+     ========================================================== -->
+<style id="pomru-v9733-home-style">
+/* Make Home feel like a game room instead of a dashboard. */
+#bbAppHome{background:#f6effb!important}
+#pomruPetHome.pomruV89{min-height:100dvh!important;background:linear-gradient(180deg,#efe5ff 0,#fff3f8 46%,#fff8ef 100%)!important}
+#pomruPetHome .p89Room{min-height:calc(100dvh - 4px)!important;overflow:hidden!important;padding:18px 28px 118px!important;border-radius:0!important;background:
+ radial-gradient(circle at 50% 36%,rgba(255,255,255,.82),transparent 32%),
+ linear-gradient(180deg,#e7d9ff 0 13%,#fff0f7 13% 55%,#f5c58f 55% 100%)!important}
+#pomruPetHome .p89RoomSky{background:radial-gradient(circle at 50% 12%,rgba(255,255,255,.78),transparent 36%),linear-gradient(180deg,#d9c9ff,#f8e8f3)!important}
+#pomruPetHome .p89Window{top:126px!important;width:min(500px,42vw)!important;height:330px!important;border:14px solid rgba(255,255,255,.78)!important;border-radius:190px 190px 40px 40px!important;background:linear-gradient(#aee4ff,#effaff)!important;box-shadow:0 22px 55px rgba(105,75,130,.12)!important}
+#pomruPetHome .p89Curtain{top:104px!important;height:410px!important;width:24%!important;filter:drop-shadow(0 18px 25px rgba(106,61,103,.12))}
+#pomruPetHome .p89CurtainL{left:19%!important}#pomruPetHome .p89CurtainR{right:19%!important}
+#pomruPetHome .p89Floor{top:55%!important;background:repeating-linear-gradient(90deg,transparent 0 140px,rgba(123,78,45,.09) 141px 143px),repeating-linear-gradient(0deg,transparent 0 72px,rgba(123,78,45,.07) 73px 75px),linear-gradient(180deg,#ffd8ad,#eeb376)!important}
+#pomruPetHome .p89Rug{bottom:125px!important;width:min(650px,50vw)!important;height:180px!important;background:radial-gradient(circle,#ffddec 0 42%,#ffc1dc 44% 72%,#f7abd0)!important;box-shadow:0 22px 42px rgba(137,67,100,.14)!important}
+
+#pomruPetHome .p89Topbar{z-index:30!important;grid-template-columns:1fr auto!important;align-items:start!important}
+#pomruPetHome .p89Tagline{display:none!important}
+#pomruPetHome .p89Brand{transform:scale(1.08);transform-origin:left top}
+#pomruPetHome .p89TopActions{align-items:center!important}
+#pomruPetHome .p93FriendsTopBtn{display:none!important}
+#pomruPetHome .p89Coins,#pomruPetHome .p89Profile{background:rgba(255,255,255,.94)!important;border:2px solid rgba(255,255,255,.78)!important;box-shadow:0 10px 24px rgba(86,52,96,.12)!important}
+
+/* Keep old cards alive for sync, but replace them visually with the new hub. */
+#pomruPetHome .p89Vitals,
+#pomruPetHome .p89MissionCard,
+#pomruPetHome .p89RankCard,
+#pomruPetHome .p89BuddyCard,
+#pomruPetHome .p89Online,
+#pomruPetHome .p94HomeDock{display:none!important}
+
+#pomruPetHome #p971BuddyPulse{position:absolute!important;z-index:18!important;left:50%!important;top:82px!important;transform:translateX(-50%)!important;width:min(720px,58vw)!important;min-height:94px!important;margin:0!important;padding:14px 18px!important;grid-template-columns:64px minmax(0,1fr) auto!important;border:3px solid rgba(255,255,255,.82)!important;border-radius:28px!important;background:rgba(255,250,253,.93)!important;box-shadow:0 14px 34px rgba(110,63,103,.15)!important;backdrop-filter:blur(10px)!important}
+#pomruPetHome .p971BondHeart{width:58px!important;height:58px!important;border-radius:20px!important;background:linear-gradient(145deg,#ff74b4,#ed3e90)!important;color:#fff!important;box-shadow:inset 0 2px 0 rgba(255,255,255,.45),0 8px 17px rgba(238,65,145,.21)!important;font-size:28px!important}
+#pomruPetHome .p971BondCopy small{font-size:9px!important;letter-spacing:.14em!important;color:#e04891!important}
+#pomruPetHome #p971BondLabel{font-size:16px!important;color:#493951!important}
+#pomruPetHome .p971BondTrack{height:12px!important;margin-top:8px!important;background:#e9e0e8!important}
+#pomruPetHome .p971BondTrack i{background:linear-gradient(90deg,#ff5aa6,#8b65e7)!important}
+#pomruPetHome .p971MoodPill{align-self:start!important;margin-top:3px!important;padding:8px 11px!important;font-size:9px!important}
+.p974CareBtn{grid-column:3;align-self:end;margin-top:4px;border:0;border-radius:13px;padding:9px 13px;background:linear-gradient(145deg,#8c6ae8,#6e4bd2);color:#fff;font-size:9px;font-weight:1000;cursor:pointer;box-shadow:0 6px 14px rgba(96,68,176,.18)}
+.p974BondProgress{display:block;margin-top:3px;color:#8c7b91;font-size:8px;font-weight:900}
+
+#pomruPetHome .p89PetCenter{z-index:9!important;top:180px!important;bottom:150px!important;width:min(520px,40vw)!important}
+#pomruPetHome .p89BuddyStage{width:min(430px,34vw)!important;height:min(520px,52vh)!important;filter:drop-shadow(0 20px 18px rgba(84,53,93,.17))}
+#pomruPetHome .p89Speech{right:-72px!important;top:47%!important;min-width:160px!important;padding:13px 15px!important;border:2px solid rgba(255,255,255,.85)!important;box-shadow:0 10px 22px rgba(81,53,83,.12)!important}
+
+.p974HomeCard{position:absolute;z-index:16;border:3px solid rgba(255,255,255,.75);border-radius:27px;background:rgba(255,252,255,.88);box-shadow:0 15px 34px rgba(78,50,89,.14);backdrop-filter:blur(11px);overflow:hidden;color:#4f3b60}
+.p974HomeCard button{font:inherit}
+.p974CardHead{display:flex;align-items:center;justify-content:space-between;gap:10px}.p974CardHead small{display:block;font-size:8px;color:#9b7cab;font-weight:1000;letter-spacing:.1em}.p974CardHead b{display:block;margin-top:2px;font-size:17px}.p974MiniPill{padding:6px 8px;border-radius:999px;background:#f0e8ff;color:#7356c6;font-size:8px;font-weight:1000}
+
+#p974FriendsCard{left:26px;top:208px;width:270px;padding:15px 15px 13px}
+.p974FriendList{display:grid;gap:7px;margin:10px 0}.p974FriendRow{display:grid;grid-template-columns:40px 1fr auto;align-items:center;gap:8px;padding:7px;border-radius:15px;background:rgba(255,255,255,.82)}.p974FriendAv{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;overflow:hidden;background:#ffe5ef;font-size:18px}.p974FriendAv img{width:100%;height:100%;object-fit:cover}.p974FriendRow b,.p974FriendRow small{display:block}.p974FriendRow b{font-size:10px}.p974FriendRow small{margin-top:2px;color:#6cb977;font-size:8px;font-weight:900}.p974OnlineDot{width:9px;height:9px;border-radius:50%;background:#46c76a;box-shadow:0 0 0 4px rgba(70,199,106,.12)}
+.p974CardAction{width:100%;min-height:39px;border:0;border-radius:14px;background:linear-gradient(145deg,#8d6bea,#6b49d1);color:#fff;font-size:10px;font-weight:1000;cursor:pointer}
+
+#p974RankCard{right:26px;top:208px;width:270px;padding:16px;text-align:center;background:linear-gradient(160deg,rgba(249,240,255,.95),rgba(255,245,253,.93))}
+.p974RankShield{width:104px;height:104px;margin:8px auto 6px;border-radius:30px;display:grid;place-items:center;background:linear-gradient(145deg,#a48df0,#6d52bd);color:#fff;font-size:44px;font-weight:1000;box-shadow:inset 0 0 0 8px rgba(255,255,255,.25),0 10px 23px rgba(91,62,144,.22)}
+#p974RankName{display:block;font-size:25px;color:#5f43a5}.p974RankStars{margin:6px 0;color:#ffc942;font-size:22px;letter-spacing:4px}.p974RankProgress{height:8px;border-radius:999px;background:#e6dbef;overflow:hidden;margin:9px 5px}.p974RankProgress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#8567df,#ff72ad)}#p974RankPoints{font-size:8px;color:#8f7d96;font-weight:900}
+
+#p974SkinCard{left:30px;bottom:116px;width:265px;min-height:94px;padding:12px 14px;display:grid;grid-template-columns:72px 1fr 32px;align-items:center;gap:9px;cursor:pointer;background:linear-gradient(145deg,rgba(255,249,253,.94),rgba(241,231,255,.93))}
+.p974SkinArt{width:70px;height:70px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(145deg,#ffe4f0,#eee8ff);overflow:hidden}.p974SkinArt img{width:66px;height:66px;object-fit:contain}.p974SkinCopy small,.p974SkinCopy b,.p974SkinCopy span{display:block}.p974SkinCopy small{font-size:7px;color:#a0799c;font-weight:1000;letter-spacing:.1em}.p974SkinCopy b{font-size:15px;margin-top:2px}.p974SkinCopy span{font-size:8px;color:#8e7e92;margin-top:3px}.p974Arrow{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#a27ee8;color:#fff;font-size:20px}
+
+#p974DailyCard{right:30px;bottom:116px;width:265px;min-height:94px;padding:12px 14px;display:grid;grid-template-columns:68px 1fr;align-items:center;gap:10px;cursor:pointer;background:linear-gradient(145deg,rgba(255,249,253,.95),rgba(243,235,255,.94))}.p974Chest{width:66px;height:58px;border-radius:17px;display:grid;place-items:center;background:linear-gradient(145deg,#ffe080,#d89b31);box-shadow:inset 0 0 0 6px rgba(255,255,255,.28);font-size:30px}.p974DailyCopy small,.p974DailyCopy b,.p974DailyCopy span{display:block}.p974DailyCopy small{font-size:7px;color:#a07aa2;font-weight:1000}.p974DailyCopy b{font-size:14px}.p974DailyCopy span{margin-top:3px;font-size:8px;color:#8a7890}.p974DailyCopy em{display:inline-block;margin-top:6px;padding:5px 10px;border-radius:999px;background:#986fe5;color:#fff;font-size:8px;font-style:normal;font-weight:1000}
+
+#p974BottomDock{position:absolute;z-index:22;left:50%;bottom:14px;transform:translateX(-50%);display:grid;grid-template-columns:82px 82px minmax(230px,310px) 82px 82px;align-items:end;gap:12px;padding:0 12px}
+.p974DockBtn{position:relative;border:0;background:transparent;color:#5b426c;display:grid;justify-items:center;gap:5px;cursor:pointer;font-weight:1000;font-size:10px}.p974DockBtn .ico{width:70px;height:70px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#fff,#e9ddff);border:4px solid rgba(255,255,255,.88);box-shadow:0 9px 20px rgba(88,57,99,.16),inset 0 0 0 2px rgba(132,91,201,.15);font-size:28px;color:#7655d5}.p974DockBtn.play .ico{width:100%;height:96px;border-radius:30px;background:linear-gradient(180deg,#ff69ad,#df3a91);color:#fff;font-size:38px;box-shadow:0 10px 0 #b72c75,0 17px 28px rgba(166,46,112,.22),inset 0 2px 0 rgba(255,255,255,.35)}.p974DockBtn.play b{font-size:28px;color:#fff;text-shadow:0 2px 0 rgba(92,38,96,.18);position:absolute;margin-top:27px}.p974DockBtn.play .ico span{opacity:0}.p974DockBtn:active .ico{transform:translateY(3px)}
+
+@media(max-width:1180px) and (min-width:761px){
+  #p974FriendsCard,#p974RankCard{width:230px;transform:scale(.88)}#p974FriendsCard{left:8px;transform-origin:top left}#p974RankCard{right:8px;transform-origin:top right}
+  #p974SkinCard,#p974DailyCard{width:225px;transform:scale(.88)}#p974SkinCard{left:10px;transform-origin:bottom left}#p974DailyCard{right:10px;transform-origin:bottom right}
+  #pomruPetHome #p971BuddyPulse{width:min(630px,58vw)!important}
+  #p974BottomDock{grid-template-columns:66px 66px minmax(190px,250px) 66px 66px;gap:8px}.p974DockBtn .ico{width:58px;height:58px}.p974DockBtn.play .ico{height:82px}
+}
+@media(max-width:760px){
+  #pomruPetHome .p89Room{min-height:820px!important;padding:12px 10px 104px!important}
+  #pomruPetHome #p971BuddyPulse{top:78px!important;width:calc(100% - 20px)!important;min-height:76px!important;padding:10px 11px!important;grid-template-columns:46px 1fr auto!important}.p974CareBtn{padding:7px 8px}.p974BondProgress{display:none}
+  #pomruPetHome .p89PetCenter{top:180px!important;bottom:240px!important;width:100%!important}#pomruPetHome .p89BuddyStage{width:min(300px,72vw)!important;height:360px!important}
+  #p974FriendsCard,#p974RankCard{display:none!important}
+  #p974SkinCard,#p974DailyCard{bottom:103px;width:calc(50% - 14px);min-height:75px;padding:8px;grid-template-columns:45px 1fr}.p974SkinArt,.p974Chest{width:44px;height:44px}.p974SkinArt img{width:43px;height:43px}.p974Arrow{display:none}#p974SkinCard{left:8px}#p974DailyCard{right:8px}
+  #p974BottomDock{bottom:8px;width:calc(100% - 12px);grid-template-columns:54px 54px minmax(116px,1fr) 54px 54px;gap:4px;padding:0}.p974DockBtn .ico{width:48px;height:48px;border-width:3px;font-size:20px}.p974DockBtn{font-size:7px}.p974DockBtn.play .ico{height:62px;border-radius:20px}.p974DockBtn.play b{font-size:18px;margin-top:18px}
+}
+</style>
+
+<script id="pomru-v9733-home-ranked-runtime">
+(function(){
+  "use strict";
+  const $=id=>document.getElementById(id);
+  const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+
+  function homeRoom(){return document.querySelector("#pomruPetHome .p89Room")}
+  function skinName(){
+    try{
+      const code=window.POMRUColorSkins?.selected?.()||"pink";
+      return window.POMRUColorSkins?.list?.().find(x=>x.code===code)?.name||"Pink";
+    }catch(_){return "Pink"}
+  }
+  function buddyImage(){
+    const base=$("bbEquippedHeroCharacterImg");
+    const bg=base?.style?.backgroundImage||"";
+    const m=bg.match(/url\(["']?([^"')]+)["']?\)/);
+    return m?.[1]||"/assets/buddy/default-pink-buddy.png?v=9733";
+  }
+
+  function ensureHome(){
+    const room=homeRoom();if(!room||$("p974BottomDock"))return;
+
+    const pulse=$("p971BuddyPulse");
+    if(pulse){
+      if(!$("p974BondProgress")){
+        const prog=document.createElement("span");prog.id="p974BondProgress";prog.className="p974BondProgress";prog.textContent="0 / 500";
+        pulse.querySelector(".p971BondCopy")?.appendChild(prog);
+      }
+      if(!$("p974CareBtn")){
+        const care=document.createElement("button");care.type="button";care.id="p974CareBtn";care.className="p974CareBtn";care.textContent="♥ ดูแล Buddy";
+        care.addEventListener("click",()=>$("p898FeedBtn")?.click());pulse.appendChild(care);
+      }
+    }
+
+    const friends=document.createElement("section");friends.id="p974FriendsCard";friends.className="p974HomeCard";
+    friends.innerHTML='<div class="p974CardHead"><div><small>FRIENDS</small><b>เพื่อนของคุณ</b></div><span class="p974MiniPill" id="p974OnlineCount">0 ออนไลน์</span></div><div class="p974FriendList" id="p974FriendList"><div class="p974FriendRow"><span class="p974FriendAv">♡</span><span><b>กำลังโหลดเพื่อน…</b><small>ออนไลน์</small></span><i class="p974OnlineDot"></i></div></div><button class="p974CardAction" type="button">ดูเพื่อนทั้งหมด</button>';
+    friends.addEventListener("click",()=>window.POMRUV94?.openFriendRoom?.());room.appendChild(friends);
+
+    const rank=document.createElement("section");rank.id="p974RankCard";rank.className="p974HomeCard";
+    rank.innerHTML='<div class="p974CardHead"><div><small>RANKED</small><b>แรงค์ของคุณ</b></div><span class="p974MiniPill">1V1</span></div><div class="p974RankShield">★</div><strong id="p974RankName">Bronze</strong><div class="p974RankStars">★ ☆ ☆</div><div class="p974RankProgress"><i id="p974RankBar"></i></div><span id="p974RankPoints">0 แต้มแรงค์</span>';
+    rank.addEventListener("click",()=>window.POMRUV94?.openRanked?.());room.appendChild(rank);
+
+    const skin=document.createElement("button");skin.type="button";skin.id="p974SkinCard";skin.className="p974HomeCard";
+    skin.innerHTML='<span class="p974SkinArt"><img id="p974SkinImg" src="/assets/buddy/default-pink-buddy.png?v=9733" alt="Buddy"></span><span class="p974SkinCopy"><small>CUSTOMIZE</small><b>เปลี่ยนสกิน</b><span id="p974SkinText">Pink Buddy</span></span><span class="p974Arrow">›</span>';
+    skin.addEventListener("click",()=>window.bbAppShowScreen?.("inventory"));room.appendChild(skin);
+
+    const daily=document.createElement("button");daily.type="button";daily.id="p974DailyCard";daily.className="p974HomeCard";
+    daily.innerHTML='<span class="p974Chest">🎁</span><span class="p974DailyCopy"><small>DAILY REWARD</small><b>ภารกิจวันนี้</b><span id="p974DailyText">ทำภารกิจเพื่อรับเหรียญ</span><em id="p974DailyCta">ดูภารกิจ</em></span>';
+    daily.addEventListener("click",()=>$("p941MissionBtn")?.click());room.appendChild(daily);
+
+    const dock=document.createElement("nav");dock.id="p974BottomDock";dock.setAttribute("aria-label","เมนูหลัก");
+    dock.innerHTML='<button class="p974DockBtn" data-p974="inventory"><span class="ico">▣</span><span>คลัง</span></button><button class="p974DockBtn" data-p974="skin"><span class="ico">♢</span><span>สกิน</span></button><button class="p974DockBtn play" data-p974="play"><span class="ico"><span>▶</span></span><b>เริ่มเล่น</b></button><button class="p974DockBtn" data-p974="friends"><span class="ico">♟</span><span>เพื่อน</span></button><button class="p974DockBtn" data-p974="rank"><span class="ico">★</span><span>แรงค์</span></button>';
+    dock.addEventListener("click",e=>{
+      const b=e.target.closest("[data-p974]");if(!b)return;
+      const a=b.dataset.p974;
+      if(a==="inventory"||a==="skin")window.bbAppShowScreen?.("inventory");
+      else if(a==="play")window.bbAppShowScreen?.("modes");
+      else if(a==="friends")window.POMRUV94?.openFriendRoom?.();
+      else if(a==="rank")window.POMRUV94?.openRanked?.();
+    });room.appendChild(dock);
+
+    syncHome();
+  }
+
+  function syncHome(){
+    if(!$("p974BottomDock"))ensureHome();
+    try{
+      const st=window.POMRUProgress?.getState?.()||{};
+      const p=st.progress||{};
+      const rank=p.rank_name||p.ranked_tier||"Bronze";
+      const pts=Number(p.season_points??p.ranked_points??0)||0;
+      $("p974RankName")&&($("p974RankName").textContent=rank);
+      $("p974RankPoints")&&($("p974RankPoints").textContent=pts.toLocaleString()+" แต้มแรงค์");
+      $("p974RankBar")&&($("p974RankBar").style.width=Math.min(100,(pts%300)/300*100)+"%");
+      const m=st.missions||{};
+      const done=[m.play_progress>=m.play_target,m.feed_progress>=m.feed_target,m.exercise_progress>=m.exercise_target].filter(Boolean).length;
+      $("p974DailyText")&&($("p974DailyText").textContent=m.reward_claimed?"รับรางวัลวันนี้แล้ว":`สำเร็จ ${done}/3 ภารกิจ • +${Number(m.reward_coins||30)} เหรียญ`);
+      $("p974DailyCta")&&($("p974DailyCta").textContent=m.can_claim&&!m.reward_claimed?"รับเลย":"ดูภารกิจ");
+    }catch(_){}
+    try{
+      const fs=window.POMRUDuel?.getFriends?.()||[];
+      const sorted=[...fs].sort((a,b)=>(b.is_online?1:0)-(a.is_online?1:0));
+      const online=sorted.filter(x=>x.is_online).length;
+      $("p974OnlineCount")&&($("p974OnlineCount").textContent=online+" ออนไลน์");
+      const host=$("p974FriendList");
+      if(host){
+        const rows=sorted.slice(0,2);
+        host.innerHTML=rows.length?rows.map(f=>`<div class="p974FriendRow"><span class="p974FriendAv">${f.avatar_url?`<img src="${esc(f.avatar_url)}" alt="">`:esc((f.display_name||"?").slice(0,1))}</span><span><b>${esc(f.display_name||"เพื่อน")}</b><small>${f.is_online?"ออนไลน์":"ออฟไลน์"}</small></span><i class="p974OnlineDot" style="opacity:${f.is_online?1:.18}"></i></div>`).join(""):'<div class="p974FriendRow"><span class="p974FriendAv">♡</span><span><b>เพิ่มเพื่อนคนแรก</b><small>ชวนมาเล่นด้วยกัน</small></span><i class="p974OnlineDot" style="opacity:.18"></i></div>';
+      }
+    }catch(_){}
+    const img=$("p974SkinImg");if(img)img.src=buddyImage();
+    $("p974SkinText")&&($("p974SkinText").textContent=skinName()+" Buddy");
+    try{
+      const pet=window.BrainBuddyPet?.getState?.()||{};const care=Math.max(0,Number(pet.care_xp)||0),target=Math.max(1,Number(pet.level_target)||500),progress=care%target;
+      $("p974BondProgress")&&($("p974BondProgress").textContent=progress.toLocaleString()+" / "+target.toLocaleString());
+    }catch(_){}
+  }
+
+  /* Direct matchmaking bridge: matched → join/ready → host starts → both launch.
+     This deliberately avoids the old Arena/Lobby transition that could leave
+     iPad Safari parked on the SEARCHING screen after a reciprocal match. */
+  const bridge={row:null,timer:null,busy:false,user:null,started:0,attempts:0};
+  function sb(){return window.__bbSupabase||window.sb||null}
+  function stopBridge(){if(bridge.timer){clearInterval(bridge.timer);bridge.timer=null}bridge.busy=false}
+  function showMatched(){
+    ["p94RankedIntro","p94Searching","p94RankedError"].forEach(id=>$(id)?.classList.add("hidden"));
+    $("p94Matched")?.classList.remove("hidden");
+    if($("p94RankedStatusPill"))$("p94RankedStatusPill").textContent="พบคู่แข่งแล้ว";
+  }
+  async function bridgeTick(){
+    if(bridge.busy||!bridge.row?.room_id)return;
+    if(window.BB_RANKED_ACTIVE||document.body.classList.contains("bbRankedPlaying")){stopBridge();return}
+    const c=sb();if(!c)return;bridge.busy=true;bridge.attempts++;
+    try{
+      if(!bridge.user){const {data}=await c.auth.getUser();bridge.user=data?.user||null}
+      if(!bridge.user)return;
+      const roomId=bridge.row.room_id;
+      let {data:players,error:pe}=await c.from("ranked_room_players").select("user_id,is_ready,seat").eq("room_id",roomId);if(pe)throw pe;players=players||[];
+      if(!players.some(x=>x.user_id===bridge.user.id)&&bridge.row.room_code){
+        const j=await c.rpc("bb_ranked_join_room",{p_room_code:bridge.row.room_code});if(j.error)throw j.error;
+      }
+      try{await c.rpc("bb_ranked_set_ready",{p_room_id:roomId,p_ready:true})}catch(_){}
+      const rr=await c.from("ranked_rooms").select("id,status,host_id,ranked_subject_code,ranked_rule_tier,ranked_content_level").eq("id",roomId).maybeSingle();
+      const room=rr.data||null;
+      const mm=await c.from("ranked_matches").select("*").eq("room_id",roomId).order("created_at",{ascending:false}).limit(1).maybeSingle();
+      let match=mm.data||null;
+      if(match&&(match.status==="countdown"||match.status==="playing")){
+        const hydrated={...bridge.row,...match,id:match.id,ranked_subject_code:room?.ranked_subject_code||bridge.row.subject_code||null,ranked_rule_tier:room?.ranked_rule_tier||bridge.row.rule_tier||null,ranked_content_level:room?.ranked_content_level||bridge.row.content_level||null};
+        if($("p94MatchedGame"))$("p94MatchedGame").textContent=(bridge.row.game_name||"Buddy Battle")+" • กำลังเปิดเกม";
+        stopBridge();
+        if(typeof window.POMRUInternalStartRankedCountdown==="function")window.POMRUInternalStartRankedCountdown(hydrated);
+        else if(typeof window.POMRUInternalLaunchRanked==="function")window.POMRUInternalLaunchRanked(hydrated);
+        return;
+      }
+      const pp=await c.from("ranked_room_players").select("user_id,is_ready,seat").eq("room_id",roomId);players=pp.data||players;
+      const both=players.length>=2&&players.some(x=>x.user_id===bridge.row.opponent_id);
+      const ready=players.filter(x=>x.is_ready).length>=2;
+      if($("p94MatchedGame"))$("p94MatchedGame").textContent=both?(ready?"ทั้งสองคนพร้อมแล้ว • กำลังเริ่ม Battle":"พบคู่แข่งแล้ว • กำลังซิงก์ความพร้อม"):"พบคู่แข่งแล้ว • กำลังพาอีกฝ่ายเข้าสนาม";
+      const hostId=room?.host_id||bridge.row.host_user_id||null;
+      if(both&&ready&&hostId===bridge.user.id&&room?.status==="waiting"){
+        const start=await c.rpc("bb_ranked_start_match_v2",{p_room_id:roomId});
+        if(!start.error&&start.data?.[0]){
+          const x=start.data[0];
+          const hydrated={...bridge.row,...x,id:x.match_id||x.id,room_id:roomId,ranked_subject_code:room?.ranked_subject_code||bridge.row.subject_code||null,ranked_rule_tier:room?.ranked_rule_tier||bridge.row.rule_tier||null,ranked_content_level:room?.ranked_content_level||bridge.row.content_level||null};
+          stopBridge();window.POMRUInternalStartRankedCountdown?.(hydrated);return;
+        }
+      }
+      if(Date.now()-bridge.started>18000&&$("p94MatchedGame"))$("p94MatchedGame").textContent="เชื่อมต่อช้ากว่าปกติ • กำลังลองเปิดเกมให้อัตโนมัติ";
+    }catch(e){
+      console.warn("POMRU v97.3.3 ranked bridge:",e?.message||e);
+      if($("p94MatchedGame"))$("p94MatchedGame").textContent="กำลังเชื่อมต่อการแข่งขันอีกครั้ง";
+    }finally{bridge.busy=false}
+  }
+  function startBridge(detail){
+    if(!detail?.room_id)return;
+    bridge.row={...detail};bridge.started=Date.now();bridge.attempts=0;bridge.user=null;stopBridge();showMatched();
+    window.POMRU_RANKED_ROOM_ID=detail.room_id;window.POMRU_RANKED_MATCHMAKING_RESULT={...detail};
+    bridge.timer=setInterval(bridgeTick,350);bridgeTick();
+  }
+  window.POMRURankedBridge={start:startBridge,stop:stopBridge,snapshot:()=>({room_id:bridge.row?.room_id||null,attempts:bridge.attempts,running:!!bridge.timer})};
+
+  document.addEventListener("pomru:ranked-match-found",e=>startBridge(e.detail||{}));
+  document.addEventListener("pomru:ranked-game-started",()=>stopBridge());
+  document.addEventListener("pomru:ranked-game-ended",()=>stopBridge());
+  document.addEventListener("pomru:duel-room-left",()=>stopBridge());
+  document.addEventListener("pomru:progress-updated",()=>setTimeout(syncHome,60));
+  document.addEventListener("pomru:v899-synced",()=>setTimeout(syncHome,60));
+  document.addEventListener("bb:pet-updated",()=>setTimeout(syncHome,60));
+  document.addEventListener("pomru:core-synced",()=>setTimeout(syncHome,60));
+  window.addEventListener("pageshow",()=>setTimeout(()=>{ensureHome();syncHome();if(!window.BB_RANKED_ACTIVE&&window.POMRU_RANKED_MATCHMAKING_RESULT?.room_id)startBridge(window.POMRU_RANKED_MATCHMAKING_RESULT)},160));
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(()=>{ensureHome();syncHome()},260),{once:true});else setTimeout(()=>{ensureHome();syncHome()},260);
+})();
+</script>
+
+<script id="pomru-v9733-marker">window.POMRU_V9733={version:"97.3.3",home:"game-hub",rankedTransition:"direct-bridge"};</script>
 
 </body>
 </html>
