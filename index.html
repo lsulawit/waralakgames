@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>POMRU • ผมรู้ — v97.3.4 Ranked Guest Join Fix</title>
+<title>POMRU • ผมรู้ — v97.3.5 Ranked Stabilization</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -24421,13 +24421,23 @@ window.addEventListener("load",()=>{
 
     if(window.BB_RANKED_ACTIVE&&activeRankedMatch?.id===matchId)return;
 
+    // v97.3.5: the direct matchmaking bridge can enter the canonical Ranked
+    // engine without opening the legacy Arena first. Initialize THIS module's
+    // local Supabase client/auth before any live-state or result code uses it.
+    const rankedClient=await getClient();
+    if(!rankedClient){
+      toast("เชื่อมต่อระบบ Ranked ไม่สำเร็จ • กรุณารีเฟรชแล้วลองใหม่");
+      return;
+    }
+    try{await getAuth()}catch(e){console.warn("POMRU Ranked auth hydrate:",e?.message||e)}
+
     // Always hydrate the canonical ranked_matches row.
     // Matchmaking/start RPCs may return only a subset of columns.
     let full={...match,id:matchId};
 
     try{
-      if(client){
-        const {data,error}=await client
+      if(rankedClient){
+        const {data,error}=await rankedClient
           .from("ranked_matches")
           .select("*")
           .eq("id",matchId)
@@ -25342,14 +25352,16 @@ window.addEventListener("load",()=>{
   }
 
   async function forfeitRankedMatch(){
-    if(!activeRankedMatch?.id||!client)return;
+    if(!activeRankedMatch?.id)return;
+    const c=await getClient();
+    if(!c){toast("เชื่อมต่อระบบ Ranked ไม่สำเร็จ");return}
     if(!confirm("ยอมแพ้การแข่งขันนี้? คะแนนจะเป็น 0 และออกจากเกมทันที"))return;
     try{window.POMRUInGameChat?.close?.()}catch(_){}
     showRankedWaitingScreen();
     $("#bbResultsProgressText").textContent="กำลังบันทึกการยอมแพ้…";
     try{localStorage.setItem("bb_ranked_waiting_match",activeRankedMatch.id)}catch(e){}
     try{
-      const {data,error}=await client.rpc("bb_ranked_forfeit",{p_match_id:activeRankedMatch.id});
+      const {data,error}=await c.rpc("bb_ranked_forfeit",{p_match_id:activeRankedMatch.id});
       if(error)throw error;
       currentRoom=null;players=[];
       const s=data?.[0]||{};
@@ -25367,7 +25379,9 @@ window.addEventListener("load",()=>{
     try{localStorage.setItem("bb_ranked_waiting_match",activeRankedMatch.id)}catch(e){}
 
     try{
-      const {data,error}=await client.rpc("bb_ranked_submit_result",{
+      const c=await getClient();
+      if(!c)throw new Error("supabase_client_unavailable");
+      const {data,error}=await c.rpc("bb_ranked_submit_result",{
         p_match_id:activeRankedMatch.id,
         p_score:Number(result.score)||0,
         p_correct_answers:Number(result.correct)||0,
@@ -45293,10 +45307,10 @@ body.bbCandyHome .p89Vitals{display:none!important}
 .p971BattleToast{position:fixed;z-index:260510;left:50%;top:118px;transform:translate(-50%,-8px);padding:8px 12px;border-radius:999px;background:#fff;color:#5b4566;font-size:10px;font-weight:1000;box-shadow:0 9px 24px rgba(34,22,48,.22);opacity:0;pointer-events:none;transition:.2s}
 .p971BattleToast.show{opacity:1;transform:translate(-50%,0)}
 .p971FighterArt.hit img{animation:p971Hit .38s ease}.p971FighterArt.attack img{animation:p971Attack .40s ease}
-@keyframes p971Hit{30%{transform:translateX(-8px) rotate(-5deg)}60%{transform:translateX(6px) rotate(3deg)}100%{transform:none}}
-@keyframes p971Attack{45%{transform:translateX(10px) scale(1.06)}100%{transform:none}}
+@keyframes p971Hit{18%{transform:translateX(-20px) rotate(-8deg) scale(.92);filter:brightness(1.35)}45%{transform:translateX(13px) rotate(5deg) scale(1.02)}72%{transform:translateX(-6px) rotate(-2deg)}100%{transform:none}}
+@keyframes p971Attack{18%{transform:translateX(-8px) scale(.92,1.08)}55%{transform:translateX(54px) scale(1.13,.92)}100%{transform:none}}
 .p971Fighter.right .p971FighterArt.attack img{animation-name:p971AttackR}
-@keyframes p971AttackR{45%{transform:translateX(-10px) scale(1.06)}100%{transform:none}}
+@keyframes p971AttackR{18%{transform:translateX(8px) scale(.92,1.08)}55%{transform:translateX(-54px) scale(1.13,.92)}100%{transform:none}}
 
 body.p971BattleActive.bbRankedLearningPlaying .bbRankLearnTop{padding-top:112px!important}
 body.p971BattleActive.bbRankedLearningPlaying .bbRankLearnShell{margin-top:10px!important}
@@ -45398,16 +45412,26 @@ body.p971BattleActive.bbRankedPlaying:not(.bbRankedLearningPlaying) #game{paddin
 
   async function loadFighters(matchId){
     const c=client();if(!c||!state.user)return;
-    const {data:players,error}=await c.from("ranked_match_players").select("user_id,seat").eq("match_id",matchId);
-    if(error)throw error;
-    const rows=Array.isArray(players)?players:[];
-    const opp=rows.find(x=>x.user_id!==state.user.id);
-    if(!opp)return;
-    state.opponent={id:opp.user_id,name:"คู่แข่ง"};
+
+    // v97.3.5: ranked_match_players has RLS and is server-authority data.
+    // Resolve the opponent through an authenticated SECURITY DEFINER RPC
+    // (or the reciprocal matchmaking payload) instead of selecting it directly.
+    let opponentId=safe(window.POMRU_RANKED_MATCHMAKING_RESULT?.opponent_id);
+
+    if(!opponentId){
+      const {data,error}=await c.rpc("bb_ranked_connection_state",{p_match_id:matchId});
+      if(error)throw error;
+      const row=Array.isArray(data)?data[0]:data;
+      opponentId=safe(row?.opponent_id);
+    }
+
+    if(!opponentId)return;
+    state.opponent={id:opponentId,name:"คู่แข่ง"};
+
     try{
-      const {data:profiles}=await c.from("profiles").select("id,display_name,avatar_url").in("id",[state.user.id,opp.user_id]);
+      const {data:profiles}=await c.from("profiles").select("id,display_name,avatar_url").in("id",[state.user.id,opponentId]);
       const ps=Array.isArray(profiles)?profiles:[];
-      const me=ps.find(x=>x.id===state.user.id),other=ps.find(x=>x.id===opp.user_id);
+      const me=ps.find(x=>x.id===state.user.id),other=ps.find(x=>x.id===opponentId);
       $("p971SelfName")&&($("p971SelfName").textContent=safe(me?.display_name)||"คุณ");
       $("p971OppName")&&($("p971OppName").textContent=safe(other?.display_name)||"คู่แข่ง");
       state.opponent.name=safe(other?.display_name)||"คู่แข่ง";
@@ -45422,8 +45446,16 @@ body.p971BattleActive.bbRankedPlaying:not(.bbRankedLearningPlaying) #game{paddin
         .eq("match_id",id)
         .order("question_index",{ascending:true});
       if(error)throw error;
-      state.rows=Array.isArray(data)?data:[];render();
-    }catch(e){console.warn("POMRU Buddy Battle refresh:",e?.message||e)}
+      state.rows=Array.isArray(data)?data:[];
+      if(!state.opponent?.id&&state.user?.id){
+        const other=state.rows.find(r=>r.user_id&&r.user_id!==state.user.id);
+        if(other)state.opponent={id:other.user_id,name:"คู่แข่ง"};
+      }
+      render();
+    }catch(e){
+      console.warn("POMRU Buddy Battle refresh:",e?.message||e);
+      toast("Battle Sync ขัดข้อง • "+safe(e?.message||e));
+    }
   }
 
   function cleanupChannel(){
@@ -45440,12 +45472,18 @@ body.p971BattleActive.bbRankedPlaying:not(.bbRankedLearningPlaying) #game{paddin
     try{
       const {data}=await c.auth.getSession();state.user=data?.session?.user||null;
       if(!state.user)return;
-      await loadFighters(id);show(true);await refresh();
+      show(true);
+      try{await loadFighters(id)}catch(e){console.warn("POMRU Buddy Battle fighters:",e?.message||e)}
+      await refresh();
       state.channel=c.channel("pomru-battle-"+id+"-"+Math.random().toString(36).slice(2))
         .on("postgres_changes",{event:"*",schema:"public",table:"bb_ranked_battle_answers",filter:`match_id=eq.${id}`},()=>refresh())
         .subscribe();
       state.poll=setInterval(refresh,900);
-    }catch(e){console.warn("POMRU Buddy Battle start:",e?.message||e);show(false)}
+    }catch(e){
+      console.warn("POMRU Buddy Battle start:",e?.message||e);
+      show(true);
+      toast("Battle Sync ขัดข้อง • "+safe(e?.message||e));
+    }
   }
 
   async function submit(correct,index){
@@ -45462,7 +45500,11 @@ body.p971BattleActive.bbRankedPlaying:not(.bbRankedLearningPlaying) #game{paddin
       if(error)throw error;
       document.dispatchEvent(new CustomEvent("pomru:battle-answer-submitted",{detail:{match_id:id,question_index:i,is_correct:!!correct}}));
       await refresh();
-    }catch(e){state.submitted.delete(key);console.warn("POMRU Buddy Battle submit:",e?.message||e)}
+    }catch(e){
+      state.submitted.delete(key);
+      console.warn("POMRU Buddy Battle submit:",e?.message||e);
+      toast("ส่งคำตอบ Battle ไม่สำเร็จ • "+safe(e?.message||e));
+    }
   }
 
   function markFinishing(){state.finishing=true;setTimeout(()=>{show(false);cleanupChannel()},2200)}
@@ -46439,6 +46481,15 @@ window.POMRUV9732=Object.freeze({version:"97.3.2",characterModel:"one-pomru-budd
 </script>
 
 <script id="pomru-v9734-marker">window.POMRU_V9734={version:"97.3.4",home:"game-hub",rankedTransition:"guest-join-first"};</script>
+<script id="pomru-v9735-marker">
+window.POMRU_V9735=Object.freeze({
+  version:"97.3.5",
+  rankedClient:"canonical-init-before-launch",
+  battleOpponent:"connection-state-rpc",
+  resultSubmit:"non-null-client",
+  battleErrors:"visible"
+});
+</script>
 
 </body>
 </html>
