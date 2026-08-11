@@ -15541,6 +15541,583 @@ body.p93SocialOpen{overflow:hidden!important}
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style id="pomru-v94-simple-home-playhub">
+.p93FriendsTopBtn,
+.p89Online{display:none!important}
+
+/* -------- HOME: only three compact logo buttons -------- */
+.p94HomeDock{
+  position:absolute!important;z-index:20!important;
+  left:50%!important;bottom:24px!important;
+  transform:translateX(-50%)!important;
+  width:auto!important;min-width:330px!important;
+  padding:9px 14px!important;
+  display:flex!important;align-items:flex-end!important;justify-content:center!important;
+  gap:22px!important;
+  border:1px solid rgba(171,113,148,.18)!important;
+  border-radius:34px!important;
+  background:rgba(255,247,251,.95)!important;
+  box-shadow:0 14px 32px rgba(101,63,86,.16)!important;
+  backdrop-filter:blur(8px);
+}
+.p94HomeLogo{
+  position:relative;width:82px!important;min-height:auto!important;
+  padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;
+  display:grid!important;justify-items:center!important;gap:5px!important;
+  color:#6d5362!important
+}
+.p94HomeLogo:active{transform:scale(.96)!important}
+.p94HomeLogo b{color:#6c5361!important;font-size:9px!important;font-weight:1000!important;text-shadow:none!important}
+.p94LogoIcon{
+  width:59px;height:59px;position:relative;display:grid;place-items:center;
+  border:4px solid #fff;border-radius:21px;
+  box-shadow:0 8px 16px rgba(94,58,81,.16),inset 0 1px 0 rgba(255,255,255,.6)
+}
+.p94HomeLogo.feed .p94LogoIcon{background:linear-gradient(145deg,#ff92bb,#f15b98)}
+.p94HomeLogo.play .p94LogoIcon{background:linear-gradient(145deg,#8b6aef,#6946d3)}
+.p94HomeLogo.menu .p94LogoIcon{background:linear-gradient(145deg,#7cc9ed,#4c9bd4)}
+.p94HomeLogo.primary{transform:translateY(-9px)}
+.p94HomeLogo.primary .p94LogoIcon{width:69px;height:69px;border-radius:24px}
+.foodIcon94::before{content:"";width:29px;height:20px;border:4px solid #fff;border-top:0;border-radius:0 0 16px 16px;transform:translateY(4px)}
+.foodIcon94::after{content:"";position:absolute;top:13px;width:27px;height:8px;border-radius:50%;background:#fff}
+.playIcon94::before{content:"";width:0;height:0;border-top:13px solid transparent;border-bottom:13px solid transparent;border-left:21px solid #fff;transform:translateX(3px)}
+.menuIcon94::before{content:"";width:31px;height:5px;border-radius:999px;background:#fff;box-shadow:0 -10px 0 #fff,0 10px 0 #fff}
+.p94MenuBadge{
+  position:absolute;right:3px;top:-4px;min-width:20px;height:20px;padding:0 4px;
+  box-sizing:border-box;display:grid;place-items:center;border:3px solid #fff;border-radius:999px;
+  background:#ef5d8f;color:#fff;font-size:7px;font-weight:1000
+}
+.p94MenuBadge.hidden{display:none!important}
+
+/* -------- PLAY HUB -------- */
+.p94PlayHubScreen{
+  min-height:100dvh;padding:14px 16px 45px;box-sizing:border-box;overflow:auto;color:#4e3c4b;
+  background:
+    radial-gradient(circle at 15% 0%,rgba(255,221,235,.72),transparent 24rem),
+    radial-gradient(circle at 88% 0%,rgba(205,239,255,.76),transparent 25rem),
+    linear-gradient(180deg,#fffafe,#f7fcff 60%,#fff8ef)
+}
+.p94PlayTop{width:min(980px,100%);margin:auto;display:grid;grid-template-columns:48px 1fr 48px;align-items:center;gap:10px}
+.p94RoundBack,.p94TinyProfile{
+  width:46px;height:46px;border:1px solid rgba(111,79,96,.10);border-radius:15px;background:#fff;color:#684f80;display:grid;place-items:center
+}
+.p94RoundBack svg{width:22px;height:22px}.p94TinyProfile{overflow:hidden;padding:5px}.p94TinyProfile img{width:100%;height:100%;object-fit:contain}
+.p94PlayBrand small{display:block;color:#a3748a;font-size:7px;font-weight:1000;letter-spacing:.13em}
+.p94PlayBrand b{display:block;margin-top:2px;font-size:17px}
+.p94PlayPage{width:min(980px,100%);margin:11px auto 0}
+.p94PlayHero{
+  min-height:245px;padding:26px 30px;
+  display:grid;grid-template-columns:minmax(0,1fr) 230px;align-items:center;overflow:hidden;
+  border:1px solid rgba(111,79,96,.09);border-radius:32px;
+  background:linear-gradient(135deg,#fff1f7,#fff 55%,#eaf8ff);
+  box-shadow:0 14px 33px rgba(92,62,80,.08)
+}
+.p94PlayHero>div:first-child>span{color:#d7548e;font-size:9px;font-weight:1000}
+.p94PlayHero h1{margin:7px 0;color:#52384f;font-size:50px;line-height:.95;letter-spacing:-.055em}
+.p94PlayHero p{max-width:570px;margin:8px 0 0;color:#81717b;font-size:11px;line-height:1.55}
+.p94PlayBuddy{height:230px;display:grid;place-items:end center}.p94PlayBuddy img{max-width:230px;max-height:220px;object-fit:contain}
+.p94ModeChoices{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-top:13px}
+.p94ModeCard{
+  position:relative;min-height:225px;padding:20px 17px;
+  display:flex;flex-direction:column;align-items:flex-start;text-align:left;overflow:hidden;
+  border:1px solid rgba(111,79,96,.09);border-radius:27px;background:#fff;color:#4f3e4d;
+  box-shadow:0 9px 22px rgba(91,61,80,.06)
+}
+.p94ModeCard:active{transform:translateY(2px)}
+.p94ModeCard.solo{background:linear-gradient(145deg,#fff0f7,#fff)}
+.p94ModeCard.room{background:linear-gradient(145deg,#edf9ff,#fff)}
+.p94ModeCard.ranked{background:linear-gradient(145deg,#f2edff,#fff8e7)}
+.p94ModeLogo{width:65px;height:65px;display:grid;place-items:center;border:5px solid #fff;border-radius:22px;box-shadow:0 8px 17px rgba(84,57,75,.10)}
+.solo .p94ModeLogo{background:#f36aa1}.room .p94ModeLogo{background:#53a9dd}.ranked .p94ModeLogo{background:#7252cf}
+.p94ModeLogo i{position:relative;width:33px;height:33px;color:#fff}
+.soloIcon94::before{content:"";position:absolute;inset:3px;border:4px solid currentColor;border-radius:50%}
+.soloIcon94::after{content:"";position:absolute;left:6px;right:6px;bottom:0;height:11px;border:4px solid currentColor;border-radius:14px 14px 4px 4px}
+.roomIcon94::before{content:"";position:absolute;left:1px;right:1px;top:7px;bottom:2px;border:4px solid currentColor;border-radius:10px}
+.roomIcon94::after{content:"+";position:absolute;inset:0;display:grid;place-items:center;font-size:22px;font-weight:1000}
+.rankIcon94::before{
+  content:"";position:absolute;left:3px;right:3px;bottom:1px;height:25px;background:currentColor;
+  clip-path:polygon(0 66%,26% 66%,26% 42%,61% 42%,61% 15%,100% 15%,100% 100%,0 100%)
+}
+.p94ModeCopy{margin-top:14px}.p94ModeCopy small{display:block;color:#a3788d;font-size:7px;font-weight:1000;letter-spacing:.12em}
+.p94ModeCopy strong{display:block;margin-top:3px;color:#4d3b4a;font-size:22px;letter-spacing:-.03em}
+.p94ModeCopy p{margin:6px 0 0;color:#8c7884;font-size:9px;line-height:1.5}
+.p94ModeArrow{position:absolute;right:15px;bottom:13px;width:35px;height:35px;display:grid;place-items:center;border-radius:12px;background:rgba(255,255,255,.75);color:#7154a3;font-size:24px}
+.p94RankLive{position:absolute;right:13px;top:13px;padding:5px 8px;border-radius:999px;background:#fff;color:#6b4db4;font-size:6px;font-weight:1000}
+.p94RankLive i{display:inline-block;width:6px;height:6px;margin-right:4px;border-radius:50%;background:#48b976}
+
+body.bbCandySelect #bbAppSoloModes.p94SoloWorldScreen{
+  min-height:100dvh!important;
+  background:
+    radial-gradient(circle at 50% -8%,rgba(142,222,255,.68),transparent 33rem),
+    radial-gradient(circle at 4% 29%,rgba(255,209,229,.84),transparent 29rem),
+    linear-gradient(180deg,#fffafd,#fff5f8 60%,#fff7ee)!important
+}
+body.bbCandySelect #bbAppSoloModes.p94SoloWorldScreen::before,
+body.bbCandySelect #bbAppSoloModes.p94SoloWorldScreen::after{display:none!important}
+
+/* -------- QUICK MENU -------- */
+.p94QuickMenuBackdrop{
+  position:fixed;inset:0;z-index:180000;padding:16px;display:grid;place-items:end center;background:rgba(75,51,69,.25)
+}
+.p94QuickMenuBackdrop.hidden{display:none!important}
+.p94QuickMenuCard{
+  width:min(520px,100%);padding:18px;margin-bottom:max(8px,env(safe-area-inset-bottom));
+  border:1px solid rgba(111,79,96,.10);border-radius:28px;background:#fff;
+  box-shadow:0 24px 60px rgba(74,49,68,.22)
+}
+.p94QuickMenuHead{display:flex;align-items:center;justify-content:space-between}
+.p94QuickMenuHead small{display:block;color:#a4778d;font-size:7px;font-weight:1000;letter-spacing:.12em}
+.p94QuickMenuHead h2{margin:2px 0;color:#4e3d4c;font-size:21px}
+.p94QuickMenuHead button{width:39px;height:39px;border:0;border-radius:12px;background:#f4eef3;color:#725f6a;font-size:21px}
+.p94QuickGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:11px}
+.p94QuickGrid button{min-height:115px;padding:13px;border:1px solid rgba(111,79,96,.09);border-radius:19px;background:#faf8fb;color:#54434f;text-align:left}
+.p94QuickGrid b{display:block;margin-top:8px;font-size:12px}.p94QuickGrid small{display:block;margin-top:3px;color:#95828e;font-size:7px}
+.p94QIcon{width:42px;height:42px;display:block;position:relative;border-radius:14px;background:#eee8ff;color:#7153b9}
+.p94QIcon.profile::before{content:"";position:absolute;left:13px;top:7px;width:12px;height:12px;border:3px solid currentColor;border-radius:50%}
+.p94QIcon.profile::after{content:"";position:absolute;left:8px;right:8px;bottom:6px;height:10px;border:3px solid currentColor;border-radius:12px 12px 4px 4px}
+.p94QIcon.friends::before{content:"";position:absolute;left:6px;top:8px;width:10px;height:10px;border:3px solid currentColor;border-radius:50%;box-shadow:13px 2px 0 -1px #eee8ff,13px 2px 0 2px currentColor}
+.p94QIcon.friends::after{content:"";position:absolute;left:5px;bottom:7px;width:18px;height:9px;border:3px solid currentColor;border-radius:10px}
+.p94QIcon.inventory::before{content:"";position:absolute;left:8px;right:8px;top:11px;bottom:7px;border:3px solid currentColor;border-radius:5px 5px 9px 9px}
+.p94QIcon.shop::before{content:"";position:absolute;left:8px;right:8px;top:12px;bottom:7px;border:3px solid currentColor;border-radius:0 0 7px 7px}
+
+/* -------- RANKED MATCHMAKING -------- */
+.p94RankedOverlay{
+  position:fixed;inset:0;z-index:190000;overflow:auto;color:#4f3d4b;
+  background:radial-gradient(circle at 50% 0%,#f0e8ff,transparent 27rem),linear-gradient(180deg,#faf7ff,#fff7fb 55%,#f5fbff)
+}
+.p94RankedOverlay.hidden{display:none!important}
+body.p94RankedOpen{overflow:hidden!important}
+.p94RankedTop{
+  width:min(920px,calc(100% - 24px));min-height:72px;margin:12px auto 0;padding:7px 9px;
+  box-sizing:border-box;display:grid;grid-template-columns:47px 1fr auto;align-items:center;gap:10px;
+  border:1px solid rgba(111,79,96,.10);border-radius:22px;background:#fff;box-shadow:0 10px 27px rgba(82,55,75,.08)
+}
+.p94RankedTop>button{width:45px;height:45px;border:0;border-radius:14px;background:#f5eff7;color:#694f89;display:grid;place-items:center}
+.p94RankedTop svg{width:22px;height:22px}.p94RankedTop small{display:block;color:#9e718a;font-size:7px;font-weight:1000;letter-spacing:.12em}
+.p94RankedTop b{display:block;margin-top:2px;font-size:16px}
+.p94RankedStatusPill{padding:7px 10px;border-radius:999px;background:#eee8ff;color:#6d51b3;font-size:7px;font-weight:1000}
+.p94RankedPage{width:min(720px,calc(100% - 24px));margin:18px auto 40px}
+.p94RankedIntro,.p94Searching,.p94Matched,.p94RankedError{
+  min-height:550px;padding:35px 30px;box-sizing:border-box;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  border:1px solid rgba(111,79,96,.09);border-radius:34px;background:rgba(255,255,255,.95);
+  box-shadow:0 16px 38px rgba(84,57,75,.09)
+}
+.p94RankedIntro.hidden,.p94Searching.hidden,.p94Matched.hidden,.p94RankedError.hidden{display:none!important}
+.p94RankedShield{
+  width:105px;height:105px;display:grid;place-items:center;border:8px solid #fff;border-radius:32px;
+  background:linear-gradient(145deg,#8a65e8,#6644c5);box-shadow:0 13px 25px rgba(101,69,192,.23);
+  transform:rotate(45deg);margin-bottom:25px
+}
+.p94RankedShield span{transform:rotate(-45deg);color:#fff;font-size:30px;font-weight:1000}
+.p94HeroPill2{padding:6px 10px;border-radius:999px;background:#f0eaff;color:#7050bb;font-size:7px;font-weight:1000;letter-spacing:.12em}
+.p94HeroPill2.good{background:#e2f5e9;color:#439468}
+.p94RankedIntro h1{margin:10px 0;color:#50384e;font-size:50px;line-height:.94;letter-spacing:-.055em}
+.p94RankedIntro>p{max-width:530px;margin:4px 0;color:#857480;font-size:10px;line-height:1.55}
+.p94RankedRules{width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px}
+.p94RankedRules>div{padding:12px 7px;border-radius:16px;background:#faf7fb}
+.p94RankedRules b{display:block;color:#6f50b7;font-size:11px}.p94RankedRules small{display:block;margin-top:3px;color:#98848f;font-size:6px}
+.p94RankedStartBtn{
+  width:min(330px,100%);min-height:54px;margin-top:20px;border:0;border-radius:17px;
+  background:linear-gradient(180deg,#835de2,#6948ca);color:#fff;font-size:12px;font-weight:1000;
+  box-shadow:0 10px 21px rgba(106,73,199,.21)
+}
+.p94RankedNote{max-width:470px;margin-top:11px;color:#a08d98;font-size:6.5px;line-height:1.45}
+.p94SearchVisual{position:relative;width:190px;height:190px;margin-bottom:22px;display:grid;place-items:center}
+.p94SearchRing{position:absolute;border:2px solid rgba(116,80,194,.18);border-radius:50%}
+.p94SearchRing.r1{inset:0}.p94SearchRing.r2{inset:24px}
+.p94SearchAvatar{position:relative;z-index:2;width:100px;height:100px;overflow:hidden;border:7px solid #fff;border-radius:32px;background:#fff0f6;box-shadow:0 10px 22px rgba(83,56,75,.12)}
+.p94SearchAvatar img{width:100%;height:100%;object-fit:contain}
+.p94Searching h2,.p94Matched h2{margin:10px 0 4px;color:#503c4d;font-size:28px}
+.p94Searching p,.p94Matched p{margin:4px 0;color:#8d7a85;font-size:9px}
+.p94SearchTimer{margin:14px 0;font-size:35px;font-weight:1000;color:#7252c2;font-variant-numeric:tabular-nums}
+.p94CancelMatch{min-height:43px;padding:0 16px;border:0;border-radius:13px;background:#f3edf2;color:#715b68;font-size:8px;font-weight:950}
+.p94MatchedVS{width:100%;margin:19px 0;display:grid;grid-template-columns:1fr 80px 1fr;align-items:center;gap:8px}
+.p94MatchedVS article{min-height:210px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:23px;background:#faf7fb}
+.p94MatchedVS>strong{width:65px;height:65px;margin:auto;display:grid;place-items:center;border:6px solid #fff;border-radius:50%;background:linear-gradient(145deg,#f2b74f,#e88a34);color:#fff;font-size:20px;box-shadow:0 8px 17px rgba(82,55,74,.11)}
+.p94MatchAvatar{width:94px;height:94px;overflow:hidden;border:6px solid #fff;border-radius:30px;background:#fff0f5;box-shadow:0 8px 18px rgba(85,58,76,.10)}
+.p94MatchAvatar img{width:100%;height:100%;object-fit:cover}.p94MatchAvatar>span{width:100%;height:100%;display:grid;place-items:center;color:#ad9ca6;font-size:28px;font-weight:1000}
+.p94MatchedVS small{margin-top:9px;color:#9b7e8f;font-size:6px;font-weight:1000}.p94MatchedVS b{margin-top:3px;color:#4e3c4b;font-size:12px}
+.p94MatchedVS em{margin-top:3px;color:#7357aa;font-size:7px;font-style:normal;font-weight:900}
+.p94RankedError b{color:#5a4151;font-size:18px}.p94RankedError p{max-width:480px;color:#a0546e;font-size:9px;line-height:1.5}
+.p94RankedError button{min-height:43px;padding:0 16px;border:0;border-radius:13px;background:#7252c8;color:#fff;font-size:9px;font-weight:1000}
+
+@media(max-width:760px){
+  .p94HomeDock{min-width:285px!important;bottom:17px!important;gap:15px!important;padding:7px 11px!important}
+  .p94HomeLogo{width:72px!important}.p94LogoIcon{width:52px;height:52px;border-radius:18px}
+  .p94HomeLogo.primary .p94LogoIcon{width:61px;height:61px;border-radius:21px}.p94HomeLogo b{font-size:8px!important}
+  .p89PetCenter{bottom:135px!important}
+
+  .p94PlayHubScreen{padding:8px 8px 35px}
+  .p94PlayHero{min-height:205px;padding:21px 19px;grid-template-columns:minmax(0,1fr) 125px}
+  .p94PlayHero h1{font-size:36px}.p94PlayHero p{font-size:9px}.p94PlayBuddy{height:140px}
+  .p94PlayBuddy img{max-width:135px;max-height:135px}
+
+  .p94ModeChoices{grid-template-columns:1fr}
+  .p94ModeCard{min-height:145px;padding:15px;display:grid;grid-template-columns:65px 1fr 35px;align-items:center;gap:12px}
+  .p94ModeLogo{width:58px;height:58px;margin:0}.p94ModeCopy{margin:0}.p94ModeCopy strong{font-size:18px}
+  .p94ModeCopy p{font-size:8px}.p94ModeArrow{position:static;grid-column:3;grid-row:1}.p94RankLive{right:10px;top:8px}
+
+  .p94RankedTop{width:calc(100% - 14px);margin-top:7px}.p94RankedStatusPill{font-size:6px}
+  .p94RankedPage{width:calc(100% - 14px);margin-top:8px}
+  .p94RankedIntro,.p94Searching,.p94Matched,.p94RankedError{min-height:calc(100dvh - 105px);padding:25px 17px;border-radius:26px}
+  .p94RankedIntro h1{font-size:39px}.p94RankedRules{gap:5px}
+  .p94MatchedVS{grid-template-columns:1fr 50px 1fr}
+  .p94MatchedVS>strong{width:47px;height:47px;border-width:4px;font-size:15px}
+  .p94MatchAvatar{width:73px;height:73px;border-width:5px;border-radius:24px}
+  .p94MatchedVS article{min-height:175px}
+}
+</style>
+
+
+<style id="pomru-v94-casual-result">
+body.p94CasualResult .bbMyResultRanks,
+body.p94CasualResult .bbPodiumDelta,
+body.p94CasualResult .worldMetric{
+  display:none!important;
+}
+body.p94CasualResult #bbResultMainSub{
+  color:#6d7c72!important;
+}
+</style>
+
+
+<style id="pomru-v941-clean-home-logo-menu">
+/* ============================================================
+   POMRU v94.1 — Clean Buddy Home
+   Home = Buddy + vitals + 3 floating game logos only
+   ============================================================ */
+
+/* Remove information cards from the main room.
+   Their DOM remains alive for Supabase sync and can be opened from Menu. */
+.p89Room > .p89MissionCard,
+.p89Room > .p89RankCard,
+.p89Room > .p89BuddyCard,
+.p89Room > .p89Online{
+  display:none!important;
+}
+
+/* Less visual noise in header. */
+.p89Room .p89Tagline{
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+.p89Room .p89Topbar{
+  grid-template-columns:1fr auto!important;
+}
+.p89Room .p89TopActions{
+  grid-column:2!important;
+}
+.p89Room .p89Brand{
+  grid-column:1!important;
+}
+
+/* Give Buddy more room once side cards are gone. */
+.p89Room .p89PetCenter{
+  left:50%!important;
+  width:min(520px,46vw)!important;
+}
+.p89Room .p89BuddyStage{
+  transform:scale(1.06);
+  transform-origin:center bottom;
+}
+
+/* ---------- Floating logo dock: not a rectangular button bar ---------- */
+.p89Room .p94HomeDock{
+  left:50%!important;
+  bottom:25px!important;
+  width:auto!important;
+  min-width:0!important;
+  padding:0!important;
+  gap:31px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  align-items:end!important;
+}
+
+.p89Room .p94HomeLogo{
+  width:88px!important;
+  gap:7px!important;
+}
+
+.p89Room .p94HomeLogo.primary{
+  transform:none!important;
+}
+
+.p89Room .p94LogoIcon{
+  width:68px!important;
+  height:68px!important;
+  border-radius:24px!important;
+  border:5px solid rgba(255,255,255,.98)!important;
+  box-shadow:
+    0 7px 0 rgba(96,61,83,.10),
+    0 13px 23px rgba(91,58,81,.15),
+    inset 0 2px 0 rgba(255,255,255,.55)!important;
+  transition:transform .13s ease, box-shadow .13s ease!important;
+  overflow:hidden;
+}
+
+.p89Room .p94HomeLogo.primary .p94LogoIcon{
+  width:82px!important;
+  height:82px!important;
+  border-radius:28px!important;
+}
+
+.p89Room .p94HomeLogo .p94LogoIcon::after{
+  filter:none!important;
+}
+
+.p89Room .p94HomeLogo .p94LogoIcon:before{
+  z-index:2;
+}
+
+/* glossy highlight — static, iPad-safe */
+.p89Room .p94LogoIcon > *{
+  position:relative;
+  z-index:2;
+}
+.p89Room .p94LogoIcon{
+  isolation:isolate;
+}
+.p89Room .p94LogoIcon::marker{display:none}
+.p89Room .p94HomeLogo.feed .p94LogoIcon{
+  background:
+    radial-gradient(circle at 33% 20%,rgba(255,255,255,.55),transparent 22%),
+    linear-gradient(145deg,#ff8fbc,#ed4f91)!important;
+}
+.p89Room .p94HomeLogo.play .p94LogoIcon{
+  background:
+    radial-gradient(circle at 33% 20%,rgba(255,255,255,.52),transparent 22%),
+    linear-gradient(145deg,#9677ef,#6944cc)!important;
+}
+.p89Room .p94HomeLogo.menu .p94LogoIcon{
+  background:
+    radial-gradient(circle at 33% 20%,rgba(255,255,255,.52),transparent 22%),
+    linear-gradient(145deg,#75cdf0,#4596d1)!important;
+}
+
+.p89Room .p94HomeLogo:active .p94LogoIcon{
+  transform:translateY(3px) scale(.96)!important;
+  box-shadow:
+    0 3px 0 rgba(96,61,83,.10),
+    0 7px 14px rgba(91,58,81,.13),
+    inset 0 2px 0 rgba(255,255,255,.50)!important;
+}
+
+.p89Room .p94HomeLogo b{
+  padding:4px 9px!important;
+  border:1px solid rgba(104,77,96,.08)!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.86)!important;
+  color:#624d5b!important;
+  box-shadow:0 5px 13px rgba(94,62,81,.08)!important;
+  font-size:9px!important;
+  line-height:1!important;
+}
+
+/* Small dot under the most important action */
+.p89Room .p94HomeLogo.play b{
+  background:#fff!important;
+  color:#6843c6!important;
+}
+
+/* Rebuild pictograms a little more "game logo" than utility icon */
+.p89Room .foodIcon94::before{
+  width:31px!important;
+  height:22px!important;
+  border-width:4px!important;
+}
+.p89Room .foodIcon94::after{
+  top:15px!important;
+  width:30px!important;
+  height:8px!important;
+}
+.p89Room .playIcon94::before{
+  border-top-width:15px!important;
+  border-bottom-width:15px!important;
+  border-left-width:24px!important;
+}
+.p89Room .menuIcon94::before{
+  width:33px!important;
+  height:5px!important;
+  box-shadow:0 -11px 0 #fff,0 11px 0 #fff!important;
+}
+
+/* ---------- Quick menu: 6 compact destinations ---------- */
+.p941QuickGrid{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+}
+.p941QuickGrid button{
+  min-height:112px!important;
+}
+.p94QIcon.mission941{
+  background:#fff1da!important;
+  color:#d78e29!important;
+}
+.p94QIcon.mission941::before{
+  content:"";
+  position:absolute;
+  left:10px;right:10px;top:9px;bottom:8px;
+  border:3px solid currentColor;
+  border-radius:5px;
+}
+.p94QIcon.mission941::after{
+  content:"";
+  position:absolute;
+  left:16px;top:16px;
+  width:13px;height:7px;
+  border-left:3px solid currentColor;
+  border-bottom:3px solid currentColor;
+  transform:rotate(-45deg);
+}
+.p94QIcon.rank941{
+  background:#f3edff!important;
+  color:#7553bf!important;
+}
+.p94QIcon.rank941::before{
+  content:"";
+  position:absolute;
+  left:8px;right:8px;bottom:8px;height:25px;
+  background:currentColor;
+  clip-path:polygon(
+    0 65%,26% 65%,26% 42%,61% 42%,61% 15%,
+    100% 15%,100% 100%,0 100%
+  );
+}
+
+/* ---------- Mission / Ranking as focused popup ---------- */
+.p941InfoBackdrop{
+  position:fixed;
+  inset:0;
+  z-index:185000;
+  display:grid;
+  place-items:center;
+  padding:18px;
+  background:rgba(73,50,66,.28);
+}
+.p941InfoBackdrop.hidden{
+  display:none!important;
+}
+.p941InfoClose{
+  position:fixed;
+  z-index:185030;
+  top:max(20px,env(safe-area-inset-top));
+  right:20px;
+  width:46px;height:46px;
+  display:grid;place-items:center;
+  border:1px solid rgba(105,75,94,.10);
+  border-radius:16px;
+  background:#fff;
+  color:#6d5966;
+  box-shadow:0 10px 22px rgba(78,52,69,.14);
+}
+.p941InfoClose svg{width:23px;height:23px}
+
+body.p941MissionOpen,
+body.p941RankOpen{
+  overflow:hidden!important;
+}
+
+body.p941MissionOpen .p89Room > .p89MissionCard,
+body.p941RankOpen .p89Room > .p89RankCard{
+  display:block!important;
+  position:fixed!important;
+  z-index:185020!important;
+  left:50%!important;
+  right:auto!important;
+  top:50%!important;
+  bottom:auto!important;
+  transform:translate(-50%,-50%)!important;
+  width:min(430px,calc(100vw - 34px))!important;
+  max-height:calc(100dvh - 110px)!important;
+  overflow:auto!important;
+  margin:0!important;
+  padding:20px!important;
+  box-sizing:border-box!important;
+  border:1px solid rgba(111,79,96,.10)!important;
+  border-radius:28px!important;
+  background:#fff!important;
+  box-shadow:0 25px 65px rgba(75,49,67,.24)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+
+body.p941MissionOpen .p89MissionCard .cardHead h3,
+body.p941RankOpen .p89RankCard .cardHead h3{
+  font-size:22px!important;
+}
+body.p941MissionOpen .p89MissionCard .missionRow{
+  padding:13px 0!important;
+}
+body.p941MissionOpen .p89MissionCard .missionRow b{
+  font-size:12px!important;
+}
+body.p941RankOpen .p89RankCard .p89RankRows{
+  margin-top:14px!important;
+}
+
+/* ---------- Responsive ---------- */
+@media(max-width:760px){
+  .p89Room .p89Topbar{
+    grid-template-columns:1fr auto!important;
+  }
+  .p89Room .p89Tagline{
+    display:none!important;
+  }
+
+  .p89Room .p94HomeDock{
+    bottom:18px!important;
+    gap:18px!important;
+  }
+  .p89Room .p94HomeLogo{
+    width:75px!important;
+  }
+  .p89Room .p94LogoIcon{
+    width:58px!important;
+    height:58px!important;
+    border-radius:20px!important;
+    border-width:4px!important;
+  }
+  .p89Room .p94HomeLogo.primary .p94LogoIcon{
+    width:70px!important;
+    height:70px!important;
+    border-radius:24px!important;
+  }
+  .p89Room .p94HomeLogo b{
+    padding:4px 8px!important;
+    font-size:8px!important;
+  }
+  .p89Room .p89PetCenter{
+    width:min(360px,78vw)!important;
+    bottom:125px!important;
+  }
+  .p89Room .p89BuddyStage{
+    transform:scale(1.03);
+  }
+
+  .p941QuickGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  .p941QuickGrid button{
+    min-height:105px!important;
+  }
+}
+
+@media(max-width:390px){
+  .p89Room .p94HomeDock{
+    gap:10px!important;
+  }
+  .p89Room .p94HomeLogo{
+    width:70px!important;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -15666,28 +16243,24 @@ body.p93SocialOpen{overflow:hidden!important}
       <span class="onlineArt" aria-hidden="true"></span><span><small>ONLINE</small><b>สร้างห้อง</b><em>ชวนเพื่อนมาแข่งขัน</em></span><strong>สร้างห้อง ›</strong>
     </button>
 
-    <section class="p89MainActions p911HomeActions" aria-label="กิจกรรมหลัก">
-      <button class="p89Action feed" type="button" id="p898FeedBtn" aria-haspopup="dialog" aria-controls="p898FeedModal">
-        <span class="p900ActionIcon feedIcon" aria-hidden="true"></span>
-        <b>ให้อาหาร</b><small>ดูแล Buddy</small>
-      </button>
-      <button class="p89Action play" type="button" data-app-go="modes">
-        <span class="p900ActionIcon playIcon" aria-hidden="true"></span>
-        <b>เล่นเกม</b><small>เก็บแต้ม</small>
-      </button>
-      <button class="p89Action createRoom" type="button" id="p911CreateRoomBtn">
-        <span class="p911ActionIcon createRoomIcon" aria-hidden="true"></span>
-        <b>สร้างห้อง</b><small>แข่งกับเพื่อน</small>
-      </button>
-      <button class="p89Action inventory" type="button" data-app-go="inventory">
-        <span class="p911ActionIcon inventoryIcon" aria-hidden="true"></span>
-        <b>คลัง</b><small>ของที่มี</small>
-      </button>
-      <button class="p89Action shop" type="button" data-app-go="shop">
-        <span class="p911ActionIcon shopIcon" aria-hidden="true"></span>
-        <b>ร้านค้า</b><small>เลือกของใหม่</small>
-      </button>
-    </section>
+    
+<section class="p89MainActions p94HomeDock" aria-label="เมนูหลัก">
+  <button class="p94HomeLogo feed" type="button" id="p898FeedBtn" aria-haspopup="dialog" aria-controls="p898FeedModal">
+    <span class="p94LogoIcon foodIcon94" aria-hidden="true"></span>
+    <b>ให้อาหาร</b>
+  </button>
+
+  <button class="p94HomeLogo play primary" type="button" data-app-go="modes">
+    <span class="p94LogoIcon playIcon94" aria-hidden="true"></span>
+    <b>เริ่มเล่น</b>
+  </button>
+
+  <button class="p94HomeLogo menu" type="button" id="p94MenuBtn">
+    <span class="p94LogoIcon menuIcon94" aria-hidden="true"></span>
+    <b>เมนู</b>
+    <span class="p94MenuBadge hidden" id="p94MenuBadge">0</span>
+  </button>
+</section>
 
     
   </section>
@@ -16278,15 +16851,76 @@ body.p93SocialOpen{overflow:hidden!important}
 
 
 
-<section class="bbAppScreen p91Screen p911AdventureScreen" id="bbAppModes" data-app-screen="modes">
+
+<section class="bbAppScreen p94PlayHubScreen" id="bbAppModes" data-app-screen="modes">
+  <header class="p94PlayTop">
+    <button class="p94RoundBack" type="button" data-app-go="home" aria-label="กลับ">
+      <svg viewBox="0 0 24 24"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="p94PlayBrand">
+      <small>POMRU • PLAY</small>
+      <b>เลือกวิธีเล่น</b>
+    </div>
+    <button class="p94TinyProfile" type="button" data-app-action="profile">
+      <img src="/assets/buddy/default-pink-buddy.png?v=940" alt="">
+    </button>
+  </header>
+
+  <main class="p94PlayPage">
+    <section class="p94PlayHero">
+      <div>
+        <span>พร้อมแล้วใช่ไหม?</span>
+        <h1>วันนี้<br>เล่นแบบไหนดี?</h1>
+        <p>เลือกเพียงหนึ่งโหมด — ฝึกด้วยตัวเอง เล่นกับเพื่อน หรือแข่งขันจัดอันดับแบบ 1 ต่อ 1</p>
+      </div>
+      <div class="p94PlayBuddy" aria-hidden="true">
+        <img src="/assets/buddy/default-pink-buddy.png?v=940" alt="">
+      </div>
+    </section>
+
+    <section class="p94ModeChoices">
+      <button class="p94ModeCard solo" type="button" data-app-go="solo">
+        <span class="p94ModeLogo"><i class="soloIcon94"></i></span>
+        <span class="p94ModeCopy">
+          <small>SOLO</small>
+          <strong>เล่นคนเดียว</strong>
+          <p>เลือก Memory, Math หรือ Language แล้วเล่นฝึกด้วยตัวเอง</p>
+        </span>
+        <span class="p94ModeArrow">›</span>
+      </button>
+
+      <button class="p94ModeCard room" type="button" id="p94FriendRoomBtn">
+        <span class="p94ModeLogo"><i class="roomIcon94"></i></span>
+        <span class="p94ModeCopy">
+          <small>FRIEND ROOM</small>
+          <strong>สร้างห้อง</strong>
+          <p>สร้างห้อง 1v1 เชิญเพื่อน ดูสถานะออนไลน์ และแชทก่อนเล่น</p>
+        </span>
+        <span class="p94ModeArrow">›</span>
+      </button>
+
+      <button class="p94ModeCard ranked" type="button" id="p94RankedModeBtn">
+        <span class="p94ModeLogo"><i class="rankIcon94"></i></span>
+        <span class="p94ModeCopy">
+          <small>RANKED 1V1</small>
+          <strong>โหมดจัดอันดับ</strong>
+          <p>กดเริ่มแล้วระบบจะสุ่มผู้เล่นแรงก์ใกล้เคียงให้โดยอัตโนมัติ</p>
+        </span>
+        <span class="p94RankLive"><i></i> MATCHMAKING</span>
+        <span class="p94ModeArrow">›</span>
+      </button>
+    </section>
+  </main>
+</section>
+<section class="bbAppScreen p91Screen p911AdventureScreen p94SoloWorldScreen" id="bbAppSoloModes" data-app-screen="solo">
   <header class="p911AdventureTop">
-    <button class="p91Back p911RoundBack" type="button" data-app-go="home" aria-label="กลับหน้าหลัก">
+    <button class="p91Back p911RoundBack" type="button" data-app-go="modes" aria-label="กลับหน้าหลัก">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
 
     <div class="p911AdventureBrand">
       <span class="p911LogoWord">POMRU</span>
-      <small>เลือกโลกที่อยากเล่น</small>
+      <small>เล่นคนเดียว • เลือกเกม</small>
     </div>
 
     <div class="p911AdventureWallet">
@@ -16304,8 +16938,8 @@ body.p93SocialOpen{overflow:hidden!important}
     <section class="p911AdventureHero">
       <div class="p911Welcome">
         <span>ยินดีต้อนรับกลับ</span>
-        <h1>วันนี้อยาก<br>เล่นอะไร?</h1>
-        <p>เลือกโลกที่ชอบ แล้วเริ่มผจญภัย เก็บแต้ม และเพิ่มเลเวลได้เลย</p>
+        <h1>เลือกเกม<br>สำหรับฝึก</h1>
+        <p>เล่นด้วยตัวเอง ฝึกทักษะ เก็บแต้ม และพัฒนาเลเวลของคุณ</p>
       </div>
       <div class="p911HeroCharacter" aria-hidden="true">
         <span class="p911Crown"></span>
@@ -16365,7 +16999,7 @@ body.p93SocialOpen{overflow:hidden!important}
 
 <section class="bbAppScreen p91Screen p91Subject" id="bbAppMathGames" data-app-screen="mathgames">
   <header class="p91Topbar">
-    <button class="p91Back" type="button" data-app-go="modes" aria-label="กลับ">
+    <button class="p91Back" type="button" data-app-go="solo" aria-label="กลับ">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
     <div class="p91Brand">
@@ -16427,7 +17061,7 @@ body.p93SocialOpen{overflow:hidden!important}
 
 <section class="bbAppScreen p91Screen p91Subject" id="bbAppLanguageGames" data-app-screen="languagegames">
   <header class="p91Topbar">
-    <button class="p91Back" type="button" data-app-go="modes" aria-label="กลับ">
+    <button class="p91Back" type="button" data-app-go="solo" aria-label="กลับ">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
     <div class="p91Brand">
@@ -16587,7 +17221,7 @@ body.p93SocialOpen{overflow:hidden!important}
 
 <section class="bbAppScreen p91Screen p91Memory" id="bbAppTeddyModes" data-app-screen="teddy">
   <header class="p91Topbar">
-    <button class="p91Back" type="button" data-app-go="modes" aria-label="กลับ">
+    <button class="p91Back" type="button" data-app-go="solo" aria-label="กลับ">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
     <div class="p91Brand">
@@ -18639,7 +19273,7 @@ window.addEventListener("load",()=>{
     if(!currentRoom?.id||!client)return;
     const rq=await client.from("ranked_rooms").select("*").eq("id",currentRoom.id).maybeSingle();
     if(rq.error||!rq.data){toast("ห้องถูกปิดแล้ว");currentRoom=null;cleanupRoomChannel();show("#bbArenaRoom",false);show("#bbArenaLobby",true);await loadLobby();subscribeLobby();return}
-    currentRoom=rq.data;
+    currentRoom=rq.data;window.POMRU_MATCH_KIND=currentRoom?.match_kind||"ranked";
     const pq=await client.from("ranked_room_players").select("room_id,user_id,seat,is_ready,joined_at").eq("room_id",currentRoom.id).order("seat");
     if(pq.error){toast(errText(pq.error));return}
     const raw=pq.data||[],ids=raw.map(x=>x.user_id);
@@ -19619,12 +20253,14 @@ window.addEventListener("load",()=>{
       .sort((a,b)=>Number(a.placement)-Number(b.placement));
 
     const mine=ordered.find(r=>r.user_id===user?.id);
+    const casualMatch=window.POMRU_MATCH_KIND==="casual";
+    document.body.classList.toggle("p94CasualResult",casualMatch);
     const world=resultWorldInfo(first.ranked_world||mine?.ranked_world);
     const modeText=modeLabel(first.mode_code||activeRankedMatch?.mode_code,activeRankedMatch?.mode);
     const diffText=diffLabel(first.difficulty_code||activeRankedMatch?.difficulty_code,activeRankedMatch?.difficulty);
 
     $("#bbResultMatchStamp").innerHTML=`
-      <span>${world.icon} ${esc(world.name)} Ranked</span>
+      <span>${world.icon} ${esc(world.name)} ${casualMatch?"ห้องเพื่อน":"จัดอันดับ"}</span>
       <b>${esc(modeText)} • ${esc(diffText)}</b>`;
 
     $("#bbResultPlayerCount").textContent=`${ordered.length.toLocaleString()} ผู้เล่น`;
@@ -19637,8 +20273,9 @@ window.addEventListener("load",()=>{
             ? "🥇 เบอร์หนึ่งของแมตช์!"
             : `🏆 อันดับ #${Number(mine.placement)}`;
 
-      $("#bbResultMainSub").textContent=
-        `Performance ${Number(mine.performance_score||0).toLocaleString()} / 1000 • ${fmtRPDelta(mine.rp_change)} Overall RP`;
+      $("#bbResultMainSub").textContent=casualMatch
+        ? `Performance ${Number(mine.performance_score||0).toLocaleString()} / 1000 • ห้องเพื่อนไม่เปลี่ยนแรงก์`
+        : `Performance ${Number(mine.performance_score||0).toLocaleString()} / 1000 • ผลจัดอันดับถูกบันทึกแล้ว`;
     }else{
       $("#bbResultMainTitle").textContent="🏆 ผลการแข่งขัน";
       $("#bbResultMainSub").textContent="ประกาศอันดับเรียบร้อยแล้ว";
@@ -19748,7 +20385,7 @@ window.addEventListener("load",()=>{
           </article>
         </div>`;
 
-      showRankUpIfNeeded(mine);
+      if(!casualMatch)showRankUpIfNeeded(mine);
 
     }else{
       $("#bbMyRank").innerHTML=
@@ -19955,12 +20592,12 @@ window.addEventListener("load",()=>{
     if(push&&screen!==next)previous=screen;
     screen=next;
     document.querySelectorAll(".bbAppScreen").forEach(s=>s.classList.toggle("active",s===target));
-    document.body.classList.toggle("bbCandySelect",["modes","teddy","mathgames","languagegames","learningplay"].includes(next));
+    document.body.classList.toggle("bbCandySelect",["modes","solo","teddy","mathgames","languagegames","learningplay"].includes(next));
     document.body.classList.toggle("bbCandyHome",next==="home");
     document.body.classList.toggle("bbCandySetup",next==="setup");
     if(typeof setDockActive==="function"){
       if(next==="home")setDockActive("home");
-      else if(["modes","teddy","mathgames","languagegames","learningplay","setup"].includes(next))setDockActive("play");
+      else if(["modes","solo","teddy","mathgames","languagegames","learningplay","setup"].includes(next))setDockActive("play");
       else if(next==="shop"||next==="inventory"||next==="topup")setDockActive("shop");
     }
     if(next==="shop")window.bbLoadShop?.();
@@ -28593,7 +29230,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </button>
     <div class="p93SocialBrand">
       <small>POMRU SOCIAL</small>
-      <h1>เพื่อน & ดวล 1v1</h1>
+      <h1>เพื่อน & ห้อง 1v1</h1>
     </div>
     <div class="p93SocialMe">
       <span class="p93Pulse"></span>
@@ -28604,9 +29241,9 @@ document.addEventListener('DOMContentLoaded', () => {
   <main class="p93SocialMain">
     <section class="p93DuelHero">
       <div class="p93DuelHeroCopy">
-        <span class="p93HeroPill">RANKED DUEL</span>
-        <h2>ท้าดวลเพื่อน<br>แบบตัวต่อตัว</h2>
-        <p>เห็นว่าใครออนไลน์ ชวนเข้าห้อง คุยกันก่อนเริ่ม และแข่งพร้อมกันแบบ Realtime</p>
+        <span class="p93HeroPill">FRIEND ROOM</span>
+        <h2>สร้างห้องกับเพื่อน<br>แบบตัวต่อตัว</h2>
+        <p>เห็นว่าใครออนไลน์ ชวนเข้าห้อง คุยกันก่อนเริ่ม และเล่นพร้อมกันแบบ Realtime</p>
         <div class="p93HeroActions">
           <button type="button" class="primary" id="p93CreateCodeRoom">สร้างห้อง 1v1</button>
           <button type="button" class="secondary" id="p93OpenJoinCode">เข้าด้วยรหัส</button>
@@ -29564,6 +30201,585 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener("DOMContentLoaded",check,{once:true});
   }else{
     check();
+  }
+})();
+</script>
+
+
+<div class="p94QuickMenuBackdrop hidden" id="p94QuickMenu">
+  <section class="p94QuickMenuCard">
+    <div class="p94QuickMenuHead">
+      <div><small>POMRU MENU</small><h2>เมนูของฉัน</h2></div>
+      <button type="button" id="p94MenuClose">×</button>
+    </div>
+
+    <div class="p94QuickGrid p941QuickGrid">
+      <button type="button" data-app-action="profile">
+        <span class="p94QIcon profile"></span>
+        <b>โปรไฟล์</b><small>ชื่อ รูป และตั้งค่า</small>
+      </button>
+
+      <button type="button" id="p94MenuFriends">
+        <span class="p94QIcon friends"></span>
+        <b>เพื่อน</b><small>ออนไลน์และคำเชิญ</small>
+      </button>
+
+      <button type="button" id="p941MissionBtn">
+        <span class="p94QIcon mission941"></span>
+        <b>ภารกิจ</b><small>ภารกิจประจำวันนี้</small>
+      </button>
+
+      <button type="button" id="p941RankBtn">
+        <span class="p94QIcon rank941"></span>
+        <b>อันดับ</b><small>อันดับซีซันของคุณ</small>
+      </button>
+
+      <button type="button" data-app-go="inventory">
+        <span class="p94QIcon inventory"></span>
+        <b>คลัง</b><small>ของและชุด Buddy</small>
+      </button>
+
+      <button type="button" data-app-go="shop">
+        <span class="p94QIcon shop"></span>
+        <b>ร้านค้า</b><small>ใช้เหรียญเลือกของ</small>
+      </button>
+    </div>
+  </section>
+</div>
+
+
+<div class="p94RankedOverlay hidden" id="p94RankedOverlay" aria-hidden="true">
+  <header class="p94RankedTop">
+    <button type="button" id="p94RankedClose" aria-label="กลับ">
+      <svg viewBox="0 0 24 24"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div><small>POMRU RANKED</small><b>จัดอันดับ 1v1</b></div>
+    <span class="p94RankedStatusPill" id="p94RankedStatusPill">พร้อมจับคู่</span>
+  </header>
+
+  <main class="p94RankedPage">
+    <section class="p94RankedIntro" id="p94RankedIntro">
+      <div class="p94RankedShield"><span>VS</span></div>
+      <span class="p94HeroPill2">MATCHMAKING</span>
+      <h1>หาคู่แข่ง<br>แรงก์ใกล้เคียง</h1>
+      <p>ระบบเริ่มค้นหาจากผู้เล่นระดับใกล้คุณที่สุด และค่อย ๆ ขยายช่วงค้นหาเมื่อรอนานขึ้น</p>
+
+      <div class="p94RankedRules">
+        <div><b>1 VS 1</b><small>สองคนเท่านั้น</small></div>
+        <div><b>ใกล้เคียง</b><small>จับคู่ตามแรงก์</small></div>
+        <div><b>Realtime</b><small>เริ่มจากเวลา Server</small></div>
+      </div>
+
+      <button type="button" class="p94RankedStartBtn" id="p94RankedStartBtn">เริ่มจับคู่</button>
+      <small class="p94RankedNote">Ranked รุ่นแรกสุ่มจาก 3 เกม Memory มาตรฐาน เพื่อให้ทั้งสองฝ่ายใช้กติกาเดียวกัน</small>
+    </section>
+
+    <section class="p94Searching hidden" id="p94Searching">
+      <div class="p94SearchVisual">
+        <div class="p94SearchRing r1"></div>
+        <div class="p94SearchRing r2"></div>
+        <div class="p94SearchAvatar">
+          <img src="/assets/buddy/default-pink-buddy.png?v=940" alt="">
+        </div>
+      </div>
+
+      <span class="p94HeroPill2">SEARCHING</span>
+      <h2>กำลังหาคู่แข่ง…</h2>
+      <p id="p94SearchText">กำลังค้นหาผู้เล่นแรงก์ใกล้เคียง</p>
+      <div class="p94SearchTimer" id="p94SearchTimer">00:00</div>
+      <button type="button" class="p94CancelMatch" id="p94CancelMatch">ยกเลิกการค้นหา</button>
+    </section>
+
+    <section class="p94Matched hidden" id="p94Matched">
+      <span class="p94HeroPill2 good">MATCH FOUND</span>
+      <h2>พบคู่แข่งแล้ว!</h2>
+
+      <div class="p94MatchedVS">
+        <article>
+          <div class="p94MatchAvatar">
+            <img src="/assets/buddy/default-pink-buddy.png?v=940" alt="">
+          </div>
+          <small>YOU</small>
+          <b id="p94MatchMeName">คุณ</b>
+        </article>
+
+        <strong>VS</strong>
+
+        <article>
+          <div class="p94MatchAvatar" id="p94MatchOpponentAvatar"><span>?</span></div>
+          <small>OPPONENT</small>
+          <b id="p94MatchOpponentName">คู่แข่ง</b>
+          <em id="p94MatchOpponentRank">แรงก์ใกล้เคียง</em>
+        </article>
+      </div>
+
+      <p id="p94MatchedGame">กำลังเตรียมห้องแข่งขัน…</p>
+    </section>
+
+    <section class="p94RankedError hidden" id="p94RankedError">
+      <b>เปิดระบบจับคู่ไม่สำเร็จ</b>
+      <p id="p94RankedErrorText"></p>
+      <button type="button" id="p94RankedRetry">ลองใหม่</button>
+    </section>
+  </main>
+</div>
+
+
+<script id="pomru-v94-playhub-matchmaking-runtime">
+(function(){
+  "use strict";
+
+  const $=id=>document.getElementById(id);
+  const show=(id,on=true)=>$(id)?.classList.toggle("hidden",!on);
+
+  let client=null;
+  let user=null;
+  let queueTimer=null;
+  let queueStartedAt=0;
+  let queueBusy=false;
+  let matched=false;
+
+  function getClient(){
+    if(client)return client;
+    if(window.__bbSupabase?.auth)return client=window.__bbSupabase;
+    if(window.sb?.auth)return client=window.sb;
+    return null;
+  }
+
+  async function getUser(){
+    const c=getClient();
+    if(!c)return null;
+    const {data}=await c.auth.getUser();
+    user=data?.user||null;
+    return user;
+  }
+
+  async function rpc(name,args={}){
+    const c=getClient();
+    if(!c)throw new Error("ยังเชื่อมต่อระบบออนไลน์ไม่สำเร็จ");
+    const {data,error}=await c.rpc(name,args);
+    if(error)throw error;
+    return data;
+  }
+
+  function errorText(e){
+    const s=String(e?.message||e||"เกิดข้อผิดพลาด");
+    if(
+      s.includes("bb_ranked_matchmaking_tick")
+      ||s.includes("Could not find the function")
+    ){
+      return "ยังไม่ได้ติดตั้งระบบ Matchmaking • กรุณารัน POMRU Step E1 ใน Supabase ก่อน";
+    }
+    if(s.includes("authentication_required"))return "กรุณาเข้าสู่ระบบก่อน";
+    return s;
+  }
+
+  function openMenu(){show("p94QuickMenu",true)}
+  function closeMenu(){show("p94QuickMenu",false)}
+
+  async function openFriendRoom(){
+    closeMenu();
+
+    if(window.POMRUDuel?.openHub){
+      window.POMRUDuel.openHub("friends");
+      return;
+    }
+
+    if(window.bbOpenRankedArena){
+      window.bbOpenRankedArena();
+    }
+  }
+
+  function state(screen){
+    ["p94RankedIntro","p94Searching","p94Matched","p94RankedError"]
+      .forEach(id=>show(id,id===screen));
+  }
+
+  async function openRanked(){
+    await getUser();
+
+    if(!user){
+      window.POMRUMember?.gateOpen?.();
+      return;
+    }
+
+    stopPoll();
+    queueStartedAt=0;
+    matched=false;
+
+    state("p94RankedIntro");
+    $("p94RankedStatusPill").textContent="พร้อมจับคู่";
+
+    show("p94RankedOverlay",true);
+    $("p94RankedOverlay")?.setAttribute("aria-hidden","false");
+    document.body.classList.add("p94RankedOpen");
+  }
+
+  async function closeRanked(){
+    if(queueTimer){
+      try{await rpc("bb_ranked_matchmaking_cancel")}catch(_){}
+    }
+
+    stopPoll();
+    show("p94RankedOverlay",false);
+    $("p94RankedOverlay")?.setAttribute("aria-hidden","true");
+    document.body.classList.remove("p94RankedOpen");
+  }
+
+  function stopPoll(){
+    if(queueTimer){
+      clearInterval(queueTimer);
+      queueTimer=null;
+    }
+    queueBusy=false;
+  }
+
+  function renderTimer(){
+    if(!queueStartedAt)return;
+
+    const sec=Math.max(
+      0,
+      Math.floor((Date.now()-queueStartedAt)/1000)
+    );
+
+    $("p94SearchTimer").textContent=
+      String(Math.floor(sec/60)).padStart(2,"0")
+      +":"
+      +String(sec%60).padStart(2,"0");
+  }
+
+  function modeName(code){
+    return ({
+      teddy_position:"จำตำแหน่ง",
+      teddy_match:"จับคู่",
+      teddy_sequence:"จำลำดับ"
+    })[code]||"Memory";
+  }
+
+  function rankName(tier){
+    return ({
+      bronze:"ทองแดง",
+      silver:"เงิน",
+      gold:"ทอง",
+      platinum:"แพลทินัม",
+      diamond:"เพชร",
+      master:"มาสเตอร์",
+      legend:"ตำนาน"
+    })[String(tier||"").toLowerCase()]||String(tier||"ใกล้เคียง");
+  }
+
+  function avatar(url,name){
+    if(url){
+      return `<img src="${String(url).replace(/"/g,"&quot;")}" alt="">`;
+    }
+    return `<span>${String(name||"?").trim().slice(0,1)||"?"}</span>`;
+  }
+
+  async function startSearch(){
+    if(queueTimer||queueBusy)return;
+
+    await getUser();
+
+    if(!user){
+      window.POMRUMember?.gateOpen?.();
+      return;
+    }
+
+    matched=false;
+    queueStartedAt=Date.now();
+
+    state("p94Searching");
+    $("p94RankedStatusPill").textContent="กำลังจับคู่";
+    $("p94SearchText").textContent="กำลังค้นหาผู้เล่นแรงก์ใกล้เคียง";
+
+    renderTimer();
+
+    await tick();
+
+    if(!matched && !queueTimer){
+      queueTimer=setInterval(()=>{
+        renderTimer();
+        tick();
+      },1800);
+    }
+  }
+
+  async function tick(){
+    if(queueBusy||matched)return;
+
+    queueBusy=true;
+
+    try{
+      const data=await rpc("bb_ranked_matchmaking_tick");
+      const row=Array.isArray(data)?data[0]:data;
+
+      if(!row)return;
+
+      if(row.queue_status==="searching"){
+        const sec=Number(row.wait_seconds||0);
+
+        $("p94SearchText").textContent=
+          sec>=20
+            ?"กำลังขยายการค้นหาเพื่อให้เจอคู่เร็วขึ้น"
+            :sec>=10
+              ?"กำลังค้นหาเพิ่ม แต่ยังเน้นผู้เล่นระดับใกล้กัน"
+              :"กำลังค้นหาผู้เล่นแรงก์ใกล้เคียง";
+
+        return;
+      }
+
+      if(row.queue_status==="matched" && row.room_id){
+
+        matched=true;
+        stopPoll();
+
+        const progress=window.POMRUProgress?.getState?.()?.progress||{};
+
+        $("p94MatchMeName").textContent=
+          progress.display_name
+          ||user.user_metadata?.display_name
+          ||user.email?.split("@")[0]
+          ||"คุณ";
+
+        $("p94MatchOpponentName").textContent=row.opponent_name||"คู่แข่ง";
+        $("p94MatchOpponentRank").textContent="แรงก์ "+rankName(row.opponent_ranked_tier);
+        $("p94MatchOpponentAvatar").innerHTML=avatar(row.opponent_avatar_url,row.opponent_name);
+        $("p94MatchedGame").textContent=
+          `เกม: ${modeName(row.mode_code)} • กำลังเตรียมห้องแข่งขัน`;
+
+        $("p94RankedStatusPill").textContent="พบคู่แข่ง";
+        state("p94Matched");
+
+        
+        // อีกฝ่ายต้อง join ห้องด้วย session ของตัวเอง
+        if(user.id!==row.host_user_id){
+          const joined=await rpc(
+            "bb_ranked_join_room",
+            {p_room_code:row.room_code}
+          );
+
+          const jr=Array.isArray(joined)?joined[0]:joined;
+
+          if(!jr?.room_id){
+            throw new Error("เข้าห้องแข่งขันไม่สำเร็จ");
+          }
+        }
+
+        try{
+          await rpc(
+            "bb_presence_touch",
+            {
+              p_status:"online",
+              p_room_id:row.room_id
+            }
+          );
+        }catch(_){}
+
+        setTimeout(async()=>{
+
+          show("p94RankedOverlay",false);
+          $("p94RankedOverlay")?.setAttribute("aria-hidden","true");
+          document.body.classList.remove("p94RankedOpen");
+
+          // เปิดหน้า VS / Chat ของ v93
+          if(window.POMRUDuel?.openArenaRoom){
+            await window.POMRUDuel.openArenaRoom();
+          }else if(window.__POMRU_LEGACY_ARENA_OPEN){
+            await window.__POMRU_LEGACY_ARENA_OPEN();
+          }
+
+        },1700);
+
+      }
+
+    }catch(e){
+
+      stopPoll();
+
+      $("p94RankedErrorText").textContent=errorText(e);
+      $("p94RankedStatusPill").textContent="เกิดข้อผิดพลาด";
+      state("p94RankedError");
+
+    }finally{
+      queueBusy=false;
+    }
+  }
+
+  async function cancelSearch(){
+    try{
+      await rpc("bb_ranked_matchmaking_cancel");
+    }catch(_){}
+
+    stopPoll();
+    queueStartedAt=0;
+
+    state("p94RankedIntro");
+    $("p94RankedStatusPill").textContent="พร้อมจับคู่";
+  }
+
+  function syncNotificationBadge(){
+    const source=$("p93FriendsBadge");
+    const target=$("p94MenuBadge");
+
+    if(!source||!target)return;
+
+    const n=parseInt(source.textContent||"0",10)||0;
+
+    target.textContent=n>99?"99+":String(n);
+    target.classList.toggle("hidden",n<1);
+  }
+
+  function bind(){
+    $("p94MenuBtn")?.addEventListener("click",openMenu);
+    $("p94MenuClose")?.addEventListener("click",closeMenu);
+
+    $("p94QuickMenu")?.addEventListener("click",e=>{
+      if(e.target.id==="p94QuickMenu")closeMenu();
+    });
+
+    $("p94MenuFriends")?.addEventListener("click",openFriendRoom);
+    $("p94FriendRoomBtn")?.addEventListener("click",openFriendRoom);
+
+    $("p94RankedModeBtn")?.addEventListener("click",openRanked);
+    $("p94RankedStartBtn")?.addEventListener("click",startSearch);
+    $("p94CancelMatch")?.addEventListener("click",cancelSearch);
+    $("p94RankedClose")?.addEventListener("click",closeRanked);
+
+    $("p94RankedRetry")?.addEventListener("click",()=>{
+      state("p94RankedIntro");
+      $("p94RankedStatusPill").textContent="พร้อมจับคู่";
+    });
+
+    document.addEventListener("click",e=>{
+      if(
+        e.target.closest(
+          "#p94QuickMenu [data-app-go],#p94QuickMenu [data-app-action]"
+        )
+      ){
+        setTimeout(closeMenu,0);
+      }
+    });
+
+    document.addEventListener("pomru:progress-updated",syncNotificationBadge);
+    document.addEventListener("pomru:v899-synced",syncNotificationBadge);
+
+    setTimeout(syncNotificationBadge,700);
+  }
+
+  window.POMRUV94={
+    openMenu,
+    openFriendRoom,
+    openRanked
+  };
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",bind,{once:true});
+  }else{
+    bind();
+  }
+})();
+</script>
+
+
+<div class="p941InfoBackdrop hidden" id="p941InfoBackdrop" aria-hidden="true">
+  <button type="button" class="p941InfoClose" id="p941InfoClose" aria-label="ปิด">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="m7 7 10 10M17 7 7 17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+    </svg>
+  </button>
+</div>
+
+
+<script id="pomru-v941-clean-home-runtime">
+(function(){
+  "use strict";
+
+  const $=id=>document.getElementById(id);
+  const body=document.body;
+
+  function closeQuickMenu(){
+    $("p94QuickMenu")?.classList.add("hidden");
+  }
+
+  function openInfo(which){
+    closeQuickMenu();
+
+    body.classList.remove("p941MissionOpen","p941RankOpen");
+    body.classList.add(
+      which==="mission" ? "p941MissionOpen" : "p941RankOpen"
+    );
+
+    const overlay=$("p941InfoBackdrop");
+    overlay?.classList.remove("hidden");
+    overlay?.setAttribute("aria-hidden","false");
+  }
+
+  function closeInfo(){
+    body.classList.remove("p941MissionOpen","p941RankOpen");
+
+    const overlay=$("p941InfoBackdrop");
+    overlay?.classList.add("hidden");
+    overlay?.setAttribute("aria-hidden","true");
+  }
+
+  function bind(){
+    $("p941MissionBtn")?.addEventListener(
+      "click",
+      ()=>openInfo("mission")
+    );
+
+    $("p941RankBtn")?.addEventListener(
+      "click",
+      ()=>openInfo("rank")
+    );
+
+    $("p941InfoClose")?.addEventListener(
+      "click",
+      closeInfo
+    );
+
+    $("p941InfoBackdrop")?.addEventListener(
+      "click",
+      e=>{
+        if(e.target?.id==="p941InfoBackdrop"){
+          closeInfo();
+        }
+      }
+    );
+
+    document.addEventListener(
+      "keydown",
+      e=>{
+        if(e.key==="Escape")closeInfo();
+      }
+    );
+
+    /* Ranking's existing 'ดูทั้งหมด' / my-rank flows keep working.
+       Close this lightweight focus layer first when those controls are used. */
+    $("p899RankAllBtn")?.addEventListener(
+      "click",
+      ()=>setTimeout(closeInfo,0)
+    );
+    $("p899MyRankBtn")?.addEventListener(
+      "click",
+      ()=>setTimeout(closeInfo,0)
+    );
+  }
+
+  window.POMRUV941={
+    openMission:()=>openInfo("mission"),
+    openRank:()=>openInfo("rank"),
+    closeInfo
+  };
+
+  if(document.readyState==="loading"){
+    document.addEventListener(
+      "DOMContentLoaded",
+      bind,
+      {once:true}
+    );
+  }else{
+    bind();
   }
 })();
 </script>
