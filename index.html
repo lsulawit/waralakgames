@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>POMRU • ผมรู้ — v97.3.1 Closet + Ranked Hotfix</title>
+<title>POMRU • ผมรู้ — v97.3.2 Skin UX + Ranked Content Fix</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -20729,7 +20729,7 @@ button{
     <div class="bbShopV2HeroCopy">
       <span>SHOP 2.0</span>
       <h1>สร้าง Buddy ในแบบของคุณ</h1>
-      <p>เปลี่ยนตัวละคร สกิน ชุด หมวก และเอฟเฟกต์ได้อย่างอิสระ ของแต่งไม่มีผลต่อแรงก์หรืออันดับ</p>
+      <p>เปลี่ยนสี Buddy ชุด หมวก เครื่องประดับ และเอฟเฟกต์ได้อย่างอิสระ ของแต่งไม่มีผลต่อแรงก์หรืออันดับ</p>
       <button type="button" data-app-go="inventory">เปิดห้องแต่งตัว →</button>
     </div>
 
@@ -31207,13 +31207,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const BB_DEFAULT_BUDDY_ASSET="/assets/buddy/default-pink-buddy.png";
 
   function displayCharacterItem(){
-    const character=loadoutItem("character");
-    const src=assetOf(character)||BB_DEFAULT_BUDDY_ASSET;
-
+    // v97.3.2: POMRU has one canonical Buddy character.
+    // Legacy character products (e.g. Cocoa Buddy) remain in DB for compatibility
+    // but no longer replace the mascot in the current UI. Color is handled by
+    // POMRUColorSkins and clothes/effects remain independent layers.
     return {
-      ...(character||{}),
-      name:character?.name||"Pink Buddy",
-      asset_url:src
+      name:"POMRU Buddy",
+      asset_url:BB_DEFAULT_BUDDY_ASSET,
+      item_code:"pomru_buddy_master",
+      slot_type:"character"
     };
   }
 
@@ -31223,8 +31225,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const character=displayCharacterItem();
     const characterLayer=q('[data-buddy-preview-layer="character"]',root);
     if(characterLayer)renderImageLayer(characterLayer,character);
+    renderImageLayer(q('[data-buddy-preview-layer="skin"]',root),null);
 
-    ["skin","outfit","accessory","hat","effect"].forEach(slot=>{
+    ["outfit","accessory","hat","effect"].forEach(slot=>{
       renderImageLayer(q(`[data-buddy-preview-layer="${slot}"]`,root),loadoutItem(slot));
     });
   }
@@ -31240,8 +31243,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderImageLayer(base,character);
 
+    // v97.3.2: color skins are CSS palettes, not legacy image layers.
+    renderImageLayer(q("#bbHomeBuddySkin"),null);
     const homeMap={
-      skin:"#bbHomeBuddySkin",
       outfit:"#bbHomeBuddyOutfit",
       accessory:"#bbHomeBuddyAccessory",
       hat:"#bbHomeBuddyHat",
@@ -31251,14 +31255,16 @@ document.addEventListener('DOMContentLoaded', () => {
       renderImageLayer(q(selector),loadoutItem(slot));
     });
 
-    const characterName=character?.name||"Pink Buddy";
-    const activeNames=[...state.loadout.values()].map(x=>x.name).filter(Boolean);
+    const characterName="POMRU Buddy";
+    const activeNames=[...state.loadout.entries()]
+      .filter(([slot])=>!['character','skin'].includes(slot))
+      .map(([,x])=>x.name).filter(Boolean);
 
     const label=q("#bbEquippedCosmeticLabel");
     if(label){
       label.textContent=activeNames.length
         ? "Look: "+activeNames.join(" • ")
-        : "Look: Pink Buddy";
+        : "Look: POMRU Buddy";
       label.classList.remove("hidden");
     }
 
@@ -31347,7 +31353,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(invBal)invBal.textContent=state.user?state.balance.toLocaleString():"—";
     if(shopOwned)shopOwned.textContent=state.owned.size.toLocaleString();
     if(invOwned)invOwned.textContent=state.owned.size.toLocaleString();
-    if(invEq)invEq.textContent=state.loadout.size.toLocaleString();
+    if(invEq)invEq.textContent=[...state.loadout.keys()].filter(x=>!['character','skin'].includes(x)).length.toLocaleString();
 
     q("#bbShopLogin")?.classList.toggle("hidden",!!state.user);
     q("#bbShopBody")?.classList.toggle("hidden",!state.user);
@@ -31364,6 +31370,11 @@ document.addEventListener('DOMContentLoaded', () => {
   function filteredItems(which){
     const filter=which==="shop"?shopFilter:closetFilter;
     let list=which==="shop"?state.items:state.items.filter(x=>state.owned.has(Number(x.id)));
+
+    // v97.3.2 taxonomy: one POMRU Buddy + color skins.
+    // Hide legacy character/skin products such as Cocoa Buddy/Pink Buddy so the
+    // player never sees two overlapping character systems. Records stay in DB.
+    list=list.filter(item=>!["character","skin"].includes(slotOf(item)));
 
     if(filter!=="all"){
       list=list.filter(item=>slotOf(item)===filter);
@@ -45526,12 +45537,12 @@ body.p971BattleActive.bbRankedPlaying:not(.bbRankedLearningPlaying) #game{paddin
   const STORAGE="pomru_color_skin_v1";
 
   const SKINS=[
-    {code:"pink",name:"Pink Buddy",short:"PINK",level:1,filter:"none"},
-    {code:"sky",name:"Sky Buddy",short:"SKY",level:2,filter:"hue-rotate(230deg) saturate(.78) brightness(1.07)"},
-    {code:"mint",name:"Mint Buddy",short:"MINT",level:4,filter:"hue-rotate(165deg) saturate(.62) brightness(1.08)"},
-    {code:"lavender",name:"Lavender Buddy",short:"LAV",level:6,filter:"hue-rotate(300deg) saturate(.72) brightness(1.04)"},
-    {code:"cream",name:"Cream Buddy",short:"CREAM",level:8,filter:"sepia(.42) saturate(.40) brightness(1.13) contrast(.94)"},
-    {code:"night",name:"Night Buddy",short:"NIGHT",level:10,filter:"grayscale(.48) hue-rotate(220deg) saturate(.42) brightness(.62) contrast(1.14)"}
+    {code:"pink",name:"Pink",short:"PINK",level:1,filter:"none"},
+    {code:"sky",name:"Sky Blue",short:"SKY",level:2,filter:"hue-rotate(230deg) saturate(.78) brightness(1.07)"},
+    {code:"mint",name:"Mint",short:"MINT",level:4,filter:"hue-rotate(165deg) saturate(.62) brightness(1.08)"},
+    {code:"lavender",name:"Lavender",short:"LAV",level:6,filter:"hue-rotate(300deg) saturate(.72) brightness(1.04)"},
+    {code:"cream",name:"Cream",short:"CREAM",level:8,filter:"sepia(.42) saturate(.40) brightness(1.13) contrast(.94)"},
+    {code:"night",name:"Night",short:"NIGHT",level:10,filter:"grayscale(.48) hue-rotate(220deg) saturate(.42) brightness(.62) contrast(1.14)"}
   ];
 
   let selected="pink";
@@ -45593,7 +45604,7 @@ body.p971BattleActive.bbRankedPlaying:not(.bbRankedLearningPlaying) #game{paddin
     const count=SKINS.filter(x=>lv>=x.level).length;
     box.innerHTML=`
       <div class="p972SkinHead">
-        <div><small>POMRU BUDDY COLLECTION</small><h3>เลือก Buddy ของคุณ</h3></div>
+        <div><small>POMRU COLOR SKINS</small><h3>เลือกสี Buddy</h3></div>
         <span class="p972SkinCount">${count} / ${SKINS.length} ปลดล็อก</span>
       </div>
       <div class="p972SkinGrid">
@@ -45601,12 +45612,12 @@ body.p971BattleActive.bbRankedPlaying:not(.bbRankedLearningPlaying) #game{paddin
           const open=lv>=s.level,active=s.code===selected;
           return `<button type="button" class="p972SkinCard ${open?"":"locked"} ${active?"active":""}" data-p972-skin="${s.code}" style="--skin-filter:${s.filter}">
             <span class="p972SkinThumb"><img src="${MASTER}" alt="${esc(s.name)}"></span>
-            <b>${esc(s.name)}</b><small>${open?(active?"กำลังใช้งาน":"ใช้ตัวนี้"):`ปลดล็อกที่เลเวล ${s.level}`}</small>
+            <b>${esc(s.name)}</b><small>${open?(active?"กำลังใช้สีนี้":"ใช้สีนี้"):`ปลดล็อกที่เลเวล ${s.level}`}</small>
             <span class="p972SkinLock">${active?"USE":open?"✓":"L"+s.level}</span>
           </button>`;
         }).join("")}
       </div>
-      <p class="p972SkinNote">สีพื้นฐานปลดล็อกจากการเล่น • ไม่มีผลต่อ HP หรือ Damage • สกินพิเศษแบบ Galaxy / Crystal / Sakura จะเป็นของสะสมใน Shop ภายหลัง</p>`;
+      <p class="p972SkinNote">Pink / Sky Blue / Mint / Lavender / Cream / Night คือ “สีของ POMRU Buddy ตัวเดียว” ไม่ใช่ตัวละครคนละตัว • สีไม่มีผลต่อ HP หรือ Damage</p>`;
   }
 
   async function saveRemote(code){
@@ -45639,10 +45650,10 @@ body.p971BattleActive.bbRankedPlaying:not(.bbRankedLearningPlaying) #game{paddin
 
   function choose(code){
     const s=skin(code);
-    if(!unlocked(s)){toast(`🔒 ${s.name} ปลดล็อกเมื่อถึง Level ${s.level}`);return}
+    if(!unlocked(s)){toast(`🔒 สี ${s.name} ปลดล็อกเมื่อถึง Level ${s.level}`);return}
     selected=s.code;writeLocal(selected);applySelf(selected);
     clearTimeout(saveTimer);saveTimer=setTimeout(()=>saveRemote(selected),120);
-    toast(`🎨 เปลี่ยนเป็น ${s.name} แล้ว`);
+    toast(`🎨 เปลี่ยน Buddy เป็นสี ${s.name} แล้ว`);
   }
 
   async function loadOpponentSkin(){
@@ -45663,7 +45674,7 @@ body.p971BattleActive.bbRankedPlaying:not(.bbRankedLearningPlaying) #game{paddin
     const host=$(nameId);if(!host)return;
     let chip=host.parentElement?.querySelector(`[data-p972-battle-skin="${key}"]`);
     if(!chip){chip=document.createElement("span");chip.className="p972BattleSkinName";chip.dataset.p972BattleSkin=key;host.insertAdjacentElement("afterend",chip)}
-    chip.textContent=name.replace(" Buddy","");
+    chip.textContent=name;
   }
 
   async function syncBattle(){
@@ -45929,12 +45940,13 @@ window.POMRUV973=Object.freeze({version:"97.3",feature:"single-image-battle-feel
 
 
 <!-- ==========================================================
-     POMRU v97.3.1 — CLOSET UX + RANKED COMPATIBILITY UI
-     Clear Buddy picker; existing inventory/shop logic remains intact.
+     POMRU v97.3.2 — SKIN-FIRST CLOSET + RANKED CONTENT FIX UI
+     One mascot identity. Pink/Sky/Mint/etc are color skins.
+     Legacy character products are hidden, not deleted.
      ========================================================== -->
-<style id="pomru-v9731-closet-style">
+<style id="pomru-v9732-closet-style">
 #bbAppInventory.bbClosetScreen{
-  --p9731-ink:#493858;--p9731-muted:#8f7f94;--p9731-purple:#7959da;--p9731-pink:#f65ca3;
+  --p9732-ink:#493858;--p9732-muted:#8f7f94;--p9732-purple:#7959da;--p9732-pink:#f65ca3;
   background:linear-gradient(180deg,#faf8ff 0%,#fff8fb 48%,#fff 100%)!important;
 }
 #bbAppInventory .bbClosetTop{max-width:1380px!important;padding:16px 18px 8px!important}
@@ -45942,18 +45954,20 @@ window.POMRUV973=Object.freeze({version:"97.3",feature:"single-image-battle-feel
 #bbAppInventory .bbClosetBrand small{color:#9a78ae!important}
 #bbAppInventory .bbClosetBrand h2{font-size:1.72rem!important;letter-spacing:-.02em}
 
-.p9731ClosetIntro{max-width:1380px;margin:4px auto 12px;padding:0 18px;box-sizing:border-box}
-.p9731ClosetHero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;margin-bottom:12px}
-.p9731ClosetHero h1{margin:0;color:#4c356b;font-size:clamp(26px,3.1vw,42px);line-height:1;font-weight:1000;letter-spacing:-.045em}
-.p9731ClosetHero p{margin:7px 0 0;color:#8c7b92;font-size:12px;font-weight:750}
-.p9731Help{max-width:390px;padding:11px 14px;border:1px solid rgba(131,89,161,.10);border-radius:18px;background:#fff9fd;color:#715f78;box-shadow:0 7px 18px rgba(75,50,85,.05)}
-.p9731Help b{display:block;color:#654692;font-size:11px}.p9731Help span{display:block;margin-top:2px;font-size:9px;line-height:1.45}
-.p9731Steps{display:grid;grid-template-columns:1.25fr repeat(4,1fr) .8fr;gap:8px}
-.p9731Step{min-width:0;min-height:70px;border:1.5px solid rgba(116,86,140,.10);border-radius:18px;padding:10px 12px;background:#fff;color:#766286;text-align:left;display:grid;grid-template-columns:34px minmax(0,1fr);align-items:center;gap:8px;cursor:pointer;box-shadow:0 4px 13px rgba(78,53,88,.035)}
-.p9731Step .ico{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:#f1ebff;color:#7658d3;font-size:16px;font-weight:1000}
-.p9731Step b,.p9731Step small{display:block}.p9731Step b{font-size:11px;color:#6a527a}.p9731Step small{margin-top:2px;font-size:7px;color:#a18fa6;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.p9731Step.active{border-color:transparent;background:linear-gradient(145deg,#ff70b0,#ef4f9a);color:#fff;box-shadow:0 9px 22px rgba(239,79,154,.20)}
-.p9731Step.active .ico{background:rgba(255,255,255,.22);color:#fff}.p9731Step.active b,.p9731Step.active small{color:#fff}
+.p9732ClosetIntro{max-width:1380px;margin:4px auto 12px;padding:0 18px;box-sizing:border-box}
+.p9732ClosetHero{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,410px);gap:14px;align-items:center;margin-bottom:12px}
+.p9732ClosetHero h1{margin:0;color:#4c356b;font-size:clamp(27px,3.1vw,42px);line-height:1;font-weight:1000;letter-spacing:-.045em}
+.p9732ClosetHero p{margin:7px 0 0;color:#8c7b92;font-size:12px;font-weight:750;line-height:1.5}
+.p9732Rule{padding:12px 14px;border:1px solid rgba(131,89,161,.11);border-radius:18px;background:linear-gradient(145deg,#fffafd,#f6f1ff);color:#715f78;box-shadow:0 7px 18px rgba(75,50,85,.05)}
+.p9732Rule b{display:block;color:#654692;font-size:11px}.p9732Rule span{display:block;margin-top:3px;font-size:9px;line-height:1.5}
+.p9732Rule strong{color:#ef4f9a}
+
+.p9732Steps{display:grid;grid-template-columns:1.2fr repeat(4,1fr) .8fr;gap:8px}
+.p9732Step{min-width:0;min-height:70px;border:1.5px solid rgba(116,86,140,.10);border-radius:18px;padding:10px 12px;background:#fff;color:#766286;text-align:left;display:grid;grid-template-columns:34px minmax(0,1fr);align-items:center;gap:8px;cursor:pointer;box-shadow:0 4px 13px rgba(78,53,88,.035)}
+.p9732Step .ico{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:#f1ebff;color:#7658d3;font-size:16px;font-weight:1000}
+.p9732Step b,.p9732Step small{display:block}.p9732Step b{font-size:11px;color:#6a527a}.p9732Step small{margin-top:2px;font-size:7px;color:#a18fa6;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p9732Step.active{border-color:transparent;background:linear-gradient(145deg,#ff70b0,#ef4f9a);color:#fff;box-shadow:0 9px 22px rgba(239,79,154,.20)}
+.p9732Step.active .ico{background:rgba(255,255,255,.22);color:#fff}.p9732Step.active b,.p9732Step.active small{color:#fff}
 
 #bbAppInventory .bbClosetLayout{max-width:1380px!important;grid-template-columns:minmax(330px,430px) minmax(0,1fr)!important;gap:16px!important;padding:0 18px 110px!important}
 #bbAppInventory .bbClosetPreviewCard,#bbAppInventory .bbClosetInventory{border-radius:28px!important;border:1.5px solid rgba(118,78,145,.09)!important;box-shadow:0 15px 38px rgba(74,49,84,.07)!important;background:rgba(255,255,255,.96)!important}
@@ -45961,19 +45975,18 @@ window.POMRUV973=Object.freeze({version:"97.3",feature:"single-image-battle-feel
 #bbAppInventory .bbClosetPreviewHead{align-items:flex-start!important}
 #bbAppInventory .bbClosetPreviewHead small{color:#a27699!important;letter-spacing:.15em!important}
 #bbAppInventory .bbClosetPreviewHead h1{font-size:1.45rem!important;margin-top:3px!important}
-#bbAppInventory .bbClosetPreviewHead p{display:none!important}
-#bbAppInventory .bbClosetOwned{display:none!important}
+#bbAppInventory .bbClosetPreviewHead p,#bbAppInventory .bbClosetOwned{display:none!important}
 #bbAppInventory .bbBuddyStage{margin-top:8px!important;border-radius:24px!important;min-height:420px!important;background:radial-gradient(circle at 50% 34%,#fff 0 20%,transparent 45%),linear-gradient(165deg,#fff0f8,#f5efff)!important}
-#bbAppInventory .bbBuddyStage::before{content:"กำลังใช้งาน";position:absolute;z-index:80;left:50%;top:12px;transform:translateX(-50%);padding:7px 13px;border-radius:999px;background:#f655a2;color:#fff;font-size:9px;font-weight:1000;box-shadow:0 6px 14px rgba(239,76,153,.18)}
+#bbAppInventory .bbBuddyStage::before{content:"POMRU BUDDY";position:absolute;z-index:80;left:50%;top:12px;transform:translateX(-50%);padding:7px 13px;border-radius:999px;background:#f655a2;color:#fff;font-size:9px;font-weight:1000;box-shadow:0 6px 14px rgba(239,76,153,.18)}
 #bbAppInventory .bbBuddyStageLabel{padding:12px 13px!important;border-radius:17px!important;background:rgba(255,255,255,.94)!important}
 #bbAppInventory .bbBuddyStageLabel strong{font-size:15px!important;color:#4f3c61!important}
 #bbAppInventory .bbBuddyStageLabel span{font-size:8px!important;color:#9c8da1!important}
-#bbAppInventory .bbLoadoutSlots{display:none!important}
+#bbAppInventory .bbLoadoutSlots,#bbAppInventory .bbClosetTabs{display:none!important}
 
-.p9731PreviewActions{display:grid;gap:8px;margin-top:10px}
-.p9731CurrentBtn,.p9731ShopBtn{min-height:46px;border-radius:15px;font-weight:1000;font-size:11px}
-.p9731CurrentBtn{border:0;background:linear-gradient(145deg,#ff70b0,#ef4f9a);color:#fff;cursor:default}
-.p9731ShopBtn{border:1.5px solid #a885ec;background:#fff;color:#7757cf;cursor:pointer}
+.p9732PreviewActions{display:grid;gap:8px;margin-top:10px}
+.p9732CurrentBtn,.p9732ShopBtn{min-height:46px;border-radius:15px;font-weight:1000;font-size:11px}
+.p9732CurrentBtn{border:0;background:linear-gradient(145deg,#ff70b0,#ef4f9a);color:#fff;cursor:default}
+.p9732ShopBtn{border:1.5px solid #a885ec;background:#fff;color:#7757cf;cursor:pointer}
 
 #bbAppInventory .bbClosetInventory{padding:18px!important;min-height:650px}
 #bbAppInventory .bbClosetInventoryHead{padding-bottom:11px;border-bottom:1px solid rgba(109,80,125,.07)}
@@ -45981,11 +45994,11 @@ window.POMRUV973=Object.freeze({version:"97.3",feature:"single-image-battle-feel
 #bbAppInventory .bbClosetInventoryHead h2{font-size:1.55rem!important;margin:2px 0!important}
 #bbAppInventory .bbClosetInventoryHead p{font-size:9px!important}
 #bbAppInventory .bbClosetInventoryHead>button{min-height:40px!important;border-radius:13px!important;background:#7757d6!important;color:#fff!important}
-#bbAppInventory .bbClosetTabs{display:none!important}
 #bbAppInventory .bbClosetGrid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important;margin-top:12px!important}
 #bbAppInventory .bbClosetItem{border-radius:18px!important;padding:7px!important}
 #bbAppInventory .bbClosetAction{min-height:36px!important;border-radius:11px!important;font-size:9px!important}
 
+/* The only skin picker: one mascot, six color palettes. */
 #p972SkinStudio{margin:12px 0 8px!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
 #p972SkinStudio .p972SkinHead{margin-bottom:12px!important}
 #p972SkinStudio .p972SkinHead small{color:#ae769a!important;font-size:7px!important}
@@ -46002,124 +46015,142 @@ window.POMRUV973=Object.freeze({version:"97.3",feature:"single-image-battle-feel
 #p972SkinStudio .p972SkinCard.active small{background:#f45aa2!important}
 #p972SkinStudio .p972SkinCard.locked small{background:#eee8f4!important;color:#725f7f!important}
 #p972SkinStudio .p972SkinLock{right:9px!important;top:9px!important}
-#p972SkinStudio .p972SkinNote{margin:11px 3px 0!important;padding:9px 11px;border-radius:12px;background:#faf7ff;color:#897990!important;font-size:8px!important}
-.p9731BuddySubhead{margin:12px 0 3px;padding-top:10px;border-top:1px solid rgba(104,76,119,.07);color:#6c5877;font-size:10px;font-weight:1000}
+#p972SkinStudio .p972SkinNote{margin:11px 3px 0!important;padding:10px 12px;border-radius:13px;background:#fff7fb;color:#725f7f!important;font-size:8px!important;line-height:1.55!important;border:1px solid rgba(239,79,154,.09)}
 
-.p9731Hidden{display:none!important}
+.p9732Hidden{display:none!important}
+.p9732Empty{margin:16px 0;padding:24px;border:1.5px dashed #ded3e5;border-radius:18px;text-align:center;color:#8d7c92;font-size:10px;font-weight:850;background:#fcfaff}
 
 @media(max-width:980px){
-  .p9731ClosetHero{grid-template-columns:1fr}.p9731Help{max-width:none}.p9731Steps{display:flex;overflow-x:auto;padding-bottom:3px;scrollbar-width:none}.p9731Steps::-webkit-scrollbar{display:none}.p9731Step{min-width:150px}
+  .p9732ClosetHero{grid-template-columns:1fr}.p9732Rule{max-width:none}.p9732Steps{display:flex;overflow-x:auto;padding-bottom:3px;scrollbar-width:none}.p9732Steps::-webkit-scrollbar{display:none}.p9732Step{min-width:150px}
   #bbAppInventory .bbClosetLayout{grid-template-columns:1fr!important}.bbClosetPreviewCard{position:relative!important;top:auto!important}.bbBuddyStage{min-height:360px!important}
   #p972SkinStudio .p972SkinGrid,#bbAppInventory .bbClosetGrid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 }
 @media(max-width:620px){
-  .p9731ClosetIntro{padding:0 10px}.p9731ClosetHero h1{font-size:28px}.p9731Help{display:none}
+  .p9732ClosetIntro{padding:0 10px}.p9732ClosetHero h1{font-size:28px}.p9732Rule{font-size:9px}
   #bbAppInventory .bbClosetLayout{padding:0 10px 100px!important}.bbClosetPreviewCard,.bbClosetInventory{padding:11px!important}
   #p972SkinStudio .p972SkinGrid,#bbAppInventory .bbClosetGrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
   #p972SkinStudio .p972SkinCard{min-height:190px!important}#p972SkinStudio .p972SkinThumb{height:116px!important}#p972SkinStudio .p972SkinThumb img{width:108px!important;height:108px!important}
 }
 </style>
 
-<script id="pomru-v9731-closet-runtime">
+<script id="pomru-v9732-closet-runtime">
 (function(){
   "use strict";
   const $=id=>document.getElementById(id);
   const steps=[
-    {key:"buddy",icon:"♥",label:"1. Buddy",sub:"เปลี่ยนตัวละคร / สี",filter:"character"},
+    {key:"skin",icon:"🎨",label:"1. สี Buddy",sub:"Pink / Sky / Mint",filter:null},
     {key:"outfit",icon:"T",label:"2. ชุด",sub:"เลือกชุดที่ชอบ",filter:"outfit"},
     {key:"hat",icon:"H",label:"3. หมวก",sub:"เปลี่ยนหมวก",filter:"hat"},
     {key:"accessory",icon:"A",label:"4. เครื่องประดับ",sub:"เพิ่มของตกแต่ง",filter:"accessory"},
     {key:"effect",icon:"✦",label:"5. เอฟเฟกต์",sub:"เอฟเฟกต์พิเศษ",filter:"effect"},
     {key:"more",icon:"+",label:"อื่น ๆ",sub:"Frame / Theme",filter:"all"}
   ];
-  let active="buddy";
+  let active="skin";
+
+  function selectedSkin(){
+    try{
+      const code=window.POMRUColorSkins?.selected?.()||"pink";
+      return window.POMRUColorSkins?.list?.().find(x=>x.code===code)||{code:"pink",name:"Pink"};
+    }catch(_){return {code:"pink",name:"Pink"}}
+  }
 
   function ensureIntro(){
-    if($("p9731ClosetIntro"))return;
+    if($("p9732ClosetIntro"))return;
     const layout=$("bbInventoryBody");if(!layout)return;
-    const intro=document.createElement("section");intro.id="p9731ClosetIntro";intro.className="p9731ClosetIntro";
-    intro.innerHTML=`<div class="p9731ClosetHero"><div><h1>แต่ง Buddy</h1><p>เริ่มจากเลือก Buddy ของคุณ แล้วค่อยเลือกชุด หมวก เครื่องประดับ และเอฟเฟกต์</p></div><div class="p9731Help"><b>💡 เปลี่ยนตัวละครตรงไหน?</b><span>กดแท็บ <strong>1. Buddy</strong> แล้วเลือกตัวที่ต้องการ จากนั้นกด “ใช้ตัวนี้”</span></div></div><nav class="p9731Steps" id="p9731Steps">${steps.map(x=>`<button type="button" class="p9731Step ${x.key===active?"active":""}" data-p9731-step="${x.key}"><span class="ico">${x.icon}</span><span><b>${x.label}</b><small>${x.sub}</small></span></button>`).join("")}</nav>`;
+    const intro=document.createElement("section");intro.id="p9732ClosetIntro";intro.className="p9732ClosetIntro";
+    intro.innerHTML=`<div class="p9732ClosetHero"><div><h1>แต่ง POMRU Buddy</h1><p>มี Buddy หลักเพียงตัวเดียว แล้วเลือก <strong>สี + ชุด + ของตกแต่ง</strong> เพื่อสร้างลุคของคุณ</p></div><div class="p9732Rule"><b>💡 จำง่าย ๆ</b><span><strong>Pink / Sky Blue / Mint / Lavender / Cream / Night = สกินสีของ Buddy ตัวเดียว</strong><br>เลือกสีได้เลย ไม่ต้องเลือกตัวละครซ้ำอีกชั้น</span></div></div><nav class="p9732Steps" id="p9732Steps">${steps.map(x=>`<button type="button" class="p9732Step ${x.key===active?"active":""}" data-p9732-step="${x.key}"><span class="ico">${x.icon}</span><span><b>${x.label}</b><small>${x.sub}</small></span></button>`).join("")}</nav>`;
     layout.insertAdjacentElement("beforebegin",intro);
   }
 
   function ensurePreviewActions(){
-    const card=document.querySelector("#bbAppInventory .bbClosetPreviewCard");if(!card||card.querySelector(".p9731PreviewActions"))return;
-    const a=document.createElement("div");a.className="p9731PreviewActions";
-    a.innerHTML='<button type="button" class="p9731CurrentBtn">✓ Buddy ที่กำลังใช้งาน</button><button type="button" class="p9731ShopBtn" data-app-go="shop">▣ ไปที่ร้านค้า</button>';
-    card.appendChild(a);
+    const card=document.querySelector("#bbAppInventory .bbClosetPreviewCard");if(!card)return;
+    card.querySelector(".p9731PreviewActions")?.remove();
+    let a=card.querySelector(".p9732PreviewActions");
+    if(!a){a=document.createElement("div");a.className="p9732PreviewActions";a.innerHTML='<button type="button" class="p9732CurrentBtn" id="p9732CurrentSkin">✓ กำลังใช้สี Pink</button><button type="button" class="p9732ShopBtn" data-app-go="shop">▣ ไปที่ร้านค้า</button>';card.appendChild(a)}
   }
 
-  function ensureBuddyHost(){
+  function ensureSkinHost(){
     const inv=document.querySelector("#bbAppInventory .bbClosetInventory");if(!inv)return null;
-    let host=$("p9731BuddyPickerHost");if(!host){host=document.createElement("div");host.id="p9731BuddyPickerHost";const head=inv.querySelector(".bbClosetInventoryHead");head?.insertAdjacentElement("afterend",host)}
+    let host=$("p9732SkinHost");
+    if(!host){host=document.createElement("div");host.id="p9732SkinHost";const head=inv.querySelector(".bbClosetInventoryHead");head?.insertAdjacentElement("afterend",host)}
     const studio=$("p972SkinStudio");if(studio&&studio.parentElement!==host)host.appendChild(studio);
     return host;
   }
 
   function clickLegacyFilter(filter){
+    if(!filter)return;
     const b=document.querySelector(`[data-inventory-filter="${filter}"]`)||document.querySelector('[data-inventory-filter="all"]');
     if(b&&!b.classList.contains("active"))b.click();
   }
 
-  function syncPreviewName(){
-    try{
-      const code=window.POMRUColorSkins?.selected?.();
-      const item=window.POMRUColorSkins?.list?.().find(x=>x.code===code);
-      if(item&&$("bbClosetBuddyName"))$("bbClosetBuddyName").textContent=item.name;
-      if($("bbClosetBuddyLook"))$("bbClosetBuddyLook").textContent="กำลังใช้งาน • เปลี่ยนได้จากแท็บ Buddy";
-    }catch(_){}
-  }
-
-  function setHead(title,sub){
+  function setHead(title,sub,eyebrow="MY ITEMS"){
+    const small=document.querySelector("#bbAppInventory .bbClosetInventoryHead small");
     const h=document.querySelector("#bbAppInventory .bbClosetInventoryHead h2");
     const p=document.querySelector("#bbAppInventory .bbClosetInventoryHead p");
-    if(h)h.textContent=title;if(p)p.textContent=sub;
+    if(small)small.textContent=eyebrow;if(h)h.textContent=title;if(p)p.textContent=sub;
+  }
+
+  function syncPreview(){
+    const s=selectedSkin();
+    if($("bbClosetBuddyName"))$("bbClosetBuddyName").textContent="POMRU Buddy";
+    if($("bbClosetBuddyLook"))$("bbClosetBuddyLook").textContent=`สี ${s.name}`;
+    const btn=$("p9732CurrentSkin");if(btn)btn.textContent=`✓ กำลังใช้สี ${s.name}`;
+    const homeLook=$("bbEquippedCosmeticLabel");if(homeLook&&!homeLook.textContent.includes(" • "))homeLook.textContent=`Look: POMRU Buddy • สี ${s.name}`;
   }
 
   function setStep(key){
-    active=steps.some(x=>x.key===key)?key:"buddy";
-    document.querySelectorAll("[data-p9731-step]").forEach(b=>b.classList.toggle("active",b.dataset.p9731Step===active));
-    const host=ensureBuddyHost();const grid=$("bbInventoryGrid");
-    if(active==="buddy"){
-      host?.classList.remove("p9731Hidden");grid?.classList.remove("p9731Hidden");
-      setHead("เลือก Buddy ของคุณ","เลือกสี/ลุคประจำตัว แล้วกด “ใช้ตัวนี้” • ด้านล่างคือ Buddy อื่นที่คุณมี");
-      clickLegacyFilter("character");
-      if(grid&&!grid.previousElementSibling?.classList?.contains("p9731BuddySubhead")){
-        const sh=document.createElement("div");sh.className="p9731BuddySubhead";sh.textContent="Buddy อื่นในคลัง";grid.insertAdjacentElement("beforebegin",sh);
-      }
-      const sh=grid?.previousElementSibling;if(sh?.classList?.contains("p9731BuddySubhead"))sh.classList.remove("p9731Hidden");
-      setTimeout(()=>{ensureBuddyHost();syncPreviewName()},40);
+    active=steps.some(x=>x.key===key)?key:"skin";
+    document.querySelectorAll("[data-p9732-step]").forEach(b=>b.classList.toggle("active",b.dataset.p9732Step===active));
+    const host=ensureSkinHost();const grid=$("bbInventoryGrid");
+
+    if(active==="skin"){
+      host?.classList.remove("p9732Hidden");
+      grid?.classList.add("p9732Hidden");
+      setHead("เลือกสี Buddy","เลือกสีที่ปลดล็อกแล้ว แล้วกด “ใช้สีนี้” • สีไม่เพิ่ม HP หรือ Damage","COLOR SKINS");
+      setTimeout(()=>{window.POMRUColorSkins?.refresh?.();ensureSkinHost();syncPreview()},40);
       return;
     }
-    host?.classList.add("p9731Hidden");grid?.classList.remove("p9731Hidden");
-    const sh=grid?.previousElementSibling;if(sh?.classList?.contains("p9731BuddySubhead"))sh.classList.add("p9731Hidden");
-    const meta={outfit:["เลือกชุด","ชุดที่ซื้อหรือปลดล็อกแล้ว"],hat:["เลือกหมวก","หมวกที่ใช้แต่ง Buddy"],accessory:["เลือกเครื่องประดับ","ของตกแต่งที่คุณมี"],effect:["เลือกเอฟเฟกต์","เอฟเฟกต์ที่โชว์กับ Buddy และใน Battle"],more:["ของแต่งเพิ่มเติม","Frame, Theme และของสะสมอื่น ๆ"]}[active];
+
+    host?.classList.add("p9732Hidden");
+    grid?.classList.remove("p9732Hidden");
+    const meta={outfit:["เลือกชุด","ชุดที่ซื้อหรือปลดล็อกแล้ว"],hat:["เลือกหมวก","หมวกที่ใช้แต่ง POMRU Buddy"],accessory:["เลือกเครื่องประดับ","ของตกแต่งที่คุณมี"],effect:["เลือกเอฟเฟกต์","เอฟเฟกต์ที่โชว์บน Buddy และใน Battle"],more:["ของแต่งเพิ่มเติม","Frame, Theme และของสะสมอื่น ๆ"]}[active];
     setHead(meta?.[0]||"ของที่ฉันมี",meta?.[1]||"");
     clickLegacyFilter(steps.find(x=>x.key===active)?.filter||"all");
+    setTimeout(()=>{
+      if(grid&&!grid.children.length)grid.innerHTML='<div class="p9732Empty">ยังไม่มีของในหมวดนี้</div>';
+    },60);
+  }
+
+  function cleanupLegacy(){
+    $("p9731ClosetIntro")?.remove();
+    document.querySelector(".p9731BuddySubhead")?.remove();
+    $("p9731BuddyPickerHost")?.remove();
+    // Native legacy character/skin tabs stay hidden by CSS and data stays intact in DB.
   }
 
   function boot(){
+    cleanupLegacy();
     const brandSmall=document.querySelector("#bbAppInventory .bbClosetBrand small");if(brandSmall)brandSmall.textContent="POMRU CUSTOMIZE";
     const brandH=document.querySelector("#bbAppInventory .bbClosetBrand h2");if(brandH)brandH.textContent="แต่ง Buddy";
-    const previewSmall=document.querySelector("#bbAppInventory .bbClosetPreviewHead small");if(previewSmall)previewSmall.textContent="MY BUDDY";
-    const previewH=document.querySelector("#bbAppInventory .bbClosetPreviewHead h1");if(previewH)previewH.textContent="Buddy ของฉัน";
-    ensureIntro();ensurePreviewActions();ensureBuddyHost();setStep(active);syncPreviewName();
+    const previewSmall=document.querySelector("#bbAppInventory .bbClosetPreviewHead small");if(previewSmall)previewSmall.textContent="LIVE PREVIEW";
+    const previewH=document.querySelector("#bbAppInventory .bbClosetPreviewHead h1");if(previewH)previewH.textContent="POMRU Buddy ของฉัน";
+    ensureIntro();ensurePreviewActions();ensureSkinHost();syncPreview();setStep(active);
   }
 
   document.addEventListener("click",e=>{
-    const step=e.target.closest("[data-p9731-step]");if(step){e.preventDefault();setStep(step.dataset.p9731Step);return}
-    if(e.target.closest("[data-p972-skin]"))setTimeout(syncPreviewName,80);
-    if(e.target.closest('[data-app-go="inventory"]'))setTimeout(()=>{boot();setStep("buddy")},90);
+    const step=e.target.closest("[data-p9732-step]");if(step){e.preventDefault();setStep(step.dataset.p9732Step);return}
+    if(e.target.closest("[data-p972-skin]"))setTimeout(syncPreview,80);
+    if(e.target.closest('[data-app-go="inventory"]'))setTimeout(()=>{active="skin";boot();setStep("skin");try{window.scrollTo({top:0,behavior:"smooth"})}catch(_){window.scrollTo(0,0)}},100);
   },true);
-  document.addEventListener("pomru:progress-updated",()=>setTimeout(()=>{ensureBuddyHost();syncPreviewName()},90));
-  window.addEventListener("pageshow",()=>setTimeout(boot,130));
-  window.POMRUClosetUX={version:"97.3.1",open:(step="buddy")=>{boot();setStep(step)}};
-  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(boot,220),{once:true});else setTimeout(boot,220);
+  document.addEventListener("pomru:progress-updated",()=>setTimeout(()=>{ensureSkinHost();syncPreview()},100));
+  window.addEventListener("pageshow",()=>setTimeout(boot,140));
+  window.POMRUClosetUX={version:"97.3.2",open:(step="skin")=>{boot();setStep(step)}};
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(boot,240),{once:true});else setTimeout(boot,240);
 })();
 </script>
 
-<script id="pomru-v9731-marker">
-window.POMRUV9731=Object.freeze({version:"97.3.1",closetUX:"guided",rankedHotfixRequired:"pomru-v97-3-1-ranked-hotfix.sql"});
+<script id="pomru-v9732-marker">
+window.POMRUV9732=Object.freeze({version:"97.3.2",characterModel:"one-pomru-buddy",colorSkins:true,legacyCharactersVisible:false,rankedFixRequired:"pomru-v97-3-2-ranked-content-fix.sql"});
 </script>
 
 </body>
