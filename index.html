@@ -17390,6 +17390,95 @@ body.p951RankedQuickStart #bbArenaLobby{
 }
 </style>
 
+
+<style id="pomru-v954-reconnect-style">
+.p954ConnectionBanner{
+  position:fixed;
+  z-index:280000;
+  top:max(78px,calc(env(safe-area-inset-top) + 58px));
+  left:50%;
+  transform:translateX(-50%);
+  width:min(540px,calc(100vw - 28px));
+  min-height:62px;
+  padding:9px 12px;
+  box-sizing:border-box;
+  display:grid;
+  grid-template-columns:12px minmax(0,1fr) auto;
+  gap:10px;
+  align-items:center;
+  border:1px solid rgba(154,103,35,.16);
+  border-radius:18px;
+  background:rgba(255,249,233,.97);
+  box-shadow:0 12px 34px rgba(80,58,45,.16);
+  color:#5d4939;
+}
+
+.p954ConnectionBanner.hidden{
+  display:none!important;
+}
+
+.p954ConnectionDot{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  background:#e9a23b;
+}
+
+.p954ConnectionBanner b{
+  display:block;
+  color:#5c4737;
+  font-size:10px;
+}
+
+.p954ConnectionBanner small{
+  display:block;
+  margin-top:2px;
+  color:#8c7564;
+  font-size:7px;
+}
+
+.p954ConnectionBanner strong{
+  min-width:58px;
+  padding:7px 8px;
+  border-radius:12px;
+  background:#fff;
+  color:#b16e24;
+  font-size:12px;
+  text-align:center;
+  font-variant-numeric:tabular-nums;
+}
+
+.p954ConnectionBanner.reconnected{
+  border-color:rgba(43,153,103,.16);
+  background:rgba(240,255,247,.98);
+}
+
+.p954ConnectionBanner.reconnected .p954ConnectionDot{
+  background:#35a979;
+}
+
+.p954ConnectionBanner.reconnected strong{
+  color:#318965;
+}
+
+@media(max-width:760px){
+  .p954ConnectionBanner{
+    top:max(68px,calc(env(safe-area-inset-top) + 50px));
+    min-height:56px;
+    padding:8px 10px;
+    border-radius:16px;
+  }
+
+  .p954ConnectionBanner b{
+    font-size:9px;
+  }
+
+  .p954ConnectionBanner small{
+    font-size:6px;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -21062,6 +21151,104 @@ window.addEventListener("load",()=>{
   let rankedAnswerInterval=null, rankedAnswerTimeout=null, rankedAnswerToken=0;
   let rankedPhaseCursorMs=0;
 
+  const P954_ACTIVE_MATCH_KEY="pomru_ranked_active_match";
+
+  function p954CheckpointKey(matchId){
+    return `pomru_ranked_checkpoint_${String(matchId||"")}`;
+  }
+
+  function p954ReadCheckpoint(matchId){
+    if(!matchId)return null;
+
+    try{
+      const raw=localStorage.getItem(
+        p954CheckpointKey(matchId)
+      );
+
+      if(!raw)return null;
+
+      const parsed=JSON.parse(raw);
+
+      if(
+        !parsed
+        ||parsed.match_id!==String(matchId)
+      ){
+        return null;
+      }
+
+      return parsed;
+
+    }catch(_){
+      return null;
+    }
+  }
+
+  function p954WriteCheckpoint(
+    matchId,
+    payload={}
+  ){
+    if(!matchId)return;
+
+    try{
+      localStorage.setItem(
+        p954CheckpointKey(matchId),
+        JSON.stringify({
+          ...payload,
+          match_id:String(matchId),
+          saved_at:Date.now()
+        })
+      );
+    }catch(_){}
+  }
+
+  function p954ClearCheckpoint(matchId){
+    if(!matchId)return;
+
+    try{
+      localStorage.removeItem(
+        p954CheckpointKey(matchId)
+      );
+    }catch(_){}
+  }
+
+  function p954SaveActiveMatch(match){
+    const id=match?.id||match?.match_id;
+    if(!id)return;
+
+    try{
+      localStorage.setItem(
+        P954_ACTIVE_MATCH_KEY,
+        JSON.stringify({
+          match_id:String(id),
+          room_id:
+            match?.room_id
+            ||window.POMRU_RANKED_ROOM_ID
+            ||null,
+          subject:
+            match?.ranked_subject_code
+            ||window.POMRU_RANKED_SUBJECT
+            ||null,
+          saved_at:Date.now()
+        })
+      );
+    }catch(_){}
+  }
+
+  function p954ClearActiveMatch(){
+    try{
+      localStorage.removeItem(
+        P954_ACTIVE_MATCH_KEY
+      );
+    }catch(_){}
+  }
+
+  window.POMRURankedCheckpoint={
+    read:p954ReadCheckpoint,
+    save:p954WriteCheckpoint,
+    clear:p954ClearCheckpoint,
+    clearActive:p954ClearActiveMatch
+  };
+
   function rankedResetTimeline(match){
     const serverStart=new Date(match?.started_at||Date.now()).getTime();
     const serverBase=(Number.isFinite(serverStart)?serverStart:Date.now())+650;
@@ -21136,6 +21323,36 @@ window.addEventListener("load",()=>{
     rankedMatchAttempts=0;
     rankedMatchStartedAt=Date.now();
     window.__bbRankedMatchElapsedMs=null;
+
+    const p954SaveMemoryCheckpoint=()=>{
+      if(!activeRankedMatch?.id)return;
+
+      const matchedIndexes=[
+        ...board.children
+      ]
+      .map((card,index)=>
+        card.classList.contains("correct")
+          ?index
+          :null
+      )
+      .filter(index=>index!==null);
+
+      p954WriteCheckpoint(
+        activeRankedMatch.id,
+        {
+          kind:"memory_match",
+          mode_code:
+            activeRankedMatch.mode_code
+            ||"teddy_match",
+          score:Number(score)||0,
+          correct:Number(correct)||0,
+          match_done:Number(matchDone)||0,
+          attempts:Number(rankedMatchAttempts)||0,
+          matched_indexes:matchedIndexes,
+          started_at:Number(rankedMatchStartedAt)||Date.now()
+        }
+      );
+    };
 
     if(rankedMatchFlipTimer){
       clearTimeout(rankedMatchFlipTimer);
@@ -21213,6 +21430,7 @@ window.addEventListener("load",()=>{
 
           matchDone++;
           record(true);
+          p954SaveMemoryCheckpoint();
           updateMatchProgress();
 
           matchLock=false;
@@ -21225,6 +21443,7 @@ window.addEventListener("load",()=>{
         }
 
         record(false);
+        p954SaveMemoryCheckpoint();
         first.s.classList.add("wrong");
         s.classList.add("wrong");
         setMain("ไม่ใช่คู่เดียวกัน • จำตำแหน่งไว้",()=>{},true);
@@ -21245,6 +21464,81 @@ window.addEventListener("load",()=>{
 
       board.appendChild(s);
     });
+
+    // Restore local progress after Refresh / Safari reload.
+    const p954MemorySaved=
+      activeRankedMatch?.id
+        ?p954ReadCheckpoint(
+            activeRankedMatch.id
+          )
+        :null;
+
+    if(
+      p954MemorySaved?.kind==="memory_match"
+      &&p954MemorySaved.mode_code===
+        (
+          activeRankedMatch?.mode_code
+          ||"teddy_match"
+        )
+    ){
+      score=Math.max(
+        0,
+        Number(p954MemorySaved.score)||0
+      );
+
+      correct=Math.max(
+        0,
+        Number(p954MemorySaved.correct)||0
+      );
+
+      matchDone=Math.max(
+        0,
+        Math.min(
+          pairs,
+          Number(p954MemorySaved.match_done)||0
+        )
+      );
+
+      rankedMatchAttempts=Math.max(
+        0,
+        Number(p954MemorySaved.attempts)||0
+      );
+
+      rankedMatchStartedAt=
+        Number(p954MemorySaved.started_at)
+        ||Date.now();
+
+      const indexes=Array.isArray(
+        p954MemorySaved.matched_indexes
+      )
+        ?p954MemorySaved.matched_indexes
+        :[];
+
+      indexes.forEach(index=>{
+        const card=board.children[
+          Number(index)
+        ];
+
+        if(!card)return;
+
+        card.classList.remove(
+          "numberBoard",
+          "selected",
+          "wrong"
+        );
+
+        card.classList.add("correct");
+      });
+
+      updateHUD();
+
+      if(matchDone>=pairs){
+        setTimeout(
+          completeRankedMatch,
+          180
+        );
+      }
+    }
 
     updateMatchProgress();
     setMain("เลือก 2 ใบเพื่อจับคู่",()=>{},true);
@@ -21611,6 +21905,8 @@ window.addEventListener("load",()=>{
       difficulty_code:diffCode
     };
 
+    p954SaveActiveMatch(activeRankedMatch);
+
     rankedResetTimeline(activeRankedMatch);
 
     window.BB_RANKED_ACTIVE=true;
@@ -21781,6 +22077,53 @@ window.addEventListener("load",()=>{
     rankedLiveOutcomeBusy=false;
   }
 
+  window.POMRUGetRankedLiveResult=function(){
+    try{
+      if(
+        typeof window.bbGetRankedLearningLiveResult==="function"
+      ){
+        const learning=
+          window.bbGetRankedLearningLiveResult();
+
+        if(learning)return learning;
+      }
+    }catch(_){}
+
+    if(
+      window.BB_RANKED_ACTIVE
+      &&cfg?.mode==="match"
+    ){
+      const pairs=Math.max(
+        2,
+        Math.floor(dc().n/2)
+      );
+
+      return {
+        score:Number(score)||0,
+        correct:Number(matchDone)||0,
+        total:pairs,
+        averageAnswerMs:
+          Number(window.__bbRankedMatchElapsedMs)>0
+            ?Math.round(
+                Number(
+                  window.__bbRankedMatchElapsedMs
+                )
+              )
+            :null
+      };
+    }
+
+    return {
+      score:Number(score)||0,
+      correct:Number(correct)||0,
+      total:Math.max(
+        0,
+        Number(roundAttempts)||0
+      ),
+      averageAnswerMs:null
+    };
+  };
+
   async function handleOpponentForfeit(){
     if(!window.BB_RANKED_ACTIVE||!activeRankedMatch?.id)return;
 
@@ -21811,6 +22154,9 @@ window.addEventListener("load",()=>{
       80
     );
   }
+
+  window.POMRUHandleOpponentForfeit=
+    handleOpponentForfeit;
 
   async function pollRankedLiveOutcome(){
     if(
@@ -22372,8 +22718,35 @@ window.addEventListener("load",()=>{
   }
 
   function showRankedWaitingScreen(){
+    const p954EndedMatchId=
+      activeRankedMatch?.id||null;
+
     cleanupRankedLiveOutcomeWatch();
-    try{window.bbAbortRankedLearning?.("waiting_screen")}catch(_){}
+
+    try{
+      window.bbAbortRankedLearning?.(
+        "waiting_screen"
+      );
+    }catch(_){}
+
+    if(p954EndedMatchId){
+      p954ClearCheckpoint(
+        p954EndedMatchId
+      );
+    }
+
+    p954ClearActiveMatch();
+
+    document.dispatchEvent(
+      new CustomEvent(
+        "pomru:ranked-game-ended",
+        {
+          detail:{
+            match_id:p954EndedMatchId
+          }
+        }
+      )
+    );
     document.getElementById("bbRankedLearningOverlay")?.classList.add("hidden");
     show("#bbCreateBackdrop",false);
     clearRankedAuto();
@@ -26365,6 +26738,26 @@ document.addEventListener('DOMContentLoaded', () => {
     q("#bbRLTokens").innerHTML="";
   }
 
+  function p954SaveLearningCheckpoint(){
+    if(!session?.data?.match?.id)return;
+
+    try{
+      window.POMRURankedCheckpoint?.save?.(
+        session.data.match.id,
+        {
+          kind:"learning",
+          mode_code:session.data.modeCode,
+          question_count:
+            session.data.questions.length,
+          score:Number(session.score)||0,
+          correct:Number(session.correct)||0,
+          answers:session.answers,
+          answer_times:session.answerTimes
+        }
+      );
+    }catch(_){}
+  }
+
   function speak(text,subject){
     try{
       if(!("speechSynthesis" in window))return;
@@ -26474,6 +26867,8 @@ document.addEventListener('DOMContentLoaded', () => {
       scored:false
     };
 
+    p954SaveLearningCheckpoint();
+
     q("#bbRLLocked").classList.remove("hidden");
 
     q("#bbRLChoices").querySelectorAll("button").forEach(b=>b.disabled=true);
@@ -26512,6 +26907,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     session.revealedIndex=index;
+
+    p954SaveLearningCheckpoint();
+
     q("#bbRLScore").textContent=session.score.toLocaleString();
     q("#bbRLLocked").classList.add("hidden");
     q("#bbRLReveal").classList.remove("hidden");
@@ -26577,6 +26975,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if(typeof submit==="function"){
       await submit(result);
+
+      try{
+        window.POMRURankedCheckpoint
+          ?.clear?.(matchId);
+      }catch(_){}
+
     }else{
       alert("ไม่พบระบบส่งผล Ranked");
     }
@@ -26659,6 +27063,64 @@ document.addEventListener('DOMContentLoaded', () => {
         revealedIndex:-1
       };
 
+      const p954Saved=
+        window.POMRURankedCheckpoint
+          ?.read?.(id);
+
+      if(
+        p954Saved?.kind==="learning"
+        &&p954Saved.mode_code===data.modeCode
+        &&Number(
+          p954Saved.question_count
+        )===data.questions.length
+      ){
+        session.score=Math.max(
+          0,
+          Number(p954Saved.score)||0
+        );
+
+        session.correct=Math.max(
+          0,
+          Number(p954Saved.correct)||0
+        );
+
+        if(
+          Array.isArray(
+            p954Saved.answers
+          )
+        ){
+          session.answers=
+            p954Saved.answers
+              .slice(
+                0,
+                data.questions.length
+              );
+
+          while(
+            session.answers.length
+            <
+            data.questions.length
+          ){
+            session.answers.push(null);
+          }
+        }
+
+        if(
+          Array.isArray(
+            p954Saved.answer_times
+          )
+        ){
+          session.answerTimes=
+            p954Saved.answer_times
+              .map(Number)
+              .filter(
+                n=>
+                  Number.isFinite(n)
+                  &&n>=0
+              );
+        }
+      }
+
       q("#bbRLWorld").textContent=`${data.world?.icon||"🧠"} ${data.world?.name||"Ranked"}`;
       q("#bbRLMode").textContent=`${data.info.icon||"🎮"} ${data.info.title}`;
       q("#bbRLDiff").textContent=DIFF[data.diffCode]||data.diffCode;
@@ -26682,6 +27144,28 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   window.bbLaunchRankedLearning=launch;
+
+  window.bbGetRankedLearningLiveResult=function(){
+    if(!session)return null;
+
+    return {
+      score:Number(session.score)||0,
+      correct:Number(session.correct)||0,
+      total:Number(
+        session.data?.questions?.length
+      )||0,
+      averageAnswerMs:
+        session.answerTimes.length
+          ?Math.round(
+              session.answerTimes.reduce(
+                (a,b)=>a+b,
+                0
+              )
+              /session.answerTimes.length
+            )
+          :null
+    };
+  };
 
   window.bbAbortRankedLearning=function(reason="external"){
     clearTick();
@@ -34745,6 +35229,712 @@ document.addEventListener('DOMContentLoaded', () => {
   window.POMRUMatchHistory={
     refresh:load,
     getAll:()=>cache.slice()
+  };
+})();
+</script>
+
+
+<div
+  class="p954ConnectionBanner hidden"
+  id="p954ConnectionBanner"
+  aria-live="polite"
+>
+  <span class="p954ConnectionDot"></span>
+
+  <div>
+    <b id="p954ConnectionTitle">
+      คู่แข่งหลุดการเชื่อมต่อ
+    </b>
+
+    <small id="p954ConnectionText">
+      กำลังรอให้กลับเข้าเกม
+    </small>
+  </div>
+
+  <strong id="p954ConnectionCountdown">
+    00:30
+  </strong>
+</div>
+
+
+<script id="pomru-v954-reconnect-runtime">
+(function(){
+  "use strict";
+
+  const $=id=>document.getElementById(id);
+
+  let matchId=null;
+  let heartbeatTimer=null;
+  let stateTimer=null;
+  let heartbeatBusy=false;
+  let stateBusy=false;
+  let claimBusy=false;
+  let offlineShown=false;
+  let resumeBusy=false;
+  let resumeRetries=0;
+
+  function client(){
+    return window.__bbSupabase
+      ||window.sb
+      ||null;
+  }
+
+  async function rpc(name,args={}){
+    const c=client();
+    if(!c){
+      throw new Error(
+        "ยังเชื่อมต่อระบบออนไลน์ไม่สำเร็จ"
+      );
+    }
+
+    const {data,error}=await c.rpc(
+      name,
+      args
+    );
+
+    if(error)throw error;
+
+    return data;
+  }
+
+  function currentMatchId(){
+    return matchId
+      ||window.__bbRankedMatch?.id
+      ||window.__bbRankedMatch?.match_id
+      ||null;
+  }
+
+  function formatCountdown(seconds){
+    const s=Math.max(
+      0,
+      Math.ceil(Number(seconds)||0)
+    );
+
+    return `00:${String(s).padStart(2,"0")}`;
+  }
+
+  function hideBanner(){
+    const root=$("p954ConnectionBanner");
+    if(!root)return;
+
+    root.classList.add("hidden");
+    root.classList.remove("reconnected");
+  }
+
+  function showOffline(
+    offlineSeconds,
+    graceSeconds
+  ){
+    const root=$("p954ConnectionBanner");
+    if(!root)return;
+
+    const remaining=Math.max(
+      0,
+      Number(graceSeconds||30)
+      -
+      Number(offlineSeconds||0)
+    );
+
+    root.classList.remove(
+      "hidden",
+      "reconnected"
+    );
+
+    $("p954ConnectionTitle").textContent=
+      "คู่แข่งหลุดการเชื่อมต่อ";
+
+    $("p954ConnectionText").textContent=
+      "กำลังรอให้กลับเข้าเกม • กลับมาแล้วเล่นต่อได้ทันที";
+
+    $("p954ConnectionCountdown").textContent=
+      formatCountdown(remaining);
+
+    offlineShown=true;
+  }
+
+  function showReconnected(){
+    const root=$("p954ConnectionBanner");
+    if(!root)return;
+
+    root.classList.remove("hidden");
+    root.classList.add("reconnected");
+
+    $("p954ConnectionTitle").textContent=
+      "คู่แข่งกลับมาแล้ว";
+
+    $("p954ConnectionText").textContent=
+      "การแข่งขันดำเนินต่อ";
+
+    $("p954ConnectionCountdown").textContent=
+      "LIVE";
+
+    setTimeout(()=>{
+      if(!offlineShown){
+        hideBanner();
+      }
+    },1200);
+  }
+
+  async function heartbeat(){
+    const id=currentMatchId();
+
+    if(
+      !id
+      ||heartbeatBusy
+      ||!window.BB_RANKED_ACTIVE
+    ){
+      return;
+    }
+
+    heartbeatBusy=true;
+
+    try{
+      await rpc(
+        "bb_ranked_presence_heartbeat",
+        {
+          p_match_id:id
+        }
+      );
+    }catch(e){
+      console.warn(
+        "POMRU heartbeat:",
+        e?.message||e
+      );
+    }finally{
+      heartbeatBusy=false;
+    }
+  }
+
+  function liveResult(){
+    try{
+      return (
+        window.POMRUGetRankedLiveResult?.()
+        ||{}
+      );
+    }catch(_){
+      return {};
+    }
+  }
+
+  async function claimDisconnect(){
+    const id=currentMatchId();
+
+    if(
+      !id
+      ||claimBusy
+      ||!window.BB_RANKED_ACTIVE
+    ){
+      return;
+    }
+
+    claimBusy=true;
+
+    try{
+      const result=liveResult();
+
+      const data=await rpc(
+        "bb_ranked_claim_disconnect_win",
+        {
+          p_match_id:id,
+          p_score:
+            Number(result.score)||0,
+          p_correct_answers:
+            Number(result.correct)||0,
+          p_total_answers:
+            Number(result.total)||0,
+          p_average_answer_ms:
+            Number(result.averageAnswerMs)>0
+              ?Math.round(
+                  Number(
+                    result.averageAnswerMs
+                  )
+                )
+              :null
+        }
+      );
+
+      const row=Array.isArray(data)
+        ?data[0]
+        :data;
+
+      if(row?.finalized){
+        hideBanner();
+
+        try{
+          await window
+            .POMRUHandleOpponentForfeit?.();
+        }catch(_){}
+      }
+
+    }catch(e){
+      const msg=String(
+        e?.message||e||""
+      );
+
+      if(
+        !msg.includes(
+          "disconnect_grace_active"
+        )
+        &&!msg.includes(
+          "opponent_already_finished"
+        )
+        &&!msg.includes(
+          "match_not_active"
+        )
+      ){
+        console.warn(
+          "POMRU disconnect claim:",
+          msg
+        );
+      }
+
+    }finally{
+      claimBusy=false;
+    }
+  }
+
+  async function pollState(){
+    const id=currentMatchId();
+
+    if(
+      !id
+      ||stateBusy
+      ||!window.BB_RANKED_ACTIVE
+    ){
+      return;
+    }
+
+    stateBusy=true;
+
+    try{
+      const data=await rpc(
+        "bb_ranked_connection_state",
+        {
+          p_match_id:id
+        }
+      );
+
+      const state=Array.isArray(data)
+        ?data[0]
+        :data;
+
+      if(!state)return;
+
+      if(state.opponent_forfeited===true){
+        hideBanner();
+
+        await window
+          .POMRUHandleOpponentForfeit?.();
+
+        return;
+      }
+
+      if(
+        state.match_status==="finished"
+      ){
+        stop();
+        return;
+      }
+
+      const offline=Number(
+        state.opponent_offline_seconds||0
+      );
+
+      const grace=Number(
+        state.grace_seconds||30
+      );
+
+      // Allow a few seconds of network jitter before showing warning.
+      if(
+        !state.opponent_submitted
+        &&offline>=7
+      ){
+        showOffline(
+          offline,
+          grace
+        );
+      }else{
+        if(offlineShown){
+          offlineShown=false;
+          showReconnected();
+        }else{
+          hideBanner();
+        }
+      }
+
+      if(
+        state.can_claim_disconnect_win===true
+      ){
+        await claimDisconnect();
+      }
+
+    }catch(e){
+      console.warn(
+        "POMRU connection state:",
+        e?.message||e
+      );
+    }finally{
+      stateBusy=false;
+    }
+  }
+
+  function stop(){
+    if(heartbeatTimer){
+      clearInterval(
+        heartbeatTimer
+      );
+      heartbeatTimer=null;
+    }
+
+    if(stateTimer){
+      clearInterval(
+        stateTimer
+      );
+      stateTimer=null;
+    }
+
+    matchId=null;
+    heartbeatBusy=false;
+    stateBusy=false;
+    claimBusy=false;
+    offlineShown=false;
+
+    hideBanner();
+  }
+
+  function start(id=null){
+    const resolved=
+      id
+      ||window.__bbRankedMatch?.id
+      ||window.__bbRankedMatch?.match_id
+      ||null;
+
+    if(!resolved)return;
+
+    if(
+      matchId===resolved
+      &&heartbeatTimer
+      &&stateTimer
+    ){
+      heartbeat();
+      pollState();
+      return;
+    }
+
+    stop();
+
+    matchId=resolved;
+
+    heartbeat();
+    pollState();
+
+    heartbeatTimer=setInterval(
+      heartbeat,
+      3000
+    );
+
+    stateTimer=setInterval(
+      pollState,
+      1800
+    );
+  }
+
+  function parseJsonObject(value){
+    if(!value)return null;
+
+    if(typeof value==="object"){
+      return value;
+    }
+
+    try{
+      return JSON.parse(value);
+    }catch(_){
+      return null;
+    }
+  }
+
+  async function resume(){
+    if(
+      resumeBusy
+      ||window.BB_RANKED_ACTIVE
+    ){
+      return;
+    }
+
+    const c=client();
+
+    if(!c?.auth)return;
+
+    resumeBusy=true;
+
+    try{
+      const {
+        data:userData
+      }=await c.auth.getUser();
+
+      if(!userData?.user){
+        return;
+      }
+
+      const {
+        data,
+        error
+      }=await c.rpc(
+        "bb_ranked_resume_active_match"
+      );
+
+      if(error)throw error;
+
+      const row=Array.isArray(data)
+        ?data[0]
+        :data;
+
+      if(!row?.match_json){
+        resumeRetries=0;
+        return;
+      }
+
+      const match=parseJsonObject(
+        row.match_json
+      );
+
+      const room=parseJsonObject(
+        row.room_json
+      );
+
+      if(!match?.id)return;
+
+      const hydrated={
+        ...match,
+
+        id:match.id,
+
+        room_id:
+          match.room_id
+          ||room?.id
+          ||null,
+
+        ranked_subject_code:
+          room?.ranked_subject_code
+          ||null,
+
+        ranked_rule_tier:
+          room?.ranked_rule_tier
+          ||null,
+
+        ranked_content_level:
+          room?.ranked_content_level
+          ||null
+      };
+
+      window.POMRU_RANKED_ROOM_ID=
+        hydrated.room_id||null;
+
+      window.POMRU_RANKED_MATCHMAKING_RESULT={
+        room_id:
+          hydrated.room_id||null,
+        subject_code:
+          hydrated.ranked_subject_code
+          ||null,
+        rule_tier:
+          hydrated.ranked_rule_tier
+          ||null,
+        content_level:
+          hydrated.ranked_content_level
+          ||null
+      };
+
+      if(
+        hydrated.ranked_subject_code
+      ){
+        window.POMRU_RANKED_SUBJECT=
+          hydrated.ranked_subject_code;
+      }
+
+      if(
+        hydrated.status==="countdown"
+        &&typeof window
+          .POMRUInternalStartRankedCountdown
+          ==="function"
+      ){
+        window
+          .POMRUInternalStartRankedCountdown(
+            hydrated
+          );
+      }else if(
+        hydrated.status==="playing"
+        &&typeof window
+          .POMRUInternalLaunchRanked
+          ==="function"
+      ){
+        await window
+          .POMRUInternalLaunchRanked(
+            hydrated
+          );
+      }
+
+      resumeRetries=0;
+
+    }catch(e){
+      const msg=String(
+        e?.message||e||""
+      );
+
+      // During initial page boot auth/client may not be ready yet.
+      if(
+        resumeRetries<8
+        &&(
+          msg.includes(
+            "authentication_required"
+          )
+          ||msg.includes(
+            "Failed to fetch"
+          )
+        )
+      ){
+        resumeRetries++;
+
+        setTimeout(
+          resume,
+          900
+        );
+      }else{
+        console.warn(
+          "POMRU Ranked resume:",
+          msg
+        );
+      }
+
+    }finally{
+      resumeBusy=false;
+    }
+  }
+
+  document.addEventListener(
+    "pomru:ranked-game-started",
+    e=>{
+      const id=
+        e.detail?.match_id
+        ||window.__bbRankedMatch?.id
+        ||null;
+
+      start(id);
+    }
+  );
+
+  document.addEventListener(
+    "pomru:ranked-game-ended",
+    stop
+  );
+
+  document.addEventListener(
+    "pomru:duel-room-left",
+    stop
+  );
+
+  document.addEventListener(
+    "visibilitychange",
+    ()=>{
+      if(!document.hidden){
+        if(window.BB_RANKED_ACTIVE){
+          heartbeat();
+          pollState();
+        }else{
+          setTimeout(
+            resume,
+            120
+          );
+        }
+      }
+    }
+  );
+
+  window.addEventListener(
+    "pageshow",
+    ()=>{
+      setTimeout(
+        ()=>{
+          if(window.BB_RANKED_ACTIVE){
+            start(
+              window.__bbRankedMatch?.id
+              ||null
+            );
+          }else{
+            resume();
+          }
+        },
+        280
+      );
+    },
+    {passive:true}
+  );
+
+  // Do NOT call forfeit on beforeunload.
+  // Heartbeat stopping naturally starts the 30s reconnect grace.
+
+  const bodyObserver=
+    new MutationObserver(()=>{
+      if(
+        document.body.classList
+          .contains(
+            "bbRankedPlaying"
+          )
+      ){
+        const id=
+          window.__bbRankedMatch?.id
+          ||null;
+
+        if(id)start(id);
+      }
+    });
+
+  bodyObserver.observe(
+    document.body,
+    {
+      attributes:true,
+      attributeFilter:["class"]
+    }
+  );
+
+  const boot=()=>{
+    setTimeout(
+      resume,
+      1400
+    );
+
+    const c=client();
+
+    try{
+      c?.auth?.onAuthStateChange?.(
+        (_event,session)=>{
+          if(session?.user){
+            setTimeout(
+              resume,
+              280
+            );
+          }
+        }
+      );
+    }catch(_){}
+  };
+
+  if(
+    document.readyState==="loading"
+  ){
+    document.addEventListener(
+      "DOMContentLoaded",
+      boot,
+      {once:true}
+    );
+  }else{
+    boot();
+  }
+
+  window.POMRUReconnect={
+    start,
+    stop,
+    resume,
+    heartbeat
   };
 })();
 </script>
