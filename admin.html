@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#6f56d9">
 <meta name="author" content="Sulawit Songsang">
-<title>POMRU • Admin Control Center v97.0</title>
+<title>POMRU • Admin Center v99.2</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{box-sizing:border-box}
@@ -1287,6 +1287,15 @@ button{cursor:pointer}
   .englishDeleteBtn{grid-column:1/-1}
 }
 
+
+/* POMRU v99.2 Production Content QA */
+.p992SourceTruth{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}
+.p992SourceCard{border:1px solid #e9e0ef;background:linear-gradient(180deg,#fff,#fbf9fd);border-radius:18px;padding:13px;min-width:0}
+.p992SourceCard .ico{font-size:27px;display:block;margin-bottom:7px}.p992SourceCard small{font-size:9px;font-weight:900;letter-spacing:.07em;color:#91859a}.p992SourceCard b{display:block;font-size:13px;margin-top:3px}.p992SourceCard code{display:block;margin-top:6px;font-size:9px;color:#6d5480;overflow-wrap:anywhere}.p992SourceCard em{display:inline-flex;margin-top:8px;padding:4px 7px;border-radius:999px;background:#eafaf3;color:#27745c;font-size:8px;font-style:normal;font-weight:900}.p992SourceCard.memory em{background:#eef5ff;color:#416999}
+.p992ReadinessCard{grid-column:1/-1}.p992ReadinessHead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.p992ReadinessHead button{border:1px solid #ded2e5;background:#fff;color:#664c79;border-radius:12px;padding:8px 10px;font-weight:900;cursor:pointer}.p992ReadinessGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}.p992ReadinessWorld{border:1px solid #e8deed;border-radius:16px;padding:10px;background:#fcfbfd}.p992ReadinessWorld>header{display:flex;align-items:center;gap:7px;margin-bottom:8px}.p992ReadinessWorld>header span{font-size:20px}.p992ReadinessWorld>header b{font-size:11px}.p992LevelRow{display:grid;grid-template-columns:minmax(48px,.9fr) auto auto;gap:5px;align-items:center;padding:6px 0;border-top:1px dashed #eee7f1;font-size:9px}.p992LevelRow:first-of-type{border-top:0}.p992LevelRow strong{font-size:9px;white-space:nowrap}.p992LevelRow .ok{color:#238061}.p992LevelRow .bad{color:#ba5164}.p992LevelRow .need{color:#9a7180;font-size:8px;text-align:right}.p992Policy{grid-column:1/-1;border-radius:17px;padding:12px 14px;background:linear-gradient(135deg,#f8f3ff,#fff7fa);border:1px solid #e8dcf1;display:flex;gap:12px;align-items:flex-start}.p992Policy>span{font-size:25px}.p992Policy b{font-size:11px}.p992Policy p{margin:3px 0 0;font-size:9px;line-height:1.55;color:#766b7d}.p992Policy code{font-size:8px;color:#725884}
+@media(max-width:1050px){.p992SourceTruth,.p992ReadinessGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.p992SourceTruth,.p992ReadinessGrid{grid-template-columns:1fr}.p992ReadinessHead{flex-direction:column}}
+
 </style>
 
 <style id="pomru-admin-v970">
@@ -1359,6 +1368,17 @@ body{background:linear-gradient(180deg,#fbf8ff 0%,#fff8fb 55%,#fffaf2 100%)!impo
 }
 </style>
 
+
+<style id="pomru-admin-v994-style">
+#p994AdminSafetyBadge:not(:empty){display:inline-grid;place-items:center;min-width:16px;height:16px;margin-left:3px;padding:0 4px;border-radius:999px;background:#e45e88;color:#fff;font-size:8px;font-weight:1000}
+.p994AdminHero{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:13px}.p994AdminHero small{color:#b36086;font-size:9px;font-weight:1000;letter-spacing:.13em}.p994AdminHero h2{margin:3px 0;color:#4f3d5c}.p994AdminHero p{margin:3px 0 0;color:#8c7e92;font-size:10px;line-height:1.55}
+.p994AdminStats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:12px}.p994AdminStats article{display:flex;align-items:center;gap:10px;border:1px solid #eadfeb;border-radius:18px;background:#fff;padding:12px}.p994AdminStats article>span{font-size:24px}.p994AdminStats small{display:block;color:#9a879d;font-size:7px;font-weight:1000}.p994AdminStats strong{display:inline-block;margin-top:2px;color:#574264;font-size:19px}.p994AdminStats em{margin-left:5px;color:#9b899f;font-size:7px;font-style:normal}
+.p994AdminGrid{display:grid;grid-template-columns:1.35fr .65fr;gap:11px}.p994AdminCard{border:1px solid #e9dfeb;border-radius:20px;background:#fff;padding:13px}.p994AdminCardHead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.p994AdminCardHead small{display:block;color:#a16f9c;font-size:7px;font-weight:1000;letter-spacing:.12em}.p994AdminCardHead h3{margin:2px 0;color:#574263;font-size:15px}.p994AdminCardHead select{border:1px solid #e5dbe8;border-radius:11px;background:#faf8fb;padding:7px 9px;color:#66536f;font-size:9px}.p994ServerPill{padding:5px 8px;border-radius:999px;background:#eaf8f2;color:#39765d;font-size:7px;font-weight:1000}
+.p994ReportQueue{display:grid;gap:8px}.p994ReportRow{border:1px solid #eee6ef;border-radius:16px;background:#fdfcfe;padding:11px}.p994ReportTop{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}.p994ReportTop small{color:#9d899f;font-size:7px}.p994ReportTop b{display:block;margin-top:2px;color:#594664;font-size:11px}.p994ReportBadge{padding:4px 7px;border-radius:999px;background:#fff0f3;color:#a84c67;font-size:7px;font-weight:1000}.p994ReportMeta{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}.p994ReportMeta span{padding:4px 6px;border-radius:8px;background:#f5f1f7;color:#796981;font-size:7px;font-weight:850}.p994ReportText{margin-top:7px;padding:8px 9px;border-radius:11px;background:#faf7fb;color:#725f79;font-size:8px;line-height:1.5;white-space:pre-wrap}.p994ReportMessage{background:#fff7e6;color:#806126}.p994ModControls{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:9px}.p994ModControls select,.p994ModControls input{border:1px solid #e4dae7;border-radius:10px;padding:7px 8px;font-size:8px;color:#604d69;background:#fff}.p994ModControls button{grid-column:1/-1;border:0;border-radius:10px;padding:8px;background:#7657bd;color:#fff;font-size:8px;font-weight:1000}
+.p994FilterForm{display:grid;grid-template-columns:1fr auto;gap:6px}.p994FilterForm input{min-width:0;border:1px solid #e4dae7;border-radius:12px;padding:9px 10px}.p994AdminHint{margin:8px 1px;color:#948298;font-size:8px;line-height:1.5}.p994FilterList{display:flex;flex-wrap:wrap;gap:6px}.p994FilterChip{display:inline-flex;align-items:center;gap:5px;padding:6px 8px;border-radius:999px;background:#f5eff8;color:#66516f;font-size:8px;font-weight:900}.p994FilterChip button{width:18px;height:18px;border:0;border-radius:50%;background:#eadde8;color:#96617a;padding:0;font-size:10px}.p994AdminPolicy{display:flex;gap:10px;align-items:center;margin-top:11px;padding:11px 13px;border-radius:17px;background:#f1f8ff;border:1px solid #dfeaf6}.p994AdminPolicy>span{font-size:23px}.p994AdminPolicy b{display:block;color:#4f607c;font-size:10px}.p994AdminPolicy small{display:block;margin-top:2px;color:#75839a;font-size:8px;line-height:1.45}
+@media(max-width:900px){.p994AdminStats{grid-template-columns:repeat(2,1fr)}.p994AdminGrid{grid-template-columns:1fr}}@media(max-width:560px){.p994AdminHero{flex-direction:column}.p994AdminStats{grid-template-columns:1fr 1fr}.p994ModControls{grid-template-columns:1fr}.p994ModControls button{grid-column:auto}}
+</style>
+
 </head>
 <body>
 <header class="top">
@@ -1372,6 +1392,7 @@ body{background:linear-gradient(180deg,#fbf8ff 0%,#fff8fb 55%,#fffaf2 100%)!impo
       <button data-admin-panel="content">โจทย์ & เนื้อหา</button>
       <button data-admin-panel="games">เกม & Ranked</button>
       <button data-admin-panel="users">ผู้เล่น</button>
+      <button data-admin-panel="safety">🛡️ Safety <span id="p994AdminSafetyBadge"></span></button>
       <button data-admin-panel="bears">Assets</button>
     </div>
     <a class="back" href="/">← กลับหน้าเกม</a>
@@ -1383,9 +1404,9 @@ body{background:linear-gradient(180deg,#fbf8ff 0%,#fff8fb 55%,#fffaf2 100%)!impo
   <div class="shell">
     <div class="heroCard">
       <div>
-        <span class="status">ADMIN CONTROL CENTER</span>
-        <h1>POMRU Control Center</h1>
-        <p>ดูสุขภาพเกม เพิ่มโจทย์ให้ถูกคลัง คุม Game/Ranked และจัดการผู้เล่นจากหน้าเดียว — ออกแบบให้เปิดมาแล้วรู้ทันทีว่าต้องทำอะไรต่อ</p>
+        <span class="status">PRODUCTION ADMIN • v99.4</span>
+        <h1>POMRU Admin Center</h1>
+        <p>ดูความพร้อม Production คุม Game/Ranked เนื้อหา ผู้เล่น และ Moderation Queue จากหน้าเดียว — Social Safety แยก Report / Block / Mute / Chat Filter ชัดเจน</p>
       </div>
       <div class="heroArt"><span class="brain"></span><span class="bear"></span><span class="book"></span></div>
     </div>
@@ -1447,6 +1468,28 @@ body{background:linear-gradient(180deg,#fbf8ff 0%,#fff8fb 55%,#fffaf2 100%)!impo
           <p style="margin:4px 0 0;font-size:9px">ตรวจจากกติกา Bronze → Legend ของฐานข้อมูลจริง</p>
           <div class="p97Health" id="p97RankedHealth"><div class="learnLoading">กำลังตรวจคลัง Ranked…</div></div>
         </article>
+
+        <article class="p97PanelCard p992ReadinessCard">
+          <div class="p992ReadinessHead">
+            <div><span class="p97Eyebrow">PRODUCTION READINESS BY LEVEL</span><h3>แต่ละระดับมีโจทย์พร้อมเปิดหรือยัง</h3><p style="margin:4px 0 0;font-size:9px">เกณฑ์ Ranked = อย่างน้อย 10 รายการที่ active และข้อมูลคำถาม/คำตอบครบ</p></div>
+            <button type="button" id="p992ReadinessRefresh">↻ ตรวจใหม่</button>
+          </div>
+          <div class="p992ReadinessGrid" id="p992ReadinessGrid"><div class="learnLoading">กำลังอ่าน Production content…</div></div>
+        </article>
+
+        <article class="p97PanelCard p992ReadinessCard">
+          <span class="p97Eyebrow">SOURCE OF TRUTH</span>
+          <h3>คลังที่เกม Production อ่านจริง</h3>
+          <div class="p992SourceTruth">
+            <div class="p992SourceCard memory"><span class="ico">🧸</span><small>MEMORY</small><b>Asset Pool</b><code>Buddy / memory assets</code><em>✓ ไม่ใช้ question rows</em></div>
+            <div class="p992SourceCard"><span class="ico">÷</span><small>MATH</small><b>Math Questions</b><code>bb_math_questions</code><em>✓ Canonical</em></div>
+            <div class="p992SourceCard"><span class="ico">中</span><small>CHINESE</small><b>HSK Vocabulary</b><code>bb_hsk_vocabulary</code><em>✓ Canonical</em></div>
+            <div class="p992SourceCard"><span class="ico">A</span><small>ENGLISH</small><b>English Content</b><code>bb_english_content</code><em>✓ Canonical</em></div>
+          </div>
+        </article>
+
+        <div class="p992Policy"><span>🛡️</span><div><b>Production catalog policy</b><p><code>bb_learning_content</code> เป็น Legacy compatibility เท่านั้น • Typing/Listening ไม่รับ content ใหม่และไม่อยู่ในหน้าเกม Production • Ranked ใช้ Memory Position / Math Multiple Choice / English Vocabulary / Chinese Hanzi→Meaning เท่านั้น</p></div></div>
+
       </div>
     </section>
 
@@ -1476,7 +1519,7 @@ body{background:linear-gradient(180deg,#fbf8ff 0%,#fff8fb 55%,#fffaf2 100%)!impo
 
         <article class="p97Bank chinese">
           <div class="p97BankIcon">中</div><small>CHINESE WORLD</small><h3>HSK Vocabulary</h3>
-          <p>เพิ่มคำจีนหนึ่งครั้ง แล้วเกมสามารถสร้าง Hanzi→Meaning, Pinyin, Listening และ Mix จากคำเดียวได้</p>
+          <p>เพิ่มคำจีนหนึ่งครั้ง แล้ว Production ใช้กับ Hanzi→Meaning, Hanzi→Pinyin และ HSK Mix • Listening พักไว้จน audio พร้อม</p>
           <div class="p97BankMeta"><span id="p97HSKTotal">กำลังอ่าน…</span><span>HSK 1–6</span></div>
           <div class="p97BankActions"><button data-p97-new="hsk">+ เพิ่มคำ HSK</button><button class="secondary" data-p97-open="hsk">จัดการคลัง</button></div>
           <span class="p97Source">bb_hsk_vocabulary</span>
@@ -1484,14 +1527,14 @@ body{background:linear-gradient(180deg,#fbf8ff 0%,#fff8fb 55%,#fffaf2 100%)!impo
 
         <article class="p97Bank english">
           <div class="p97BankIcon">A</div><small>ENGLISH WORLD</small><h3>English Content</h3>
-          <p>A1–C1 รองรับ Vocabulary, Typing, Listening และเนื้อหาแบบฝึกอื่น ๆ จากคลังเฉพาะของ English</p>
+          <p>A1–C1 ใช้ Vocabulary, Multiple Choice และ Matching ใน Production • Typing/Listening พักไว้จน content พร้อม</p>
           <div class="p97BankMeta"><span id="p97EnglishTotal">กำลังอ่าน…</span><span>A1–C1</span></div>
           <div class="p97BankActions"><button data-p97-new="english">+ เพิ่ม English</button><button class="secondary" data-p97-open="english">จัดการคลัง</button></div>
           <span class="p97Source">bb_english_content</span>
         </article>
       </div>
 
-      <div class="p97Legacy"><b>Legacy Content:</b> `bb_learning_content` ยังเก็บไว้เพื่อความเข้ากันได้กับโค้ดรุ่นเก่า แต่ไม่ใช่จุดหลักสำหรับ Math / HSK / English ใหม่ <button data-p97-open="learning">เปิด Legacy CMS</button></div>
+      <div class="p97Legacy"><b>Legacy Content:</b> `bb_learning_content` เก็บไว้เพื่อ compatibility เท่านั้น • ห้ามใช้เพิ่ม Math / HSK / English Production ใหม่ <button data-p97-open="learning">เปิด Legacy CMS</button></div>
     </section>
 
     <!-- BEARS -->
@@ -1537,7 +1580,7 @@ body{background:linear-gradient(180deg,#fbf8ff 0%,#fff8fb 55%,#fffaf2 100%)!impo
         </label>
         <label><span>ประเภท</span>
           <select id="learnTypeFilter">
-            <option value="">ทุกประเภท</option><option value="vocabulary">คำศัพท์</option><option value="multiple_choice">ปรนัย</option><option value="typing">พิมพ์คำตอบ</option><option value="matching">จับคู่</option><option value="sentence_order">เรียงประโยค</option><option value="listening">ฟัง</option>
+            <option value="">ทุกประเภท</option><option value="vocabulary">คำศัพท์</option><option value="multiple_choice">ปรนัย</option><option value="matching">จับคู่</option><option value="sentence_order">เรียงประโยค</option>
           </select>
         </label>
         <label><span>สถานะ</span>
@@ -1567,7 +1610,7 @@ body{background:linear-gradient(180deg,#fbf8ff 0%,#fff8fb 55%,#fffaf2 100%)!impo
                 <select id="fSubject" required><option value="chinese">ภาษาจีน</option><option value="english">ภาษาอังกฤษ</option><option value="math">คณิตศาสตร์</option></select>
               </label>
               <label><span>ประเภท *</span>
-                <select id="fType" required><option value="vocabulary">คำศัพท์</option><option value="multiple_choice">ปรนัย</option><option value="typing">พิมพ์คำตอบ</option><option value="matching">จับคู่</option><option value="sentence_order">เรียงประโยค</option><option value="listening">ฟังแล้วตอบ</option></select>
+                <select id="fType" required><option value="vocabulary">คำศัพท์</option><option value="multiple_choice">ปรนัย</option><option value="matching">จับคู่</option><option value="sentence_order">เรียงประโยค</option></select>
               </label>
               <label><span>ระดับ *</span>
                 <select id="fDifficulty" required><option value="easy">ง่าย</option><option value="normal">ปานกลาง</option><option value="hard">ยาก</option><option value="expert">Expert</option></select>
@@ -1884,10 +1927,10 @@ body{background:linear-gradient(180deg,#fbf8ff 0%,#fff8fb 55%,#fffaf2 100%)!impo
             <select id="mathFilterType">
               <option value="">ทุกประเภท</option>
               <option value="multiple_choice">🎯 เลือกคำตอบ</option>
-              <option value="typing">⌨️ พิมพ์คำตอบ</option>
+              
               <option value="matching">🧩 จับคู่</option>
               <option value="sentence_order">🔀 เรียงขั้นตอน</option>
-              <option value="listening">🎧 ฟังโจทย์</option>
+              
               <option value="mix">⚡ Mix</option>
             </select>
           </label>
@@ -2040,9 +2083,9 @@ body{background:linear-gradient(180deg,#fbf8ff 0%,#fff8fb 55%,#fffaf2 100%)!impo
               <option value="vocabulary">📚 Vocabulary</option>
               <option value="multiple_choice">🎯 Multiple Choice</option>
               <option value="matching">🧩 Matching</option>
-              <option value="typing">⌨️ Typing</option>
+              
               <option value="sentence_order">🔀 Sentence Order</option>
-              <option value="listening">🎧 Listening</option>
+              
             </select>
           </label>
 
@@ -2141,6 +2184,39 @@ body{background:linear-gradient(180deg,#fbf8ff 0%,#fff8fb 55%,#fffaf2 100%)!impo
       </div>
     </section>
 
+    <!-- SOCIAL SAFETY / MODERATION -->
+    <section class="adminPanel" id="panel-safety">
+      <div class="p994AdminHero">
+        <div><small>SOCIAL SAFETY • v99.4</small><h2>🛡️ Moderation Center</h2><p>ตรวจรายงานผู้เล่น จัดการข้อจำกัด Social/Chat และดูแลคำที่ Server ปฏิเสธก่อนส่งข้อความ</p></div>
+        <button class="btn" id="p994AdminReload">รีเฟรชทั้งหมด</button>
+      </div>
+
+      <div class="p994AdminStats">
+        <article><span>🚩</span><div><small>OPEN REPORTS</small><strong id="p994OpenReports">0</strong><em>รอตรวจ</em></div></article>
+        <article><span>👀</span><div><small>REVIEWING</small><strong id="p994ReviewingReports">0</strong><em>กำลังตรวจ</em></div></article>
+        <article><span>✅</span><div><small>ACTIONED</small><strong id="p994ActionedReports">0</strong><em>ดำเนินการแล้ว</em></div></article>
+        <article><span>💬</span><div><small>CHAT FILTERS</small><strong id="p994FilterCount">0</strong><em>คำที่เปิดใช้</em></div></article>
+      </div>
+
+      <div class="p994AdminGrid">
+        <section class="p994AdminCard">
+          <header class="p994AdminCardHead"><div><small>REPORT QUEUE</small><h3>รายงานผู้เล่น</h3></div><select id="p994ReportStatusFilter"><option value="open">รอตรวจ</option><option value="reviewing">กำลังตรวจ</option><option value="actioned">ดำเนินการแล้ว</option><option value="dismissed">ยกเลิก</option><option value="all">ทั้งหมด</option></select></header>
+          <div class="p994ReportQueue" id="p994ReportQueue"><div class="learnLoading">กำลังโหลดรายงาน…</div></div>
+        </section>
+
+        <section class="p994AdminCard">
+          <header class="p994AdminCardHead"><div><small>SERVER CHAT FILTER</small><h3>คำที่ไม่อนุญาต</h3></div><span class="p994ServerPill">Server enforced</span></header>
+          <form class="p994FilterForm" id="p994FilterForm"><input id="p994FilterTerm" maxlength="80" placeholder="เพิ่มคำหรือวลี"><button class="btn primary" type="submit">เพิ่ม Filter</button></form>
+          <p class="p994AdminHint">ข้อความที่มีคำในรายการนี้จะไม่ถูกบันทึกลงห้องแชท และผู้ส่งจะได้รับข้อความให้แก้ไขก่อนส่ง</p>
+          <div class="p994FilterList" id="p994FilterList"><div class="learnLoading">กำลังโหลด Filter…</div></div>
+        </section>
+      </div>
+
+      <div class="p994AdminPolicy">
+        <span>🔐</span><div><b>หลักการ v99.4</b><small>Block/Mute เป็นเครื่องมือของผู้เล่น • Report เข้า Queue • การจำกัดบัญชีทำโดย Admin หลังตรวจสอบ • Cosmetic/Ranked RP ไม่ถูกแก้จากระบบ Safety โดยอัตโนมัติ</small></div>
+      </div>
+    </section>
+
     <!-- USER CONTROL -->
     <section class="adminPanel" id="panel-users">
       <div class="toolbar userControlToolbar">
@@ -2230,9 +2306,9 @@ body{background:linear-gradient(180deg,#fbf8ff 0%,#fff8fb 55%,#fffaf2 100%)!impo
               <option value="vocabulary">📚 Vocabulary</option>
               <option value="multiple_choice">🎯 Multiple Choice</option>
               <option value="matching">🧩 Matching</option>
-              <option value="typing">⌨️ Typing</option>
+              
               <option value="sentence_order">🔀 Sentence Order</option>
-              <option value="listening">🎧 Listening</option>
+              
             </select>
           </label>
 
@@ -2428,10 +2504,10 @@ body{background:linear-gradient(180deg,#fbf8ff 0%,#fff8fb 55%,#fffaf2 100%)!impo
             <span>ประเภทเกม *</span>
             <select id="mathEditType" required>
               <option value="multiple_choice">🎯 เลือกคำตอบ</option>
-              <option value="typing">⌨️ พิมพ์คำตอบ</option>
+              
               <option value="matching">🧩 จับคู่</option>
               <option value="sentence_order">🔀 เรียงขั้นตอน</option>
-              <option value="listening">🎧 ฟังโจทย์</option>
+              
               <option value="mix">⚡ Mix</option>
             </select>
           </label>
@@ -2831,7 +2907,7 @@ const SUPABASE_URL="https://zumxppmhpajfhttdmlgu.supabase.co";
 const SUPABASE_KEY="sb_publishable_mLG21_IL92Jo2Pt7swNTYw_tVHME3a9";
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
-const POMRU_ADMIN_VERSION="97.0";
+const POMRU_ADMIN_VERSION="99.2";
 
 document.addEventListener("click",e=>{
  const open=e.target.closest("[data-user-open]");
@@ -2996,7 +3072,7 @@ function parseOptions(raw){
 function optionsText(o){return Array.isArray(o)?o.map(String).join("\n"):""}
 
 function openPanel(name){
- const panelNames=["home","content","bears","learning","hsk","math","english","games","users"];
+ const panelNames=["home","content","bears","learning","hsk","math","english","games","users","safety"];
  panelNames.forEach(p=>$("#panel-"+p)?.classList.toggle("active",name===p));
  document.querySelectorAll("[data-admin-panel]").forEach(b=>b.classList.toggle("active",b.dataset.adminPanel===name));
  if(name==="home")loadP97Overview();
@@ -3007,6 +3083,7 @@ function openPanel(name){
  if(name==="english")Promise.all([loadEnglishStats(),loadEnglishManager(false)]);
  if(name==="games")loadGameControl();
  if(name==="users")loadUserControl(false);
+ if(name==="safety")window.POMRUAdminSafety?.load?.();
  try{window.scrollTo({top:0,behavior:"smooth"})}catch(_){window.scrollTo(0,0)}
 }
 document.querySelectorAll("[data-admin-panel]").forEach(b=>b.onclick=()=>openPanel(b.dataset.adminPanel));
@@ -3014,6 +3091,47 @@ document.querySelectorAll("[data-admin-panel]").forEach(b=>b.onclick=()=>openPan
 const P97_SUBJECT_META={
  memory:{icon:"🧸",name:"Memory"},math:{icon:"÷",name:"Math"},chinese:{icon:"中",name:"Chinese"},english:{icon:"A",name:"English"}
 };
+const P992_LEVEL_ORDER={memory:["generated"],math:["math1","math2","math3","math4","math5","math6"],english:["a1","a2","b1","b2","c1"],chinese:["hsk1","hsk2","hsk3","hsk4","hsk5","hsk6"]};
+function p992LevelLabel(subject,level){
+ const raw=String(level||"").toLowerCase();
+ if(subject==="memory")return "Generated";
+ if(subject==="math")return raw.replace("math","Math ");
+ if(subject==="english")return raw.toUpperCase();
+ if(subject==="chinese")return raw.replace("hsk","HSK ");
+ return raw;
+}
+function p992GroupReadiness(rows){
+ const out={memory:new Map(),math:new Map(),english:new Map(),chinese:new Map()};
+ for(const r of rows||[]){
+   const s=String(r.subject_code||"").toLowerCase(); if(!out[s])continue;
+   const level=s==="memory"?"generated":String(r.content_level||"").toLowerCase();
+   const prev=out[s].get(level);
+   if(!prev || Number(r.available_count||0)>Number(prev.available_count||0))out[s].set(level,r);
+ }
+ return out;
+}
+function p992RenderReadiness(rows){
+ const host=$("#p992ReadinessGrid");if(!host)return;
+ const grouped=p992GroupReadiness(rows);
+ host.innerHTML=["memory","math","english","chinese"].map(subject=>{
+   const meta=P97_SUBJECT_META[subject];
+   let levels=[...grouped[subject].keys()];
+   const order=P992_LEVEL_ORDER[subject]||[];
+   levels.sort((a,b)=>{const ai=order.indexOf(a),bi=order.indexOf(b);return (ai<0?99:ai)-(bi<0?99:bi)||a.localeCompare(b)});
+   if(!levels.length&&subject==="memory")levels=["generated"];
+   const body=levels.map(level=>{
+     const r=grouped[subject].get(level)||{available_count:subject==="memory"?10:0,required_count:10,is_ready:subject==="memory"};
+     const have=p97Num(r.available_count),need=Math.max(1,p97Num(r.required_count)||10),ok=have>=need||r.is_ready===true,missing=Math.max(0,need-have);
+     return `<div class="p992LevelRow"><b>${esc(p992LevelLabel(subject,level))}</b><strong class="${ok?"ok":"bad"}">${have}/${need} ${ok?"✅":"❌"}</strong><span class="need">${ok?"พร้อม":`ขาด ${missing}`}</span></div>`;
+   }).join("")||'<div class="p992LevelRow"><b>ยังไม่มีระดับ</b><strong class="bad">0/10 ❌</strong><span class="need">ตรวจฐานข้อมูล</span></div>';
+   return `<section class="p992ReadinessWorld"><header><span>${meta.icon}</span><b>${meta.name}</b></header>${body}</section>`;
+ }).join("");
+}
+async function loadP992Readiness(){
+ const host=$("#p992ReadinessGrid");if(host)host.innerHTML='<div class="learnLoading">กำลังอ่าน Production content…</div>';
+ try{const {data,error}=await sb.rpc("bb_ranked_content_health_matrix");if(error)throw error;p992RenderReadiness(Array.isArray(data)?data:[])}catch(err){if(host)host.innerHTML=`<div class="learnEmpty">อ่าน readiness ไม่สำเร็จ<br><small>${esc(err?.message||"ลองรีเฟรช")}</small></div>`}
+}
+
 function p97Num(v){return Number(v)||0}
 function p97Set(id,value){const el=$("#"+id);if(el)el.textContent=value}
 async function loadP97ContentOverview(){
@@ -3025,6 +3143,7 @@ async function loadP97ContentOverview(){
 }
 async function loadP97Overview(){
  loadP97ContentOverview();
+ loadP992Readiness();
  const host=$("#p97RankedHealth");
  if(!host)return;
  host.innerHTML='<div class="learnLoading">กำลังตรวจคลัง Ranked…</div>';
@@ -3058,7 +3177,8 @@ document.addEventListener("click",e=>{
  if(type==="english"){openPanel("english");setTimeout(()=>$("#englishManagerNew")?.click(),60)}
  if(type==="hsk"){openPanel("hsk");setTimeout(()=>openHSKEditor(null),60)}
 });
-$("#p97ContentRefresh")?.addEventListener("click",()=>{loadP97ContentOverview();loadP97Overview()});
+$("#p97ContentRefresh")?.addEventListener("click",()=>{loadP97ContentOverview();loadP97Overview();loadP992Readiness()});
+$("#p992ReadinessRefresh")?.addEventListener("click",loadP992Readiness);
 
 function updateLearningStats(){
  $("#statAll").textContent=learningRows.length;
@@ -5316,5 +5436,42 @@ $("#deleteModal").addEventListener("click",e=>{if(e.target.id==="deleteModal"){$
 checkAdmin();
 $("#hskManagerNew")?.addEventListener("click",()=>openHSKEditor(null));
 </script>
+
+<script id="pomru-admin-v992-marker">
+window.POMRUAdminV992=Object.freeze({version:"99.2",canonicalSources:{memory:"asset-pool",math:"bb_math_questions",chinese:"bb_hsk_vocabulary",english:"bb_english_content"},legacy:"bb_learning_content",productionPaused:["typing","listening"]});
+</script>
+
+<script id="pomru-admin-v994-safety-runtime">
+(function(){
+ "use strict";
+ const el=id=>document.getElementById(id),esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+ let queue=[],filters=[];
+ async function rpc(name,args={}){const {data,error}=await sb.rpc(name,args);if(error)throw error;return data}
+ function date(v){try{return new Date(v).toLocaleString("th-TH",{dateStyle:"short",timeStyle:"short"})}catch(_){return "—"}}
+ function cat(v){return ({harassment:"คุกคาม",hate:"ถ้อยคำเกลียดชัง",sexual:"เนื้อหาทางเพศ",spam:"Spam",cheating:"สงสัยโกง",unsafe_name:"ชื่อไม่เหมาะสม",other:"อื่น ๆ"})[v]||v||"อื่น ๆ"}
+ function renderQueue(){
+  const host=el("p994ReportQueue");if(!host)return;if(!queue.length){host.innerHTML='<div class="learnEmpty">ไม่มีรายงานในสถานะนี้</div>';return}
+  host.innerHTML=queue.map(r=>`<article class="p994ReportRow"><div class="p994ReportTop"><div><small>${esc(date(r.created_at))}</small><b>${esc(r.reported_name||"ผู้เล่น")} • ${esc(cat(r.category))}</b></div><span class="p994ReportBadge">${esc(r.status||"open")}</span></div><div class="p994ReportMeta"><span>Reporter: ${esc(r.reporter_name||"ผู้เล่น")}</span>${r.room_id?`<span>Room ${esc(String(r.room_id).slice(0,8))}</span>`:""}${r.match_id?`<span>Match ${esc(String(r.match_id).slice(0,8))}</span>`:""}${r.message_id?`<span>Message #${esc(r.message_id)}</span>`:""}</div>${r.details?`<div class="p994ReportText">${esc(r.details)}</div>`:""}${r.message_body?`<div class="p994ReportText p994ReportMessage">💬 ${esc(r.message_body)}</div>`:""}<div class="p994ModControls"><select data-p994-action="${esc(r.report_id)}"><option value="review">กำลังตรวจ</option><option value="warn">เตือน</option><option value="restrict_chat_24h">ปิด Chat 24 ชม.</option><option value="restrict_social_24h">ปิด Social 24 ชม.</option><option value="dismiss">ยกเลิกรายงาน</option></select><input data-p994-note="${esc(r.report_id)}" maxlength="500" placeholder="หมายเหตุ"><button type="button" data-p994-apply="${esc(r.report_id)}">บันทึกการตรวจ</button></div></article>`).join("")
+ }
+ function renderFilters(){const host=el("p994FilterList");if(!host)return;const active=filters.filter(x=>x.active);el("p994FilterCount").textContent=String(active.length);host.innerHTML=filters.length?filters.map(f=>`<span class="p994FilterChip">${esc(f.term)}${f.active?"":" • ปิด"}<button type="button" data-p994-filter-delete="${Number(f.id)}" aria-label="ลบ">×</button></span>`).join(""):'<div class="learnEmpty">ยังไม่มี Filter</div>'}
+ async function loadStats(){
+  const statuses=["open","reviewing","actioned"];const counts={};await Promise.all(statuses.map(async st=>{try{const rows=await rpc("bb_admin_moderation_queue",{p_code:adminCode,p_status:st,p_limit:200})||[];counts[st]=rows.length}catch(_){counts[st]=0}}));
+  el("p994OpenReports").textContent=counts.open||0;el("p994ReviewingReports").textContent=counts.reviewing||0;el("p994ActionedReports").textContent=counts.actioned||0;const badge=el("p994AdminSafetyBadge");if(badge)badge.textContent=counts.open?String(Math.min(99,counts.open)):"";
+ }
+ async function loadQueue(){const host=el("p994ReportQueue");if(host)host.innerHTML='<div class="learnLoading">กำลังโหลดรายงาน…</div>';try{queue=await rpc("bb_admin_moderation_queue",{p_code:adminCode,p_status:el("p994ReportStatusFilter")?.value||"open",p_limit:100})||[];renderQueue()}catch(e){if(host)host.innerHTML=`<div class="learnEmpty">${esc(e?.message||"โหลดรายงานไม่สำเร็จ")}</div>`}}
+ async function loadFilters(){try{filters=await rpc("bb_admin_list_chat_filters",{p_code:adminCode})||[];renderFilters()}catch(e){const host=el("p994FilterList");if(host)host.innerHTML=`<div class="learnEmpty">${esc(e?.message||"โหลด Filter ไม่สำเร็จ")}</div>`}}
+ async function load(){await Promise.all([loadStats(),loadQueue(),loadFilters()])}
+ async function applyReport(id){const action=document.querySelector(`[data-p994-action="${CSS.escape(id)}"]`)?.value||"review",note=document.querySelector(`[data-p994-note="${CSS.escape(id)}"]`)?.value||"";try{await rpc("bb_admin_resolve_report",{p_code:adminCode,p_report_id:id,p_action:action,p_note:note||null});toast("อัปเดต Moderation แล้ว ✓");await load()}catch(e){toast(e?.message||"บันทึกไม่สำเร็จ")}}
+ async function addFilter(e){e.preventDefault();const input=el("p994FilterTerm"),term=input?.value.trim();if(!term)return;try{await rpc("bb_admin_save_chat_filter",{p_code:adminCode,p_term:term,p_active:true});input.value="";toast("เพิ่ม Chat Filter แล้ว");await loadFilters()}catch(err){toast(err?.message||"เพิ่ม Filter ไม่สำเร็จ")}}
+ async function deleteFilter(id){if(!confirm("ลบคำนี้ออกจาก Chat Filter?"))return;try{await rpc("bb_admin_delete_chat_filter",{p_code:adminCode,p_id:Number(id)});toast("ลบ Filter แล้ว");await loadFilters()}catch(e){toast(e?.message||"ลบไม่สำเร็จ")}}
+ el("p994AdminReload")?.addEventListener("click",load);el("p994ReportStatusFilter")?.addEventListener("change",loadQueue);el("p994FilterForm")?.addEventListener("submit",addFilter);document.addEventListener("click",e=>{const a=e.target.closest?.("[data-p994-apply]");if(a){applyReport(a.dataset.p994Apply);return}const d=e.target.closest?.("[data-p994-filter-delete]");if(d)deleteFilter(d.dataset.p994FilterDelete)});
+ window.POMRUAdminSafety=Object.freeze({version:"99.4",load,queue:()=>queue.slice(),filters:()=>filters.slice()});
+ setTimeout(()=>{if(adminCode)loadStats().catch(()=>{})},900);
+ el("unlockBtn")?.addEventListener("click",()=>setTimeout(()=>{if(adminCode)loadStats().catch(()=>{})},450));
+})();
+</script>
+<script id="pomru-admin-v994-marker">window.POMRUAdminV994=Object.freeze({version:"99.4",feature:"social-safety",moderationQueue:true,chatFilters:true,actions:["review","warn","restrict_chat_24h","restrict_social_24h","dismiss"]});</script>
+
+
 </body>
 </html>
