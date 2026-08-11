@@ -17122,6 +17122,13 @@ body.p951RankedQuickStart #bbArenaLobby{
 }
 </style>
 
+
+<style id="pomru-v9521-ranked-hotfix-style">
+#p951ChatDrawer header small{
+  letter-spacing:.08em;
+}
+</style>
+
 </head>
 <body>
 
@@ -21320,6 +21327,10 @@ window.addEventListener("load",()=>{
     window.__bbRankedMatch=activeRankedMatch;
     window.__bbRankedRng=seeded(Number(activeRankedMatch.seed)||1);
 
+    // Restored from the older Ranked branch: opponent Forfeit
+    // must stop the active game immediately.
+    watchRankedLiveOutcome(activeRankedMatch.id);
+
     document.dispatchEvent(
       new CustomEvent(
         "pomru:ranked-game-started",
@@ -21466,6 +21477,152 @@ window.addEventListener("load",()=>{
   };
 
   let rankedResultChannel=null,rankedResultPoll=null,rankedWaitClockTimer=null,rankedWaitDeadline=null;
+  let rankedLiveOutcomeChannel=null,rankedLiveOutcomePoll=null,rankedLiveOutcomeBusy=false;
+
+  function cleanupRankedLiveOutcomeWatch(){
+    if(rankedLiveOutcomeChannel&&client){
+      client.removeChannel(rankedLiveOutcomeChannel);
+      rankedLiveOutcomeChannel=null;
+    }
+    if(rankedLiveOutcomePoll){
+      clearInterval(rankedLiveOutcomePoll);
+      rankedLiveOutcomePoll=null;
+    }
+    rankedLiveOutcomeBusy=false;
+  }
+
+  async function handleOpponentForfeit(){
+    if(!window.BB_RANKED_ACTIVE||!activeRankedMatch?.id)return;
+
+    cleanupRankedLiveOutcomeWatch();
+
+    try{
+      window.bbAbortRankedLearning?.("opponent_forfeit");
+    }catch(_){}
+
+    showRankedWaitingScreen();
+
+    const text=$("#bbResultsProgressText");
+    if(text){
+      text.textContent="คู่แข่งยอมแพ้ • คุณชนะการแข่งขันนี้";
+    }
+
+    document.dispatchEvent(
+      new CustomEvent(
+        "pomru:opponent-forfeit",
+        {detail:{match_id:activeRankedMatch?.id||null}}
+      )
+    );
+
+    watchRankedResults();
+
+    setTimeout(
+      ()=>refreshRankedResults(),
+      80
+    );
+  }
+
+  async function pollRankedLiveOutcome(){
+    if(
+      rankedLiveOutcomeBusy
+      ||!client
+      ||!activeRankedMatch?.id
+      ||!window.BB_RANKED_ACTIVE
+    ){
+      return;
+    }
+
+    rankedLiveOutcomeBusy=true;
+
+    try{
+      const {data,error}=await client.rpc(
+        "bb_ranked_live_state",
+        {p_match_id:activeRankedMatch.id}
+      );
+
+      if(error)throw error;
+
+      const state=Array.isArray(data)?data[0]:data;
+
+      if(state?.opponent_forfeited===true){
+        await handleOpponentForfeit();
+        return;
+      }
+
+      // A finished match while our game is still running means
+      // the server has already resolved the outcome.
+      if(
+        state?.match_status==="finished"
+        &&window.BB_RANKED_ACTIVE
+      ){
+        cleanupRankedLiveOutcomeWatch();
+
+        try{
+          window.bbAbortRankedLearning?.("match_finished");
+        }catch(_){}
+
+        showRankedWaitingScreen();
+        watchRankedResults();
+        setTimeout(()=>refreshRankedResults(),80);
+      }
+
+    }catch(e){
+      console.warn(
+        "POMRU live match state:",
+        e?.message||e
+      );
+    }finally{
+      rankedLiveOutcomeBusy=false;
+    }
+  }
+
+  function watchRankedLiveOutcome(matchId){
+    cleanupRankedLiveOutcomeWatch();
+
+    if(!client||!matchId||!user)return;
+
+    // Realtime path restored from the older code.
+    rankedLiveOutcomeChannel=client
+      .channel(
+        "bb-ranked-live-outcome-"
+        +matchId
+        +"-"
+        +Math.random().toString(36).slice(2)
+      )
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"ranked_match_results",
+          filter:`match_id=eq.${matchId}`
+        },
+        payload=>{
+          const row=payload?.new||{};
+
+          if(
+            row?.forfeited===true
+            &&row.user_id
+            &&row.user_id!==user.id
+            &&window.BB_RANKED_ACTIVE
+          ){
+            handleOpponentForfeit();
+          }
+        }
+      )
+      .subscribe();
+
+    // Poll fallback for iOS/Safari or Realtime delivery misses.
+    rankedLiveOutcomePoll=setInterval(
+      pollRankedLiveOutcome,
+      650
+    );
+
+    setTimeout(
+      pollRankedLiveOutcome,
+      120
+    );
+  }
 
   function stopRankedWaitClock(){
     if(rankedWaitClockTimer){clearInterval(rankedWaitClockTimer);rankedWaitClockTimer=null}
@@ -21491,6 +21648,7 @@ window.addEventListener("load",()=>{
   }
 
   function cleanupRankedResultsWatch(){
+    cleanupRankedLiveOutcomeWatch();
     if(rankedResultChannel&&client){client.removeChannel(rankedResultChannel);rankedResultChannel=null}
     if(rankedResultPoll){clearInterval(rankedResultPoll);rankedResultPoll=null}
     stopRankedWaitClock();
@@ -21815,6 +21973,8 @@ window.addEventListener("load",()=>{
   }
 
   function showRankedWaitingScreen(){
+    cleanupRankedLiveOutcomeWatch();
+    try{window.bbAbortRankedLearning?.("waiting_screen")}catch(_){}
     document.getElementById("bbRankedLearningOverlay")?.classList.add("hidden");
     show("#bbCreateBackdrop",false);
     clearRankedAuto();
@@ -21836,6 +21996,7 @@ window.addEventListener("load",()=>{
   async function forfeitRankedMatch(){
     if(!activeRankedMatch?.id||!client)return;
     if(!confirm("ยอมแพ้การแข่งขันนี้? คะแนนจะเป็น 0 และออกจากเกมทันที"))return;
+    try{window.POMRUInGameChat?.close?.()}catch(_){}
     showRankedWaitingScreen();
     $("#bbResultsProgressText").textContent="กำลังบันทึกการยอมแพ้…";
     try{localStorage.setItem("bb_ranked_waiting_match",activeRankedMatch.id)}catch(e){}
@@ -25977,6 +26138,37 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   window.bbLaunchRankedLearning=launch;
+
+  window.bbAbortRankedLearning=function(reason="external"){
+    clearTick();
+    finishing=true;
+
+    if(session?.data?.match?.id){
+      prepared.delete(session.data.match.id);
+    }
+
+    session=null;
+
+    const overlay=q("#bbRankedLearningOverlay");
+    overlay?.classList.add("hidden");
+    overlay?.setAttribute("aria-hidden","true");
+
+    document.body.classList.remove(
+      "bbRankedLearningPlaying"
+    );
+
+    try{
+      speechSynthesis?.cancel?.();
+    }catch(_){}
+
+    // Do not submit a local score after the server has already
+    // ended the match because of opponent Forfeit.
+    setTimeout(()=>{
+      finishing=false;
+    },0);
+
+    return reason;
+  };
 
   // ---------------- UI actions ----------------
   document.addEventListener("click",e=>{
@@ -32206,7 +32398,7 @@ document.addEventListener('DOMContentLoaded', () => {
         $("p94MatchedGame").textContent=
           `${row.game_name||modeName(row.mode_code)} • ${row.level_label||row.content_level||""} • กำลังเตรียมห้องแข่งขัน`;
 
-        $("p94RankedStatusPill").textContent="พบคู่แข่ง";
+        $("p94RankedStatusPill").textContent="กำลังยืนยันคู่แข่ง";
         state("p94Matched");
 
         
@@ -33009,7 +33201,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <section class="p951ChatDrawer hidden" id="p951ChatDrawer" aria-hidden="true">
     <header>
       <div>
-        <small>LIVE MATCH CHAT</small>
+        <small>LIVE MATCH CHAT • SERVER SYNC</small>
         <h3>คุยกับคู่แข่ง</h3>
       </div>
       <button type="button" id="p951ChatClose" aria-label="ปิด">×</button>
@@ -33311,11 +33503,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const msg=String(e?.message||e||"");
 
       if(msg.includes("chat_closed")){
-        alert(
-          "แชทในเกมยังไม่เปิดในฐานข้อมูล • กรุณารัน Step F1.3"
-        );
+        alert("แมตช์นี้จบแล้ว จึงไม่สามารถส่งแชทเพิ่มได้");
       }else if(msg.includes("chat_rate_limited")){
         alert("ส่งเร็วเกินไป ลองใหม่อีกครั้ง");
+      }else if(msg.includes("created_at")&&msg.includes("ambiguous")){
+        alert("ฐานข้อมูลแชทยังไม่ได้อัปเดต • กรุณารัน Step F1.4");
       }else{
         alert(msg);
       }
@@ -33743,6 +33935,45 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     stop
   };
+})();
+</script>
+
+
+<script id="pomru-v9521-ranked-hotfix-runtime">
+(function(){
+  "use strict";
+
+  document.addEventListener(
+    "pomru:opponent-forfeit",
+    ()=>{
+      try{
+        window.POMRUInGameChat?.close?.();
+      }catch(_){}
+    }
+  );
+
+  // If a stale "matched" visual survives browser back/forward cache,
+  // do not reuse it as proof of a live opponent.
+  window.addEventListener(
+    "pageshow",
+    e=>{
+      if(!e.persisted)return;
+
+      const result=window.POMRU_RANKED_MATCHMAKING_RESULT;
+
+      if(
+        result?.room_id
+        &&!window.BB_RANKED_ACTIVE
+      ){
+        const pill=document.getElementById(
+          "p94RankedStatusPill"
+        );
+        if(pill){
+          pill.textContent="กำลังตรวจสอบคู่แข่ง";
+        }
+      }
+    }
+  );
 })();
 </script>
 
