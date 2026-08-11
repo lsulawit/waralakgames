@@ -17129,6 +17129,267 @@ body.p951RankedQuickStart #bbArenaLobby{
 }
 </style>
 
+
+<style id="pomru-v953-results-history-style">
+.bbResultsTitleV74 #bbResultMainTitle{
+  letter-spacing:.02em;
+  font-size:clamp(31px,5vw,58px)!important;
+}
+
+.p953ResultHero{
+  padding:15px;
+  display:grid;
+  grid-template-columns:95px minmax(0,1fr);
+  gap:13px;
+  align-items:center;
+  border-radius:21px;
+  background:#faf8fb;
+  border:1px solid rgba(111,79,96,.09);
+}
+
+.p953ResultHero.win{
+  background:linear-gradient(145deg,#f0fff7,#fff);
+  border-color:#c8ecd8;
+}
+
+.p953ResultHero.loss{
+  background:linear-gradient(145deg,#fff4f6,#fff);
+  border-color:#f0d5dc;
+}
+
+.p953ResultState{
+  min-height:78px;
+  display:grid;
+  place-items:center;
+  align-content:center;
+  border-radius:18px;
+  background:#fff;
+}
+
+.p953ResultState small{
+  color:#9a8791;font-size:6px;font-weight:1000;
+}
+
+.p953ResultState strong{
+  margin-top:3px;color:#55434f;font-size:22px;
+}
+
+.p953ResultHero.win .p953ResultState strong{color:#27855e}
+.p953ResultHero.loss .p953ResultState strong{color:#b75c70}
+
+.p953VsNames{
+  display:grid;
+  grid-template-columns:1fr 42px 1fr;
+  align-items:center;
+  gap:7px;
+}
+
+.p953VsNames>div{min-width:0}
+.p953VsNames>div:last-child{text-align:right}
+.p953VsNames small{display:block;color:#9d8793;font-size:6px;font-weight:1000}
+.p953VsNames b{display:block;margin-top:2px;overflow:hidden;color:#4e3c49;font-size:13px;text-overflow:ellipsis;white-space:nowrap}
+.p953VsNames span{display:block;margin-top:3px;color:#795e6d;font-size:7px}
+
+.p953VsNames i{
+  width:42px;height:42px;display:grid;place-items:center;
+  border-radius:999px;background:#7653cd;color:#fff;
+  font-size:10px;font-style:normal;font-weight:1000
+}
+
+.p953MatchMetrics{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:6px;margin-top:8px
+}
+
+.p953MatchMetrics article{
+  min-height:62px;padding:8px;display:grid;align-content:center;
+  border-radius:14px;background:#fff;border:1px solid rgba(111,79,96,.08)
+}
+
+.p953MatchMetrics small{color:#98848f;font-size:6px}
+.p953MatchMetrics b{margin-top:2px;color:#503f4c;font-size:13px}
+
+.p953RankProgressCard{
+  margin-top:8px;padding:12px;border-radius:17px;
+  background:linear-gradient(145deg,#f5f0ff,#fff);
+  border:1px solid #e5daf8
+}
+
+.p953RankProgressCard header{
+  display:flex;align-items:center;justify-content:space-between;gap:10px
+}
+
+.p953RankProgressCard header small{display:block;color:#947b9b;font-size:6px;font-weight:1000}
+.p953RankProgressCard header b{display:block;margin-top:2px;color:#503d58;font-size:13px}
+.p953RankProgressCard header>strong{font-size:17px}
+.p953RankProgressCard header>strong.plus{color:#258a64}
+.p953RankProgressCard header>strong.minus{color:#ba536c}
+
+.p953RankNumbers{
+  margin-top:9px;display:flex;align-items:center;gap:7px;
+  color:#806e79;font-size:8px
+}
+.p953RankNumbers b{color:#5f45aa;font-size:12px}
+.p953RankNumbers i{font-style:normal}
+
+.p953RankTrack{
+  height:9px;margin-top:7px;overflow:hidden;
+  border-radius:999px;background:#e8e1ee
+}
+.p953RankTrack i{
+  display:block;height:100%;border-radius:inherit;
+  background:linear-gradient(90deg,#ef78a8,#7654ce)
+}
+
+.p953RankProgressCard footer{
+  margin-top:6px;display:flex;justify-content:space-between;
+  gap:8px;color:#8e7886;font-size:6px
+}
+.p953RankProgressCard footer b{color:#67508e}
+
+.p953RankUpMini{
+  margin-top:8px;padding:6px 8px;border-radius:10px;
+  background:#fff5cf;color:#8d6a19;font-size:7px;
+  font-weight:1000;text-align:center
+}
+
+.p953ResultActions{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:7px;margin-top:15px
+}
+
+.p953ResultActions>button{
+  min-height:88px;padding:10px 7px;display:flex;
+  flex-direction:column;align-items:center;justify-content:center;
+  border:1px solid rgba(111,79,96,.10);
+  border-radius:17px;background:#fff;color:#594652;cursor:pointer
+}
+
+.p953ResultActions>button>span{
+  width:38px;height:38px;display:grid;place-items:center;
+  border-radius:13px;background:#f1ebfa;color:#6f50b6;
+  font-size:17px;font-weight:1000
+}
+
+.p953ResultActions>button>b{margin-top:5px;font-size:9px}
+.p953ResultActions>button>small{margin-top:2px;color:#998590;font-size:6px}
+
+.p953ResultActions .p953PlayAgain{
+  background:linear-gradient(145deg,#7654d0,#6043b9);
+  color:#fff;border-color:transparent
+}
+
+.p953ResultActions .p953PlayAgain>span{
+  background:rgba(255,255,255,.16);color:#fff
+}
+
+.p953ResultActions .p953PlayAgain>small{color:rgba(255,255,255,.75)}
+
+.p953BoardLink{
+  min-height:38px!important;grid-column:1/-1;
+  flex-direction:row!important;border:0!important;
+  background:transparent!important;color:#7659a4!important
+}
+
+/* Profile history */
+.p953HistorySection{grid-column:1/-1}
+
+.p953HistoryHead{
+  display:flex;justify-content:space-between;align-items:center;gap:8px
+}
+
+.p953HistoryHead small{
+  display:block;color:#9c778b;font-size:6px;font-weight:1000;letter-spacing:.1em
+}
+
+.p953HistoryHead h3{margin:2px 0 0!important}
+
+.p953HistoryHead button{
+  padding:6px 9px;border:1px solid rgba(111,79,96,.09);
+  border-radius:10px;background:#fff;color:#7055a5;
+  font-size:7px;font-weight:950
+}
+
+.p953HistoryStats{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:6px;margin-top:10px
+}
+
+.p953HistoryStats>div{
+  min-height:54px;padding:8px;display:grid;align-content:center;
+  border-radius:13px;background:#f8f5fa
+}
+
+.p953HistoryStats small{color:#96818d;font-size:6px}
+.p953HistoryStats b{margin-top:2px;color:#523f4c;font-size:13px}
+
+.p953HistoryList{display:grid;gap:6px;margin-top:8px}
+
+.p953HistoryRow{
+  padding:8px;display:grid;
+  grid-template-columns:42px minmax(0,1fr) auto;
+  gap:8px;align-items:center;
+  border:1px solid rgba(111,79,96,.08);
+  border-radius:14px;background:#fff
+}
+
+.p953HistoryResult{
+  width:42px;height:42px;display:grid;place-items:center;
+  align-content:center;border-radius:13px;background:#f3eff5
+}
+
+.p953HistoryRow.win .p953HistoryResult{background:#e8f8f0;color:#27815e}
+.p953HistoryRow.loss .p953HistoryResult{background:#fff0f3;color:#b75a70}
+.p953HistoryResult strong{font-size:15px}
+.p953HistoryResult small{font-size:5px;font-weight:950}
+
+.p953HistoryMain{min-width:0}
+
+.p953HistoryTitle{
+  display:flex;align-items:center;gap:6px;min-width:0
+}
+
+.p953HistoryTitle b{
+  overflow:hidden;color:#4e3d49;font-size:8px;
+  text-overflow:ellipsis;white-space:nowrap
+}
+
+.p953HistoryTitle span{
+  flex:0 0 auto;padding:2px 5px;border-radius:999px;
+  background:#f0eafd;color:#7054a7;font-size:5px;font-weight:950
+}
+
+.p953HistoryMain p{
+  margin:3px 0;overflow:hidden;color:#7d6975;
+  font-size:6px;text-overflow:ellipsis;white-space:nowrap
+}
+
+.p953HistoryMain>small{color:#a08c96;font-size:5px}
+.p953HistoryRank{text-align:right}
+.p953HistoryRank b{display:block;font-size:10px}
+.p953HistoryRank b.plus{color:#27855e}
+.p953HistoryRank b.minus{color:#b75a70}
+.p953HistoryRank span{display:block;margin-top:2px;color:#816d78;font-size:5px}
+
+.p953HistoryEmpty{
+  padding:18px 10px;border-radius:13px;background:#f9f7fa;
+  color:#806d78;font-size:8px;text-align:center
+}
+
+.p953HistoryEmpty small{
+  display:block;margin-top:3px;color:#a08c96;font-size:6px
+}
+
+@media(max-width:760px){
+  .p953ResultHero{grid-template-columns:72px minmax(0,1fr)}
+  .p953VsNames{grid-template-columns:1fr 32px 1fr}
+  .p953VsNames i{width:32px;height:32px;font-size:8px}
+  .p953MatchMetrics{grid-template-columns:1fr 1fr}
+  .p953ResultActions{grid-template-columns:1fr 1fr}
+  .p953BoardLink{grid-column:1/-1}
+}
+</style>
+
 </head>
 <body>
 
@@ -18471,6 +18732,21 @@ body.p951RankedQuickStart #bbArenaLobby{
         </div>
       </section>
 
+      <section class="p92ProfileSection p953HistorySection">
+        <div class="p953HistoryHead">
+          <div><small>RANKED HISTORY</small><h3>การแข่งขันล่าสุด</h3></div>
+          <button type="button" id="p953RefreshHistory">รีเฟรช</button>
+        </div>
+        <div class="p953HistoryStats" id="p953HistoryStats">
+          <div><small>เกมล่าสุด</small><b>—</b></div>
+          <div><small>ชนะ</small><b>—</b></div>
+          <div><small>Win rate</small><b>—</b></div>
+        </div>
+        <div class="p953HistoryList" id="p953HistoryList">
+          <div class="p953HistoryEmpty">กำลังโหลดประวัติ…</div>
+        </div>
+      </section>
+
       <section class="p92ProfileSection p92ProfileSettings">
         <h3>การตั้งค่า</h3>
         <label class="p92Switch"><span><b>เพลงพื้นหลัง</b><small>เพลงระหว่างเล่น</small></span><input id="p92MusicToggle" type="checkbox"></label>
@@ -19614,10 +19890,24 @@ window.addEventListener("load",()=>{
 
           <div class="bbFullResults bbFullResultsV74" id="bbFullResults"></div>
 
-          <div class="bbResultBottomActions">
-            <button class="bbResultBoardBtn" id="bbResultOpenBoard">ดูทำเนียบผู้เล่น</button>
-            <button class="bbArenaPrimary" id="bbResultsLobby">กลับหน้าเพื่อน</button>
+          <div class="p953ResultActions">
+            <button class="p953PlayAgain" id="p953PlayAgain">
+              <span>⚔️</span><b>เล่นอีกครั้ง</b><small>จับคู่หมวดเดิม</small>
+            </button>
+            <button class="p953AddFriend" id="p953AddOpponentFriend">
+              <span>＋</span><b>เพิ่มเป็นเพื่อน</b><small>คู่แข่งแมตช์นี้</small>
+            </button>
+            <button class="p953HistoryBtn" id="p953OpenHistory">
+              <span>◷</span><b>ประวัติ</b><small>ดูเกมล่าสุด</small>
+            </button>
+            <button class="p953HomeBtn" id="p953ResultHome">
+              <span>⌂</span><b>หน้าหลัก</b><small>กลับหา Buddy</small>
+            </button>
+            <button class="bbResultBoardBtn p953BoardLink" id="bbResultOpenBoard">
+              ดูอันดับผู้เล่น
+            </button>
           </div>
+          <button class="bbArenaPrimary hidden" id="bbResultsLobby" aria-hidden="true">กลับหน้าเพื่อน</button>
         </div>
       </section>
 
@@ -21678,6 +21968,36 @@ window.addEventListener("load",()=>{
     })[world]||{icon:"🧠",name:"Overall"};
   }
 
+  function subjectRankProgress(rp){
+    rp=Math.max(0,Number(rp)||0);
+
+    const tiers=[
+      {name:"Bronze",min:0,next:500},
+      {name:"Silver",min:500,next:1500},
+      {name:"Gold",min:1500,next:3500},
+      {name:"Platinum",min:3500,next:7000},
+      {name:"Diamond",min:7000,next:12000},
+      {name:"Master",min:12000,next:20000},
+      {name:"Legend",min:20000,next:null}
+    ];
+
+    const t=[...tiers].reverse().find(x=>rp>=x.min)||tiers[0];
+
+    if(t.next==null){
+      return {...t,percent:100,current:rp-t.min,needed:0};
+    }
+
+    const span=Math.max(1,t.next-t.min);
+    const current=Math.max(0,rp-t.min);
+
+    return {
+      ...t,
+      percent:Math.max(0,Math.min(100,current/span*100)),
+      current,
+      needed:Math.max(0,t.next-rp)
+    };
+  }
+
   function subjectTierFromRP(rp){
     rp=Math.max(0,Number(rp)||0);
     if(rp>=20000)return {icon:"🏆",name:"Legend"};
@@ -21829,19 +22149,46 @@ window.addEventListener("load",()=>{
     $("#bbResultPlayerCount").textContent=`${ordered.length.toLocaleString()} ผู้เล่น`;
 
     if(mine){
-      $("#bbResultMainTitle").textContent=
-        mine.forfeited
-          ? "จบการแข่งขัน"
-          : Number(mine.placement)===1
-            ? "🥇 เบอร์หนึ่งของแมตช์!"
-            : `🏆 อันดับ #${Number(mine.placement)}`;
+      const opponent=ordered.find(r=>r.user_id!==user?.id)||null;
 
-      $("#bbResultMainSub").textContent=casualMatch
-        ? `Performance ${Number(mine.performance_score||0).toLocaleString()} / 1000 • ห้องเพื่อนไม่เปลี่ยนแรงก์`
-        : `Performance ${Number(mine.performance_score||0).toLocaleString()} / 1000 • ผลจัดอันดับถูกบันทึกแล้ว`;
+      const won=
+        !mine.forfeited
+        &&(
+          opponent?.forfeited
+          ||Number(mine.placement)===1
+        );
+
+      const lost=
+        mine.forfeited
+        ||Number(mine.placement)===2;
+
+      $("#bbResultMainTitle").textContent=
+        casualMatch
+          ?(won?"🏆 คุณชนะ!":lost?"การแข่งขันจบแล้ว":"เสมอ")
+          :(won?"VICTORY":lost?"DEFEAT":"DRAW");
+
+      $("#bbResultMainSub").textContent=
+        mine.forfeited
+          ?"คุณยอมแพ้การแข่งขันนี้"
+          :opponent?.forfeited
+            ?"คู่แข่งยอมแพ้ • คุณเป็นผู้ชนะ"
+            :casualMatch
+              ?`Performance ${Number(mine.performance_score||0).toLocaleString()} / 1000 • ห้องเพื่อนไม่เปลี่ยนแรงก์`
+              :`${rankedSubjectLabel()} Rank ${fmtRPDelta(mine.rp_change)} • ${Number(mine.correct_answers||0)}/${Number(mine.total_answers||0)} ข้อถูก`;
+
+      window.POMRU_LAST_RANKED_OPPONENT=opponent
+        ?{
+            id:opponent.user_id,
+            name:opponent.display_name||"คู่แข่ง",
+            avatar_url:opponent.avatar_url||null
+          }
+        :null;
+
+      window.POMRU_LAST_RANKED_SUBJECT=rankedSubjectCode();
+
     }else{
-      $("#bbResultMainTitle").textContent="🏆 ผลการแข่งขัน";
-      $("#bbResultMainSub").textContent="ประกาศอันดับเรียบร้อยแล้ว";
+      $("#bbResultMainTitle").textContent="ผลการแข่งขัน";
+      $("#bbResultMainSub").textContent="ประกาศผลเรียบร้อยแล้ว";
     }
 
     // ---------------- Podium ----------------
@@ -21874,47 +22221,99 @@ window.addEventListener("load",()=>{
       const afterSubject=subjectTierFromRP(mine.rp_after);
       const subjectUp=beforeSubject.name!==afterSubject.name;
       const subjectLabel=rankedSubjectLabel();
+      const prog=subjectRankProgress(mine.rp_after);
+
+      const opponent=ordered.find(r=>r.user_id!==user?.id)||null;
+
+      const won=
+        !mine.forfeited
+        &&(
+          opponent?.forfeited
+          ||Number(mine.placement)===1
+        );
+
+      const resultWord=
+        won
+          ?"ชนะ"
+          :mine.forfeited||Number(mine.placement)===2
+            ?"แพ้"
+            :"เสมอ";
+
+      const accuracy=
+        Number(mine.total_answers||0)>0
+          ?Math.round(
+              Number(mine.correct_answers||0)
+              /Number(mine.total_answers||1)
+              *100
+            )
+          :0;
+
+      const avgMs=Number(mine.average_answer_ms||0);
 
       $("#bbMyRank").innerHTML=`
-        <div class="bbMyResultHero">
-          <div class="bbMyResultPlace">#${Number(mine.placement)}</div>
-
-          <div class="bbMyResultIdentity">
-            <small>YOUR MATCH RESULT</small>
-            <h2>${esc(mine.display_name||"ผู้เล่น")}</h2>
-            <p>${mine.forfeited?"ยอมแพ้ / ไม่จบ":`${Number(mine.correct_answers||0)} / ${Number(mine.total_answers||0)} ข้อถูก • ${Number(mine.score||0).toLocaleString()} คะแนน`}</p>
+        <div class="p953ResultHero ${won?"win":resultWord==="แพ้"?"loss":"draw"}">
+          <div class="p953ResultState">
+            <small>RESULT</small>
+            <strong>${esc(resultWord)}</strong>
           </div>
 
-          <div class="bbMyResultPerformance">
-            <small>PERFORMANCE</small>
-            <strong>${Number(mine.performance_score||0)}</strong>
-            <span>/ 1000</span>
+          <div class="p953VsNames">
+            <div>
+              <small>YOU</small>
+              <b>${esc(mine.display_name||"คุณ")}</b>
+              <span>${Number(mine.score||0).toLocaleString()} คะแนน</span>
+            </div>
+
+            <i>VS</i>
+
+            <div>
+              <small>OPPONENT</small>
+              <b>${esc(opponent?.display_name||"คู่แข่ง")}</b>
+              <span>${Number(opponent?.score||0).toLocaleString()} คะแนน</span>
+            </div>
           </div>
         </div>
 
+        <div class="p953MatchMetrics">
+          <article><small>ความแม่นยำ</small><b>${accuracy}%</b></article>
+          <article><small>ตอบถูก</small><b>${Number(mine.correct_answers||0)}/${Number(mine.total_answers||0)}</b></article>
+          <article><small>เวลาเฉลี่ย</small><b>${avgMs>0?(avgMs/1000).toFixed(2)+"s":"—"}</b></article>
+          <article><small>Performance</small><b>${Number(mine.performance_score||0)}</b></article>
+        </div>
+
         ${casualMatch?"":`
-        <div class="bbMyResultRanks p95SingleSubjectResult">
-          <article class="bbResultRankCard">
-            <div class="bbResultRankCardHead">
-              <span>🎯 ${esc(subjectLabel.toUpperCase())} RANK</span>
+        <article class="p953RankProgressCard">
+          <header>
+            <div>
+              <small>${esc(subjectLabel.toUpperCase())} RANK</small>
               <b>${afterSubject.icon} ${esc(afterSubject.name)}</b>
             </div>
+            <strong class="${rpDeltaClass(mine.rp_change)}">
+              ${fmtRPDelta(mine.rp_change)}
+            </strong>
+          </header>
 
-            <div class="bbResultRankNumbers">
-              <strong>${Number(mine.rp_before||0).toLocaleString()}</strong>
-              <i>→</i>
-              <strong>${Number(mine.rp_after||0).toLocaleString()}</strong>
-              <span class="bbResultRPDelta ${rpDeltaClass(mine.rp_change)}">${fmtRPDelta(mine.rp_change)}</span>
-            </div>
+          <div class="p953RankNumbers">
+            <span>${Number(mine.rp_before||0).toLocaleString()}</span>
+            <i>→</i>
+            <b>${Number(mine.rp_after||0).toLocaleString()}</b>
+          </div>
 
-            <div class="bbResultTierPath ${subjectUp?"rankup":""}">
-              ${beforeSubject.icon} ${esc(beforeSubject.name)}
-              →
-              ${afterSubject.icon} ${esc(afterSubject.name)}
-            </div>
-          </article>
-        </div>`}
-      </div>`;
+          <div class="p953RankTrack">
+            <i style="width:${prog.percent.toFixed(2)}%"></i>
+          </div>
+
+          <footer>
+            <span>${afterSubject.name}</span>
+            <b>${prog.next==null?"แรงก์สูงสุดแล้ว":"อีก "+Number(prog.needed).toLocaleString()+" แต้ม"}</b>
+          </footer>
+
+          ${subjectUp
+            ?`<div class="p953RankUpMini">RANK UP • ${beforeSubject.name} → ${afterSubject.name}</div>`
+            :""
+          }
+        </article>`}
+      `;
 
       if(!casualMatch)showRankUpIfNeeded(mine);
 
@@ -22080,6 +22479,151 @@ window.addEventListener("load",()=>{
     setTimeout(()=>window.POMRUDuel?.openHub?.("friends"),60);
     toast("จบการดวลแล้ว • ผลการแข่งขันถูกบันทึกไว้");
   });
+
+  async function p953CleanupFinishedMatch(){
+    cleanupRankedResultsWatch();
+    cleanupRoomChannel();
+    stopCountdown();
+
+    window.BB_RANKED_ACTIVE=false;
+    window.__bbRankedRng=null;
+
+    document.body.classList.remove(
+      "bbRankedPlaying",
+      "bbRankedWaiting",
+      "bbGameActive"
+    );
+
+    try{window.POMRUInGameChat?.close?.()}catch(_){}
+    try{window.bbRestoreGameplayDock?.()}catch(_){}
+    try{localStorage.removeItem("bb_ranked_waiting_match")}catch(_){}
+
+    const finishedRoom=
+      activeRankedMatch?.room_id
+      ||window.POMRU_RANKED_ROOM_ID
+      ||currentRoom?.id
+      ||null;
+
+    currentRoom=null;
+    players=[];
+    activeRankedMatch=null;
+
+    window.POMRU_RANKED_ROOM_ID=null;
+    window.POMRU_RANKED_ROOM_CODE=null;
+    window.POMRU_RANKED_HOST_ID=null;
+
+    document.dispatchEvent(
+      new CustomEvent(
+        "pomru:duel-room-left",
+        {detail:{room_id:finishedRoom}}
+      )
+    );
+
+    try{window.POMRUFourRanks?.refresh?.()}catch(_){}
+    try{window.POMRUMatchHistory?.refresh?.()}catch(_){}
+  }
+
+
+  $("#p953PlayAgain")?.addEventListener("click",async()=>{
+    const subject=
+      window.POMRU_LAST_RANKED_SUBJECT
+      ||rankedSubjectCode()
+      ||"memory";
+
+    await p953CleanupFinishedMatch();
+    closeArena();
+
+    try{
+      window.POMRURankSubject?.choose?.(subject);
+    }catch(_){}
+
+    setTimeout(async()=>{
+      try{
+        await window.POMRURankedQueue?.open?.();
+        setTimeout(
+          ()=>window.POMRURankedQueue?.start?.(),
+          150
+        );
+      }catch(_){
+        toast("เปิดการจับคู่ใหม่ไม่สำเร็จ");
+      }
+    },90);
+  });
+
+
+  $("#p953AddOpponentFriend")?.addEventListener("click",async()=>{
+    const opponent=window.POMRU_LAST_RANKED_OPPONENT;
+
+    if(!opponent?.id){
+      toast("ไม่พบข้อมูลคู่แข่ง");
+      return;
+    }
+
+    const btn=$("#p953AddOpponentFriend");
+    if(btn)btn.disabled=true;
+
+    try{
+      const {error}=await client.rpc(
+        "bb_send_friend_request",
+        {p_user_id:opponent.id}
+      );
+
+      if(error)throw error;
+
+      toast(`ส่งคำขอเป็นเพื่อนให้ ${opponent.name||"คู่แข่ง"} แล้ว`);
+
+      const b=btn?.querySelector("b");
+      if(b)b.textContent="ส่งคำขอแล้ว";
+
+    }catch(e){
+      const msg=String(e?.message||e||"");
+      if(/already|friend|pending/i.test(msg)){
+        toast("เป็นเพื่อนกันหรือมีคำขออยู่แล้ว");
+      }else{
+        toast("ส่งคำขอเป็นเพื่อนไม่สำเร็จ");
+      }
+    }finally{
+      if(btn)btn.disabled=false;
+    }
+  });
+
+
+  $("#p953OpenHistory")?.addEventListener("click",async()=>{
+    await p953CleanupFinishedMatch();
+    closeArena();
+
+    setTimeout(()=>{
+      if(typeof openModal==="function"){
+        openModal("profileModal");
+      }else{
+        $("#profileModal")?.classList.remove("hidden");
+      }
+
+      setTimeout(
+        ()=>window.POMRUMatchHistory?.refresh?.(),
+        120
+      );
+    },90);
+  });
+
+
+  $("#p953ResultHome")?.addEventListener("click",async()=>{
+    await p953CleanupFinishedMatch();
+    closeArena();
+
+    const home=
+      document.querySelector('[data-app-go="home"]');
+
+    if(home){
+      home.click();
+      return;
+    }
+
+    try{
+      window.POMRUApp?.go?.("home");
+    }catch(_){}
+  });
+
 
   $("#bbResultsLobby")?.addEventListener("click",async()=>{
     cleanupRankedResultsWatch();cleanupRoomChannel();stopCountdown();
@@ -32536,6 +33080,14 @@ document.addEventListener('DOMContentLoaded', () => {
     openRanked
   };
 
+  window.POMRURankedQueue={
+    open:openRanked,
+    start:startSearch,
+    cancel:cancelSearch,
+    close:closeRanked,
+    subject:rankedSubject
+  };
+
   if(document.readyState==="loading"){
     document.addEventListener("DOMContentLoaded",bind,{once:true});
   }else{
@@ -33974,6 +34526,226 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   );
+})();
+</script>
+
+
+<script id="pomru-v953-match-history-runtime">
+(function(){
+  "use strict";
+
+  const $=id=>document.getElementById(id);
+
+  let cache=[];
+
+  const SUBJECT={
+    memory:{icon:"🧸",name:"หมี"},
+    math:{icon:"➗",name:"คณิต"},
+    english:{icon:"🇬🇧",name:"อังกฤษ"},
+    chinese:{icon:"🇨🇳",name:"จีน"}
+  };
+
+  function client(){
+    return window.__bbSupabase||window.sb||null;
+  }
+
+  function esc(v){
+    return String(v??"").replace(
+      /[&<>"']/g,
+      m=>({
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#39;"
+      }[m])
+    );
+  }
+
+  function relativeDate(value){
+    const d=new Date(value);
+    if(!Number.isFinite(d.getTime()))return "ล่าสุด";
+
+    const diff=Date.now()-d.getTime();
+    const min=Math.floor(diff/60000);
+
+    if(min<1)return "เมื่อสักครู่";
+    if(min<60)return `${min} นาทีที่แล้ว`;
+
+    const hr=Math.floor(min/60);
+    if(hr<24)return `${hr} ชม.ที่แล้ว`;
+
+    const day=Math.floor(hr/24);
+    if(day<7)return `${day} วันที่แล้ว`;
+
+    return d.toLocaleDateString(
+      "th-TH",
+      {day:"numeric",month:"short"}
+    );
+  }
+
+  function outcomeInfo(value){
+    if(value==="victory"){
+      return {label:"ชนะ",cls:"win",mark:"W"};
+    }
+
+    if(value==="defeat"){
+      return {label:"แพ้",cls:"loss",mark:"L"};
+    }
+
+    return {label:"เสมอ",cls:"draw",mark:"D"};
+  }
+
+  function renderStats(){
+    const host=$("p953HistoryStats");
+    if(!host)return;
+
+    const total=cache.length;
+    const wins=cache.filter(x=>x.outcome==="victory").length;
+    const rate=total?Math.round(wins/total*100):0;
+
+    host.innerHTML=`
+      <div><small>เกมล่าสุด</small><b>${total}</b></div>
+      <div><small>ชนะ</small><b>${wins}</b></div>
+      <div><small>Win rate</small><b>${rate}%</b></div>
+    `;
+  }
+
+  function render(){
+    renderStats();
+
+    const host=$("p953HistoryList");
+    if(!host)return;
+
+    if(!cache.length){
+      host.innerHTML=`
+        <div class="p953HistoryEmpty">
+          ยังไม่มีประวัติ Ranked
+          <small>เล่นการแข่งขันครั้งแรกแล้วผลจะขึ้นตรงนี้</small>
+        </div>
+      `;
+      return;
+    }
+
+    host.innerHTML=cache.map(row=>{
+      const out=outcomeInfo(row.outcome);
+      const subject=SUBJECT[row.subject_code]||SUBJECT.memory;
+      const delta=Number(row.points_change||0);
+
+      const accuracy=
+        Number(row.total_answers||0)>0
+          ?Math.round(
+              Number(row.correct_answers||0)
+              /Number(row.total_answers||1)
+              *100
+            )
+          :0;
+
+      return `
+        <article class="p953HistoryRow ${out.cls}">
+          <div class="p953HistoryResult">
+            <strong>${out.mark}</strong>
+            <small>${out.label}</small>
+          </div>
+
+          <div class="p953HistoryMain">
+            <div class="p953HistoryTitle">
+              <b>${subject.icon} ${esc(row.game_name||subject.name)}</b>
+              <span>${esc(row.level_label||"")}</span>
+            </div>
+
+            <p>
+              VS ${esc(row.opponent_name||"คู่แข่ง")}
+              • ${accuracy}% แม่นยำ
+              • ${Number(row.score||0).toLocaleString()} คะแนน
+            </p>
+
+            <small>${relativeDate(row.played_at)}</small>
+          </div>
+
+          <div class="p953HistoryRank">
+            <b class="${delta>=0?"plus":"minus"}">
+              ${delta>0?"+":""}${delta}
+            </b>
+            <span>${esc(row.tier_after||"Bronze")}</span>
+          </div>
+        </article>
+      `;
+    }).join("");
+  }
+
+  async function load(){
+    const c=client();
+    const host=$("p953HistoryList");
+
+    if(!c)return [];
+
+    if(host){
+      host.innerHTML=
+        '<div class="p953HistoryEmpty">กำลังโหลดประวัติ…</div>';
+    }
+
+    try{
+      const {data,error}=await c.rpc(
+        "bb_my_ranked_match_history",
+        {p_limit:10}
+      );
+
+      if(error)throw error;
+
+      cache=Array.isArray(data)?data:[];
+      render();
+      return cache;
+
+    }catch(e){
+      console.warn(
+        "POMRU match history:",
+        e?.message||e
+      );
+
+      if(host){
+        const msg=String(e?.message||"");
+
+        host.innerHTML=`
+          <div class="p953HistoryEmpty">
+            โหลดประวัติยังไม่สำเร็จ
+            <small>${
+              msg.includes("bb_my_ranked_match_history")
+                ?"กรุณารัน Step F2 ใน Supabase"
+                :"ลองกดรีเฟรชอีกครั้ง"
+            }</small>
+          </div>
+        `;
+      }
+
+      return [];
+    }
+  }
+
+  $("p953RefreshHistory")?.addEventListener("click",load);
+
+  document.addEventListener(
+    "click",
+    e=>{
+      if(
+        e.target.closest('[data-app-action="profile"]')
+        ||e.target.closest("#p953OpenHistory")
+      ){
+        setTimeout(load,120);
+      }
+    },
+    true
+  );
+
+  document.addEventListener(
+    "pomru:progress-updated",
+    ()=>setTimeout(load,180)
+  );
+
+  window.POMRUMatchHistory={
+    refresh:load,
+    getAll:()=>cache.slice()
+  };
 })();
 </script>
 
