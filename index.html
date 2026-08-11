@@ -16118,6 +16118,218 @@ body.p941RankOpen .p89RankCard .p89RankRows{
 }
 </style>
 
+
+<style id="pomru-v95-ranked-select-chat-fix">
+/* ============================================================
+   POMRU v95 — Ranked: 4 core games only
+   ============================================================ */
+
+.p95RankedIntro{
+  justify-content:flex-start!important;
+  padding-top:31px!important;
+}
+.p95RankedIntro h1{
+  margin:10px 0 7px!important;
+  font-size:45px!important;
+}
+.p95RankedIntro>p{
+  max-width:560px!important;
+}
+
+.p95RankedGames{
+  width:100%;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:21px;
+}
+
+.p95RankedGame{
+  min-height:100px;
+  padding:11px 12px;
+  display:grid;
+  grid-template-columns:57px minmax(0,1fr) 24px;
+  align-items:center;
+  gap:10px;
+  border:2px solid transparent;
+  border-radius:20px;
+  background:#faf8fb;
+  color:#51404e;
+  text-align:left;
+  box-shadow:none;
+}
+
+.p95RankedGame.selected{
+  border-color:#7958d2;
+  background:#f5f0ff;
+  box-shadow:0 7px 17px rgba(103,72,183,.11);
+}
+
+.p95RankedGame>span:nth-child(2) small{
+  display:block;
+  color:#9c7e8f;
+  font-size:6px;
+  font-weight:1000;
+  letter-spacing:.12em;
+}
+.p95RankedGame>span:nth-child(2) b{
+  display:block;
+  margin-top:2px;
+  color:#4e3d4b;
+  font-size:13px;
+}
+.p95RankedGame>span:nth-child(2) em{
+  display:block;
+  margin-top:2px;
+  color:#927d89;
+  font-size:7px;
+  font-style:normal;
+}
+
+.p95GameMark{
+  width:54px;height:54px;
+  display:grid;place-items:center;
+  position:relative;
+  border:4px solid #fff;
+  border-radius:18px;
+  box-shadow:0 6px 13px rgba(83,56,74,.10);
+  font-size:19px;
+  font-weight:1000;
+  box-sizing:border-box;
+}
+.p95RankedGame.memory .p95GameMark{background:#ffdfec;color:#d8588d}
+.p95RankedGame.math .p95GameMark{background:#fff0c8;color:#c48625}
+.p95RankedGame.chinese .p95GameMark{background:#ffe4e7;color:#c95d67}
+.p95RankedGame.english .p95GameMark{background:#e2f3ff;color:#4e91c4}
+
+.memoryMark::before,
+.memoryMark::after{
+  content:"";
+  position:absolute;
+  width:17px;height:22px;
+  border-radius:6px;
+  background:#fff;
+  box-shadow:inset 0 0 0 3px currentColor;
+}
+.memoryMark::before{left:8px;transform:rotate(-8deg)}
+.memoryMark::after{right:8px;transform:rotate(8deg)}
+
+.p95RankedGame>i{
+  width:18px;height:18px;
+  border:2px solid #d9ced5;
+  border-radius:50%;
+  position:relative;
+}
+.p95RankedGame.selected>i{
+  border-color:#7351ca;
+  background:#7351ca;
+}
+.p95RankedGame.selected>i::after{
+  content:"";
+  position:absolute;
+  left:4px;top:2px;
+  width:6px;height:9px;
+  border-right:2px solid #fff;
+  border-bottom:2px solid #fff;
+  transform:rotate(45deg);
+}
+
+.p95SelectedGame{
+  width:100%;
+  min-height:52px;
+  margin-top:11px;
+  padding:8px 11px;
+  box-sizing:border-box;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:9px;
+  border-radius:14px;
+  background:#faf7fa;
+}
+.p95SelectedGame small{
+  color:#9a8691;
+  font-size:7px;
+}
+.p95SelectedGame b{
+  color:#6e50b1;
+  font-size:9px;
+}
+
+.p94RankedStartBtn:disabled{
+  opacity:.42!important;
+  box-shadow:none!important;
+}
+
+/* ============================================================
+   CHAT FIX — iPad/Safari: explicitly interactive layer
+   ============================================================ */
+
+#bbArenaRoom .p93RoomChat{
+  position:relative!important;
+  z-index:70!important;
+  pointer-events:auto!important;
+  isolation:isolate;
+}
+#bbArenaRoom .p93ChatMessages{
+  position:relative!important;
+  z-index:71!important;
+  pointer-events:auto!important;
+}
+#bbArenaRoom .p93ChatComposer{
+  position:relative!important;
+  z-index:80!important;
+  pointer-events:auto!important;
+  opacity:1;
+}
+#bbArenaRoom .p93ChatComposer:not(.disabled){
+  pointer-events:auto!important;
+}
+#bbArenaRoom #p93ChatInput{
+  position:relative!important;
+  z-index:82!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+  -webkit-user-select:text!important;
+  user-select:text!important;
+  -webkit-appearance:none!important;
+  appearance:none!important;
+  opacity:1!important;
+}
+#bbArenaRoom #p93ChatSend{
+  position:relative!important;
+  z-index:83!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+}
+#bbArenaRoom .p93ChatComposer.disabled{
+  pointer-events:none!important;
+  opacity:.5!important;
+}
+
+@media(max-width:760px){
+  .p95RankedIntro{
+    padding:21px 13px!important;
+  }
+  .p95RankedIntro h1{
+    font-size:35px!important;
+  }
+  .p95RankedGames{
+    grid-template-columns:1fr!important;
+    gap:7px;
+  }
+  .p95RankedGame{
+    min-height:80px;
+    grid-template-columns:49px minmax(0,1fr) 22px;
+    padding:8px 10px;
+  }
+  .p95GameMark{
+    width:47px;height:47px;
+    border-radius:15px;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -18488,7 +18700,7 @@ window.addEventListener("load",()=>{
             </div>
             <form class="p93ChatComposer" id="p93ChatForm">
               <input id="p93ChatInput" maxlength="300" autocomplete="off" placeholder="พิมพ์ข้อความ…">
-              <button type="submit" id="p93ChatSend">ส่ง</button>
+              <button type="button" id="p93ChatSend">ส่ง</button>
             </form>
           </section>
         </section>
@@ -19098,7 +19310,7 @@ window.addEventListener("load",()=>{
   function closeArena(){document.body.classList.remove("bbArenaOpen");
     closeCreateRoomSheet();
     $("#bbArena").classList.add("hidden");$("#bbArena").setAttribute("aria-hidden","true");document.body.style.overflow="";
-    cleanupRoomChannel();cleanupLobbyChannel();stopCountdown();
+    cleanupRoomChannel();cleanupLobbyChannel();stopCountdown();cleanupRankedLiveOutcomeWatch?.();
     try{
       const active=document.querySelector(".bbAppScreen.active")?.dataset?.appScreen||"home";
       document.querySelectorAll(".v17dock [data-v17]").forEach(b=>{
@@ -19999,6 +20211,7 @@ window.addEventListener("load",()=>{
     rankedResetTimeline(match);
     window.BB_RANKED_ACTIVE=true;
     window.__bbRankedMatch=match;
+    watchRankedLiveOutcome(match.id);
     window.__bbRankedRng=seeded(Number(match.seed)||1);
 
     show("#bbArenaCountdown",false);
@@ -20085,6 +20298,47 @@ window.addEventListener("load",()=>{
   }
 
   let rankedResultChannel=null,rankedResultPoll=null,rankedWaitClockTimer=null,rankedWaitDeadline=null;
+  let rankedLiveOutcomeChannel=null;
+
+  function cleanupRankedLiveOutcomeWatch(){
+    if(rankedLiveOutcomeChannel&&client){
+      client.removeChannel(rankedLiveOutcomeChannel);
+      rankedLiveOutcomeChannel=null;
+    }
+  }
+
+  function watchRankedLiveOutcome(matchId){
+    cleanupRankedLiveOutcomeWatch();
+    if(!client||!matchId||!user)return;
+
+    rankedLiveOutcomeChannel=client
+      .channel("bb-ranked-live-outcome-"+matchId+"-"+Math.random().toString(36).slice(2))
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"ranked_match_results",
+          filter:`match_id=eq.${matchId}`
+        },
+        payload=>{
+          const row=payload?.new||{};
+          if(
+            row?.forfeited===true
+            && row.user_id
+            && row.user_id!==user.id
+            && window.BB_RANKED_ACTIVE
+          ){
+            cleanupRankedLiveOutcomeWatch();
+            showRankedWaitingScreen();
+            $("#bbResultsProgressText").textContent="คู่แข่งยอมแพ้ • คุณชนะการแข่งขันนี้";
+            watchRankedResults();
+            setTimeout(()=>refreshRankedResults(),120);
+          }
+        }
+      )
+      .subscribe();
+  }
 
   function stopRankedWaitClock(){
     if(rankedWaitClockTimer){clearInterval(rankedWaitClockTimer);rankedWaitClockTimer=null}
@@ -20442,6 +20696,7 @@ window.addEventListener("load",()=>{
   }
 
   function showRankedWaitingScreen(){
+    cleanupRankedLiveOutcomeWatch();
     document.getElementById("bbRankedLearningOverlay")?.classList.add("hidden");
     show("#bbCreateBackdrop",false);
     clearRankedAuto();
@@ -20462,17 +20717,17 @@ window.addEventListener("load",()=>{
 
   async function forfeitRankedMatch(){
     if(!activeRankedMatch?.id||!client)return;
-    if(!confirm("ยอมแพ้การแข่งขันนี้? คะแนนจะเป็น 0 และออกจากเกมทันที"))return;
+    if(!confirm("ยอมแพ้การแข่งขันนี้? คู่แข่งจะชนะทันที และการแข่งขันจะจบลง"))return;
     showRankedWaitingScreen();
-    $("#bbResultsProgressText").textContent="กำลังบันทึกการยอมแพ้…";
+    $("#bbResultsProgressText").textContent="กำลังจบการแข่งขัน • คู่แข่งจะชนะทันที…";
     try{localStorage.setItem("bb_ranked_waiting_match",activeRankedMatch.id)}catch(e){}
     try{
-      const {data,error}=await client.rpc("bb_ranked_forfeit",{p_match_id:activeRankedMatch.id});
+      const {data,error}=await client.rpc("bb_ranked_forfeit_v2",{p_match_id:activeRankedMatch.id});
       if(error)throw error;
       currentRoom=null;players=[];
-      const s=data?.[0]||{};
-      $("#bbResultsProgressText").textContent=`${Number(s.submitted_count||0)} / ${Number(s.expected_count||0)} คน เล่นจบแล้ว`;
-      watchRankedResults();await refreshRankedResults();
+      $("#bbResultsProgressText").textContent="คุณยอมแพ้ • คู่แข่งชนะการแข่งขันนี้";
+      watchRankedResults();
+      await refreshRankedResults();
     }catch(e){
       $("#bbResultsProgressText").textContent="ยอมแพ้ไม่สำเร็จ • "+errText(e);
       toast(errText(e));
@@ -30020,9 +30275,31 @@ document.addEventListener('DOMContentLoaded', () => {
     await Promise.all([loadDuelState(roomId),loadChat(roomId)]);
     subscribeChat(roomId);
     const form=q("#p93ChatForm");
+    const input=q("#p93ChatInput");
+    const send=q("#p93ChatSend");
+
     form?.classList.remove("disabled");
+
+    if(form){
+      form.style.pointerEvents="auto";
+      form.removeAttribute("inert");
+    }
+
     if(q("#p93ChatStatus"))q("#p93ChatStatus").textContent="เปิดอยู่";
-    if(q("#p93ChatInput"))q("#p93ChatInput").disabled=false;
+
+    if(input){
+      input.disabled=false;
+      input.readOnly=false;
+      input.removeAttribute("disabled");
+      input.removeAttribute("readonly");
+      input.removeAttribute("inert");
+      input.style.pointerEvents="auto";
+    }
+
+    if(send){
+      send.disabled=false;
+      send.style.pointerEvents="auto";
+    }
   }
 
   async function leaveDuelRoom(){
@@ -30067,7 +30344,28 @@ document.addEventListener('DOMContentLoaded', () => {
       searchPlayers(q("#p93SearchInput")?.value||"");
     });
 
-    q("#p93ChatForm")?.addEventListener("submit",e=>{e.preventDefault();sendChat()});
+    q("#p93ChatForm")?.addEventListener("submit",e=>{
+      e.preventDefault();
+      sendChat();
+    });
+
+    q("#p93ChatSend")?.addEventListener("click",e=>{
+      e.preventDefault();
+      sendChat();
+    });
+
+    q("#p93ChatInput")?.addEventListener("pointerdown",e=>{
+      if(!e.currentTarget.disabled){
+        setTimeout(()=>e.currentTarget.focus(),0);
+      }
+    });
+
+    q("#p93ChatInput")?.addEventListener("keydown",e=>{
+      if(e.key==="Enter"&&!e.shiftKey){
+        e.preventDefault();
+        sendChat();
+      }
+    });
 
     q("#p93InviteFriendInRoom")?.addEventListener("click",async()=>{
       if(!activeRoomId)return;
@@ -30258,21 +30556,52 @@ document.addEventListener('DOMContentLoaded', () => {
   </header>
 
   <main class="p94RankedPage">
-    <section class="p94RankedIntro" id="p94RankedIntro">
-      <div class="p94RankedShield"><span>VS</span></div>
-      <span class="p94HeroPill2">MATCHMAKING</span>
-      <h1>หาคู่แข่ง<br>แรงก์ใกล้เคียง</h1>
-      <p>ระบบเริ่มค้นหาจากผู้เล่นระดับใกล้คุณที่สุด และค่อย ๆ ขยายช่วงค้นหาเมื่อรอนานขึ้น</p>
+    
+<section class="p94RankedIntro p95RankedIntro" id="p94RankedIntro">
+  <span class="p94HeroPill2">RANKED 1V1</span>
+  <h1>เลือกเกม<br>ที่จะจัดอันดับ</h1>
+  <p>Ranked เก็บเฉพาะเกมหลักอย่างละ 1 เกม เพื่อให้กติกาชัดและจับคู่คนที่ต้องการเล่นเกมเดียวกัน</p>
 
-      <div class="p94RankedRules">
-        <div><b>1 VS 1</b><small>สองคนเท่านั้น</small></div>
-        <div><b>ใกล้เคียง</b><small>จับคู่ตามแรงก์</small></div>
-        <div><b>Realtime</b><small>เริ่มจากเวลา Server</small></div>
-      </div>
+  <div class="p95RankedGames" id="p95RankedGames">
+    <button type="button" class="p95RankedGame memory" data-p95-ranked-mode="teddy_match">
+      <span class="p95GameMark memoryMark" aria-hidden="true"></span>
+      <span><small>MEMORY</small><b>จับคู่</b><em>เกมหมี</em></span>
+      <i></i>
+    </button>
 
-      <button type="button" class="p94RankedStartBtn" id="p94RankedStartBtn">เริ่มจับคู่</button>
-      <small class="p94RankedNote">Ranked รุ่นแรกสุ่มจาก 3 เกม Memory มาตรฐาน เพื่อให้ทั้งสองฝ่ายใช้กติกาเดียวกัน</small>
-    </section>
+    <button type="button" class="p95RankedGame math" data-p95-ranked-mode="math_multiple_choice">
+      <span class="p95GameMark mathMark" aria-hidden="true">×÷</span>
+      <span><small>MATH</small><b>เลือกคำตอบ</b><em>คณิตศาสตร์</em></span>
+      <i></i>
+    </button>
+
+    <button type="button" class="p95RankedGame chinese" data-p95-ranked-mode="chinese_hanzi_meaning">
+      <span class="p95GameMark chineseMark" aria-hidden="true">汉</span>
+      <span><small>CHINESE</small><b>คำศัพท์จีน</b><em>汉字 → ความหมาย</em></span>
+      <i></i>
+    </button>
+
+    <button type="button" class="p95RankedGame english" data-p95-ranked-mode="english_vocabulary">
+      <span class="p95GameMark englishMark" aria-hidden="true">A</span>
+      <span><small>ENGLISH</small><b>Vocabulary</b><em>คำศัพท์อังกฤษ</em></span>
+      <i></i>
+    </button>
+  </div>
+
+  <div class="p95SelectedGame" id="p95SelectedGame">
+    <small>เลือกเกมก่อนเริ่มจับคู่</small>
+    <b id="p95SelectedGameName">ยังไม่ได้เลือก</b>
+  </div>
+
+  <button type="button" class="p94RankedStartBtn" id="p94RankedStartBtn" disabled>
+    เริ่มจับคู่
+  </button>
+
+  <small class="p94RankedNote">
+    ระบบจะจับคู่เฉพาะผู้เล่นที่เลือกเกมเดียวกัน และเริ่มจากแรงก์ที่ใกล้คุณที่สุด
+  </small>
+</section>
+
 
     <section class="p94Searching hidden" id="p94Searching">
       <div class="p94SearchVisual">
@@ -30338,6 +30667,14 @@ document.addEventListener('DOMContentLoaded', () => {
   let queueStartedAt=0;
   let queueBusy=false;
   let matched=false;
+  let selectedRankedMode=null;
+
+  const RANKED_CORE_GAMES={
+    teddy_match:{name:"จับคู่",world:"Memory"},
+    math_multiple_choice:{name:"เลือกคำตอบ",world:"Math"},
+    chinese_hanzi_meaning:{name:"คำศัพท์จีน",world:"Chinese"},
+    english_vocabulary:{name:"Vocabulary",world:"English"}
+  };
 
   function getClient(){
     if(client)return client;
@@ -30365,10 +30702,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function errorText(e){
     const s=String(e?.message||e||"เกิดข้อผิดพลาด");
     if(
-      s.includes("bb_ranked_matchmaking_tick")
+      s.includes("bb_ranked_matchmaking_tick_v2")||s.includes("bb_ranked_matchmaking_tick")
       ||s.includes("Could not find the function")
     ){
-      return "ยังไม่ได้ติดตั้งระบบ Matchmaking • กรุณารัน POMRU Step E1 ใน Supabase ก่อน";
+      return "ยังไม่ได้ติดตั้ง Ranked E2 • กรุณารัน POMRU Step E2 ใน Supabase ก่อน";
     }
     if(s.includes("authentication_required"))return "กรุณาเข้าสู่ระบบก่อน";
     return s;
@@ -30408,7 +30745,10 @@ document.addEventListener('DOMContentLoaded', () => {
     matched=false;
 
     state("p94RankedIntro");
-    $("p94RankedStatusPill").textContent="พร้อมจับคู่";
+    $("p94RankedStatusPill").textContent=selectedRankedMode
+      ? "เลือก "+(RANKED_CORE_GAMES[selectedRankedMode]?.name||"เกมแล้ว")
+      : "เลือกเกมก่อน";
+    syncRankedGameSelection();
 
     show("p94RankedOverlay",true);
     $("p94RankedOverlay")?.setAttribute("aria-hidden","false");
@@ -30478,6 +30818,11 @@ document.addEventListener('DOMContentLoaded', () => {
   async function startSearch(){
     if(queueTimer||queueBusy)return;
 
+    if(!selectedRankedMode){
+      $("p94RankedStatusPill").textContent="กรุณาเลือกเกม";
+      return;
+    }
+
     await getUser();
 
     if(!user){
@@ -30490,7 +30835,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     state("p94Searching");
     $("p94RankedStatusPill").textContent="กำลังจับคู่";
-    $("p94SearchText").textContent="กำลังค้นหาผู้เล่นแรงก์ใกล้เคียง";
+    $("p94SearchText").textContent=`กำลังหาคู่แข่ง ${RANKED_CORE_GAMES[selectedRankedMode]?.name||""} ที่แรงก์ใกล้เคียง`;
 
     renderTimer();
 
@@ -30510,7 +30855,10 @@ document.addEventListener('DOMContentLoaded', () => {
     queueBusy=true;
 
     try{
-      const data=await rpc("bb_ranked_matchmaking_tick");
+      const data=await rpc(
+        "bb_ranked_matchmaking_tick_v2",
+        {p_mode_code:selectedRankedMode}
+      );
       const row=Array.isArray(data)?data[0]:data;
 
       if(!row)return;
@@ -30518,12 +30866,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if(row.queue_status==="searching"){
         const sec=Number(row.wait_seconds||0);
 
+        const gameName=RANKED_CORE_GAMES[selectedRankedMode]?.name||"เกมนี้";
         $("p94SearchText").textContent=
           sec>=20
-            ?"กำลังขยายการค้นหาเพื่อให้เจอคู่เร็วขึ้น"
+            ?`กำลังขยายช่วงแรงก์สำหรับ ${gameName} เพื่อให้เจอคู่เร็วขึ้น`
             :sec>=10
-              ?"กำลังค้นหาเพิ่ม แต่ยังเน้นผู้เล่นระดับใกล้กัน"
-              :"กำลังค้นหาผู้เล่นแรงก์ใกล้เคียง";
+              ?`กำลังหาคนเล่น ${gameName} เพิ่ม แต่ยังเน้นแรงก์ใกล้กัน`
+              :`กำลังหาคู่แข่ง ${gameName} ที่แรงก์ใกล้เคียง`;
 
         return;
       }
@@ -30629,6 +30978,33 @@ document.addEventListener('DOMContentLoaded', () => {
     target.classList.toggle("hidden",n<1);
   }
 
+  function syncRankedGameSelection(){
+    document.querySelectorAll("[data-p95-ranked-mode]").forEach(btn=>{
+      btn.classList.toggle(
+        "selected",
+        btn.dataset.p95RankedMode===selectedRankedMode
+      );
+    });
+
+    const game=RANKED_CORE_GAMES[selectedRankedMode]||null;
+    const start=$("p94RankedStartBtn");
+    if(start)start.disabled=!game;
+
+    if($("p95SelectedGameName")){
+      $("p95SelectedGameName").textContent=game
+        ? `${game.world} • ${game.name}`
+        : "ยังไม่ได้เลือก";
+    }
+  }
+
+  function selectRankedGame(mode){
+    if(!RANKED_CORE_GAMES[mode])return;
+    selectedRankedMode=mode;
+    syncRankedGameSelection();
+    $("p94RankedStatusPill").textContent=
+      `เลือก ${RANKED_CORE_GAMES[mode].name} แล้ว`;
+  }
+
   function bind(){
     $("p94MenuBtn")?.addEventListener("click",openMenu);
     $("p94MenuClose")?.addEventListener("click",closeMenu);
@@ -30641,6 +31017,13 @@ document.addEventListener('DOMContentLoaded', () => {
     $("p94FriendRoomBtn")?.addEventListener("click",openFriendRoom);
 
     $("p94RankedModeBtn")?.addEventListener("click",openRanked);
+
+    document.querySelectorAll("[data-p95-ranked-mode]").forEach(btn=>{
+      btn.addEventListener("click",()=>{
+        selectRankedGame(btn.dataset.p95RankedMode);
+      });
+    });
+
     $("p94RankedStartBtn")?.addEventListener("click",startSearch);
     $("p94CancelMatch")?.addEventListener("click",cancelSearch);
     $("p94RankedClose")?.addEventListener("click",closeRanked);
@@ -30663,7 +31046,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener("pomru:progress-updated",syncNotificationBadge);
     document.addEventListener("pomru:v899-synced",syncNotificationBadge);
 
-    setTimeout(syncNotificationBadge,700);
+    setTimeout(syncNotificationBadge,700);syncRankedGameSelection();
   }
 
   window.POMRUV94={
