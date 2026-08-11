@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>POMRU • ผมรู้ — v97.4.2 Battle Answer RPC Fix</title>
+<title>POMRU • ผมรู้ — v98 Home + Buddy Core Loop</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -21793,7 +21793,17 @@ function updateSummary(){
   $("hintline")&&($("hintline").textContent="POMRU จับเวลาให้อัตโนมัติตามระดับ");
 }
 function roundLayout(r=Math.random){const pool=shuf(sourcePool(),r),d=dc();if(cfg.mode==="match"){const pairs=Math.max(2,Math.floor(d.n/2)),ids=pool.slice(0,pairs);return shuf(ids.flatMap(x=>[x,x]),r)}return pool.slice(0,d.n)}
-function resetRound(r=Math.random){stopTimer();layout=roundLayout(r);baseLayout=[...layout];asked=new Set();correct=score=combo=bestCombo=0;lives=3;hints=3;targetIndex=pickedIndex=lastTarget=null;swapPair=[];swapPicks=[];changeIndex=changeAlt=null;matchFirst=null;matchLock=false;matchDone=0;sequenceOrder=[];sequencePick=[];sequencePlaying=false;teamคะแนนs=[0,0,0,0,0,0];roundXP=0;roundStartedAt=Date.now();roundAttempts=0;practiceRewardSubmitted=false;adaptiveShift=adaptiveWins=adaptiveMisses=0;lucky=false;roundStarted=true;roundComplete=false;renderTeams();updateHUD();saveResume()}
+function resetRound(r=Math.random){
+  stopTimer();
+  const serverPlan=(window.BB_RANKED_ACTIVE&&cfg.mode==="position")?window.POMRUServerBattleV2?.plan?.():null;
+  const serverLayout=Array.isArray(serverPlan?.memory_layout)?serverPlan.memory_layout.map(Number).filter(Number.isFinite):[];
+  layout=serverLayout.length?serverLayout:roundLayout(r);
+  baseLayout=[...layout];asked=new Set();correct=score=combo=bestCombo=0;lives=3;hints=3;
+  targetIndex=pickedIndex=lastTarget=null;swapPair=[];swapPicks=[];changeIndex=changeAlt=null;matchFirst=null;matchLock=false;matchDone=0;
+  sequenceOrder=[];sequencePick=[];sequencePlaying=false;teamคะแนนs=[0,0,0,0,0,0];roundXP=0;roundStartedAt=Date.now();roundAttempts=0;
+  practiceRewardSubmitted=false;adaptiveShift=adaptiveWins=adaptiveMisses=0;lucky=false;roundStarted=true;roundComplete=false;
+  renderTeams();updateHUD();saveResume()
+}
 function startRound(r=Math.random){
   cfg.style="solo";cfg.teams=1;cfg.answer="screen";
   if(cfg.source==="teddy"&&!["position","match","sequence"].includes(cfg.mode))cfg.mode="position";
@@ -21837,9 +21847,28 @@ function startTimer(expire){stopTimer();if(!cfg.timer)return;$("timer").classLis
 const MODE_POINTS={position:100,match:80,missing:120,swap:150,change:130,sequence:160};
 const DIFF_MULT={easy:1,normal:1.25,hard:1.5,expert:2};
 function pointsPerCorrect(){return Math.round((MODE_POINTS[cfg.mode]||100)*(DIFF_MULT[effDiff()]||1))}
-function record(ok){roundAttempts++;if(ok){correct++;combo++;bestCombo=Math.max(bestCombo,combo);score+=pointsPerCorrect();sfx("ok")}else{combo=0;sfx("bad")}if(window.BB_RANKED_ACTIVE&&cfg.mode==="position"){try{window.POMRUBuddyBattle?.submit?.(!!ok,Math.max(0,roundAttempts-1))}catch(_){}}updateHUD();saveResume()}
+function record(ok){roundAttempts++;if(ok){correct++;combo++;bestCombo=Math.max(bestCombo,combo);score+=pointsPerCorrect();sfx("ok")}else{combo=0;sfx("bad")}if(window.BB_RANKED_ACTIVE&&cfg.mode==="position"&&!window.POMRUServerBattleV2?.enabled){try{window.POMRUBuddyBattle?.submit?.(!!ok,Math.max(0,roundAttempts-1))}catch(_){}}updateHUD();saveResume()}
 function surprise(){return}
-function positionAsk(){stopTimer();if(asked.size>=qCount())return finishRound();const a=layout.map((_,i)=>i).filter(i=>!asked.has(i));if(!a.length)return finishRound();targetIndex=a[Math.floor((window.__bbRankedRng||Math.random)()*a.length)];asked.add(targetIndex);pickedIndex=null;state="position_target";renderTarget(targetIndex);showScene("target");setStatus("🧸","ดูรูปเป้าหมาย","จำว่าตัวนี้เคยอยู่ช่องไหน");setMain("พร้อมตอบ",positionAnswer);$("replayBtn").classList.add("hidden");updateHUD();sfx("flip");saveResume()}
+function positionAsk(){
+  stopTimer();
+  if(asked.size>=qCount())return finishRound();
+  const a=layout.map((_,i)=>i).filter(i=>!asked.has(i));
+  if(!a.length)return finishRound();
+
+  let chosen=null;
+  if(window.BB_RANKED_ACTIVE&&window.POMRUServerBattleV2?.enabled){
+    const qIndex=asked.size;
+    const sq=window.POMRUServerBattleV2.question?.(qIndex);
+    const teddy=Number(sq?.metadata?.target_teddy_id);
+    const idx=layout.findIndex(x=>Number(x)===teddy);
+    if(idx>=0&&!asked.has(idx))chosen=idx;
+  }
+
+  targetIndex=chosen===null?a[Math.floor((window.__bbRankedRng||Math.random)()*a.length)]:chosen;
+  asked.add(targetIndex);pickedIndex=null;state="position_target";renderTarget(targetIndex);showScene("target");
+  setStatus("🧸","ดูรูปเป้าหมาย","จำว่าตัวนี้เคยอยู่ช่องไหน");setMain("พร้อมตอบ",positionAnswer);$("replayBtn").classList.add("hidden");
+  updateHUD();sfx("flip");saveResume()
+}
 function bbAnswerTimer(expire){
   if(window.BB_RANKED_ACTIVE && typeof window.bbRankedAnswerTimer==="function"){
     return window.bbRankedAnswerTimer(expire);
@@ -21860,40 +21889,30 @@ function positionAnswer(){
   state="position_answer";showScene("board");renderBoard(true);
 
   const rankedBoard=document.getElementById("board");
-  if(rankedBoard){
-    rankedBoard.style.pointerEvents="auto";
-    rankedBoard.style.touchAction="manipulation";
-    [...rankedBoard.children].forEach(slot=>{
-      slot.style.pointerEvents="auto";
-      slot.style.touchAction="manipulation";
-    });
-  }
+  if(rankedBoard){rankedBoard.style.pointerEvents="auto";rankedBoard.style.touchAction="manipulation";[...rankedBoard.children].forEach(slot=>{slot.style.pointerEvents="auto";slot.style.touchAction="manipulation"})}
 
   $("boardTitle").textContent="อยู่หมายเลขไหน?";
-  $("boardSub").textContent=window.BB_RANKED_ACTIVE?"เลือกคำตอบ แล้วรอเวลาหมดเพื่อดูเฉลย":cfg.answer==="voice"&&cfg.style==="team"?"ตอบออกเสียง แล้วกดเฉลยเมื่อพร้อม":"แตะหมายเลขที่คิดว่าถูกต้อง";
-  setStatus(cfg.answer==="voice"&&cfg.style==="team"?"🗣️":"🔢",cfg.answer==="voice"&&cfg.style==="team"?"ตอบออกเสียง":"เลือกตำแหน่ง",window.BB_RANKED_ACTIVE?"คำตอบจะเฉลยพร้อมกันเมื่อหมดเวลา":"ตอบแล้วเปิดเฉลยทั้งกระดาน");
+  $("boardSub").textContent=window.BB_RANKED_ACTIVE?"เลือกคำตอบ 1 ครั้ง • Server จะตรวจและเฉลยพร้อมกัน":cfg.answer==="voice"&&cfg.style==="team"?"ตอบออกเสียง แล้วกดเฉลยเมื่อพร้อม":"แตะหมายเลขที่คิดว่าถูกต้อง";
+  setStatus(cfg.answer==="voice"&&cfg.style==="team"?"🗣️":"🔢",cfg.answer==="voice"&&cfg.style==="team"?"ตอบออกเสียง":"เลือกตำแหน่ง",window.BB_RANKED_ACTIVE?"คำตอบถูกตรวจโดย Server":"ตอบแล้วเปิดเฉลยทั้งกระดาน");
 
   if(cfg.answer==="voice"&&cfg.style==="team"){
-    $("voiceBtn").classList.remove("hidden");
-    $("voiceBtn").onclick=()=>positionReveal(true);
-    setMain(window.BB_RANKED_ACTIVE?"รอหมดเวลา…":"เฉลยเลย",()=>positionReveal(true),!!window.BB_RANKED_ACTIVE);
+    $("voiceBtn").classList.remove("hidden");$("voiceBtn").onclick=()=>positionReveal(true);setMain(window.BB_RANKED_ACTIVE?"รอหมดเวลา…":"เฉลยเลย",()=>positionReveal(true),!!window.BB_RANKED_ACTIVE);
   }else{
-    [...$("board").children].forEach((s,i)=>s.onclick=()=>{
+    [...$("board").children].forEach((slot,i)=>slot.onclick=()=>{
+      if(window.BB_RANKED_ACTIVE&&pickedIndex!==null)return;
       pickedIndex=i;
-      [...$("board").children].forEach((x,j)=>x.classList.toggle("selected",j===i));
-      if(window.BB_RANKED_ACTIVE)setMain("✓ เลือกแล้ว • รอหมดเวลา",()=>{},true);
-      else setMain("เฉลย",()=>positionReveal(false));
+      [...$("board").children].forEach((x,j)=>{x.classList.toggle("selected",j===i);if(window.BB_RANKED_ACTIVE)x.style.pointerEvents="none"});
+      if(window.BB_RANKED_ACTIVE){
+        const qi=Math.max(0,asked.size-1);
+        window.POMRUServerBattleV2?.submit?.(qi,String(i+1));
+        setMain("✓ ล็อกคำตอบแล้ว • รอ Server",()=>{},true);
+      }else setMain("เฉลย",()=>positionReveal(false));
       sfx("tap");saveResume()
     });
     setMain("เลือกหมายเลขก่อน",()=>{},true)
   }
 
-  if(window.BB_RANKED_ACTIVE){
-    $("replayBtn").classList.add("hidden");
-  }else{
-    $("replayBtn").classList.remove("hidden");
-    $("replayBtn").onclick=()=>{renderTarget(targetIndex);showScene("target");setMain("กลับไปตอบ",positionAnswer);sfx("flip")}
-  }
+  if(window.BB_RANKED_ACTIVE){$("replayBtn").classList.add("hidden")}else{$("replayBtn").classList.remove("hidden");$("replayBtn").onclick=()=>{renderTarget(targetIndex);showScene("target");setMain("กลับไปตอบ",positionAnswer);sfx("flip")}}
 
   bbAnswerTimer(()=>positionReveal(false,window.BB_RANKED_ACTIVE?pickedIndex===null:true));
   saveResume()
@@ -21902,18 +21921,40 @@ function positionReveal(verbal=false,timeout=false){
   if(window.BB_RANKED_ACTIVE&&timerId)return;
   stopTimer();
   if(!verbal&&!timeout&&pickedIndex===null)return;
+  if(state==="position_reveal")return;
+
+  let authoritative=null;
+  if(window.BB_RANKED_ACTIVE&&window.POMRUServerBattleV2?.enabled){
+    const qi=Math.max(0,asked.size-1);
+    if(pickedIndex===null)window.POMRUServerBattleV2.submitNoAnswer?.(qi);
+    authoritative=window.POMRUServerBattleV2.round?.(qi);
+    if(!authoritative?.resolved){
+      setStatus("☁️","กำลังตรวจคำตอบ","รอ Server และคำตอบของคู่แข่ง…");
+      setMain("กำลังซิงก์ Battle…",()=>{},true);
+      window.POMRUServerBattleV2.refresh?.();
+      setTimeout(()=>positionReveal(verbal,timeout),140);
+      return;
+    }
+  }
+
   state="position_reveal";showScene("board");renderBoard(false);
-  [...$("board").children].forEach((s,i)=>{if(i===targetIndex)s.classList.add("correct");if(!verbal&&pickedIndex!==null&&i===pickedIndex&&i!==targetIndex)s.classList.add("wrong")});
-  if(verbal&&cfg.style==="team")sfx("ok");else record(!timeout&&pickedIndex===targetIndex);
-  $("answer").textContent=`✨ คำตอบคือหมายเลข ${targetIndex+1}`;$("answer").classList.remove("hidden");
-  $("boardTitle").textContent="เฉลย";$("boardSub").textContent="เปิดภาพทั้งหมดให้เห็นตำแหน่งเดิม • แสดงอย่างน้อย 2 วินาที";
-  setStatus("✅","เฉลยพร้อมกันแล้ว",cfg.style==="team"?"เพิ่มคะแนนให้ทีมที่ตอบถูก แล้วไปข้อถัดไป":"ดูคำตอบ แล้วเกมจะไปข้อต่อไปพร้อมกัน");
+  [...$("board").children].forEach((slot,i)=>{if(i===targetIndex)slot.classList.add("correct");if(!verbal&&pickedIndex!==null&&i===pickedIndex&&i!==targetIndex)slot.classList.add("wrong")});
+
+  const ok=authoritative?!!authoritative.self_correct:(!timeout&&pickedIndex===targetIndex);
+  if(verbal&&cfg.style==="team")sfx("ok");else record(ok);
+  const answerText=authoritative?.correct_answer||String(targetIndex+1);
+  $("answer").textContent=`✨ คำตอบคือหมายเลข ${answerText}`;$("answer").classList.remove("hidden");
+  $("boardTitle").textContent="เฉลย";$("boardSub").textContent="Server ตรวจคำตอบแล้ว • เปิดภาพทั้งหมดให้เห็นตำแหน่งเดิม";
+  setStatus("✅","เฉลยพร้อมกันแล้ว",ok?"ตอบถูก • รอดูการโจมตี":"ตอบผิด • รอดูผล Battle");
   $("voiceBtn").classList.add("hidden");surprise();
-  const next=asked.size>=qCount()?finishRound:positionAsk;
+  const battleEnded=!!window.POMRUServerBattleV2?.snapshot?.().battle_over;
+  const next=(battleEnded||asked.size>=qCount())?finishRound:positionAsk;
   if(window.BB_RANKED_ACTIVE){
-    setMain(asked.size>=qCount()?"กำลังสรุปผล…":"ข้อต่อไปใน 2 วินาที…",()=>{},true);
-    runRankedRevealHold(2,"ดูเฉลย",()=>next())
-  }else setMain(asked.size>=qCount()?"ดูผลลัพธ์":"คำถามใหม่จากกระดานเดิม",next);
+    const ending=battleEnded||asked.size>=qCount();
+    setMain(ending?(battleEnded?"KO! • กำลังสรุปผล…":"กำลังสรุปผล…"):"ข้อต่อไปใน 2 วินาที…",()=>{},true);
+    runRankedRevealHold(battleEnded?1.1:2,battleEnded?"BATTLE END":"ดูเฉลย",()=>next())
+  }
+  else setMain(asked.size>=qCount()?"ดูผลลัพธ์":"คำถามใหม่จากกระดานเดิม",next);
   saveResume()
 }
 function startMatch(){stopTimer();state="match";showScene("board");const d=dc(),pairs=Math.max(2,Math.floor(d.n/2)),pool=shuf(sourcePool()).slice(0,pairs),deck=shuf(pool.flatMap((id,p)=>[{id,p},{id,p}]));layout=deck.map(x=>x.id);baseLayout=[...layout];$("board").innerHTML="";$("board").className="board";$("board").style.setProperty("--cols",d.cols);matchDone=0;matchFirst=null;matchLock=false;asked=new Set();$("boardTitle").textContent="จับคู่ให้ครบ";$("boardSub").textContent="เปิดได้ครั้งละ 2 ใบ และจำตำแหน่งที่เคยเปิด";setStatus("🧩","จับคู่ภาพ","ใช้ความจำตามหาคู่เหมือน");deck.forEach(it=>{const s=document.createElement("div");s.className="slot numberBoard";s.innerHTML=`<div class="content">${content(it.id)}</div><div class="num">?</div>`;s.onclick=()=>{if(matchLock||s.classList.contains("correct")||!s.classList.contains("numberBoard"))return;s.classList.remove("numberBoard");sfx("flip");if(!matchFirst){matchFirst={s,it};return}matchLock=true;if(matchFirst.it.p===it.p){matchFirst.s.classList.add("correct");s.classList.add("correct");matchDone++;asked.add(matchDone);record(true);matchFirst=null;matchLock=false;if(matchDone===pairs)setTimeout(finishRound,500)}else{record(false);setTimeout(()=>{matchFirst.s.classList.add("numberBoard");s.classList.add("numberBoard");matchFirst=null;matchLock=false},600)}};$("board").appendChild(s)});$("hintBtn").classList.add("hidden");setMain("เริ่มจับคู่ใหม่",()=>startRound());updateHUD();saveResume()}
@@ -24600,6 +24641,9 @@ window.addEventListener("load",()=>{
     }
 
     // Teddy Memory Ranked
+    if(window.POMRUServerBattleV2?.enabled){
+      try{await window.POMRUServerBattleV2.prepare(activeRankedMatch)}catch(e){toast(e?.message||"โหลด Server Battle plan ไม่สำเร็จ");return}
+    }
     const teddyMode=
       String(modeCode||"teddy_position")
         .replace(/^teddy_/,"");
@@ -25398,20 +25442,19 @@ window.addEventListener("load",()=>{
     try{
       const c=await getClient();
       if(!c)throw new Error("supabase_client_unavailable");
-      const {data,error}=await c.rpc("bb_ranked_submit_result",{
-        p_match_id:activeRankedMatch.id,
-        p_score:Number(result.score)||0,
-        p_correct_answers:Number(result.correct)||0,
-        p_total_answers:Number(result.total)||0,
-        p_average_answer_ms:
-          Number(result.averageAnswerMs)>0
-            ? Math.round(Number(result.averageAnswerMs))
-            : (
-                result.mode==="match" && Number(window.__bbRankedMatchElapsedMs)>0
-                  ? Math.round(Number(window.__bbRankedMatchElapsedMs))
-                  : null
-              )
-      });
+      const serverV2=window.POMRUServerBattleV2?.enabled;
+      const serverFinalRpc=window.POMRUServerBattleV2?.version==="97.6"
+        ? "bb_ranked_battle_finish_v3"
+        : "bb_ranked_battle_finish_v2";
+      const {data,error}=serverV2
+        ? await c.rpc(serverFinalRpc,{p_match_id:activeRankedMatch.id})
+        : await c.rpc("bb_ranked_submit_result",{
+            p_match_id:activeRankedMatch.id,
+            p_score:Number(result.score)||0,
+            p_correct_answers:Number(result.correct)||0,
+            p_total_answers:Number(result.total)||0,
+            p_average_answer_ms:Number(result.averageAnswerMs)>0?Math.round(Number(result.averageAnswerMs)):(result.mode==="match"&&Number(window.__bbRankedMatchElapsedMs)>0?Math.round(Number(window.__bbRankedMatchElapsedMs)):null)
+          });
       if(error)throw error;
       const status=data?.[0]||{};
       // ฝั่ง DB ลบผู้เล่นคนนี้ออกจาก room_players แล้ว
@@ -29318,17 +29361,49 @@ document.addEventListener('DOMContentLoaded', () => {
     if(q("#bbRLLoadingText"))q("#bbRLLoadingText").textContent=text||"กำลังเตรียมโจทย์…";
   }
 
-  window.bbPrepareRankedLearning=function(match){
+  window.bbPrepareRankedLearning=async function(match){
     const id=match?.id||match?.match_id;
-    if(!id)return Promise.reject(new Error("ไม่พบ Match"));
+    if(!id)throw new Error("ไม่พบ Match");
     if(prepared.has(id))return prepared.get(id);
 
-    const p=build(match).catch(err=>{
-      prepared.delete(id);
-      throw err;
-    });
-    prepared.set(id,p);
-    return p;
+    const p=(async()=>{
+      const c=client();if(!c)throw new Error("เชื่อมต่อฐานข้อมูลไม่สำเร็จ");
+      const full=await fullMatch(match);
+      const {data,error}=await c.rpc("bb_ranked_battle_plan_v2",{p_match_id:id});
+      if(error)throw new Error("v97.5 Server Battle: "+(error.message||error));
+      const row=Array.isArray(data)?data[0]:data;
+      if(!row)throw new Error("Server ไม่ส่ง Battle plan");
+      const modeCode=row.mode_code||full.mode_code;
+      const info=MODE[modeCode];
+      if(!info)throw new Error("ยังไม่มี Ranked Engine สำหรับเกมนี้");
+      const qs=Array.isArray(row.questions)?row.questions:[];
+      if(!qs.length)throw new Error("Server ไม่พบโจทย์สำหรับการแข่งขัน");
+      const questions=qs.map(item=>({
+        id:item.question_key||`server-${item.question_index}`,
+        question_index:Number(item.question_index)||0,
+        kind:"choice",
+        prompt:clean(item.prompt),
+        sub:clean(item.sub),
+        answer:"",
+        choices:Array.isArray(item.choices)?item.choices.map(String):[],
+        tokens:[],
+        category:clean(item.category||"RANKED"),
+        explanation:"",
+        audio:false,
+        server_authoritative:true,
+        metadata:item.metadata||{}
+      }));
+      const rawBase=new Date(full.started_at).getTime()+650;
+      return {
+        match:full,modeCode,
+        diffCode:row.difficulty_code||full.difficulty_code||full.difficulty||"normal",
+        contentLevel:row.content_level||full.ranked_content_level||full.difficulty_code||"normal",
+        info,questions,world:WORLD[info.subject],
+        baseMs:rawBase<Date.now()-1500?Date.now()+180:rawBase,
+        server_authoritative:true
+      };
+    })().catch(err=>{prepared.delete(id);throw err});
+    prepared.set(id,p);return p;
   };
 
   function clearTick(){
@@ -29478,8 +29553,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     try{
-      const battleCorrect=norm(clean(value))===norm(qn.answer);
-      window.POMRUBuddyBattle?.submit?.(battleCorrect,idx);
+      if(window.POMRUServerBattleV2?.enabled)window.POMRUServerBattleV2.submit(idx,clean(value));
+      else {const battleCorrect=norm(clean(value))===norm(qn.answer);window.POMRUBuddyBattle?.submit?.(battleCorrect,idx)}
     }catch(_){}
 
     p954SaveLearningCheckpoint();
@@ -29501,22 +29576,31 @@ document.addEventListener('DOMContentLoaded', () => {
     if(session.revealedIndex===index)return;
 
     const question=session.data.questions[index];
-    const a=session.answers[index]||{locked:false,value:"",answerMs:ANSWER_MS,scored:false};
+    let a=session.answers[index]||{locked:false,value:"",answerMs:ANSWER_MS,scored:false};
 
-    if(!a.locked){
+    let authoritative=null;
+    if(window.BB_RANKED_ACTIVE&&question.server_authoritative&&window.POMRUServerBattleV2?.enabled){
+      if(!a.locked)window.POMRUServerBattleV2.submitNoAnswer?.(index);
+      authoritative=window.POMRUServerBattleV2.round?.(index);
+      if(!authoritative?.resolved){
+        q("#bbRLPhaseText").textContent="รอ Server ตรวจคำตอบ";
+        q("#bbRLLocked").classList.remove("hidden");
+        window.POMRUServerBattleV2.refresh?.();
+        return;
+      }
+      question.answer=clean(authoritative.correct_answer||"");
+      question.explanation=clean(authoritative.explanation||question.answer);
+    }else if(!a.locked){
       try{window.POMRUBuddyBattle?.submit?.(false,index)}catch(_){}
     }
 
     if(!a.scored){
-      const ok=a.locked && (
-        norm(a.value)===norm(question.answer) ||
-        (question.kind==="order" && norm(String(a.value).replace(/\s+/g,""))===norm(String(question.answer).replace(/\s+/g,"")))
-      );
-
-      a.ok=ok;
-      a.scored=true;
+      const ok=authoritative
+        ?!!authoritative.self_correct
+        :a.locked && (norm(a.value)===norm(question.answer)||(question.kind==="order"&&norm(String(a.value).replace(/\s+/g,""))===norm(String(question.answer).replace(/\s+/g,""))));
+      a.ok=ok;a.scored=true;
+      if(authoritative&&Number.isFinite(Number(authoritative.self_answer_ms)))a.answerMs=Number(authoritative.self_answer_ms);
       session.answers[index]=a;
-
       if(ok){
         session.correct++;
         const speedRatio=Math.max(0,Math.min(1,(ANSWER_MS-a.answerMs)/ANSWER_MS));
@@ -29525,30 +29609,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    session.revealedIndex=index;
-
-    p954SaveLearningCheckpoint();
-
-    q("#bbRLScore").textContent=session.score.toLocaleString();
-    q("#bbRLLocked").classList.add("hidden");
-    q("#bbRLReveal").classList.remove("hidden");
-    q("#bbRLReveal").classList.toggle("wrong",!a.ok);
-    q("#bbRLRevealIcon").textContent=a.ok?"✓":"✕";
-    q("#bbRLRevealTitle").textContent=a.ok?"ถูกต้อง!":"คำตอบที่ถูก";
-    q("#bbRLRevealText").textContent=question.explanation||question.answer;
-
-    if(question.kind==="choice"){
-      q("#bbRLChoices").querySelectorAll("button").forEach(b=>{
-        b.disabled=true;
-        const v=decodeURIComponent(b.dataset.rlChoice||"");
-        if(norm(v)===norm(question.answer))b.classList.add("correct");
-        else if(a.locked&&norm(v)===norm(a.value))b.classList.add("wrong");
-      });
-    }
-
-    q("#bbRLInput").disabled=true;
-    q("#bbRLSubmit").disabled=true;
-    q("#bbRLOrderSubmit").disabled=true;
+    session.revealedIndex=index;p954SaveLearningCheckpoint();
+    q("#bbRLScore").textContent=session.score.toLocaleString();q("#bbRLLocked").classList.add("hidden");q("#bbRLReveal").classList.remove("hidden");q("#bbRLReveal").classList.toggle("wrong",!a.ok);
+    q("#bbRLRevealIcon").textContent=a.ok?"✓":"✕";q("#bbRLRevealTitle").textContent=a.ok?"ถูกต้อง!":"คำตอบที่ถูก";q("#bbRLRevealText").textContent=question.explanation||question.answer;
+    if(question.kind==="choice")q("#bbRLChoices").querySelectorAll("button").forEach(b=>{b.disabled=true;const v=decodeURIComponent(b.dataset.rlChoice||"");if(norm(v)===norm(question.answer))b.classList.add("correct");else if(a.locked&&norm(v)===norm(a.value))b.classList.add("wrong")});
+    q("#bbRLInput").disabled=true;q("#bbRLSubmit").disabled=true;q("#bbRLOrderSubmit").disabled=true;
   }
 
   async function finish(){
@@ -29608,8 +29673,22 @@ document.addEventListener('DOMContentLoaded', () => {
     finishing=false;
   }
 
+  window.bbRankedLearningForceFinish=()=>finish();
+
   function syncTick(){
     if(!session||finishing)return;
+
+    const battleState=window.POMRUServerBattleV2?.snapshot?.();
+    if(window.BB_RANKED_ACTIVE&&battleState?.battle_over){
+      if(!session.battleEndScheduled){
+        session.battleEndScheduled=true;
+        q("#bbRLPhaseText").textContent=battleState.opponent_hp<=0?"KO!":"BATTLE END";
+        q("#bbRLTimer").textContent="0.0";
+        q("#bbRLTimerBar").style.width="0%";
+        setTimeout(()=>finish(),1050);
+      }
+      return;
+    }
 
     const now=Date.now();
     const elapsed=now-session.data.baseMs;
@@ -45499,6 +45578,8 @@ body.p971BattleActive.bbRankedPlaying:not(.bbRankedLearningPlaying) #game{paddin
 
   async function start(match){
     const id=match?.id||match?.match_id;if(!id)return;
+    if(window.POMRUServerBattleV2?.enabled){show(true);return}
+
     if(state.match?.id===id&&state.channel){show(true);return}
     cleanupChannel();state.match={...match,id};state.rows=[];state.submitted.clear();state.resolved.clear();state.finishing=false;
     const c=client();if(!c)return;
@@ -47014,5 +47095,421 @@ window.POMRU_V9741=Object.freeze({
 window.POMRU_V974=Object.freeze({version:"97.4",rankedUI:"buddy-battle-arena",answerGrid:"2x2-game-cards",authorityChanges:false});
 </script>
 
+
+<!-- ==========================================================
+     POMRU v97.5 — SERVER-AUTHORITATIVE BUDDY BATTLE RUNTIME
+     Frontend submits selected answer only. PostgreSQL decides
+     correctness, timestamp, damage, HP and final result stats.
+     ========================================================== -->
+<script id="pomru-v975-server-battle-runtime">
+(function(){
+  "use strict";
+  const $=id=>document.getElementById(id);
+  const state={match:null,planRow:null,questions:[],rounds:new Map(),submitted:new Set(),resolved:new Set(),poll:null,busy:false,user:null,opponent:null,lastError:"",lastStateAt:0,overDispatched:false};
+  function client(){return window.__bbSupabase||window.sb||null}
+  function safe(v){return String(v??"").trim()}
+  function matchId(m=state.match){return m?.id||m?.match_id||null}
+  function show(on=true){const h=$("p971BattleHud");if(h){h.classList.toggle("hidden",!on);h.setAttribute("aria-hidden",on?"false":"true")}document.body.classList.toggle("p971BattleActive",!!on)}
+  function setHp(selfHp,oppHp){
+    const sh=Math.max(0,Math.min(100,Number(selfHp??100))),oh=Math.max(0,Math.min(100,Number(oppHp??100)));
+    $("p971SelfHpBar")&&($("p971SelfHpBar").style.width=sh+"%");$("p971OppHpBar")&&($("p971OppHpBar").style.width=oh+"%");
+    $("p971SelfHp")&&($("p971SelfHp").textContent=Math.round(sh)+" HP");$("p971OppHp")&&($("p971OppHp").textContent=Math.round(oh)+" HP");
+  }
+  function animate(side,kind){const el=$(side==="self"?"p971SelfArt":"p971OppArt");if(!el)return;el.classList.remove("attack","hit");void el.offsetWidth;el.classList.add(kind);setTimeout(()=>el.classList.remove(kind),620)}
+  async function identifyOpponent(id){
+    const c=client();if(!c||!id)return;
+    try{
+      const {data:sess}=await c.auth.getSession();state.user=sess?.session?.user||null;if(!state.user)return;
+      const {data,error}=await c.rpc("bb_ranked_connection_state",{p_match_id:id});if(error)throw error;
+      const row=Array.isArray(data)?data[0]:data;const oid=safe(row?.opponent_id);if(!oid)return;
+      state.opponent={id:oid,name:"คู่แข่ง"};
+      const {data:profiles}=await c.from("profiles").select("id,display_name").in("id",[state.user.id,oid]);
+      const ps=Array.isArray(profiles)?profiles:[],me=ps.find(x=>x.id===state.user.id),op=ps.find(x=>x.id===oid);
+      $("p971SelfName")&&($("p971SelfName").textContent=safe(me?.display_name)||"คุณ");$("p971OppName")&&($("p971OppName").textContent=safe(op?.display_name)||"คู่แข่ง");
+      state.opponent.name=safe(op?.display_name)||"คู่แข่ง";
+    }catch(e){console.warn("POMRU v97.6 opponent:",e?.message||e)}
+  }
+  async function prepare(match){
+    const id=matchId(match);if(!id)throw new Error("match_required");
+    if(state.match?.id===id&&state.planRow)return state.planRow;
+    const c=client();if(!c)throw new Error("supabase_client_unavailable");
+    const {data,error}=await c.rpc("bb_ranked_battle_plan_v2",{p_match_id:id});
+    if(error)throw new Error("v97.6 SQL ยังไม่พร้อม • "+(error.message||error));
+    const row=Array.isArray(data)?data[0]:data;if(!row)throw new Error("battle_plan_missing");
+    state.match={...match,id};state.planRow={...row,memory_layout:Array.isArray(row.memory_layout)?row.memory_layout.map(Number):[]};
+    state.questions=Array.isArray(row.questions)?row.questions:[];state.rounds.clear();state.submitted.clear();state.resolved.clear();state.lastError="";state.overDispatched=false;
+    return state.planRow;
+  }
+  function plan(){return state.planRow}
+  function question(i){return state.questions.find(q=>Number(q.question_index)===Number(i))||null}
+  function round(i){return state.rounds.get(String(Number(i)))||null}
+  async function refresh(){
+    const id=matchId();const c=client();if(!id||!c||state.busy)return;state.busy=true;
+    try{
+      const {data,error}=await c.rpc("bb_ranked_battle_state_v2",{p_match_id:id});if(error)throw error;
+      const rows=Array.isArray(data)?data:[];let lastHpSelf=100,lastHpOpp=100,battleOver=false,winnerId=null;
+      for(const r of rows){
+        const key=String(Number(r.question_index));state.rounds.set(key,r);
+        if(r.resolved&&r.self_hp!=null){lastHpSelf=Number(r.self_hp);lastHpOpp=Number(r.opponent_hp)}
+        if(r.battle_over)battleOver=true;if(r.winner_id)winnerId=r.winner_id;
+        if(r.resolved&&!state.resolved.has(key)){
+          state.resolved.add(key);
+          const selfDamage=Number(r.damage_to_self)||0,oppDamage=Number(r.damage_to_opponent)||0;
+          if(oppDamage>0){animate("self","attack");animate("opp","hit")}
+          else if(selfDamage>0){animate("opp","attack");animate("self","hit")}
+          document.dispatchEvent(new CustomEvent("pomru:battle-round-resolved",{detail:{
+            question_index:Number(r.question_index),
+            outcome:{self:Number(r.damage_to_self)||0,opp:Number(r.damage_to_opponent)||0},
+            self_hp:Number(r.self_hp??lastHpSelf),opponent_hp:Number(r.opponent_hp??lastHpOpp),
+            self_correct:r.self_correct,opponent_correct:r.opponent_correct,
+            correct_answer:r.correct_answer,explanation:r.explanation,
+            server_authoritative:true
+          }}));
+        }
+      }
+      setHp(lastHpSelf,lastHpOpp);state.lastError="";state.lastStateAt=Date.now();
+      if(battleOver&&!state.overDispatched){
+        state.overDispatched=true;
+        document.dispatchEvent(new CustomEvent("pomru:battle-over",{detail:{match_id:id,self_hp:lastHpSelf,opponent_hp:lastHpOpp,winner_id:winnerId,self_id:state.user?.id||null,server_authoritative:true}}));
+      }
+      document.dispatchEvent(new CustomEvent("pomru:battle-v2-state",{detail:{match_id:id,rows:rows.length,self_hp:lastHpSelf,opponent_hp:lastHpOpp,battle_over:battleOver,winner_id:winnerId}}));
+    }catch(e){state.lastError=safe(e?.message||e);console.warn("POMRU v97.6 state:",state.lastError)}finally{state.busy=false}
+  }
+  async function start(match){
+    const id=matchId(match);if(!id)return;
+    try{await prepare(match);show(true);setHp(100,100);await identifyOpponent(id);await refresh();clearInterval(state.poll);state.poll=setInterval(refresh,280)}
+    catch(e){state.lastError=safe(e?.message||e);console.warn("POMRU v97.6 start:",state.lastError);throw e}
+  }
+  async function submit(index,choice,retry=0){
+    const id=matchId();if(!id)return null;const i=Math.max(0,Math.floor(Number(index)||0)),key=id+":"+i;
+    if(state.submitted.has(key))return round(i);state.submitted.add(key);document.dispatchEvent(new CustomEvent("pomru:battle-answer-submitted",{detail:{match_id:id,question_index:i}}));
+    const c=client();if(!c){state.submitted.delete(key);return null}
+    try{
+      const {error}=await c.rpc("bb_ranked_battle_submit_choice_v2",{p_match_id:id,p_question_index:i,p_choice_text:String(choice??"")});
+      if(error)throw error;await refresh();return round(i)
+    }catch(e){
+      const msg=safe(e?.message||e);state.lastError=msg;
+      if(/question_not_open/i.test(msg)&&retry<2){state.submitted.delete(key);await new Promise(r=>setTimeout(r,650));return submit(i,choice,retry+1)}
+      state.submitted.delete(key);console.warn("POMRU v97.6 submit:",msg);const t=$("p89Toast");if(t){t.textContent="ส่งคำตอบไม่สำเร็จ • "+msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2200)}return null
+    }
+  }
+  function submitNoAnswer(index){return submit(index,"__NO_ANSWER__")}
+  async function finish(){
+    const id=matchId();const c=client();if(!id||!c)throw new Error("battle_not_ready");
+    await refresh();const {data,error}=await c.rpc("bb_ranked_battle_finish_v3",{p_match_id:id});if(error)throw error;return Array.isArray(data)?data[0]:data
+  }
+  function stop(){clearInterval(state.poll);state.poll=null;state.match=null;state.planRow=null;state.questions=[];state.rounds.clear();state.submitted.clear();state.resolved.clear();state.opponent=null;state.overDispatched=false;show(false)}
+  function snapshot(){let selfHp=100,oppHp=100,battleOver=false,winnerId=null;for(const r of state.rounds.values()){if(r.resolved&&r.self_hp!=null){selfHp=Number(r.self_hp);oppHp=Number(r.opponent_hp)}if(r.battle_over)battleOver=true;if(r.winner_id)winnerId=r.winner_id}return {version:"97.6",match_id:matchId(),self_id:state.user?.id||null,opponent:state.opponent,self_hp:selfHp,opponent_hp:oppHp,rows:state.rounds.size,resolved:state.resolved.size,battle_over:battleOver,winner_id:winnerId,last_error:state.lastError,last_state_at:state.lastStateAt}}
+
+  window.POMRUServerBattleV2={enabled:true,version:"97.6",prepare,start,plan,question,round,refresh,submit,submitNoAnswer,finish,stop,snapshot};
+  if(window.POMRUBuddyBattle){window.POMRUBuddyBattle.start=start;window.POMRUBuddyBattle.refresh=refresh;window.POMRUBuddyBattle.submit=(correct,index)=>{console.warn("Legacy boolean battle submit ignored in v97.6",correct,index)};window.POMRUBuddyBattle.snapshot=snapshot;window.POMRUBuddyBattle.stop=stop}
+  document.addEventListener("pomru:ranked-game-started",e=>setTimeout(()=>start(window.__bbRankedMatch||{id:e.detail?.match_id}).catch(()=>{}),40));
+  document.addEventListener("pomru:ranked-game-ended",()=>setTimeout(stop,250));
+  window.addEventListener("pageshow",()=>{if(window.BB_RANKED_ACTIVE&&window.__bbRankedMatch)setTimeout(()=>start(window.__bbRankedMatch).catch(()=>{}),100)});
+})();
+</script>
+<script id="pomru-v975-marker">window.POMRUV975=Object.freeze({version:"97.5",battleAuthority:"server",clientSubmits:"selected-answer-only",serverOwns:["question-plan","correctness","timestamps","damage","hp","result-stats"]});</script>
+
+
+<style id="pomru-v976-final-battle-style">
+.p976BattleEnd{position:fixed;inset:0;z-index:390000;display:grid;place-items:center;pointer-events:none;background:rgba(25,12,54,.18);backdrop-filter:blur(2px);opacity:0;transition:.18s}
+.p976BattleEnd.show{opacity:1}.p976BattleEndCard{min-width:min(420px,84vw);padding:24px 28px;border-radius:30px;text-align:center;background:linear-gradient(145deg,rgba(255,255,255,.97),rgba(255,239,250,.96));border:2px solid rgba(255,255,255,.9);box-shadow:0 26px 80px rgba(37,19,67,.30)}
+.p976BattleEndCard small{display:block;font-size:9px;letter-spacing:.18em;font-weight:1000;color:#8a6aa2}.p976BattleEndCard b{display:block;margin:5px 0 2px;font-size:clamp(38px,8vw,68px);line-height:1;color:#6842bd}.p976BattleEndCard span{font-size:12px;font-weight:900;color:#735f7f}
+.p976BattleEnd.win .p976BattleEndCard b{color:#e44d99}.p976BattleEnd.loss .p976BattleEndCard b{color:#7456cf}
+@media(prefers-reduced-motion:no-preference){.p976BattleEnd.show .p976BattleEndCard{animation:p976Pop .55s cubic-bezier(.2,.9,.25,1.2)}@keyframes p976Pop{0%{transform:scale(.72);opacity:.2}100%{transform:scale(1);opacity:1}}}
+</style>
+<script id="pomru-v976-final-battle-runtime">
+(function(){
+  "use strict";
+  function layer(){let el=document.getElementById("p976BattleEnd");if(el)return el;el=document.createElement("div");el.id="p976BattleEnd";el.className="p976BattleEnd";el.innerHTML='<div class="p976BattleEndCard"><small>BUDDY BATTLE</small><b id="p976BattleEndTitle">BATTLE END</b><span id="p976BattleEndSub">Server กำลังสรุปผลการแข่งขัน</span></div>';document.body.appendChild(el);return el}
+  function show(detail={}){const el=layer(),title=document.getElementById("p976BattleEndTitle"),sub=document.getElementById("p976BattleEndSub");const self=detail.self_id||window.POMRUServerBattleV2?.snapshot?.().self_id;const winner=detail.winner_id;const won=winner&&self&&winner===self;el.className="p976BattleEnd show "+(winner?(won?"win":"loss"):"");title.textContent=detail.opponent_hp<=0&&won?"KO!":detail.self_hp<=0&&!won?"DEFEAT":winner?(won?"VICTORY!":"DEFEAT"):"BATTLE END";sub.textContent=winner?(won?"Buddy ของคุณชนะ • กำลังบันทึกแรงก์":"คู่แข่งชนะ • กำลังบันทึกผล") : "ครบทุกข้อแล้ว • Server กำลังตัดสิน Tie-break";setTimeout(()=>el.classList.remove("show"),1150)}
+  document.addEventListener("pomru:battle-over",e=>show(e.detail||{}));
+  window.POMRUFinalBattleRules=Object.freeze({version:"97.6",authority:"server",winnerOrder:["KO","HP","ACCURACY","TOTAL_CORRECT_TIME","ROUND_WINS","SERVER_TIEBREAK"],drawAtRound:true});
+})();
+</script>
+<script id="pomru-v976-marker">window.POMRUV976=Object.freeze({version:"97.6",feature:"final-battle-rules",koEndsMatch:true,rankPlacement:"server-battle-winner-first",rpAuthority:"server"});</script>
 </body>
 </html>
+
+<!-- ==========================================================
+     POMRU v98 — HOME + BUDDY CORE LOOP
+     Game-first home, clear next action, reward -> care -> unlock.
+     No database migration required.
+     ========================================================== -->
+<style id="pomru-v98-home-core-loop-style">
+/* ----- Room atmosphere: richer game-like presentation ----- */
+#bbAppHome{background:#dbcdf8!important}
+#pomruPetHome.pomruV89{
+  --p98-purple:#7350df;--p98-pink:#f64d9e;--p98-ink:#4b3860;
+  background:linear-gradient(180deg,#d7c7f8 0,#ffeef7 47%,#ffe5c4 100%)!important
+}
+#pomruPetHome .p89Room{
+  background:
+    radial-gradient(circle at 50% 23%,rgba(255,255,255,.94),transparent 20%),
+    radial-gradient(circle at 13% 36%,rgba(255,214,238,.60),transparent 24%),
+    radial-gradient(circle at 87% 32%,rgba(211,200,255,.60),transparent 23%),
+    linear-gradient(180deg,#d8caf8 0 12%,#fff0f7 12% 55%,#f5c48f 55% 100%)!important;
+  isolation:isolate
+}
+#pomruPetHome .p89Room::before{
+  content:"";position:absolute;z-index:1;inset:72px 0 auto;height:52%;pointer-events:none;opacity:.66;
+  background:
+    radial-gradient(circle at 8% 20%,rgba(255,255,255,.95) 0 2px,transparent 3px),
+    radial-gradient(circle at 18% 55%,rgba(255,228,109,.95) 0 2px,transparent 3px),
+    radial-gradient(circle at 78% 17%,rgba(255,255,255,.95) 0 2px,transparent 3px),
+    radial-gradient(circle at 91% 44%,rgba(255,209,236,.95) 0 2px,transparent 3px);
+  background-size:190px 160px,260px 210px,230px 175px,280px 220px
+}
+#pomruPetHome .p89Window{box-shadow:0 30px 80px rgba(98,66,137,.16),inset 0 0 45px rgba(255,255,255,.7)!important}
+#pomruPetHome .p89Rug{bottom:116px!important;width:min(720px,53vw)!important;height:190px!important;filter:drop-shadow(0 18px 20px rgba(139,61,105,.10))}
+
+/* ----- Top HUD ----- */
+#pomruPetHome .p89Topbar{padding:0 2px!important}
+#pomruPetHome .p89Logo{font-size:clamp(30px,3.4vw,48px)!important}
+#pomruPetHome .p89Coins,#pomruPetHome .p89Profile{
+  border:3px solid rgba(255,255,255,.78)!important;
+  box-shadow:0 12px 28px rgba(85,47,104,.14),inset 0 1px 0 rgba(255,255,255,.95)!important
+}
+#pomruPetHome .p89Coins{height:54px!important;border-radius:24px!important;padding:5px 9px!important}
+#pomruPetHome .p89Profile{height:54px!important;border-radius:23px!important}
+
+/* ----- Buddy Bond: the one primary pet meter ----- */
+#pomruPetHome #p971BuddyPulse{
+  top:84px!important;width:min(770px,61vw)!important;min-height:106px!important;
+  padding:14px 16px!important;grid-template-columns:66px minmax(0,1fr) auto!important;
+  border-radius:31px!important;border:4px solid rgba(255,255,255,.78)!important;
+  background:linear-gradient(145deg,rgba(255,253,255,.96),rgba(255,241,250,.93))!important;
+  box-shadow:0 18px 42px rgba(100,56,107,.17),inset 0 1px 0 #fff!important
+}
+#pomruPetHome .p971BondHeart{width:60px!important;height:60px!important;border-radius:22px!important;font-size:31px!important}
+#pomruPetHome #p971BondLabel{font-size:17px!important}
+#pomruPetHome .p971BondTrack{height:14px!important;border:2px solid rgba(108,78,128,.06)!important}
+#pomruPetHome .p971MoodPill{display:none!important}
+.p974BondProgress{font-size:9px!important;color:#7e6b8b!important}
+.p974CareBtn{display:none!important}
+.p980BondActions{display:flex;flex-direction:column;gap:6px;align-items:stretch;min-width:122px}
+.p980BondBtn{border:0;border-radius:16px;padding:9px 11px;color:#fff;font-size:9px;font-weight:1000;cursor:pointer;box-shadow:0 8px 16px rgba(94,60,153,.17)}
+.p980BondBtn.feed{background:linear-gradient(145deg,#ff74af,#e83b8c)}
+.p980BondBtn.gift{background:linear-gradient(145deg,#8e70ee,#6849cc)}
+.p980BondBtn.ready{animation:p980GiftPulse 1.25s ease-in-out infinite}
+@keyframes p980GiftPulse{50%{transform:translateY(-2px) scale(1.025);box-shadow:0 10px 22px rgba(108,72,203,.28)}}
+
+/* ----- A single explicit next-goal ribbon ----- */
+.p980NextGoal{
+  position:absolute;z-index:19;left:50%;top:194px;transform:translateX(-50%);
+  width:min(610px,48vw);min-height:52px;padding:8px 12px 8px 14px;
+  display:grid;grid-template-columns:42px minmax(0,1fr) 30px;align-items:center;gap:10px;
+  border:3px solid rgba(255,255,255,.78);border-radius:21px;background:rgba(255,252,255,.92);
+  box-shadow:0 12px 30px rgba(83,53,97,.12);color:#4f3c5e;cursor:pointer;backdrop-filter:blur(10px)
+}
+.p980NextGoal .icon{width:40px;height:40px;border:0;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,#ffe070,#ffad42);font-size:20px;box-shadow:inset 0 1px 0 #fff}
+.p980NextGoal small,.p980NextGoal b{display:block}.p980NextGoal small{font-size:7px;color:#a57a9d;font-weight:1000;letter-spacing:.12em}.p980NextGoal b{font-size:11px;margin-top:2px;line-height:1.25}.p980NextGoal .go{width:29px;height:29px;border-radius:50%;display:grid;place-items:center;background:#8464df;color:#fff;font-size:18px;font-weight:1000}
+.p980NextGoal.reward{background:linear-gradient(145deg,rgba(255,250,229,.97),rgba(255,240,249,.96))}
+.p980NextGoal.reward .icon{background:linear-gradient(145deg,#ffda4d,#ff8c55)}
+.p980NextGoal.feed .icon{background:linear-gradient(145deg,#ff9dbe,#f34e96)}
+
+/* ----- Buddy is the hero ----- */
+#pomruPetHome .p89PetCenter{top:226px!important;bottom:136px!important;width:min(560px,42vw)!important}
+#pomruPetHome .p89BuddyStage{width:min(470px,36vw)!important;height:min(540px,52vh)!important;filter:drop-shadow(0 25px 22px rgba(80,50,91,.18))}
+#pomruPetHome .p89Speech{right:-76px!important;top:37%!important;min-width:175px!important;border-radius:20px!important;background:rgba(255,255,255,.96)!important}
+#pomruPetHome .p89Speech b{font-size:12px!important;color:#563e67!important}#pomruPetHome .p89Speech span{font-size:9px!important}
+
+/* ----- Side cards: more like a mobile-game hub ----- */
+.p974HomeCard{border:4px solid rgba(255,255,255,.73)!important;border-radius:31px!important;background:linear-gradient(145deg,rgba(255,253,255,.94),rgba(245,236,255,.91))!important;box-shadow:0 18px 40px rgba(74,46,94,.15),inset 0 1px 0 #fff!important}
+#p974FriendsCard{left:24px!important;top:238px!important;width:278px!important;padding:16px!important}
+#p974RankCard{right:24px!important;top:238px!important;width:278px!important;padding:16px!important;background:linear-gradient(155deg,rgba(248,237,255,.97),rgba(255,238,249,.95))!important}
+.p974RankShield{border-radius:34px!important;background:linear-gradient(145deg,#b6a7f2,#6654b7)!important;box-shadow:inset 0 0 0 9px rgba(255,255,255,.25),0 12px 27px rgba(91,62,144,.24)!important}
+#p974SkinCard,#p974DailyCard{bottom:126px!important;width:280px!important;min-height:102px!important}
+#p974SkinCard{left:24px!important}#p974DailyCard{right:24px!important}
+#p974SkinCard .p974SkinCopy b{font-size:16px!important}#p974DailyCard .p974DailyCopy b{font-size:15px!important}
+
+/* ----- Big bottom play dock ----- */
+#p974BottomDock{bottom:12px!important;grid-template-columns:78px 78px minmax(260px,340px) 78px 78px!important;gap:11px!important}
+.p974DockBtn .ico{background:linear-gradient(145deg,#fff,#eee4ff)!important;border:4px solid rgba(255,255,255,.95)!important;box-shadow:0 10px 23px rgba(87,53,101,.18),inset 0 0 0 2px rgba(133,94,205,.14)!important}
+.p974DockBtn.play .ico{height:104px!important;border-radius:33px!important;background:linear-gradient(180deg,#ff6eb3,#db3a94)!important;box-shadow:0 11px 0 #ad2a75,0 20px 34px rgba(154,43,109,.25),inset 0 3px 0 rgba(255,255,255,.42)!important}
+.p974DockBtn.play b{font-size:30px!important;margin-top:24px!important}
+.p980PlaySub{position:absolute;top:67px;color:#ffeaf5;font-size:8px;font-weight:900;white-space:nowrap;pointer-events:none}
+
+/* ----- Recent reward chip ----- */
+.p980RewardToast{position:absolute;z-index:35;left:50%;bottom:132px;transform:translate(-50%,18px);min-width:270px;max-width:calc(100% - 24px);padding:10px 14px;border:3px solid rgba(255,255,255,.82);border-radius:999px;background:linear-gradient(145deg,#fff8d9,#ffe8f3);box-shadow:0 12px 28px rgba(96,51,89,.18);color:#5a4260;font-size:10px;font-weight:1000;text-align:center;opacity:0;pointer-events:none;transition:.25s ease}
+.p980RewardToast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ----- Result screens: make the loop back to Buddy explicit ----- */
+.p980BackBuddy{border:0!important;background:linear-gradient(145deg,#ff6fac,#e53a91)!important;color:#fff!important;box-shadow:0 7px 16px rgba(201,49,126,.18)!important}
+#bbLearningResult .actions .p980BackBuddy{order:-1}
+
+@media(max-width:1180px) and (min-width:761px){
+  #pomruPetHome #p971BuddyPulse{width:min(650px,62vw)!important}
+  .p980NextGoal{width:min(500px,48vw)!important}
+  #p974FriendsCard,#p974RankCard{width:230px!important}#p974SkinCard,#p974DailyCard{width:230px!important}
+  #pomruPetHome .p89PetCenter{width:min(500px,43vw)!important}
+  #p974BottomDock{grid-template-columns:64px 64px minmax(210px,280px) 64px 64px!important}
+}
+@media(max-width:760px){
+  #pomruPetHome .p89Room{min-height:900px!important;padding:10px 8px 102px!important}
+  #pomruPetHome #p971BuddyPulse{top:70px!important;width:calc(100% - 14px)!important;min-height:84px!important;padding:8px 9px!important;grid-template-columns:46px 1fr auto!important;border-radius:23px!important}
+  #pomruPetHome .p971BondHeart{width:44px!important;height:44px!important;border-radius:15px!important;font-size:22px!important}
+  #pomruPetHome #p971BondLabel{font-size:12px!important}.p980BondActions{min-width:82px}.p980BondBtn{padding:7px 7px;font-size:7px}.p980BondBtn.gift{display:none}
+  .p980NextGoal{top:161px!important;width:calc(100% - 18px)!important;min-height:48px!important;grid-template-columns:36px 1fr 27px!important}.p980NextGoal .icon{width:34px;height:34px;border-radius:12px}.p980NextGoal b{font-size:9px!important}
+  #p974FriendsCard,#p974RankCard{display:block!important;top:216px!important;width:calc(50% - 12px)!important;height:94px!important;padding:8px!important;overflow:hidden!important;transform:none!important}
+  #p974FriendsCard{left:7px!important}#p974RankCard{right:7px!important}
+  #p974FriendsCard .p974FriendList{margin:5px 0 0!important}.p974FriendList .p974FriendRow:nth-child(n+2),#p974FriendsCard .p974CardAction{display:none!important}.p974FriendRow{grid-template-columns:30px 1fr auto!important;padding:4px!important}.p974FriendAv{width:30px!important;height:30px!important;border-radius:10px!important}
+  #p974RankCard .p974RankShield,#p974RankCard .p974RankStars{display:none!important}#p974RankCard .p974RankProgress{margin:5px 0!important}#p974RankName{font-size:17px!important}
+  #pomruPetHome .p89PetCenter{top:310px!important;bottom:230px!important;width:100%!important}#pomruPetHome .p89BuddyStage{width:min(300px,72vw)!important;height:350px!important}#pomruPetHome .p89Speech{right:2%!important;top:28%!important;min-width:130px!important}
+  #p974SkinCard,#p974DailyCard{bottom:101px!important;width:calc(50% - 11px)!important;min-height:72px!important;padding:7px!important;grid-template-columns:42px 1fr!important;border-radius:20px!important}#p974SkinCard{left:7px!important}#p974DailyCard{right:7px!important}.p974SkinArt,.p974Chest{width:40px!important;height:40px!important}.p974SkinArt img{width:40px!important;height:40px!important}.p974SkinCopy small,.p974DailyCopy small,.p974SkinCopy span,.p974DailyCopy span{display:none!important}.p974SkinCopy b,.p974DailyCopy b{font-size:10px!important}.p974DailyCopy em{font-size:7px!important;margin-top:3px!important;padding:4px 7px!important}
+  #p974BottomDock{bottom:6px!important;width:calc(100% - 8px)!important;grid-template-columns:48px 48px minmax(130px,1fr) 48px 48px!important;gap:3px!important}.p974DockBtn .ico{width:44px!important;height:44px!important}.p974DockBtn.play .ico{height:66px!important;border-radius:20px!important}.p974DockBtn.play b{font-size:18px!important;margin-top:14px!important}.p980PlaySub{top:43px!important;font-size:6px!important}.p974DockBtn{font-size:6px!important}
+  .p980RewardToast{bottom:96px!important;font-size:8px!important}
+}
+@media(prefers-reduced-motion:reduce){.p980BondBtn.ready{animation:none!important}.p980RewardToast{transition:none!important}}
+</style>
+
+<script id="pomru-v98-home-core-loop-runtime">
+(function(){
+  "use strict";
+  const $=id=>document.getElementById(id);
+  const STORE="pomru_v98_last_reward";
+  const now=()=>Date.now();
+  const n=(v,d=0)=>Number.isFinite(Number(v))?Number(v):d;
+
+  function goHome(){
+    try{window.bbAppShowScreen?.("home",false)}catch(_){}
+    setTimeout(()=>{try{window.scrollTo({top:0,behavior:"smooth"})}catch(_){window.scrollTo(0,0)};sync()},80);
+  }
+  function current(){return window.POMRUProgress?.getState?.()||{}}
+  function pet(){try{return window.BrainBuddyPet?.getState?.()||{}}catch(_){return {}}}
+  function skinList(){try{return window.POMRUColorSkins?.list?.()||[]}catch(_){return []}}
+  function readReward(){try{return JSON.parse(localStorage.getItem(STORE)||"null")}catch(_){return null}}
+  function writeReward(x){try{localStorage.setItem(STORE,JSON.stringify(x))}catch(_){}}
+
+  function ensure(){
+    const room=document.querySelector("#pomruPetHome .p89Room");if(!room)return false;
+    if(!$(`p974BottomDock`)){setTimeout(ensure,120);return false}
+
+    const pulse=$("p971BuddyPulse");
+    if(pulse&&!$("p980BondActions")){
+      $("p974CareBtn")?.remove();
+      const actions=document.createElement("div");actions.id="p980BondActions";actions.className="p980BondActions";
+      actions.innerHTML='<button type="button" class="p980BondBtn feed" id="p980FeedBtn">🍓 ให้อาหาร</button><button type="button" class="p980BondBtn gift" id="p980BondGift">🎁 ภารกิจ</button>';
+      actions.querySelector("#p980FeedBtn")?.addEventListener("click",()=>$("p898FeedBtn")?.click());
+      actions.querySelector("#p980BondGift")?.addEventListener("click",()=>{
+        const st=current(),m=st.missions||{};
+        if(m.can_claim&&!m.reward_claimed)$("p89MissionReward")?.click();
+        else $("p941MissionBtn")?.click();
+      });
+      pulse.appendChild(actions);
+    }
+
+    if(!$("p980NextGoal")){
+      const goal=document.createElement("button");goal.type="button";goal.id="p980NextGoal";goal.className="p980NextGoal";
+      goal.innerHTML='<span class="icon" id="p980GoalIcon">★</span><span><small>NEXT GOAL</small><b id="p980GoalText">เล่นอีกหนึ่งรอบเพื่อพัฒนา Buddy</b></span><span class="go">›</span>';
+      goal.addEventListener("click",()=>doGoal(goal.dataset.action||"play"));room.appendChild(goal);
+    }
+
+    if(!$("p980RewardToast")){
+      const toast=document.createElement("div");toast.id="p980RewardToast";toast.className="p980RewardToast";toast.setAttribute("role","status");room.appendChild(toast);
+    }
+
+    const play=document.querySelector('#p974BottomDock [data-p974="play"]');
+    if(play&&!$("p980PlaySub")){
+      const s=document.createElement("span");s.id="p980PlaySub";s.className="p980PlaySub";s.textContent="รับ Coins + แต้ม";play.appendChild(s);
+    }
+
+    const skinTitle=document.querySelector("#p974SkinCard .p974SkinCopy b");if(skinTitle)skinTitle.textContent="เปลี่ยนลุค";
+    const skinSmall=document.querySelector("#p974SkinCard .p974SkinCopy small");if(skinSmall)skinSmall.textContent="CUSTOMIZE BUDDY";
+
+    addResultButtons();
+    return true;
+  }
+
+  function addResultButtons(){
+    const memory=document.querySelector("#resultScene .resultActions");
+    if(memory&&!$("p980BackBuddyMemory")){
+      const b=document.createElement("button");b.type="button";b.id="p980BackBuddyMemory";b.className="btn p980BackBuddy";b.textContent="♥ กลับหา Buddy";b.addEventListener("click",goHome);memory.appendChild(b);
+    }
+    const learning=document.querySelector("#bbLearningResult .actions");
+    if(learning&&!$("p980BackBuddyLearning")){
+      const b=document.createElement("button");b.type="button";b.id="p980BackBuddyLearning";b.className="p980BackBuddy";b.textContent="♥ กลับหา Buddy";b.addEventListener("click",goHome);learning.appendChild(b);
+    }
+    const ranked=$("p953ResultHome");if(ranked){ranked.querySelector("b")&&(ranked.querySelector("b").textContent="กลับหา Buddy");ranked.querySelector("small")&&(ranked.querySelector("small").textContent="ดูรางวัลและดูแลคู่หู")}
+  }
+
+  function recentReward(){
+    const r=readReward();if(!r||now()-n(r.at)>10*60*1000)return null;return r;
+  }
+  function nextSkin(level){return skinList().filter(s=>n(s.level,1)>level).sort((a,b)=>n(a.level)-n(b.level))[0]||null}
+
+  function goal(){
+    const st=current(),p=st.progress||{},m=st.missions||{},ps=pet();
+    if(m.can_claim&&!m.reward_claimed)return {kind:"reward",action:"daily",icon:"🎁",text:`ภารกิจครบแล้ว • รับ +${n(m.reward_coins,30)} Coins`};
+
+    const rr=recentReward();
+    if(rr&&n(rr.coins)>0)return {kind:"reward",action:"feed",icon:"🪙",text:`รอบล่าสุด +${n(rr.coins)} Coins • เอารางวัลไปดูแล Buddy`};
+
+    if(n(ps.hunger,100)<55)return {kind:"feed",action:"feed",icon:"🍓",text:"Buddy เริ่มหิว • ให้อาหารเพื่อเพิ่มความผูกพัน"};
+
+    const level=Math.max(1,n(p.player_level,1));
+    const progress=Math.max(0,n(p.level_progress));
+    const target=Math.max(1,n(p.level_target,500));
+    const left=Math.max(0,target-progress);
+    const next=nextSkin(level);
+    if(next)return {kind:"play",action:"play",icon:"✨",text:`อีก ${left.toLocaleString()} แต้ม → Lv.${level+1} • เป้าหมายสกิน ${next.name} Lv.${next.level}`};
+    return {kind:"play",action:"play",icon:"⚔️",text:"เล่นเพื่อสะสม Coins • เพิ่มเลเวล • ไต่แรงค์ Buddy Battle"};
+  }
+
+  function doGoal(action){
+    if(action==="feed"){$("p898FeedBtn")?.click();return}
+    if(action==="daily"){
+      const st=current(),m=st.missions||{};if(m.can_claim&&!m.reward_claimed)$("p89MissionReward")?.click();else $("p941MissionBtn")?.click();return
+    }
+    if(action==="skin"){window.bbAppShowScreen?.("inventory");return}
+    window.bbAppShowScreen?.("modes");
+  }
+
+  function syncSpeech(g){
+    const host=$("pomruPetSpeech");if(!host)return;
+    const b=host.querySelector("b"),s=host.querySelector("span");
+    if(g.action==="feed"){if(b)b.textContent="หิวแล้ว~";if(s)s.textContent="มีของอร่อยให้เรามั้ย?";return}
+    if(g.action==="daily"){if(b)b.textContent="เย้!";if(s)s.textContent="รางวัลวันนี้พร้อมรับแล้ว";return}
+    const rr=recentReward();
+    if(rr){if(b)b.textContent="เก่งมาก!";if(s)s.textContent=`เราได้ ${n(rr.coins)} Coins จากเกมล่าสุด`;return}
+    if(b)b.textContent="ไปเล่นกัน!";if(s)s.textContent="เล่นแล้วกลับมาดูแลเราอีกนะ";
+  }
+
+  function sync(){
+    if(!ensure())return;
+    const st=current(),m=st.missions||{};
+    const g=goal(),el=$("p980NextGoal");
+    if(el){el.className="p980NextGoal "+g.kind;el.dataset.action=g.action;$("p980GoalIcon")&&($("p980GoalIcon").textContent=g.icon);$("p980GoalText")&&($("p980GoalText").textContent=g.text)}
+    const gift=$("p980BondGift");
+    if(gift){gift.classList.toggle("ready",!!m.can_claim&&!m.reward_claimed);gift.textContent=m.reward_claimed?"✓ รับแล้ว":m.can_claim?`🎁 รับ +${n(m.reward_coins,30)}`:"🎁 ภารกิจ"}
+    const playSub=$("p980PlaySub");if(playSub)playSub.textContent="รับ Coins + แต้ม • พัฒนา Buddy";
+    syncSpeech(g);
+  }
+
+  function onReward(detail){
+    if(!detail||detail.ok===false)return;
+    const points=n(detail.points_gained??detail.exp_gained),coins=n(detail.coins_gained);
+    if(points<=0&&coins<=0)return;
+    const r={at:now(),points,coins,level:n(detail.player_level??detail.new_level,1)};writeReward(r);
+    const t=$("p980RewardToast");if(t){t.textContent=`🎉 รอบล่าสุด +${points} แต้ม • +${coins} Coins • กลับไปดูแล Buddy ได้เลย`;t.classList.add("show");clearTimeout(t.__hide);t.__hide=setTimeout(()=>t.classList.remove("show"),3200)}
+    setTimeout(sync,80);
+  }
+
+  document.addEventListener("pomru:progress-updated",e=>{onReward(e.detail);setTimeout(sync,80)});
+  document.addEventListener("pomru:v899-synced",()=>setTimeout(sync,80));
+  document.addEventListener("bb:pet-updated",()=>setTimeout(sync,60));
+  document.addEventListener("pomru:core-synced",()=>setTimeout(sync,80));
+  document.addEventListener("click",e=>{
+    if(e.target.closest('[data-app-go="home"],#p953ResultHome'))setTimeout(sync,100);
+    if(e.target.closest("#p898FeedBtn,[data-p898-feed]"))setTimeout(()=>{try{localStorage.removeItem(STORE)}catch(_){};sync()},800);
+  },true);
+  window.addEventListener("pageshow",()=>setTimeout(()=>{ensure();sync()},180));
+
+  window.POMRUHomeV98=Object.freeze({version:"98.0",sync,goal:()=>goal(),lastReward:()=>recentReward(),goHome});
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(()=>{ensure();sync()},320),{once:true});else setTimeout(()=>{ensure();sync()},320);
+})();
+</script>
+
+<script id="pomru-v98-marker">
+window.POMRUV98=Object.freeze({version:"98.0",feature:"home-buddy-core-loop",loop:["PLAY","EARN","CARE","BOND","UNLOCK"],primaryPetMeter:"bond",databaseMigration:false});
+</script>
