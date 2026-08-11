@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>POMRU • ผมรู้ — v97.1 Buddy Battle</title>
+<title>POMRU • ผมรู้ — v97.3 Buddy Battle Feel</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -45336,6 +45336,12 @@ body.p971BattleActive.bbRankedPlaying:not(.bbRankedLearningPlaying) #game{paddin
         if(o.text)toast(o.text);
         if(o.winner==="self"){animate("self","attack");animate("opp","hit")}
         if(o.winner==="opp"){animate("opp","attack");animate("self","hit")}
+        document.dispatchEvent(new CustomEvent("pomru:battle-round-resolved",{detail:{
+          question_index:i,
+          outcome:{...o},
+          self_hp:selfHp,
+          opponent_hp:oppHp
+        }}));
       }
     });
     return {selfHp,oppHp,last};
@@ -45413,7 +45419,9 @@ body.p971BattleActive.bbRankedPlaying:not(.bbRankedLearningPlaying) #game{paddin
     const c=client();if(!c)return;
     try{
       const {error}=await c.rpc("bb_ranked_battle_submit_answer",{p_match_id:id,p_question_index:i,p_is_correct:!!correct});
-      if(error)throw error;await refresh();
+      if(error)throw error;
+      document.dispatchEvent(new CustomEvent("pomru:battle-answer-submitted",{detail:{match_id:id,question_index:i,is_correct:!!correct}}));
+      await refresh();
     }catch(e){state.submitted.delete(key);console.warn("POMRU Buddy Battle submit:",e?.message||e)}
   }
 
@@ -45452,6 +45460,467 @@ body.p971BattleActive.bbRankedPlaying:not(.bbRankedLearningPlaying) #game{paddin
   }
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",clean,{once:true});else clean();
 })();
+</script>
+
+
+
+<!-- ==========================================================
+     POMRU v97.2 — COLOR SKIN COLLECTION
+     One master Buddy asset, six progression palettes.
+     No extra character image generation required.
+     ========================================================== -->
+<style id="pomru-v972-color-skin-style">
+:root{--p972-buddy-filter:none}
+
+/* Tint only the character/base layer. Clothes, hats and effects keep their original colors. */
+#bbEquippedHeroCharacterImg,
+#bbClosetBuddyRender [data-buddy-preview-layer="character"],
+#bbShopBuddyRender [data-buddy-preview-layer="character"]{
+  filter:var(--p972-buddy-filter)!important;
+  transition:filter .28s ease,transform .28s ease
+}
+
+.p972SkinStudio{
+  margin:10px 0 2px;padding:12px;border:1.5px solid rgba(119,81,153,.11);
+  border-radius:22px;background:linear-gradient(145deg,#fffafd,#f8f4ff);
+  box-shadow:0 8px 24px rgba(82,52,92,.07)
+}
+.p972SkinHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px}
+.p972SkinHead small{display:block;color:#9a7a91;font-size:7px;font-weight:1000;letter-spacing:.13em}
+.p972SkinHead h3{margin:2px 0 0;color:#58475c;font-size:15px}
+.p972SkinCount{padding:7px 9px;border-radius:999px;background:#f0eaff;color:#7457a2;font-size:8px;font-weight:1000;white-space:nowrap}
+.p972SkinGrid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}
+.p972SkinCard{position:relative;min-width:0;border:1.5px solid rgba(112,80,128,.10);border-radius:16px;padding:6px 5px 7px;background:#fff;color:#58475c;cursor:pointer;box-shadow:0 4px 12px rgba(75,50,85,.05)}
+.p972SkinCard.active{border-color:#8a68db;box-shadow:0 0 0 2px rgba(138,104,219,.12),0 6px 16px rgba(75,50,85,.08)}
+.p972SkinCard.locked{opacity:.58;filter:saturate(.72)}
+.p972SkinThumb{height:69px;display:grid;place-items:end center;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#fff,#f7f2f8)}
+.p972SkinThumb img{width:64px;height:64px;object-fit:contain;transform-origin:center bottom;filter:var(--skin-filter,none);transition:transform .18s ease}
+.p972SkinCard:not(.locked):active .p972SkinThumb img{transform:scale(.94)}
+.p972SkinCard b{display:block;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:8px}
+.p972SkinCard small{display:block;margin-top:1px;color:#9a8794;font-size:6.5px;font-weight:850}
+.p972SkinLock{position:absolute;right:5px;top:5px;min-width:20px;height:20px;padding:0 5px;border-radius:999px;display:grid;place-items:center;background:rgba(54,42,66,.78);color:#fff;font-size:6px;font-weight:1000}
+.p972SkinCard.active .p972SkinLock{background:#6f55cb}
+.p972SkinNote{margin:8px 2px 0;color:#8d7d8b;font-size:7px;line-height:1.45}
+
+/* Battle keeps the same master character but each side can carry a different palette. */
+#p971SelfArt img,#p971OppArt img{transition:filter .25s ease,transform .25s ease}
+#p971SelfArt img{filter:var(--p972-self-battle-filter,none) drop-shadow(0 6px 7px rgba(0,0,0,.18))!important}
+#p971OppArt img{filter:var(--p972-opp-battle-filter,none) drop-shadow(0 6px 7px rgba(0,0,0,.18))!important}
+
+/* Small identity chip beside Battle names. */
+.p972BattleSkinName{display:inline-block;margin-left:4px;padding:2px 5px;border-radius:999px;background:rgba(255,255,255,.12);color:#e9e1f3;font-size:6px;font-weight:900;vertical-align:1px}
+
+@media(max-width:900px){.p972SkinGrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:520px){.p972SkinGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.p972SkinThumb{height:78px}.p972SkinThumb img{width:73px;height:73px}}
+@media(prefers-reduced-motion:reduce){#bbEquippedHeroCharacterImg,#bbClosetBuddyRender [data-buddy-preview-layer="character"],#bbShopBuddyRender [data-buddy-preview-layer="character"],.p972SkinThumb img,#p971SelfArt img,#p971OppArt img{transition:none!important}}
+</style>
+
+<script id="pomru-v972-color-skin-runtime">
+(function(){
+  "use strict";
+  const $=id=>document.getElementById(id);
+  const MASTER="/assets/buddy/default-pink-buddy.png?v=972";
+  const STORAGE="pomru_color_skin_v1";
+
+  const SKINS=[
+    {code:"pink",name:"Pink Buddy",short:"PINK",level:1,filter:"none"},
+    {code:"sky",name:"Sky Buddy",short:"SKY",level:2,filter:"hue-rotate(145deg) saturate(.82) brightness(1.04)"},
+    {code:"mint",name:"Mint Buddy",short:"MINT",level:4,filter:"hue-rotate(95deg) saturate(.72) brightness(1.05)"},
+    {code:"lavender",name:"Lavender Buddy",short:"LAV",level:6,filter:"hue-rotate(300deg) saturate(.72) brightness(1.04)"},
+    {code:"cream",name:"Cream Buddy",short:"CREAM",level:8,filter:"sepia(.28) saturate(.48) brightness(1.10) contrast(.96)"},
+    {code:"night",name:"Night Buddy",short:"NIGHT",level:10,filter:"hue-rotate(235deg) saturate(.55) brightness(.62) contrast(1.12)"}
+  ];
+
+  let selected="pink";
+  let remoteLoaded=false;
+  let saveTimer=null;
+
+  function client(){return window.__bbSupabase||window.sb||null}
+  function skin(code){return SKINS.find(x=>x.code===code)||SKINS[0]}
+  function level(){
+    const p=window.POMRUProgress?.getState?.()?.progress;
+    return Math.max(1,Number(p?.player_level)||1);
+  }
+  function unlocked(s){return level()>=s.level}
+  function esc(v){return String(v??"").replace(/[&<>\"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'\"':"&quot;","'":"&#39;"}[m]))}
+  function toast(msg){
+    const e=$("bbInventoryToast")||$("p89Toast");if(!e)return;
+    e.textContent=msg;e.classList.remove("hidden");e.classList.add("show");
+    clearTimeout(e.__p972);e.__p972=setTimeout(()=>{e.classList.remove("show");if(e.id==="bbInventoryToast")e.classList.add("hidden")},1900);
+  }
+
+  function readLocal(){
+    try{return localStorage.getItem(STORAGE)||"pink"}catch(_){return "pink"}
+  }
+  function writeLocal(code){try{localStorage.setItem(STORAGE,code)}catch(_){}}
+
+  function setFilterVar(name,value){document.documentElement.style.setProperty(name,value||"none")}
+
+  function applySelf(code=selected){
+    const s=skin(code);
+    selected=s.code;
+    setFilterVar("--p972-buddy-filter",s.filter);
+    setFilterVar("--p972-self-battle-filter",s.filter);
+
+    // Battle image uses the currently equipped Buddy master asset when available.
+    const battleImg=$("p971SelfArt")?.querySelector("img");
+    if(battleImg)battleImg.src=window.__bbActiveBuddyAsset||MASTER;
+
+    // Keep Home/closet slot label understandable even though this palette is not an image layer.
+    const slot=document.querySelector('[data-closet-slot="skin"] b');
+    if(slot)slot.textContent=s.name;
+
+    document.body.dataset.pomruSkin=s.code;
+    renderStudio();
+  }
+
+  function ensureStudio(){
+    let box=$("p972SkinStudio");if(box)return box;
+    const stage=document.querySelector("#bbAppInventory .bbBuddyStage");
+    if(!stage)return null;
+    box=document.createElement("section");
+    box.id="p972SkinStudio";box.className="p972SkinStudio";
+    stage.insertAdjacentElement("afterend",box);
+    return box;
+  }
+
+  function renderStudio(){
+    const box=ensureStudio();if(!box)return;
+    const lv=level();
+    const count=SKINS.filter(x=>lv>=x.level).length;
+    box.innerHTML=`
+      <div class="p972SkinHead">
+        <div><small>POMRU COLOR COLLECTION</small><h3>เลือกสี Buddy</h3></div>
+        <span class="p972SkinCount">${count} / ${SKINS.length} ปลดล็อก</span>
+      </div>
+      <div class="p972SkinGrid">
+        ${SKINS.map(s=>{
+          const open=lv>=s.level,active=s.code===selected;
+          return `<button type="button" class="p972SkinCard ${open?"":"locked"} ${active?"active":""}" data-p972-skin="${s.code}" style="--skin-filter:${s.filter}">
+            <span class="p972SkinThumb"><img src="${MASTER}" alt="${esc(s.name)}"></span>
+            <b>${esc(s.name)}</b><small>${open?(active?"กำลังใช้":"แตะเพื่อใช้"):`ปลดล็อก Level ${s.level}`}</small>
+            <span class="p972SkinLock">${active?"USE":open?"✓":"L"+s.level}</span>
+          </button>`;
+        }).join("")}
+      </div>
+      <p class="p972SkinNote">สีพื้นฐานปลดล็อกจากการเล่น • ไม่มีผลต่อ HP หรือ Damage • สกินพิเศษแบบ Galaxy / Crystal / Sakura จะเป็นของสะสมใน Shop ภายหลัง</p>`;
+  }
+
+  async function saveRemote(code){
+    const c=client();if(!c)return;
+    try{
+      const {data:sess}=await c.auth.getSession();
+      const uid=sess?.session?.user?.id;if(!uid)return;
+      const {error}=await c.from("bb_user_visual_profile").upsert({user_id:uid,color_skin:code,updated_at:new Date().toISOString()},{onConflict:"user_id"});
+      if(error && !/does not exist|schema cache/i.test(String(error.message||error)))throw error;
+    }catch(e){console.warn("POMRU skin sync:",e?.message||e)}
+  }
+
+  async function loadRemote(){
+    if(remoteLoaded)return;
+    const c=client();if(!c)return;
+    try{
+      const {data:sess}=await c.auth.getSession();
+      const uid=sess?.session?.user?.id;if(!uid)return;
+      const {data,error}=await c.from("bb_user_visual_profile").select("color_skin").eq("user_id",uid).maybeSingle();
+      if(error){
+        if(/does not exist|schema cache/i.test(String(error.message||error)))return;
+        throw error;
+      }
+      remoteLoaded=true;
+      const code=data?.color_skin;
+      if(code&&skin(code).code===code&&unlocked(skin(code))){selected=code;writeLocal(code)}
+      applySelf(selected);
+    }catch(e){console.warn("POMRU skin load:",e?.message||e)}
+  }
+
+  function choose(code){
+    const s=skin(code);
+    if(!unlocked(s)){toast(`🔒 ${s.name} ปลดล็อกเมื่อถึง Level ${s.level}`);return}
+    selected=s.code;writeLocal(selected);applySelf(selected);
+    clearTimeout(saveTimer);saveTimer=setTimeout(()=>saveRemote(selected),120);
+    toast(`🎨 เปลี่ยนเป็น ${s.name} แล้ว`);
+  }
+
+  async function loadOpponentSkin(){
+    const c=client();if(!c)return;
+    const snap=window.POMRUBuddyBattle?.snapshot?.();
+    const opp=snap?.opponent?.id;if(!opp)return;
+    try{
+      const {data,error}=await c.from("bb_user_visual_profile").select("color_skin").eq("user_id",opp).maybeSingle();
+      if(error){if(/does not exist|schema cache/i.test(String(error.message||error)))return;throw error}
+      const os=skin(data?.color_skin||"pink");
+      setFilterVar("--p972-opp-battle-filter",os.filter);
+      const img=$("p971OppArt")?.querySelector("img");if(img)img.src=MASTER;
+      addBattleLabel("p971OppName",os.name,"opp");
+    }catch(e){console.warn("POMRU rival skin:",e?.message||e)}
+  }
+
+  function addBattleLabel(nameId,name,key){
+    const host=$(nameId);if(!host)return;
+    let chip=host.parentElement?.querySelector(`[data-p972-battle-skin="${key}"]`);
+    if(!chip){chip=document.createElement("span");chip.className="p972BattleSkinName";chip.dataset.p972BattleSkin=key;host.insertAdjacentElement("afterend",chip)}
+    chip.textContent=name.replace(" Buddy","");
+  }
+
+  async function syncBattle(){
+    applySelf(selected);
+    addBattleLabel("p971SelfName",skin(selected).name,"self");
+    for(let i=0;i<6;i++){
+      const snap=window.POMRUBuddyBattle?.snapshot?.();
+      if(snap?.opponent?.id){await loadOpponentSkin();break}
+      await new Promise(r=>setTimeout(r,140));
+    }
+  }
+
+  function boot(){
+    // Keep the last chosen palette during the short window before server progress arrives.
+    // Unlock rules are enforced after POMRU progress sync, not against a temporary level-1 fallback.
+    const candidate=skin(readLocal());
+    selected=candidate.code;
+    applySelf(selected);renderStudio();
+    setTimeout(loadRemote,700);
+  }
+
+  document.addEventListener("click",e=>{
+    const b=e.target.closest("[data-p972-skin]");if(b){e.preventDefault();choose(b.dataset.p972Skin);return}
+    const skinSlot=e.target.closest('[data-closet-slot="skin"],[data-inventory-filter="skin"]');
+    if(skinSlot)setTimeout(()=>ensureStudio()?.scrollIntoView({behavior:"smooth",block:"center"}),60);
+  },true);
+
+  document.addEventListener("pomru:progress-updated",()=>setTimeout(()=>{renderStudio();applySelf(selected)},90));
+  document.addEventListener("pomru:v899-synced",()=>setTimeout(()=>{renderStudio();if(!unlocked(skin(selected)))choose("pink")},90));
+  document.addEventListener("pomru:ranked-game-started",()=>setTimeout(syncBattle,180));
+  window.addEventListener("bb:auth-changed",()=>{remoteLoaded=false;setTimeout(loadRemote,220)});
+  window.addEventListener("pageshow",()=>setTimeout(()=>{applySelf(selected);renderStudio()},100));
+
+  window.POMRUColorSkins={
+    list:()=>SKINS.map(x=>({...x,unlocked:unlocked(x)})),
+    selected:()=>selected,
+    choose,
+    refresh:()=>{renderStudio();applySelf(selected);return selected},
+    syncBattle
+  };
+
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(boot,180),{once:true});else setTimeout(boot,180);
+})();
+</script>
+
+<script id="pomru-v972-marker">
+window.POMRUV972=Object.freeze({version:"97.2",feature:"color-skin-collection",masterAssetStrategy:"single-buddy-css-palettes",rankedPayToWin:false});
+</script>
+
+
+
+<!-- ==========================================================
+     POMRU v97.3 — BUDDY BATTLE FEEL
+     Single-image animation, impact feedback, HP danger states.
+     No additional art assets and no gameplay-authority changes.
+     ========================================================== -->
+<style id="pomru-v973-battle-feel-style">
+/* Make the fighters the visual anchor without stealing space from the question. */
+.p971BattleHud{
+  overflow:visible!important;
+  min-height:112px!important;
+  background:
+    radial-gradient(circle at 18% 44%,rgba(255,120,188,.16),transparent 28%),
+    radial-gradient(circle at 82% 44%,rgba(113,184,255,.16),transparent 28%),
+    linear-gradient(135deg,rgba(43,33,70,.97),rgba(104,55,126,.97))!important;
+}
+.p971FighterArt{width:88px!important;height:94px!important;isolation:isolate}
+.p971FighterArt img{
+  max-width:86px!important;max-height:92px!important;
+  animation:p973Idle 2.6s ease-in-out infinite;
+  will-change:transform;
+}
+.p971FighterArt::after{
+  content:"";position:absolute;z-index:-1;left:14%;right:14%;bottom:3px;height:11px;
+  border-radius:50%;background:rgba(13,8,26,.28);filter:blur(2px);
+  animation:p973Shadow 2.6s ease-in-out infinite
+}
+@keyframes p973Idle{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-4px) scale(1.018,.985)}
+}
+@keyframes p973Shadow{0%,100%{transform:scaleX(1);opacity:.72}50%{transform:scaleX(.84);opacity:.48}}
+
+.p971FighterArt.attack img{animation:p973AttackL .52s cubic-bezier(.18,.82,.2,1)!important}
+.p971Fighter.right .p971FighterArt.attack img{animation:p973AttackR .52s cubic-bezier(.18,.82,.2,1)!important}
+.p971FighterArt.hit img{animation:p973HitL .48s ease!important}
+.p971Fighter.right .p971FighterArt.hit img{animation:p973HitR .48s ease!important}
+@keyframes p973AttackL{
+  0%{transform:translate(0,0) scale(1)}
+  30%{transform:translate(-7px,3px) scale(.95,1.06)}
+  60%{transform:translate(34px,-8px) rotate(7deg) scale(1.12,.92)}
+  100%{transform:translate(0,0) scale(1)}
+}
+@keyframes p973AttackR{
+  0%{transform:translate(0,0) scale(1)}
+  30%{transform:translate(7px,3px) scale(.95,1.06)}
+  60%{transform:translate(-34px,-8px) rotate(-7deg) scale(1.12,.92)}
+  100%{transform:translate(0,0) scale(1)}
+}
+@keyframes p973HitL{
+  0%,100%{transform:translate(0,0) rotate(0)}
+  24%{transform:translate(-14px,-1px) rotate(-8deg) scale(.96)}
+  48%{transform:translate(7px,0) rotate(4deg)}
+  70%{transform:translate(-4px,0) rotate(-2deg)}
+}
+@keyframes p973HitR{
+  0%,100%{transform:translate(0,0) rotate(0)}
+  24%{transform:translate(14px,-1px) rotate(8deg) scale(.96)}
+  48%{transform:translate(-7px,0) rotate(-4deg)}
+  70%{transform:translate(4px,0) rotate(2deg)}
+}
+
+/* Damage numbers live beside the Buddy, not over the question. */
+.p973Damage{
+  position:absolute;z-index:8;left:50%;top:5px;transform:translateX(-50%);
+  pointer-events:none;white-space:nowrap;font-size:17px;font-weight:1000;
+  color:#fff;text-shadow:0 2px 0 rgba(55,25,50,.38),0 4px 12px rgba(0,0,0,.20);
+  animation:p973DamageFloat .88s ease forwards
+}
+.p973Damage.critical{font-size:20px}
+@keyframes p973DamageFloat{
+  0%{opacity:0;transform:translate(-50%,12px) scale(.72)}
+  20%{opacity:1;transform:translate(-50%,0) scale(1.14)}
+  100%{opacity:0;transform:translate(-50%,-31px) scale(.96)}
+}
+
+/* Impact layer: generated particles, no image assets. */
+.p973FxLayer{position:absolute;z-index:15;inset:0;pointer-events:none;overflow:visible}
+.p973Impact{
+  position:absolute;left:50%;top:53%;width:16px;height:16px;margin:-8px;border-radius:50%;
+  background:#fff;box-shadow:0 0 0 8px rgba(255,255,255,.14),0 0 28px rgba(255,216,117,.78);
+  animation:p973Impact .48s ease forwards
+}
+.p973Impact.critical{box-shadow:0 0 0 12px rgba(255,255,255,.16),0 0 38px rgba(255,133,190,.92)}
+@keyframes p973Impact{0%{opacity:0;transform:scale(.2)}28%{opacity:1;transform:scale(1.5)}100%{opacity:0;transform:scale(2.5)}}
+.p973Particle{
+  --dx:0px;--dy:0px;position:absolute;z-index:16;left:50%;top:53%;width:7px;height:7px;
+  margin:-3px;border-radius:50%;background:#fff;box-shadow:0 0 9px rgba(255,255,255,.7);
+  animation:p973Particle .64s ease-out forwards
+}
+@keyframes p973Particle{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.2)}}
+
+.p971BattleHud.p973Shake{animation:p973HudShake .32s ease}
+@keyframes p973HudShake{25%{transform:translateX(calc(-50% - 3px))}50%{transform:translateX(calc(-50% + 3px))}75%{transform:translateX(calc(-50% - 1px))}}
+
+/* HP reads at a glance. */
+.p971Fighter.p973HpMid .p971HpTrack i{background:linear-gradient(90deg,#ffd76d,#ffac55)!important}
+.p971Fighter.p973HpLow .p971HpTrack i{background:linear-gradient(90deg,#ff887c,#ff4f7e)!important;animation:p973HpDanger 1s ease-in-out infinite}
+.p971Fighter.p973HpLow .p971HpNum{color:#ffd8df}
+@keyframes p973HpDanger{50%{filter:brightness(1.22)}}
+
+.p973BattleState{
+  display:inline-flex;align-items:center;justify-content:center;min-width:64px;max-width:95px;
+  margin-top:4px;padding:3px 7px;border-radius:999px;background:rgba(255,255,255,.11);
+  color:#f2eaf8;font-size:6px;font-weight:1000;letter-spacing:.06em;white-space:nowrap
+}
+.p973BattleState.wait{background:rgba(255,225,126,.14);color:#ffe7a5}
+.p973BattleState.good{background:rgba(110,231,176,.15);color:#b8ffdb}
+.p973BattleState.bad{background:rgba(255,112,153,.15);color:#ffd0de}
+.p973BattleState.draw{background:rgba(154,190,255,.15);color:#d9e8ff}
+
+/* Question surface stays clean and tap-first. */
+body.p971BattleActive.bbRankedLearningPlaying .bbRLCard{padding-top:22px!important}
+body.p971BattleActive.bbRankedLearningPlaying #bbRLPrompt{margin-top:18px!important}
+body.p971BattleActive.bbRankedLearningPlaying .bbRLChoices button{
+  min-height:68px;font-size:14px;transition:transform .12s ease,border-color .18s ease,background .18s ease
+}
+body.p971BattleActive.bbRankedLearningPlaying .bbRLChoices button:not(:disabled):active{transform:scale(.975)}
+
+@media(max-width:760px){
+  .p971BattleHud{min-height:88px!important}
+  .p971FighterArt{width:55px!important;height:64px!important}.p971FighterArt img{max-width:54px!important;max-height:63px!important}
+  .p973Damage{font-size:12px}.p973Damage.critical{font-size:14px}.p973BattleState{min-width:48px;max-width:60px;font-size:5px;padding:2px 4px}
+  body.p971BattleActive.bbRankedLearningPlaying .bbRLChoices button{min-height:56px;font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){
+  .p971FighterArt img,.p971FighterArt::after,.p971FighterArt.attack img,.p971FighterArt.hit img,
+  .p973Damage,.p973Impact,.p973Particle,.p971BattleHud.p973Shake,.p971Fighter.p973HpLow .p971HpTrack i{animation:none!important}
+}
+</style>
+
+<script id="pomru-v973-battle-feel-runtime">
+(function(){
+  "use strict";
+  const $=id=>document.getElementById(id);
+  let stateTimer=null;
+
+  function hud(){return $("p971BattleHud")}
+  function ensure(){
+    const h=hud();if(!h)return;
+    let fx=$("p973FxLayer");
+    if(!fx){fx=document.createElement("div");fx.id="p973FxLayer";fx.className="p973FxLayer";h.appendChild(fx)}
+    let s=$("p973BattleState");
+    const center=h.querySelector(".p971BattleCenter");
+    if(!s&&center){s=document.createElement("span");s.id="p973BattleState";s.className="p973BattleState";s.textContent="READY";center.appendChild(s)}
+    const brand=document.querySelector("#bbRankedLearningOverlay .bbRankLearnBrand small");if(brand)brand.textContent="POMRU BUDDY BATTLE";
+    const footer=document.querySelector("#bbRankedLearningOverlay .bbRLFooter span:first-child");if(footer)footer.textContent="✓ ความถูกต้องมาก่อน • ความเร็วเพิ่มแรงโจมตี";
+  }
+
+  function battleState(text,kind=""){
+    ensure();const el=$("p973BattleState");if(!el)return;
+    el.textContent=text;el.className="p973BattleState "+kind;
+    clearTimeout(stateTimer);
+    if(text!=="READY"&&text!=="WAITING")stateTimer=setTimeout(()=>{el.textContent="NEXT ROUND";el.className="p973BattleState"},1200);
+  }
+
+  function hpClass(side,hp){
+    const el=document.querySelector(`.p971Fighter.${side}`);if(!el)return;
+    el.classList.remove("p973HpMid","p973HpLow");
+    hp=Number(hp)||0;if(hp<=30)el.classList.add("p973HpLow");else if(hp<=60)el.classList.add("p973HpMid");
+  }
+
+  function damage(which,amount,critical=false){
+    const art=$(which==="self"?"p971SelfArt":"p971OppArt");if(!art||!amount)return;
+    const el=document.createElement("span");el.className="p973Damage"+(critical?" critical":"");
+    el.textContent=(critical?"CRIT ":"")+"-"+Math.round(amount);
+    art.appendChild(el);setTimeout(()=>el.remove(),950);
+  }
+
+  function burst(critical=false){
+    ensure();const fx=$("p973FxLayer");if(!fx)return;
+    const impact=document.createElement("i");impact.className="p973Impact"+(critical?" critical":"");fx.appendChild(impact);setTimeout(()=>impact.remove(),600);
+    const count=critical?12:8;
+    for(let i=0;i<count;i++){
+      const p=document.createElement("i");p.className="p973Particle";
+      const a=(Math.PI*2/count)*i+(Math.random()*.28-.14),d=26+Math.random()*(critical?48:34);
+      p.style.setProperty("--dx",(Math.cos(a)*d).toFixed(1)+"px");
+      p.style.setProperty("--dy",(Math.sin(a)*d).toFixed(1)+"px");
+      fx.appendChild(p);setTimeout(()=>p.remove(),760);
+    }
+    const h=hud();if(h){h.classList.remove("p973Shake");void h.offsetWidth;h.classList.add("p973Shake");setTimeout(()=>h.classList.remove("p973Shake"),390)}
+  }
+
+  function resolved(detail={}){
+    ensure();
+    const o=detail.outcome||{},selfD=Number(o.self)||0,oppD=Number(o.opp)||0;
+    hpClass("left",detail.self_hp);hpClass("right",detail.opponent_hp);
+    if(oppD>0){const crit=oppD>=13;damage("opp",oppD,crit);burst(crit);battleState(crit?"CRITICAL!":"NICE HIT","good");return}
+    if(selfD>0){const crit=selfD>=13;damage("self",selfD,crit);burst(crit);battleState(crit?"RIVAL CRIT":"HIT!","bad");return}
+    battleState("DRAW","draw");
+  }
+
+  document.addEventListener("pomru:battle-answer-submitted",()=>battleState("WAITING","wait"));
+  document.addEventListener("pomru:battle-round-resolved",e=>resolved(e.detail||{}));
+  document.addEventListener("pomru:ranked-game-started",()=>{ensure();hpClass("left",100);hpClass("right",100);battleState("READY")});
+  document.addEventListener("pomru:ranked-finished",()=>battleState("FINISH"));
+  window.addEventListener("pageshow",()=>setTimeout(ensure,160));
+
+  window.POMRUBattleFeel={
+    version:"97.3",
+    refresh:ensure,
+    demo:(side="opp",amount=12)=>{damage(side,amount,amount>=13);burst(amount>=13)}
+  };
+
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(ensure,240),{once:true});else setTimeout(ensure,240);
+})();
+</script>
+
+<script id="pomru-v973-marker">
+window.POMRUV973=Object.freeze({version:"97.3",feature:"single-image-battle-feel",newArtAssetsRequired:false,rankedAuthorityChanged:false});
 </script>
 
 </body>
