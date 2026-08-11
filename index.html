@@ -16818,6 +16818,277 @@ body.p941RankOpen .p89RankCard .p89RankRows{
 }
 </style>
 
+
+<style id="pomru-v951-instant-ranked-chat-style">
+/* ============================================================
+   Ranked = Match Found -> Game. No pre-match lounge.
+   ============================================================ */
+
+body.p951RankedQuickStart #bbArenaRoom{
+  display:none!important;
+}
+
+body.p951RankedQuickStart #bbArenaLobby{
+  display:none!important;
+}
+
+body.p951RankedQuickStart #bbArenaCountdown{
+  display:none!important;
+}
+
+/* Keep Match Found above the hidden internal Arena while syncing. */
+body.p951RankedQuickStart #p94RankedOverlay:not(.hidden){
+  display:block!important;
+}
+
+body.p951RankedQuickStart #p94Matched{
+  min-height:calc(100dvh - 120px)!important;
+}
+
+/* ============================================================
+   Floating in-game chat
+   ============================================================ */
+
+.p951GameChat{
+  position:fixed;
+  z-index:260000;
+  right:18px;
+  bottom:max(18px,env(safe-area-inset-bottom));
+  pointer-events:none;
+}
+
+.p951GameChat.hidden{
+  display:none!important;
+}
+
+body.bbRankedPlaying .p951GameChat{
+  display:block!important;
+}
+
+.p951ChatFab{
+  pointer-events:auto;
+  position:relative;
+  min-width:72px;
+  min-height:58px;
+  padding:7px 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  border:4px solid #fff;
+  border-radius:20px;
+  background:linear-gradient(145deg,#835fe0,#6747c6);
+  color:#fff;
+  box-shadow:0 10px 24px rgba(83,57,142,.25);
+  font-weight:1000;
+}
+
+.p951ChatFab b{
+  font-size:9px;
+}
+
+.p951ChatIcon{
+  width:25px;
+  height:20px;
+  position:relative;
+  display:block;
+  border:3px solid #fff;
+  border-radius:8px;
+}
+
+.p951ChatIcon::after{
+  content:"";
+  position:absolute;
+  left:3px;
+  bottom:-7px;
+  width:8px;
+  height:8px;
+  border-left:3px solid #fff;
+  transform:skew(-28deg);
+}
+
+.p951ChatBadge{
+  position:absolute;
+  right:-5px;
+  top:-6px;
+  min-width:21px;
+  height:21px;
+  padding:0 4px;
+  box-sizing:border-box;
+  display:grid;
+  place-items:center;
+  border:3px solid #fff;
+  border-radius:999px;
+  background:#ef5f8e;
+  color:#fff;
+  font-size:7px;
+  font-style:normal;
+  font-weight:1000;
+}
+
+.p951ChatBadge.hidden{
+  display:none!important;
+}
+
+.p951ChatDrawer{
+  pointer-events:auto;
+  position:absolute;
+  right:0;
+  bottom:70px;
+  width:min(360px,calc(100vw - 28px));
+  overflow:hidden;
+  border:1px solid rgba(100,70,90,.12);
+  border-radius:24px;
+  background:#fff;
+  box-shadow:0 20px 55px rgba(67,45,61,.22);
+}
+
+.p951ChatDrawer.hidden{
+  display:none!important;
+}
+
+.p951ChatDrawer header{
+  min-height:64px;
+  padding:12px 13px;
+  box-sizing:border-box;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  background:linear-gradient(145deg,#f5efff,#fff4f8);
+}
+
+.p951ChatDrawer header small{
+  display:block;
+  color:#956e86;
+  font-size:6px;
+  font-weight:1000;
+  letter-spacing:.11em;
+}
+
+.p951ChatDrawer header h3{
+  margin:2px 0 0;
+  color:#4e3d4a;
+  font-size:15px;
+}
+
+.p951ChatDrawer header button{
+  width:37px;
+  height:37px;
+  border:0;
+  border-radius:12px;
+  background:#fff;
+  color:#715d69;
+  font-size:20px;
+}
+
+.p951ChatMessages{
+  height:250px;
+  padding:10px;
+  box-sizing:border-box;
+  overflow:auto;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  background:#faf8fa;
+}
+
+.p951ChatEmpty{
+  margin:auto;
+  color:#9c8993;
+  font-size:8px;
+}
+
+.p951ChatRow{
+  display:flex;
+  justify-content:flex-start;
+}
+
+.p951ChatRow.me{
+  justify-content:flex-end;
+}
+
+.p951ChatBubble{
+  max-width:78%;
+  padding:8px 10px;
+  border-radius:14px 14px 14px 5px;
+  background:#fff;
+  color:#55444e;
+  box-shadow:0 3px 10px rgba(83,58,74,.06);
+  font-size:9px;
+  line-height:1.4;
+  word-break:break-word;
+}
+
+.p951ChatRow.me .p951ChatBubble{
+  border-radius:14px 14px 5px 14px;
+  background:#7655cf;
+  color:#fff;
+}
+
+.p951ChatBubble small{
+  display:block;
+  margin-top:3px;
+  opacity:.62;
+  font-size:5px;
+}
+
+.p951ChatComposer{
+  padding:8px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:6px;
+  border-top:1px solid rgba(111,79,96,.08);
+  background:#fff;
+}
+
+.p951ChatComposer input{
+  min-width:0;
+  height:43px;
+  padding:0 11px;
+  border:1px solid rgba(111,79,96,.13);
+  border-radius:13px;
+  background:#fff;
+  color:#54434f;
+  font-size:16px;
+  outline:0;
+}
+
+.p951ChatComposer button{
+  min-width:59px;
+  border:0;
+  border-radius:13px;
+  background:#7352cc;
+  color:#fff;
+  font-size:9px;
+  font-weight:1000;
+}
+
+@media(max-width:760px){
+  .p951GameChat{
+    right:10px;
+    bottom:max(10px,env(safe-area-inset-bottom));
+  }
+
+  .p951ChatFab{
+    min-width:62px;
+    min-height:52px;
+    border-radius:18px;
+  }
+
+  .p951ChatDrawer{
+    right:0;
+    bottom:62px;
+    width:min(345px,calc(100vw - 20px));
+    border-radius:21px;
+  }
+
+  .p951ChatMessages{
+    height:min(285px,42dvh);
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -19214,8 +19485,8 @@ window.addEventListener("load",()=>{
           <section class="p93RoomChat">
             <div class="p93ChatHead">
               <div>
-                <small>PRE-MATCH CHAT</small>
-                <h3>คุยกันก่อนเริ่ม</h3>
+                <small>ROOM CHAT</small>
+                <h3>แชทในห้อง</h3>
               </div>
               <span id="p93ChatStatus">เปิดอยู่</span>
             </div>
@@ -19413,6 +19684,7 @@ window.addEventListener("load",()=>{
 
   let client=null,user=null,profile=null,currentRoom=null,players=[],roomChannel=null,lobbyChannel=null,countdownTimer=null,countdownLaunchTimer=null,visibility="public",lobbyRefreshTimer=null;
   let p942AutoReadyBusy=false,p942AutoStartTimer=null,p942AutoStartRoomId=null;
+  let p951AutoStartBusy=false,p951AutoStartRetry=null;
   let rankedCatalog=[...FALLBACK_CATALOG],selectedRankWorld="teddy",selectedRankMode="teddy_position";
 
   function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
@@ -20021,6 +20293,90 @@ window.addEventListener("load",()=>{
     renderRoom();
     if(currentRoom.status==="countdown"||currentRoom.status==="playing")await loadLatestMatch();
   }
+  async function p951AutoStartRanked(r){
+    if(
+      !r?.id
+      ||r.match_kind!=="ranked"
+      ||r.status!=="waiting"
+      ||p951AutoStartBusy
+      ||window.BB_RANKED_ACTIVE
+    ){
+      return;
+    }
+
+    const readyNow=
+      players.length===2
+      &&players.filter(x=>x.is_ready).length===2;
+
+    if(!readyNow)return;
+
+    p951AutoStartBusy=true;
+
+    try{
+      // Both devices may reach this call. The existing RPC remains
+      // authoritative. The Host starts the match; the other device
+      // simply loads the Match row created by Host.
+      const {data,error}=await client.rpc(
+        "bb_ranked_start_match_v2",
+        {p_room_id:r.id}
+      );
+
+      if(!error && data?.[0]){
+        const row=data[0];
+
+        startCountdown({
+          ...row,
+          id:row.match_id,
+          ranked_subject_code:
+            currentRoom?.ranked_subject_code||null,
+          ranked_rule_tier:
+            currentRoom?.ranked_rule_tier||null,
+          ranked_content_level:
+            currentRoom?.ranked_content_level||null
+        });
+
+        return;
+      }
+
+      // Non-host / already-started errors are expected on one device.
+      // Do not show an error screen; fetch the canonical match instead.
+      await new Promise(resolve=>setTimeout(resolve,180));
+      await loadLatestMatch();
+
+    }catch(e){
+      console.warn(
+        "POMRU instant ranked start:",
+        e?.message||e
+      );
+
+      try{
+        await loadLatestMatch();
+      }catch(_){}
+
+    }finally{
+      p951AutoStartBusy=false;
+
+      if(p951AutoStartRetry){
+        clearTimeout(p951AutoStartRetry);
+      }
+
+      // Retry only while the room is still waiting.
+      if(
+        currentRoom?.id===r.id
+        &&currentRoom?.status==="waiting"
+        &&!window.BB_RANKED_ACTIVE
+      ){
+        p951AutoStartRetry=setTimeout(()=>{
+          p951AutoStartRetry=null;
+
+          if(currentRoom?.id===r.id){
+            refreshRoom();
+          }
+        },420);
+      }
+    }
+  }
+
   function renderRoom(){
     const r=currentRoom;if(!r)return;
     $("#bbRoomName").textContent=r.room_name;
@@ -20048,7 +20404,10 @@ window.addEventListener("load",()=>{
       && r.status==="waiting";
 
     if(autoRanked){
-      // Automatic Ranked: both players are readied automatically.
+      // Ranked has NO waiting lounge.
+      // The room remains alive internally for realtime sync only.
+      document.body.classList.add("p951RankedQuickStart");
+
       rb.classList.add("hidden");
       sbBtn.classList.add("hidden");
 
@@ -20064,59 +20423,35 @@ window.addEventListener("load",()=>{
                 p_ready:true
               }
             );
+
             if(error)throw error;
+
           }catch(e){
-            console.warn("POMRU auto-ready:",e);
+            console.warn(
+              "POMRU ranked auto-ready:",
+              e?.message||e
+            );
           }finally{
             p942AutoReadyBusy=false;
+
             if(currentRoom?.id===r.id){
               refreshRoom();
             }
           }
-        },120);
+        },50);
       }
 
       if(n<2){
         $("#bbRoomInfo").textContent=
-          "พบแมตช์แล้ว • กำลังนำคู่แข่งเข้าห้อง";
+          "กำลังนำคู่แข่งเข้าสู่เกม";
       }else if(ready<2){
         $("#bbRoomInfo").textContent=
-          `คู่แข่งพร้อมแล้ว • กำลังเตรียมการแข่งขัน ${ready}/2`;
+          "พบคู่แข่งแล้ว • กำลังซิงก์ผู้เล่น";
       }else{
         $("#bbRoomInfo").textContent=
-          "ทั้งสองคนพร้อม • เริ่มอัตโนมัติใน 4 วินาที";
+          "พร้อมแล้ว • กำลังเริ่มเกม";
 
-        if(
-          host
-          && p942AutoStartRoomId!==r.id
-          && !p942AutoStartTimer
-        ){
-          p942AutoStartRoomId=r.id;
-
-          p942AutoStartTimer=setTimeout(async()=>{
-            p942AutoStartTimer=null;
-
-            if(
-              !currentRoom
-              ||currentRoom.id!==r.id
-              ||currentRoom.status!=="waiting"
-            ){
-              return;
-            }
-
-            const readyNow=
-              players.length===2
-              &&players.filter(x=>x.is_ready).length===2;
-
-            if(!readyNow){
-              p942AutoStartRoomId=null;
-              refreshRoom();
-              return;
-            }
-
-            await startMatch();
-          },4000);
-        }
+        p951AutoStartRanked(r);
       }
 
     }else if(host){
@@ -20169,7 +20504,10 @@ window.addEventListener("load",()=>{
     catch(x){toast(errText(x));return}
     const leftRoomId=currentRoom?.id||null;
     if(p942AutoStartTimer){clearTimeout(p942AutoStartTimer);p942AutoStartTimer=null}
+    if(p951AutoStartRetry){clearTimeout(p951AutoStartRetry);p951AutoStartRetry=null}
     p942AutoStartRoomId=null;
+    p951AutoStartBusy=false;
+    document.body.classList.remove("p951RankedQuickStart");
     cleanupRoomChannel();stopCountdown();currentRoom=null;players=[];
     document.dispatchEvent(new CustomEvent("pomru:duel-room-left",{detail:{room_id:leftRoomId}}));
     closeArena();
@@ -20256,7 +20594,26 @@ window.addEventListener("load",()=>{
     document.dispatchEvent(new CustomEvent("pomru:duel-starting",{
       detail:{room_id:currentRoom?.id||null,match_id:match.id}
     }));
-    show("#bbArenaRoom",false);show("#bbArenaLobby",false);show("#bbArenaCountdown",true);
+    show("#bbArenaRoom",false);
+    show("#bbArenaLobby",false);
+
+    if(document.body.classList.contains("p951RankedQuickStart")){
+      show("#bbArenaCountdown",false);
+
+      const status=document.getElementById("p94RankedStatusPill");
+      if(status)status.textContent="กำลังเริ่มเกม";
+
+      const matchedText=document.getElementById("p94MatchedGame");
+      if(matchedText){
+        const mCode=match.mode_code || (match.mode?"teddy_"+match.mode:null);
+        const dCode=match.difficulty_code || match.difficulty;
+        matchedText.textContent=
+          `${modeLabel(mCode,match.mode)} • ${diffLabel(dCode,match.difficulty)} • กำลังซิงก์เวลา`;
+      }
+
+    }else{
+      show("#bbArenaCountdown",true);
+    }
 
     // ใช้ started_at จาก Server เป็นนาฬิกากลางของทุกเครื่อง
     const startMs=new Date(match.started_at).getTime();
@@ -20835,6 +21192,16 @@ window.addEventListener("load",()=>{
   async function launchRankedGame(match){
     if(!match)return;
 
+    // Ranked quick-start ends only when the actual game engine launches.
+    const quickOverlay=document.getElementById("p94RankedOverlay");
+    if(quickOverlay){
+      quickOverlay.classList.add("hidden");
+      quickOverlay.setAttribute("aria-hidden","true");
+    }
+
+    document.body.classList.remove("p94RankedOpen");
+
+
     const matchId=match.id||match.match_id;
     if(!matchId)return;
 
@@ -20904,6 +21271,22 @@ window.addEventListener("load",()=>{
     window.__bbRankedMatch=activeRankedMatch;
     window.__bbRankedRng=seeded(Number(activeRankedMatch.seed)||1);
 
+    document.dispatchEvent(
+      new CustomEvent(
+        "pomru:ranked-game-started",
+        {
+          detail:{
+            match_id:activeRankedMatch.id,
+            room_id:
+              activeRankedMatch.room_id
+              ||currentRoom?.id
+              ||window.POMRUDuel?.getActiveRoom?.()
+              ||null
+          }
+        }
+      )
+    );
+
     show("#bbArenaCountdown",false);
     show("#bbArenaRoom",false);
 
@@ -20962,7 +21345,20 @@ window.addEventListener("load",()=>{
       document.getElementById("bbRankedGameHud")?.classList.add("hidden");
 
       if(typeof window.bbLaunchRankedLearning==="function"){
-        window.bbLaunchRankedLearning(activeRankedMatch);
+        try{
+          await window.bbLaunchRankedLearning(
+            activeRankedMatch
+          );
+        }catch(e){
+          console.error(
+            "POMRU Ranked Learning launch:",
+            e
+          );
+          toast(
+            e?.message
+            ||"โหลดเกมจัดอันดับไม่สำเร็จ"
+          );
+        }
       }else{
         toast("โหลด Ranked Learning Engine ไม่สำเร็จ");
       }
@@ -31767,24 +32163,33 @@ document.addEventListener('DOMContentLoaded', () => {
           );
         }catch(_){}
 
+        document.body.classList.add(
+          "p951RankedQuickStart"
+        );
+
+        $("p94RankedStatusPill").textContent=
+          "กำลังเริ่มเกม";
+
+        $("p94MatchedGame").textContent=
+          `${row.game_name||modeName(row.mode_code)} • ${row.level_label||row.content_level||""} • กำลังซิงก์เกม`;
+
+        // Open the legacy arena internally so its realtime room/match
+        // engine can work, but keep the Match Found screen on top.
         setTimeout(async()=>{
 
           try{
-            localStorage.removeItem("bb_ranked_waiting_match");
+            localStorage.removeItem(
+              "bb_ranked_waiting_match"
+            );
           }catch(_){}
 
-          show("p94RankedOverlay",false);
-          $("p94RankedOverlay")?.setAttribute("aria-hidden","true");
-          document.body.classList.remove("p94RankedOpen");
-
-          // เปิดหน้า VS / Chat ของ v93
           if(window.POMRUDuel?.openArenaRoom){
             await window.POMRUDuel.openArenaRoom();
           }else if(window.__POMRU_LEGACY_ARENA_OPEN){
             await window.__POMRU_LEGACY_ARENA_OPEN();
           }
 
-        },1700);
+        },120);
 
       }
 
@@ -32519,6 +32924,334 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(load,1000);
   }
 
+})();
+</script>
+
+
+<div class="p951GameChat hidden" id="p951GameChat">
+  <button type="button" class="p951ChatFab" id="p951ChatFab" aria-label="เปิดแชท">
+    <span class="p951ChatIcon" aria-hidden="true"></span>
+    <b>แชท</b>
+    <i class="p951ChatBadge hidden" id="p951ChatBadge">0</i>
+  </button>
+
+  <section class="p951ChatDrawer hidden" id="p951ChatDrawer" aria-hidden="true">
+    <header>
+      <div>
+        <small>LIVE MATCH CHAT</small>
+        <h3>คุยกับคู่แข่ง</h3>
+      </div>
+      <button type="button" id="p951ChatClose" aria-label="ปิด">×</button>
+    </header>
+
+    <div class="p951ChatMessages" id="p951ChatMessages">
+      <div class="p951ChatEmpty">ยังไม่มีข้อความ</div>
+    </div>
+
+    <form class="p951ChatComposer" id="p951ChatForm">
+      <input
+        id="p951ChatInput"
+        maxlength="300"
+        autocomplete="off"
+        placeholder="พิมพ์ข้อความ…"
+      >
+      <button type="submit" id="p951ChatSend">ส่ง</button>
+    </form>
+  </section>
+</div>
+
+
+<script id="pomru-v951-instant-ranked-chat-runtime">
+(function(){
+  "use strict";
+
+  const $=id=>document.getElementById(id);
+
+  let user=null;
+  let roomId=null;
+  let channel=null;
+  let unread=0;
+  let drawerOpen=false;
+
+  function client(){
+    return window.__bbSupabase||window.sb||null;
+  }
+
+  function esc(v){
+    return String(v??"").replace(
+      /[&<>"']/g,
+      m=>({
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#39;"
+      }[m])
+    );
+  }
+
+  async function getUser(){
+    const c=client();
+    if(!c?.auth)return null;
+
+    const {data}=await c.auth.getUser();
+    user=data?.user||null;
+    return user;
+  }
+
+  function currentRoomId(fallback=null){
+    return fallback
+      ||window.__bbRankedMatch?.room_id
+      ||window.POMRUDuel?.getActiveRoom?.()
+      ||roomId
+      ||null;
+  }
+
+  async function rpc(name,args={}){
+    const c=client();
+    if(!c)throw new Error("ยังเชื่อมต่อระบบออนไลน์ไม่สำเร็จ");
+
+    const {data,error}=await c.rpc(name,args);
+
+    if(error)throw error;
+    return data;
+  }
+
+  function badge(){
+    const b=$("p951ChatBadge");
+    if(!b)return;
+
+    b.textContent=unread>99?"99+":String(unread);
+    b.classList.toggle("hidden",unread<1);
+  }
+
+  function setOpen(open){
+    drawerOpen=!!open;
+
+    const d=$("p951ChatDrawer");
+    d?.classList.toggle("hidden",!drawerOpen);
+    d?.setAttribute(
+      "aria-hidden",
+      drawerOpen?"false":"true"
+    );
+
+    if(drawerOpen){
+      unread=0;
+      badge();
+      load();
+      setTimeout(
+        ()=>$("p951ChatInput")?.focus(),
+        50
+      );
+    }
+  }
+
+  function render(rows){
+    const host=$("p951ChatMessages");
+    if(!host)return;
+
+    if(!rows?.length){
+      host.innerHTML=
+        '<div class="p951ChatEmpty">ยังไม่มีข้อความ</div>';
+      return;
+    }
+
+    host.innerHTML=rows.map(m=>`
+      <div class="p951ChatRow ${m.is_me?"me":""}">
+        <div class="p951ChatBubble">
+          ${esc(m.body)}
+          <small>${esc(m.display_name||"ผู้เล่น")}</small>
+        </div>
+      </div>
+    `).join("");
+
+    host.scrollTop=host.scrollHeight;
+  }
+
+  async function load(){
+    roomId=currentRoomId(roomId);
+
+    if(!roomId)return;
+
+    try{
+      const rows=await rpc(
+        "bb_room_chat",
+        {
+          p_room_id:roomId,
+          p_limit:50
+        }
+      );
+
+      render(
+        Array.isArray(rows)?rows:[]
+      );
+
+    }catch(e){
+      console.warn(
+        "POMRU in-game chat load:",
+        e?.message||e
+      );
+    }
+  }
+
+  function stopRealtime(){
+    const c=client();
+
+    if(channel&&c){
+      c.removeChannel(channel);
+    }
+
+    channel=null;
+  }
+
+  function subscribe(){
+    stopRealtime();
+
+    const c=client();
+    if(!c||!roomId)return;
+
+    channel=c.channel(
+      "p951-game-chat-"
+      +roomId
+      +"-"
+      +Math.random().toString(36).slice(2)
+    )
+    .on(
+      "postgres_changes",
+      {
+        event:"INSERT",
+        schema:"public",
+        table:"bb_room_chat_messages",
+        filter:`room_id=eq.${roomId}`
+      },
+      ()=>{
+        if(!drawerOpen){
+          unread++;
+          badge();
+        }
+
+        load();
+      }
+    )
+    .subscribe();
+  }
+
+  async function start(id=null){
+    await getUser();
+
+    roomId=currentRoomId(id);
+
+    if(!user||!roomId)return;
+
+    const root=$("p951GameChat");
+    root?.classList.remove("hidden");
+
+    unread=0;
+    badge();
+
+    await load();
+    subscribe();
+  }
+
+  function stop(){
+    setOpen(false);
+    stopRealtime();
+
+    roomId=null;
+    unread=0;
+    badge();
+
+    $("p951GameChat")?.classList.add("hidden");
+  }
+
+  async function send(){
+    const input=$("p951ChatInput");
+    const body=String(input?.value||"").trim();
+
+    roomId=currentRoomId(roomId);
+
+    if(!body||!roomId)return;
+
+    const btn=$("p951ChatSend");
+    if(btn)btn.disabled=true;
+
+    try{
+      await rpc(
+        "bb_send_room_chat",
+        {
+          p_room_id:roomId,
+          p_body:body
+        }
+      );
+
+      input.value="";
+      await load();
+
+    }catch(e){
+      const msg=String(e?.message||e||"");
+
+      if(msg.includes("chat_closed")){
+        alert(
+          "แชทในเกมยังไม่เปิดในฐานข้อมูล • กรุณารัน Step F1.3"
+        );
+      }else if(msg.includes("chat_rate_limited")){
+        alert("ส่งเร็วเกินไป ลองใหม่อีกครั้ง");
+      }else{
+        alert(msg);
+      }
+
+    }finally{
+      if(btn)btn.disabled=false;
+    }
+  }
+
+  function bind(){
+    $("p951ChatFab")?.addEventListener(
+      "click",
+      ()=>setOpen(!drawerOpen)
+    );
+
+    $("p951ChatClose")?.addEventListener(
+      "click",
+      ()=>setOpen(false)
+    );
+
+    $("p951ChatForm")?.addEventListener(
+      "submit",
+      e=>{
+        e.preventDefault();
+        send();
+      }
+    );
+
+    document.addEventListener(
+      "pomru:ranked-game-started",
+      e=>{
+        start(e.detail?.room_id||null);
+      }
+    );
+
+    document.addEventListener(
+      "pomru:duel-room-left",
+      stop
+    );
+  }
+
+  window.POMRUInGameChat={
+    open:()=>setOpen(true),
+    close:()=>setOpen(false),
+    refresh:load
+  };
+
+  if(document.readyState==="loading"){
+    document.addEventListener(
+      "DOMContentLoaded",
+      bind,
+      {once:true}
+    );
+  }else{
+    bind();
+  }
 })();
 </script>
 
