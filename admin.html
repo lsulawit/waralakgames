@@ -3,28 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#765fda">
+<meta name="theme-color" content="#6f56d9">
 <meta name="author" content="Sulawit Songsang">
-<title>Brain Buddy • Admin Center v71</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-document.addEventListener("click",e=>{
- const open=e.target.closest("[data-user-open]");
- if(open){
-  openUserControlModal(open.dataset.userOpen);
-  return;
- }
-
- const quick=e.target.closest("[data-user-quick]");
- if(quick){
-  quickUserAdjust(
-   quick.dataset.userQuick,
-   Number(quick.dataset.amount)||0
-  );
-  return;
- }
-});
-
-</script>
+<title>POMRU • Admin Control Center v97.0</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{box-sizing:border-box}
 :root{
@@ -1306,22 +1288,91 @@ button{cursor:pointer}
 }
 
 </style>
+
+<style id="pomru-admin-v970">
+:root{
+  --p97-ink:#2f2637;--p97-muted:#817589;--p97-line:#ece4ef;--p97-card:#fff;
+  --p97-purple:#7058d6;--p97-pink:#ed6aa6;--p97-green:#44aa80;--p97-amber:#dda53c;
+}
+body{background:linear-gradient(180deg,#fbf8ff 0%,#fff8fb 55%,#fffaf2 100%)!important}
+.top{background:rgba(255,255,255,.95)!important}
+.brand div small{color:#9a77a0!important}.brand div strong{color:#513c68!important}
+.adminTabs{gap:5px!important}
+.adminTabs button{font-size:11px;padding:10px 12px!important;background:#f7f2fa!important;color:#716579!important}
+.adminTabs button.active{background:linear-gradient(135deg,#765ddd,#9a79e6)!important;color:#fff!important}
+.hero{padding:16px 0 10px!important}
+.heroCard{min-height:170px!important;background:linear-gradient(135deg,#6e57d7,#9b70e2 53%,#ed73ad)!important}
+.hero h1{font-size:clamp(30px,4.5vw,47px)!important}
+.hero p{max-width:760px!important}
+#dashboard{padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+
+.p97DashboardGrid{display:grid;grid-template-columns:1.15fr .85fr;gap:12px}
+.p97PanelCard{background:rgba(255,255,255,.96);border:1px solid var(--p97-line);border-radius:24px;padding:17px;box-shadow:0 10px 30px rgba(67,48,82,.07)}
+.p97PanelCard h2,.p97PanelCard h3{margin:0;color:#4f3b60}.p97PanelCard p{color:var(--p97-muted);line-height:1.6}
+.p97Eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:8px;letter-spacing:.13em;font-weight:1000;color:#9b70a0}
+.p97CoreLoop{grid-column:1/-1;background:linear-gradient(135deg,#fff5fa,#f3efff 50%,#f1fbf7)}
+.p97LoopTrack{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:12px}
+.p97LoopStep{position:relative;padding:11px 8px;border-radius:16px;background:#fff;border:1px solid #eee5f0;text-align:center;min-height:88px}
+.p97LoopStep span{display:grid;place-items:center;width:34px;height:34px;margin:0 auto 6px;border-radius:12px;background:#f5effb;font-size:18px}
+.p97LoopStep b{display:block;font-size:10px;color:#55445f}.p97LoopStep small{display:block;margin-top:3px;font-size:7px;color:#96879b;line-height:1.35}
+.p97LoopStep:not(:last-child)::after{content:'›';position:absolute;right:-7px;top:32px;z-index:3;color:#aa92bf;font-size:20px;font-weight:1000}
+
+.p97QuickGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:11px}
+.p97Quick{border:1px solid #ebe2ee;border-radius:18px;padding:12px;background:#fff;text-align:left;color:#54445d;min-height:94px;transition:.18s}
+.p97Quick:hover{transform:translateY(-1px);box-shadow:0 10px 20px rgba(87,61,104,.08)}
+.p97Quick span{font-size:23px}.p97Quick b{display:block;margin-top:6px;font-size:12px}.p97Quick small{display:block;margin-top:2px;color:#928397;font-size:8px;line-height:1.5}
+
+.p97Health{display:grid;gap:7px;margin-top:10px}
+.p97HealthRow{display:grid;grid-template-columns:42px 1fr auto;gap:9px;align-items:center;padding:9px;border:1px solid #eee6ef;border-radius:15px;background:#fff}
+.p97HealthIcon{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:#f7f2fa;font-weight:1000}
+.p97HealthRow b{display:block;font-size:10px;color:#57465f}.p97HealthRow small{display:block;font-size:7px;color:#96879a;margin-top:2px}
+.p97HealthBadge{padding:6px 8px;border-radius:999px;font-size:7px;font-weight:1000;background:#eaf8f1;color:#33825f;white-space:nowrap}
+.p97HealthBadge.warn{background:#fff1e6;color:#a36a30}.p97HealthBadge.bad{background:#fff0f3;color:#ae516b}
+
+.p97ContentHero{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px}
+.p97ContentHero h2{margin:0;color:#4d3b5b}.p97ContentHero p{margin:4px 0 0;color:#8c7f91;font-size:10px;line-height:1.55}
+.p97ContentGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.p97Bank{position:relative;overflow:hidden;border:1px solid #e9e1ec;border-radius:22px;padding:15px;background:#fff;min-height:190px}
+.p97Bank.memory{background:linear-gradient(145deg,#fff4f8,#fff)}
+.p97Bank.math{background:linear-gradient(145deg,#fff9e8,#fff)}
+.p97Bank.chinese{background:linear-gradient(145deg,#fff0f0,#fff)}
+.p97Bank.english{background:linear-gradient(145deg,#eef6ff,#fff)}
+.p97BankIcon{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:#fff;border:1px solid rgba(100,80,120,.08);font-size:23px;font-weight:1000}
+.p97Bank small{display:block;margin-top:9px;color:#9a889f;font-size:7px;font-weight:1000;letter-spacing:.1em}
+.p97Bank h3{margin:3px 0;color:#4e4055;font-size:19px}.p97Bank p{margin:0;color:#887b8d;font-size:9px;line-height:1.55;min-height:42px}
+.p97BankMeta{display:flex;gap:5px;flex-wrap:wrap;margin:9px 0}.p97BankMeta span{padding:5px 7px;border-radius:999px;background:rgba(255,255,255,.82);border:1px solid #ede6ef;color:#786c7d;font-size:7px;font-weight:900}
+.p97BankActions{display:flex;gap:6px;flex-wrap:wrap}.p97BankActions button{border:0;border-radius:12px;padding:9px 10px;font-size:9px;font-weight:950;background:#755bd7;color:#fff}.p97BankActions button.secondary{background:#f1ebf6;color:#685974}
+.p97Legacy{margin-top:12px;padding:11px 13px;border:1px dashed #d9ccd9;border-radius:17px;background:#fbf8fb;color:#7e7182;font-size:9px;line-height:1.55}
+.p97Legacy b{color:#5c4e61}.p97Legacy button{margin-left:6px;border:0;border-radius:10px;padding:7px 9px;background:#eee7f2;color:#66586e;font-weight:900}
+.p97Source{display:inline-flex;margin-top:8px;padding:5px 7px;border-radius:8px;background:#f6f2f8;color:#8b7b91;font:700 7px ui-monospace,SFMono-Regular,Menlo,monospace}
+
+/* Make manager headers say POMRU instead of legacy brand. */
+.mathManagerHero small,.englishManagerHero small{letter-spacing:.10em!important}
+
+@media(max-width:900px){
+  .p97DashboardGrid{grid-template-columns:1fr}.p97CoreLoop{grid-column:auto}.p97LoopTrack{grid-template-columns:repeat(3,1fr)}
+  .p97LoopStep:nth-child(3)::after{display:none}.p97ContentGrid{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  .p97LoopTrack{grid-template-columns:repeat(2,1fr)}.p97LoopStep:nth-child(2)::after,.p97LoopStep:nth-child(4)::after{display:none}.p97LoopStep:nth-child(3)::after{display:block}
+  .p97QuickGrid{grid-template-columns:1fr}.p97ContentHero{flex-direction:column}.heroArt{display:none!important}
+}
+</style>
+
 </head>
 <body>
 <header class="top">
   <div class="shell nav">
     <div class="brand">
       <span class="brandMark"><i></i></span>
-      <div><small>BRAIN BUDDY</small><strong>Admin Center</strong></div>
+      <div><small>POMRU • ผมรู้</small><strong>Admin Center</strong></div>
     </div>
     <div class="adminTabs" id="adminTabs">
-      <button class="active" data-admin-panel="bears">จัดการหมี</button>
-      <button data-admin-panel="learning">คำศัพท์ / โจทย์</button>
-      <button data-admin-panel="hsk">HSK 1–6</button>
-      <button data-admin-panel="math">➗ Math Manager</button>
-      <button data-admin-panel="english">🇬🇧 English Manager</button>
-      <button data-admin-panel="games">🎮 Game Control</button>
-      <button data-admin-panel="users">👥 User Control</button>
+      <button class="active" data-admin-panel="home">ภาพรวม</button>
+      <button data-admin-panel="content">โจทย์ & เนื้อหา</button>
+      <button data-admin-panel="games">เกม & Ranked</button>
+      <button data-admin-panel="users">ผู้เล่น</button>
+      <button data-admin-panel="bears">Assets</button>
     </div>
     <a class="back" href="/">← กลับหน้าเกม</a>
   </div>
@@ -1333,8 +1384,8 @@ button{cursor:pointer}
     <div class="heroCard">
       <div>
         <span class="status">ADMIN CONTROL CENTER</span>
-        <h1>ศูนย์จัดการ Brain Buddy</h1>
-        <p>จัดการตัวหมี HSK Math English เกม สมาชิก Coins EXP และ Rank จากหน้าเดียว</p>
+        <h1>POMRU Control Center</h1>
+        <p>ดูสุขภาพเกม เพิ่มโจทย์ให้ถูกคลัง คุม Game/Ranked และจัดการผู้เล่นจากหน้าเดียว — ออกแบบให้เปิดมาแล้วรู้ทันทีว่าต้องทำอะไรต่อ</p>
       </div>
       <div class="heroArt"><span class="brain"></span><span class="bear"></span><span class="book"></span></div>
     </div>
@@ -1345,14 +1396,14 @@ button{cursor:pointer}
   <div class="card loginBox" id="needLogin">
     <div style="font-size:48px">🔐</div>
     <h2>กรุณาเข้าสู่ระบบก่อน</h2>
-    <p>Admin Center ต้องใช้บัญชี Brain Buddy ที่เข้าสู่ระบบอยู่ก่อน</p>
+    <p>Admin Center ต้องใช้บัญชี POMRU ที่เข้าสู่ระบบอยู่ก่อน</p>
     <a class="btn primary" style="display:inline-block;text-decoration:none" href="/">ไปหน้าเข้าสู่ระบบ</a>
   </div>
 
   <div class="card loginBox hidden" id="codeGate">
     <span class="status" style="background:#f4effa;color:#665376;border:0">บัญชีผู้ดูแลที่กำลังใช้งาน</span>
     <h2>ใส่รหัสแอดมิน</h2>
-    <p>ส่วนจัดการหมีเดิมยังใช้รหัสแอดมินเพื่อความเข้ากันได้กับระบบเดิม</p>
+    <p>ยืนยันสิทธิ์ผู้ดูแลก่อนเข้าสู่ระบบหลังบ้าน POMRU</p>
     <div class="userline" id="adminEmail"></div>
     <div class="codeForm">
       <input type="password" id="adminCode" autocomplete="current-password" placeholder="รหัสแอดมิน">
@@ -1362,10 +1413,91 @@ button{cursor:pointer}
   </div>
 
   <div class="card hidden" id="dashboard">
+    <!-- POMRU ADMIN HOME -->
+    <section class="adminPanel active" id="panel-home">
+      <div class="p97DashboardGrid">
+        <article class="p97PanelCard p97CoreLoop">
+          <span class="p97Eyebrow">POMRU PRODUCT LOOP</span>
+          <h2>ผู้เล่นต้องรู้ว่า “เล่นไปทำไม” ภายในไม่กี่วินาที</h2>
+          <p style="margin:5px 0 0;font-size:10px">แกนเดียวที่ทุกระบบต้องช่วยกัน: เล่นเพื่อหา Coins/EXP → ดูแลและแต่ง Buddy → Buddy เติบโตและปลดล็อกสิ่งใหม่ → กลับไปเล่นด่านที่ท้าทายขึ้น</p>
+          <div class="p97LoopTrack">
+            <div class="p97LoopStep"><span>🎮</span><b>PLAY</b><small>Memory / Math / Language</small></div>
+            <div class="p97LoopStep"><span>🪙</span><b>EARN</b><small>Coins + EXP + Progress</small></div>
+            <div class="p97LoopStep"><span>🍓</span><b>CARE</b><small>อาหาร / ความสุข / พลัง</small></div>
+            <div class="p97LoopStep"><span>👕</span><b>CUSTOMIZE</b><small>แต่ง Buddy และของสะสม</small></div>
+            <div class="p97LoopStep"><span>✨</span><b>GROW</b><small>Level / Unlock / Animation</small></div>
+            <div class="p97LoopStep"><span>🏆</span><b>RETURN</b><small>ด่านใหม่ / Ranked / Missions</small></div>
+          </div>
+        </article>
+
+        <article class="p97PanelCard">
+          <span class="p97Eyebrow">QUICK ACTIONS</span>
+          <h3>งานที่ใช้บ่อย</h3>
+          <div class="p97QuickGrid">
+            <button class="p97Quick" data-p97-new="math"><span>➗</span><b>เพิ่มโจทย์ Math</b><small>เข้า bb_math_questions โดยตรง</small></button>
+            <button class="p97Quick" data-p97-new="hsk"><span>中</span><b>เพิ่มคำ HSK</b><small>เข้า bb_hsk_vocabulary โดยตรง</small></button>
+            <button class="p97Quick" data-p97-new="english"><span>A</span><b>เพิ่ม English</b><small>เข้า bb_english_content โดยตรง</small></button>
+            <button class="p97Quick" data-p97-open="games"><span>🏆</span><b>ตรวจ Game / Ranked</b><small>เปิด–ปิดเกมและดู readiness</small></button>
+          </div>
+        </article>
+
+        <article class="p97PanelCard">
+          <span class="p97Eyebrow">RANKED CONTENT HEALTH</span>
+          <h3>คลัง Ranked พร้อมแค่ไหน</h3>
+          <p style="margin:4px 0 0;font-size:9px">ตรวจจากกติกา Bronze → Legend ของฐานข้อมูลจริง</p>
+          <div class="p97Health" id="p97RankedHealth"><div class="learnLoading">กำลังตรวจคลัง Ranked…</div></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTENT HUB -->
+    <section class="adminPanel" id="panel-content">
+      <div class="p97ContentHero">
+        <div><span class="p97Eyebrow">CONTENT HUB</span><h2>เพิ่มเนื้อหาให้ถูกคลัง</h2><p>ไม่ต้องจำชื่อตาราง เลือกโลกที่ต้องการแล้ว Admin จะพาไป manager ที่เกมใช้งานจริง</p></div>
+        <button class="btn" id="p97ContentRefresh">รีเฟรชสถานะทั้งหมด</button>
+      </div>
+
+      <div class="p97ContentGrid">
+        <article class="p97Bank memory">
+          <div class="p97BankIcon">🧸</div><small>MEMORY WORLD</small><h3>Memory Assets</h3>
+          <p>เกมความจำสร้างด่านจากชุดภาพ ไม่ควรเพิ่มเป็น “โจทย์” ทีละข้อ ให้จัดการภาพ/ธีมแทน</p>
+          <div class="p97BankMeta"><span>จำตำแหน่ง</span><span>จับคู่</span><span>จำลำดับ</span></div>
+          <div class="p97BankActions"><button data-p97-open="bears">จัดการ Assets</button></div>
+          <span class="p97Source">generated memory content</span>
+        </article>
+
+        <article class="p97Bank math">
+          <div class="p97BankIcon">÷</div><small>MATH WORLD</small><h3>Math Questions</h3>
+          <p>Math 1–6 แยกระดับและรูปแบบเกม โจทย์ที่เพิ่มตรงนี้ถูกอ่านโดย Practice และใช้ตรวจความพร้อม Ranked</p>
+          <div class="p97BankMeta"><span id="p97MathTotal">กำลังอ่าน…</span><span>Math 1–6</span></div>
+          <div class="p97BankActions"><button data-p97-new="math">+ เพิ่มโจทย์</button><button class="secondary" data-p97-open="math">จัดการคลัง</button></div>
+          <span class="p97Source">bb_math_questions</span>
+        </article>
+
+        <article class="p97Bank chinese">
+          <div class="p97BankIcon">中</div><small>CHINESE WORLD</small><h3>HSK Vocabulary</h3>
+          <p>เพิ่มคำจีนหนึ่งครั้ง แล้วเกมสามารถสร้าง Hanzi→Meaning, Pinyin, Listening และ Mix จากคำเดียวได้</p>
+          <div class="p97BankMeta"><span id="p97HSKTotal">กำลังอ่าน…</span><span>HSK 1–6</span></div>
+          <div class="p97BankActions"><button data-p97-new="hsk">+ เพิ่มคำ HSK</button><button class="secondary" data-p97-open="hsk">จัดการคลัง</button></div>
+          <span class="p97Source">bb_hsk_vocabulary</span>
+        </article>
+
+        <article class="p97Bank english">
+          <div class="p97BankIcon">A</div><small>ENGLISH WORLD</small><h3>English Content</h3>
+          <p>A1–C1 รองรับ Vocabulary, Typing, Listening และเนื้อหาแบบฝึกอื่น ๆ จากคลังเฉพาะของ English</p>
+          <div class="p97BankMeta"><span id="p97EnglishTotal">กำลังอ่าน…</span><span>A1–C1</span></div>
+          <div class="p97BankActions"><button data-p97-new="english">+ เพิ่ม English</button><button class="secondary" data-p97-open="english">จัดการคลัง</button></div>
+          <span class="p97Source">bb_english_content</span>
+        </article>
+      </div>
+
+      <div class="p97Legacy"><b>Legacy Content:</b> `bb_learning_content` ยังเก็บไว้เพื่อความเข้ากันได้กับโค้ดรุ่นเก่า แต่ไม่ใช่จุดหลักสำหรับ Math / HSK / English ใหม่ <button data-p97-open="learning">เปิด Legacy CMS</button></div>
+    </section>
+
     <!-- BEARS -->
-    <section class="adminPanel active" id="panel-bears">
+    <section class="adminPanel" id="panel-bears">
       <div class="toolbar">
-        <div><h2>จัดการหมีในเกม</h2><p>เปลี่ยนรูปทีละตัว หรือใช้รูปเดียวแทนหมีทั้ง 20 ตัว</p></div>
+        <div><h2>จัดการ Memory / Buddy Assets</h2><p>จัดการชุดภาพสำหรับเกมความจำและ asset รุ่นเดิม โดยไม่กระทบคลังโจทย์ Math / HSK / English</p></div>
         <div class="actions">
           <button class="btn" id="reloadBtn">โหลดใหม่</button>
           <button class="btn danger" id="resetAllBtn">คืนค่าเดิมทั้งหมด</button>
@@ -1381,7 +1513,7 @@ button{cursor:pointer}
     <!-- LEARNING -->
     <section class="adminPanel" id="panel-learning">
       <div class="toolbar">
-        <div><h2>คำศัพท์และโจทย์</h2><p>Chinese • English • Mathematics — เพิ่ม แก้ ปิด/เปิด และลบได้จาก iPad</p></div>
+        <div><h2>Legacy Learning Content</h2><p>คลัง bb_learning_content รุ่นเก่า — เก็บไว้เพื่อ compatibility ไม่ใช่จุดหลักสำหรับเนื้อหาใหม่</p></div>
         <div class="actions">
           <button class="btn" id="learnReloadBtn">โหลดใหม่</button>
           <button class="btn primary" id="newLearnBtn">+ เพิ่มเนื้อหา</button>
@@ -1594,7 +1726,7 @@ button{cursor:pointer}
             <h3>จัดการคำศัพท์ HSK</h3>
             <p>ค้นหา แก้ความหมายไทย/อังกฤษ Pinyin ตัวอย่าง รูป เสียง และเปิด–ปิดคำ</p>
           </div>
-          <button class="btn" id="hskManagerRefresh">รีเฟรชรายการ</button>
+          <div class="actions"><button class="btn" id="hskManagerRefresh">รีเฟรชรายการ</button><button class="btn primary" id="hskManagerNew">+ เพิ่มคำ HSK</button></div>
         </div>
 
         <div class="hskManagerFilters">
@@ -1664,7 +1796,7 @@ button{cursor:pointer}
       <div class="mathManagerHero">
         <div class="mathManagerHeroIcon">➗</div>
         <div>
-          <small>BRAIN BUDDY MATH BANK</small>
+          <small>POMRU MATH BANK</small>
           <h3>คลังโจทย์คณิตศาสตร์</h3>
           <p>Math ยังสามารถล็อกไว้ใน Game Control ระหว่างตรวจสอบโจทย์ ก่อนเปิดให้ผู้เล่นจริง</p>
         </div>
@@ -1822,7 +1954,7 @@ button{cursor:pointer}
       <div class="englishManagerHero">
         <div class="englishManagerHeroIcon">A</div>
         <div>
-          <small>ENGLISH JOURNEY • A1 → C1</small>
+          <small>POMRU ENGLISH • A1 → C1</small>
           <h3>คลัง English World</h3>
           <p>ตรวจและปรับเนื้อหาให้พร้อมก่อนเปิด English ใน Game Control</p>
         </div>
@@ -2407,7 +2539,7 @@ button{cursor:pointer}
   <div class="modalCard hskEditModalCard">
     <div class="hskEditHeader">
       <div>
-        <small>EDIT HSK VOCABULARY</small>
+        <small>HSK VOCABULARY EDITOR</small>
         <h3 id="hskEditTitle">แก้ไขคำศัพท์</h3>
       </div>
       <button class="btn" type="button" id="hskEditClose">ปิด</button>
@@ -2699,6 +2831,21 @@ const SUPABASE_URL="https://zumxppmhpajfhttdmlgu.supabase.co";
 const SUPABASE_KEY="sb_publishable_mLG21_IL92Jo2Pt7swNTYw_tVHME3a9";
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
+const POMRU_ADMIN_VERSION="97.0";
+
+document.addEventListener("click",e=>{
+ const open=e.target.closest("[data-user-open]");
+ if(open){
+  openUserControlModal(open.dataset.userOpen);
+  return;
+ }
+ const quick=e.target.closest("[data-user-quick]");
+ if(quick){
+  quickUserAdjust(quick.dataset.userQuick,Number(quick.dataset.amount)||0);
+ }
+});
+
+
 const palettes=[
 ["#b57a53","#e3ad82","#fff0db"],["#d19a77","#f0c4a5","#fff3e9"],["#98694e","#c89270","#f4ddc4"],["#c17f88","#ebb2b9","#fff0f1"],
 ["#a88a69","#d8b68f","#f9e8d3"],["#8f725f","#b99782","#eee0d2"],["#c49a63","#edc68a","#fff0d1"],["#a17963","#d3a58b","#f5dfd3"],
@@ -2789,7 +2936,8 @@ async function checkAdmin(){
  const {data,error}=await sb.rpc("bb_admin_check",{p_code:adminCode});
  if(error||!data){adminCode="";sessionStorage.removeItem("bb_admin_code");return false}
  $("#codeGate").classList.add("hidden");$("#dashboard").classList.remove("hidden");
- await Promise.all([loadAssets(),loadLearning()]);
+ await Promise.all([loadAssets()]);
+ openPanel("home");
  return true;
 }
 
@@ -2801,8 +2949,9 @@ async function unlock(){
  if(!data){$("#gateMsg").textContent="รหัสไม่ถูกต้อง หรือบัญชีนี้ไม่ใช่ผู้ดูแล";return}
  adminCode=code;sessionStorage.setItem("bb_admin_code",code);
  $("#codeGate").classList.add("hidden");$("#dashboard").classList.remove("hidden");
- await Promise.all([loadAssets(),loadLearning()]);
- toast("เข้าสู่ Admin Center แล้ว");
+ await Promise.all([loadAssets()]);
+ openPanel("home");
+ toast("เข้าสู่ POMRU Admin Center แล้ว");
 }
 
 async function loadAssets(){
@@ -2847,22 +2996,69 @@ function parseOptions(raw){
 function optionsText(o){return Array.isArray(o)?o.map(String).join("\n"):""}
 
 function openPanel(name){
+ const panelNames=["home","content","bears","learning","hsk","math","english","games","users"];
+ panelNames.forEach(p=>$("#panel-"+p)?.classList.toggle("active",name===p));
  document.querySelectorAll("[data-admin-panel]").forEach(b=>b.classList.toggle("active",b.dataset.adminPanel===name));
- $("#panel-bears").classList.toggle("active",name==="bears");
- $("#panel-learning").classList.toggle("active",name==="learning");
- $("#panel-hsk").classList.toggle("active",name==="hsk");
- $("#panel-math").classList.toggle("active",name==="math");
- $("#panel-english").classList.toggle("active",name==="english");
- $("#panel-games").classList.toggle("active",name==="games");
- $("#panel-users").classList.toggle("active",name==="users");
+ if(name==="home")loadP97Overview();
+ if(name==="content")loadP97ContentOverview();
  if(name==="learning")loadLearning();
  if(name==="hsk")Promise.all([loadHSKAdminStats(),loadHSKManager(false)]);
  if(name==="math")Promise.all([loadMathStats(),loadMathManager(false)]);
  if(name==="english")Promise.all([loadEnglishStats(),loadEnglishManager(false)]);
  if(name==="games")loadGameControl();
  if(name==="users")loadUserControl(false);
+ try{window.scrollTo({top:0,behavior:"smooth"})}catch(_){window.scrollTo(0,0)}
 }
 document.querySelectorAll("[data-admin-panel]").forEach(b=>b.onclick=()=>openPanel(b.dataset.adminPanel));
+
+const P97_SUBJECT_META={
+ memory:{icon:"🧸",name:"Memory"},math:{icon:"÷",name:"Math"},chinese:{icon:"中",name:"Chinese"},english:{icon:"A",name:"English"}
+};
+function p97Num(v){return Number(v)||0}
+function p97Set(id,value){const el=$("#"+id);if(el)el.textContent=value}
+async function loadP97ContentOverview(){
+ const tasks=[];
+ tasks.push((async()=>{try{const {data,error}=await sb.rpc("bb_admin_math_stats");if(error)throw error;const n=(data||[]).reduce((s,r)=>s+p97Num(r.total),0);p97Set("p97MathTotal",n.toLocaleString()+" ข้อ")}catch(_){p97Set("p97MathTotal","อ่านไม่ได้")}})());
+ tasks.push((async()=>{try{const {data,error}=await sb.rpc("bb_admin_english_stats");if(error)throw error;const n=(data||[]).reduce((s,r)=>s+p97Num(r.total),0);p97Set("p97EnglishTotal",n.toLocaleString()+" รายการ")}catch(_){p97Set("p97EnglishTotal","อ่านไม่ได้")}})());
+ tasks.push((async()=>{try{const {count,error}=await sb.from("bb_hsk_vocabulary").select("id",{count:"exact",head:true});if(error)throw error;p97Set("p97HSKTotal",p97Num(count).toLocaleString()+" คำ")}catch(_){p97Set("p97HSKTotal","อ่านไม่ได้")}})());
+ await Promise.allSettled(tasks);
+}
+async function loadP97Overview(){
+ loadP97ContentOverview();
+ const host=$("#p97RankedHealth");
+ if(!host)return;
+ host.innerHTML='<div class="learnLoading">กำลังตรวจคลัง Ranked…</div>';
+ try{
+  const {data,error}=await sb.rpc("bb_ranked_content_health_matrix");
+  if(error)throw error;
+  const rows=Array.isArray(data)?data:[];
+  host.innerHTML=["memory","math","chinese","english"].map(subject=>{
+   const pool=rows.filter(r=>String(r.subject_code||"").toLowerCase()===subject);
+   const ready=pool.filter(r=>r.is_ready===true).length;
+   const total=pool.length||7;
+   const bronze=pool.find(r=>String(r.ranked_tier||"").toLowerCase()==="bronze");
+   const meta=P97_SUBJECT_META[subject];
+   const cls=ready===total?"":ready>0?"warn":"bad";
+   const detail=bronze?`Bronze ${bronze.available_count}/${bronze.required_count} • ${bronze.content_level}`:`${ready}/${total} tiers`;
+   return `<div class="p97HealthRow"><span class="p97HealthIcon">${meta.icon}</span><div><b>${meta.name}</b><small>${detail}</small></div><span class="p97HealthBadge ${cls}">${ready}/${total} tiers พร้อม</span></div>`;
+  }).join("");
+ }catch(err){
+  host.innerHTML=`<div class="learnEmpty">ตรวจ Ranked ไม่สำเร็จ<br><small>${esc(err?.message||"ลองรีเฟรช")}</small></div>`;
+ }
+}
+
+document.addEventListener("click",e=>{
+ const go=e.target.closest("[data-p97-open]");
+ if(go){e.preventDefault();openPanel(go.dataset.p97Open);return}
+ const add=e.target.closest("[data-p97-new]");
+ if(!add)return;
+ e.preventDefault();
+ const type=add.dataset.p97New;
+ if(type==="math"){openPanel("math");setTimeout(()=>$("#mathManagerNew")?.click(),60)}
+ if(type==="english"){openPanel("english");setTimeout(()=>$("#englishManagerNew")?.click(),60)}
+ if(type==="hsk"){openPanel("hsk");setTimeout(()=>openHSKEditor(null),60)}
+});
+$("#p97ContentRefresh")?.addEventListener("click",()=>{loadP97ContentOverview();loadP97Overview()});
 
 function updateLearningStats(){
  $("#statAll").textContent=learningRows.length;
@@ -3145,7 +3341,7 @@ async function loadHSKAdminStats(){
    if(!hskImportBusy){
      hskSetStatus(
        total>0?"ฐานข้อมูลพร้อมใช้งาน":"ยังไม่มีคำศัพท์",
-       total>0?`${Number(total).toLocaleString()} คำในคลัง Brain Buddy`:"กดนำเข้า HSK 1–6 ทั้งหมดเพื่อเริ่มต้น",
+       total>0?`${Number(total).toLocaleString()} คำในคลัง POMRU`:"กดนำเข้า HSK 1–6 ทั้งหมดเพื่อเริ่มต้น",
        total>0?100:0
      );
    }
@@ -3258,27 +3454,28 @@ function findHSKManagerRow(id){
 }
 
 function openHSKEditor(id){
- const row=findHSKManagerRow(id);
- if(!row)return toast("ไม่พบคำศัพท์");
+ const row=id?findHSKManagerRow(id):null;
+ if(id && !row)return toast("ไม่พบคำศัพท์");
 
- $("#hskEditId").value=row.id;
- $("#hskEditLevel").value=String(row.hsk_level||1);
- $("#hskEditSimplified").value=row.simplified||"";
- $("#hskEditTraditional").value=row.traditional||"";
- $("#hskEditPinyin").value=row.pinyin||"";
- $("#hskEditSort").value=String(row.sort_order||0);
- $("#hskEditMeaningEn").value=row.meaning_en||"";
- $("#hskEditMeaningTh").value=row.meaning_th||"";
- $("#hskEditExampleZh").value=row.example_zh||"";
- $("#hskEditExamplePinyin").value=row.example_pinyin||"";
- $("#hskEditExampleEn").value=row.example_en||"";
- $("#hskEditExampleTh").value=row.example_th||"";
- $("#hskEditImageUrl").value=row.image_url||"";
- $("#hskEditAudioUrl").value=row.audio_url||"";
- $("#hskEditActive").checked=row.is_active!==false;
+ $("#hskEditId").value=row?.id||"";
+ $("#hskEditLevel").value=String(row?.hsk_level||1);
+ $("#hskEditSimplified").value=row?.simplified||"";
+ $("#hskEditTraditional").value=row?.traditional||"";
+ $("#hskEditPinyin").value=row?.pinyin||"";
+ $("#hskEditSort").value=String(row?.sort_order||0);
+ $("#hskEditMeaningEn").value=row?.meaning_en||"";
+ $("#hskEditMeaningTh").value=row?.meaning_th||"";
+ $("#hskEditExampleZh").value=row?.example_zh||"";
+ $("#hskEditExamplePinyin").value=row?.example_pinyin||"";
+ $("#hskEditExampleEn").value=row?.example_en||"";
+ $("#hskEditExampleTh").value=row?.example_th||"";
+ $("#hskEditImageUrl").value=row?.image_url||"";
+ $("#hskEditAudioUrl").value=row?.audio_url||"";
+ $("#hskEditActive").checked=row?row.is_active!==false:true;
 
- $("#hskEditTitle").textContent=`แก้ไข ${row.simplified}`;
+ $("#hskEditTitle").textContent=row?`แก้ไข ${row.simplified}`:"เพิ่มคำศัพท์ HSK";
  $("#hskEditModal").classList.remove("hidden");
+ setTimeout(()=>$("#hskEditSimplified")?.focus(),40);
 }
 
 function closeHSKEditor(){
@@ -3286,9 +3483,7 @@ function closeHSKEditor(){
 }
 
 async function saveHSKEditor(){
- const id=Number($("#hskEditId").value)||0;
- if(!id)return toast("ไม่พบรหัสคำศัพท์");
-
+ const id=Number($("#hskEditId").value)||null;
  const simplified=$("#hskEditSimplified").value.trim();
  const pinyin=$("#hskEditPinyin").value.trim();
  const meaningEn=$("#hskEditMeaningEn").value.trim();
@@ -3303,7 +3498,7 @@ async function saveHSKEditor(){
  btn.textContent="กำลังบันทึก…";
 
  try{
-   const {data,error}=await sb.rpc("bb_admin_update_hsk_vocabulary",{
+   const {data,error}=await sb.rpc("bb_admin_save_hsk_vocabulary",{
      p_id:id,
      p_hsk_level:Number($("#hskEditLevel").value)||1,
      p_simplified:simplified,
@@ -3323,12 +3518,13 @@ async function saveHSKEditor(){
    if(error)throw error;
 
    closeHSKEditor();
-   toast("บันทึกคำศัพท์แล้ว ✓");
-   await Promise.all([loadHSKManager(false),loadHSKAdminStats()]);
+   toast(id?"บันทึกคำศัพท์แล้ว ✓":"เพิ่มคำศัพท์ HSK แล้ว ✓");
+   await Promise.all([loadHSKManager(false),loadHSKAdminStats(),loadP97ContentOverview()]);
 
  }catch(err){
-   console.error("HSK update:",err);
-   toast(err?.message||"บันทึกไม่สำเร็จ");
+   console.error("HSK save:",err);
+   const msg=String(err?.message||"");
+   toast(msg.includes("bb_admin_save_hsk_vocabulary")?"ต้องรัน SQL v97 Admin ก่อน":(msg||"บันทึกไม่สำเร็จ"));
  }finally{
    btn.disabled=false;
    btn.textContent=old;
@@ -5118,6 +5314,7 @@ $("#confirmDelete").onclick=doDelete;
 $("#deleteModal").addEventListener("click",e=>{if(e.target.id==="deleteModal"){$("#deleteModal").classList.add("hidden");deleteItem=null}});
 
 checkAdmin();
+$("#hskManagerNew")?.addEventListener("click",()=>openHSKEditor(null));
 </script>
 </body>
 </html>
