@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>POMRU • ผมรู้ — v89.5 Hero Buddy</title>
+<title>POMRU • ผมรู้ — v96.3 Server Integrity</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -18706,6 +18706,1360 @@ body.p957PlayerOpen{
 }
 </style>
 
+
+<style id="pomru-v958-achievement-share-style">
+/* ============================================================
+   POMRU v95.8 — Achievement Badges + Share Card
+   ============================================================ */
+
+.p958AchievementSection{
+  padding-top:18px;
+}
+
+.p958AchievementGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+}
+
+.p958Achievement{
+  min-height:70px;
+  padding:8px 9px;
+  display:grid;
+  grid-template-columns:44px minmax(0,1fr) auto;
+  gap:8px;
+  align-items:center;
+  border:1px solid rgba(111,79,96,.08);
+  border-radius:15px;
+  background:#faf8fb;
+}
+
+.p958AchievementIcon{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border-radius:14px;
+  font-size:18px;
+  font-weight:1000;
+}
+
+.p958Achievement.unlocked{
+  background:linear-gradient(145deg,#fff9e8,#fff);
+  border-color:#f0dfb4;
+}
+
+.p958Achievement.unlocked .p958AchievementIcon{
+  background:#fff0c7;
+}
+
+.p958Achievement.locked{
+  opacity:.58;
+}
+
+.p958Achievement.locked .p958AchievementIcon{
+  background:#efebef;
+  color:#8f7c87;
+}
+
+.p958Achievement b{
+  display:block;
+  color:#4e3c48;
+  font-size:8px;
+}
+
+.p958Achievement small{
+  display:block;
+  margin-top:2px;
+  color:#8f7a85;
+  font-size:5.5px;
+  line-height:1.35;
+}
+
+.p958Achievement strong{
+  padding:4px 6px;
+  border-radius:999px;
+  background:#fff;
+  color:#8a6c35;
+  font-size:5px;
+}
+
+.p958Achievement.locked strong{
+  color:#8d7b85;
+}
+
+/* Third Player Card action */
+.p957PlayerActions{
+  grid-template-columns:1fr 1fr 1fr!important;
+}
+
+.p958ShareButton{
+  background:linear-gradient(145deg,#eaf7ff,#f4efff)!important;
+  color:#5c4b8f!important;
+}
+
+/* Share modal */
+.p958ShareOverlay{
+  position:fixed;
+  inset:0;
+  z-index:310000;
+  padding:14px;
+  box-sizing:border-box;
+  display:grid;
+  place-items:center;
+  background:rgba(60,43,56,.42);
+}
+
+.p958ShareOverlay.hidden{
+  display:none!important;
+}
+
+body.p958ShareOpen{
+  overflow:hidden!important;
+}
+
+.p958ShareCard{
+  width:min(520px,100%);
+  max-height:calc(100dvh - 28px);
+  overflow:auto;
+  border-radius:26px;
+  background:#fff;
+  box-shadow:0 28px 80px rgba(61,42,54,.28);
+}
+
+.p958ShareCard>header{
+  position:sticky;
+  top:0;
+  z-index:2;
+  min-height:70px;
+  padding:12px 13px;
+  box-sizing:border-box;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  background:linear-gradient(145deg,#fff2f7,#f3efff);
+}
+
+.p958ShareCard>header small{
+  display:block;
+  color:#9b7689;
+  font-size:5.5px;
+  font-weight:1000;
+  letter-spacing:.11em;
+}
+
+.p958ShareCard>header h3{
+  margin:2px 0 0;
+  color:#4d3b47;
+  font-size:17px;
+}
+
+.p958ShareCard>header button{
+  width:39px;
+  height:39px;
+  border:0;
+  border-radius:13px;
+  background:#fff;
+  color:#735f6b;
+  font-size:22px;
+}
+
+.p958SharePreviewWrap{
+  padding:12px;
+  background:#f7f3f7;
+}
+
+#p958ShareCanvas{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:18px;
+  background:#fff;
+  box-shadow:0 8px 24px rgba(72,50,62,.12);
+}
+
+.p958ShareActions{
+  padding:11px 12px 14px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+}
+
+.p958ShareActions button{
+  min-height:46px;
+  border:0;
+  border-radius:14px;
+  background:#f0ebf5;
+  color:#675475;
+  font-size:8px;
+  font-weight:1000;
+}
+
+.p958ShareActions button.primary{
+  background:linear-gradient(145deg,#7654cf,#6042b8);
+  color:#fff;
+}
+
+.p958ShareActions button:disabled{
+  opacity:.55;
+}
+
+@media(max-width:760px){
+  .p958AchievementGrid{
+    grid-template-columns:1fr;
+  }
+
+  .p957PlayerActions{
+    grid-template-columns:1fr 1fr!important;
+  }
+
+  .p958ShareButton{
+    grid-column:1/-1;
+  }
+
+  .p958ShareOverlay{
+    padding:7px;
+    align-items:end;
+  }
+
+  .p958ShareCard{
+    width:100%;
+    max-height:90dvh;
+    border-radius:25px 25px 17px 17px;
+  }
+}
+</style>
+
+
+<style id="pomru-v959-onboarding-style">
+/* ============================================================
+   POMRU v95.9 — First-time Onboarding
+   local transform/opacity only; no animated fullscreen gradient
+   ============================================================ */
+
+.p959ReplayRow{
+  min-height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  border-top:1px solid rgba(111,79,96,.08);
+}
+
+.p959ReplayRow b{
+  display:block;
+  color:#5b4b58;
+  font-size:10px;
+}
+
+.p959ReplayRow small{
+  display:block;
+  margin-top:2px;
+  color:#94818c;
+  font-size:7px;
+}
+
+.p959ReplayRow button{
+  flex:0 0 auto;
+  padding:7px 10px;
+  border:0;
+  border-radius:11px;
+  background:#f0eafd;
+  color:#6e52ad;
+  font-size:7px;
+  font-weight:1000;
+}
+
+
+/* Overlay */
+.p959Onboarding{
+  position:fixed;
+  inset:0;
+  z-index:320000;
+  padding:12px;
+  box-sizing:border-box;
+  display:grid;
+  place-items:center;
+  background:#f6f0f4;
+}
+
+.p959Onboarding.hidden{
+  display:none!important;
+}
+
+body.p959OnboardingOpen{
+  overflow:hidden!important;
+}
+
+.p959OnboardingShell{
+  width:min(900px,100%);
+  min-height:min(720px,calc(100dvh - 24px));
+  max-height:calc(100dvh - 24px);
+  overflow:auto;
+  position:relative;
+  display:grid;
+  grid-template-rows:auto minmax(0,1fr) auto;
+  border:1px solid rgba(103,74,92,.09);
+  border-radius:34px;
+  background:#fff;
+  box-shadow:0 28px 90px rgba(72,49,63,.18);
+}
+
+.p959OnboardingTop{
+  min-height:72px;
+  padding:13px 18px;
+  box-sizing:border-box;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:12px;
+  align-items:center;
+  border-bottom:1px solid rgba(104,76,93,.06);
+}
+
+.p959Brand{
+  display:flex;
+  align-items:baseline;
+  gap:7px;
+}
+
+.p959Brand strong{
+  color:#6949b7;
+  font-size:19px;
+  letter-spacing:.04em;
+}
+
+.p959Brand span{
+  color:#ad708d;
+  font-size:8px;
+  font-weight:900;
+}
+
+.p959StepDots{
+  display:flex;
+  gap:6px;
+}
+
+.p959StepDots i{
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  background:#dfd7de;
+}
+
+.p959StepDots i.active{
+  width:25px;
+  background:#7854ca;
+}
+
+.p959SkipTop{
+  justify-self:end;
+  border:0;
+  background:transparent;
+  color:#98818e;
+  font-size:7px;
+  font-weight:900;
+}
+
+
+/* Step */
+.p959Step{
+  min-height:0;
+  padding:24px 48px;
+  box-sizing:border-box;
+  display:none;
+  grid-template-columns:minmax(250px,.9fr) minmax(320px,1.1fr);
+  gap:44px;
+  align-items:center;
+}
+
+.p959Step.active{
+  display:grid;
+}
+
+.p959StepCopy>small{
+  display:block;
+  color:#9d778d;
+  font-size:7px;
+  font-weight:1000;
+  letter-spacing:.13em;
+}
+
+.p959StepCopy h1{
+  margin:7px 0 0;
+  color:#493744;
+  font-size:clamp(34px,5vw,52px);
+  line-height:1.04;
+  letter-spacing:-.035em;
+}
+
+.p959StepCopy>p{
+  max-width:470px;
+  margin:12px 0 0;
+  color:#826d79;
+  font-size:10px;
+  line-height:1.65;
+}
+
+
+/* Step 1 */
+.p959StepVisual{
+  min-height:380px;
+  display:grid;
+  place-items:center;
+  border-radius:34px;
+  background:#fff0f6;
+}
+
+.p959MiniAvatar{
+  width:260px;
+  height:330px;
+  display:grid;
+  place-items:end center;
+}
+
+.p959MiniAvatar img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+.p959NameField{
+  margin-top:26px;
+  display:block;
+}
+
+.p959NameField>span{
+  display:block;
+  margin-bottom:6px;
+  color:#5e4a57;
+  font-size:8px;
+  font-weight:1000;
+}
+
+.p959NameField input{
+  width:100%;
+  height:56px;
+  padding:0 16px;
+  box-sizing:border-box;
+  border:2px solid #e8dfe5;
+  border-radius:16px;
+  outline:none;
+  background:#fff;
+  color:#493843;
+  font-size:17px;
+  font-weight:800;
+}
+
+.p959NameField input:focus{
+  border-color:#8b69d1;
+}
+
+.p959NameField>small{
+  display:block;
+  margin-top:5px;
+  color:#9a858f;
+  font-size:6px;
+}
+
+.p959NameField>small.error{
+  color:#bd5570;
+}
+
+
+/* Buddy intro */
+.p959BuddyIntro{
+  position:relative;
+  min-height:420px;
+  display:grid;
+  place-items:center;
+}
+
+.p959BuddyHalo{
+  position:absolute;
+  width:340px;
+  height:340px;
+  border-radius:50%;
+  background:#fff0f6;
+}
+
+.p959BuddyIntro>img{
+  position:relative;
+  z-index:1;
+  width:330px;
+  height:370px;
+  object-fit:contain;
+}
+
+.p959BuddyBubble{
+  position:absolute;
+  z-index:2;
+  right:2px;
+  top:65px;
+  padding:10px 14px;
+  border-radius:16px 16px 16px 4px;
+  background:#fff;
+  box-shadow:0 10px 30px rgba(83,56,72,.12);
+  color:#725269;
+  font-size:9px;
+  font-weight:1000;
+}
+
+.p959LearnCards{
+  margin-top:24px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+}
+
+.p959LearnCards>div{
+  min-height:100px;
+  padding:11px;
+  box-sizing:border-box;
+  display:grid;
+  align-content:start;
+  border-radius:17px;
+  background:#faf7fa;
+}
+
+.p959LearnCards span{
+  width:35px;
+  height:35px;
+  display:grid;
+  place-items:center;
+  border-radius:11px;
+  background:#ffe8f2;
+  color:#b95880;
+  font-size:16px;
+  font-weight:1000;
+}
+
+.p959LearnCards span.coin{
+  background:#fff1ce;
+  color:#bf7a27;
+}
+
+.p959LearnCards span.rank{
+  background:#eee8ff;
+  color:#684ab4;
+}
+
+.p959LearnCards b{
+  margin-top:8px;
+  color:#503e4a;
+  font-size:9px;
+}
+
+.p959LearnCards small{
+  margin-top:3px;
+  color:#917d87;
+  font-size:6px;
+  line-height:1.4;
+}
+
+
+/* Subjects */
+.p959SubjectCopy{
+  grid-column:1/-1;
+  width:min(720px,100%);
+  justify-self:center;
+}
+
+.p959SubjectGrid{
+  margin-top:24px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+}
+
+.p959SubjectGrid button{
+  min-height:116px;
+  padding:12px;
+  box-sizing:border-box;
+  display:grid;
+  grid-template-columns:54px minmax(0,1fr) auto;
+  grid-template-rows:auto auto;
+  gap:2px 11px;
+  align-items:center;
+  border:2px solid transparent;
+  border-radius:19px;
+  background:#faf7fa;
+  text-align:left;
+  color:#4e3d49;
+}
+
+.p959SubjectGrid button>span{
+  grid-row:1/3;
+  width:54px;
+  height:54px;
+  display:grid;
+  place-items:center;
+  border-radius:17px;
+  font-size:22px;
+  font-weight:1000;
+}
+
+.p959SubjectGrid span.memory{
+  background:#ffe9f2;
+}
+
+.p959SubjectGrid span.math{
+  background:#fff1d7;
+  color:#bd7425;
+}
+
+.p959SubjectGrid span.english{
+  background:#eaf6ff;
+  color:#438fc4;
+}
+
+.p959SubjectGrid span.chinese{
+  background:#fff0ed;
+  color:#c15650;
+}
+
+.p959SubjectGrid button>b{
+  align-self:end;
+  font-size:12px;
+}
+
+.p959SubjectGrid button>small{
+  align-self:start;
+  color:#8f7a85;
+  font-size:7px;
+}
+
+.p959SubjectGrid button>i{
+  grid-column:3;
+  grid-row:1/3;
+  padding:5px 8px;
+  border-radius:999px;
+  background:#eee9ef;
+  color:#86717c;
+  font-size:6px;
+  font-style:normal;
+  font-weight:1000;
+}
+
+.p959SubjectGrid button.selected{
+  border-color:#8260cf;
+  background:#f6f1ff;
+}
+
+.p959SubjectGrid button.selected>i{
+  background:#7653c8;
+  color:#fff;
+}
+
+.p959SubjectHint{
+  margin-top:8px;
+  color:#9a838f;
+  font-size:7px;
+}
+
+.p959SubjectHint.error{
+  color:#bd5570;
+}
+
+
+/* Reward */
+.p959RewardVisual{
+  min-height:390px;
+  position:relative;
+  display:grid;
+  place-items:center;
+  border-radius:34px;
+  background:#fff7e9;
+}
+
+.p959RewardBuddy{
+  width:260px;
+  height:320px;
+  display:grid;
+  place-items:end center;
+}
+
+.p959RewardBuddy img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+.p959CoinStack{
+  position:absolute;
+  right:34px;
+  bottom:45px;
+  width:95px;
+  height:90px;
+}
+
+.p959CoinStack span{
+  position:absolute;
+  width:48px;
+  height:48px;
+  display:grid;
+  place-items:center;
+  border:4px solid #e0a23c;
+  border-radius:50%;
+  background:#ffd873;
+  color:#9c661c;
+  font-size:18px;
+  font-weight:1000;
+}
+
+.p959CoinStack span:nth-child(1){
+  left:0;
+  bottom:0;
+}
+
+.p959CoinStack span:nth-child(2){
+  right:0;
+  bottom:4px;
+}
+
+.p959CoinStack span:nth-child(3){
+  left:23px;
+  top:0;
+}
+
+.p959RewardCard{
+  margin-top:20px;
+  min-height:80px;
+  padding:11px;
+  box-sizing:border-box;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  border:1px solid #eeddbd;
+  border-radius:18px;
+  background:#fffaf0;
+}
+
+.p959RewardCard>div{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.p959RewardCoin{
+  width:48px;
+  height:48px;
+  display:grid;
+  place-items:center;
+  border:4px solid #e0a13a;
+  border-radius:50%;
+  background:#ffd978;
+  color:#98631d;
+  font-size:18px;
+  font-weight:1000;
+}
+
+.p959RewardCard small{
+  display:block;
+  color:#a17a44;
+  font-size:5.5px;
+  font-weight:1000;
+  letter-spacing:.1em;
+}
+
+.p959RewardCard b{
+  display:block;
+  margin-top:2px;
+  color:#5b4736;
+  font-size:11px;
+}
+
+.p959RewardCard p{
+  margin:2px 0 0;
+  color:#94785d;
+  font-size:6px;
+}
+
+.p959RewardCard>strong{
+  color:#b27121;
+  font-size:18px;
+}
+
+.p959RewardCard>strong.hidden{
+  display:none!important;
+}
+
+.p959RewardCard.claimed{
+  border-color:#cbe9d8;
+  background:#f1fff7;
+}
+
+.p959RewardCard.claimed .p959RewardCoin{
+  border-color:#64b88c;
+  background:#dff5e9;
+  color:#378563;
+}
+
+.p959ClaimButton{
+  width:100%;
+  min-height:51px;
+  margin-top:10px;
+  border:0;
+  border-radius:15px;
+  background:#7854ca;
+  color:#fff;
+  font-size:9px;
+  font-weight:1000;
+}
+
+.p959ClaimButton.claimed{
+  background:#3d956f;
+}
+
+.p959RewardSkip{
+  width:100%;
+  margin-top:7px;
+  padding:6px;
+  border:0;
+  background:transparent;
+  color:#96818c;
+  font-size:7px;
+}
+
+
+/* Footer */
+.p959OnboardingBottom{
+  min-height:74px;
+  padding:11px 18px;
+  box-sizing:border-box;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  border-top:1px solid rgba(104,76,93,.06);
+}
+
+.p959BottomSpacer{
+  flex:1;
+}
+
+.p959Back,
+.p959Next{
+  min-width:120px;
+  height:48px;
+  border:0;
+  border-radius:15px;
+  font-size:9px;
+  font-weight:1000;
+}
+
+.p959Back{
+  background:#f2edf1;
+  color:#6f5c68;
+}
+
+.p959Back.hidden{
+  visibility:hidden;
+}
+
+.p959Next{
+  background:#7653ca;
+  color:#fff;
+}
+
+.p959Next:disabled{
+  opacity:.5;
+}
+
+
+/* Reduced motion */
+@media(prefers-reduced-motion:reduce){
+  .p959Onboarding *,
+  .p959Onboarding *::before,
+  .p959Onboarding *::after{
+    scroll-behavior:auto!important;
+    transition:none!important;
+    animation:none!important;
+  }
+}
+
+body.motionReduced .p959Onboarding *,
+body.reduceMotion .p959Onboarding *{
+  transition:none!important;
+  animation:none!important;
+}
+
+
+/* Mobile */
+@media(max-width:760px){
+  .p959Onboarding{
+    padding:0;
+    align-items:stretch;
+  }
+
+  .p959OnboardingShell{
+    width:100%;
+    min-height:100dvh;
+    max-height:100dvh;
+    border:0;
+    border-radius:0;
+    box-shadow:none;
+  }
+
+  .p959OnboardingTop{
+    min-height:62px;
+    padding:9px 12px;
+    grid-template-columns:1fr auto 1fr;
+  }
+
+  .p959Brand strong{
+    font-size:16px;
+  }
+
+  .p959Brand span{
+    display:none;
+  }
+
+  .p959SkipTop{
+    font-size:6px;
+  }
+
+  .p959Step{
+    padding:16px 17px;
+    grid-template-columns:1fr;
+    gap:13px;
+    align-content:center;
+  }
+
+  .p959StepVisual{
+    min-height:240px;
+  }
+
+  .p959MiniAvatar{
+    width:190px;
+    height:230px;
+  }
+
+  .p959StepCopy h1{
+    font-size:34px;
+  }
+
+  .p959StepCopy>p{
+    font-size:8px;
+  }
+
+  .p959BuddyIntro{
+    min-height:265px;
+  }
+
+  .p959BuddyHalo{
+    width:230px;
+    height:230px;
+  }
+
+  .p959BuddyIntro>img{
+    width:220px;
+    height:255px;
+  }
+
+  .p959BuddyBubble{
+    right:10px;
+    top:25px;
+    font-size:7px;
+  }
+
+  .p959LearnCards{
+    margin-top:14px;
+  }
+
+  .p959LearnCards>div{
+    min-height:86px;
+    padding:8px;
+  }
+
+  .p959LearnCards span{
+    width:29px;
+    height:29px;
+    font-size:13px;
+  }
+
+  .p959SubjectGrid{
+    margin-top:17px;
+    grid-template-columns:1fr;
+    gap:6px;
+  }
+
+  .p959SubjectGrid button{
+    min-height:78px;
+    grid-template-columns:44px minmax(0,1fr) auto;
+  }
+
+  .p959SubjectGrid button>span{
+    width:44px;
+    height:44px;
+    border-radius:14px;
+    font-size:18px;
+  }
+
+  .p959RewardVisual{
+    min-height:235px;
+  }
+
+  .p959RewardBuddy{
+    width:190px;
+    height:225px;
+  }
+
+  .p959CoinStack{
+    right:25px;
+    bottom:28px;
+    transform:scale(.75);
+  }
+
+  .p959OnboardingBottom{
+    min-height:68px;
+    padding:9px 12px calc(9px + env(safe-area-inset-bottom));
+  }
+
+  .p959Back,
+  .p959Next{
+    min-width:105px;
+    height:45px;
+  }
+}
+</style>
+
+
+<style id="pomru-v960-production-style">
+/* ============================================================
+   POMRU v96.0 — Production Readiness
+   - iPad/mobile stability
+   - network state
+   - tap de-duplication
+   - modal/body recovery
+   ============================================================ */
+
+html{
+  min-height:100%;
+  -webkit-text-size-adjust:100%;
+}
+
+body{
+  min-height:100dvh;
+  overscroll-behavior-y:none;
+}
+
+button,
+[role="button"],
+input,
+select,
+textarea{
+  touch-action:manipulation;
+}
+
+button{
+  -webkit-tap-highlight-color:transparent;
+}
+
+.p960TapBusy{
+  pointer-events:none!important;
+}
+
+.p960NetworkBanner{
+  position:fixed;
+  z-index:340000;
+  left:50%;
+  top:max(
+    12px,
+    calc(env(safe-area-inset-top) + 8px)
+  );
+  width:min(
+    560px,
+    calc(100vw - 24px)
+  );
+  min-height:58px;
+  padding:9px 11px;
+  box-sizing:border-box;
+  display:grid;
+  grid-template-columns:12px minmax(0,1fr) auto;
+  gap:9px;
+  align-items:center;
+  border:1px solid #efd1d7;
+  border-radius:17px;
+  background:#fff4f6;
+  box-shadow:0 12px 32px rgba(78,51,62,.14);
+  color:#604851;
+  transform:translateX(-50%);
+}
+
+.p960NetworkBanner.hidden{
+  display:none!important;
+}
+
+.p960NetworkBanner.online{
+  border-color:#c8ead7;
+  background:#f1fff7;
+}
+
+.p960NetworkDot{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  background:#dc687f;
+}
+
+.p960NetworkBanner.online .p960NetworkDot{
+  background:#35a777;
+}
+
+.p960NetworkBanner b{
+  display:block;
+  color:#58414b;
+  font-size:9px;
+}
+
+.p960NetworkBanner small{
+  display:block;
+  margin-top:2px;
+  color:#8f747d;
+  font-size:6px;
+  line-height:1.4;
+}
+
+.p960NetworkBanner>strong{
+  min-width:54px;
+  padding:6px 7px;
+  border-radius:10px;
+  background:#fff;
+  color:#b45369;
+  font-size:6px;
+  text-align:center;
+}
+
+.p960NetworkBanner.online>strong{
+  color:#2f8963;
+}
+
+
+/* Network-only actions disabled by production guard */
+[data-p960-offline-disabled="1"]{
+  opacity:.48!important;
+  pointer-events:none!important;
+}
+
+
+/* Improve safe-area behavior of the major full-screen layers */
+#p959Onboarding,
+#p956NotificationOverlay,
+#p957PlayerOverlay,
+#p958ShareOverlay,
+#p94RankedFindModal,
+#bbArena{
+  padding-bottom:max(
+    8px,
+    env(safe-area-inset-bottom)
+  );
+}
+
+#p956NotificationCard,
+.p956NotificationCard,
+.p957PlayerCard,
+.p958ShareCard,
+.p959OnboardingShell{
+  -webkit-overflow-scrolling:touch;
+}
+
+
+/* Debug panel — only visible with ?pomru_debug=1 */
+.p960DebugPanel{
+  position:fixed;
+  z-index:350000;
+  right:12px;
+  bottom:max(
+    12px,
+    env(safe-area-inset-bottom)
+  );
+  width:min(
+    390px,
+    calc(100vw - 24px)
+  );
+  max-height:min(
+    650px,
+    calc(100dvh - 24px)
+  );
+  overflow:auto;
+  border:1px solid rgba(79,60,72,.13);
+  border-radius:20px;
+  background:#fff;
+  box-shadow:0 24px 70px rgba(52,38,46,.24);
+  color:#4c3c46;
+}
+
+.p960DebugPanel.hidden{
+  display:none!important;
+}
+
+.p960DebugPanel>header{
+  position:sticky;
+  top:0;
+  z-index:2;
+  padding:10px 11px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  background:#f7f2fa;
+  border-bottom:1px solid rgba(79,60,72,.07);
+}
+
+.p960DebugPanel>header small{
+  display:block;
+  color:#8f7485;
+  font-size:5px;
+  font-weight:1000;
+  letter-spacing:.1em;
+}
+
+.p960DebugPanel>header b{
+  display:block;
+  margin-top:2px;
+  font-size:10px;
+}
+
+.p960DebugPanel>header button{
+  width:34px;
+  height:34px;
+  border:0;
+  border-radius:11px;
+  background:#fff;
+  color:#6d5965;
+  font-size:20px;
+}
+
+#p960DebugList{
+  padding:9px;
+  display:grid;
+  gap:5px;
+}
+
+.p960Check{
+  min-height:42px;
+  padding:7px 8px;
+  display:grid;
+  grid-template-columns:10px minmax(0,1fr) auto;
+  gap:7px;
+  align-items:center;
+  border-radius:11px;
+  background:#faf8fa;
+}
+
+.p960Check>i{
+  width:9px;
+  height:9px;
+  border-radius:999px;
+  background:#d46c7e;
+}
+
+.p960Check.ok>i{
+  background:#39a777;
+}
+
+.p960Check.warn>i{
+  background:#e2a042;
+}
+
+.p960Check b{
+  display:block;
+  font-size:7px;
+}
+
+.p960Check small{
+  display:block;
+  margin-top:1px;
+  color:#8c7883;
+  font-size:5px;
+}
+
+.p960Check>strong{
+  color:#7d6674;
+  font-size:5px;
+}
+
+.p960DebugPanel>footer{
+  padding:8px 10px 10px;
+  color:#8f7b85;
+  font-size:5px;
+  text-align:center;
+}
+
+.p960DebugPanel code{
+  padding:2px 4px;
+  border-radius:5px;
+  background:#f0ebf3;
+}
+
+
+/* Critical controls should remain comfortably tappable */
+@media(max-width:760px){
+  #p94RankedStartBtn,
+  #p953PlayAgain,
+  #p953ResultHome,
+  #p956ClaimDaily,
+  #p957PlayerPrimary,
+  #p957PlayerChallenge,
+  #p958SharePlayerCard,
+  #p959Next,
+  #p959Back,
+  #p959ClaimStarter,
+  #bbRankedForfeitBtn{
+    min-height:44px;
+  }
+
+  .p960NetworkBanner{
+    top:max(
+      7px,
+      calc(env(safe-area-inset-top) + 5px)
+    );
+    width:calc(100vw - 14px);
+    min-height:54px;
+    border-radius:15px;
+  }
+}
+
+
+/* Respect user's reduced motion preference everywhere in production UI */
+@media(prefers-reduced-motion:reduce){
+  .p960NetworkBanner,
+  .p960DebugPanel,
+  .p960NetworkBanner *,
+  .p960DebugPanel *{
+    animation:none!important;
+    transition:none!important;
+  }
+}
+</style>
+
+
+<style id="pomru-v961-qa-hotfix-style">
+/* v96.3 Ranked + server integrity hardening */
+
+#p957PlayerPrimary[data-action="pending"]{
+  background:#eee9f3!important;
+  color:#806c78!important;
+}
+
+#p957PlayerPrimary[data-action="accept"]{
+  background:linear-gradient(
+    145deg,
+    #4ba87f,
+    #358864
+  )!important;
+  color:#fff!important;
+}
+
+@media(max-width:760px){
+  .p957PlayerActions button,
+  .p956NotificationActions button{
+    touch-action:manipulation;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -20072,6 +21426,20 @@ body.p957PlayerOpen{
         <label class="p92Switch"><span><b>ลดแอนิเมชัน</b><small>ช่วยให้เครื่องทำงานลื่นขึ้น</small></span><input id="p92MotionToggle" type="checkbox"></label>
         <label class="p92Switch"><span><b>ตัวอักษรใหญ่</b><small>เพิ่มขนาดข้อความ</small></span><input id="p92LargeToggle" type="checkbox"></label>
         <label class="p92Switch"><span><b>คำพูด Buddy</b><small>แสดงข้อความเหนือ Buddy</small></span><input id="p92SpeechToggle" type="checkbox"></label>
+
+        <div class="p959ReplayRow">
+          <span>
+            <b>คู่มือเริ่มต้น</b>
+            <small>ดูวิธีเริ่มเล่นกับ Buddy อีกครั้ง</small>
+          </span>
+
+          <button
+            type="button"
+            id="p959ReplayOnboarding"
+          >
+            ดูคู่มือ
+          </button>
+        </div>
       </section>
     </div>
 
@@ -20267,7 +21635,7 @@ function cloudSnapshot(){return{profile:load("bb_profile",{name:"ผู้เล
 function hasผู้เยี่ยมชมProgress(s=cloudSnapshot()){return (s.profile?.xp||0)>0||(s.history?.length||0)>0||Object.keys(s.badges||{}).length>0}
 function applyCloudSnapshot(s,prof){cloudApplying=true;try{if(s?.history)localStorage.setItem("bb_history",JSON.stringify(s.history));if(s?.badges)localStorage.setItem("bb_badges",JSON.stringify(s.badges));if(s?.daily_streak!==undefined)localStorage.setItem("bb_daily_streak",JSON.stringify(s.daily_streak));if(s?.daily_last!==undefined)localStorage.setItem("bb_daily_last",JSON.stringify(s.daily_last));if(s?.theme)localStorage.setItem("bb_theme",JSON.stringify(s.theme));if(s?.motion)localStorage.setItem("bb_motion",JSON.stringify(s.motion));if(s?.large!==undefined)localStorage.setItem("bb_large",JSON.stringify(s.large));if(s?.contrast!==undefined)localStorage.setItem("bb_contrast",JSON.stringify(s.contrast));if(s?.audio)localStorage.setItem("bb_audio",JSON.stringify(s.audio));if(prof){localStorage.setItem("bb_profile",JSON.stringify({name:prof.display_name||"ผู้เล่น",avatar:prof.avatar||"🧸",xp:prof.xp||0}))}else if(s?.profile)localStorage.setItem("bb_profile",JSON.stringify(s.profile))}finally{cloudApplying=false}restoreAccess();restoreAudio();renderProfile();renderHome();renderStats();renderCollection();renderDaily();updateHUD()}
 function scheduleCloudSync(){if(cloudApplying||!currentUser||!cloudConfigured)return;clearTimeout(cloudSyncTimer);cloudSetMini("syncing","Syncing…");cloudSyncTimer=setTimeout(()=>cloudPushState().catch(()=>{}),650)}
-async function cloudPushState(){if(!sb||!currentUser)return;cloudSetMini("syncing","Syncing…");const snap=cloudSnapshot(),p=snap.profile,now=new Date().toISOString();const [a,b]=await Promise.all([sb.from("profiles").upsert({id:currentUser.id,display_name:p.name||"ผู้เล่น",avatar:p.avatar||"🧸",xp:Number(p.xp)||0,updated_at:now},{onConflict:"id"}),sb.from("user_state").upsert({user_id:currentUser.id,state:snap,updated_at:now},{onConflict:"user_id"})]);if(a.error||b.error){cloudSetMini("error","Sync error");throw(a.error||b.error)}cloudSetMini("online","Saved");if($("memberMessage")){$("memberMessage").className="authMessage good";$("memberMessage").textContent="ซิงก์ล่าสุดแล้ว"}}
+async function cloudPushState(){if(!sb||!currentUser)return;cloudSetMini("syncing","Syncing…");const snap=cloudSnapshot(),p=snap.profile,now=new Date().toISOString();/* v96.3: XP/Ranked fields are server-authoritative; client sync may update identity only. */const [a,b]=await Promise.all([sb.from("profiles").upsert({id:currentUser.id,display_name:p.name||"ผู้เล่น",avatar:p.avatar||"🧸",updated_at:now},{onConflict:"id"}),sb.from("user_state").upsert({user_id:currentUser.id,state:snap,updated_at:now},{onConflict:"user_id"})]);if(a.error||b.error){cloudSetMini("error","Sync error");throw(a.error||b.error)}cloudSetMini("online","Saved");if($("memberMessage")){$("memberMessage").className="authMessage good";$("memberMessage").textContent="ซิงก์ล่าสุดแล้ว"}}
 async function cloudHydrate(){if(!sb||!currentUser)return;cloudSetMini("syncing","Loading…");const [{data:pRows,error:pErr},{data:sRows,error:sErr}]=await Promise.all([sb.from("profiles").select("id,display_name,avatar,xp,updated_at").eq("id",currentUser.id).limit(1),sb.from("user_state").select("state,updated_at").eq("user_id",currentUser.id).limit(1)]);if(pErr||sErr){cloudSetMini("error","Cloud error");return}const prof=pRows?.[0],state=sRows?.[0]?.state||{};if(Object.keys(state).length){applyCloudSnapshot(state,prof)}else{if(prof)applyCloudSnapshot({},prof);await cloudPushState()}cloudHydratedUser=currentUser.id;cloudSetMini("online","Saved");renderAccountPanel()}
 async function cloudRecordGame(rate,sc){
   if(!sb||!currentUser)return;
@@ -20282,39 +21650,23 @@ async function cloudRecordGame(rate,sc){
     combo:Number(bestCombo)||0,
     xp:Number(roundXP)||0
   };
-  const leaderboardRow={
-    user_id:currentUser.id,
-    score:Number(sc)||0,
-    xp:Number(profile().xp)||0,
-    best_combo:Number(bestCombo)||0,
-    mode:cfg.mode
-  };
-  const [gameRes,leaderRes]=await Promise.all([
-    sb.from("game_results").insert(row),
-    sb.from("leaderboard_entries").insert(leaderboardRow)
-  ]);
-  if(gameRes.error)console.warn("Brain Buddy cloud result:",gameRes.error.message);
-  if(leaderRes.error)console.warn("Brain Buddy leaderboard:",leaderRes.error.message);
-  if(window.__bbRenderCloudLeaderboard)window.__bbRenderCloudLeaderboard();
+  /* v96.3: legacy leaderboard_entries is no longer client-authoritative.
+     POMRU ranking/progression is written by server RPCs. */
+  const gameRes=await sb.from("game_results").insert(row);
+  if(gameRes.error)console.warn("POMRU cloud history:",gameRes.error.message);
 }
+
 async function cloudClearStats(){
   if(!sb||!currentUser)return;
-  await Promise.all([
-    sb.from("game_results").delete().eq("user_id",currentUser.id),
-    sb.from("leaderboard_entries").delete().eq("user_id",currentUser.id)
-  ]);
-  await sb.from("profiles").update({
-    total_score:0,
-    best_score:0,
-    games_played:0,
-    wins:0,
-    best_combo:0,
-    rank_tier:"Bronze"
-  }).eq("id",currentUser.id);
+  const {error}=await sb.rpc("bb_clear_my_legacy_stats");
+  if(error){
+    console.warn("POMRU clear legacy stats:",error.message);
+    throw error;
+  }
   scheduleCloudSync();
   if(window.__bbRenderCloudLeaderboard)window.__bbRenderCloudLeaderboard();
 }
-function mergeผู้เยี่ยมชมIntoCurrent(g){const c=cloudSnapshot(),p={...c.profile};p.xp=Math.max(Number(c.profile?.xp)||0,Number(g.profile?.xp)||0);if((g.profile?.name||"")!=="ผู้เล่น"&&(c.profile?.name||"")==="ผู้เล่น")p.name=g.profile.name;p.avatar=c.profile?.avatar||g.profile?.avatar||"🧸";const map=new Map();[...(c.history||[]),...(g.history||[])].forEach(x=>map.set(`${x.date}-${x.mode}-${x.score}`,x));const out={...c,profile:p,history:[...map.values()].sort((a,b)=>(a.date||0)-(b.date||0)).slice(-80),badges:{...(g.badges||{}),...(c.badges||{})},daily_streak:Math.max(c.daily_streak||0,g.daily_streak||0),daily_last:[c.daily_last||"",g.daily_last||""].sort().pop()};applyCloudSnapshot(out,{display_name:p.name,avatar:p.avatar,xp:p.xp});return cloudPushState()}
+function mergeผู้เยี่ยมชมIntoCurrent(g){const c=cloudSnapshot(),p={...c.profile};/* v96.3: guest XP is not promoted to server-authoritative member XP. */p.xp=Number(c.profile?.xp)||0;if((g.profile?.name||"")!=="ผู้เล่น"&&(c.profile?.name||"")==="ผู้เล่น")p.name=g.profile.name;p.avatar=c.profile?.avatar||g.profile?.avatar||"🧸";const map=new Map();[...(c.history||[]),...(g.history||[])].forEach(x=>map.set(`${x.date}-${x.mode}-${x.score}`,x));const out={...c,profile:p,history:[...map.values()].sort((a,b)=>(a.date||0)-(b.date||0)).slice(-80),badges:{...(g.badges||{}),...(c.badges||{})},daily_streak:Math.max(c.daily_streak||0,g.daily_streak||0),daily_last:[c.daily_last||"",g.daily_last||""].sort().pop()};applyCloudSnapshot(out,{display_name:p.name,avatar:p.avatar,xp:p.xp});return cloudPushState()}
 function prepareผู้เยี่ยมชมBackup(){guestSnapshotBeforeLogin=cloudSnapshot();if(!load("bb_guest_backup",null))localStorage.setItem("bb_guest_backup",JSON.stringify(guestSnapshotBeforeLogin))}
 function restoreผู้เยี่ยมชมAfterLogout(){const g=load("bb_guest_backup",null);if(g)applyCloudSnapshot(g,null);localStorage.removeItem("bb_account_active")}
 function authMsg(text,type=""){const e=$("authMessage");if(!e)return;e.textContent=text;e.className="authMessage"+(type?" "+type:"")}
@@ -23760,6 +25112,7 @@ window.addEventListener("load",()=>{
         :null;
 
       window.POMRU_LAST_RANKED_SUBJECT=rankedSubjectCode();
+      window.POMRU_LAST_RANKED_RESULT_AT=Date.now();
 
     }else{
       $("#bbResultMainTitle").textContent="ผลการแข่งขัน";
@@ -33486,7 +34839,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ["room_full","ห้องเต็มแล้ว"],
       ["invite_expired","คำเชิญหมดอายุแล้ว"],
       ["chat_rate_limited","ส่งเร็วเกินไป ลองใหม่อีกครั้ง"],
-      ["chat_closed","แชทปิดเมื่อการแข่งขันเริ่มแล้ว"],
+      ["chat_closed","แชทของแมตช์นี้ปิดแล้ว"],
       ["room_not_waiting","ห้องนี้เริ่มแข่งขันไปแล้ว"]
     ];
     for(const [a,b] of map)if(s.includes(a))return b;
@@ -34407,6 +35760,13 @@ document.addEventListener('DOMContentLoaded', () => {
   let queueBusy=false;
   let matched=false;
 
+  // v96.3 — Ranked + server state integrity
+  let searchGeneration=0;
+  let activeSearchSubject=null;
+  let candidateRoomId=null;
+  let candidateSince=0;
+  let staleCandidateRestarts=0;
+
   function getClient(){
     if(client)return client;
     if(window.__bbSupabase?.auth)return client=window.__bbSupabase;
@@ -34488,9 +35848,17 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    ++searchGeneration;
     stopPoll();
     queueStartedAt=0;
     matched=false;
+    activeSearchSubject=null;
+    resetCandidate();
+    staleCandidateRestarts=0;
+
+    if(!window.BB_RANKED_ACTIVE){
+      clearMatchGlobals();
+    }
 
     state("p94RankedIntro");
     $("p94RankedStatusPill").textContent="พร้อมจับคู่";
@@ -34505,11 +35873,26 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function closeRanked(){
-    if(queueTimer){
+    const wasSearching=
+      !!queueTimer
+      ||(queueStartedAt>0&&!matched);
+
+    ++searchGeneration;
+
+    if(wasSearching){
       try{await rpc("bb_ranked_matchmaking_cancel")}catch(_){}
     }
 
     stopPoll();
+
+    if(!window.BB_RANKED_ACTIVE){
+      matched=false;
+      queueStartedAt=0;
+      activeSearchSubject=null;
+      resetCandidate();
+      clearMatchGlobals();
+    }
+
     show("p94RankedOverlay",false);
     $("p94RankedOverlay")?.setAttribute("aria-hidden","true");
     document.body.classList.remove("p94RankedOpen");
@@ -34593,46 +35976,197 @@ document.addEventListener('DOMContentLoaded', () => {
     return `<span>${String(name||"?").trim().slice(0,1)||"?"}</span>`;
   }
 
+  function clearMatchGlobals(){
+    window.POMRU_RANKED_ROOM_ID=null;
+    window.POMRU_RANKED_ROOM_CODE=null;
+    window.POMRU_RANKED_HOST_ID=null;
+    window.POMRU_RANKED_MATCHMAKING_RESULT=null;
+    document.body.classList.remove("p951RankedQuickStart");
+  }
+
+  function resetCandidate(){
+    candidateRoomId=null;
+    candidateSince=0;
+  }
+
+  function sameSearch(generation){
+    return generation===searchGeneration && queueStartedAt>0;
+  }
+
+  function sleep(ms){
+    return new Promise(resolve=>setTimeout(resolve,ms));
+  }
+
+  async function loadCandidateRoom(row){
+    const c=getClient();
+    if(!c||!row?.room_id)return null;
+    const {data,error}=await c
+      .from("ranked_rooms")
+      .select("id,room_code,host_id,status,match_kind,ranked_subject_code,mode_code,difficulty_code")
+      .eq("id",row.room_id)
+      .maybeSingle();
+    if(error)throw error;
+    return data||null;
+  }
+
+  async function loadCandidatePlayers(roomId){
+    const c=getClient();
+    if(!c||!roomId)return [];
+    const {data,error}=await c
+      .from("ranked_room_players")
+      .select("user_id,seat,is_ready,joined_at")
+      .eq("room_id",roomId);
+    if(error)throw error;
+    return Array.isArray(data)?data:[];
+  }
+
+  async function validateMatchedCandidate(row,generation){
+    if(!sameSearch(generation))throw new Error("ranked_search_superseded");
+
+    if(row?.queue_status!=="matched"||!row?.room_id||!row?.opponent_id){
+      throw new Error("ranked_state_invalid");
+    }
+
+    if(row.opponent_id===user?.id){
+      throw new Error("ranked_self_match_blocked");
+    }
+
+    const expectedSubject=activeSearchSubject||rankedSubject();
+
+    if(row.subject_code&&expectedSubject&&row.subject_code!==expectedSubject){
+      throw new Error("ranked_subject_mismatch");
+    }
+
+    if(candidateRoomId!==row.room_id){
+      candidateRoomId=row.room_id;
+      candidateSince=Date.now();
+    }
+
+    const room=await loadCandidateRoom(row);
+    if(!sameSearch(generation))throw new Error("ranked_search_superseded");
+
+    if(!room)throw new Error("ranked_candidate_pending");
+
+    if(room.status==="finished"||room.status==="cancelled"){
+      throw new Error("ranked_candidate_stale");
+    }
+
+    if(!["waiting","countdown","playing"].includes(room.status)){
+      throw new Error("ranked_state_invalid");
+    }
+
+    if(room.match_kind&&room.match_kind!=="ranked"){
+      throw new Error("ranked_state_invalid");
+    }
+
+    if(row.room_code&&room.room_code&&row.room_code!==room.room_code){
+      throw new Error("ranked_room_mismatch");
+    }
+
+    if(room.ranked_subject_code&&expectedSubject&&room.ranked_subject_code!==expectedSubject){
+      throw new Error("ranked_subject_mismatch");
+    }
+
+    if(room.host_id&&room.host_id!==user?.id&&room.host_id!==row.opponent_id){
+      throw new Error("ranked_host_mismatch");
+    }
+
+    let players=await loadCandidatePlayers(row.room_id);
+    let ids=new Set(players.map(p=>p.user_id));
+
+    if(!ids.has(user.id)){
+      if(!row.room_code)throw new Error("ranked_room_code_missing");
+
+      const joined=await rpc("bb_ranked_join_room",{p_room_code:row.room_code});
+      const jr=Array.isArray(joined)?joined[0]:joined;
+
+      if(!jr?.room_id)throw new Error("ranked_join_failed");
+    }
+
+    for(let attempt=0;attempt<8;attempt++){
+      if(!sameSearch(generation))throw new Error("ranked_search_superseded");
+
+      players=await loadCandidatePlayers(row.room_id);
+      ids=new Set(players.map(p=>p.user_id));
+
+      if(ids.has(user.id)&&ids.has(row.opponent_id)){
+        return {room,players};
+      }
+
+      if(Date.now()-candidateSince>12000){
+        throw new Error("ranked_candidate_stale");
+      }
+
+      await sleep(220+attempt*70);
+    }
+
+    throw new Error("ranked_candidate_pending");
+  }
+
+  async function recycleStaleCandidate(generation){
+    if(!sameSearch(generation))return false;
+
+    staleCandidateRestarts++;
+
+    try{await rpc("bb_ranked_matchmaking_cancel")}catch(_){}
+    if(!sameSearch(generation))return false;
+
+    matched=false;
+    resetCandidate();
+    clearMatchGlobals();
+
+    if(staleCandidateRestarts>2){
+      stopPoll();
+      queueStartedAt=0;
+      activeSearchSubject=null;
+      $("p94RankedErrorText").textContent=
+        "การจับคู่ไม่เสถียร กรุณาลองใหม่อีกครั้ง";
+      $("p94RankedStatusPill").textContent="เกิดข้อผิดพลาด";
+      state("p94RankedError");
+      return false;
+    }
+
+    queueStartedAt=Date.now();
+    state("p94Searching");
+    $("p94RankedStatusPill").textContent="กำลังค้นหาใหม่";
+    $("p94SearchText").textContent=
+      "คู่แข่งเดิมหลุดก่อนเริ่มเกม • กำลังหาคู่ใหม่ให้อัตโนมัติ";
+
+    return true;
+  }
+
   async function startSearch(){
     if(queueTimer||queueBusy)return;
 
-    // New matchmaking must not restore an old results screen.
-    try{
-      localStorage.removeItem("bb_ranked_waiting_match");
-    }catch(_){}
-    document.body.classList.remove(
-      "bbRankedWaiting",
-      "bbRankedPlaying"
-    );
+    try{localStorage.removeItem("bb_ranked_waiting_match")}catch(_){}
+    document.body.classList.remove("bbRankedWaiting","bbRankedPlaying");
+
+    const generation=++searchGeneration;
+    clearMatchGlobals();
+    resetCandidate();
+    staleCandidateRestarts=0;
 
     await getUser();
+    if(generation!==searchGeneration)return;
 
     if(!user){
       window.POMRUMember?.gateOpen?.();
       return;
     }
 
+    activeSearchSubject=rankedSubject();
+
     const preflight=
       await window.POMRURankedContent
-        ?.check?.(
-          rankedSubject(),
-          true
-        );
+        ?.check?.(activeSearchSubject,true);
 
-    if(
-      preflight
-      &&preflight.is_ready===false
-    ){
+    if(generation!==searchGeneration)return;
+
+    if(preflight&&preflight.is_ready===false){
+      activeSearchSubject=null;
       state("p94RankedIntro");
-
-      $("p94RankedStatusPill").textContent=
-        "เนื้อหายังไม่พร้อม";
-
-      try{
-        window.POMRURankedContent
-          ?.focus?.();
-      }catch(_){}
-
+      $("p94RankedStatusPill").textContent="เนื้อหายังไม่พร้อม";
+      try{window.POMRURankedContent?.focus?.()}catch(_){}
       return;
     }
 
@@ -34642,22 +36176,21 @@ document.addEventListener('DOMContentLoaded', () => {
     state("p94Searching");
     $("p94RankedStatusPill").textContent="กำลังจับคู่";
     $("p94SearchText").textContent=
-      `กำลังหาคู่แข่ง ${subjectName(rankedSubject())} ที่แรงก์ใกล้เคียง`;
+      `กำลังหาคู่แข่ง ${subjectName(activeSearchSubject)} ที่แรงก์ใกล้เคียง`;
 
     renderTimer();
+    await tick(generation);
 
-    await tick();
-
-    if(!matched && !queueTimer){
+    if(generation===searchGeneration&&!matched&&!queueTimer&&queueStartedAt>0){
       queueTimer=setInterval(()=>{
         renderTimer();
-        tick();
+        tick(generation);
       },1800);
     }
   }
 
-  async function tick(){
-    if(queueBusy||matched)return;
+  async function tick(generation=searchGeneration){
+    if(queueBusy||matched||!sameSearch(generation))return;
 
     queueBusy=true;
 
@@ -34665,17 +36198,18 @@ document.addEventListener('DOMContentLoaded', () => {
       const data=await rpc(
         "bb_ranked_matchmaking_tick",
         {
-          p_subject_code:rankedSubject()
+          p_subject_code:activeSearchSubject||rankedSubject()
         }
       );
       const row=Array.isArray(data)?data[0]:data;
 
+      if(!sameSearch(generation))return;
       if(!row)return;
 
       if(row.queue_status==="searching"){
         const sec=Number(row.wait_seconds||0);
 
-        const selectedName=subjectName(rankedSubject());
+        const selectedName=subjectName(activeSearchSubject||rankedSubject());
 
         $("p94SearchText").textContent=
           sec>=20
@@ -34689,18 +36223,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if(row.queue_status==="matched" && row.room_id){
 
+        $("p94RankedStatusPill").textContent="กำลังยืนยันคู่แข่ง";
+        $("p94SearchText").textContent=
+          "พบคู่แข่งแล้ว • กำลังตรวจสอบห้องและการเชื่อมต่อของทั้งสองฝ่าย";
+
+        await validateMatchedCandidate(row,generation);
+        if(!sameSearch(generation))return;
+
         matched=true;
         stopPoll();
+        resetCandidate();
 
         window.POMRU_RANKED_ROOM_ID=row.room_id;
         window.POMRU_RANKED_ROOM_CODE=row.room_code||null;
         window.POMRU_RANKED_HOST_ID=row.host_user_id||null;
-        window.POMRU_RANKED_MATCHMAKING_RESULT={...row};
+        window.POMRU_RANKED_MATCHMAKING_RESULT={
+          ...row,
+          __validated_at:new Date().toISOString(),
+          __search_generation:generation
+        };
 
         document.dispatchEvent(
           new CustomEvent(
             "pomru:ranked-match-found",
-            {detail:{...row}}
+            {detail:{...window.POMRU_RANKED_MATCHMAKING_RESULT}}
           )
         );
 
@@ -34718,62 +36264,39 @@ document.addEventListener('DOMContentLoaded', () => {
         $("p94MatchedGame").textContent=
           `${row.game_name||modeName(row.mode_code)} • ${row.level_label||row.content_level||""} • กำลังเตรียมห้องแข่งขัน`;
 
-        $("p94RankedStatusPill").textContent="กำลังยืนยันคู่แข่ง";
+        $("p94RankedStatusPill").textContent="ยืนยันคู่แข่งแล้ว";
         state("p94Matched");
-
-        
-        // อีกฝ่ายต้อง join ห้องด้วย session ของตัวเอง
-        if(user.id!==row.host_user_id){
-          const joined=await rpc(
-            "bb_ranked_join_room",
-            {p_room_code:row.room_code}
-          );
-
-          const jr=Array.isArray(joined)?joined[0]:joined;
-
-          if(!jr?.room_id){
-            throw new Error("เข้าห้องแข่งขันไม่สำเร็จ");
-          }
-        }
 
         try{
           await rpc(
             "bb_presence_touch",
-            {
-              p_status:"online",
-              p_room_id:row.room_id
-            }
+            {p_status:"online",p_room_id:row.room_id}
           );
         }catch(_){}
 
-        document.body.classList.add(
-          "p951RankedQuickStart"
-        );
+        if(generation!==searchGeneration)return;
 
-        $("p94RankedStatusPill").textContent=
-          "กำลังเริ่มเกม";
-
+        document.body.classList.add("p951RankedQuickStart");
+        $("p94RankedStatusPill").textContent="กำลังเริ่มเกม";
         $("p94MatchedGame").textContent=
           `${row.game_name||modeName(row.mode_code)} • ${row.level_label||row.content_level||""} • กำลังซิงก์เกม`;
 
-        // Open the legacy arena internally so its realtime room/match
-        // engine can work, but keep the Match Found screen on top.
         setTimeout(async()=>{
+          if(
+            generation!==searchGeneration
+            ||!window.POMRU_RANKED_MATCHMAKING_RESULT?.room_id
+          ){
+            return;
+          }
 
-          try{
-            localStorage.removeItem(
-              "bb_ranked_waiting_match"
-            );
-          }catch(_){}
+          try{localStorage.removeItem("bb_ranked_waiting_match")}catch(_){}
 
           if(window.POMRUDuel?.openArenaRoom){
             await window.POMRUDuel.openArenaRoom();
           }else if(window.__POMRU_LEGACY_ARENA_OPEN){
             await window.__POMRU_LEGACY_ARENA_OPEN();
           }
-
         },120);
-
       }
 
     }catch(e){
@@ -34782,6 +36305,34 @@ document.addEventListener('DOMContentLoaded', () => {
         e?.message||e||""
       );
 
+      if(msg.includes("ranked_search_superseded")){
+        return;
+      }
+
+      if(msg.includes("ranked_candidate_pending")){
+        matched=false;
+        state("p94Searching");
+        $("p94RankedStatusPill").textContent="กำลังยืนยันคู่แข่ง";
+        $("p94SearchText").textContent=
+          "พบคู่แข่งแล้ว • รออีกฝ่ายเชื่อมต่อเข้าห้อง";
+        return;
+      }
+
+      if(
+        msg.includes("ranked_candidate_stale")
+        ||msg.includes("ranked_state_invalid")
+        ||msg.includes("ranked_self_match_blocked")
+        ||msg.includes("ranked_subject_mismatch")
+        ||msg.includes("ranked_room_mismatch")
+        ||msg.includes("ranked_host_mismatch")
+        ||msg.includes("ranked_room_code_missing")
+        ||msg.includes("ranked_join_failed")
+      ){
+        const recycled=await recycleStaleCandidate(generation);
+        if(recycled)setTimeout(()=>tick(generation),360);
+        return;
+      }
+
       if(
         msg.includes(
           "ranked_content_not_ready"
@@ -34789,6 +36340,10 @@ document.addEventListener('DOMContentLoaded', () => {
       ){
         stopPoll();
         matched=false;
+        queueStartedAt=0;
+        activeSearchSubject=null;
+        resetCandidate();
+        clearMatchGlobals();
 
         state("p94RankedIntro");
 
@@ -34811,6 +36366,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       stopPoll();
+      matched=false;
+      queueStartedAt=0;
+      activeSearchSubject=null;
+      resetCandidate();
+      clearMatchGlobals();
 
       $("p94RankedErrorText").textContent=
         errorText(e);
@@ -34826,12 +36386,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function cancelSearch(){
-    try{
-      await rpc("bb_ranked_matchmaking_cancel");
-    }catch(_){}
+    ++searchGeneration;
+
+    try{await rpc("bb_ranked_matchmaking_cancel")}catch(_){}
 
     stopPoll();
+    matched=false;
     queueStartedAt=0;
+    activeSearchSubject=null;
+    resetCandidate();
+    staleCandidateRestarts=0;
+    clearMatchGlobals();
 
     state("p94RankedIntro");
     $("p94RankedStatusPill").textContent="พร้อมจับคู่";
@@ -34930,7 +36495,15 @@ document.addEventListener('DOMContentLoaded', () => {
     start:startSearch,
     cancel:cancelSearch,
     close:closeRanked,
-    subject:rankedSubject
+    subject:rankedSubject,
+    debug:()=>({
+      generation:searchGeneration,
+      subject:activeSearchSubject,
+      searching:queueStartedAt>0&&!matched,
+      matched,
+      candidate_room_id:candidateRoomId,
+      stale_restarts:staleCandidateRestarts
+    })
   };
 
   if(document.readyState==="loading"){
@@ -37861,10 +39434,27 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function rematchAvailable(){
+    const at=Number(
+      window.POMRU_LAST_RANKED_RESULT_AT
+    )||0;
+
+    const fresh=
+      at>0
+      &&Date.now()-at
+        <=15*60*1000;
+
     return !!(
-      window.POMRU_LAST_RANKED_OPPONENT?.id
+      fresh
+      &&!window.BB_RANKED_ACTIVE
+      &&window.POMRU_LAST_RANKED_OPPONENT?.id
       &&window.POMRU_LAST_RANKED_SUBJECT
     );
+  }
+
+  function clearRematchShortcut(){
+    window.POMRU_LAST_RANKED_OPPONENT=null;
+    window.POMRU_LAST_RANKED_SUBJECT=null;
+    window.POMRU_LAST_RANKED_RESULT_AT=0;
   }
 
   function notificationTotal(){
@@ -38483,6 +40073,8 @@ document.addEventListener('DOMContentLoaded', () => {
       ||window.POMRU_RANKED_SUBJECT
       ||"memory";
 
+    clearRematchShortcut();
+
     try{
       window.POMRURankSubject
         ?.choose?.(subject);
@@ -38746,10 +40338,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }catch(_){}
   }
 
+  document.addEventListener(
+    "pomru:ranked-game-started",
+    ()=>{
+      clearRematchShortcut();
+      render();
+    }
+  );
+
   window.POMRUNotifications={
     open,
     close,
     refresh,
+    clearRematch:clearRematchShortcut,
     getCount:()=>total
   };
 
@@ -38856,6 +40457,18 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="p957RankGrid" id="p957RankGrid"></div>
       </section>
 
+      <section class="p957Section p958AchievementSection">
+        <div class="p957SectionHead">
+          <div>
+            <small>ACHIEVEMENTS</small>
+            <h3>เหรียญความสำเร็จ</h3>
+          </div>
+          <span id="p958AchievementCount">0 / 8</span>
+        </div>
+
+        <div class="p958AchievementGrid" id="p958AchievementGrid"></div>
+      </section>
+
       <section class="p957Section p957RecentSection">
         <div class="p957SectionHead">
           <div>
@@ -38883,6 +40496,14 @@ document.addEventListener('DOMContentLoaded', () => {
           id="p957PlayerChallenge"
         >
           ชวนดวล
+        </button>
+
+        <button
+          type="button"
+          class="p958ShareButton"
+          id="p958SharePlayerCard"
+        >
+          แชร์ Player Card
         </button>
       </footer>
     </div>
@@ -38921,6 +40542,76 @@ document.addEventListener('DOMContentLoaded', () => {
       accent:"red"
     }
   };
+
+  const TIER_ORDER={
+    Bronze:1,
+    Silver:2,
+    Gold:3,
+    Platinum:4,
+    Diamond:5,
+    Master:6,
+    Legend:7
+  };
+
+  const ACHIEVEMENTS=[
+    {
+      id:"first_duel",
+      icon:"⚔️",
+      name:"First Duel",
+      text:"เล่น Ranked ครั้งแรก",
+      test:ctx=>ctx.games>=1
+    },
+    {
+      id:"challenger_10",
+      icon:"🎯",
+      name:"Challenger",
+      text:"เล่น Ranked ครบ 10 เกม",
+      test:ctx=>ctx.games>=10
+    },
+    {
+      id:"veteran_100",
+      icon:"🏟️",
+      name:"Veteran",
+      text:"เล่น Ranked ครบ 100 เกม",
+      test:ctx=>ctx.games>=100
+    },
+    {
+      id:"hot_streak",
+      icon:"🔥",
+      name:"Hot Streak",
+      text:"ชนะติดกันอย่างน้อย 3 เกม",
+      test:ctx=>ctx.bestStreak>=3
+    },
+    {
+      id:"gold_subject",
+      icon:"🥇",
+      name:"Gold Standard",
+      text:"มีอย่างน้อย 1 หมวดถึง Gold",
+      test:ctx=>ctx.rankOrders.some(x=>x>=3)
+    },
+    {
+      id:"multi_talent",
+      icon:"✨",
+      name:"Multi Talent",
+      text:"อย่างน้อย 2 หมวดถึง Silver",
+      test:ctx=>ctx.rankOrders.filter(x=>x>=2).length>=2
+    },
+    {
+      id:"all_rounder",
+      icon:"🌈",
+      name:"All-Rounder",
+      text:"ทั้ง 4 หมวดถึง Silver",
+      test:ctx=>ctx.rankOrders.length>=4
+        &&ctx.rankOrders.every(x=>x>=2)
+    },
+    {
+      id:"legend",
+      icon:"👑",
+      name:"Legend",
+      text:"มีอย่างน้อย 1 หมวดถึง Legend",
+      test:ctx=>ctx.rankOrders.some(x=>x>=7)
+    }
+  ];
 
   let current=null;
   let currentUser=null;
@@ -39005,13 +40696,33 @@ document.addEventListener('DOMContentLoaded', () => {
     if(friend){
       return {
         kind:"friend",
-        friend
+        friend,
+        request:null
+      };
+    }
+
+    const request=
+      duel?.getRequests?.()
+        ?.find(
+          x=>x.other_user_id===targetId
+        )
+      ||null;
+
+    if(request){
+      return {
+        kind:
+          request.direction==="incoming"
+            ?"incoming"
+            :"pending",
+        friend:null,
+        request
       };
     }
 
     return {
       kind:"none",
-      friend:null
+      friend:null,
+      request:null
     };
   }
 
@@ -39141,6 +40852,77 @@ document.addEventListener('DOMContentLoaded', () => {
     .join("");
   }
 
+  function achievementContext(row){
+    const ranks=parseJSON(
+      row?.ranks,
+      []
+    );
+
+    return {
+      games:Number(row?.ranked_games)||0,
+      wins:Number(row?.ranked_wins)||0,
+      losses:Number(row?.ranked_losses)||0,
+      winRate:Number(row?.win_rate)||0,
+      bestStreak:Number(row?.best_streak)||0,
+      rankOrders:ranks.map(
+        r=>TIER_ORDER[
+          r?.ranked_tier
+        ]||1
+      )
+    };
+  }
+
+  function unlockedAchievements(row){
+    const ctx=achievementContext(row);
+
+    return ACHIEVEMENTS.map(
+      achievement=>({
+        ...achievement,
+        unlocked:!!achievement.test(ctx)
+      })
+    );
+  }
+
+  function renderAchievements(row){
+    const host=$("p958AchievementGrid");
+    if(!host)return;
+
+    const badges=
+      unlockedAchievements(row);
+
+    const unlocked=
+      badges.filter(
+        x=>x.unlocked
+      ).length;
+
+    const count=$(
+      "p958AchievementCount"
+    );
+
+    if(count){
+      count.textContent=
+        `${unlocked} / ${badges.length}`;
+    }
+
+    host.innerHTML=
+      badges.map(badge=>`
+        <article class="p958Achievement ${badge.unlocked?"unlocked":"locked"}">
+          <span class="p958AchievementIcon">
+            ${badge.unlocked?badge.icon:"?"}
+          </span>
+
+          <div>
+            <b>${esc(badge.name)}</b>
+            <small>${esc(badge.text)}</small>
+          </div>
+
+          <strong>
+            ${badge.unlocked?"ปลดล็อก":"ล็อก"}
+          </strong>
+        </article>
+      `).join("");
+  }
+
   function renderRecent(rows){
     const host=$("p957RecentList");
     if(!host)return;
@@ -39244,6 +41026,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
       challenge.disabled=false;
 
+    }else if(
+      rel.kind==="pending"
+    ){
+      primary.textContent=
+        "ส่งคำขอแล้ว";
+
+      primary.disabled=true;
+      primary.dataset.action="pending";
+
+      challenge.textContent=
+        "รอเป็นเพื่อนก่อน";
+
+      challenge.disabled=true;
+
+    }else if(
+      rel.kind==="incoming"
+    ){
+      primary.textContent=
+        "รับคำขอเป็นเพื่อน";
+
+      primary.disabled=false;
+      primary.dataset.action="accept";
+
+      challenge.textContent=
+        "รับเป็นเพื่อนก่อน";
+
+      challenge.disabled=true;
+
     }else{
       primary.textContent=
         "เพิ่มเป็นเพื่อน";
@@ -39343,6 +41153,8 @@ document.addEventListener('DOMContentLoaded', () => {
         []
       )
     );
+
+    renderAchievements(row);
 
     renderRecent(
       parseJSON(
@@ -39463,6 +41275,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function close(){
+    try{
+      closeShare();
+    }catch(_){}
+
     show(
       "p957PlayerOverlay",
       false
@@ -39532,12 +41348,45 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    const rel=relation(
+      current.user_id
+    );
+
+    if(rel.kind==="pending"){
+      syncActions();
+      return;
+    }
+
     if(button)button.disabled=true;
 
     try{
       const duel=window.POMRUDuel;
 
-      if(duel?.sendFriend){
+      if(
+        rel.kind==="incoming"
+        &&rel.request?.request_id
+      ){
+        if(duel?.respondFriend){
+          await duel.respondFriend(
+            rel.request.request_id,
+            true
+          );
+        }else{
+          const c=client();
+
+          const {error}=await c.rpc(
+            "bb_respond_friend_request",
+            {
+              p_request_id:
+                rel.request.request_id,
+              p_accept:true
+            }
+          );
+
+          if(error)throw error;
+        }
+
+      }else if(duel?.sendFriend){
         await duel.sendFriend(
           current.user_id
         );
@@ -39560,13 +41409,6 @@ document.addEventListener('DOMContentLoaded', () => {
           ?.refresh?.();
       }catch(_){}
 
-      if(button){
-        button.textContent=
-          "ส่งคำขอแล้ว";
-        button.dataset.action=
-          "sent";
-      }
-
     }catch(e){
       const msg=String(
         e?.message||e||""
@@ -39587,10 +41429,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
     }finally{
-      if(button){
-        button.disabled=false;
-      }
-
       syncActions();
     }
   }
@@ -39624,6 +41462,765 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function roundedRect(
+    ctx,
+    x,
+    y,
+    w,
+    h,
+    r
+  ){
+    const radius=Math.min(
+      r,
+      w/2,
+      h/2
+    );
+
+    ctx.beginPath();
+    ctx.moveTo(x+radius,y);
+    ctx.arcTo(
+      x+w,y,
+      x+w,y+h,
+      radius
+    );
+    ctx.arcTo(
+      x+w,y+h,
+      x,y+h,
+      radius
+    );
+    ctx.arcTo(
+      x,y+h,
+      x,y,
+      radius
+    );
+    ctx.arcTo(
+      x,y,
+      x+w,y,
+      radius
+    );
+    ctx.closePath();
+  }
+
+  function loadCanvasImage(src){
+    return new Promise(
+      (resolve,reject)=>{
+        const img=new Image();
+
+        img.onload=()=>resolve(img);
+        img.onerror=reject;
+
+        img.src=src;
+      }
+    );
+  }
+
+  function shareRanks(){
+    const ranks=parseJSON(
+      current?.ranks,
+      []
+    );
+
+    const byCode=new Map(
+      ranks.map(
+        r=>[
+          r.subject_code,
+          r
+        ]
+      )
+    );
+
+    return [
+      "memory",
+      "math",
+      "english",
+      "chinese"
+    ].map(code=>({
+      code,
+      meta:SUBJECTS[code],
+      row:byCode.get(code)||{
+        ranked_tier:"Bronze",
+        ranked_points:0
+      }
+    }));
+  }
+
+  async function drawShareCard(){
+    if(!current){
+      throw new Error(
+        "player_card_not_ready"
+      );
+    }
+
+    const canvas=$(
+      "p958ShareCanvas"
+    );
+
+    if(!canvas){
+      throw new Error(
+        "share_canvas_missing"
+      );
+    }
+
+    const ctx=canvas.getContext(
+      "2d"
+    );
+
+    const W=canvas.width;
+    const H=canvas.height;
+
+    // Background
+    const bg=ctx.createLinearGradient(
+      0,
+      0,
+      W,
+      H
+    );
+
+    bg.addColorStop(
+      0,
+      "#fff0f6"
+    );
+
+    bg.addColorStop(
+      .55,
+      "#f4efff"
+    );
+
+    bg.addColorStop(
+      1,
+      "#eaf7ff"
+    );
+
+    ctx.fillStyle=bg;
+    ctx.fillRect(
+      0,
+      0,
+      W,
+      H
+    );
+
+    // Decorative bubbles
+    ctx.globalAlpha=.35;
+    ctx.fillStyle="#ffffff";
+
+    [
+      [120,140,95],
+      [935,160,120],
+      [975,1115,150],
+      [105,1180,130]
+    ].forEach(([x,y,r])=>{
+      ctx.beginPath();
+      ctx.arc(
+        x,
+        y,
+        r,
+        0,
+        Math.PI*2
+      );
+      ctx.fill();
+    });
+
+    ctx.globalAlpha=1;
+
+    // Main card
+    roundedRect(
+      ctx,
+      70,
+      65,
+      940,
+      1220,
+      56
+    );
+
+    ctx.fillStyle=
+      "rgba(255,255,255,.90)";
+
+    ctx.fill();
+
+    // Brand
+    ctx.fillStyle="#6e50b7";
+    ctx.font=
+      "900 42px system-ui, sans-serif";
+    ctx.fillText(
+      "POMRU",
+      120,
+      135
+    );
+
+    ctx.fillStyle="#9b7d8e";
+    ctx.font=
+      "700 22px system-ui, sans-serif";
+    ctx.fillText(
+      "COMPETITIVE PLAYER CARD",
+      120,
+      174
+    );
+
+    // Buddy
+    try{
+      const buddy=
+        await loadCanvasImage(
+          DEFAULT_BUDDY
+        );
+
+      ctx.drawImage(
+        buddy,
+        100,
+        225,
+        350,
+        350
+      );
+    }catch(_){
+      ctx.fillStyle="#ffe5f0";
+      roundedRect(
+        ctx,
+        125,
+        255,
+        300,
+        300,
+        50
+      );
+      ctx.fill();
+    }
+
+    // Identity
+    ctx.fillStyle="#4b3946";
+    ctx.font=
+      "900 54px system-ui, sans-serif";
+
+    const name=String(
+      current.display_name
+      ||"POMRU Player"
+    );
+
+    ctx.fillText(
+      name.slice(0,22),
+      485,
+      295
+    );
+
+    ctx.fillStyle="#7f6876";
+    ctx.font=
+      "700 26px system-ui, sans-serif";
+
+    ctx.fillText(
+      `Level ${Number(current.player_level||1)}`,
+      485,
+      340
+    );
+
+    // Stats
+    const stats=[
+      [
+        "RANKED",
+        Number(
+          current.ranked_games||0
+        ).toLocaleString(),
+        "เกม"
+      ],
+      [
+        "WIN RATE",
+        `${Number(current.win_rate||0).toFixed(1).replace(".0","")}%`,
+        `${Number(current.ranked_wins||0)}W • ${Number(current.ranked_losses||0)}L`
+      ],
+      [
+        "BEST STREAK",
+        Number(
+          current.best_streak||0
+        ).toLocaleString(),
+        "ชนะติดกัน"
+      ]
+    ];
+
+    stats.forEach(
+      ([label,value,sub],index)=>{
+        const x=485;
+        const y=385+index*105;
+
+        roundedRect(
+          ctx,
+          x,
+          y,
+          455,
+          88,
+          24
+        );
+
+        ctx.fillStyle=
+          index===1
+            ?"#f1f8ff"
+            :"#f8f4fb";
+
+        ctx.fill();
+
+        ctx.fillStyle="#9c8291";
+        ctx.font=
+          "800 18px system-ui, sans-serif";
+
+        ctx.fillText(
+          label,
+          x+22,
+          y+29
+        );
+
+        ctx.fillStyle="#4f3c49";
+        ctx.font=
+          "900 30px system-ui, sans-serif";
+
+        ctx.fillText(
+          value,
+          x+22,
+          y+61
+        );
+
+        ctx.fillStyle="#8c7582";
+        ctx.font=
+          "700 18px system-ui, sans-serif";
+
+        const measure=
+          ctx.measureText(sub);
+
+        ctx.fillText(
+          sub,
+          x+430-measure.width,
+          y+58
+        );
+      }
+    );
+
+    // Rank cards
+    ctx.fillStyle="#4f3d49";
+    ctx.font=
+      "900 31px system-ui, sans-serif";
+
+    ctx.fillText(
+      "4 SUBJECT RANKS",
+      120,
+      650
+    );
+
+    shareRanks().forEach(
+      ({meta,row},index)=>{
+        const col=index%2;
+        const line=Math.floor(
+          index/2
+        );
+
+        const x=120+col*440;
+        const y=685+line*150;
+
+        roundedRect(
+          ctx,
+          x,
+          y,
+          400,
+          125,
+          28
+        );
+
+        ctx.fillStyle=
+          index===0
+            ?"#fff0f5"
+            :index===1
+              ?"#fff6e5"
+              :index===2
+                ?"#edf8ff"
+                :"#fff1ef";
+
+        ctx.fill();
+
+        ctx.font=
+          "900 34px system-ui, sans-serif";
+
+        ctx.fillStyle="#5c4854";
+
+        ctx.fillText(
+          meta.icon,
+          x+25,
+          y+50
+        );
+
+        ctx.font=
+          "800 21px system-ui, sans-serif";
+
+        ctx.fillStyle="#8f7785";
+
+        ctx.fillText(
+          meta.name,
+          x+78,
+          y+38
+        );
+
+        ctx.font=
+          "900 30px system-ui, sans-serif";
+
+        ctx.fillStyle="#4d3b47";
+
+        ctx.fillText(
+          String(
+            row.ranked_tier
+            ||"Bronze"
+          ),
+          x+78,
+          y+75
+        );
+
+        ctx.font=
+          "800 21px system-ui, sans-serif";
+
+        ctx.fillStyle="#7155aa";
+
+        ctx.fillText(
+          Number(
+            row.ranked_points||0
+          ).toLocaleString(),
+          x+78,
+          y+105
+        );
+      }
+    );
+
+    // Achievements
+    const badges=
+      unlockedAchievements(
+        current
+      )
+      .filter(
+        x=>x.unlocked
+      )
+      .slice(0,4);
+
+    ctx.fillStyle="#4f3d49";
+    ctx.font=
+      "900 31px system-ui, sans-serif";
+
+    ctx.fillText(
+      "ACHIEVEMENTS",
+      120,
+      1015
+    );
+
+    if(!badges.length){
+      ctx.fillStyle="#947f8a";
+      ctx.font=
+        "700 23px system-ui, sans-serif";
+
+      ctx.fillText(
+        "ยังไม่มี Badge ที่ปลดล็อก",
+        120,
+        1060
+      );
+
+    }else{
+      badges.forEach(
+        (badge,index)=>{
+          const x=120+index*210;
+          const y=1045;
+
+          roundedRect(
+            ctx,
+            x,
+            y,
+            185,
+            105,
+            24
+          );
+
+          ctx.fillStyle="#f7f3fb";
+          ctx.fill();
+
+          ctx.font=
+            "900 34px system-ui, sans-serif";
+
+          ctx.fillStyle="#604b74";
+
+          ctx.fillText(
+            badge.icon,
+            x+18,
+            y+43
+          );
+
+          ctx.font=
+            "800 16px system-ui, sans-serif";
+
+          ctx.fillStyle="#5b4653";
+
+          const shortName=
+            String(
+              badge.name
+            ).slice(0,15);
+
+          ctx.fillText(
+            shortName,
+            x+18,
+            y+76
+          );
+        }
+      );
+    }
+
+    // Footer
+    ctx.fillStyle="#7d6574";
+    ctx.font=
+      "700 20px system-ui, sans-serif";
+
+    ctx.fillText(
+      "เล่น • เรียน • แข่งขันกับ Buddy",
+      120,
+      1215
+    );
+
+    ctx.textAlign="right";
+
+    ctx.fillStyle="#6e50b7";
+    ctx.font=
+      "900 22px system-ui, sans-serif";
+
+    ctx.fillText(
+      "waralakbraingame.online",
+      940,
+      1215
+    );
+
+    ctx.textAlign="left";
+
+    return canvas;
+  }
+
+  async function canvasBlob(){
+    const canvas=
+      await drawShareCard();
+
+    return await new Promise(
+      (resolve,reject)=>{
+        canvas.toBlob(
+          blob=>{
+            if(blob){
+              resolve(blob);
+            }else{
+              reject(
+                new Error(
+                  "image_export_failed"
+                )
+              );
+            }
+          },
+          "image/png",
+          1
+        );
+      }
+    );
+  }
+
+  function openShare(){
+    if(!current)return;
+
+    const overlay=$(
+      "p958ShareOverlay"
+    );
+
+    overlay?.classList.remove(
+      "hidden"
+    );
+
+    overlay?.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+    document.body.classList.add(
+      "p958ShareOpen"
+    );
+
+    Promise.resolve(
+      document.fonts?.ready
+    )
+    .catch(()=>{})
+    .finally(
+      ()=>drawShareCard()
+        .catch(e=>{
+          console.warn(
+            "POMRU share card:",
+            e?.message||e
+          );
+        })
+    );
+  }
+
+  function closeShare(){
+    const overlay=$(
+      "p958ShareOverlay"
+    );
+
+    overlay?.classList.add(
+      "hidden"
+    );
+
+    overlay?.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    document.body.classList.remove(
+      "p958ShareOpen"
+    );
+  }
+
+  async function shareCard(){
+    if(!current)return;
+
+    const button=$(
+      "p958ShareNow"
+    );
+
+    if(button){
+      button.disabled=true;
+      button.textContent=
+        "กำลังเตรียม…";
+    }
+
+    try{
+      const blob=
+        await canvasBlob();
+
+      const file=new File(
+        [blob],
+        "POMRU-Player-Card.png",
+        {
+          type:"image/png"
+        }
+      );
+
+      if(
+        navigator.share
+        &&(
+          !navigator.canShare
+          ||navigator.canShare({
+            files:[file]
+          })
+        )
+      ){
+        await navigator.share({
+          title:
+            `${current.display_name||"POMRU"} Player Card`,
+          text:
+            "POMRU Competitive Player Card",
+          files:[file]
+        });
+
+      }else{
+        const url=
+          URL.createObjectURL(
+            blob
+          );
+
+        const a=
+          document.createElement(
+            "a"
+          );
+
+        a.href=url;
+        a.download=
+          "POMRU-Player-Card.png";
+
+        document.body.appendChild(
+          a
+        );
+
+        a.click();
+        a.remove();
+
+        setTimeout(
+          ()=>URL.revokeObjectURL(
+            url
+          ),
+          1500
+        );
+      }
+
+    }catch(e){
+      const msg=String(
+        e?.message||e||""
+      );
+
+      if(
+        !/abort|cancel/i.test(
+          msg
+        )
+      ){
+        alert(
+          "สร้างภาพ Player Card ไม่สำเร็จ"
+        );
+      }
+
+    }finally{
+      if(button){
+        button.disabled=false;
+        button.textContent=
+          "แชร์";
+      }
+    }
+  }
+
+  async function saveCard(){
+    if(!current)return;
+
+    const button=$(
+      "p958SaveImage"
+    );
+
+    if(button){
+      button.disabled=true;
+      button.textContent=
+        "กำลังสร้าง…";
+    }
+
+    try{
+      const blob=
+        await canvasBlob();
+
+      const url=
+        URL.createObjectURL(
+          blob
+        );
+
+      const a=
+        document.createElement(
+          "a"
+        );
+
+      a.href=url;
+      a.download=
+        "POMRU-Player-Card.png";
+
+      document.body.appendChild(
+        a
+      );
+
+      a.click();
+      a.remove();
+
+      setTimeout(
+        ()=>URL.revokeObjectURL(
+          url
+        ),
+        1500
+      );
+
+    }catch(e){
+      alert(
+        "บันทึก Player Card ไม่สำเร็จ"
+      );
+
+    }finally{
+      if(button){
+        button.disabled=false;
+        button.textContent=
+          "บันทึกภาพ";
+      }
+    }
+  }
+
   async function openMyCard(){
     const me=await getMe();
 
@@ -39631,6 +42228,43 @@ document.addEventListener('DOMContentLoaded', () => {
       open(me.id);
     }
   }
+
+  $("p958SharePlayerCard")
+    ?.addEventListener(
+      "click",
+      openShare
+    );
+
+  $("p958ShareClose")
+    ?.addEventListener(
+      "click",
+      closeShare
+    );
+
+  $("p958ShareNow")
+    ?.addEventListener(
+      "click",
+      shareCard
+    );
+
+  $("p958SaveImage")
+    ?.addEventListener(
+      "click",
+      saveCard
+    );
+
+  $("p958ShareOverlay")
+    ?.addEventListener(
+      "click",
+      e=>{
+        if(
+          e.target.id===
+            "p958ShareOverlay"
+        ){
+          closeShare();
+        }
+      }
+    );
 
   $("p957PlayerClose")
     ?.addEventListener(
@@ -39720,11 +42354,2773 @@ document.addEventListener('DOMContentLoaded', () => {
     open,
     close,
     openMine:openMyCard,
-    getCurrent:()=>current
+    share:openShare,
+    getCurrent:()=>current,
+    getAchievements:()=>
+      current
+        ?unlockedAchievements(
+            current
+          )
+        :[]
   };
 
 })();
 </script>
 
+
+<div
+  class="p958ShareOverlay hidden"
+  id="p958ShareOverlay"
+  aria-hidden="true"
+>
+  <section class="p958ShareCard">
+    <header>
+      <div>
+        <small>SHARE PLAYER CARD</small>
+        <h3>พร้อมแชร์</h3>
+      </div>
+
+      <button
+        type="button"
+        id="p958ShareClose"
+        aria-label="ปิด"
+      >×</button>
+    </header>
+
+    <div class="p958SharePreviewWrap">
+      <canvas
+        id="p958ShareCanvas"
+        width="1080"
+        height="1350"
+      ></canvas>
+    </div>
+
+    <div class="p958ShareActions">
+      <button
+        type="button"
+        class="primary"
+        id="p958ShareNow"
+      >
+        แชร์
+      </button>
+
+      <button
+        type="button"
+        id="p958SaveImage"
+      >
+        บันทึกภาพ
+      </button>
+    </div>
+  </section>
+</div>
+
+
+<div
+  class="p959Onboarding hidden"
+  id="p959Onboarding"
+  aria-hidden="true"
+>
+  <section class="p959OnboardingShell">
+
+    <header class="p959OnboardingTop">
+      <div class="p959Brand">
+        <strong>POMRU</strong>
+        <span>ผมรู้</span>
+      </div>
+
+      <div
+        class="p959StepDots"
+        id="p959StepDots"
+        aria-label="ความคืบหน้า"
+      >
+        <i class="active"></i>
+        <i></i>
+        <i></i>
+        <i></i>
+      </div>
+
+      <button
+        type="button"
+        class="p959SkipTop"
+        id="p959SkipTop"
+      >
+        ข้ามคู่มือ
+      </button>
+    </header>
+
+
+    <!-- STEP 1 -->
+    <article
+      class="p959Step active"
+      id="p959Step1"
+      data-p959-step="1"
+    >
+      <div class="p959StepVisual">
+        <div class="p959MiniAvatar">
+          <img
+            src="/assets/buddy/default-pink-buddy.png?v=959"
+            alt="Buddy"
+          >
+        </div>
+      </div>
+
+      <div class="p959StepCopy">
+        <small>STEP 1 OF 4</small>
+        <h1>ก่อนเริ่มเล่น<br>คุณชื่ออะไร?</h1>
+        <p>
+          ชื่อนี้จะแสดงบน Player Card,
+          ตารางคะแนน และตอนเจอคู่แข่ง
+        </p>
+
+        <label class="p959NameField">
+          <span>ชื่อผู้เล่น</span>
+          <input
+            id="p959PlayerName"
+            type="text"
+            maxlength="24"
+            autocomplete="nickname"
+            placeholder="เช่น Lucky"
+          >
+          <small id="p959NameHint">
+            2–24 ตัวอักษร
+          </small>
+        </label>
+      </div>
+    </article>
+
+
+    <!-- STEP 2 -->
+    <article
+      class="p959Step"
+      id="p959Step2"
+      data-p959-step="2"
+    >
+      <div class="p959BuddyIntro">
+        <div class="p959BuddyHalo"></div>
+
+        <img
+          src="/assets/buddy/default-pink-buddy.png?v=959"
+          alt="Buddy"
+        >
+
+        <div class="p959BuddyBubble">
+          ยินดีที่ได้รู้จัก!
+        </div>
+      </div>
+
+      <div class="p959StepCopy">
+        <small>STEP 2 OF 4</small>
+        <h1>นี่คือ Buddy<br>ตัวแทนของคุณ</h1>
+        <p>
+          เล่นและเรียนเพื่อพัฒนาโปรไฟล์ของคุณ
+          แล้วแต่ง Buddy ให้มีเอกลักษณ์
+        </p>
+
+        <div class="p959LearnCards">
+          <div>
+            <span>★</span>
+            <b>แต้ม</b>
+            <small>เพิ่ม Level ของผู้เล่น</small>
+          </div>
+
+          <div>
+            <span class="coin">C</span>
+            <b>เหรียญ</b>
+            <small>ซื้อของแต่งและอาหาร</small>
+          </div>
+
+          <div>
+            <span class="rank">R</span>
+            <b>แรงก์</b>
+            <small>แข่งขันแยก 4 หมวด</small>
+          </div>
+        </div>
+      </div>
+    </article>
+
+
+    <!-- STEP 3 -->
+    <article
+      class="p959Step"
+      id="p959Step3"
+      data-p959-step="3"
+    >
+      <div class="p959StepCopy p959SubjectCopy">
+        <small>STEP 3 OF 4</small>
+        <h1>อยากเริ่มจาก<br>หมวดไหนก่อน?</h1>
+        <p>
+          เลือกได้ใหม่ทุกครั้ง นี่เป็นเพียงหมวดแรก
+          ที่ POMRU จะเตรียมไว้ให้คุณ
+        </p>
+
+        <div
+          class="p959SubjectGrid"
+          id="p959SubjectGrid"
+        >
+          <button
+            type="button"
+            data-p959-subject="memory"
+          >
+            <span class="memory">🧸</span>
+            <b>Memory</b>
+            <small>จำและจับคู่</small>
+            <i>เลือก</i>
+          </button>
+
+          <button
+            type="button"
+            data-p959-subject="math"
+          >
+            <span class="math">÷</span>
+            <b>Math</b>
+            <small>คิดและเลือกคำตอบ</small>
+            <i>เลือก</i>
+          </button>
+
+          <button
+            type="button"
+            data-p959-subject="english"
+          >
+            <span class="english">A</span>
+            <b>English</b>
+            <small>Vocabulary</small>
+            <i>เลือก</i>
+          </button>
+
+          <button
+            type="button"
+            data-p959-subject="chinese"
+          >
+            <span class="chinese">汉</span>
+            <b>Chinese</b>
+            <small>汉字 → ความหมาย</small>
+            <i>เลือก</i>
+          </button>
+        </div>
+
+        <div
+          class="p959SubjectHint"
+          id="p959SubjectHint"
+        >
+          เลือก 1 หมวดเพื่อไปต่อ
+        </div>
+      </div>
+    </article>
+
+
+    <!-- STEP 4 -->
+    <article
+      class="p959Step"
+      id="p959Step4"
+      data-p959-step="4"
+    >
+      <div class="p959RewardVisual">
+        <div class="p959RewardBuddy">
+          <img
+            src="/assets/buddy/default-pink-buddy.png?v=959"
+            alt="Buddy"
+          >
+        </div>
+
+        <div class="p959CoinStack">
+          <span>C</span>
+          <span>C</span>
+          <span>C</span>
+        </div>
+      </div>
+
+      <div class="p959StepCopy">
+        <small>STEP 4 OF 4</small>
+        <h1>ของขวัญต้อนรับ<br>จาก POMRU</h1>
+        <p id="p959RewardDescription">
+          รับ Starter Reward สำหรับใช้เริ่มสะสม
+          ของแต่งและดูแล Buddy
+        </p>
+
+        <div
+          class="p959RewardCard"
+          id="p959RewardCard"
+        >
+          <div>
+            <span class="p959RewardCoin">C</span>
+
+            <div>
+              <small>STARTER REWARD</small>
+              <b id="p959RewardTitle">
+                โบนัสเริ่มต้น
+              </b>
+              <p id="p959RewardStatus">
+                พร้อมรับ
+              </p>
+            </div>
+          </div>
+
+          <strong
+            id="p959RewardDelta"
+            class="hidden"
+          >
+            +0
+          </strong>
+        </div>
+
+        <button
+          type="button"
+          class="p959ClaimButton"
+          id="p959ClaimStarter"
+        >
+          รับ Starter Reward
+        </button>
+
+        <button
+          type="button"
+          class="p959RewardSkip"
+          id="p959RewardSkip"
+        >
+          ไว้รับทีหลัง
+        </button>
+      </div>
+    </article>
+
+
+    <footer class="p959OnboardingBottom">
+      <button
+        type="button"
+        class="p959Back hidden"
+        id="p959Back"
+      >
+        ย้อนกลับ
+      </button>
+
+      <div class="p959BottomSpacer"></div>
+
+      <button
+        type="button"
+        class="p959Next"
+        id="p959Next"
+      >
+        ต่อไป
+      </button>
+    </footer>
+
+  </section>
+</div>
+
+
+<script id="pomru-v959-onboarding-runtime">
+(function(){
+  "use strict";
+
+  const $=id=>document.getElementById(id);
+
+  const VERSION="v1";
+  const AUTO_WINDOW_MS=
+    6*60*60*1000;
+
+  let user=null;
+  let step=1;
+  let selectedSubject=null;
+  let rewardClaimed=false;
+  let rewardDelta=0;
+  let openReason="auto";
+  let busy=false;
+  let autoCheckedUserId=null;
+
+  function client(){
+    return window.__bbSupabase
+      ||window.sb
+      ||null;
+  }
+
+  function localKey(uid){
+    return `pomru_onboarding_${VERSION}_${uid}`;
+  }
+
+  function profileNameFallback(){
+    const meta=user?.user_metadata||{};
+
+    try{
+      const local=JSON.parse(
+        localStorage.getItem(
+          "bb_profile"
+        )||"{}"
+      );
+
+      return String(
+        local.name
+        ||meta.display_name
+        ||meta.full_name
+        ||meta.name
+        ||user?.email
+          ?.split("@")[0]
+        ||""
+      ).trim();
+
+    }catch(_){
+      return String(
+        meta.display_name
+        ||meta.full_name
+        ||meta.name
+        ||user?.email
+          ?.split("@")[0]
+        ||""
+      ).trim();
+    }
+  }
+
+  function isOpen(){
+    return !$(
+      "p959Onboarding"
+    )?.classList.contains(
+      "hidden"
+    );
+  }
+
+  function setStep(next){
+    step=Math.max(
+      1,
+      Math.min(
+        4,
+        Number(next)||1
+      )
+    );
+
+    document
+      .querySelectorAll(
+        "[data-p959-step]"
+      )
+      .forEach(el=>{
+        el.classList.toggle(
+          "active",
+          Number(
+            el.dataset.p959Step
+          )===step
+        );
+      });
+
+    document
+      .querySelectorAll(
+        "#p959StepDots i"
+      )
+      .forEach((dot,index)=>{
+        dot.classList.toggle(
+          "active",
+          index+1===step
+        );
+      });
+
+    const back=$("p959Back");
+    const nextBtn=$("p959Next");
+
+    back?.classList.toggle(
+      "hidden",
+      step===1
+    );
+
+    if(nextBtn){
+      if(step===4){
+        nextBtn.textContent=
+          rewardClaimed
+            ?"เข้า POMRU"
+            :"เสร็จสิ้น";
+      }else{
+        nextBtn.textContent=
+          "ต่อไป";
+      }
+    }
+
+    if(step===4){
+      refreshRewardStatus();
+    }
+  }
+
+  function paintSubject(){
+    document
+      .querySelectorAll(
+        "[data-p959-subject]"
+      )
+      .forEach(btn=>{
+        const active=
+          btn.dataset.p959Subject===
+          selectedSubject;
+
+        btn.classList.toggle(
+          "selected",
+          active
+        );
+
+        const i=
+          btn.querySelector("i");
+
+        if(i){
+          i.textContent=
+            active
+              ?"เลือกแล้ว"
+              :"เลือก";
+        }
+      });
+
+    const hint=$(
+      "p959SubjectHint"
+    );
+
+    if(hint){
+      hint.classList.remove(
+        "error"
+      );
+
+      hint.textContent=
+        selectedSubject
+          ?"เปลี่ยนหมวดได้ภายหลัง"
+          :"เลือก 1 หมวดเพื่อไปต่อ";
+    }
+  }
+
+  function paintReward(){
+    const card=$(
+      "p959RewardCard"
+    );
+
+    const button=$(
+      "p959ClaimStarter"
+    );
+
+    const status=$(
+      "p959RewardStatus"
+    );
+
+    const delta=$(
+      "p959RewardDelta"
+    );
+
+    card?.classList.toggle(
+      "claimed",
+      rewardClaimed
+    );
+
+    button?.classList.toggle(
+      "claimed",
+      rewardClaimed
+    );
+
+    if(button){
+      button.disabled=
+        rewardClaimed||busy;
+
+      button.textContent=
+        rewardClaimed
+          ?"รับแล้ว ✓"
+          :"รับ Starter Reward";
+    }
+
+    if(status){
+      status.textContent=
+        rewardClaimed
+          ?"รางวัลนี้ถูกบันทึกเข้าบัญชีแล้ว"
+          :"พร้อมรับครั้งเดียวสำหรับบัญชีนี้";
+    }
+
+    if(delta){
+      if(
+        rewardClaimed
+        &&rewardDelta>0
+      ){
+        delta.textContent=
+          `+${rewardDelta.toLocaleString()}`;
+
+        delta.classList.remove(
+          "hidden"
+        );
+
+      }else{
+        delta.classList.add(
+          "hidden"
+        );
+      }
+    }
+
+    if(step===4){
+      const next=$("p959Next");
+
+      if(next){
+        next.textContent=
+          rewardClaimed
+            ?"เข้า POMRU"
+            :"เสร็จสิ้น";
+      }
+    }
+  }
+
+  async function walletBalance(){
+    if(!user)return 0;
+
+    const c=client();
+    if(!c)return 0;
+
+    try{
+      const {
+        data,
+        error
+      }=await c
+        .from("bb_wallets")
+        .select("coin_balance")
+        .eq("user_id",user.id)
+        .maybeSingle();
+
+      if(error)throw error;
+
+      return Math.max(
+        0,
+        Number(
+          data?.coin_balance
+        )||0
+      );
+
+    }catch(_){
+      return 0;
+    }
+  }
+
+  async function refreshRewardStatus(){
+    if(!user)return;
+
+    const c=client();
+    if(!c)return;
+
+    try{
+      const {
+        data,
+        error
+      }=await c
+        .from(
+          "bb_reward_claims"
+        )
+        .select(
+          "reward_code"
+        )
+        .eq(
+          "user_id",
+          user.id
+        )
+        .in(
+          "reward_code",
+          [
+            "starter_100",
+            "starter_500"
+          ]
+        )
+        .limit(1);
+
+      if(error)throw error;
+
+      rewardClaimed=
+        !!data?.length;
+
+      paintReward();
+
+    }catch(_){
+      paintReward();
+    }
+  }
+
+  async function saveName(){
+    if(!user)return false;
+
+    const input=$(
+      "p959PlayerName"
+    );
+
+    const hint=$(
+      "p959NameHint"
+    );
+
+    const name=String(
+      input?.value||""
+    )
+    .trim()
+    .replace(/\s+/g," ")
+    .slice(0,24);
+
+    if(name.length<2){
+      if(hint){
+        hint.textContent=
+          "กรุณาตั้งชื่ออย่างน้อย 2 ตัวอักษร";
+
+        hint.classList.add(
+          "error"
+        );
+      }
+
+      input?.focus();
+      return false;
+    }
+
+    hint?.classList.remove(
+      "error"
+    );
+
+    if(hint){
+      hint.textContent=
+        "ชื่อนี้เปลี่ยนได้ภายหลังใน Profile";
+    }
+
+    const c=client();
+
+    if(!c)return false;
+
+    try{
+      const {
+        error
+      }=await c
+        .from("profiles")
+        .upsert(
+          {
+            id:user.id,
+            display_name:name
+          },
+          {
+            onConflict:"id"
+          }
+        );
+
+      if(error)throw error;
+
+      const meta={
+        ...(user.user_metadata||{}),
+        display_name:name,
+        full_name:name
+      };
+
+      const {
+        data:updateData,
+        error:updateError
+      }=await c.auth.updateUser({
+        data:meta
+      });
+
+      if(updateError)throw updateError;
+
+      if(updateData?.user){
+        user=updateData.user;
+      }
+
+      try{
+        const local=JSON.parse(
+          localStorage.getItem(
+            "bb_profile"
+          )||"{}"
+        );
+
+        local.name=name;
+
+        localStorage.setItem(
+          "bb_profile",
+          JSON.stringify(local)
+        );
+      }catch(_){}
+
+      try{
+        await window.POMRUProgress
+          ?.refresh?.(
+            "onboarding-name"
+          );
+      }catch(_){}
+
+      try{
+        window.POMRUMember
+          ?.renderProfile?.();
+      }catch(_){}
+
+      return true;
+
+    }catch(e){
+      if(hint){
+        hint.textContent=
+          "บันทึกชื่อไม่สำเร็จ กรุณาลองอีกครั้ง";
+
+        hint.classList.add(
+          "error"
+        );
+      }
+
+      return false;
+    }
+  }
+
+  async function claimReward(){
+    if(
+      !user
+      ||rewardClaimed
+      ||busy
+    ){
+      return;
+    }
+
+    const c=client();
+    if(!c)return;
+
+    busy=true;
+    paintReward();
+
+    const button=$(
+      "p959ClaimStarter"
+    );
+
+    if(button){
+      button.textContent=
+        "กำลังรับ…";
+    }
+
+    try{
+      const before=
+        await walletBalance();
+
+      const {
+        error
+      }=await c.rpc(
+        "bb_claim_starter_coins"
+      );
+
+      if(error){
+        const msg=String(
+          error.message||""
+        );
+
+        if(
+          !/already|claimed|starter/i
+            .test(msg)
+        ){
+          throw error;
+        }
+      }
+
+      const after=
+        await walletBalance();
+
+      rewardDelta=Math.max(
+        0,
+        after-before
+      );
+
+      rewardClaimed=true;
+
+      try{
+        await window.bbLoadShop?.();
+      }catch(_){}
+
+      try{
+        await window.POMRUProgress
+          ?.refresh?.(
+            "starter-reward"
+          );
+      }catch(_){}
+
+      document.dispatchEvent(
+        new CustomEvent(
+          "pomru:progress-updated"
+        )
+      );
+
+    }catch(e){
+      const status=$(
+        "p959RewardStatus"
+      );
+
+      if(status){
+        status.textContent=
+          String(
+            e?.message
+            ||"รับรางวัลไม่สำเร็จ ลองใหม่อีกครั้ง"
+          );
+      }
+
+    }finally{
+      busy=false;
+      paintReward();
+    }
+  }
+
+  async function markDone(){
+    if(!user)return;
+
+    const c=client();
+
+    const meta={
+      ...(user.user_metadata||{}),
+      pomru_onboarding_v1:true,
+      pomru_first_subject:
+        selectedSubject
+        ||"memory"
+    };
+
+    try{
+      const {
+        data,
+        error
+      }=await c.auth.updateUser({
+        data:meta
+      });
+
+      if(!error&&data?.user){
+        user=data.user;
+      }
+    }catch(_){}
+
+    try{
+      localStorage.setItem(
+        localKey(user.id),
+        "done"
+      );
+
+      localStorage.setItem(
+        "pomru_first_subject",
+        selectedSubject
+        ||"memory"
+      );
+    }catch(_){}
+  }
+
+  function applyFirstSubject(){
+    const subject=
+      selectedSubject||"memory";
+
+    window.POMRU_RANKED_SUBJECT=
+      subject;
+
+    try{
+      window.POMRURankSubject
+        ?.choose?.(subject);
+    }catch(_){}
+  }
+
+  async function finish({
+    skipped=false
+  }={}){
+    if(!user)return;
+
+    if(!skipped&&step===1){
+      const ok=await saveName();
+      if(!ok)return;
+    }
+
+    await markDone();
+    applyFirstSubject();
+
+    close();
+
+    try{
+      document
+        .querySelector(
+          '[data-app-go="home"]'
+        )
+        ?.click?.();
+    }catch(_){}
+
+    try{
+      await window.POMRUNotifications
+        ?.refresh?.();
+    }catch(_){}
+
+    try{
+      await window.POMRUFourRanks
+        ?.refresh?.();
+    }catch(_){}
+
+    const toast=
+      document.getElementById(
+        "toast"
+      );
+
+    if(
+      !skipped
+      &&typeof window.toast===
+        "function"
+    ){
+      try{
+        window.toast(
+          "พร้อมแล้ว! เริ่มเล่นกับ Buddy ได้เลย"
+        );
+      }catch(_){}
+    }else if(toast&&!skipped){
+      toast.textContent=
+        "พร้อมแล้ว! เริ่มเล่นกับ Buddy ได้เลย";
+    }
+  }
+
+  async function next(){
+    if(busy)return;
+
+    if(step===1){
+      busy=true;
+
+      const ok=
+        await saveName();
+
+      busy=false;
+
+      if(!ok)return;
+
+      setStep(2);
+      return;
+    }
+
+    if(step===2){
+      setStep(3);
+      return;
+    }
+
+    if(step===3){
+      if(!selectedSubject){
+        const hint=$(
+          "p959SubjectHint"
+        );
+
+        if(hint){
+          hint.textContent=
+            "เลือกหมวดแรกก่อนนะ";
+
+          hint.classList.add(
+            "error"
+          );
+        }
+
+        return;
+      }
+
+      setStep(4);
+      return;
+    }
+
+    await finish();
+  }
+
+  function back(){
+    if(step<=1)return;
+
+    setStep(
+      step-1
+    );
+  }
+
+  async function loadUser(){
+    const c=client();
+    if(!c?.auth)return null;
+
+    try{
+      const {
+        data
+      }=await c.auth.getUser();
+
+      user=
+        data?.user||null;
+
+      return user;
+
+    }catch(_){
+      user=null;
+      return null;
+    }
+  }
+
+  async function open({
+    manual=false
+  }={}){
+    const c=client();
+
+    if(!c)return;
+
+    if(!user){
+      await loadUser();
+    }
+
+    if(!user)return;
+
+    openReason=
+      manual
+        ?"manual"
+        :"auto";
+
+    step=1;
+    rewardDelta=0;
+
+    selectedSubject=
+      user.user_metadata
+        ?.pomru_first_subject
+      ||localStorage.getItem(
+          "pomru_first_subject"
+        )
+      ||null;
+
+    const input=$(
+      "p959PlayerName"
+    );
+
+    if(input){
+      input.value=
+        profileNameFallback();
+    }
+
+    paintSubject();
+
+    rewardClaimed=false;
+    await refreshRewardStatus();
+
+    const overlay=$(
+      "p959Onboarding"
+    );
+
+    overlay?.classList.remove(
+      "hidden"
+    );
+
+    overlay?.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+    document.body.classList.add(
+      "p959OnboardingOpen"
+    );
+
+    setStep(1);
+
+    setTimeout(
+      ()=>input?.focus?.(),
+      160
+    );
+  }
+
+  function close(){
+    const overlay=$(
+      "p959Onboarding"
+    );
+
+    overlay?.classList.add(
+      "hidden"
+    );
+
+    overlay?.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    document.body.classList.remove(
+      "p959OnboardingOpen"
+    );
+  }
+
+  function shouldAutoShow(u){
+    if(!u)return false;
+
+    if(
+      u.user_metadata
+        ?.pomru_onboarding_v1===
+        true
+    ){
+      return false;
+    }
+
+    try{
+      if(
+        localStorage.getItem(
+          localKey(u.id)
+        )==="done"
+      ){
+        return false;
+      }
+    }catch(_){}
+
+    const created=
+      new Date(
+        u.created_at||0
+      ).getTime();
+
+    if(!Number.isFinite(created)){
+      return false;
+    }
+
+    const age=
+      Date.now()-created;
+
+    return (
+      age>=0
+      &&age<=AUTO_WINDOW_MS
+    );
+  }
+
+  async function accountLooksFresh(u){
+    const c=client();
+
+    if(!c||!u)return false;
+
+    try{
+      const [
+        profileResult,
+        rewardResult
+      ]=await Promise.allSettled([
+        c.from("profiles")
+          .select("xp")
+          .eq("id",u.id)
+          .maybeSingle(),
+
+        c.from("bb_reward_claims")
+          .select("reward_code")
+          .eq("user_id",u.id)
+          .in(
+            "reward_code",
+            [
+              "starter_100",
+              "starter_500"
+            ]
+          )
+          .limit(1)
+      ]);
+
+      if(
+        profileResult.status===
+          "fulfilled"
+        &&!profileResult.value?.error
+        &&Number(
+          profileResult.value?.data?.xp
+        )>0
+      ){
+        return false;
+      }
+
+      if(
+        rewardResult.status===
+          "fulfilled"
+        &&!rewardResult.value?.error
+        &&rewardResult.value?.data
+          ?.length
+      ){
+        return false;
+      }
+
+      return true;
+
+    }catch(_){
+      // Fall back to account age instead of trapping user.
+      return true;
+    }
+  }
+
+  async function checkAuto(){
+    if(
+      isOpen()
+      ||busy
+    ){
+      return;
+    }
+
+    const u=await loadUser();
+
+    if(!u)return;
+
+    if(
+      autoCheckedUserId===
+        u.id
+    ){
+      return;
+    }
+
+    autoCheckedUserId=u.id;
+
+    if(!shouldAutoShow(u)){
+      return;
+    }
+
+    const fresh=
+      await accountLooksFresh(u);
+
+    if(!fresh){
+      return;
+    }
+
+    setTimeout(
+      ()=>open({
+        manual:false
+      }),
+      650
+    );
+  }
+
+  $("p959Next")
+    ?.addEventListener(
+      "click",
+      next
+    );
+
+  $("p959Back")
+    ?.addEventListener(
+      "click",
+      back
+    );
+
+  $("p959SkipTop")
+    ?.addEventListener(
+      "click",
+      ()=>finish({
+        skipped:true
+      })
+    );
+
+  $("p959RewardSkip")
+    ?.addEventListener(
+      "click",
+      ()=>finish()
+    );
+
+  $("p959ClaimStarter")
+    ?.addEventListener(
+      "click",
+      claimReward
+    );
+
+  $("p959ReplayOnboarding")
+    ?.addEventListener(
+      "click",
+      ()=>{
+        document
+          .getElementById(
+            "profileModal"
+          )
+          ?.classList.add(
+            "hidden"
+          );
+
+        open({
+          manual:true
+        });
+      }
+    );
+
+  document
+    .querySelectorAll(
+      "[data-p959-subject]"
+    )
+    .forEach(btn=>{
+      btn.addEventListener(
+        "click",
+        ()=>{
+          selectedSubject=
+            btn.dataset
+              .p959Subject;
+
+          paintSubject();
+        }
+      );
+    });
+
+  $("p959PlayerName")
+    ?.addEventListener(
+      "input",
+      ()=>{
+        const hint=$(
+          "p959NameHint"
+        );
+
+        if(hint){
+          hint.classList.remove(
+            "error"
+          );
+
+          hint.textContent=
+            "2–24 ตัวอักษร";
+        }
+      }
+    );
+
+  document.addEventListener(
+    "keydown",
+    e=>{
+      if(!isOpen())return;
+
+      if(e.key==="Escape"){
+        e.preventDefault();
+
+        finish({
+          skipped:true
+        });
+
+        return;
+      }
+
+      if(
+        e.key==="Enter"
+        &&document.activeElement
+          ?.id!=="p959ClaimStarter"
+      ){
+        e.preventDefault();
+        next();
+      }
+    }
+  );
+
+  const boot=()=>{
+    setTimeout(
+      checkAuto,
+      1600
+    );
+
+    const c=client();
+
+    try{
+      c?.auth
+        ?.onAuthStateChange?.(
+          (event,session)=>{
+            if(
+              event==="SIGNED_OUT"
+            ){
+              user=null;
+              autoCheckedUserId=null;
+              close();
+              return;
+            }
+
+            if(session?.user){
+              user=session.user;
+
+              if(
+                autoCheckedUserId!==
+                  user.id
+              ){
+                setTimeout(
+                  checkAuto,
+                  850
+                );
+              }
+            }
+          }
+        );
+    }catch(_){}
+  };
+
+  window.POMRUOnboarding={
+    open:()=>open({
+      manual:true
+    }),
+    close,
+    check:checkAuto,
+    getStep:()=>step,
+    getSubject:()=>
+      selectedSubject
+  };
+
+  if(
+    document.readyState===
+      "loading"
+  ){
+    document.addEventListener(
+      "DOMContentLoaded",
+      boot,
+      {
+        once:true
+      }
+    );
+  }else{
+    boot();
+  }
+
+})();
+</script>
+
+
+<div
+  class="p960NetworkBanner hidden"
+  id="p960NetworkBanner"
+  role="status"
+  aria-live="polite"
+>
+  <span class="p960NetworkDot"></span>
+
+  <div>
+    <b id="p960NetworkTitle">
+      การเชื่อมต่อขาดหาย
+    </b>
+
+    <small id="p960NetworkText">
+      POMRU จะเชื่อมต่อให้อัตโนมัติเมื่ออินเทอร์เน็ตกลับมา
+    </small>
+  </div>
+
+  <strong id="p960NetworkState">
+    OFFLINE
+  </strong>
+</div>
+
+
+<aside
+  class="p960DebugPanel hidden"
+  id="p960DebugPanel"
+  aria-label="POMRU Diagnostics"
+>
+  <header>
+    <div>
+      <small>PRODUCTION DIAGNOSTICS</small>
+      <b>POMRU v96.3</b>
+    </div>
+
+    <button
+      type="button"
+      id="p960DebugClose"
+      aria-label="ปิด"
+    >×</button>
+  </header>
+
+  <div id="p960DebugList"></div>
+
+  <footer>
+    เปิดแผงนี้ด้วย
+    <code>?pomru_debug=1</code>
+  </footer>
+</aside>
+
+
+<script id="pomru-v960-production-runtime">
+(function(){
+  "use strict";
+
+  const $=id=>document.getElementById(id);
+
+  const VERSION="96.3";
+
+  const clickTimes=new WeakMap();
+  const submitTimes=new WeakMap();
+
+  let reconnectTimer=null;
+  let onlineFlashTimer=null;
+  let healthCache=null;
+
+  const CRITICAL_CLICK_SELECTOR=[
+    "#p94RankedStartBtn",
+    "#p953PlayAgain",
+    "#p953AddOpponentFriend",
+    "#p956ClaimDaily",
+    "#p957PlayerPrimary",
+    "#p957PlayerChallenge",
+    "#p958SharePlayerCard",
+    "#p958ShareNow",
+    "#p958SaveImage",
+    "#p959Next",
+    "#p959ClaimStarter",
+    "#bbRankedForfeitBtn",
+    "[data-p956-friend-accept]",
+    "[data-p956-friend-decline]",
+    "[data-p956-invite-accept]",
+    "[data-p956-invite-decline]"
+  ].join(",");
+
+  const NETWORK_ACTION_SELECTOR=[
+    "#p94RankedStartBtn",
+    "#p953PlayAgain",
+    "#p956ClaimDaily",
+    "#p957PlayerPrimary",
+    "#p957PlayerChallenge",
+    "#p959ClaimStarter"
+  ].join(",");
+
+  function client(){
+    return window.__bbSupabase
+      ||window.sb
+      ||null;
+  }
+
+  function safeText(value){
+    return String(
+      value??""
+    )
+    .replace(/\s+/g," ")
+    .trim();
+  }
+
+  function safeError(error){
+    const raw=safeText(
+      error?.message
+      ||error
+      ||""
+    );
+
+    const low=raw.toLowerCase();
+
+    if(
+      low.includes(
+        "failed to fetch"
+      )
+      ||low.includes(
+        "network"
+      )
+      ||low.includes(
+        "load failed"
+      )
+    ){
+      return "เชื่อมต่ออินเทอร์เน็ตไม่สำเร็จ กรุณาลองอีกครั้ง";
+    }
+
+    if(
+      low.includes(
+        "authentication_required"
+      )
+      ||low.includes("jwt")
+    ){
+      return "กรุณาเข้าสู่ระบบใหม่";
+    }
+
+    if(
+      low.includes(
+        "rate"
+      )
+      &&low.includes(
+        "limit"
+      )
+    ){
+      return "ทำรายการเร็วเกินไป กรุณารอสักครู่";
+    }
+
+    if(
+      low.includes(
+        "already_in_another_room"
+      )
+    ){
+      return "กำลังออกจากห้องเดิม กรุณาลองจับคู่อีกครั้ง";
+    }
+
+    if(
+      low.includes(
+        "ranked_content_not_ready"
+      )
+    ){
+      return "เนื้อหาระดับนี้ยังไม่พร้อมสำหรับ Ranked";
+    }
+
+    if(
+      low.includes(
+        "chat_rate_limited"
+      )
+    ){
+      return "ส่งข้อความเร็วเกินไป กรุณารอสักครู่";
+    }
+
+    if(
+      low.includes(
+        "disconnect_grace_active"
+      )
+    ){
+      return "กำลังให้เวลาคู่แข่งเชื่อมต่อกลับ";
+    }
+
+    return raw
+      ||"เกิดข้อผิดพลาด กรุณาลองใหม่";
+  }
+
+  function isTransient(error){
+    const raw=safeText(
+      error?.message
+      ||error
+      ||""
+    ).toLowerCase();
+
+    return (
+      raw.includes(
+        "failed to fetch"
+      )
+      ||raw.includes(
+        "network"
+      )
+      ||raw.includes(
+        "load failed"
+      )
+      ||raw.includes(
+        "timeout"
+      )
+      ||raw.includes(
+        "temporarily"
+      )
+    );
+  }
+
+  function sleep(ms){
+    return new Promise(
+      resolve=>setTimeout(
+        resolve,
+        ms
+      )
+    );
+  }
+
+  async function retry(
+    fn,
+    {
+      attempts=2,
+      delay=450
+    }={}
+  ){
+    let last;
+
+    for(
+      let index=0;
+      index<attempts;
+      index++
+    ){
+      try{
+        return await fn(
+          index
+        );
+      }catch(error){
+        last=error;
+
+        if(
+          !isTransient(error)
+          ||index>=attempts-1
+        ){
+          throw error;
+        }
+
+        await sleep(
+          delay*(index+1)
+        );
+      }
+    }
+
+    throw last;
+  }
+
+  function banner(){
+    return $(
+      "p960NetworkBanner"
+    );
+  }
+
+  function disableNetworkActions(){
+    document
+      .querySelectorAll(
+        NETWORK_ACTION_SELECTOR
+      )
+      .forEach(el=>{
+        if(
+          !el.disabled
+          &&!el.hasAttribute(
+            "data-p960-offline-disabled"
+          )
+        ){
+          el.setAttribute(
+            "data-p960-offline-disabled",
+            "1"
+          );
+
+          el.setAttribute(
+            "aria-disabled",
+            "true"
+          );
+        }
+      });
+  }
+
+  function restoreNetworkActions(){
+    document
+      .querySelectorAll(
+        '[data-p960-offline-disabled="1"]'
+      )
+      .forEach(el=>{
+        el.removeAttribute(
+          "data-p960-offline-disabled"
+        );
+
+        el.removeAttribute(
+          "aria-disabled"
+        );
+      });
+  }
+
+  function showOffline(){
+    clearTimeout(
+      onlineFlashTimer
+    );
+
+    const root=banner();
+
+    if(!root)return;
+
+    root.classList.remove(
+      "hidden",
+      "online"
+    );
+
+    $("p960NetworkTitle").textContent=
+      "อินเทอร์เน็ตขาดการเชื่อมต่อ";
+
+    $("p960NetworkText").textContent=
+      window.BB_RANKED_ACTIVE
+        ?"เกมจะให้เวลา Reconnect และเชื่อมต่อกลับอัตโนมัติ"
+        :"POMRU จะเชื่อมต่อใหม่เมื่ออินเทอร์เน็ตกลับมา";
+
+    $("p960NetworkState").textContent=
+      "OFFLINE";
+
+    disableNetworkActions();
+  }
+
+  function showOnline(){
+    restoreNetworkActions();
+
+    const root=banner();
+
+    if(!root)return;
+
+    root.classList.remove(
+      "hidden"
+    );
+
+    root.classList.add(
+      "online"
+    );
+
+    $("p960NetworkTitle").textContent=
+      "กลับมาออนไลน์แล้ว";
+
+    $("p960NetworkText").textContent=
+      "กำลังซิงก์ข้อมูลล่าสุด";
+
+    $("p960NetworkState").textContent=
+      "ONLINE";
+
+    clearTimeout(
+      onlineFlashTimer
+    );
+
+    onlineFlashTimer=setTimeout(
+      ()=>{
+        root.classList.add(
+          "hidden"
+        );
+
+        root.classList.remove(
+          "online"
+        );
+      },
+      1600
+    );
+  }
+
+  async function refreshAfterReconnect(){
+    if(
+      !navigator.onLine
+    ){
+      return;
+    }
+
+    if(reconnectTimer){
+      clearTimeout(
+        reconnectTimer
+      );
+    }
+
+    reconnectTimer=setTimeout(
+      async()=>{
+        const jobs=[
+          ()=>window.POMRUReconnect
+            ?.heartbeat?.(),
+          ()=>window.POMRUReconnect
+            ?.resume?.(),
+          ()=>window.POMRUNotifications
+            ?.refresh?.(),
+          ()=>window.POMRURankedContent
+            ?.refresh?.(),
+          ()=>window.POMRUDuel
+            ?.refresh?.(),
+          ()=>window.POMRUFourRanks
+            ?.refresh?.(),
+          ()=>window.POMRUMatchHistory
+            ?.refresh?.()
+        ];
+
+        for(const job of jobs){
+          try{
+            await retry(
+              async()=>{
+                const result=job();
+
+                if(
+                  result
+                  &&typeof result.then===
+                    "function"
+                ){
+                  await result;
+                }
+              },
+              {
+                attempts:2,
+                delay:350
+              }
+            );
+          }catch(_){}
+        }
+
+        runHealthCheck();
+
+      },
+      280
+    );
+  }
+
+  function reconcileBodyLocks(){
+    const mappings=[
+      [
+        "p956NotificationOpen",
+        "p956NotificationOverlay"
+      ],
+      [
+        "p957PlayerOpen",
+        "p957PlayerOverlay"
+      ],
+      [
+        "p958ShareOpen",
+        "p958ShareOverlay"
+      ],
+      [
+        "p959OnboardingOpen",
+        "p959Onboarding"
+      ],
+      [
+        "bbAccountModalOpen",
+        "accountModal"
+      ]
+    ];
+
+    mappings.forEach(
+      ([bodyClass,elementId])=>{
+        const el=$(elementId);
+
+        if(
+          !el
+          ||el.classList.contains(
+            "hidden"
+          )
+        ){
+          document.body
+            .classList
+            .remove(
+              bodyClass
+            );
+        }
+      }
+    );
+
+    // Do not remove Ranked classes while a live match is active.
+    if(
+      !window.BB_RANKED_ACTIVE
+      &&!window.__bbRankedMatch?.id
+    ){
+      const waiting=
+        document.querySelector(
+          ".bbRankedWaiting:not(.hidden)"
+        );
+
+      if(!waiting){
+        document.body
+          .classList
+          .remove(
+            "bbRankedWaiting"
+          );
+      }
+    }
+  }
+
+  function duplicateIdCount(){
+    const seen=new Set();
+    let duplicates=0;
+
+    document
+      .querySelectorAll("[id]")
+      .forEach(el=>{
+        if(seen.has(el.id)){
+          duplicates++;
+        }else{
+          seen.add(el.id);
+        }
+      });
+
+    return duplicates;
+  }
+
+  async function currentSession(){
+    const c=client();
+
+    if(!c?.auth){
+      return null;
+    }
+
+    try{
+      const {
+        data
+      }=await c.auth.getSession();
+
+      return data?.session||null;
+
+    }catch(_){
+      return null;
+    }
+  }
+
+  function criticalDomChecks(){
+    const ids=[
+      "p92MemberGate",
+      "p898FeedBtn",
+      "p94RankedModeBtn",
+      "p94RankedStartBtn",
+      "p951GameChat",
+      "p953PlayAgain",
+      "p956NotificationSummary",
+      "p957PlayerOverlay",
+      "p959Onboarding"
+    ];
+
+    const missing=
+      ids.filter(
+        id=>!$(id)
+      );
+
+    return {
+      ok:missing.length===0,
+      missing
+    };
+  }
+
+  async function runHealthCheck(){
+    const session=
+      await currentSession();
+
+    const dom=
+      criticalDomChecks();
+
+    const duplicateIds=
+      duplicateIdCount();
+
+    healthCache={
+      version:VERSION,
+      timestamp:
+        new Date().toISOString(),
+      online:
+        navigator.onLine,
+      supabase:
+        !!client(),
+      authenticated:
+        !!session?.user,
+      user_id:
+        session?.user?.id||null,
+      duplicate_ids:
+        duplicateIds,
+      critical_dom:
+        dom,
+      ranked_active:
+        !!window.BB_RANKED_ACTIVE,
+      ranked_match_id:
+        window.__bbRankedMatch?.id
+        ||window.__bbRankedMatch
+          ?.match_id
+        ||null,
+      reconnect:
+        !!window.POMRUReconnect,
+      notifications:
+        !!window.POMRUNotifications,
+      content_preflight:
+        !!window.POMRURankedContent,
+      player_card:
+        !!window.POMRUPlayerCard,
+      onboarding:
+        !!window.POMRUOnboarding
+    };
+
+    renderDebug(
+      healthCache
+    );
+
+    return healthCache;
+  }
+
+  function checkRow(
+    label,
+    ok,
+    detail="",
+    state=null
+  ){
+    const cls=
+      ok===true
+        ?"ok"
+        :ok===false
+          ?"bad"
+          :"warn";
+
+    return `
+      <div class="p960Check ${cls}">
+        <i></i>
+
+        <div>
+          <b>${label}</b>
+          <small>${detail||""}</small>
+        </div>
+
+        <strong>
+          ${
+            state
+            ||(
+              ok===true
+                ?"OK"
+                :ok===false
+                  ?"ERROR"
+                  :"CHECK"
+            )
+          }
+        </strong>
+      </div>
+    `;
+  }
+
+  function renderDebug(data){
+    const host=$(
+      "p960DebugList"
+    );
+
+    if(!host||!data)return;
+
+    host.innerHTML=[
+      checkRow(
+        "Internet",
+        data.online,
+        navigator.onLine
+          ?"อุปกรณ์ออนไลน์"
+          :"อุปกรณ์ออฟไลน์"
+      ),
+
+      checkRow(
+        "Supabase Client",
+        data.supabase,
+        data.supabase
+          ?"Client พร้อม"
+          :"ไม่พบ Supabase client"
+      ),
+
+      checkRow(
+        "Authentication",
+        data.authenticated
+          ?true
+          :null,
+        data.authenticated
+          ?"มี session สมาชิก"
+          :"ยังไม่ได้ Login",
+        data.authenticated
+          ?"SIGNED IN"
+          :"SIGNED OUT"
+      ),
+
+      checkRow(
+        "DOM Integrity",
+        data.critical_dom?.ok,
+        data.critical_dom?.ok
+          ?"พบ UI สำคัญครบ"
+          :"ขาด: "
+            +(
+              data.critical_dom
+                ?.missing
+                ?.join(", ")
+              ||"unknown"
+            )
+      ),
+
+      checkRow(
+        "Duplicate IDs",
+        data.duplicate_ids===0,
+        `${data.duplicate_ids} จุด`
+      ),
+
+      checkRow(
+        "Ranked Recovery",
+        data.reconnect,
+        data.ranked_active
+          ?`Match ${data.ranked_match_id||"active"}`
+          :"พร้อมใช้เมื่อเข้า Ranked"
+      ),
+
+      checkRow(
+        "Notifications",
+        data.notifications,
+        data.notifications
+          ?"Controller พร้อม"
+          :"Controller ไม่พบ"
+      ),
+
+      checkRow(
+        "Content Preflight",
+        data.content_preflight,
+        data.content_preflight
+          ?"Ranked content check พร้อม"
+          :"Controller ไม่พบ"
+      ),
+
+      checkRow(
+        "Player Card",
+        data.player_card,
+        data.player_card
+          ?"Player Card พร้อม"
+          :"Controller ไม่พบ"
+      ),
+
+      checkRow(
+        "Onboarding",
+        data.onboarding,
+        data.onboarding
+          ?"First-time flow พร้อม"
+          :"Controller ไม่พบ"
+      )
+    ].join("");
+  }
+
+  function maybeShowDebug(){
+    const params=
+      new URLSearchParams(
+        location.search
+      );
+
+    if(
+      params.get(
+        "pomru_debug"
+      )!=="1"
+    ){
+      return;
+    }
+
+    $("p960DebugPanel")
+      ?.classList.remove(
+        "hidden"
+      );
+
+    runHealthCheck();
+  }
+
+  // ----------------------------------------------------------
+  // Click de-duplication:
+  // first click passes through; only rapid repeated click blocked.
+  // ----------------------------------------------------------
+  document.addEventListener(
+    "click",
+    event=>{
+      const target=
+        event.target.closest?.(
+          CRITICAL_CLICK_SELECTOR
+        );
+
+      if(!target)return;
+
+      const now=
+        performance.now();
+
+      const previous=
+        clickTimes.get(
+          target
+        )||0;
+
+      if(
+        now-previous<650
+      ){
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        return;
+      }
+
+      clickTimes.set(
+        target,
+        now
+      );
+
+      target.classList.add(
+        "p960TapBusy"
+      );
+
+      setTimeout(
+        ()=>target.classList.remove(
+          "p960TapBusy"
+        ),
+        420
+      );
+    },
+    true
+  );
+
+
+  // ----------------------------------------------------------
+  // Login/signup/recovery accidental double submit protection.
+  // ----------------------------------------------------------
+  document.addEventListener(
+    "submit",
+    event=>{
+      const form=event.target;
+
+      if(
+        !form?.matches?.(
+          "#loginForm,#signupForm,#recoveryForm"
+        )
+      ){
+        return;
+      }
+
+      const now=
+        performance.now();
+
+      const previous=
+        submitTimes.get(
+          form
+        )||0;
+
+      if(
+        now-previous<1400
+      ){
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        return;
+      }
+
+      submitTimes.set(
+        form,
+        now
+      );
+    },
+    true
+  );
+
+
+  window.addEventListener(
+    "offline",
+    ()=>{
+      showOffline();
+      runHealthCheck();
+    },
+    {
+      passive:true
+    }
+  );
+
+
+  window.addEventListener(
+    "online",
+    ()=>{
+      showOnline();
+      refreshAfterReconnect();
+    },
+    {
+      passive:true
+    }
+  );
+
+
+  window.addEventListener(
+    "pageshow",
+    ()=>{
+      setTimeout(
+        ()=>{
+          reconcileBodyLocks();
+
+          if(
+            navigator.onLine
+          ){
+            refreshAfterReconnect();
+          }else{
+            showOffline();
+          }
+        },
+        180
+      );
+    },
+    {
+      passive:true
+    }
+  );
+
+
+  document.addEventListener(
+    "visibilitychange",
+    ()=>{
+      if(
+        document.hidden
+      ){
+        return;
+      }
+
+      reconcileBodyLocks();
+
+      if(
+        navigator.onLine
+      ){
+        refreshAfterReconnect();
+      }else{
+        showOffline();
+      }
+    }
+  );
+
+
+  // Keep body lock classes aligned with overlays without polling.
+  const observer=
+    new MutationObserver(
+      ()=>{
+        reconcileBodyLocks();
+      }
+    );
+
+  [
+    "p956NotificationOverlay",
+    "p957PlayerOverlay",
+    "p958ShareOverlay",
+    "p959Onboarding",
+    "accountModal"
+  ]
+  .map($)
+  .filter(Boolean)
+  .forEach(el=>{
+    observer.observe(
+      el,
+      {
+        attributes:true,
+        attributeFilter:[
+          "class"
+        ]
+      }
+    );
+  });
+
+
+  $("p960DebugClose")
+    ?.addEventListener(
+      "click",
+      ()=>{
+        $("p960DebugPanel")
+          ?.classList.add(
+            "hidden"
+          );
+      }
+    );
+
+
+  // Do not interrupt game with generic alert.
+  // We only log unhandled errors and expose a safe message for diagnostics.
+  window.addEventListener(
+    "unhandledrejection",
+    event=>{
+      const error=
+        event.reason;
+
+      if(
+        isTransient(error)
+        &&!navigator.onLine
+      ){
+        showOffline();
+      }
+
+      console.warn(
+        "POMRU unhandled:",
+        safeError(error)
+      );
+    }
+  );
+
+
+  function boot(){
+    reconcileBodyLocks();
+
+    if(
+      !navigator.onLine
+    ){
+      showOffline();
+    }
+
+    setTimeout(
+      ()=>{
+        runHealthCheck();
+        maybeShowDebug();
+      },
+      1800
+    );
+  }
+
+
+  window.POMRUProduction={
+    version:VERSION,
+    safeError,
+    retry,
+    refreshAfterReconnect,
+    reconcileBodyLocks,
+    runHealthCheck,
+    getHealth:()=>healthCache,
+    showDiagnostics:async()=>{
+      $("p960DebugPanel")
+        ?.classList.remove(
+          "hidden"
+        );
+
+      return await runHealthCheck();
+    }
+  };
+
+
+  if(
+    document.readyState===
+      "loading"
+  ){
+    document.addEventListener(
+      "DOMContentLoaded",
+      boot,
+      {
+        once:true
+      }
+    );
+  }else{
+    boot();
+  }
+
+})();
+</script>
+
+
+<script id="pomru-v961-qa-hotfix-runtime">
+(function(){
+  "use strict";
+
+  const $=id=>document.getElementById(id);
+
+  function visible(id){
+    const el=$(id);
+
+    return !!(
+      el
+      &&!el.classList.contains(
+        "hidden"
+      )
+    );
+  }
+
+  function clearResultShortcutIfStale(){
+    const at=Number(
+      window.POMRU_LAST_RANKED_RESULT_AT
+    )||0;
+
+    if(
+      !at
+      ||Date.now()-at
+        >15*60*1000
+    ){
+      try{
+        window.POMRUNotifications
+          ?.clearRematch?.();
+      }catch(_){}
+    }
+  }
+
+  function closeTopmost(){
+    // Onboarding owns its own Escape handler because it must mark completion.
+    if(visible("p959Onboarding")){
+      return false;
+    }
+
+    if(visible("p958ShareOverlay")){
+      document.getElementById(
+        "p958ShareClose"
+      )?.click?.();
+
+      return true;
+    }
+
+    if(visible("p957PlayerOverlay")){
+      window.POMRUPlayerCard
+        ?.close?.();
+
+      return true;
+    }
+
+    if(visible("p956NotificationOverlay")){
+      window.POMRUNotifications
+        ?.close?.();
+
+      return true;
+    }
+
+    return false;
+  }
+
+  function cleanupSignedOutState(){
+    try{
+      window.POMRUNotifications
+        ?.close?.();
+    }catch(_){}
+
+    try{
+      window.POMRUPlayerCard
+        ?.close?.();
+    }catch(_){}
+
+    try{
+      document.getElementById(
+        "p958ShareOverlay"
+      )?.classList.add(
+        "hidden"
+      );
+    }catch(_){}
+
+    try{
+      window.POMRUReconnect
+        ?.stop?.();
+    }catch(_){}
+
+    try{
+      window.POMRUNotifications
+        ?.clearRematch?.();
+    }catch(_){}
+
+    window.BB_RANKED_ACTIVE=false;
+    window.__bbRankedMatch=null;
+    window.POMRU_RANKED_ROOM_ID=null;
+    window.POMRU_RANKED_ROOM_CODE=null;
+    window.POMRU_RANKED_HOST_ID=null;
+
+    document.body.classList.remove(
+      "bbRankedPlaying",
+      "bbRankedWaiting",
+      "bbGameActive",
+      "p956NotificationOpen",
+      "p957PlayerOpen",
+      "p958ShareOpen"
+    );
+
+    try{
+      window.POMRUProduction
+        ?.reconcileBodyLocks?.();
+    }catch(_){}
+  }
+
+  document.addEventListener(
+    "keydown",
+    event=>{
+      if(event.key!=="Escape"){
+        return;
+      }
+
+      if(closeTopmost()){
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    },
+    true
+  );
+
+  document.addEventListener(
+    "pomru:ranked-game-started",
+    clearResultShortcutIfStale
+  );
+
+  document.addEventListener(
+    "visibilitychange",
+    ()=>{
+      if(!document.hidden){
+        clearResultShortcutIfStale();
+      }
+    }
+  );
+
+  window.addEventListener(
+    "pageshow",
+    clearResultShortcutIfStale,
+    {
+      passive:true
+    }
+  );
+
+  const c=
+    window.__bbSupabase
+    ||window.sb
+    ||null;
+
+  try{
+    c?.auth?.onAuthStateChange?.(
+      (event)=>{
+        if(event==="SIGNED_OUT"){
+          cleanupSignedOutState();
+        }
+      }
+    );
+  }catch(_){}
+
+  window.POMRUQA={
+    version:"96.3",
+    closeTopmost,
+    cleanupSignedOutState,
+    clearResultShortcutIfStale
+  };
+
+  clearResultShortcutIfStale();
+
+})();
+</script>
+
+<script id="pomru-v962-ranked-integrity-runtime">
+(function(){
+  "use strict";
+
+  const VERSION="96.3";
+
+  function clearMatchGlobals(){
+    window.POMRU_RANKED_ROOM_ID=null;
+    window.POMRU_RANKED_ROOM_CODE=null;
+    window.POMRU_RANKED_HOST_ID=null;
+    window.POMRU_RANKED_MATCHMAKING_RESULT=null;
+    document.body.classList.remove("p951RankedQuickStart");
+  }
+
+  function snapshot(){
+    let queue={};
+    try{queue=window.POMRURankedQueue?.debug?.()||{}}catch(_){}
+
+    const result=window.POMRU_RANKED_MATCHMAKING_RESULT||null;
+
+    return {
+      version:VERSION,
+      ranked_active:!!window.BB_RANKED_ACTIVE,
+      ranked_playing:document.body.classList.contains("bbRankedPlaying"),
+      queue,
+      room_id:result?.room_id||window.POMRU_RANKED_ROOM_ID||null,
+      opponent_id:result?.opponent_id||null,
+      validated_at:result?.__validated_at||null
+    };
+  }
+
+  function cleanupSignedOut(){
+    try{window.POMRURankedQueue?.cancel?.()}catch(_){}
+    if(!window.BB_RANKED_ACTIVE)clearMatchGlobals();
+  }
+
+  const c=window.__bbSupabase||window.sb||null;
+  try{
+    c?.auth?.onAuthStateChange?.(event=>{
+      if(event==="SIGNED_OUT")cleanupSignedOut();
+    });
+  }catch(_){}
+
+  window.POMRURankedIntegrity={
+    version:VERSION,
+    snapshot,
+    clearStale:()=>{
+      if(window.BB_RANKED_ACTIVE)return false;
+      clearMatchGlobals();
+      return true;
+    }
+  };
+})();
+</script>
+
+
+<script id="pomru-v963-server-integrity-marker">
+window.POMRUServerIntegrity=Object.freeze({
+  version:"96.3",
+  profileProgressAuthority:"server",
+  legacyLeaderboardClientWrites:false,
+  requiresDatabasePatch:"pomru-v96-3-server-integrity.sql"
+});
+</script>
 </body>
 </html>
