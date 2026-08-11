@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>POMRU • ผมรู้ — v96.3 Server Integrity</title>
+<title>POMRU • ผมรู้ — v97.1 Buddy Battle</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -21053,7 +21053,7 @@ button{
       <button class="p91GameCard sand" data-hsk-quiz="hanzi_pinyin" data-hsk-title="汉字 → Pinyin"><span class="p91GameIcon">拼</span><span><b>汉字 → Pinyin</b><small>เลือกพินอินพร้อมวรรณยุกต์ให้ถูกต้อง</small><em><span data-hsk-complete-label>ครบ 150 คำ</span></em></span><i>›</i></button>
       <button class="p91GameCard blue" data-hsk-quiz="pinyin_hanzi" data-hsk-title="Pinyin → 汉字"><span class="p91GameIcon">P</span><span><b>Pinyin → 汉字</b><small>ดูพินอิน แล้วเลือกคำจีนที่ตรงกัน</small><em><span data-hsk-complete-label>ครบ 150 คำ</span></em></span><i>›</i></button>
       <button class="p91GameCard lavender" data-hsk-quiz="listen_hanzi" data-hsk-title="ฟัง → 汉字"><span class="p91GameIcon">เสียง</span><span><b>ฟัง → 汉字</b><small>ฟังการออกเสียง แล้วเลือกคำจีนที่ได้ยิน</small><em><span data-hsk-complete-label>ครบ 150 คำ</span></em></span><i>›</i></button>
-      <button class="p91GameCard aqua" data-hsk-quiz="mix" data-hsk-title="HSK Mix"><span class="p91GameIcon">MIX</span><span><b>HSK Mix</b><small>สุ่มความหมาย พินอิน ตัวอักษร และการฟัง</small><em><span data-hsk-complete-label>ครบ 150 คำ</span></em></span><i>›</i></button>
+      <button class="p91GameCard aqua" data-hsk-quiz="mix" data-hsk-title="HSK Mix"><span class="p91GameIcon">MIX</span><span><b>HSK Mix</b><small>สุ่มความหมาย พินอิน และตัวอักษร</small><em><span data-hsk-complete-label>ครบ 150 คำ</span></em></span><i>›</i></button>
     </div>
 
     <section class="p91Panel hidden" id="bbEnglishLevelSelector">
@@ -21837,7 +21837,7 @@ function startTimer(expire){stopTimer();if(!cfg.timer)return;$("timer").classLis
 const MODE_POINTS={position:100,match:80,missing:120,swap:150,change:130,sequence:160};
 const DIFF_MULT={easy:1,normal:1.25,hard:1.5,expert:2};
 function pointsPerCorrect(){return Math.round((MODE_POINTS[cfg.mode]||100)*(DIFF_MULT[effDiff()]||1))}
-function record(ok){roundAttempts++;if(ok){correct++;combo++;bestCombo=Math.max(bestCombo,combo);score+=pointsPerCorrect();sfx("ok")}else{combo=0;sfx("bad")}updateHUD();saveResume()}
+function record(ok){roundAttempts++;if(ok){correct++;combo++;bestCombo=Math.max(bestCombo,combo);score+=pointsPerCorrect();sfx("ok")}else{combo=0;sfx("bad")}if(window.BB_RANKED_ACTIVE&&cfg.mode==="position"){try{window.POMRUBuddyBattle?.submit?.(!!ok,Math.max(0,roundAttempts-1))}catch(_){}}updateHUD();saveResume()}
 function surprise(){return}
 function positionAsk(){stopTimer();if(asked.size>=qCount())return finishRound();const a=layout.map((_,i)=>i).filter(i=>!asked.has(i));if(!a.length)return finishRound();targetIndex=a[Math.floor((window.__bbRankedRng||Math.random)()*a.length)];asked.add(targetIndex);pickedIndex=null;state="position_target";renderTarget(targetIndex);showScene("target");setStatus("🧸","ดูรูปเป้าหมาย","จำว่าตัวนี้เคยอยู่ช่องไหน");setMain("พร้อมตอบ",positionAnswer);$("replayBtn").classList.add("hidden");updateHUD();sfx("flip");saveResume()}
 function bbAnswerTimer(expire){
@@ -22660,20 +22660,13 @@ window.addEventListener("load",()=>{
     chinese_hanzi_meaning:"汉",chinese_meaning_hanzi:"中",chinese_hanzi_pinyin:"拼",chinese_pinyin_hanzi:"字",chinese_listening:"🎧",chinese_mix:"🔥",
     english_vocabulary:"A",english_multiple_choice:"🎯",english_matching:"🧩",english_typing:"⌨️",english_sentence_order:"🔀",english_listening:"🎧"
   };
+  // POMRU v97.1: Ranked is intentionally one clear tap-answer battle per world.
+  // Typing/listening are removed from competitive play until answer/audio quality is deterministic.
   const FALLBACK_CATALOG=[
     ["teddy_position","teddy","จำตำแหน่ง",1],
-    ["teddy_match","teddy","จับคู่",2],
-    ["teddy_sequence","teddy","จำลำดับ",3],
     ["math_multiple_choice","math","เลือกคำตอบ",1],
-    ["math_typing","math","พิมพ์คำตอบ",2],
-    ["math_mix","math","Math Mix",3],
-    ["chinese_hanzi_meaning","chinese","คำศัพท์จีน",1],
-    ["chinese_hanzi_pinyin","chinese","พินอิน",2],
-    ["chinese_listening","chinese","ฝึกฟัง",3],
-    ["chinese_mix","chinese","Chinese Mix",4],
-    ["english_vocabulary","english","Vocabulary",1],
-    ["english_typing","english","Typing",2],
-    ["english_listening","english","Listening",3]
+    ["chinese_hanzi_meaning","chinese","汉字 → ความหมาย",1],
+    ["english_vocabulary","english","Vocabulary",1]
   ].map(x=>({mode_code:x[0],world:x[1],name_th:x[2],sort_order:x[3]}));
   const POMRU_ALLOWED_RANKED_MODES=new Set(FALLBACK_CATALOG.map(x=>x.mode_code));
 
@@ -27607,6 +27600,10 @@ document.addEventListener('DOMContentLoaded', () => {
           math_level:row.level_code
         }));
 
+        if(type==="all"){
+          data=data.filter(row=>["multiple_choice","matching"].includes(row.content_type));
+        }
+
         all=(allResult.data||[]).map(row=>({
           ...row,
           subject:"math",
@@ -28353,8 +28350,7 @@ document.addEventListener('DOMContentLoaded', () => {
       "hanzi_meaning",
       "meaning_hanzi",
       "hanzi_pinyin",
-      "pinyin_hanzi",
-      "listen_hanzi"
+      "pinyin_hanzi"
     ])[0];
   }
 
@@ -29450,6 +29446,11 @@ document.addEventListener('DOMContentLoaded', () => {
       scored:false
     };
 
+    try{
+      const battleCorrect=norm(clean(value))===norm(qn.answer);
+      window.POMRUBuddyBattle?.submit?.(battleCorrect,idx);
+    }catch(_){}
+
     p954SaveLearningCheckpoint();
 
     q("#bbRLLocked").classList.remove("hidden");
@@ -29470,6 +29471,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const question=session.data.questions[index];
     const a=session.answers[index]||{locked:false,value:"",answerMs:ANSWER_MS,scored:false};
+
+    if(!a.locked){
+      try{window.POMRUBuddyBattle?.submit?.(false,index)}catch(_){}
+    }
 
     if(!a.scored){
       const ok=a.locked && (
@@ -29549,6 +29554,7 @@ document.addEventListener('DOMContentLoaded', () => {
     q("#bbRankedLearningOverlay").classList.add("hidden");
     q("#bbRankedLearningOverlay").setAttribute("aria-hidden","true");
     document.body.classList.remove("bbRankedLearningPlaying");
+    try{window.POMRUBuddyBattle?.markFinishing?.()}catch(_){}
 
     const matchId=session.data.match.id;
     prepared.delete(matchId);
@@ -34397,6 +34403,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function injectEnglishMix(){
+    // v97.1: English Mix is paused until every included item is a deterministic tap-answer mode.
+    return;
     const grid=$("bbEnglishGameGrid");
     if(!grid||grid.querySelector('[data-learning-type="all"]'))return;
     const b=document.createElement("button");
@@ -38890,6 +38898,33 @@ document.addEventListener('DOMContentLoaded', () => {
       ||null;
   }
 
+  const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+
+  async function waitForAuthenticatedSession(c){
+    const delays=[0,220,520,950,1450];
+    for(const delay of delays){
+      if(delay)await sleep(delay);
+      try{
+        const {data,error}=await c.auth.getSession();
+        if(error)throw error;
+        if(data?.session?.user)return data.session.user;
+      }catch(e){
+        if(delay===delays[delays.length-1])throw e;
+      }
+    }
+    return null;
+  }
+
+  function drawAuthRequired(){
+    const root=$("p955ContentStatus");
+    root?.classList.remove("checking","ready");
+    root?.classList.add("blocked");
+    if($("p955StatusTitle"))$("p955StatusTitle").textContent="กรุณาเข้าสู่ระบบเพื่อเล่น Ranked";
+    if($("p955StatusText"))$("p955StatusText").textContent="เข้าสู่ระบบแล้วระบบจะตรวจคลัง Ranked ให้อัตโนมัติ";
+    if($("p955StatusCount"))$("p955StatusCount").textContent="LOGIN";
+    setButtonReady(false);
+  }
+
   function selectedSubject(){
     return (
       window.POMRURankSubject
@@ -39037,6 +39072,12 @@ document.addEventListener('DOMContentLoaded', () => {
     drawLoading();
 
     try{
+      const authUser=await waitForAuthenticatedSession(c);
+      if(!authUser){
+        if(myToken===token)drawAuthRequired();
+        return {subject_code:subject,is_ready:false,error:"authentication_required"};
+      }
+
       const {
         data,
         error
@@ -39093,12 +39134,27 @@ document.addEventListener('DOMContentLoaded', () => {
       $("p955StatusTitle").textContent=
         "ยังตรวจคลัง Ranked ไม่สำเร็จ";
 
-      $("p955StatusText").textContent=
-        msg.includes(
-          "bb_ranked_content_status"
-        )
-          ?"กรุณารัน Step F4 ใน Supabase ก่อน"
-          :"ลองรีเฟรชแล้วตรวจอีกครั้ง";
+      const normalized=msg.toLowerCase();
+      const isAuth=
+        normalized.includes("authentication_required")
+        ||normalized.includes("jwt")
+        ||normalized.includes("permission denied");
+
+      if(isAuth){
+        $("p955StatusTitle").textContent=
+          "เซสชัน Ranked ยังไม่พร้อม";
+        $("p955StatusText").textContent=
+          "ระบบกำลังเชื่อมบัญชีใหม่ • ลองเปิด Ranked อีกครั้ง";
+      }else if(msg.includes("bb_ranked_content_status")){
+        $("p955StatusText").textContent=
+          "ฟังก์ชันตรวจคลัง Ranked ยังไม่พร้อมใน Supabase";
+      }else{
+        const shortMsg=msg.replace(/\s+/g," ").trim().slice(0,120);
+        $("p955StatusText").textContent=
+          shortMsg
+            ?`ตรวจคลังไม่สำเร็จ • ${shortMsg}`
+            :"ลองรีเฟรชแล้วตรวจอีกครั้ง";
+      }
 
       $("p955StatusCount").textContent=
         "!";
@@ -39200,6 +39256,16 @@ document.addEventListener('DOMContentLoaded', () => {
       ),
       1250
     );
+
+    const c=client();
+    try{
+      c?.auth?.onAuthStateChange?.((_event,session)=>{
+        if(session?.user){
+          setTimeout(()=>check(selectedSubject(),true),180);
+          setTimeout(()=>check(selectedSubject(),true),700);
+        }
+      });
+    }catch(_){}
   };
 
   if(
@@ -43857,7 +43923,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <header>
     <div>
       <small>PRODUCTION DIAGNOSTICS</small>
-      <b>POMRU v96.3</b>
+      <b>POMRU v96.3.1</b>
     </div>
 
     <button
@@ -45122,5 +45188,271 @@ window.POMRUServerIntegrity=Object.freeze({
   requiresDatabasePatch:"pomru-v96-3-server-integrity.sql"
 });
 </script>
+
+
+<!-- ==========================================================
+     POMRU v97.1 — BUDDY BATTLE + CORE LOOP CLARITY
+     ========================================================== -->
+<style id="pomru-v971-buddy-battle-style">
+/* ---------- Simplify casual game choice: fixed-answer, tap-first ---------- */
+#bbAppMathGames [data-learning-type="typing"],
+#bbAppMathGames [data-learning-type="listening"],
+#bbAppMathGames [data-learning-type="sentence_order"],
+#bbChineseGameGrid [data-hsk-quiz="meaning_hanzi"],
+#bbChineseGameGrid [data-hsk-quiz="pinyin_hanzi"],
+#bbChineseGameGrid [data-hsk-quiz="listen_hanzi"],
+#bbEnglishGameGrid [data-learning-type="typing"],
+#bbEnglishGameGrid [data-learning-type="listening"],
+#bbEnglishGameGrid [data-learning-type="sentence_order"],
+#bbEnglishGameGrid [data-learning-type="all"]{display:none!important}
+
+/* Bring back deterministic tap modes that older UI hid. */
+#bbAppMathGames [data-learning-type="matching"],
+#bbAppMathGames [data-learning-type="all"],
+#bbEnglishGameGrid [data-learning-type="vocabulary"],
+#bbEnglishGameGrid [data-learning-type="multiple_choice"],
+#bbEnglishGameGrid [data-learning-type="matching"]{display:grid!important}
+
+/* ---------- Home: one primary relationship meter, needs become contextual ---------- */
+body.bbCandyHome .p89Vitals{display:none!important}
+.p971BuddyPulse{
+  position:relative;z-index:18;width:min(560px,76%);margin:14px auto 0;
+  display:grid;grid-template-columns:42px minmax(0,1fr) auto;align-items:center;gap:10px;
+  padding:9px 11px;border-radius:20px;border:1.5px solid rgba(122,79,150,.12);
+  background:rgba(255,255,255,.94);box-shadow:0 8px 22px rgba(82,52,92,.10)
+}
+.p971BondHeart{width:42px;height:42px;border-radius:15px;display:grid;place-items:center;background:#ffe2ee;font-size:23px}
+.p971BondCopy small{display:block;font-size:7px;letter-spacing:.12em;font-weight:1000;color:#a4778e}
+.p971BondCopy b{display:block;font-size:12px;color:#594654;margin-top:1px}
+.p971BondTrack{height:7px;margin-top:5px;border-radius:999px;background:#eee7ed;overflow:hidden}
+.p971BondTrack i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,#ff72ae,#8b6bf0);transition:width .28s ease}
+.p971MoodPill{white-space:nowrap;padding:8px 10px;border-radius:999px;background:#f5f0ff;color:#6b55a2;font-size:9px;font-weight:1000}
+.p971MoodPill.hungry{background:#fff1dc;color:#9d6817}.p971MoodPill.tired{background:#eef1ff;color:#5c67a6}.p971MoodPill.sad{background:#eaf7ff;color:#3e7b9b}.p971MoodPill.great{background:#eafff3;color:#2e8a62}
+
+/* ---------- Ranked Battle HUD ---------- */
+.p971BattleHud{
+  position:fixed;z-index:260500;left:50%;top:max(8px,env(safe-area-inset-top));transform:translateX(-50%);
+  width:min(950px,calc(100% - 18px));min-height:100px;box-sizing:border-box;
+  display:grid;grid-template-columns:minmax(0,1fr) 96px minmax(0,1fr);align-items:center;gap:8px;
+  padding:8px 10px;border:1px solid rgba(255,255,255,.35);border-radius:26px;
+  background:linear-gradient(135deg,rgba(48,37,75,.96),rgba(110,63,126,.96));
+  box-shadow:0 14px 40px rgba(30,18,46,.28);color:#fff;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)
+}
+.p971BattleHud.hidden{display:none!important}
+.p971Fighter{min-width:0;display:grid;grid-template-columns:72px minmax(0,1fr);align-items:center;gap:8px}
+.p971Fighter.right{grid-template-columns:minmax(0,1fr) 72px;text-align:right}.p971Fighter.right .p971FighterArt{grid-column:2}.p971Fighter.right .p971FighterInfo{grid-column:1;grid-row:1}
+.p971FighterArt{position:relative;width:72px;height:78px;display:grid;place-items:end center}
+.p971FighterArt img{max-width:70px;max-height:76px;object-fit:contain;filter:drop-shadow(0 6px 7px rgba(0,0,0,.18));transform-origin:center bottom}
+.p971FighterInfo{min-width:0}.p971FighterInfo small{display:block;font-size:7px;letter-spacing:.12em;color:#d9cfea;font-weight:1000}.p971FighterInfo b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;margin:1px 0 5px}
+.p971HpLine{display:flex;align-items:center;gap:7px}.p971Fighter.right .p971HpLine{flex-direction:row-reverse}
+.p971HpTrack{flex:1;min-width:0;height:12px;padding:2px;border-radius:999px;background:rgba(255,255,255,.14);box-shadow:inset 0 1px 4px rgba(0,0,0,.18)}
+.p971HpTrack i{display:block;width:100%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#72e5a8,#e9ed6d);transition:width .35s cubic-bezier(.2,.75,.25,1)}
+.p971Fighter.right .p971HpTrack i{margin-left:auto;background:linear-gradient(90deg,#ffcf73,#ff7f9f)}
+.p971HpNum{width:38px;font-size:9px;font-weight:1000;color:#fff}
+.p971BattleCenter{text-align:center}.p971BattleCenter strong{display:block;font-size:23px;line-height:1}.p971BattleCenter b{display:block;margin-top:2px;font-size:9px}.p971BattleCenter small{display:block;margin-top:2px;color:#d8cce8;font-size:7px;font-weight:850}
+.p971BattleToast{position:fixed;z-index:260510;left:50%;top:118px;transform:translate(-50%,-8px);padding:8px 12px;border-radius:999px;background:#fff;color:#5b4566;font-size:10px;font-weight:1000;box-shadow:0 9px 24px rgba(34,22,48,.22);opacity:0;pointer-events:none;transition:.2s}
+.p971BattleToast.show{opacity:1;transform:translate(-50%,0)}
+.p971FighterArt.hit img{animation:p971Hit .38s ease}.p971FighterArt.attack img{animation:p971Attack .40s ease}
+@keyframes p971Hit{30%{transform:translateX(-8px) rotate(-5deg)}60%{transform:translateX(6px) rotate(3deg)}100%{transform:none}}
+@keyframes p971Attack{45%{transform:translateX(10px) scale(1.06)}100%{transform:none}}
+.p971Fighter.right .p971FighterArt.attack img{animation-name:p971AttackR}
+@keyframes p971AttackR{45%{transform:translateX(-10px) scale(1.06)}100%{transform:none}}
+
+body.p971BattleActive.bbRankedLearningPlaying .bbRankLearnTop{padding-top:112px!important}
+body.p971BattleActive.bbRankedLearningPlaying .bbRankLearnShell{margin-top:10px!important}
+body.p971BattleActive.bbRankedPlaying:not(.bbRankedLearningPlaying) #game{padding-top:108px!important;box-sizing:border-box}
+
+@media(max-width:760px){
+  .p971BuddyPulse{width:calc(100% - 20px);grid-template-columns:36px minmax(0,1fr) auto;margin-top:8px;padding:7px 8px;border-radius:16px}.p971BondHeart{width:36px;height:36px;font-size:19px}.p971MoodPill{padding:6px 7px;font-size:7px}
+  .p971BattleHud{min-height:82px;grid-template-columns:minmax(0,1fr) 58px minmax(0,1fr);gap:4px;padding:6px;border-radius:19px}
+  .p971Fighter{grid-template-columns:48px minmax(0,1fr);gap:4px}.p971Fighter.right{grid-template-columns:minmax(0,1fr) 48px}.p971FighterArt{width:48px;height:58px}.p971FighterArt img{max-width:47px;max-height:57px}.p971FighterInfo small{display:none}.p971FighterInfo b{font-size:8px;margin-bottom:4px}.p971HpTrack{height:9px}.p971HpNum{width:29px;font-size:7px}.p971BattleCenter strong{font-size:16px}.p971BattleCenter b{font-size:7px}.p971BattleCenter small{font-size:6px}.p971BattleToast{top:98px;font-size:8px;max-width:90%;text-align:center}
+  body.p971BattleActive.bbRankedLearningPlaying .bbRankLearnTop{padding-top:92px!important}
+  body.p971BattleActive.bbRankedPlaying:not(.bbRankedLearningPlaying) #game{padding-top:90px!important}
+}
+@media(prefers-reduced-motion:reduce){.p971FighterArt.hit img,.p971FighterArt.attack img{animation:none!important}.p971HpTrack i,.p971BattleToast,.p971BondTrack i{transition:none!important}}
+</style>
+
+<div id="p971BattleHud" class="p971BattleHud hidden" aria-hidden="true">
+  <section class="p971Fighter left">
+    <div class="p971FighterArt" id="p971SelfArt"><img src="/assets/buddy/default-pink-buddy.png?v=971" alt="Buddy ของฉัน"></div>
+    <div class="p971FighterInfo"><small>YOU</small><b id="p971SelfName">คุณ</b><div class="p971HpLine"><div class="p971HpTrack"><i id="p971SelfHpBar"></i></div><span class="p971HpNum" id="p971SelfHp">100 HP</span></div></div>
+  </section>
+  <div class="p971BattleCenter"><strong>VS</strong><b id="p971BattleRound">BUDDY BATTLE</b><small>ถูกก่อน • เร็วกว่าโจมตี</small></div>
+  <section class="p971Fighter right">
+    <div class="p971FighterArt" id="p971OppArt"><img src="/assets/buddy/default-pink-buddy.png?v=971" alt="Buddy คู่แข่ง"></div>
+    <div class="p971FighterInfo"><small>RIVAL</small><b id="p971OppName">คู่แข่ง</b><div class="p971HpLine"><div class="p971HpTrack"><i id="p971OppHpBar"></i></div><span class="p971HpNum" id="p971OppHp">100 HP</span></div></div>
+  </section>
+</div>
+<div class="p971BattleToast" id="p971BattleToast" role="status"></div>
+
+<script id="pomru-v971-buddy-battle-runtime">
+(function(){
+  "use strict";
+  const $=id=>document.getElementById(id);
+  const FAIR_WINDOW_MS=500; // Ignore tiny differences likely to be latency/noise.
+  const MAX_HP=100;
+  const state={match:null,user:null,opponent:null,rows:[],channel:null,poll:null,submitted:new Set(),resolved:new Set(),finishing:false,toastTimer:null};
+
+  function client(){return window.__bbSupabase||window.sb||null}
+  function clamp(v,a,b){return Math.max(a,Math.min(b,Number(v)||0))}
+  function ts(v){const n=Date.parse(v||"");return Number.isFinite(n)?n:0}
+  function safe(v){return String(v??"").trim()}
+  function show(on){const h=$("p971BattleHud");if(!h)return;h.classList.toggle("hidden",!on);h.setAttribute("aria-hidden",on?"false":"true");document.body.classList.toggle("p971BattleActive",!!on)}
+  function toast(msg){const e=$("p971BattleToast");if(!e)return;e.textContent=msg;e.classList.add("show");clearTimeout(state.toastTimer);state.toastTimer=setTimeout(()=>e.classList.remove("show"),1700)}
+  function animate(which,kind){const e=$(which==="self"?"p971SelfArt":"p971OppArt");if(!e)return;e.classList.remove("hit","attack");void e.offsetWidth;e.classList.add(kind);setTimeout(()=>e.classList.remove(kind),480)}
+
+  function outcome(selfRow,oppRow){
+    if(!selfRow||!oppRow)return {self:0,opp:0,text:""};
+    const s=!!selfRow.is_correct,o=!!oppRow.is_correct;
+    if(s&&!o)return {self:0,opp:16,text:"โจมตีสำเร็จ • คู่แข่ง -16 HP",winner:"self"};
+    if(!s&&o)return {self:16,opp:0,text:"คู่แข่งตอบถูก • คุณ -16 HP",winner:"opp"};
+    if(!s&&!o)return {self:0,opp:0,text:"พลาดทั้งคู่ • ไม่เสีย HP"};
+    const delta=Math.abs(ts(selfRow.submitted_at)-ts(oppRow.submitted_at));
+    if(delta<=FAIR_WINDOW_MS)return {self:0,opp:0,text:"สูสีมาก • เสมอรอบนี้"};
+    const dmg=clamp(7+Math.floor((delta-FAIR_WINDOW_MS)/700)*2,7,15);
+    if(ts(selfRow.submitted_at)<ts(oppRow.submitted_at))return {self:0,opp:dmg,text:`เร็วกว่า ${(delta/1000).toFixed(1)} วิ • คู่แข่ง -${dmg} HP`,winner:"self"};
+    return {self:dmg,opp:0,text:`คู่แข่งเร็วกว่า ${(delta/1000).toFixed(1)} วิ • คุณ -${dmg} HP`,winner:"opp"};
+  }
+
+  function calculate(){
+    if(!state.user?.id||!state.opponent?.id)return {selfHp:MAX_HP,oppHp:MAX_HP,last:null};
+    const by=new Map();
+    for(const r of state.rows){
+      const i=Number(r.question_index);if(!Number.isFinite(i))continue;
+      if(!by.has(i))by.set(i,{});
+      const box=by.get(i);
+      if(r.user_id===state.user.id)box.self=r;
+      else if(r.user_id===state.opponent.id)box.opp=r;
+    }
+    let selfHp=MAX_HP,oppHp=MAX_HP,last=null;
+    [...by.keys()].sort((a,b)=>a-b).forEach(i=>{
+      const box=by.get(i);if(!box.self||!box.opp)return;
+      const o=outcome(box.self,box.opp);
+      selfHp=clamp(selfHp-o.self,0,MAX_HP);oppHp=clamp(oppHp-o.opp,0,MAX_HP);
+      last={i,o};
+      const key=String(i);
+      if(!state.resolved.has(key)){
+        state.resolved.add(key);
+        if(o.text)toast(o.text);
+        if(o.winner==="self"){animate("self","attack");animate("opp","hit")}
+        if(o.winner==="opp"){animate("opp","attack");animate("self","hit")}
+      }
+    });
+    return {selfHp,oppHp,last};
+  }
+
+  function render(){
+    const r=calculate();
+    $("p971SelfHpBar")&&( $("p971SelfHpBar").style.width=r.selfHp+"%" );
+    $("p971OppHpBar")&&( $("p971OppHpBar").style.width=r.oppHp+"%" );
+    $("p971SelfHp")&&( $("p971SelfHp").textContent=Math.round(r.selfHp)+" HP" );
+    $("p971OppHp")&&( $("p971OppHp").textContent=Math.round(r.oppHp)+" HP" );
+    if(r.last&&$("p971BattleRound"))$("p971BattleRound").textContent="ROUND "+(r.last.i+1);
+  }
+
+  async function loadFighters(matchId){
+    const c=client();if(!c||!state.user)return;
+    const {data:players,error}=await c.from("ranked_match_players").select("user_id,seat").eq("match_id",matchId);
+    if(error)throw error;
+    const rows=Array.isArray(players)?players:[];
+    const opp=rows.find(x=>x.user_id!==state.user.id);
+    if(!opp)return;
+    state.opponent={id:opp.user_id,name:"คู่แข่ง"};
+    try{
+      const {data:profiles}=await c.from("profiles").select("id,display_name,avatar_url").in("id",[state.user.id,opp.user_id]);
+      const ps=Array.isArray(profiles)?profiles:[];
+      const me=ps.find(x=>x.id===state.user.id),other=ps.find(x=>x.id===opp.user_id);
+      $("p971SelfName")&&($("p971SelfName").textContent=safe(me?.display_name)||"คุณ");
+      $("p971OppName")&&($("p971OppName").textContent=safe(other?.display_name)||"คู่แข่ง");
+      state.opponent.name=safe(other?.display_name)||"คู่แข่ง";
+    }catch(_){}
+  }
+
+  async function refresh(){
+    const c=client(),id=state.match?.id;if(!c||!id)return;
+    try{
+      const {data,error}=await c.from("bb_ranked_battle_answers")
+        .select("match_id,question_index,user_id,is_correct,submitted_at")
+        .eq("match_id",id)
+        .order("question_index",{ascending:true});
+      if(error)throw error;
+      state.rows=Array.isArray(data)?data:[];render();
+    }catch(e){console.warn("POMRU Buddy Battle refresh:",e?.message||e)}
+  }
+
+  function cleanupChannel(){
+    const c=client();
+    if(state.channel&&c){try{c.removeChannel(state.channel)}catch(_){try{state.channel.unsubscribe()}catch(__){}}}
+    state.channel=null;if(state.poll){clearInterval(state.poll);state.poll=null}
+  }
+
+  async function start(match){
+    const id=match?.id||match?.match_id;if(!id)return;
+    if(state.match?.id===id&&state.channel){show(true);return}
+    cleanupChannel();state.match={...match,id};state.rows=[];state.submitted.clear();state.resolved.clear();state.finishing=false;
+    const c=client();if(!c)return;
+    try{
+      const {data}=await c.auth.getSession();state.user=data?.session?.user||null;
+      if(!state.user)return;
+      await loadFighters(id);show(true);await refresh();
+      state.channel=c.channel("pomru-battle-"+id+"-"+Math.random().toString(36).slice(2))
+        .on("postgres_changes",{event:"*",schema:"public",table:"bb_ranked_battle_answers",filter:`match_id=eq.${id}`},()=>refresh())
+        .subscribe();
+      state.poll=setInterval(refresh,900);
+    }catch(e){console.warn("POMRU Buddy Battle start:",e?.message||e);show(false)}
+  }
+
+  async function submit(correct,index){
+    if(state.finishing)return;
+    const match=window.__bbRankedMatch||state.match;
+    const id=match?.id||match?.match_id;if(!id)return;
+    if(!state.match||state.match.id!==id)await start(match);
+    const i=Math.max(0,Math.floor(Number(index)||0));const key=id+":"+i;
+    if(state.submitted.has(key))return;
+    state.submitted.add(key);
+    const c=client();if(!c)return;
+    try{
+      const {error}=await c.rpc("bb_ranked_battle_submit_answer",{p_match_id:id,p_question_index:i,p_is_correct:!!correct});
+      if(error)throw error;await refresh();
+    }catch(e){state.submitted.delete(key);console.warn("POMRU Buddy Battle submit:",e?.message||e)}
+  }
+
+  function markFinishing(){state.finishing=true;setTimeout(()=>{show(false);cleanupChannel()},2200)}
+  function stop(){show(false);cleanupChannel();state.match=null;state.user=null;state.opponent=null;state.rows=[];state.submitted.clear();state.resolved.clear();state.finishing=false}
+
+  window.POMRUBuddyBattle={start,submit,refresh,stop,markFinishing,snapshot:()=>({match_id:state.match?.id||null,opponent:state.opponent,rows:state.rows.length})};
+  document.addEventListener("pomru:ranked-game-started",e=>setTimeout(()=>start(window.__bbRankedMatch||{id:e.detail?.match_id}),80));
+  window.addEventListener("pageshow",()=>{if(window.BB_RANKED_ACTIVE&&window.__bbRankedMatch)setTimeout(()=>start(window.__bbRankedMatch),120)});
+  document.addEventListener("pomru:ranked-finished",markFinishing);
+})();
+
+/* Home relationship meter: keep hunger/happiness/energy internally, show only one primary meter + contextual mood. */
+(function(){
+  "use strict";
+  const $=id=>document.getElementById(id);
+  function ensure(){
+    if($("p971BuddyPulse"))return $("p971BuddyPulse");
+    const top=document.querySelector("#pomruPetHome .p89Topbar");if(!top)return null;
+    const el=document.createElement("section");el.id="p971BuddyPulse";el.className="p971BuddyPulse";
+    el.innerHTML='<span class="p971BondHeart">♥</span><div class="p971BondCopy"><small>BUDDY BOND</small><b id="p971BondLabel">ความผูกพันกับ Buddy</b><div class="p971BondTrack"><i id="p971BondBar"></i></div></div><span class="p971MoodPill" id="p971MoodPill">สดใส</span>';
+    top.insertAdjacentElement("afterend",el);return el;
+  }
+  function mood(s){const h=Number(s?.hunger??100),e=Number(s?.energy??100),happy=Number(s?.happiness??100);if(h<=30)return ["หิว • ให้อาหาร","hungry"];if(e<=25)return ["ง่วง • พักก่อน","tired"];if(happy<=30)return ["เหงา • มาเล่นกัน","sad"];if(h>=82&&e>=75&&happy>=82)return ["พร้อมลุย!","great"];return ["สดใส","happy"]}
+  function render(s){ensure();if(!s)return;const care=Math.max(0,Number(s.care_xp)||0),target=Math.max(1,Number(s.level_target)||500),progress=care%target;$("p971BondLabel")&&($("p971BondLabel").textContent="ความผูกพัน • "+care.toLocaleString()+" แต้ม");$("p971BondBar")&&($("p971BondBar").style.width=Math.min(100,progress/target*100)+"%");const m=mood(s),p=$("p971MoodPill");if(p){p.textContent=m[0];p.className="p971MoodPill "+m[1]}}
+  function sync(){try{render(window.BrainBuddyPet?.getState?.())}catch(_){} }
+  document.addEventListener("bb:pet-updated",e=>render(e.detail));document.addEventListener("pomru:core-synced",sync);window.addEventListener("pageshow",sync);
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(sync,500),{once:true});else setTimeout(sync,500);
+})();
+
+/* Remove legacy duel choices that rely on typing/listening; Battle keeps one clear mode per world. */
+(function(){
+  function clean(){
+    const allowed=new Set(["teddy_position","math_multiple_choice","chinese_hanzi_meaning","english_vocabulary"]);
+    document.querySelectorAll("#p93DuelMode option").forEach(o=>{if(!allowed.has(o.value))o.remove()});
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",clean,{once:true});else clean();
+})();
+</script>
+
 </body>
 </html>
