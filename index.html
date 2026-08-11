@@ -16657,6 +16657,167 @@ body.p941RankOpen .p89RankCard .p89RankRows{
 }
 </style>
 
+
+<style id="pomru-v95-four-subject-ranks-style">
+/* ============================================================
+   POMRU v95 — independent competitive rank for 4 subjects
+   ============================================================ */
+
+.p944SubjectGrid button{
+  position:relative;
+  padding-bottom:27px!important;
+}
+
+.p95SubjectRank{
+  position:absolute;
+  left:50%;
+  bottom:7px;
+  transform:translateX(-50%);
+  width:max-content;
+  max-width:calc(100% - 10px);
+  padding:3px 6px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  border-radius:999px;
+  background:#f5f0fa;
+  color:#725c69;
+  font-size:5.5px;
+  font-style:normal;
+  font-weight:1000;
+}
+
+.p944SubjectGrid button.active .p95SubjectRank{
+  background:#e9e1ff;
+  color:#6648ad;
+}
+
+/* Profile: four competitive ranks */
+.p95ProfileRanks{
+  grid-column:1/-1;
+}
+
+.p95ProfileRanksHead{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.p95ProfileRanksHead small{
+  display:block;
+  color:#9e768c;
+  font-size:6px;
+  font-weight:1000;
+  letter-spacing:.12em;
+}
+
+.p95ProfileRanksHead h3{
+  margin:2px 0 0!important;
+}
+
+.p95ProfileRanksHead>span{
+  padding:5px 8px;
+  border-radius:999px;
+  background:#f1ebff;
+  color:#6d50b4;
+  font-size:6px;
+  font-weight:1000;
+}
+
+.p95ProfileRankGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+}
+
+.p95ProfileRankGrid article{
+  min-height:74px;
+  padding:9px;
+  display:grid;
+  grid-template-columns:45px minmax(0,1fr) auto;
+  align-items:center;
+  gap:9px;
+  border:1px solid rgba(111,79,96,.08);
+  border-radius:16px;
+  background:#faf8fb;
+}
+
+.p95ProfileRankIcon{
+  width:45px;
+  height:45px;
+  display:grid;
+  place-items:center;
+  border-radius:14px;
+  background:#eee8ff;
+  color:#6d50b4;
+  font-size:19px;
+  font-weight:1000;
+}
+
+.p95ProfileRankGrid article:nth-child(1) .p95ProfileRankIcon{
+  background:#ffeaf3;
+}
+
+.p95ProfileRankGrid article:nth-child(2) .p95ProfileRankIcon{
+  background:#fff1d9;
+  color:#c47a2c;
+}
+
+.p95ProfileRankGrid article:nth-child(3) .p95ProfileRankIcon{
+  background:#eaf6ff;
+  color:#438fc8;
+}
+
+.p95ProfileRankGrid article:nth-child(4) .p95ProfileRankIcon{
+  background:#fff0ed;
+  color:#c85650;
+}
+
+.p95ProfileRankGrid small{
+  display:block;
+  color:#95818d;
+  font-size:6px;
+}
+
+.p95ProfileRankGrid b{
+  display:block;
+  margin-top:2px;
+  color:#4e3d4b;
+  font-size:11px;
+}
+
+.p95ProfileRankGrid em{
+  display:block;
+  margin-top:2px;
+  color:#7156a8;
+  font-size:6px;
+  font-style:normal;
+  font-weight:850;
+}
+
+.p95ProfileRankGrid strong{
+  color:#6b4fb0;
+  font-size:10px;
+  font-variant-numeric:tabular-nums;
+}
+
+.p95SingleSubjectResult{
+  grid-template-columns:1fr!important;
+}
+
+@media(max-width:760px){
+  .p95ProfileRankGrid{
+    grid-template-columns:1fr;
+  }
+
+  .p944SubjectGrid button{
+    min-height:98px!important;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -17958,8 +18119,44 @@ body.p941RankOpen .p89RankCard .p89RankRows{
           </div>
         </div>
         <div class="p92ProgressPair">
-          <div><small>แรงก์</small><b id="p92ProfileRank">มือใหม่</b></div>
+          <div><small>ระดับซีซัน</small><b id="p92ProfileRank">มือใหม่</b></div>
           <div><small>เหรียญ</small><b id="p92ProfileCoins">0</b></div>
+        </div>
+      </section>
+
+      <section class="p92ProfileSection p95ProfileRanks">
+        <div class="p95ProfileRanksHead">
+          <div>
+            <small>COMPETITIVE</small>
+            <h3>แรงก์แข่งขัน 4 หมวด</h3>
+          </div>
+          <span>แยกคะแนนกัน</span>
+        </div>
+
+        <div class="p95ProfileRankGrid">
+          <article data-p95-profile-subject="memory">
+            <span class="p95ProfileRankIcon">🧸</span>
+            <div><small>หมี • จับคู่</small><b id="p95ProfileMemoryTier">Bronze</b><em id="p95ProfileMemoryLevel">ง่าย • 2×2</em></div>
+            <strong id="p95ProfileMemoryPoints">0</strong>
+          </article>
+
+          <article data-p95-profile-subject="math">
+            <span class="p95ProfileRankIcon">÷</span>
+            <div><small>คณิต • เลือกคำตอบ</small><b id="p95ProfileMathTier">Bronze</b><em id="p95ProfileMathLevel">Math 1</em></div>
+            <strong id="p95ProfileMathPoints">0</strong>
+          </article>
+
+          <article data-p95-profile-subject="english">
+            <span class="p95ProfileRankIcon">A</span>
+            <div><small>อังกฤษ • Vocabulary</small><b id="p95ProfileEnglishTier">Bronze</b><em id="p95ProfileEnglishLevel">A1</em></div>
+            <strong id="p95ProfileEnglishPoints">0</strong>
+          </article>
+
+          <article data-p95-profile-subject="chinese">
+            <span class="p95ProfileRankIcon">汉</span>
+            <div><small>จีน • 汉字 → ความหมาย</small><b id="p95ProfileChineseTier">Bronze</b><em id="p95ProfileChineseLevel">HSK 1</em></div>
+            <strong id="p95ProfileChinesePoints">0</strong>
+          </article>
         </div>
       </section>
 
@@ -20868,6 +21065,32 @@ window.addEventListener("load",()=>{
     })[world]||{icon:"🧠",name:"Overall"};
   }
 
+  function subjectTierFromRP(rp){
+    rp=Math.max(0,Number(rp)||0);
+    if(rp>=20000)return {icon:"🏆",name:"Legend"};
+    if(rp>=12000)return {icon:"👑",name:"Master"};
+    if(rp>=7000)return {icon:"💎",name:"Diamond"};
+    if(rp>=3500)return {icon:"💠",name:"Platinum"};
+    if(rp>=1500)return {icon:"🥇",name:"Gold"};
+    if(rp>=500)return {icon:"🥈",name:"Silver"};
+    return {icon:"🥉",name:"Bronze"};
+  }
+
+  function rankedSubjectCode(){
+    return activeRankedMatch?.ranked_subject_code
+      ||window.POMRU_RANKED_SUBJECT
+      ||"memory";
+  }
+
+  function rankedSubjectLabel(){
+    return ({
+      memory:"หมี",
+      math:"คณิต",
+      english:"อังกฤษ",
+      chinese:"จีน"
+    })[rankedSubjectCode()]||"แรงก์";
+  }
+
   function thaiTierFromRP(rp){
     rp=Math.max(0,Number(rp)||0);
     const tiers=[
@@ -20906,22 +21129,20 @@ window.addEventListener("load",()=>{
   function showRankUpIfNeeded(mine){
     if(!mine||Number(mine.rp_change||0)<=0)return;
 
-    const beforeName=mine.overall_tier_before_name||thaiTierFromRP(mine.rp_before).name;
-    const beforeIcon=mine.overall_tier_before_icon||thaiTierFromRP(mine.rp_before).icon;
-    const afterName=mine.overall_tier_after_name||thaiTierFromRP(mine.rp_after).name;
-    const afterIcon=mine.overall_tier_after_icon||thaiTierFromRP(mine.rp_after).icon;
+    const before=subjectTierFromRP(mine.rp_before);
+    const after=subjectTierFromRP(mine.rp_after);
 
-    if(beforeName===afterName)return;
+    if(before.name===after.name)return;
 
-    const key=`${activeRankedMatch?.id||""}-${user?.id||""}-${afterName}`;
+    const key=`${activeRankedMatch?.id||""}-${user?.id||""}-${rankedSubjectCode()}-${after.name}`;
     if(lastRankUpKey===key)return;
     lastRankUpKey=key;
 
-    $("#bbRankUpIcon").textContent=afterIcon;
-    $("#bbRankUpTitle").textContent=afterName;
-    $("#bbRankUpText").textContent=`Overall RP ${Number(mine.rp_after||0).toLocaleString()} • ${fmtRPDelta(mine.rp_change)} RP`;
-    $("#bbRankUpBefore").textContent=`${beforeIcon} ${beforeName}`;
-    $("#bbRankUpAfter").textContent=`${afterIcon} ${afterName}`;
+    $("#bbRankUpIcon").textContent=after.icon;
+    $("#bbRankUpTitle").textContent=`${rankedSubjectLabel()} • ${after.name}`;
+    $("#bbRankUpText").textContent=`${Number(mine.rp_after||0).toLocaleString()} แต้มแรงก์ • ${fmtRPDelta(mine.rp_change)}`;
+    $("#bbRankUpBefore").textContent=`${before.icon} ${before.name}`;
+    $("#bbRankUpAfter").textContent=`${after.icon} ${after.name}`;
 
     $("#bbRankUpOverlay").classList.remove("hidden");
     $("#bbRankUpOverlay").setAttribute("aria-hidden","false");
@@ -21029,37 +21250,17 @@ window.addEventListener("load",()=>{
         <span class="bbPodiumPerformance">🔥 Performance ${Number(r.performance_score||0)}</span>
         ${r.forfeited
           ? '<small class="bbResultForfeit">ยอมแพ้ / ไม่จบ</small>'
-          : `<small class="bbPodiumDelta ${delta>=0?"positive":"negative"}">${fmtRPDelta(delta)} Overall RP</small>`
+          : `<small class="bbPodiumDelta ${delta>=0?"positive":"negative"}">${fmtRPDelta(delta)} ${esc(rankedSubjectLabel())} Rank</small>`
         }
       </div>`;
     }).join("");
 
     // ---------------- My report ----------------
     if(mine){
-      const beforeOverall={
-        icon:mine.overall_tier_before_icon||thaiTierFromRP(mine.rp_before).icon,
-        name:mine.overall_tier_before_name||thaiTierFromRP(mine.rp_before).name
-      };
-      const afterOverall={
-        icon:mine.overall_tier_after_icon||thaiTierFromRP(mine.rp_after).icon,
-        name:mine.overall_tier_after_name||thaiTierFromRP(mine.rp_after).name
-      };
-      const beforeWorld={
-        icon:mine.world_tier_before_icon||thaiTierFromRP(mine.world_rp_before).icon,
-        name:mine.world_tier_before_name||thaiTierFromRP(mine.world_rp_before).name
-      };
-      const afterWorld={
-        icon:mine.world_tier_after_icon||thaiTierFromRP(mine.world_rp_after).icon,
-        name:mine.world_tier_after_name||thaiTierFromRP(mine.world_rp_after).name
-      };
-
-      const [overallPos,worldPos]=await Promise.all([
-        fetchMyBoardPosition("overall"),
-        fetchMyBoardPosition(mine.ranked_world||"teddy")
-      ]);
-
-      const overallUp=beforeOverall.name!==afterOverall.name;
-      const worldUp=beforeWorld.name!==afterWorld.name;
+      const beforeSubject=subjectTierFromRP(mine.rp_before);
+      const afterSubject=subjectTierFromRP(mine.rp_after);
+      const subjectUp=beforeSubject.name!==afterSubject.name;
+      const subjectLabel=rankedSubjectLabel();
 
       $("#bbMyRank").innerHTML=`
         <div class="bbMyResultHero">
@@ -21078,41 +21279,29 @@ window.addEventListener("load",()=>{
           </div>
         </div>
 
-        <div class="bbMyResultRanks">
+        ${casualMatch?"":`
+        <div class="bbMyResultRanks p95SingleSubjectResult">
           <article class="bbResultRankCard">
             <div class="bbResultRankCardHead">
-              <span>🧠 OVERALL RANK</span>
-              <b>${afterOverall.icon} ${esc(afterOverall.name)}</b>
+              <span>🎯 ${esc(subjectLabel.toUpperCase())} RANK</span>
+              <b>${afterSubject.icon} ${esc(afterSubject.name)}</b>
             </div>
+
             <div class="bbResultRankNumbers">
               <strong>${Number(mine.rp_before||0).toLocaleString()}</strong>
               <i>→</i>
-              <strong>${Number(mine.rp_after||0).toLocaleString()} RP</strong>
+              <strong>${Number(mine.rp_after||0).toLocaleString()}</strong>
               <span class="bbResultRPDelta ${rpDeltaClass(mine.rp_change)}">${fmtRPDelta(mine.rp_change)}</span>
             </div>
-            <div class="bbResultTierPath ${overallUp?"rankup":""}">
-              ${beforeOverall.icon} ${esc(beforeOverall.name)} → ${afterOverall.icon} ${esc(afterOverall.name)}
-            </div>
-            ${overallPos?`<span class="bbResultBoardPosition">🇹🇭 Brain Buddy Overall #${Number(overallPos.rank_position).toLocaleString()}</span>`:""}
-          </article>
 
-          <article class="bbResultRankCard world">
-            <div class="bbResultRankCardHead">
-              <span>${world.icon} ${esc(world.name.toUpperCase())} RANK</span>
-              <b>${afterWorld.icon} ${esc(afterWorld.name)}</b>
+            <div class="bbResultTierPath ${subjectUp?"rankup":""}">
+              ${beforeSubject.icon} ${esc(beforeSubject.name)}
+              →
+              ${afterSubject.icon} ${esc(afterSubject.name)}
             </div>
-            <div class="bbResultRankNumbers">
-              <strong>${Number(mine.world_rp_before||0).toLocaleString()}</strong>
-              <i>→</i>
-              <strong>${Number(mine.world_rp_after||0).toLocaleString()} RP</strong>
-              <span class="bbResultRPDelta ${rpDeltaClass(mine.world_rp_change)}">${fmtRPDelta(mine.world_rp_change)}</span>
-            </div>
-            <div class="bbResultTierPath ${worldUp?"rankup":""}">
-              ${beforeWorld.icon} ${esc(beforeWorld.name)} → ${afterWorld.icon} ${esc(afterWorld.name)}
-            </div>
-            ${worldPos?`<span class="bbResultBoardPosition">${world.icon} ${esc(world.name)} #${Number(worldPos.rank_position).toLocaleString()}</span>`:""}
           </article>
-        </div>`;
+        </div>`}
+      </div>`;
 
       if(!casualMatch)showRankUpIfNeeded(mine);
 
@@ -21149,9 +21338,9 @@ window.addEventListener("load",()=>{
         </span>
 
         <span class="bbResultMetricV74 worldMetric">
-          <small>OVERALL RP</small>
+          <small>${esc(rankedSubjectLabel().toUpperCase())} RANK</small>
           <b class="${delta>=0?"plus":"minus"}">${fmtRPDelta(delta)}</b>
-          <small>${world.icon} ${fmtRPDelta(worldDelta)}</small>
+          <small>${subjectTierFromRP(r.rp_after).name}</small>
         </span>
       </div>`;
     }).join("");
@@ -31135,24 +31324,28 @@ document.addEventListener('DOMContentLoaded', () => {
       <span class="p944SubjectIcon">🧸</span>
       <b>หมี</b>
       <small>เกมจับคู่</small>
+      <em class="p95SubjectRank" id="p95RankMemory">Bronze • 0</em>
     </button>
 
     <button type="button" class="math" data-p944-subject="math">
       <span class="p944SubjectIcon">÷</span>
       <b>คณิต</b>
       <small>เลือกคำตอบ</small>
+      <em class="p95SubjectRank" id="p95RankMath">Bronze • 0</em>
     </button>
 
     <button type="button" class="english" data-p944-subject="english">
       <span class="p944SubjectIcon">A</span>
       <b>อังกฤษ</b>
       <small>Vocabulary</small>
+      <em class="p95SubjectRank" id="p95RankEnglish">Bronze • 0</em>
     </button>
 
     <button type="button" class="chinese" data-p944-subject="chinese">
       <span class="p944SubjectIcon">汉</span>
       <b>จีน</b>
       <small>汉字 → ความหมาย</small>
+      <em class="p95SubjectRank" id="p95RankChinese">Bronze • 0</em>
     </button>
   </div>
 
@@ -31203,7 +31396,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </section>
 
       <button type="button" class="p94RankedStartBtn" id="p94RankedStartBtn">เริ่มจับคู่</button>
-      <small class="p94RankedNote">Ranked รุ่นแรกสุ่มจาก 3 เกม Memory มาตรฐาน เพื่อให้ทั้งสองฝ่ายใช้กติกาเดียวกัน</small>
+      <small class="p94RankedNote">แรงก์แยก 4 หมวด • เลือกหมวดไหน ระบบจะใช้แรงก์ของหมวดนั้นจับคู่และกำหนดความยาก</small>
     </section>
 
     <section class="p94Searching hidden" id="p94Searching">
@@ -32145,6 +32338,187 @@ document.addEventListener('DOMContentLoaded', () => {
   }else{
     setTimeout(render,900);
   }
+})();
+</script>
+
+
+<script id="pomru-v95-four-subject-ranks-runtime">
+(function(){
+  "use strict";
+
+  const $=id=>document.getElementById(id);
+
+  let cache=[];
+
+  function client(){
+    return window.__bbSupabase||window.sb||null;
+  }
+
+  async function load(){
+    const c=client();
+    if(!c)return [];
+
+    try{
+      const {data,error}=await c.rpc(
+        "bb_my_subject_ranks"
+      );
+
+      if(error)throw error;
+
+      cache=Array.isArray(data)?data:[];
+      render();
+      return cache;
+
+    }catch(e){
+      console.warn(
+        "POMRU four subject ranks:",
+        e?.message||e
+      );
+      return [];
+    }
+  }
+
+  function row(subject){
+    return cache.find(
+      x=>x.subject_code===subject
+    )||null;
+  }
+
+  function short(subject){
+    const r=row(subject);
+    if(!r)return "Bronze • 0";
+
+    return `${r.ranked_tier||"Bronze"} • ${Number(r.ranked_points||0).toLocaleString()}`;
+  }
+
+  function setText(id,value){
+    const el=$(id);
+    if(el)el.textContent=value;
+  }
+
+  function renderSubjectButton(subject,id){
+    setText(
+      id,
+      short(subject)
+    );
+  }
+
+  function renderProfileRow(
+    subject,
+    tierId,
+    pointsId,
+    levelId
+  ){
+    const r=row(subject);
+    if(!r)return;
+
+    setText(
+      tierId,
+      r.ranked_tier||"Bronze"
+    );
+
+    setText(
+      pointsId,
+      Number(r.ranked_points||0).toLocaleString()
+    );
+
+    setText(
+      levelId,
+      r.level_label||""
+    );
+  }
+
+  function render(){
+    renderSubjectButton(
+      "memory",
+      "p95RankMemory"
+    );
+
+    renderSubjectButton(
+      "math",
+      "p95RankMath"
+    );
+
+    renderSubjectButton(
+      "english",
+      "p95RankEnglish"
+    );
+
+    renderSubjectButton(
+      "chinese",
+      "p95RankChinese"
+    );
+
+
+    renderProfileRow(
+      "memory",
+      "p95ProfileMemoryTier",
+      "p95ProfileMemoryPoints",
+      "p95ProfileMemoryLevel"
+    );
+
+    renderProfileRow(
+      "math",
+      "p95ProfileMathTier",
+      "p95ProfileMathPoints",
+      "p95ProfileMathLevel"
+    );
+
+    renderProfileRow(
+      "english",
+      "p95ProfileEnglishTier",
+      "p95ProfileEnglishPoints",
+      "p95ProfileEnglishLevel"
+    );
+
+    renderProfileRow(
+      "chinese",
+      "p95ProfileChineseTier",
+      "p95ProfileChinesePoints",
+      "p95ProfileChineseLevel"
+    );
+  }
+
+  document.addEventListener(
+    "click",
+    e=>{
+      if(
+        e.target.closest("#p94RankedModeBtn")
+        ||e.target.closest('[data-app-action="profile"]')
+        ||e.target.closest("#p94MenuFriends")
+      ){
+        setTimeout(load,80);
+      }
+    },
+    true
+  );
+
+  document.addEventListener(
+    "pomru:progress-updated",
+    ()=>setTimeout(load,80)
+  );
+
+  document.addEventListener(
+    "pomru:duel-room-left",
+    ()=>setTimeout(load,250)
+  );
+
+  window.POMRUFourRanks={
+    refresh:load,
+    getAll:()=>cache.slice(),
+    get:subject=>row(subject)
+  };
+
+  if(document.readyState==="loading"){
+    document.addEventListener(
+      "DOMContentLoaded",
+      ()=>setTimeout(load,1000),
+      {once:true}
+    );
+  }else{
+    setTimeout(load,1000);
+  }
+
 })();
 </script>
 
