@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+Thai:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#fff8fb" id="themeMeta">
-<title>POMRU • ผมรู้ — v99.5W.3 iPhone Home Final Layout</title>
+<title>POMRU • ผมรู้ — v99.5W.4 Home Final Polish</title>
 <style>
 :root{--bg:#fff9fc;--bg2:#f5f0ff;--card:rgba(255,255,255,.93);--solid:#fff;--ink:#302733;--muted:#786f7d;--pink:#f270a7;--purple:#8874e7;--mint:#6fd4b9;--yellow:#ffd56b;--red:#eb7188;--line:rgba(78,56,90,.10);--shadow:0 22px 58px rgba(73,51,86,.13);--shadow2:0 10px 25px rgba(73,51,86,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);font-family:"Thonburi","Sukhumvit Set","Leelawadee UI","Tahoma","Noto Sans Thai",system-ui,-apple-system,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased;background:radial-gradient(circle at 8% 0%,rgba(255,199,225,.35),transparent 28rem),radial-gradient(circle at 92% 3%,rgba(196,185,255,.28),transparent 30rem),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg));transition:.3s}body.dark{--bg:#171423;--bg2:#211a34;--card:rgba(38,31,55,.90);--solid:#29213d;--ink:#fbf6ff;--muted:#c4bacb;--line:rgba(255,255,255,.10);--shadow:0 24px 65px rgba(0,0,0,.34);--shadow2:0 12px 28px rgba(0,0,0,.24);background:radial-gradient(circle at 10% 0%,rgba(242,112,167,.16),transparent 28rem),radial-gradient(circle at 90% 2%,rgba(136,116,231,.20),transparent 30rem),linear-gradient(180deg,#161321,#211a35 58%,#171422)}button,input,select{font:inherit}.hidden{display:none!important}.shell{width:min(1220px,calc(100% - 22px));margin:auto}button{cursor:pointer}.btn,.icon,.chip{border:1px solid var(--line);background:var(--solid);color:var(--ink);font-weight:850;transition:.2s}.btn{border-radius:17px;padding:12px 16px;box-shadow:0 7px 17px rgba(74,52,86,.07)}.btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--pink),#ff9dc2);color:#fff}.btn.purple{border-color:transparent;background:linear-gradient(135deg,var(--purple),#aa96ff);color:#fff}.btn.small{padding:9px 12px;font-size:12px}.icon{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;font-size:18px}.chip{border-radius:999px;padding:8px 11px;font-size:11px;background:var(--solid)}.chip.active{background:linear-gradient(135deg,rgba(242,112,167,.14),rgba(136,116,231,.14));border-color:rgba(136,116,231,.25)}.btn:hover,.icon:hover,.chip:hover{transform:translateY(-2px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none!important}.input,.select{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--solid);color:var(--ink);outline:none}
@@ -49089,5 +49089,194 @@ window.POMRUV992=Object.freeze({version:"99.2",feature:"content-admin-production
 })();
 </script>
 <script id="pomru-v995w3-marker">window.POMRUV995W3=Object.freeze({version:"99.5W.3",feature:"iphone-home-final-layout",buddyRaised:true,speechAttached:true,bondCompact:true,goalCompact:true,skinVisualSync:true,playPolished:true});</script>
+
+
+<!-- POMRU v99.5W.4 — HOME FINAL POLISH -->
+<style id="pomru-v995w4-home-final-polish-style">
+@media (max-width:600px){
+  /* Bond: more readable without growing the HUD again. */
+  #pomruPetHome #p971BuddyPulse{
+    min-height:55px!important;max-height:55px!important;
+    grid-template-columns:36px minmax(0,1fr) 74px!important;
+  }
+  #pomruPetHome .p971BondHeart{width:34px!important;height:34px!important;font-size:17px!important}
+  #pomruPetHome #p971BondLabel{font-size:9.35px!important;letter-spacing:.005em!important}
+  #pomruPetHome .p971BondCopy:after{font-size:4.75px!important;line-height:1.12!important;margin-top:3px!important}
+  #pomruPetHome .p980BondBtn.feed{font-size:5.7px!important;min-height:27px!important}
+  #pomruPetHome #p985PathBtn{
+    right:81px!important;top:4px!important;min-height:21px!important;
+    padding:4px 6px!important;font-size:5px!important;border-radius:9px!important;
+  }
+
+  /* Goal is intentionally one glance: level + points, unlock in its own chip. */
+  #pomruPetHome .p980NextGoal{grid-template-columns:24px minmax(0,1fr) auto 20px!important}
+  #pomruPetHome .p980NextGoal b{font-size:6.9px!important;letter-spacing:.005em!important}
+  #pomruPetHome .p995w3Unlock{
+    min-width:66px!important;max-width:78px!important;min-height:20px!important;
+    font-size:4.55px!important;padding:2px 5px!important;
+  }
+
+  /* Social cards now read as two game shortcuts, not dashboard widgets. */
+  #pomruPetHome #p974FriendsCard,
+  #pomruPetHome #p974RankCard{
+    overflow:hidden!important;
+    border-color:rgba(255,255,255,.80)!important;
+    box-shadow:0 8px 20px rgba(82,52,107,.09),inset 0 1px 0 rgba(255,255,255,.82)!important;
+  }
+  #pomruPetHome #p974FriendsCard{
+    background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(255,238,248,.95))!important;
+  }
+  #pomruPetHome #p974RankCard{
+    background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(242,235,255,.96))!important;
+  }
+  #pomruPetHome .p974CardHead>div{display:flex!important;align-items:center!important;gap:5px!important;min-width:0!important}
+  #pomruPetHome .p974CardHead>div:before{
+    flex:0 0 21px;width:21px;height:21px;display:grid;place-items:center;
+    border-radius:8px;font-size:11px;font-weight:1000;line-height:1;
+    box-shadow:inset 0 0 0 1px rgba(118,80,173,.07);
+  }
+  #pomruPetHome #p974FriendsCard .p974CardHead>div:before{content:"♡";background:#ffe9f3;color:#dc5d9b}
+  #pomruPetHome #p974RankCard .p974CardHead>div:before{content:"★";background:#eee7ff;color:#7557cb}
+  #pomruPetHome .p974CardHead b{font-size:7.55px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  #pomruPetHome .p974MiniPill{background:rgba(255,255,255,.74)!important;border:1px solid rgba(120,82,169,.06)!important}
+  #pomruPetHome #p974FriendsCard .p974FriendRow{
+    background:rgba(255,255,255,.72)!important;
+    box-shadow:inset 0 0 0 1px rgba(210,151,188,.07)!important;
+  }
+  #pomruPetHome #p974RankName{margin-top:4px!important;margin-left:27px!important;font-size:13.5px!important}
+  #pomruPetHome #p974RankPoints{right:7px!important;bottom:7px!important}
+
+  /* W.3 made Buddy deliberately huge. Pull back ~6% while keeping its head high. */
+  #pomruPetHome .p89PetCenter{top:190px!important;bottom:192px!important}
+  #pomruPetHome .p89BuddyStage{
+    width:min(300px,77vw)!important;
+    height:min(380px,calc(var(--pomru-mobile-vh,100dvh) - 366px))!important;
+    min-height:272px!important;max-height:380px!important;
+  }
+
+  /* Bubble moves down toward the head and keeps a clear pointer to Buddy. */
+  #pomruPetHome .p89Speech{
+    top:80px!important;right:3%!important;width:100px!important;max-width:29vw!important;
+    padding:6px 7px!important;border-radius:14px 14px 14px 6px!important;
+  }
+  #pomruPetHome .p89Speech b{font-size:7.5px!important}
+  #pomruPetHome .p89Speech span{font-size:5px!important}
+  #pomruPetHome .p89Speech:after{left:12px!important;bottom:-9px!important}
+}
+
+@media (max-width:600px) and (max-height:690px){
+  #pomruPetHome .p89PetCenter{top:181px!important;bottom:177px!important}
+  #pomruPetHome .p89BuddyStage{
+    width:min(285px,76vw)!important;
+    height:min(350px,calc(var(--pomru-mobile-vh,100dvh) - 337px))!important;
+    min-height:250px!important;max-height:350px!important;
+  }
+  #pomruPetHome .p89Speech{top:66px!important;width:96px!important}
+}
+
+@media (max-width:355px){
+  #pomruPetHome .p995w3Unlock{min-width:58px!important;max-width:64px!important;font-size:4.05px!important}
+  #pomruPetHome .p89BuddyStage{width:min(278px,78vw)!important}
+  #pomruPetHome .p89Speech{width:88px!important;right:1.5%!important}
+}
+</style>
+<script id="pomru-v995w4-home-final-polish-runtime">
+(function(){
+  "use strict";
+  const $=id=>document.getElementById(id);
+  const mobile=()=>window.matchMedia?.("(max-width:600px)")?.matches;
+  const fmt=n=>(Number(n)||0).toLocaleString();
+
+  function syncOnlineCount(){
+    if(!mobile())return;
+    const list=$("p974FriendList"),badge=$("p974OnlineCount");
+    if(!list||!badge)return;
+    const rows=[...list.querySelectorAll(".p974FriendRow")];
+    if(!rows.length)return;
+    const realRows=rows.filter(row=>{
+      const name=String(row.querySelector("b")?.textContent||"").trim();
+      return name && !/กำลังโหลด|เพิ่มเพื่อนคนแรก/.test(name);
+    });
+    if(!realRows.length){badge.textContent="0 ออนไลน์";return}
+    const online=realRows.filter(row=>String(row.querySelector("small")?.textContent||"").trim()==="ออนไลน์").length;
+    badge.textContent=`${online} ออนไลน์`;
+  }
+
+  function compactGoal(){
+    if(!mobile())return;
+    const goal=$("p980NextGoal"),text=$("p980GoalText");
+    if(!goal||!text||goal.dataset.action!=="play")return;
+    let level=0,left=0,next=null;
+    try{
+      const st=window.POMRUProgress?.getState?.()||{},p=st.progress||{};
+      const current=Math.max(1,Number(p.player_level)||1);
+      const progress=Math.max(0,Number(p.level_progress)||0);
+      const target=Math.max(1,Number(p.level_target)||500);
+      level=current+1;left=Math.max(0,target-progress);
+      next=(window.POMRUColorSkins?.list?.()||[])
+        .filter(x=>(Number(x.level)||1)>current)
+        .sort((a,b)=>(Number(a.level)||1)-(Number(b.level)||1))[0]||null;
+    }catch(_){}
+    if(!level){
+      const raw=String(text.textContent||"");
+      let m=raw.match(/Lv\.?\s*(\d+).*?อีก\s*([\d,]+)/i);
+      if(m){level=Number(m[1]);left=Number(m[2].replace(/,/g,""))||0}
+      else{
+        m=raw.match(/อีก\s*([\d,]+).*?Lv\.?\s*(\d+)/i);
+        if(m){left=Number(m[1].replace(/,/g,""))||0;level=Number(m[2])}
+      }
+    }
+    if(level)text.textContent=`Lv.${level} • อีก ${fmt(left)}`;
+    const chip=goal.querySelector(".p995w3Unlock");
+    if(chip){
+      if(next)chip.textContent=`🔒 ${next.name} Lv.${next.level}`;
+      else chip.textContent=String(chip.textContent||"").replace(/\s*•\s*/g," ").replace(/\s+/g," ").trim();
+    }
+  }
+
+  function keepSpeechAttached(){
+    if(!mobile())return;
+    const bubble=$("pomruPetSpeech");if(!bubble)return;
+    const span=bubble.querySelector("span");
+    if(span && span.textContent.length>36)span.textContent=span.textContent.replace(/\s+/g," ").slice(0,36);
+  }
+
+  let raf=0;
+  function sync(){
+    if(raf)cancelAnimationFrame(raf);
+    raf=requestAnimationFrame(()=>{raf=0;syncOnlineCount();compactGoal();keepSpeechAttached()});
+  }
+
+  function observe(){
+    const list=$("p974FriendList");
+    if(list&&!list.dataset.p995w4Observed){
+      list.dataset.p995w4Observed="1";
+      new MutationObserver(sync).observe(list,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:["style","class"]});
+    }
+    const goal=$("p980NextGoal");
+    if(goal&&!goal.dataset.p995w4Observed){
+      goal.dataset.p995w4Observed="1";
+      new MutationObserver(sync).observe(goal,{childList:true,subtree:true,characterData:true});
+    }
+  }
+
+  function boot(){
+    observe();sync();
+    [120,450,900,1600].forEach(ms=>setTimeout(()=>{observe();sync()},ms));
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
+  document.addEventListener("pomru:progress-updated",()=>setTimeout(sync,40));
+  document.addEventListener("pomru:v899-synced",()=>setTimeout(sync,40));
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden)setTimeout(boot,60)});
+  document.addEventListener("click",e=>{if(e.target.closest?.('[data-app-go="home"],#p974FriendsCard,#p974RankCard,#p974SkinCard'))setTimeout(sync,90)},true);
+  window.addEventListener("pageshow",boot,{passive:true});
+  window.addEventListener("resize",sync,{passive:true});
+  /* A lightweight consistency check while Home is visible; avoids stale 0/online contradictions after realtime updates. */
+  setInterval(()=>{if(!document.hidden && mobile() && $("pomruPetHome") && !$("pomruPetHome").classList.contains("hidden"))sync()},1800);
+  window.POMRUHomeFinalPolish=Object.freeze({version:"99.5W.4",sync});
+})();
+</script>
+<script id="pomru-v995w4-marker">window.POMRUV995W4=Object.freeze({version:"99.5W.4",feature:"home-final-polish",onlineConsistency:true,buddyScaleFinal:true,speechAttached:true,goalOneGlance:true,socialGameCards:true,bondReadable:true});</script>
+
 </body>
 </html>
