@@ -13960,6 +13960,10 @@ body.bbCandySelect #bbAppModes.p911AdventureScreen::after{
   background:linear-gradient(135deg,#e7efff 0%,#f8fbff 56%,#dce9ff 100%);
   border-color:rgba(90,144,216,.18);
 }
+.p911AdventureCard.secret99{
+  background:linear-gradient(135deg,#ece5ff 0%,#fbf8ff 52%,#e0f8f3 100%);
+  border-color:rgba(117,82,209,.18);
+}
 
 .p911WorldArt{
   position:absolute;
@@ -14054,6 +14058,26 @@ body.bbCandySelect #bbAppModes.p911AdventureScreen::after{
   background:#70c6c4;color:#fff;font-size:15px;transform:rotate(-5deg);
 }
 
+.secret99Lock{
+  position:absolute;left:23px;top:26px;width:82px;height:92px;
+  display:grid;place-items:center;border:6px solid rgba(255,255,255,.8);
+  border-radius:25px;background:linear-gradient(145deg,#8f6ee8,#6444c3);
+  box-shadow:0 9px 18px rgba(73,46,136,.18);font-style:normal;
+}
+.secret99Lock:before{
+  content:"";position:absolute;left:18px;top:-35px;width:46px;height:43px;
+  border:10px solid #8f6ee8;border-bottom:0;border-radius:30px 30px 0 0;box-sizing:border-box;
+}
+.secret99Lock b{color:#fff;font-size:38px;line-height:1;text-shadow:0 3px 0 rgba(63,35,125,.22)}
+.secret99Num{
+  position:absolute;right:0;bottom:9px;width:72px;height:57px;display:grid;place-items:center;
+  border:5px solid rgba(255,255,255,.82);border-radius:15px;background:linear-gradient(145deg,#61d0bd,#42ac9f);
+  color:#fff;font-size:28px;font-weight:1000;font-style:normal;transform:rotate(7deg);
+  box-shadow:0 8px 15px rgba(56,121,112,.16);
+}
+.secret99Heart{position:absolute;color:#ff5a9f;font-style:normal;font-size:27px;filter:drop-shadow(0 3px 0 rgba(255,255,255,.9))}.secret99Heart.h1{left:0;bottom:0;transform:rotate(-9deg)}.secret99Heart.h2{left:28px;bottom:-4px;transform:rotate(8deg)}
+.secret99Arrow{position:absolute;width:34px;height:34px;display:grid;place-items:center;border-radius:12px;background:#fff;color:#7453ce;font-style:normal;font-size:20px;font-weight:1000;box-shadow:0 6px 12px rgba(70,49,108,.1)}.secret99Arrow.up{right:10px;top:9px}.secret99Arrow.down{right:-4px;top:50px;color:#e65b9e}
+
 .p911WorldContent{position:relative;z-index:2;min-width:0}
 .p911WorldContent small{
   display:inline-flex;
@@ -14065,6 +14089,7 @@ body.bbCandySelect #bbAppModes.p911AdventureScreen::after{
 }
 .p911AdventureCard.math .p911WorldContent small{color:#a47215}
 .p911AdventureCard.language .p911WorldContent small{color:#577fc1}
+.p911AdventureCard.secret99 .p911WorldContent small{color:#7153bf}
 .p911WorldContent strong{
   display:block;
   margin-top:7px;
@@ -14094,6 +14119,7 @@ body.bbCandySelect #bbAppModes.p911AdventureScreen::after{
 .p911WorldMeta b{color:#c85e8a;font-size:11px}
 .p911AdventureCard.math .p911WorldMeta b{color:#d28f17}
 .p911AdventureCard.language .p911WorldMeta b{color:#5687d2}
+.p911AdventureCard.secret99 .p911WorldMeta b{color:#7a59d1}
 
 .p911WorldDoor{
   position:absolute;
@@ -14107,6 +14133,7 @@ body.bbCandySelect #bbAppModes.p911AdventureScreen::after{
 .pinkDoor{background:linear-gradient(#ef76bd,#dd4c9d)}
 .goldDoor{background:linear-gradient(#ffc85e,#f2a22c)}
 .blueDoor{background:linear-gradient(#77c9ff,#4f93e6)}
+.violetDoor{background:linear-gradient(#a57cff,#7553db)}
 .p911WorldDoor i{
   position:absolute;
   left:50%;top:50%;
@@ -14136,6 +14163,7 @@ body.bbCandySelect #bbAppModes.p911AdventureScreen::after{
 .memory .p911StartButton{background:linear-gradient(#ff74ac,#eb4e93)}
 .math .p911StartButton{background:linear-gradient(#ffc34f,#f2a01e)}
 .language .p911StartButton{background:linear-gradient(#73bbff,#4e89e5)}
+.secret99 .p911StartButton{background:linear-gradient(#9b77ef,#6f50d2)}
 
 .p911AdventureCard:active{transform:translateY(2px)}
 
@@ -20967,6 +20995,23 @@ button{
         <span class="p911WorldDoor blueDoor" aria-hidden="true"><i></i></span>
         <span class="p911StartButton">เริ่มเล่น</span>
       </button>
+
+      <button class="p911AdventureCard secret99" type="button" data-app-go="guess99" data-pomru-guess99>
+        <span class="p911WorldArt secret99Art" aria-hidden="true">
+          <i class="secret99Lock"><b>?</b></i>
+          <i class="secret99Num">99</i>
+          <i class="secret99Heart h1">♥</i><i class="secret99Heart h2">♥</i>
+          <i class="secret99Arrow up">↑</i><i class="secret99Arrow down">↓</i>
+        </span>
+        <span class="p911WorldContent">
+          <small>ภารกิจเลขลับ</small>
+          <strong>เลขลับ 99</strong>
+          <p>ตามหาเลขลับ 1–99 มี 2 หัวใจ • ทายผิดจะบอกว่า “มากกว่า” หรือ “น้อยกว่า”</p>
+          <span class="p911WorldMeta"><b>♥♥</b> 2 โอกาสต่อรอบ</span>
+        </span>
+        <span class="p911WorldDoor violetDoor" aria-hidden="true"><i></i></span>
+        <span class="p911StartButton">เริ่มเล่น</span>
+      </button>
     </section>
   </main>
 </section>
@@ -21013,9 +21058,6 @@ button{
       <button class="p91GameCard rose" data-learning-start data-learning-subject="math" data-learning-type="multiple_choice" data-learning-title="เลือกคำตอบ">
         <span class="p91GameIcon">ABC</span><span><b>เลือกคำตอบ</b><small>เลือกคำตอบที่ถูกจากตัวเลือก</small><em><span data-content-count="math:multiple_choice">0</span> ข้อ</em></span><i>›</i>
       </button>
-      <button class="p91GameCard p99GuessGameCard" type="button" data-app-go="guess99" data-pomru-guess99>
-        <span class="p91GameIcon">99</span><span><b>ทายเลข 1–99</b><small>มี 2 หัวใจ • ทายผิดจะบอกว่าสูงกว่าหรือต่ำกว่า</small><em>❤️❤️ 2 โอกาสต่อรอบ</em></span><i>›</i>
-      </button>
       <button class="p91GameCard sand" data-learning-start data-learning-subject="math" data-learning-type="matching" data-learning-title="จับคู่สมการ">
         <span class="p91GameIcon">=</span><span><b>จับคู่สมการ</b><small>จับโจทย์ให้ตรงกับคำตอบ</small><em><span data-content-count="math:matching">0</span> ข้อ</em></span><i>›</i>
       </button>
@@ -21032,11 +21074,11 @@ button{
 
 
 
-<section class="bbAppScreen p99GuessScreen" id="p99GuessScreen" data-app-screen="guess99" aria-label="เกมทายเลข 1 ถึง 99">
+<section class="bbAppScreen p99GuessScreen" id="p99GuessScreen" data-app-screen="guess99" aria-label="เกมเลขลับ 99">
   <div class="p99GuessBg" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
   <header class="p99GuessTopbar">
-    <button class="p99GuessBack" id="p99GuessBack" type="button" data-app-go="mathgames" aria-label="กลับเกมคณิตศาสตร์">‹</button>
-    <div class="p99GuessBrand"><small>POMRU • MATH</small><strong>ทายเลข 1–99</strong></div>
+    <button class="p99GuessBack" id="p99GuessBack" type="button" data-app-go="solo" aria-label="กลับหน้าเลือกเกม">‹</button>
+    <div class="p99GuessBrand"><small>POMRU • SECRET MISSION</small><strong>เลขลับ 99</strong></div>
     <div class="p99GuessTopLives" aria-label="โอกาสที่เหลือ"><span id="p99GuessHeartTop1">♥</span><span id="p99GuessHeartTop2">♥</span></div>
   </header>
 
@@ -21055,7 +21097,7 @@ button{
 
     <section class="p99GuessCard" id="p99GuessPlayCard">
       <div class="p99GuessCardHead">
-        <span class="p99GuessModeBadge">🎯 1–99</span>
+        <span class="p99GuessModeBadge">🔐 เลขลับ 1–99</span>
         <div class="p99GuessLives" id="p99GuessLives" aria-label="2 โอกาส">
           <span class="alive">♥</span><span class="alive">♥</span>
           <small>2 โอกาส</small>
@@ -21097,7 +21139,7 @@ button{
     <section class="p99GuessResult hidden" id="p99GuessResult">
       <div class="p99GuessTrophy">★</div>
       <small>GAME COMPLETE</small>
-      <h2>จบเกมทายเลข 1–99</h2>
+      <h2>จบเกมเลขลับ 99</h2>
       <strong id="p99GuessFinalScore">0</strong>
       <p id="p99GuessFinalSummary">ตอบถูก 0 / 5 รอบ</p>
       <div class="p99GuessResultGrid">
@@ -21108,7 +21150,7 @@ button{
       <div class="p99GuessReward" id="p99GuessReward">เล่นจบแล้ว • กำลังสรุปรางวัล</div>
       <div class="p99GuessResultActions">
         <button type="button" id="p99GuessAgain">เล่นอีกครั้ง</button>
-        <button type="button" class="secondary" data-app-go="mathgames">กลับเกมคณิตศาสตร์</button>
+        <button type="button" class="secondary" data-app-go="solo">กลับหน้าเลือกเกม</button>
       </div>
     </section>
   </main>
@@ -21881,10 +21923,10 @@ let layout=[],baseLayout=[],asked=new Set(),correct=0,score=0,combo=0,bestCombo=
 let audioCtx=null,musicLoop=null,musicEnabled=false,sfxEnabled=true,musicVolume=.28,sfxVolume=.55,musicTheme="cozy",musicStep=0,themeMode="light",motionMode="full",tapCount=0,tapReset=null;
 const MUSIC={cozy:[261.6,329.6,392,329.6,293.7,349.2,440,349.2],dream:[293.7,370,440,554.4,440,370,329.6,415.3],night:[220,277.2,329.6,415.3,329.6,277.2,246.9,311.1],focus:[196,246.9,293.7,246.9,220,261.6,329.6,261.6]};
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));if(typeof CLOUD_SYNC_KEYS!=="undefined"&&CLOUD_SYNC_KEYS.has(k)&&!cloudApplying)scheduleCloudSync()}catch(e){}}function load(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}}function shuf(a,r=(window.__bbRankedRng||Math.random)){const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[x[i],x[j]]=[x[j],x[i]]}return x}function seeded(s){let x=s>>>0;return()=>{x=(x*1664525+1013904223)>>>0;return x/4294967296}}function todaySeed(){const d=new Date();return Number(`${d.getFullYear()}${String(d.getMonth()+1).padStart(2,"0")}${String(d.getDate()).padStart(2,"0")}`)}
-function profile(){return load("bb_profile",{name:"ผู้เล่น",avatar:"🧸",xp:0})}function level(xp){return Math.floor(xp/500)+1}function hist(){return load("bb_history",[])}function badgeData(){return load("bb_badges",{})}function effDiff(){const o=["easy","normal","hard","expert"],i=o.indexOf(cfg.diff);return cfg.adaptive?o[Math.max(0,Math.min(3,i+adaptiveShift))]:cfg.diff}function dc(){return DIFF[effDiff()]}function qCount(){return cfg.mode==="match"?Math.max(2,Math.floor(dc().n/2)):dc().q}
+function profile(){return load("bb_profile",{name:"ผู้เล่น",avatar:"🧸",xp:0})}function level(xp){return Math.floor(xp/500)+1}function hist(){return load("bb_history",[])}function badgeData(){return load("bb_badges",{})}function effDiff(){const o=["easy","normal","hard","expert"],i=o.indexOf(cfg.diff);return cfg.adaptive?o[Math.max(0,Math.min(3,i+adaptiveShift))]:cfg.diff}function dc(){return DIFF[effDiff()]}function qCount(){if(window.BB_RANKED_ACTIVE&&cfg.mode==="position"&&window.POMRUServerBattleV2?.enabled)return Math.max(1,Number(window.POMRUServerBattleV2?.plan?.()?.question_count)||Number(window.POMRUServerBattleV2?.plan?.()?.questions?.length)||40);return cfg.mode==="match"?Math.max(2,Math.floor(dc().n/2)):dc().q}
 function sourcePool(){if(cfg.source==="custom"&&customImages.length>=4)return customImages.map((_,i)=>i);return Array.from({length:20},(_,i)=>i)}
 function content(id){if(cfg.source==="teddy")return `<div class="teddy">${teddySVG(id%20)}</div>`;if(cfg.source==="custom"&&customImages[id])return `<div class="content upload"><img src="${customImages[id]}" alt="ภาพที่อัปโหลด"></div>`;const a=PACKS[cfg.source]||PACKS.animals;return `<div class="content emoji">${a[id%a.length]}</div>`}
-function setStatus(i,t,s){$("statusIcon").textContent=i;$("statusTitle").textContent=t;$("statusText").textContent=s}function showScene(n){["board","target","choice","result"].forEach(x=>$(x+"Scene").classList.toggle("active",x===n));$("answer").classList.add("hidden")}function setMain(t,f,dis=false){$("main").textContent=t;$("main").onclick=f;$("main").disabled=dis}function updateHUD(){$("progress").textContent=`${Math.min(asked.size,qCount())} / ${qCount()}`;$("combo").textContent=combo;$("score").textContent=score;$("levelHud").textContent=level(profile().xp||0);$("livesHud").classList.toggle("hidden",!cfg.lives);$("lives").textContent="♥".repeat(lives)+"♡".repeat(Math.max(0,3-lives));$("hintNum").textContent=hints;$("hintBtn").disabled=hints<=0}
+function setStatus(i,t,s){$("statusIcon").textContent=i;$("statusTitle").textContent=t;$("statusText").textContent=s}function showScene(n){["board","target","choice","result"].forEach(x=>$(x+"Scene").classList.toggle("active",x===n));$("answer").classList.add("hidden")}function setMain(t,f,dis=false){$("main").textContent=t;$("main").onclick=f;$("main").disabled=dis}function updateHUD(){$("progress").textContent=window.BB_RANKED_ACTIVE?`ROUND ${Math.max(1,asked.size||1)}`:`${Math.min(asked.size,qCount())} / ${qCount()}`;$("combo").textContent=combo;$("score").textContent=score;$("levelHud").textContent=level(profile().xp||0);$("livesHud").classList.toggle("hidden",!cfg.lives);$("lives").textContent="♥".repeat(lives)+"♡".repeat(Math.max(0,3-lives));$("hintNum").textContent=hints;$("hintBtn").disabled=hints<=0}
 function renderBoard(numbers=false,override={}){const d=DIFF[cfg.diff];$("board").innerHTML="";$("board").className="board"+(numbers?" numberBoard":"");$("board").style.setProperty("--cols",d.cols);layout.forEach((id,i)=>{const s=document.createElement("div");s.className="slot";s.dataset.i=i;const rid=override[i]!==undefined?override[i]:id;s.innerHTML=`<div class="content">${content(rid)}</div><div class="num">${i+1}</div>`;$("board").appendChild(s)})}
 function renderTarget(i){lastTarget=i;$("targetCard").innerHTML=`<div class="content" style="width:100%;height:100%">${content(layout[i])}</div>`;$("targetLabel").textContent=cfg.mode==="position"?"ตัวนี้อยู่หมายเลขอะไร?":"จำรายการนี้"}
 function renderTeams(){
@@ -21962,23 +22004,30 @@ function record(ok){roundAttempts++;if(ok){correct++;combo++;bestCombo=Math.max(
 function surprise(){return}
 function positionAsk(){
   stopTimer();
-  if(asked.size>=qCount())return finishRound();
-  const a=layout.map((_,i)=>i).filter(i=>!asked.has(i));
-  if(!a.length)return finishRound();
-
-  let chosen=null;
-  if(window.BB_RANKED_ACTIVE&&window.POMRUServerBattleV2?.enabled){
+  const rankedServer=!!(window.BB_RANKED_ACTIVE&&window.POMRUServerBattleV2?.enabled);
+  if(!rankedServer&&asked.size>=qCount())return finishRound();
+  let target=null;
+  if(rankedServer){
     const qIndex=asked.size;
     const sq=window.POMRUServerBattleV2.question?.(qIndex);
+    if(!sq){
+      window.POMRUServerBattleV2.refresh?.();
+      if(window.POMRUServerBattleV2?.snapshot?.()?.battle_over)return finishRound();
+      setStatus("☁️","กำลังเตรียมรอบถัดไป","Server กำลังซิงก์ Battle…");
+      setMain("กำลังซิงก์…",()=>{},true);setTimeout(positionAsk,220);return;
+    }
     const teddy=Number(sq?.metadata?.target_teddy_id);
     const idx=layout.findIndex(x=>Number(x)===teddy);
-    if(idx>=0&&!asked.has(idx))chosen=idx;
+    target=idx>=0?idx:Math.max(0,Number(sq?.metadata?.target_index)||0)%Math.max(1,layout.length);
+    asked.add(1000+qIndex);
+  }else{
+    const available=layout.map((_,i)=>i).filter(i=>!asked.has(i));
+    if(!available.length)return finishRound();
+    target=available[Math.floor((window.__bbRankedRng||Math.random)()*available.length)];asked.add(target);
   }
-
-  targetIndex=chosen===null?a[Math.floor((window.__bbRankedRng||Math.random)()*a.length)]:chosen;
-  asked.add(targetIndex);pickedIndex=null;state="position_target";renderTarget(targetIndex);showScene("target");
-  setStatus("🧸","ดูรูปเป้าหมาย","จำว่าตัวนี้เคยอยู่ช่องไหน");setMain("พร้อมตอบ",positionAnswer);$("replayBtn").classList.add("hidden");
-  updateHUD();sfx("flip");saveResume()
+  targetIndex=target;pickedIndex=null;state="position_target";renderTarget(targetIndex);showScene("target");
+  setStatus("🧸","ดูรูปเป้าหมาย",rankedServer?`ROUND ${asked.size} • จำว่าตัวนี้เคยอยู่ช่องไหน`:"จำว่าตัวนี้เคยอยู่ช่องไหน");
+  setMain("พร้อมตอบ",positionAnswer);$("replayBtn").classList.add("hidden");updateHUD();sfx("flip");saveResume();
 }
 function bbAnswerTimer(expire){
   if(window.BB_RANKED_ACTIVE && typeof window.bbRankedAnswerTimer==="function"){
@@ -22059,10 +22108,9 @@ function positionReveal(verbal=false,timeout=false){
   setStatus("✅","เฉลยพร้อมกันแล้ว",ok?"ตอบถูก • รอดูการโจมตี":"ตอบผิด • รอดูผล Battle");
   $("voiceBtn").classList.add("hidden");surprise();
   const battleEnded=!!window.POMRUServerBattleV2?.snapshot?.().battle_over;
-  const next=(battleEnded||asked.size>=qCount())?finishRound:positionAsk;
+  const next=window.BB_RANKED_ACTIVE?(battleEnded?finishRound:positionAsk):((asked.size>=qCount())?finishRound:positionAsk);
   if(window.BB_RANKED_ACTIVE){
-    const ending=battleEnded||asked.size>=qCount();
-    setMain(ending?(battleEnded?"KO! • กำลังสรุปผล…":"กำลังสรุปผล…"):"ข้อต่อไปใน 2 วินาที…",()=>{},true);
+    setMain(battleEnded?"KO! • กำลังสรุปผล…":"ข้อต่อไป • สู้จน HP หมด",()=>{},true);
     runRankedRevealHold(battleEnded?1.1:2,battleEnded?"BATTLE END":"ดูเฉลย",()=>next())
   }
   else setMain(asked.size>=qCount()?"ดูผลลัพธ์":"คำถามใหม่จากกระดานเดิม",next);
@@ -28970,8 +29018,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="bbRLTimerTrack"><i id="bbRLTimerBar"></i></div>
       </div>
       <div class="bbRLQuestionNo p996StatCard">
-        <small>PROGRESS</small>
-        <b id="bbRLQuestionNo">1 / 10</b>
+        <small>ROUND</small>
+        <b id="bbRLQuestionNo">1</b>
         <div class="p996MiniTrack"><i id="p996ProgressBar"></i></div>
       </div>
       <div id="p996ComboStat" class="p996StatCard p996ComboStat">
@@ -29475,7 +29523,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const p=(async()=>{
       const c=client();if(!c)throw new Error("เชื่อมต่อฐานข้อมูลไม่สำเร็จ");
       const full=await fullMatch(match);
-      const {data,error}=await c.rpc("bb_ranked_battle_plan_v2",{p_match_id:id});
+      const {data,error}=await c.rpc("bb_ranked_battle_plan_v5",{p_match_id:id});
       if(error)throw new Error("v97.5 Server Battle: "+(error.message||error));
       const row=Array.isArray(data)?data[0]:data;
       if(!row)throw new Error("Server ไม่ส่ง Battle plan");
@@ -29505,6 +29553,8 @@ document.addEventListener('DOMContentLoaded', () => {
         diffCode:row.difficulty_code||full.difficulty_code||full.difficulty||"normal",
         contentLevel:row.content_level||full.ranked_content_level||full.difficulty_code||"normal",
         info,questions,world:WORLD[info.subject],
+        answerMs:Math.max(2500,Number(row.answer_ms)||13000),
+        slotMs:Math.max(4500,Number(row.slot_ms)||15000),
         baseMs:rawBase<Date.now()-1500?Date.now()+180:rawBase,
         server_authoritative:true
       };
@@ -29514,6 +29564,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function clearTick(){
     if(tickTimer){clearInterval(tickTimer);tickTimer=null}
+  }
+
+  function answerWindowMs(){
+    return Math.max(2500,Number(session?.data?.answerMs)||ANSWER_MS);
+  }
+  function slotWindowMs(){
+    return Math.max(answerWindowMs()+1200,Number(session?.data?.slotMs)||SLOT_MS);
+  }
+  function liveBattleRounds(){
+    const n=Number(window.POMRUServerBattleV2?.snapshot?.()?.resolved);
+    return Number.isFinite(n)&&n>=0?n:0;
   }
 
   function clearQuestionUI(){
@@ -29582,7 +29643,7 @@ document.addEventListener('DOMContentLoaded', () => {
     session.selectedTokens=[];
     clearQuestionUI();
 
-    q("#bbRLQuestionNo").textContent=`${index+1} / ${session.data.questions.length}`;
+    q("#bbRLQuestionNo").textContent=`ROUND ${index+1}`;
     q("#bbRLCategory").textContent=question.category||"RANKED";
     q("#bbRLPrompt").textContent=question.prompt||"";
     q("#bbRLSubPrompt").textContent=question.sub||"";
@@ -29646,10 +29707,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if(!qn||session.answers[idx]?.locked)return;
 
     const now=Date.now();
-    const slotStart=session.data.baseMs+(idx*SLOT_MS);
+    const answerMs=answerWindowMs();
+    const slotMs=slotWindowMs();
+    const slotStart=session.data.baseMs+(idx*slotMs);
     const phase=now-slotStart;
 
-    if(phase<0||phase>=ANSWER_MS)return;
+    if(phase<0||phase>=answerMs)return;
 
     session.answers[idx]={
       locked:true,
@@ -29682,7 +29745,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(session.revealedIndex===index)return;
 
     const question=session.data.questions[index];
-    let a=session.answers[index]||{locked:false,value:"",answerMs:ANSWER_MS,scored:false};
+    let a=session.answers[index]||{locked:false,value:"",answerMs:answerWindowMs(),scored:false};
 
     let authoritative=null;
     if(window.BB_RANKED_ACTIVE&&question.server_authoritative&&window.POMRUServerBattleV2?.enabled){
@@ -29709,7 +29772,8 @@ document.addEventListener('DOMContentLoaded', () => {
       session.answers[index]=a;
       if(ok){
         session.correct++;
-        const speedRatio=Math.max(0,Math.min(1,(ANSWER_MS-a.answerMs)/ANSWER_MS));
+        const answerMs=answerWindowMs();
+        const speedRatio=Math.max(0,Math.min(1,(answerMs-a.answerMs)/answerMs));
         session.score+=100+Math.round(50*speedRatio);
         session.answerTimes.push(a.answerMs);
       }
@@ -29727,16 +29791,22 @@ document.addEventListener('DOMContentLoaded', () => {
     finishing=true;
     clearTick();
 
-    // ปิดคำถามใดที่ยังไม่ score
-    for(let i=0;i<session.data.questions.length;i++){
+    const serverFinalizing=!!(window.BB_RANKED_ACTIVE&&window.POMRUServerBattleV2?.enabled);
+    const playedCount=serverFinalizing
+      ?Math.max(1,Math.min(session.data.questions.length,Math.max(session.index+1,liveBattleRounds())))
+      :session.data.questions.length;
+
+    // Future plan rows are reserves for HP combat, not unanswered mistakes.
+    for(let i=0;i<playedCount;i++){
       if(!session.answers[i]?.scored){
-        const a=session.answers[i]||{locked:false,value:"",answerMs:ANSWER_MS,scored:false};
+        const a=session.answers[i]||{locked:false,value:"",answerMs:answerWindowMs(),scored:false};
         const question=session.data.questions[i];
-        const ok=a.locked && norm(a.value)===norm(question.answer);
+        const ok=!serverFinalizing && a.locked && norm(a.value)===norm(question.answer);
         a.ok=ok;a.scored=true;session.answers[i]=a;
         if(ok){
           session.correct++;
-          const speedRatio=Math.max(0,Math.min(1,(ANSWER_MS-a.answerMs)/ANSWER_MS));
+          const answerMs=answerWindowMs();
+          const speedRatio=Math.max(0,Math.min(1,(answerMs-a.answerMs)/answerMs));
           session.score+=100+Math.round(50*speedRatio);
           session.answerTimes.push(a.answerMs);
         }
@@ -29747,13 +29817,12 @@ document.addEventListener('DOMContentLoaded', () => {
       mode:"learning",
       score:session.score,
       correct:session.correct,
-      total:session.data.questions.length,
+      total:playedCount,
       averageAnswerMs:session.answerTimes.length
         ? Math.round(session.answerTimes.reduce((a,b)=>a+b,0)/session.answerTimes.length)
         : null
     };
 
-    const serverFinalizing=!!(window.BB_RANKED_ACTIVE&&window.POMRUServerBattleV2?.enabled);
     if(serverFinalizing){
       q("#bbRankedLearningOverlay").classList.remove("hidden");
       q("#bbRankedLearningOverlay").setAttribute("aria-hidden","false");
@@ -29816,10 +29885,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const total=session.data.questions.length;
-    const index=Math.floor(elapsed/SLOT_MS);
+    const slotMs=slotWindowMs();
+    const answerMs=answerWindowMs();
+    const index=Math.floor(elapsed/slotMs);
 
     if(index>=total){
-      finish();
+      window.POMRUServerBattleV2?.refresh?.();
+      const endState=window.POMRUServerBattleV2?.snapshot?.();
+      q("#bbRLPhaseText").textContent=endState?.battle_over?"KO!":"SUDDEN DEATH • กำลังซิงก์ Server";
+      q("#bbRLTimer").textContent="0.0";
+      q("#bbRLTimerBar").style.width="0%";
+      if(endState?.battle_over)setTimeout(()=>finish(),450);
       return;
     }
 
@@ -29834,19 +29910,19 @@ document.addEventListener('DOMContentLoaded', () => {
       renderQuestion(index);
     }
 
-    const phase=elapsed-(index*SLOT_MS);
+    const phase=elapsed-(index*slotMs);
 
-    if(phase<ANSWER_MS){
-      const left=ANSWER_MS-phase;
+    if(phase<answerMs){
+      const left=answerMs-phase;
       q("#bbRLPhaseText").textContent=session.answers[index]?.locked?"ล็อกคำตอบแล้ว":"ตอบคำถาม";
       q("#bbRLTimer").textContent=Math.max(0,left/1000).toFixed(1);
-      q("#bbRLTimerBar").style.width=`${Math.max(0,Math.min(100,(left/ANSWER_MS)*100))}%`;
+      q("#bbRLTimerBar").style.width=`${Math.max(0,Math.min(100,(left/answerMs)*100))}%`;
     }else{
       scoreAndReveal(index);
-      const revealLeft=SLOT_MS-phase;
+      const revealLeft=slotMs-phase;
       q("#bbRLPhaseText").textContent="เฉลยพร้อมกัน";
       q("#bbRLTimer").textContent=Math.max(0,revealLeft/1000).toFixed(1);
-      q("#bbRLTimerBar").style.width=`${Math.max(0,Math.min(100,(revealLeft/(SLOT_MS-ANSWER_MS))*100))}%`;
+      q("#bbRLTimerBar").style.width=`${Math.max(0,Math.min(100,(revealLeft/Math.max(1,slotMs-answerMs))*100))}%`;
     }
   }
 
@@ -29965,8 +30041,9 @@ document.addEventListener('DOMContentLoaded', () => {
     return {
       score:Number(session.score)||0,
       correct:Number(session.correct)||0,
-      total:Number(
-        session.data?.questions?.length
+      total:Math.max(
+        Number(session.index)+1,
+        liveBattleRounds()
       )||0,
       averageAnswerMs:
         session.answerTimes.length
@@ -47145,11 +47222,12 @@ body.p996FinalizingBattle #bbRankedLearningOverlay::after{content:"SERVER FINALI
   }
 
   function syncProgress(){
-    const txt=safe($("bbRLQuestionNo")?.textContent),m=txt.match(/(\d+)\s*\/\s*(\d+)/);if(!m)return;
-    const current=Math.max(0,Number(m[1])||0),total=Math.max(1,Number(m[2])||1);
-    const bar=$("p996ProgressBar"),width=Math.max(0,Math.min(100,current/total*100))+"%";
-    if(bar&&bar.style.width!==width)bar.style.width=width;
-    setText($("p996RoundMini"),`ROUND ${current}`);
+    const txt=safe($("bbRLQuestionNo")?.textContent);
+    const roundMatch=txt.match(/ROUND\s*(\d+)/i),legacy=txt.match(/(\d+)\s*\/\s*(\d+)/);
+    const current=Math.max(1,Number(roundMatch?.[1]||legacy?.[1])||1);
+    const bar=$("p996ProgressBar");if(bar){bar.style.width="100%";bar.style.opacity=".22"}
+    const stat=$("bbRLQuestionNo")?.closest?.(".p996StatCard")?.querySelector?.("small");
+    setText(stat,"ROUND");setText($("bbRLQuestionNo"),String(current));setText($("p996RoundMini"),`ROUND ${current}`);
   }
 
   function syncSkinLabels(){
@@ -47299,7 +47377,7 @@ window.POMRU_V9741=Object.freeze({
     const id=matchId(match);if(!id)throw new Error("match_required");
     if(state.match?.id===id&&state.planRow)return state.planRow;
     const c=client();if(!c)throw new Error("supabase_client_unavailable");
-    const {data,error}=await c.rpc("bb_ranked_battle_plan_v2",{p_match_id:id});
+    const {data,error}=await c.rpc("bb_ranked_battle_plan_v5",{p_match_id:id});
     if(error)throw new Error("v97.6 SQL ยังไม่พร้อม • "+(error.message||error));
     const row=Array.isArray(data)?data[0]:data;if(!row)throw new Error("battle_plan_missing");
     state.match={...match,id};state.planRow={...row,memory_layout:Array.isArray(row.memory_layout)?row.memory_layout.map(Number):[]};
@@ -47312,7 +47390,7 @@ window.POMRU_V9741=Object.freeze({
   async function refresh(){
     const id=matchId();const c=client();if(!id||!c||state.busy)return;state.busy=true;
     try{
-      const {data,error}=await c.rpc("bb_ranked_battle_state_v4",{p_match_id:id});if(error)throw error;
+      const {data,error}=await c.rpc("bb_ranked_battle_state_v5",{p_match_id:id});if(error)throw error;
       const rows=Array.isArray(data)?data:[];let lastHpSelf=100,lastHpOpp=100,battleOver=false,winnerId=null;
       for(const r of rows){
         const key=String(Number(r.question_index));state.rounds.set(key,r);
@@ -47351,7 +47429,7 @@ window.POMRU_V9741=Object.freeze({
     if(state.submitted.has(key))return round(i);state.submitted.add(key);document.dispatchEvent(new CustomEvent("pomru:battle-answer-submitted",{detail:{match_id:id,question_index:i}}));
     const c=client();if(!c){state.submitted.delete(key);return null}
     try{
-      const {error}=await c.rpc("bb_ranked_battle_submit_choice_v2",{p_match_id:id,p_question_index:i,p_choice_text:String(choice??"")});
+      const {error}=await c.rpc("bb_ranked_battle_submit_choice_v5",{p_match_id:id,p_question_index:i,p_choice_text:String(choice??"")});
       if(error)throw error;await refresh();return round(i)
     }catch(e){
       const msg=safe(e?.message||e);state.lastError=msg;
@@ -47381,14 +47459,14 @@ window.POMRU_V9741=Object.freeze({
   async function finish(){
     const id=matchId();const c=client();if(!id||!c)throw new Error("battle_not_ready");
     await prepareForFinish();
-    const {data,error}=await c.rpc("bb_ranked_battle_finish_v4",{p_match_id:id});
+    const {data,error}=await c.rpc("bb_ranked_battle_finish_v5",{p_match_id:id});
     if(error)throw error;
     return Array.isArray(data)?data[0]:data
   }
   function stop(){clearInterval(state.poll);state.poll=null;state.match=null;state.planRow=null;state.questions=[];state.rounds.clear();state.submitted.clear();state.resolved.clear();state.opponent=null;state.overDispatched=false;show(false)}
-  function snapshot(){let selfHp=100,oppHp=100,battleOver=false,winnerId=null;for(const r of state.rounds.values()){if(r.resolved&&r.self_hp!=null){selfHp=Number(r.self_hp);oppHp=Number(r.opponent_hp)}if(r.battle_over)battleOver=true;if(r.winner_id)winnerId=r.winner_id}return {version:"99.6.3",match_id:matchId(),self_id:state.user?.id||null,opponent:state.opponent,self_hp:selfHp,opponent_hp:oppHp,rows:state.rounds.size,resolved:state.resolved.size,battle_over:battleOver,winner_id:winnerId,last_error:state.lastError,last_state_at:state.lastStateAt}}
+  function snapshot(){let selfHp=100,oppHp=100,battleOver=false,winnerId=null;for(const r of state.rounds.values()){if(r.resolved&&r.self_hp!=null){selfHp=Number(r.self_hp);oppHp=Number(r.opponent_hp)}if(r.battle_over)battleOver=true;if(r.winner_id)winnerId=r.winner_id}return {version:"99.6.7",match_id:matchId(),self_id:state.user?.id||null,opponent:state.opponent,self_hp:selfHp,opponent_hp:oppHp,rows:state.rounds.size,resolved:state.resolved.size,battle_over:battleOver,winner_id:winnerId,last_error:state.lastError,last_state_at:state.lastStateAt}}
 
-  window.POMRUServerBattleV2={enabled:true,version:"99.6.3",stateRpc:"bb_ranked_battle_state_v4",finishRpc:"bb_ranked_battle_finish_v4",prepare,start,plan,question,round,refresh,submit,submitNoAnswer,prepareForFinish,finish,stop,snapshot};
+  window.POMRUServerBattleV2={enabled:true,version:"99.6.7",planRpc:"bb_ranked_battle_plan_v5",stateRpc:"bb_ranked_battle_state_v5",submitRpc:"bb_ranked_battle_submit_choice_v5",finishRpc:"bb_ranked_battle_finish_v5",prepare,start,plan,question,round,refresh,submit,submitNoAnswer,prepareForFinish,finish,stop,snapshot};
   if(window.POMRUBuddyBattle){window.POMRUBuddyBattle.start=start;window.POMRUBuddyBattle.refresh=refresh;window.POMRUBuddyBattle.submit=(correct,index)=>{console.warn("Legacy boolean battle submit ignored in v97.6",correct,index)};window.POMRUBuddyBattle.snapshot=snapshot;window.POMRUBuddyBattle.stop=stop}
   document.addEventListener("pomru:ranked-game-started",e=>setTimeout(()=>start(window.__bbRankedMatch||{id:e.detail?.match_id}).catch(()=>{}),40));
   document.addEventListener("pomru:ranked-game-ended",()=>setTimeout(stop,250));
@@ -47409,7 +47487,7 @@ window.POMRU_V9741=Object.freeze({
 (function(){
   "use strict";
   function layer(){let el=document.getElementById("p976BattleEnd");if(el)return el;el=document.createElement("div");el.id="p976BattleEnd";el.className="p976BattleEnd";el.innerHTML='<div class="p976BattleEndCard"><small>BUDDY BATTLE</small><b id="p976BattleEndTitle">BATTLE END</b><span id="p976BattleEndSub">Server กำลังสรุปผลการแข่งขัน</span></div>';document.body.appendChild(el);return el}
-  function show(detail={}){const el=layer(),title=document.getElementById("p976BattleEndTitle"),sub=document.getElementById("p976BattleEndSub");const self=detail.self_id||window.POMRUServerBattleV2?.snapshot?.().self_id;const winner=detail.winner_id;const won=winner&&self&&winner===self;el.className="p976BattleEnd show "+(winner?(won?"win":"loss"):"");title.textContent=detail.opponent_hp<=0&&won?"KO!":detail.self_hp<=0&&!won?"DEFEAT":winner?(won?"VICTORY!":"DEFEAT"):"BATTLE END";sub.textContent=winner?(won?"Buddy ของคุณชนะ • กำลังบันทึกแรงก์":"คู่แข่งชนะ • กำลังบันทึกผล") : "ครบทุกข้อแล้ว • Server กำลังตัดสิน Tie-break";setTimeout(()=>el.classList.remove("show"),1150)}
+  function show(detail={}){const el=layer(),title=document.getElementById("p976BattleEndTitle"),sub=document.getElementById("p976BattleEndSub");const self=detail.self_id||window.POMRUServerBattleV2?.snapshot?.().self_id;const winner=detail.winner_id;const won=winner&&self&&winner===self;el.className="p976BattleEnd show "+(winner?(won?"win":"loss"):"");title.textContent=detail.opponent_hp<=0&&won?"KO!":detail.self_hp<=0&&!won?"DEFEAT":winner?(won?"VICTORY!":"DEFEAT"):"BATTLE END";sub.textContent=winner?(won?"Buddy ของคุณชนะ • กำลังบันทึกแรงก์":"คู่แข่งชนะ • กำลังบันทึกผล") : "Server กำลังยืนยันผล KO";setTimeout(()=>el.classList.remove("show"),1150)}
   document.addEventListener("pomru:battle-over",e=>show(e.detail||{}));
   window.POMRUFinalBattleRules=Object.freeze({version:"97.6",authority:"server",winnerOrder:["KO","HP","ACCURACY","TOTAL_CORRECT_TIME","ROUND_WINS","SERVER_TIEBREAK"],drawAtRound:true});
 })();
@@ -49819,7 +49897,6 @@ body.p996UnifiedBattleActive #p951ChatFab{display:none!important}
    POMRU v99.6.5 — Guess 1–99
    Two-heart guessing game. No HP / no battle damage.
    ========================================================== */
-.p99GuessGameCard{background:linear-gradient(145deg,#f4e9ff,#fff0fa)!important;border-color:#dfc8ff!important}.p99GuessGameCard .p91GameIcon{background:linear-gradient(145deg,#7f5bf2,#e45aac)!important;color:#fff!important;box-shadow:0 8px 18px rgba(110,72,206,.24)}
 .p99GuessScreen{position:relative;min-height:100dvh;padding:12px 14px 120px;overflow-x:hidden;background:linear-gradient(180deg,#2e116e 0,#6842c9 18%,#f8e9ff 52%,#fff5f2 100%);color:#4e315d}.p99GuessBg{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}.p99GuessBg:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 18% 16%,rgba(255,255,255,.42) 0 2px,transparent 3px),radial-gradient(circle at 77% 20%,rgba(255,255,255,.5) 0 2px,transparent 3px),radial-gradient(circle at 88% 41%,rgba(255,220,251,.6) 0 3px,transparent 4px),linear-gradient(135deg,transparent 0 35%,rgba(255,255,255,.08) 36% 37%,transparent 38% 100%);background-size:auto}.p99GuessBg i{position:absolute;width:180px;height:180px;border-radius:50%;filter:blur(2px);opacity:.25}.p99GuessBg i:nth-child(1){left:-80px;top:160px;background:#65cfff}.p99GuessBg i:nth-child(2){right:-70px;top:280px;background:#ff83ca}.p99GuessBg i:nth-child(3){left:18%;bottom:100px;background:#fff}.p99GuessBg i:nth-child(4){right:7%;bottom:210px;background:#ffd86b}
 .p99GuessTopbar{position:sticky;top:0;z-index:20;max-width:760px;margin:0 auto 12px;padding:10px 12px;display:grid;grid-template-columns:50px 1fr auto;gap:10px;align-items:center;border:1px solid rgba(255,255,255,.35);border-radius:24px;background:rgba(48,18,109,.78);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 12px 30px rgba(37,12,83,.22)}.p99GuessBack{width:46px;height:46px;border:2px solid rgba(255,255,255,.38);border-radius:16px;background:linear-gradient(#9b75ff,#7149d9);color:#fff;font-size:38px;line-height:36px;font-weight:700;box-shadow:0 5px 0 #4b2aaa}.p99GuessBrand{min-width:0}.p99GuessBrand small{display:block;color:#e7dfff;font-size:9px;font-weight:1000;letter-spacing:.16em}.p99GuessBrand strong{display:block;margin-top:2px;color:#fff;font-size:20px;font-weight:1000}.p99GuessTopLives{display:flex;align-items:center;gap:5px;padding:8px 10px;border-radius:16px;background:rgba(255,255,255,.13)}.p99GuessTopLives span{font-size:25px;line-height:1;color:#ff5aa7;filter:drop-shadow(0 2px 0 #fff)}.p99GuessTopLives span.spent{color:#88769b;opacity:.35;filter:none;transform:scale(.86)}
 .p99GuessMain{width:min(760px,100%);margin:auto}.p99GuessStats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}.p99GuessStats>div{padding:10px;border:1px solid rgba(255,255,255,.55);border-radius:18px;text-align:center;background:rgba(255,255,255,.91);box-shadow:0 7px 20px rgba(65,38,93,.08)}.p99GuessStats small{display:block;color:#9a7aaa;font-size:8px;font-weight:1000;letter-spacing:.12em}.p99GuessStats strong{display:block;margin-top:2px;color:#5c2f86;font-size:19px;font-weight:1000}
@@ -49968,14 +50045,40 @@ body.p99GuessPlaying .v17dock{display:none!important}.p99GuessScreen.active{disp
     if(e.target.closest?.("#p99GuessSubmit")){guess();return}
     if(e.target.closest?.("#p99GuessNext")){next();return}
     if(e.target.closest?.("#p99GuessAgain")){start();return}
-    if(e.target.closest?.('#p99GuessBack,[data-app-go="mathgames"]')){leave()}
+    if(e.target.closest?.('#p99GuessBack,[data-app-go="solo"]')){leave()}
   });
   document.addEventListener("keydown",e=>{if(e.key==="Enter"&&document.querySelector('.p99GuessScreen.active')&&!state?.locked){e.preventDefault();guess()}});
   window.addEventListener("pageshow",()=>{if(document.querySelector('.p99GuessScreen.active'))syncBuddy()});
   window.POMRUGuess99=Object.freeze({version:"99.6.5",start,guess,state:()=>state?{round:state.round,score:state.score,attempts:state.attempts,min:state.min,max:state.max,locked:state.locked}:null});
 })();
 </script>
-<script id="pomru-v9965-marker">window.POMRU_V9965=Object.freeze({version:"99.6.5",game:"math_guess_1_99",rounds:5,livesPerRound:2,hp:false,hints:["higher","lower"],rewardMode:"math_guess_1_99"});</script>
+<script id="pomru-v9966-marker">window.POMRU_V9966=Object.freeze({version:"99.6.6",game:"secret_number_99",title:"เลขลับ 99",category:"standalone",rounds:5,livesPerRound:2,hp:false,hints:["higher","lower"],rewardMode:"math_guess_1_99"});</script>
 
+
+<style id="pomru-v9967-endless-hp-style">
+body.p996UnifiedBattleActive .p996MiniTrack{display:none!important}
+body.p996UnifiedBattleActive .p996ModeCopy span{font-weight:900!important}
+body.p996UnifiedBattleActive.p996Pressure .p996RankStrip{box-shadow:0 5px 0 rgba(38,11,94,.6),0 0 24px rgba(255,201,63,.24)!important}
+body.p996UnifiedBattleActive.p996Overtime .p996RankStrip{box-shadow:0 5px 0 rgba(38,11,94,.6),0 0 28px rgba(255,112,180,.34)!important}
+body.p996UnifiedBattleActive.p996Sudden .p996RankStrip{animation:p9967SuddenPulse 1.15s ease-in-out infinite}
+@keyframes p9967SuddenPulse{50%{filter:brightness(1.18);box-shadow:0 5px 0 rgba(38,11,94,.6),0 0 34px rgba(255,86,137,.55)}}
+</style>
+<script id="pomru-v9967-endless-hp-runtime">
+(function(){
+  "use strict";const $=id=>document.getElementById(id);let lastStage="";
+  function stageFor(round){return round>=21?"SUDDEN DEATH":round>=15?"OVERTIME":round>=9?"PRESSURE":"NORMAL"}
+  function paint(round){
+    round=Math.max(1,Number(round)||1);const stage=stageFor(round);
+    document.body.classList.toggle("p996Pressure",stage==="PRESSURE");document.body.classList.toggle("p996Overtime",stage==="OVERTIME");document.body.classList.toggle("p996Sudden",stage==="SUDDEN DEATH");
+    const copy=document.querySelector(".p996ModeCopy span");if(copy)copy.textContent=stage==="NORMAL"?"ชนะเมื่อ HP คู่แข่งเหลือ 0":stage+" • Damage เพิ่มขึ้น";
+    const power=$("p996PowerValue");if(power)power.textContent=`R${round}`;const mem=$("progress");if(mem&&document.body.classList.contains("p996MemoryBattle"))mem.textContent=`ROUND ${round}`;
+    if(stage!==lastStage&&stage!=="NORMAL"&&document.body.classList.contains("p996UnifiedBattleActive")){lastStage=stage;const toast=$("p971BattleToast");if(toast){toast.textContent=stage==="PRESSURE"?"⚡ PRESSURE • Damage เริ่มแรงขึ้น":stage==="OVERTIME"?"🔥 OVERTIME • เสมอเริ่มเสียพลัง":"💥 SUDDEN DEATH • สู้จน KO";toast.classList.add("show");setTimeout(()=>toast.classList.remove("show"),1800)}}
+  }
+  function currentRound(){const snap=window.POMRUServerBattleV2?.snapshot?.();return Math.max(1,(Number(snap?.resolved)||0)+1)}
+  document.addEventListener("pomru:ranked-game-started",()=>setTimeout(()=>{lastStage="";paint(currentRound())},120));document.addEventListener("pomru:battle-round-resolved",e=>paint((Number(e.detail?.question_index)||0)+2));document.addEventListener("pomru:battle-v2-state",()=>paint(currentRound()));document.addEventListener("pomru:ranked-game-ended",()=>{lastStage="";document.body.classList.remove("p996Pressure","p996Overtime","p996Sudden")});
+  window.POMRUBattleBalance=Object.freeze({version:"99.6.7",hp:100,endCondition:"KO_ONLY",stages:["NORMAL","PRESSURE","OVERTIME","SUDDEN DEATH"],stageFor});
+})();
+</script>
+<script id="pomru-v9967-marker">window.POMRU_V9967=Object.freeze({version:"99.6.7",feature:"endless-hp-balance",rankedEndsOn:"KO",questionCounter:"round-only",internalPlanRounds:40,secretNumber99:{hp:false,lives:2}});</script>
 </body>
 </html>
