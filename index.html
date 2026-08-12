@@ -15540,6 +15540,39 @@ body.p93SocialOpen{overflow:hidden!important}
 }
 </style>
 
+
+<style id="pomru-v995w5-friends-room-split">
+/* POMRU v99.5W.5 — Friends and 1v1 Room are independent pages */
+.p995FriendsMain{padding-bottom:max(34px,env(safe-area-inset-bottom))}
+.p995FriendsIntro{
+  min-height:108px;padding:15px 18px;box-sizing:border-box;display:grid;grid-template-columns:54px minmax(0,1fr) auto;align-items:center;gap:12px;
+  border:1px solid rgba(111,79,96,.09);border-radius:25px;background:linear-gradient(135deg,#fff1f7,#fff 52%,#f0edff);box-shadow:0 10px 28px rgba(89,62,79,.07)
+}
+.p995FriendsIntroIcon{width:50px;height:50px;display:grid;place-items:center;border-radius:17px;background:#ffe6f1;color:#e65a92;font-size:28px;font-weight:900}
+.p995FriendsIntro small,.p995RoomGuideHead small{display:block;color:#a16f89;font-size:7px;font-weight:1000;letter-spacing:.13em}
+.p995FriendsIntro h2{margin:2px 0 3px;color:#513d50;font-size:19px;line-height:1.1}.p995FriendsIntro p{margin:0;color:#917d89;font-size:8px;line-height:1.45}
+.p995FriendsIntro>button,.p995RoomGuideHead>button{min-height:39px;padding:0 13px;border:0;border-radius:13px;background:#7653cf;color:#fff;font-size:8px;font-weight:1000}.p995FriendsIntro>button span{font-size:15px;vertical-align:-1px}
+.p995FriendsMain .p93SocialShell{margin-top:10px}
+
+.p995RoomHub{background:linear-gradient(180deg,#eee9ff 0%,#fff2f7 52%,#fff7ed 100%)}
+.p995RoomMain{padding-bottom:max(40px,env(safe-area-inset-bottom))}
+.p995RoomHero{box-shadow:0 16px 38px rgba(91,61,116,.11)}
+.p995RoomGuide{margin-top:13px;padding:16px;border:1px solid rgba(111,79,96,.09);border-radius:28px;background:rgba(255,255,255,.95);box-shadow:0 11px 30px rgba(91,62,79,.07)}
+.p995RoomGuideHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.p995RoomGuideHead h3{margin:2px 0 0;color:#503e4d;font-size:18px}
+.p995RoomSteps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.p995RoomSteps article{min-height:82px;padding:11px;display:grid;grid-template-columns:34px 1fr;gap:9px;align-items:start;border:1px solid rgba(111,79,96,.08);border-radius:18px;background:#fcf9fc}
+.p995RoomSteps article>span{width:32px;height:32px;display:grid;place-items:center;border-radius:11px;background:#eee8ff;color:#6847bd;font-size:12px;font-weight:1000}.p995RoomSteps b{display:block;color:#564452;font-size:10px}.p995RoomSteps small{display:block;margin-top:3px;color:#93808b;font-size:7px;line-height:1.45}
+.p995RoomNote{margin-top:10px;min-height:64px;padding:9px 10px;display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:9px;border-radius:18px;background:linear-gradient(135deg,#fff0f6,#f2f0ff)}
+.p995RoomNote>span{width:40px;height:40px;display:grid;place-items:center;border-radius:13px;background:#fff;color:#e55f94;font-size:22px}.p995RoomNote b{display:block;color:#574451;font-size:9px}.p995RoomNote small{display:block;margin-top:2px;color:#947f8b;font-size:7px;line-height:1.4}.p995RoomNote button{min-height:37px;padding:0 11px;border:0;border-radius:12px;background:#fff;color:#6b4cb8;font-size:8px;font-weight:1000}
+.p995RoomQIcon{width:28px;height:28px;display:grid;place-items:center;margin:auto;border:2px solid currentColor;border-radius:9px;font-size:8px;font-weight:1000}
+
+@media(max-width:760px){
+  .p995FriendsIntro{min-height:82px;padding:11px 12px;grid-template-columns:42px minmax(0,1fr) auto;gap:8px;border-radius:21px}.p995FriendsIntroIcon{width:40px;height:40px;border-radius:13px;font-size:21px}.p995FriendsIntro h2{font-size:15px}.p995FriendsIntro p{font-size:7px}.p995FriendsIntro>button{min-height:34px;padding:0 9px;font-size:7px}
+  .p995RoomHero{min-height:350px!important;padding-bottom:170px!important}.p995RoomHero h2{font-size:35px!important}.p995RoomHero p{font-size:9px!important}.p995RoomHero .p93HeroDuel{height:184px!important}
+  .p995RoomGuide{padding:11px;border-radius:22px}.p995RoomGuideHead h3{font-size:14px}.p995RoomGuideHead>button{min-height:34px;font-size:7px}.p995RoomSteps{grid-template-columns:1fr;gap:6px}.p995RoomSteps article{min-height:58px;padding:8px;grid-template-columns:30px 1fr}.p995RoomSteps article>span{width:28px;height:28px}.p995RoomNote{grid-template-columns:38px 1fr;min-height:58px}.p995RoomNote>span{width:36px;height:36px}.p995RoomNote button{grid-column:1/-1;min-height:35px}
+}
+</style>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style id="pomru-v94-simple-home-playhub">
@@ -22610,7 +22643,7 @@ window.addEventListener("load",()=>{
               ดูอันดับผู้เล่น
             </button>
           </div>
-          <button class="bbArenaPrimary hidden" id="bbResultsLobby" aria-hidden="true">กลับหน้าเพื่อน</button>
+          <button class="bbArenaPrimary hidden" id="bbResultsLobby" aria-hidden="true">กลับหน้าห้อง 1v1</button>
         </div>
       </section>
 
@@ -23542,7 +23575,7 @@ window.addEventListener("load",()=>{
     cleanupRoomChannel();stopCountdown();currentRoom=null;players=[];
     document.dispatchEvent(new CustomEvent("pomru:duel-room-left",{detail:{room_id:leftRoomId}}));
     closeArena();
-    setTimeout(()=>window.POMRUDuel?.openHub?.("friends"),60);
+    setTimeout(()=>window.POMRUDuel?.openRoom?.(),60);
     toast("ออกจากห้องแล้ว");
   }
   async function toggleReady(){
@@ -25491,7 +25524,7 @@ window.addEventListener("load",()=>{
     currentRoom=null;players=[];activeRankedMatch=null;
     document.dispatchEvent(new CustomEvent("pomru:duel-room-left",{detail:{room_id:finishedRoom}}));
     closeArena();
-    setTimeout(()=>window.POMRUDuel?.openHub?.("friends"),60);
+    setTimeout(()=>window.POMRUDuel?.openRoom?.(),60);
     toast("จบการดวลแล้ว • ผลการแข่งขันถูกบันทึกไว้");
   });
 
@@ -25650,7 +25683,7 @@ window.addEventListener("load",()=>{
     currentRoom=null;players=[];activeRankedMatch=null;
     document.dispatchEvent(new CustomEvent("pomru:duel-room-left",{detail:{room_id:finishedRoom}}));
     closeArena();
-    setTimeout(()=>window.POMRUDuel?.openHub?.("friends"),60)
+    setTimeout(()=>window.POMRUDuel?.openRoom?.(),60)
   });
 
   window.bbReturnToRankedRoom=async()=>{
@@ -28800,106 +28833,84 @@ document.addEventListener('DOMContentLoaded', () => {
      v71 Ranked Learning Arena
      ========================================================= -->
 <section id="bbRankedLearningOverlay" class="bbRankLearn hidden" aria-hidden="true">
-  <div class="bbRankLearnBg" aria-hidden="true">
+  <div class="bbRankLearnBg p996ArenaBg" aria-hidden="true">
     <i class="a"></i><i class="b"></i><i class="c"></i><i class="d"></i>
+    <span class="p996Spark s1">✦</span><span class="p996Spark s2">✦</span><span class="p996Spark s3">★</span><span class="p996Spark s4">✦</span>
   </div>
 
-  <header class="bbRankLearnTop">
-    <div class="bbRankLearnBrand">
-      <span>🇹🇭</span>
-      <div>
-        <small>THAI BRAIN RANK</small>
-        <b id="bbRLWorld">Ranked</b>
-      </div>
+  <header class="bbRankLearnTop p996Topbar">
+    <button type="button" class="p996TopIcon" id="p996BattleMenu" aria-label="เมนู">☰</button>
+    <div class="p996RankLife"><span>♥</span><b>RANKED</b></div>
+    <div class="p996Logo" aria-label="POMRU"><span>P</span><span class="star">★</span><span>MRU</span></div>
+    <div class="p996TopRight">
+      <div class="p996Wallet"><span class="coin">P</span><b id="p996CoinBalance">0</b></div>
+      <button type="button" id="bbRLForfeit" class="bbRLForfeit p996Exit" aria-label="ออกจากการแข่งขัน">↩</button>
     </div>
-
-    <div class="bbRankLearnMode">
-      <small>MATCH MODE</small>
-      <b id="bbRLMode">เกม</b>
-      <span id="bbRLDiff">ระดับ</span>
+    <div class="p996MetaSource" aria-hidden="true">
+      <b id="bbRLWorld">Ranked</b><b id="bbRLMode">เกม</b><span id="bbRLDiff">ระดับ</span>
     </div>
-
-    <button type="button" id="bbRLForfeit" class="bbRLForfeit">ยอมแพ้</button>
   </header>
 
-  <main class="bbRankLearnShell">
-    <section class="bbRLStatus">
-      <div class="bbRLQuestionNo">
-        <small>QUESTION</small>
-        <b id="bbRLQuestionNo">1 / 10</b>
-      </div>
+  <main class="bbRankLearnShell p996BattlePage">
+    <div id="p996BattleMount" class="p996BattleMount"></div>
 
-      <div class="bbRLTimerWrap">
-        <div class="bbRLTimerHead">
-          <span id="bbRLPhaseText">ตอบคำถาม</span>
-          <strong id="bbRLTimer">13.0</strong>
-        </div>
-        <div class="bbRLTimerTrack"><i id="bbRLTimerBar"></i></div>
-      </div>
-
-      <div class="bbRLScore">
-        <small>SCORE</small>
-        <b id="bbRLScore">0</b>
-      </div>
+    <section id="p996RankStrip" class="p996RankStrip">
+      <div class="p996RankBadge"><span class="crown">♛</span><b>RANKED</b><small>1V1</small></div>
+      <div class="p996ModeCopy"><small>BUDDY BATTLE</small><b id="p996RankedMode">กำลังเตรียมโหมด…</b><span>ตอบให้แม่น • ความเร็วเพิ่มแรงโจมตี</span></div>
+      <div class="p996PowerBadge"><span>⚡</span><b id="p996PowerValue">1V1</b><small>DUEL</small></div>
+      <div class="p996Server"><i></i><span>SERVER<br>SYNC</span></div>
     </section>
 
-    <section class="bbRLCard">
-      <div class="bbRLMeta">
-        <span id="bbRLCategory">RANKED</span>
-        <span class="sync">● SERVER SYNC</span>
+    <section class="bbRLStatus p996Stats">
+      <div class="bbRLTimerWrap p996TimerCard">
+        <small>เวลาเหลือ</small>
+        <div class="bbRLTimerHead"><span id="bbRLPhaseText">ตอบคำถาม</span><strong id="bbRLTimer">13.0</strong></div>
+        <div class="bbRLTimerTrack"><i id="bbRLTimerBar"></i></div>
       </div>
+      <div class="bbRLQuestionNo p996StatCard">
+        <small>PROGRESS</small>
+        <b id="bbRLQuestionNo">1 / 10</b>
+        <div class="p996MiniTrack"><i id="p996ProgressBar"></i></div>
+      </div>
+      <div id="p996ComboStat" class="p996StatCard p996ComboStat">
+        <small>COMBO</small><b><span class="p996Star">★</span> <span id="p996ComboValue">0</span></b>
+      </div>
+      <div class="bbRLScore p996StatCard">
+        <small>SCORE</small><b id="bbRLScore">0</b><span class="p996Trophy">🏆</span>
+      </div>
+      <div class="p996StatCard p996DuelStat"><small>โหมด</small><b>1V1</b><span>Ranked</span></div>
+    </section>
 
-      <button type="button" id="bbRLAudio" class="bbRLAudio hidden">
-        <span>🔊</span>
-        <b>กดเพื่อฟังอีกครั้ง</b>
-      </button>
+    <section class="bbRLCard p996QuestionCard">
+      <div class="bbRLMeta p996QuestionMeta"><span id="bbRLCategory">RANKED</span><span class="sync">● SERVER SYNC</span></div>
+      <div class="p996QuestionCrest" aria-hidden="true"><span>★</span></div>
 
+      <button type="button" id="bbRLAudio" class="bbRLAudio hidden"><span>🔊</span><b>กดเพื่อฟังอีกครั้ง</b></button>
       <h1 id="bbRLPrompt">กำลังเตรียมโจทย์…</h1>
       <p id="bbRLSubPrompt">ผู้เล่นทุกคนจะได้โจทย์ชุดเดียวกัน</p>
 
-      <div id="bbRLChoices" class="bbRLChoices"></div>
+      <div id="bbRLChoices" class="bbRLChoices p996Choices"></div>
 
-      <div id="bbRLTyping" class="bbRLTyping hidden">
-        <input id="bbRLInput" type="text" autocomplete="off" placeholder="พิมพ์คำตอบ">
-        <button type="button" id="bbRLSubmit">ล็อกคำตอบ</button>
-      </div>
+      <div id="bbRLTyping" class="bbRLTyping hidden"><input id="bbRLInput" type="text" autocomplete="off" placeholder="พิมพ์คำตอบ"><button type="button" id="bbRLSubmit">ล็อกคำตอบ</button></div>
+      <div id="bbRLOrder" class="bbRLOrder hidden"><div id="bbRLSelected" class="selected"></div><div id="bbRLTokens" class="tokens"></div><button type="button" id="bbRLOrderSubmit">ล็อกคำตอบ</button></div>
 
-      <div id="bbRLOrder" class="bbRLOrder hidden">
-        <div id="bbRLSelected" class="selected"></div>
-        <div id="bbRLTokens" class="tokens"></div>
-        <button type="button" id="bbRLOrderSubmit">ล็อกคำตอบ</button>
-      </div>
-
-      <div id="bbRLLocked" class="bbRLLocked hidden">
-        <span>🔒</span>
-        <div>
-          <b>ล็อกคำตอบแล้ว</b>
-          <small>รอเปิดเฉลยพร้อมกันทุกคน</small>
-        </div>
-      </div>
-
-      <div id="bbRLReveal" class="bbRLReveal hidden">
-        <span id="bbRLRevealIcon">✓</span>
-        <div>
-          <b id="bbRLRevealTitle">ถูกต้อง!</b>
-          <p id="bbRLRevealText"></p>
-        </div>
-      </div>
+      <div id="bbRLLocked" class="bbRLLocked hidden"><span>🔒</span><div><b>ล็อกคำตอบแล้ว</b><small>รอเปิดเฉลยพร้อมกันทุกคน</small></div></div>
+      <div id="bbRLReveal" class="bbRLReveal hidden"><span id="bbRLRevealIcon">✓</span><div><b id="bbRLRevealTitle">ถูกต้อง!</b><p id="bbRLRevealText"></p></div></div>
     </section>
 
-    <footer class="bbRLFooter">
-      <span>🧠 ความแม่น + ความเร็ว = คะแนนการแข่งขัน</span>
-      <span>คำตอบจะไม่เฉลยก่อนหมดเวลา</span>
-    </footer>
+    <nav class="p996BattleActions" aria-label="เมนูระหว่างการแข่งขัน">
+      <button type="button" id="p996BuddyBtn"><span>🧸</span><b>BUDDY</b><small>คู่หูของคุณ</small></button>
+      <div class="p996BattleCore"><span>★</span><b>BATTLE</b><small id="p996RoundMini">ROUND 1</small></div>
+      <button type="button" id="p996BattleChat"><span>💬</span><b>แชท</b><small>คุยกับคู่แข่ง</small></button>
+    </nav>
+
+    <footer class="bbRLFooter"><span>✓ ความถูกต้องมาก่อน • ความเร็วเพิ่มแรงโจมตี</span><span>คำตอบจะไม่เฉลยก่อนหมดเวลา</span></footer>
   </main>
 
-  <section id="bbRLLoading" class="bbRLLoading">
-    <div class="brain">🧠</div>
-    <h2>กำลังเตรียมสนามแข่งขัน</h2>
-    <p id="bbRLLoadingText">กำลังซิงก์โจทย์ของผู้เล่นทุกคน…</p>
+  <section id="bbRLLoading" class="bbRLLoading p996Loading">
+    <div class="brain">⭐</div><h2>กำลังเตรียม BUDDY BATTLE</h2><p id="bbRLLoadingText">กำลังซิงก์โจทย์ของผู้เล่นทุกคน…</p>
   </section>
 </section>
-
 
 <script>
 (function brainBuddyV71RankedLearning(){
@@ -34166,6 +34177,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function openCreateRoom(){
+    if(window.POMRUDuel?.openRoom){
+      window.POMRUDuel.openRoom();
+      return;
+    }
     if(window.POMRUDuel?.openHub){
       window.POMRUDuel.openHub("friends");
       return;
@@ -34659,7 +34674,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </button>
     <div class="p93SocialBrand">
       <small>POMRU SOCIAL</small>
-      <h1>เพื่อน & ห้อง 1v1</h1>
+      <h1>เพื่อน</h1>
     </div>
     <div class="p93SocialMe">
       <span class="p93Pulse"></span>
@@ -34667,22 +34682,11 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
   </header>
 
-  <main class="p93SocialMain">
-    <section class="p93DuelHero">
-      <div class="p93DuelHeroCopy">
-        <span class="p93HeroPill">FRIEND ROOM</span>
-        <h2>สร้างห้องกับเพื่อน<br>แบบตัวต่อตัว</h2>
-        <p>เห็นว่าใครออนไลน์ ชวนเข้าห้อง คุยกันก่อนเริ่ม และเล่นพร้อมกันแบบ Realtime</p>
-        <div class="p93HeroActions">
-          <button type="button" class="primary" id="p93CreateCodeRoom">สร้างห้อง 1v1</button>
-          <button type="button" class="secondary" id="p93OpenJoinCode">เข้าด้วยรหัส</button>
-        </div>
-      </div>
-      <div class="p93HeroDuel" aria-hidden="true">
-        <div class="p93HeroBear left"><img src="/assets/buddy/default-pink-buddy.png?v=930" alt=""></div>
-        <strong>VS</strong>
-        <div class="p93HeroBear right"><img src="/assets/buddy/default-pink-buddy.png?v=930" alt=""></div>
-      </div>
+  <main class="p93SocialMain p995FriendsMain">
+    <section class="p995FriendsIntro">
+      <div class="p995FriendsIntroIcon" aria-hidden="true">♡</div>
+      <div><small>POMRU FRIENDS</small><h2>เล่นกับคนที่คุณรู้จัก</h2><p>ดูเพื่อนออนไลน์ • รับคำขอ • คำเชิญดวล • เพิ่มเพื่อนใหม่</p></div>
+      <button type="button" id="p995FriendsToRoom">ห้อง 1v1 <span>›</span></button>
     </section>
 
     <section class="p93SocialShell">
@@ -34742,6 +34746,56 @@ document.addEventListener('DOMContentLoaded', () => {
   </main>
 </div>
 
+<div class="p93SocialHub p995RoomHub hidden" id="p995RoomHub" aria-hidden="true">
+  <div class="p93SocialScene" aria-hidden="true">
+    <span class="p93Cloud c1"></span><span class="p93Cloud c2"></span>
+    <span class="p93Hill h1"></span><span class="p93Hill h2"></span>
+  </div>
+
+  <header class="p93SocialTop p995RoomTop">
+    <button type="button" class="p93CircleBtn" id="p995RoomClose" aria-label="กลับ">
+      <svg viewBox="0 0 24 24"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="p93SocialBrand">
+      <small>POMRU DUEL</small>
+      <h1>ห้อง 1v1</h1>
+    </div>
+    <div class="p93SocialMe">
+      <span class="p93Pulse"></span>
+      <div><small>FRIEND MATCH</small><b>ไม่เสียแรงก์</b></div>
+    </div>
+  </header>
+
+  <main class="p93SocialMain p995RoomMain">
+    <section class="p93DuelHero p995RoomHero">
+      <div class="p93DuelHeroCopy">
+        <span class="p93HeroPill">FRIEND ROOM</span>
+        <h2>สร้างห้อง 1v1<br>แล้วชวนเพื่อน</h2>
+        <p>สร้างห้องส่วนตัวหรือกรอกรหัสจากเพื่อน จากนั้นเข้า Lobby เพื่อคุยและกดพร้อมก่อนเริ่มเกม</p>
+        <div class="p93HeroActions">
+          <button type="button" class="primary" id="p93CreateCodeRoom">สร้างห้อง 1v1</button>
+          <button type="button" class="secondary" id="p93OpenJoinCode">เข้าด้วยรหัส</button>
+        </div>
+      </div>
+      <div class="p93HeroDuel" aria-hidden="true">
+        <div class="p93HeroBear left"><img src="/assets/buddy/default-pink-buddy.png?v=9955" alt=""></div>
+        <strong>VS</strong>
+        <div class="p93HeroBear right"><img src="/assets/buddy/default-pink-buddy.png?v=9955" alt=""></div>
+      </div>
+    </section>
+
+    <section class="p995RoomGuide" aria-label="วิธีเล่นห้อง 1v1">
+      <div class="p995RoomGuideHead"><div><small>HOW IT WORKS</small><h3>ห้องเพื่อน แยกจากหน้าเพื่อนแล้ว</h3></div><button type="button" id="p995RoomToFriends">ดูเพื่อน</button></div>
+      <div class="p995RoomSteps">
+        <article><span>1</span><div><b>สร้างหรือเข้าห้อง</b><small>สร้างรหัสใหม่ หรือใช้รหัสที่เพื่อนส่งมา</small></div></article>
+        <article><span>2</span><div><b>เชิญเพื่อน</b><small>ใน Lobby กดเชิญเพื่อน หรือแชร์รหัสห้อง</small></div></article>
+        <article><span>3</span><div><b>พร้อมแล้วเริ่ม</b><small>ทั้งสองคนกดพร้อม แล้วเล่นด้วย Server เดียวกัน</small></div></article>
+      </div>
+      <div class="p995RoomNote"><span>♡</span><div><b>อยากจัดการรายชื่อเพื่อน?</b><small>เพิ่มเพื่อน รับคำขอ และดูคนออนไลน์ อยู่ในหน้า “เพื่อน” แยกต่างหาก</small></div><button type="button" id="p995RoomFriendsBtn">เปิดหน้าเพื่อน</button></div>
+    </section>
+  </main>
+</div>
+
 <div class="p93SheetBackdrop hidden" id="p93DuelConfig">
   <section class="p93DuelSheet">
     <button class="p93SheetX" type="button" id="p93DuelConfigClose">×</button>
@@ -34764,19 +34818,15 @@ document.addEventListener('DOMContentLoaded', () => {
         </optgroup>
         <optgroup label="Math">
           <option value="math_multiple_choice">เลือกคำตอบ</option>
-          <option value="math_typing">พิมพ์คำตอบ</option>
           <option value="math_mix">Math Mix</option>
         </optgroup>
         <optgroup label="Chinese">
           <option value="chinese_hanzi_meaning">คำศัพท์จีน</option>
           <option value="chinese_hanzi_pinyin">พินอิน</option>
-          <option value="chinese_listening">ฝึกฟัง</option>
           <option value="chinese_mix">Chinese Mix</option>
         </optgroup>
         <optgroup label="English">
           <option value="english_vocabulary">Vocabulary</option>
-          <option value="english_typing">Typing</option>
-          <option value="english_listening">Listening</option>
         </optgroup>
       </select>
     </label>
@@ -34852,15 +34902,11 @@ document.addEventListener('DOMContentLoaded', () => {
     teddy_match:{label:"จับคู่",world:"memory"},
     teddy_sequence:{label:"จำลำดับ",world:"memory"},
     math_multiple_choice:{label:"เลือกคำตอบ",world:"math"},
-    math_typing:{label:"พิมพ์คำตอบ",world:"math"},
     math_mix:{label:"Math Mix",world:"math"},
     chinese_hanzi_meaning:{label:"คำศัพท์จีน",world:"chinese"},
     chinese_hanzi_pinyin:{label:"พินอิน",world:"chinese"},
-    chinese_listening:{label:"ฝึกฟัง",world:"chinese"},
     chinese_mix:{label:"Chinese Mix",world:"chinese"},
-    english_vocabulary:{label:"Vocabulary",world:"english"},
-    english_typing:{label:"Typing",world:"english"},
-    english_listening:{label:"Listening",world:"english"}
+    english_vocabulary:{label:"Vocabulary",world:"english"}
   };
 
   const DIFF_LABEL={
@@ -34934,13 +34980,18 @@ document.addEventListener('DOMContentLoaded', () => {
     qa("[data-p93-panel]").forEach(p=>p.classList.toggle("active",p.dataset.p93Panel===tab));
   }
 
-  async function openHub(tab="friends"){
+  async function requireSocialUser(){
     await getUser();
-    if(!user){
-      window.POMRUMember?.gateOpen?.();
-      return;
-    }
+    if(user)return true;
+    window.POMRUMember?.gateOpen?.();
+    return false;
+  }
+
+  async function openFriendsHub(tab="friends"){
+    if(!await requireSocialUser())return;
     inviteIntoRoomId=null;
+    show("#p995RoomHub",false);
+    q("#p995RoomHub")?.setAttribute("aria-hidden","true");
     show("#p93SocialHub",true);
     q("#p93SocialHub")?.setAttribute("aria-hidden","false");
     document.body.classList.add("p93SocialOpen");
@@ -34948,9 +34999,29 @@ document.addEventListener('DOMContentLoaded', () => {
     await loadAll();
   }
 
+  async function openRoomHub(){
+    if(!await requireSocialUser())return;
+    inviteIntoRoomId=null;
+    try{
+      const myBuddy=window.__bbActiveBuddyAsset||window.POMRUCosmetics?.currentBuddyAsset?.()||"/assets/buddy/default-pink-buddy.png?v=9955";
+      const img=q("#p995RoomHub .p93HeroBear.left img");
+      if(img&&myBuddy)img.src=myBuddy;
+    }catch(_){}
+    show("#p93SocialHub",false);
+    q("#p93SocialHub")?.setAttribute("aria-hidden","true");
+    show("#p995RoomHub",true);
+    q("#p995RoomHub")?.setAttribute("aria-hidden","false");
+    document.body.classList.add("p93SocialOpen");
+  }
+
+  // Compatibility: old callers asking for Social now open Friends only.
+  function openHub(tab="friends"){return openFriendsHub(tab)}
+
   function closeHub(){
     show("#p93SocialHub",false);
     q("#p93SocialHub")?.setAttribute("aria-hidden","true");
+    show("#p995RoomHub",false);
+    q("#p995RoomHub")?.setAttribute("aria-hidden","true");
     document.body.classList.remove("p93SocialOpen");
     inviteIntoRoomId=null;
   }
@@ -35476,8 +35547,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function bindEvents(){
-    q("#p93FriendsTopBtn")?.addEventListener("click",()=>openHub("friends"));
+    q("#p93FriendsTopBtn")?.addEventListener("click",()=>openFriendsHub("friends"));
     q("#p93SocialClose")?.addEventListener("click",closeHub);
+    q("#p995RoomClose")?.addEventListener("click",closeHub);
+    q("#p995FriendsToRoom")?.addEventListener("click",openRoomHub);
+    q("#p995RoomToFriends")?.addEventListener("click",()=>openFriendsHub("friends"));
+    q("#p995RoomFriendsBtn")?.addEventListener("click",()=>openFriendsHub("friends"));
     q("#p93RefreshFriends")?.addEventListener("click",loadAll);
 
     q("#p93CreateCodeRoom")?.addEventListener("click",()=>openDuelConfig(null));
@@ -35508,7 +35583,7 @@ document.addEventListener('DOMContentLoaded', () => {
     q("#p93InviteFriendInRoom")?.addEventListener("click",async()=>{
       if(!activeRoomId)return;
       inviteIntoRoomId=activeRoomId;
-      await openHub("friends");
+      await openFriendsHub("friends");
       inviteIntoRoomId=activeRoomId;
       renderFriends();
     });
@@ -35571,7 +35646,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Normal calls to "Ranked Arena" now enter Social Duel first.
     if(typeof legacyArenaOpen==="function"){
       window.__POMRU_LEGACY_ARENA_OPEN=legacyArenaOpen;
-      window.bbOpenRankedArena=()=>openHub("friends");
+      window.bbOpenRankedArena=()=>openRoomHub();
     }
 
     bindEvents();
@@ -35610,6 +35685,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.POMRUDuel={
     openHub,
+    openFriends:openFriendsHub,
+    openRoom:openRoomHub,
     closeHub,
     refresh:loadAll,
     getFriends:()=>friends.slice(),
@@ -35684,6 +35761,11 @@ document.addEventListener('DOMContentLoaded', () => {
       <button type="button" id="p94MenuFriends">
         <span class="p94QIcon friends"></span>
         <b>เพื่อน</b><small>ออนไลน์และคำเชิญ</small>
+      </button>
+
+      <button type="button" id="p995MenuRoom">
+        <span class="p995RoomQIcon">VS</span>
+        <b>ห้อง 1v1</b><small>สร้างห้องหรือเข้าด้วยรหัส</small>
       </button>
 
       <button type="button" id="p941MissionBtn">
@@ -35949,17 +36031,22 @@ document.addEventListener('DOMContentLoaded', () => {
   function openMenu(){show("p94QuickMenu",true)}
   function closeMenu(){show("p94QuickMenu",false)}
 
-  async function openFriendRoom(){
+  async function openFriends(){
     closeMenu();
-
-    if(window.POMRUDuel?.openHub){
-      window.POMRUDuel.openHub("friends");
+    if(window.POMRUDuel?.openFriends){
+      window.POMRUDuel.openFriends("friends");
       return;
     }
+    window.POMRUDuel?.openHub?.("friends");
+  }
 
-    if(window.bbOpenRankedArena){
-      window.bbOpenRankedArena();
+  async function openFriendRoom(){
+    closeMenu();
+    if(window.POMRUDuel?.openRoom){
+      window.POMRUDuel.openRoom();
+      return;
     }
+    if(window.bbOpenRankedArena)window.bbOpenRankedArena();
   }
 
   function state(screen){
@@ -36625,7 +36712,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if(e.target.id==="p94QuickMenu")closeMenu();
     });
 
-    $("p94MenuFriends")?.addEventListener("click",openFriendRoom);
+    $("p94MenuFriends")?.addEventListener("click",openFriends);
+    $("p995MenuRoom")?.addEventListener("click",openFriendRoom);
     $("p94FriendRoomBtn")?.addEventListener("click",openFriendRoom);
 
     $("p94RankedModeBtn")?.addEventListener("click",openRanked);
@@ -36656,6 +36744,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.POMRUV94={
     openMenu,
+    openFriends,
     openFriendRoom,
     openRanked
   };
@@ -45449,18 +45538,35 @@ body.p971BattleActive.bbRankedPlaying:not(.bbRankedLearningPlaying) #game{paddin
 @media(prefers-reduced-motion:reduce){.p971FighterArt.hit img,.p971FighterArt.attack img{animation:none!important}.p971HpTrack i,.p971BattleToast,.p971BondTrack i{transition:none!important}}
 </style>
 
-<div id="p971BattleHud" class="p971BattleHud hidden" aria-hidden="true">
-  <section class="p971Fighter left">
-    <div class="p971FighterArt" id="p971SelfArt"><img src="/assets/buddy/default-pink-buddy.png?v=971" alt="Buddy ของฉัน"></div>
-    <div class="p971FighterInfo"><small>YOU</small><b id="p971SelfName">คุณ</b><div class="p971HpLine"><div class="p971HpTrack"><i id="p971SelfHpBar"></i></div><span class="p971HpNum" id="p971SelfHp">100 HP</span></div></div>
+<div id="p971BattleHud" class="p971BattleHud p996VSCard hidden" aria-hidden="true">
+  <section class="p971Fighter left p996Fighter p996SelfSide">
+    <div class="p996FighterGlow"></div>
+    <div class="p971FighterArt p996BuddyArt" id="p971SelfArt"><img src="/assets/buddy/default-pink-buddy.png?v=996" alt="Buddy ของฉัน"></div>
+    <div class="p971FighterInfo p996FighterInfo">
+      <span class="p996Role blue">YOU</span>
+      <b id="p971SelfName">คุณ</b>
+      <div class="p996SkinSlot" data-p996-skin="self">POMRU Buddy</div>
+    </div>
+    <div class="p996HpLine"><span class="p996Heart">♥</span><div class="p971HpTrack"><i id="p971SelfHpBar"></i></div><span class="p971HpNum" id="p971SelfHp">100 / 100</span></div>
   </section>
-  <div class="p971BattleCenter"><strong>VS</strong><b id="p971BattleRound">BUDDY BATTLE</b><small>ถูกก่อน • เร็วกว่าโจมตี</small></div>
-  <section class="p971Fighter right">
-    <div class="p971FighterArt" id="p971OppArt"><img src="/assets/buddy/default-pink-buddy.png?v=971" alt="Buddy คู่แข่ง"></div>
-    <div class="p971FighterInfo"><small>RIVAL</small><b id="p971OppName">คู่แข่ง</b><div class="p971HpLine"><div class="p971HpTrack"><i id="p971OppHpBar"></i></div><span class="p971HpNum" id="p971OppHp">100 HP</span></div></div>
+
+  <div class="p971BattleCenter p996BattleCenter">
+    <strong>VS</strong>
+    <div class="p996BattleLabel"><b id="p971BattleRound">BUDDY BATTLE</b><small>ดวลคู่หู • เร็วกว่าชนะ!</small></div>
+  </div>
+
+  <section class="p971Fighter right p996Fighter p996OppSide">
+    <div class="p996FighterGlow"></div>
+    <div class="p971FighterArt p996BuddyArt" id="p971OppArt"><img src="/assets/buddy/default-pink-buddy.png?v=996" alt="Buddy คู่แข่ง"></div>
+    <div class="p971FighterInfo p996FighterInfo">
+      <span class="p996Role pink">RIVAL</span>
+      <b id="p971OppName">คู่แข่ง</b>
+      <div class="p996SkinSlot" data-p996-skin="opp">POMRU Buddy</div>
+    </div>
+    <div class="p996HpLine"><span class="p996Heart">♥</span><div class="p971HpTrack"><i id="p971OppHpBar"></i></div><span class="p971HpNum" id="p971OppHp">100 / 100</span></div>
   </section>
 </div>
-<div class="p971BattleToast" id="p971BattleToast" role="status"></div>
+<div class="p971BattleToast p996BattleToast" id="p971BattleToast" role="status"></div>
 
 <script id="pomru-v971-buddy-battle-runtime">
 (function(){
@@ -45534,8 +45640,8 @@ body.p971BattleActive.bbRankedPlaying:not(.bbRankedLearningPlaying) #game{paddin
     state.selfHp=r.selfHp;state.oppHp=r.oppHp;state.lastRefreshAt=Date.now();
     $("p971SelfHpBar")&&( $("p971SelfHpBar").style.width=r.selfHp+"%" );
     $("p971OppHpBar")&&( $("p971OppHpBar").style.width=r.oppHp+"%" );
-    $("p971SelfHp")&&( $("p971SelfHp").textContent=Math.round(r.selfHp)+" HP" );
-    $("p971OppHp")&&( $("p971OppHp").textContent=Math.round(r.oppHp)+" HP" );
+    $("p971SelfHp")&&( $("p971SelfHp").textContent=Math.round(r.selfHp)+" / 100" );
+    $("p971OppHp")&&( $("p971OppHp").textContent=Math.round(r.oppHp)+" / 100" );
     if(r.last&&$("p971BattleRound"))$("p971BattleRound").textContent="ROUND "+(r.last.i+1);
     document.dispatchEvent(new CustomEvent("pomru:battle-sync",{detail:{
       match_id:state.match?.id||null,
@@ -46532,7 +46638,7 @@ window.POMRUV9732=Object.freeze({version:"97.3.2",characterModel:"one-pomru-budd
 
     const friends=document.createElement("section");friends.id="p974FriendsCard";friends.className="p974HomeCard";
     friends.innerHTML='<div class="p974CardHead"><div><small>FRIENDS</small><b>เพื่อนของคุณ</b></div><span class="p974MiniPill" id="p974OnlineCount">0 ออนไลน์</span></div><div class="p974FriendList" id="p974FriendList"><div class="p974FriendRow"><span class="p974FriendAv">♡</span><span><b>กำลังโหลดเพื่อน…</b><small>ออนไลน์</small></span><i class="p974OnlineDot"></i></div></div><button class="p974CardAction" type="button">ดูเพื่อนทั้งหมด</button>';
-    friends.addEventListener("click",()=>window.POMRUV94?.openFriendRoom?.());room.appendChild(friends);
+    friends.addEventListener("click",()=>window.POMRUV94?.openFriends?.());room.appendChild(friends);
 
     const rank=document.createElement("section");rank.id="p974RankCard";rank.className="p974HomeCard";
     rank.innerHTML='<div class="p974CardHead"><div><small>RANKED</small><b>แรงค์ของคุณ</b></div><span class="p974MiniPill">1V1</span></div><div class="p974RankShield">★</div><strong id="p974RankName">Bronze</strong><div class="p974RankStars">★ ☆ ☆</div><div class="p974RankProgress"><i id="p974RankBar"></i></div><span id="p974RankPoints">0 แต้มแรงค์</span>';
@@ -46553,7 +46659,7 @@ window.POMRUV9732=Object.freeze({version:"97.3.2",characterModel:"one-pomru-budd
       const a=b.dataset.p974;
       if(a==="inventory"||a==="skin")window.bbAppShowScreen?.("inventory");
       else if(a==="play")window.bbAppShowScreen?.("modes");
-      else if(a==="friends")window.POMRUV94?.openFriendRoom?.();
+      else if(a==="friends")window.POMRUV94?.openFriends?.();
       else if(a==="rank")window.POMRUV94?.openRanked?.();
     });room.appendChild(dock);
 
@@ -46687,408 +46793,161 @@ window.POMRU_V9735=Object.freeze({
      Game-like Ranked presentation inspired by the approved concept.
      Presentation only: preserves existing matchmaking/result authority.
      ========================================================== -->
-<style id="pomru-v974-buddy-battle-arena-style">
-/* ----- Full ranked scene: feel like a mobile game, not a web form ----- */
-body.bbRankedLearningPlaying{background:#170b43!important}
+<style id="pomru-v996-battle-screen-rebuild-style">
+/* ==========================================================
+   POMRU v99.6 — BATTLE SCREEN REBUILD
+   New presentation layer only. Server-authoritative battle stays intact.
+   ========================================================== */
+body.bbRankedLearningPlaying{overflow:hidden!important;background:#16063f!important}
 body.bbRankedLearningPlaying #bbRankedLearningOverlay{
-  overflow:auto!important;
-  background:
-    radial-gradient(circle at 18% 12%,rgba(64,151,255,.36),transparent 25%),
-    radial-gradient(circle at 83% 13%,rgba(255,83,185,.34),transparent 27%),
-    radial-gradient(circle at 50% 72%,rgba(171,102,255,.22),transparent 38%),
-    linear-gradient(180deg,#170c4d 0%,#2d1465 38%,#5e2789 100%)!important;
-  color:#fff!important;
+  --p996-purple:#5c2be7;--p996-purple2:#7d47f2;--p996-pink:#ff5cab;--p996-blue:#43b7ff;--p996-gold:#ffbd3d;
+  position:fixed!important;inset:0!important;z-index:260300!important;display:block!important;overflow-y:auto!important;overflow-x:hidden!important;
+  padding:0 0 max(18px,env(safe-area-inset-bottom))!important;color:#fff!important;-webkit-overflow-scrolling:touch!important;
+  background:radial-gradient(circle at 14% 12%,rgba(50,130,255,.36),transparent 28%),radial-gradient(circle at 86% 12%,rgba(255,65,178,.38),transparent 30%),radial-gradient(circle at 50% 80%,rgba(156,87,255,.32),transparent 42%),linear-gradient(180deg,#13043f 0%,#26115c 34%,#4a1d79 70%,#6a2f91 100%)!important;
 }
-body.bbRankedLearningPlaying #bbRankedLearningOverlay::before,
-body.bbRankedLearningPlaying #bbRankedLearningOverlay::after{
-  content:"";position:fixed;inset:0;pointer-events:none;z-index:0
-}
-body.bbRankedLearningPlaying #bbRankedLearningOverlay::before{
-  opacity:.6;
-  background-image:
-    radial-gradient(circle,rgba(255,255,255,.95) 0 1px,transparent 1.8px),
-    radial-gradient(circle,rgba(255,213,104,.85) 0 1px,transparent 1.9px),
-    radial-gradient(circle,rgba(255,255,255,.7) 0 1.4px,transparent 2px);
-  background-size:82px 82px,123px 123px,171px 171px;
-  background-position:11px 18px,47px 31px,23px 77px
-}
-body.bbRankedLearningPlaying #bbRankedLearningOverlay::after{
-  background:linear-gradient(180deg,transparent 0 82%,rgba(21,8,61,.52) 100%)
-}
-body.bbRankedLearningPlaying .bbRankLearnBg{opacity:.2!important}
+body.bbRankedLearningPlaying #bbRankedLearningOverlay.hidden{display:none!important}
+body.bbRankedLearningPlaying .bbRankLearnBg{position:fixed!important;inset:0!important;z-index:0!important;opacity:1!important;pointer-events:none!important;overflow:hidden!important}
+body.bbRankedLearningPlaying .bbRankLearnBg::before{content:"";position:absolute;inset:0;opacity:.78;background-image:radial-gradient(circle,rgba(255,255,255,.95) 0 1px,transparent 1.8px),radial-gradient(circle,rgba(255,214,89,.78) 0 1.1px,transparent 2px),radial-gradient(circle,rgba(255,164,230,.72) 0 1px,transparent 1.8px);background-size:71px 71px,121px 121px,167px 167px;background-position:9px 17px,44px 31px,26px 88px}
+body.bbRankedLearningPlaying .bbRankLearnBg i{position:absolute!important;border-radius:50%!important;filter:blur(8px)!important;opacity:.32!important;background:rgba(255,255,255,.25)!important}
+.p996Spark{position:absolute;font-size:18px;color:#fff5b2;filter:drop-shadow(0 0 7px #fff);animation:p996Twinkle 2.3s ease-in-out infinite}.p996Spark.s1{left:9%;top:13%}.p996Spark.s2{right:12%;top:25%;animation-delay:.7s}.p996Spark.s3{left:48%;top:8%;animation-delay:1.2s}.p996Spark.s4{right:30%;top:53%;animation-delay:1.7s}
+@keyframes p996Twinkle{0%,100%{opacity:.35;transform:scale(.7) rotate(0)}50%{opacity:1;transform:scale(1.25) rotate(20deg)}}
 
-/* ----- Compact game header ----- */
-body.bbRankedLearningPlaying .bbRankLearnTop{
-  position:fixed!important;z-index:260620!important;left:50%!important;top:max(6px,env(safe-area-inset-top))!important;
-  transform:translateX(-50%)!important;width:min(1080px,calc(100% - 22px))!important;
-  min-height:58px!important;padding:7px 12px!important;box-sizing:border-box!important;
-  display:grid!important;grid-template-columns:1fr auto 1fr!important;align-items:center!important;
-  border:1.5px solid rgba(255,255,255,.30)!important;border-radius:22px!important;
-  background:linear-gradient(180deg,rgba(73,45,149,.93),rgba(43,25,105,.94))!important;
-  box-shadow:0 12px 34px rgba(10,3,41,.30),inset 0 1px 0 rgba(255,255,255,.24)!important;
-  backdrop-filter:blur(16px)!important;-webkit-backdrop-filter:blur(16px)!important
-}
-body.bbRankedLearningPlaying .bbRankLearnBrand>span{
-  width:38px!important;height:38px!important;border-radius:13px!important;background:linear-gradient(145deg,#ff75b7,#8658e6)!important;
-  font-size:0!important;box-shadow:inset 0 0 0 2px rgba(255,255,255,.26)!important
-}
-body.bbRankedLearningPlaying .bbRankLearnBrand>span::after{content:"★";font-size:20px;color:#ffe278}
-body.bbRankedLearningPlaying .bbRankLearnBrand small{color:#ffb7df!important;font-size:7px!important}
-body.bbRankedLearningPlaying .bbRankLearnBrand b{font-size:12px!important;color:#fff!important}
-body.bbRankedLearningPlaying .bbRankLearnMode{min-width:160px!important}
-body.bbRankedLearningPlaying .bbRankLearnMode small{color:#f2b9df!important;font-size:7px!important}
-body.bbRankedLearningPlaying .bbRankLearnMode b{font-size:18px!important;line-height:1!important;color:#fff!important}
-body.bbRankedLearningPlaying .bbRankLearnMode span{margin-top:2px!important;color:#ffe584!important;font-size:8px!important}
-body.bbRankedLearningPlaying .bbRLForfeit{
-  min-height:38px!important;padding:0 14px!important;border-radius:14px!important;
-  border:1.5px solid rgba(255,255,255,.22)!important;background:rgba(255,255,255,.10)!important;
-  color:#ffeaf6!important;font-size:9px!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.15)!important
-}
+/* Top chrome */
+body.bbRankedLearningPlaying .bbRankLearnTop.p996Topbar{position:sticky!important;top:0!important;left:auto!important;transform:none!important;z-index:260700!important;width:min(1050px,100%)!important;min-height:68px!important;margin:0 auto!important;padding:max(8px,env(safe-area-inset-top)) 12px 8px!important;box-sizing:border-box!important;display:grid!important;grid-template-columns:auto auto 1fr auto!important;gap:9px!important;align-items:center!important;border:0!important;border-radius:0!important;background:linear-gradient(180deg,rgba(31,11,82,.97),rgba(31,11,82,.82) 82%,transparent)!important;box-shadow:none!important;backdrop-filter:blur(16px)!important;-webkit-backdrop-filter:blur(16px)!important}
+.p996TopIcon,.p996Exit{width:43px;height:43px;border:2px solid rgba(255,255,255,.38)!important;border-radius:15px!important;background:linear-gradient(145deg,#7d52ef,#4e26bc)!important;color:white!important;font-size:22px!important;font-weight:1000!important;box-shadow:0 6px 0 #32158f,0 9px 20px rgba(10,0,50,.28),inset 0 2px 0 rgba(255,255,255,.34)!important}
+.p996RankLife{height:40px;padding:0 12px;display:flex;align-items:center;gap:7px;border:2px solid rgba(255,255,255,.25);border-radius:15px;background:rgba(87,45,181,.72);font-size:10px;font-weight:1000}.p996RankLife span{font-size:20px;color:#ff72b4}.p996RankLife b{letter-spacing:.08em}
+.p996Logo{justify-self:center;display:flex;align-items:center;font-size:clamp(28px,5vw,49px);font-weight:1000;letter-spacing:-.07em;line-height:.9;color:#fff;-webkit-text-stroke:5px #8c36c3;paint-order:stroke fill;filter:drop-shadow(0 4px 0 #ff5ca6) drop-shadow(0 8px 16px rgba(10,0,48,.28))}.p996Logo .star{font-size:.7em;color:#ffd34e;-webkit-text-stroke:3px #f19d27;margin:0 1px}
+.p996TopRight{justify-self:end;display:flex;align-items:center;gap:8px}.p996Wallet{height:43px;min-width:94px;padding:0 10px 0 6px;display:flex;align-items:center;gap:8px;border:2px solid rgba(255,255,255,.32);border-radius:15px;background:rgba(64,30,137,.84);box-shadow:inset 0 2px 0 rgba(255,255,255,.18)}.p996Wallet .coin{width:31px;height:31px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(#ffe778,#f6a91e);color:#9b5a00;font-size:13px;font-weight:1000;box-shadow:inset 0 0 0 4px rgba(255,255,255,.35)}.p996Wallet b{font-size:15px}.p996MetaSource{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
 
-/* ----- Large VS stage ----- */
-body.p971BattleActive.bbRankedLearningPlaying .p971BattleHud{
-  position:fixed!important;z-index:260600!important;left:50%!important;top:74px!important;transform:translateX(-50%)!important;
-  width:min(1080px,calc(100% - 22px))!important;height:224px!important;min-height:224px!important;
-  display:grid!important;grid-template-columns:minmax(0,1fr) 150px minmax(0,1fr)!important;gap:0!important;
-  padding:10px 14px 12px!important;overflow:hidden!important;border:2px solid rgba(255,255,255,.56)!important;border-radius:31px!important;
-  background:
-    radial-gradient(circle at 50% 38%,rgba(255,255,255,.30),transparent 20%),
-    linear-gradient(110deg,rgba(31,116,249,.93) 0 47%,rgba(101,55,199,.92) 49%,rgba(230,54,154,.94) 53%,rgba(255,104,173,.94) 100%)!important;
-  box-shadow:0 18px 50px rgba(10,3,47,.38),inset 0 0 0 4px rgba(255,255,255,.12),0 0 35px rgba(147,97,255,.25)!important;
-  color:#fff!important;backdrop-filter:none!important
-}
-body.p971BattleActive.bbRankedLearningPlaying .p971BattleHud::before{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:
-    radial-gradient(circle at 19% 22%,rgba(255,255,255,.55) 0 2px,transparent 3px),
-    radial-gradient(circle at 78% 28%,rgba(255,255,255,.50) 0 2px,transparent 3px),
-    radial-gradient(circle at 47% 12%,rgba(255,222,96,.55) 0 2px,transparent 3px),
-    linear-gradient(100deg,transparent 49.6%,rgba(255,255,255,.28) 49.9% 50.1%,transparent 50.4%);
-  background-size:90px 90px,116px 116px,152px 152px,100% 100%;opacity:.55
-}
-body.p971BattleActive.bbRankedLearningPlaying .p971Fighter{
-  position:relative;z-index:2;display:grid!important;grid-template-columns:170px minmax(0,1fr)!important;align-items:center!important;gap:10px!important;
-  min-width:0!important;height:100%!important;padding:5px 2px!important
-}
-body.p971BattleActive.bbRankedLearningPlaying .p971Fighter.right{
-  grid-template-columns:minmax(0,1fr) 170px!important;text-align:right!important
-}
-body.p971BattleActive.bbRankedLearningPlaying .p971FighterArt{
-  width:170px!important;height:188px!important;display:grid!important;place-items:end center!important
-}
-body.p971BattleActive.bbRankedLearningPlaying .p971FighterArt img{
-  max-width:166px!important;max-height:185px!important;object-fit:contain!important;
-  filter:drop-shadow(0 11px 11px rgba(17,7,51,.28))!important
-}
-body.p971BattleActive.bbRankedLearningPlaying #p971SelfArt img{filter:var(--p972-self-battle-filter,none) drop-shadow(0 11px 11px rgba(17,7,51,.28))!important}
-body.p971BattleActive.bbRankedLearningPlaying #p971OppArt img{filter:var(--p972-opp-battle-filter,none) drop-shadow(0 11px 11px rgba(17,7,51,.28))!important}
-body.p971BattleActive.bbRankedLearningPlaying .p971FighterInfo{align-self:center!important;min-width:0!important}
-body.p971BattleActive.bbRankedLearningPlaying .p971FighterInfo>small{
-  display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:48px!important;
-  padding:5px 9px!important;border-radius:999px!important;background:rgba(20,52,142,.76)!important;
-  color:#fff!important;font-size:8px!important;letter-spacing:.08em!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.28)!important
-}
-body.p971BattleActive.bbRankedLearningPlaying .p971Fighter.right .p971FighterInfo>small{background:rgba(192,42,105,.78)!important}
-body.p971BattleActive.bbRankedLearningPlaying .p971FighterInfo>b{
-  display:block!important;margin:7px 0 4px!important;font-size:clamp(18px,2.5vw,29px)!important;line-height:1!important;
-  color:#fff!important;text-shadow:0 2px 5px rgba(14,5,39,.25)!important
-}
-body.p971BattleActive.bbRankedLearningPlaying .p972BattleSkinName{
-  margin:0 0 7px!important;padding:4px 9px!important;border:1px solid rgba(255,255,255,.22)!important;
-  background:rgba(20,26,97,.28)!important;color:#fff!important;font-size:7px!important
-}
-body.p971BattleActive.bbRankedLearningPlaying .p971HpLine{
-  display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:7px!important;align-items:center!important
-}
-body.p971BattleActive.bbRankedLearningPlaying .p971Fighter.right .p971HpLine{grid-template-columns:auto minmax(0,1fr)!important}
-body.p971BattleActive.bbRankedLearningPlaying .p971HpTrack{
-  position:relative!important;height:25px!important;padding:3px!important;border-radius:999px!important;
-  border:2px solid rgba(255,255,255,.72)!important;background:rgba(31,18,78,.42)!important;
-  box-shadow:inset 0 2px 5px rgba(15,5,46,.30),0 4px 9px rgba(16,7,48,.14)!important
-}
-body.p971BattleActive.bbRankedLearningPlaying .p971HpTrack i{
-  height:100%!important;border-radius:999px!important;background:linear-gradient(180deg,#98f17c,#37c965)!important;
-  box-shadow:inset 0 2px 0 rgba(255,255,255,.36),0 0 12px rgba(72,232,132,.26)!important
-}
-body.p971BattleActive.bbRankedLearningPlaying .p971Fighter.right .p971HpTrack i{background:linear-gradient(180deg,#ffba60,#ff5a87)!important;box-shadow:inset 0 2px 0 rgba(255,255,255,.32),0 0 12px rgba(255,98,151,.27)!important}
-body.p971BattleActive.bbRankedLearningPlaying .p971HpNum{width:auto!important;min-width:64px!important;color:#fff!important;font-size:11px!important;text-align:center!important;text-shadow:0 1px 3px rgba(16,5,45,.24)!important}
-body.p971BattleActive.bbRankedLearningPlaying .p971BattleCenter{
-  position:relative;z-index:4;align-self:center!important;display:grid!important;justify-items:center!important;gap:3px!important;text-align:center!important
-}
-body.p971BattleActive.bbRankedLearningPlaying .p971BattleCenter strong{
-  font-size:58px!important;line-height:.88!important;font-style:italic!important;font-weight:1000!important;
-  color:#ffd86b!important;-webkit-text-stroke:2px #fff4b9!important;paint-order:stroke fill!important;
-  text-shadow:0 5px 0 #cb673b,0 10px 20px rgba(31,7,67,.34)!important
-}
-body.p971BattleActive.bbRankedLearningPlaying .p971BattleCenter b{
-  min-width:126px!important;margin:3px 0 0!important;padding:6px 9px!important;border-radius:13px!important;
-  border:1px solid rgba(255,255,255,.38)!important;background:rgba(44,21,112,.78)!important;color:#fff!important;font-size:10px!important
-}
-body.p971BattleActive.bbRankedLearningPlaying .p971BattleCenter small{color:#ffe4f4!important;font-size:7px!important}
-body.p971BattleActive.bbRankedLearningPlaying .p973BattleState{margin-top:2px!important;background:rgba(33,19,88,.72)!important;border:1px solid rgba(255,255,255,.18)!important}
-body.p971BattleActive.bbRankedLearningPlaying .p971BattleToast{
-  top:286px!important;max-width:min(760px,86vw)!important;padding:10px 16px!important;border:2px solid rgba(255,255,255,.78)!important;
-  background:linear-gradient(145deg,#fff,#fff4fb)!important;color:#58356e!important;font-size:11px!important;box-shadow:0 10px 30px rgba(15,4,52,.25)!important
-}
+/* Page width */
+body.p971BattleActive.bbRankedLearningPlaying .bbRankLearnShell.p996BattlePage{position:relative!important;z-index:2!important;width:min(1000px,calc(100% - 18px))!important;max-width:1000px!important;margin:0 auto!important;padding:7px 0 18px!important;display:flex!important;flex-direction:column!important;gap:10px!important;box-sizing:border-box!important}
+.p996BattleMount{display:block;min-height:0}
 
-/* Stronger attack motion at the larger character scale. */
-body.p971BattleActive.bbRankedLearningPlaying .p971FighterArt.attack img{animation:p974AttackL .58s cubic-bezier(.16,.82,.22,1)!important}
-body.p971BattleActive.bbRankedLearningPlaying .p971Fighter.right .p971FighterArt.attack img{animation:p974AttackR .58s cubic-bezier(.16,.82,.22,1)!important}
-body.p971BattleActive.bbRankedLearningPlaying .p971FighterArt.hit img{animation:p974HitL .52s ease!important}
-body.p971BattleActive.bbRankedLearningPlaying .p971Fighter.right .p971FighterArt.hit img{animation:p974HitR .52s ease!important}
-@keyframes p974AttackL{0%{transform:translate(0,0) scale(1)}25%{transform:translate(-12px,5px) scale(.94,1.06)}60%{transform:translate(96px,-12px) rotate(8deg) scale(1.13,.91)}100%{transform:translate(0,0) scale(1)}}
-@keyframes p974AttackR{0%{transform:translate(0,0) scale(1)}25%{transform:translate(12px,5px) scale(.94,1.06)}60%{transform:translate(-96px,-12px) rotate(-8deg) scale(1.13,.91)}100%{transform:translate(0,0) scale(1)}}
-@keyframes p974HitL{0%,100%{transform:none}18%{transform:translate(-30px,-2px) rotate(-10deg) scale(.94)}40%{transform:translate(17px,0) rotate(6deg)}66%{transform:translate(-9px,0) rotate(-3deg)}}
-@keyframes p974HitR{0%,100%{transform:none}18%{transform:translate(30px,-2px) rotate(10deg) scale(.94)}40%{transform:translate(-17px,0) rotate(-6deg)}66%{transform:translate(9px,0) rotate(3deg)}}
+/* VS card — rebuilt, old fixed HUD is no longer used */
+body.p971BattleActive.bbRankedLearningPlaying .p971BattleHud.p996VSCard{position:relative!important;left:auto!important;top:auto!important;transform:none!important;width:100%!important;height:auto!important;min-height:280px!important;margin:0!important;padding:13px 14px 12px!important;box-sizing:border-box!important;display:grid!important;grid-template-columns:minmax(0,1fr) 160px minmax(0,1fr)!important;gap:0!important;align-items:stretch!important;overflow:hidden!important;border:3px solid rgba(255,255,255,.76)!important;border-radius:34px!important;background:linear-gradient(90deg,rgba(26,105,224,.86) 0%,rgba(61,48,164,.88) 46%,rgba(185,43,155,.90) 54%,rgba(235,72,148,.90) 100%)!important;box-shadow:0 13px 0 rgba(57,20,121,.62),0 22px 40px rgba(13,2,60,.38),inset 0 2px 0 rgba(255,255,255,.46),inset 0 0 42px rgba(255,255,255,.10)!important}
+.p996VSCard::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 27% 34%,rgba(90,214,255,.42),transparent 27%),radial-gradient(circle at 73% 34%,rgba(255,126,206,.38),transparent 28%),linear-gradient(90deg,transparent 49.6%,rgba(255,255,255,.9) 50%,transparent 50.4%);opacity:.9}
+.p996VSCard::after{content:"";position:absolute;left:50%;top:25%;width:2px;height:52%;transform:translateX(-50%) rotate(24deg);background:linear-gradient(transparent,#fff,#ff7de3,#fff,transparent);box-shadow:-18px 16px 0 rgba(255,255,255,.5),16px -12px 0 rgba(255,255,255,.45);filter:drop-shadow(0 0 8px #fff);opacity:.6}
+.p996Fighter{position:relative;z-index:2;min-width:0!important;display:grid!important;grid-template-columns:150px minmax(0,1fr)!important;grid-template-rows:1fr auto!important;align-items:center!important;gap:0 5px!important;padding:4px 2px 0!important}.p996Fighter.right{grid-template-columns:minmax(0,1fr) 150px!important;text-align:right!important}.p996Fighter.right .p996BuddyArt{grid-column:2!important}.p996Fighter.right .p996FighterInfo{grid-column:1!important;grid-row:1!important}.p996FighterGlow{position:absolute;width:180px;height:180px;border-radius:50%;left:3px;top:10px;background:radial-gradient(circle,rgba(101,222,255,.62),rgba(49,123,255,.18) 52%,transparent 72%);filter:blur(2px);z-index:-1}.p996OppSide .p996FighterGlow{left:auto;right:3px;background:radial-gradient(circle,rgba(255,154,215,.64),rgba(255,78,163,.20) 52%,transparent 72%)}
+.p996BuddyArt{width:150px!important;height:194px!important;display:grid!important;place-items:end center!important;position:relative!important;overflow:visible!important;isolation:isolate!important}.p996BuddyArt img,.p996BuddyArt>.p991BuddyStack>img{width:auto!important;height:auto!important;max-width:146px!important;max-height:190px!important;object-fit:contain!important;filter:drop-shadow(0 10px 10px rgba(5,8,56,.34)) var(--p972-self-battle-filter,none);transform-origin:center bottom!important;animation:p996Idle 2.8s ease-in-out infinite!important}.p996OppSide .p996BuddyArt img,.p996OppSide .p996BuddyArt>.p991BuddyStack>img{filter:drop-shadow(0 10px 10px rgba(70,7,63,.30)) var(--p972-opp-battle-filter,none)}
+@keyframes p996Idle{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-5px) scale(1.015)}}
+.p996FighterInfo{min-width:0!important;align-self:center!important}.p996FighterInfo>b{display:block!important;margin:5px 0 4px!important;color:white!important;font-size:clamp(21px,3vw,34px)!important;line-height:1!important;text-shadow:0 3px 8px rgba(22,5,70,.28);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.p996Role{display:inline-flex;align-items:center;justify-content:center;min-height:24px;padding:0 10px;border-radius:999px;color:#fff;font-size:10px;font-weight:1000;letter-spacing:.08em;box-shadow:inset 0 1px 0 rgba(255,255,255,.42),0 4px 10px rgba(16,4,55,.18)}.p996Role.blue{background:linear-gradient(#45caff,#177de8)}.p996Role.pink{background:linear-gradient(#ff6ea8,#e73878)}
+.p972BattleSkinName,.p991BattleLook,.p996SkinSlot{display:inline-block!important;max-width:150px!important;margin:2px 0!important;padding:5px 10px!important;border:1px solid rgba(255,255,255,.28)!important;border-radius:999px!important;background:rgba(53,21,127,.40)!important;color:#fff!important;font-size:8px!important;font-weight:900!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}.p996SkinSlot{display:none!important}.p991BattleLook{opacity:.74!important}
+.p996HpLine{grid-column:1/-1;display:flex!important;align-items:center!important;gap:7px!important;height:38px;padding:5px 8px;border-radius:20px;background:rgba(30,14,91,.38);border:1px solid rgba(255,255,255,.28);box-shadow:inset 0 2px 5px rgba(10,0,50,.18)}.p996OppSide .p996HpLine{flex-direction:row-reverse}.p996Heart{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(#ff89bf,#f1357f);color:#fff;font-size:18px;text-shadow:0 2px 2px #b81c5a;box-shadow:0 3px 0 #b51d61,inset 0 2px 0 rgba(255,255,255,.5)}.p996HpLine .p971HpTrack{flex:1!important;height:20px!important;padding:3px!important;border:2px solid rgba(255,255,255,.50)!important;border-radius:999px!important;background:rgba(255,255,255,.18)!important;overflow:hidden!important}.p996HpLine .p971HpTrack i{height:100%!important;border-radius:999px!important;background:linear-gradient(90deg,#50e696,#b9ed53,#f6e75b)!important;box-shadow:inset 0 2px 2px rgba(255,255,255,.45),0 0 10px rgba(106,255,164,.42)!important;transition:width .36s cubic-bezier(.2,.8,.2,1)!important}.p996OppSide .p971HpTrack i{margin-left:auto!important;background:linear-gradient(90deg,#ffbf58,#ff846d,#ff4f91)!important;box-shadow:inset 0 2px 2px rgba(255,255,255,.4),0 0 10px rgba(255,105,157,.40)!important}.p996HpLine .p971HpNum{width:auto!important;min-width:64px!important;color:#fff!important;font-size:11px!important;font-weight:1000!important;white-space:nowrap;text-shadow:0 2px 3px rgba(32,7,78,.38)}
+.p996BattleCenter{position:relative;z-index:4!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;text-align:center!important}.p996BattleCenter>strong{font-size:74px!important;line-height:.85!important;font-style:italic;color:#fff6cc!important;background:linear-gradient(#fffde7 0%,#ffd761 43%,#ff9a27 72%,#ffe57b 100%);-webkit-background-clip:text;background-clip:text;color:transparent!important;-webkit-text-stroke:3px #fff5d7;paint-order:stroke fill;filter:drop-shadow(0 7px 0 #b83e70) drop-shadow(0 12px 12px rgba(39,5,86,.38));transform:skewX(-5deg)}.p996BattleLabel{margin-top:20px;padding:8px 12px;border:2px solid rgba(255,255,255,.48);border-radius:16px;background:linear-gradient(180deg,rgba(91,42,187,.92),rgba(58,26,135,.92));box-shadow:0 5px 0 rgba(44,17,113,.64),inset 0 1px 0 rgba(255,255,255,.28)}.p996BattleLabel b{display:block!important;margin:0!important;color:#fff!important;font-size:12px!important;letter-spacing:.03em}.p996BattleLabel small{display:block!important;margin-top:2px!important;color:#ffd9f0!important;font-size:7px!important;font-weight:900!important}
+.p971FighterArt.hit img,.p971FighterArt.hit>.p991BuddyStack{animation:p996Hit .46s ease!important}.p971FighterArt.attack img,.p971FighterArt.attack>.p991BuddyStack{animation:p996Attack .48s cubic-bezier(.2,.8,.2,1)!important}.p996OppSide .p971FighterArt.attack img,.p996OppSide .p971FighterArt.attack>.p991BuddyStack{animation-name:p996AttackR!important}@keyframes p996Attack{0%{transform:none}30%{transform:translateX(-10px) scale(.96,1.05)}62%{transform:translateX(82px) scale(1.10,.92)}100%{transform:none}}@keyframes p996AttackR{0%{transform:none}30%{transform:translateX(10px) scale(.96,1.05)}62%{transform:translateX(-82px) scale(1.10,.92)}100%{transform:none}}@keyframes p996Hit{0%{transform:none;filter:brightness(1)}24%{transform:translateX(-18px) rotate(-5deg) scale(.94);filter:brightness(1.55)}48%{transform:translateX(12px) rotate(4deg)}72%{transform:translateX(-6px) rotate(-2deg)}100%{transform:none;filter:brightness(1)}}
+.p996BattleToast{position:fixed!important;z-index:260900!important;left:50%!important;top:104px!important;transform:translate(-50%,-10px)!important;max-width:min(560px,90vw)!important;padding:9px 15px!important;border:2px solid rgba(255,255,255,.65)!important;border-radius:999px!important;background:linear-gradient(#fff,#ffe9f6)!important;color:#5c2d75!important;font-size:10px!important;font-weight:1000!important;box-shadow:0 10px 28px rgba(22,3,66,.32)!important;opacity:0!important;pointer-events:none!important;transition:.18s!important}.p996BattleToast.show{opacity:1!important;transform:translate(-50%,0)!important}
 
-/* ----- Main battle content ----- */
-body.p971BattleActive.bbRankedLearningPlaying .bbRankLearnShell{
-  width:min(1080px,calc(100% - 22px))!important;margin:0 auto 34px!important;padding-top:310px!important;box-sizing:border-box!important
-}
-.p974RankedRibbon{
-  position:relative;z-index:2;min-height:62px;margin:0 0 10px;padding:9px 15px;box-sizing:border-box;
-  display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;
-  border:2px solid rgba(255,255,255,.42);border-radius:22px;background:linear-gradient(180deg,rgba(76,43,160,.96),rgba(49,27,113,.96));
-  box-shadow:0 10px 28px rgba(10,3,44,.25),inset 0 1px 0 rgba(255,255,255,.18)
-}
-.p974RankedBadge{display:grid;place-items:center;min-width:104px;height:44px;padding:0 12px;border-radius:15px;background:linear-gradient(145deg,#ffca48,#f08c31);color:#522a78;font-size:14px;font-weight:1000;box-shadow:inset 0 0 0 3px rgba(255,255,255,.38),0 5px 0 #a64b6b}
-.p974RankedInfo small,.p974RankedInfo b{display:block}.p974RankedInfo small{font-size:7px;color:#d7c8ef;font-weight:1000;letter-spacing:.11em}.p974RankedInfo b{margin-top:3px;font-size:15px;color:#fff}.p974Server{display:flex;align-items:center;gap:6px;white-space:nowrap;font-size:9px;font-weight:1000;color:#7ff6af}.p974Server i{width:9px;height:9px;border-radius:50%;background:#43dc7b;box-shadow:0 0 0 4px rgba(67,220,123,.10),0 0 12px rgba(67,220,123,.4)}
+/* Ranked strip */
+.p996RankStrip{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;align-items:center;gap:12px;padding:10px 15px;border:3px solid rgba(255,255,255,.65);border-radius:25px;background:linear-gradient(180deg,#4d249d,#311574);box-shadow:0 8px 0 rgba(38,11,94,.6),0 15px 28px rgba(17,3,63,.28),inset 0 2px 0 rgba(255,255,255,.20)}.p996RankBadge{min-width:125px;min-height:62px;display:grid;grid-template-columns:auto 1fr;grid-template-rows:1fr 1fr;align-items:center;padding:6px 12px;border-radius:18px;background:linear-gradient(145deg,#6b2ece,#40218f);border:2px solid #ffcf4c;box-shadow:0 5px 0 #2d126c,inset 0 0 0 2px rgba(255,255,255,.16)}.p996RankBadge .crown{grid-row:1/3;font-size:32px;color:#ffd34f;text-shadow:0 3px 0 #b56a00}.p996RankBadge b{font-size:15px;color:#fff4a7}.p996RankBadge small{font-size:7px;color:#ffd9ed}.p996ModeCopy small{display:block;color:#f4afd8;font-size:7px;font-weight:1000;letter-spacing:.12em}.p996ModeCopy b{display:block;margin-top:2px;font-size:16px;color:#fff}.p996ModeCopy span{display:block;margin-top:2px;font-size:8px;color:#e5d8ff;font-weight:800}.p996PowerBadge{min-width:82px;text-align:center;padding:6px 10px;border:2px solid rgba(255,255,255,.52);border-radius:17px;background:linear-gradient(#8b59ee,#5630b5);box-shadow:0 4px 0 #3b1b89,inset 0 1px 0 rgba(255,255,255,.27)}.p996PowerBadge span{font-size:15px}.p996PowerBadge b{display:block;font-size:17px}.p996PowerBadge small{display:block;font-size:6px;color:#d8c9ff}.p996Server{display:flex;align-items:center;gap:7px;color:#71f7c1;font-size:8px;font-weight:1000;letter-spacing:.04em}.p996Server i{width:10px;height:10px;border-radius:50%;background:#43ef9c;box-shadow:0 0 12px #43ef9c;animation:p996Server 1.8s ease-in-out infinite}@keyframes p996Server{50%{opacity:.5;transform:scale(.84)}}
 
-body.p971BattleActive.bbRankedLearningPlaying .bbRLStatus{
-  display:grid!important;grid-template-columns:minmax(160px,1.4fr) minmax(120px,1fr) minmax(120px,1fr) minmax(120px,1fr)!important;
-  gap:9px!important;margin:0 0 10px!important;padding:10px!important;border:2px solid rgba(255,255,255,.66)!important;border-radius:24px!important;
-  background:linear-gradient(180deg,rgba(255,249,254,.98),rgba(246,233,255,.98))!important;
-  box-shadow:0 13px 32px rgba(17,5,52,.25),inset 0 1px 0 #fff!important;color:#4a2b86!important
-}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLQuestionNo,
-body.p971BattleActive.bbRankedLearningPlaying .bbRLScore,
-body.p971BattleActive.bbRankedLearningPlaying .bbRLTimerWrap,
-.p974BattleStat{
-  min-height:72px!important;padding:8px 11px!important;box-sizing:border-box!important;border:1.5px solid rgba(127,87,189,.14)!important;border-radius:18px!important;
-  background:linear-gradient(145deg,#fff,#fff8fd)!important;box-shadow:0 5px 13px rgba(81,49,116,.07)!important;color:#4e2a92!important
-}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLQuestionNo small,
-body.p971BattleActive.bbRankedLearningPlaying .bbRLScore small,
-.p974BattleStat small{color:#7952b9!important;font-size:8px!important;letter-spacing:.08em!important;font-weight:1000!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLQuestionNo b,
-body.p971BattleActive.bbRankedLearningPlaying .bbRLScore b,
-.p974BattleStat b{margin-top:4px!important;color:#3f1f86!important;font-size:25px!important;line-height:1!important;font-weight:1000!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLTimerWrap{grid-column:1!important;grid-row:1!important;display:flex!important;flex-direction:column!important;justify-content:center!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLTimerHead{color:#7850b7!important;font-size:8px!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLTimerHead strong{color:#3d1d84!important;font-size:25px!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLTimerTrack{height:9px!important;margin-top:6px!important;background:#ddd0ef!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLTimerTrack i{background:linear-gradient(90deg,#55dc90,#8e67e7,#ff70b5)!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLQuestionNo{grid-column:2!important;grid-row:1!important}
-.p974ComboStat{grid-column:3!important;grid-row:1!important;text-align:center!important;display:flex!important;flex-direction:column!important;justify-content:center!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLScore{grid-column:4!important;grid-row:1!important}
+/* Stats */
+body.p971BattleActive.bbRankedLearningPlaying .bbRLStatus.p996Stats{display:grid!important;grid-template-columns:1.12fr 1.35fr 1fr 1fr .82fr!important;gap:8px!important;padding:10px!important;border:3px solid rgba(255,255,255,.72)!important;border-radius:28px!important;background:linear-gradient(180deg,#fff8fb,#f5eaff)!important;color:#402176!important;box-shadow:0 8px 0 rgba(75,35,131,.22),0 16px 28px rgba(29,7,69,.18)!important}.p996Stats>div{min-height:77px!important;padding:8px 9px!important;box-sizing:border-box!important;border:2px solid rgba(126,82,177,.13)!important;border-radius:19px!important;background:linear-gradient(180deg,#fff,#fff8fc)!important;box-shadow:0 5px 11px rgba(79,45,122,.08),inset 0 1px 0 #fff!important}.p996Stats small{display:block!important;color:#7550a4!important;font-size:7px!important;font-weight:1000!important;letter-spacing:.04em!important}.p996Stats b,.p996Stats .bbRLTimerHead strong{display:block!important;color:#43207b!important;font-size:24px!important;line-height:1.05!important;font-weight:1000!important}.p996TimerCard{position:relative;overflow:hidden;background:radial-gradient(circle at 50% 38%,#7561ed,#4234b7 72%)!important;border-color:#ffc855!important;color:#fff!important}.p996TimerCard::before{content:"";position:absolute;inset:5px;border:2px solid rgba(255,214,73,.9);border-radius:50%;pointer-events:none}.p996TimerCard>small,.p996TimerCard .bbRLTimerHead span,.p996TimerCard .bbRLTimerHead strong{position:relative;z-index:1;color:#fff!important;text-align:center!important}.p996TimerCard .bbRLTimerHead{display:block!important}.p996TimerCard .bbRLTimerHead span{display:none!important}.p996TimerCard .bbRLTimerHead strong{font-size:29px!important;margin-top:7px!important}.p996TimerCard .bbRLTimerTrack{position:absolute!important;left:18px!important;right:18px!important;bottom:11px!important;height:5px!important;border-radius:999px!important;background:rgba(255,255,255,.22)!important;overflow:hidden!important}.p996TimerCard .bbRLTimerTrack i{display:block;height:100%;background:#ffd94f!important}.p996StatCard{text-align:center;position:relative}.p996MiniTrack{height:6px;margin-top:8px;border-radius:999px;background:#e6d8f8;overflow:hidden}.p996MiniTrack i{display:block;width:10%;height:100%;border-radius:999px;background:linear-gradient(90deg,#5fe5a8,#53cbed);transition:width .25s}.p996Star{color:#ffcb42;text-shadow:0 2px 0 #e29613}.p996Trophy{position:absolute;right:7px;bottom:4px;font-size:17px}.p996DuelStat span{display:block;margin-top:5px;color:#9a76b3;font-size:7px;font-weight:900}
 
-body.p971BattleActive.bbRankedLearningPlaying .bbRLCard{
-  min-height:410px!important;padding:22px 24px 24px!important;border:3px solid rgba(255,255,255,.78)!important;border-radius:32px!important;
-  background:
-    radial-gradient(circle at 9% 10%,rgba(255,193,229,.18),transparent 22%),
-    radial-gradient(circle at 91% 13%,rgba(182,151,255,.15),transparent 22%),
-    linear-gradient(180deg,#fffafd,#fff0fa)!important;
-  box-shadow:0 18px 44px rgba(16,4,52,.29),inset 0 0 0 2px rgba(167,113,220,.09)!important;color:#4c2c6f!important
-}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLMeta{margin-bottom:6px!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLMeta span{padding:6px 10px!important;border-radius:999px!important;background:#f0e6ff!important;color:#7853b5!important;font-size:8px!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLMeta .sync{background:#e7fff0!important;color:#278d5d!important}
-body.p971BattleActive.bbRankedLearningPlaying #bbRLPrompt{
-  margin:12px auto 5px!important;max-width:850px!important;color:#3f2084!important;font-size:clamp(34px,5vw,60px)!important;line-height:1.08!important;font-weight:1000!important;letter-spacing:-.02em!important
-}
-body.p971BattleActive.bbRankedLearningPlaying #bbRLSubPrompt{margin:4px auto 18px!important;color:#765d8d!important;font-size:12px!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLChoices{
-  width:min(900px,100%)!important;margin:0 auto!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:12px!important
-}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLChoices button{
-  position:relative!important;min-height:116px!important;padding:16px 18px!important;border:4px solid rgba(255,255,255,.86)!important;border-radius:27px!important;
-  color:#fff!important;font-size:clamp(27px,4vw,48px)!important;line-height:1.05!important;font-weight:1000!important;text-align:center!important;
-  text-shadow:0 2px 0 rgba(44,25,84,.20)!important;box-shadow:0 9px 0 rgba(63,33,118,.18),0 15px 25px rgba(78,43,115,.13),inset 0 2px 0 rgba(255,255,255,.42)!important;
-  overflow:hidden!important;transition:transform .12s ease,filter .18s ease,box-shadow .18s ease!important
-}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLChoices button::after{
-  content:"";position:absolute;left:8%;right:8%;top:6px;height:34%;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.34),transparent);pointer-events:none
-}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLChoices button:nth-child(4n+1){background:linear-gradient(145deg,#65d2ff,#3685ec)!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLChoices button:nth-child(4n+2){background:linear-gradient(145deg,#ff83bd,#eb4f9a)!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLChoices button:nth-child(4n+3){background:linear-gradient(145deg,#bd79ff,#8150e7)!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLChoices button:nth-child(4n+4){background:linear-gradient(145deg,#ffd568,#f49a39)!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLChoices button:not(:disabled):hover{filter:brightness(1.05)!important;transform:translateY(-2px)!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLChoices button:not(:disabled):active{transform:translateY(5px) scale(.985)!important;box-shadow:0 4px 0 rgba(63,33,118,.16),0 8px 16px rgba(78,43,115,.10),inset 0 2px 0 rgba(255,255,255,.42)!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLChoices button.selected{outline:5px solid rgba(255,240,137,.78)!important;filter:brightness(1.10)!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLChoices button.correct{outline:5px solid #60ef9c!important;filter:brightness(1.08) saturate(1.05)!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLChoices button.wrong{outline:5px solid #ff426f!important;filter:grayscale(.18) brightness(.83)!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLChoices button.p974Long{font-size:clamp(18px,2.6vw,30px)!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLChoices button.p974VeryLong{font-size:clamp(14px,2.1vw,23px)!important;line-height:1.2!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLLocked,
-body.p971BattleActive.bbRankedLearningPlaying .bbRLReveal{
-  width:min(900px,100%)!important;margin:14px auto 0!important;padding:12px 14px!important;border:2px solid rgba(121,86,183,.12)!important;border-radius:18px!important;box-sizing:border-box!important
-}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLLocked{background:#f3ebff!important;color:#62448c!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLReveal{background:#e8fff3!important;color:#267250!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLReveal.wrong{background:#fff0f5!important;color:#a33e62!important}
-body.p971BattleActive.bbRankedLearningPlaying .bbRLFooter{display:none!important}
-.p974BattleActions{display:flex;justify-content:center;gap:9px;margin:10px auto 0}
-.p974BattleActions button{min-height:42px;padding:0 16px;border:2px solid rgba(255,255,255,.36);border-radius:15px;background:linear-gradient(180deg,rgba(92,55,176,.96),rgba(58,31,128,.96));color:#fff;font-size:10px;font-weight:1000;box-shadow:0 7px 18px rgba(14,4,49,.20)}
-.p974BattleActions button:active{transform:translateY(2px)}
+/* Question board */
+body.p971BattleActive.bbRankedLearningPlaying .bbRLCard.p996QuestionCard{position:relative!important;min-height:410px!important;margin:0!important;padding:31px 18px 18px!important;overflow:visible!important;border:4px solid rgba(255,255,255,.82)!important;border-radius:37px!important;background:radial-gradient(circle at 50% 10%,#fff 0%,#fff4fb 32%,#f9e9ff 74%,#efe3ff 100%)!important;color:#482178!important;box-shadow:0 10px 0 rgba(67,29,125,.28),0 20px 42px rgba(21,4,68,.22),inset 0 0 0 2px rgba(201,167,255,.36)!important}.p996QuestionCard::before{content:"✦       ★                         ✦";position:absolute;left:20px;right:20px;top:20px;color:#efb1df;font-size:16px;letter-spacing:2.2em;white-space:nowrap;opacity:.75;pointer-events:none}.p996QuestionCrest{position:absolute;z-index:3;left:50%;top:-22px;transform:translateX(-50%);width:70px;height:49px;display:grid;place-items:center;border:3px solid #fff;border-radius:22px;background:linear-gradient(145deg,#ffde62,#ff75b1);box-shadow:0 5px 0 #9d50d0,0 8px 20px rgba(68,27,125,.22)}.p996QuestionCrest span{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:#ff5ba7;color:#ffd65b;font-size:21px;text-shadow:0 1px 0 #fff}.p996QuestionMeta{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;margin:0 0 10px!important}.p996QuestionMeta span{padding:5px 9px!important;border-radius:999px!important;background:#f0e6ff!important;color:#6a42a2!important;font-size:7px!important;font-weight:1000!important}.p996QuestionMeta .sync{color:#2c9d74!important;background:#e7fff4!important}.p996QuestionCard h1#bbRLPrompt{margin:10px auto 5px!important;max-width:850px!important;text-align:center!important;color:#36117b!important;font-size:clamp(31px,5vw,55px)!important;line-height:1.10!important;font-weight:1000!important;letter-spacing:-.035em!important;text-wrap:balance}.p996QuestionCard #bbRLSubPrompt{margin:0 auto 14px!important;max-width:720px!important;text-align:center!important;color:#6f5c8e!important;font-size:11px!important;font-weight:800!important;line-height:1.55!important}.p996Choices{display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px!important;margin-top:12px!important}.p996Choices.hidden{display:none!important}.p996Choices button{position:relative!important;min-height:116px!important;padding:12px!important;border:4px solid rgba(255,255,255,.88)!important;border-radius:28px!important;color:#fff!important;font-size:clamp(29px,5vw,52px)!important;font-weight:1000!important;line-height:1.07!important;text-shadow:0 3px 0 rgba(63,37,123,.28)!important;box-shadow:0 8px 0 rgba(66,35,128,.24),0 14px 24px rgba(72,42,119,.14),inset 0 3px 0 rgba(255,255,255,.42),inset 0 -12px 28px rgba(255,255,255,.08)!important;transition:transform .13s ease,filter .13s ease,box-shadow .13s ease!important;overflow:hidden!important}.p996Choices button::before{content:"✦";position:absolute;right:13px;top:8px;font-size:16px;color:rgba(255,255,255,.70);text-shadow:0 0 8px #fff}.p996Choices button:nth-child(4n+1){background:linear-gradient(145deg,#5ed7ff,#368af1)!important}.p996Choices button:nth-child(4n+2){background:linear-gradient(145deg,#ff8ac5,#ed4e9d)!important}.p996Choices button:nth-child(4n+3){background:linear-gradient(145deg,#c279ff,#8450e9)!important}.p996Choices button:nth-child(4n+4){background:linear-gradient(145deg,#ffd765,#f39a38)!important}.p996Choices button:not(:disabled):active{transform:translateY(6px) scale(.985)!important;box-shadow:0 2px 0 rgba(66,35,128,.24),0 7px 14px rgba(72,42,119,.12),inset 0 3px 0 rgba(255,255,255,.42)!important}.p996Choices button.selected{outline:5px solid #fff08a!important;filter:brightness(1.08)!important}.p996Choices button.correct{outline:5px solid #54f2a0!important;filter:brightness(1.08) saturate(1.12)!important}.p996Choices button.wrong{outline:5px solid #ff3d76!important;filter:grayscale(.15) brightness(.82)!important}.p996Choices button.p996Long{font-size:clamp(20px,3vw,30px)!important}.p996Choices button.p996VeryLong{font-size:clamp(15px,2.5vw,23px)!important;line-height:1.2!important}.p996QuestionCard .bbRLLocked,.p996QuestionCard .bbRLReveal{margin:13px auto 0!important;max-width:720px!important;padding:11px 13px!important;border:2px solid rgba(118,71,166,.12)!important;border-radius:18px!important;box-shadow:0 5px 13px rgba(82,47,123,.08)!important}.p996QuestionCard .bbRLLocked{background:#f0e7ff!important;color:#65468d!important}.p996QuestionCard .bbRLReveal{background:#e7fff2!important;color:#277153!important}.p996QuestionCard .bbRLReveal.wrong{background:#fff0f5!important;color:#a33f62!important}.p996QuestionCard .bbRLLocked>span,.p996QuestionCard .bbRLReveal>span{font-size:20px!important}.p996QuestionCard .bbRLLocked b,.p996QuestionCard .bbRLReveal b{font-size:11px!important}.p996QuestionCard .bbRLReveal p{font-size:9px!important}.p996QuestionCard .bbRLTyping,.p996QuestionCard .bbRLOrder{margin-top:12px}.bbRLFooter{display:none!important}
 
-/* Existing chat drawer remains the real chat backend; only its button is restyled. */
-body.bbRankedLearningPlaying #p951GameChat:not(.hidden) #p951ChatFab{
-  border:3px solid rgba(255,255,255,.78)!important;background:linear-gradient(145deg,#8f5ce7,#5d35c4)!important;
-  box-shadow:0 9px 22px rgba(12,4,44,.30)!important
+/* Bottom action bar */
+.p996BattleActions{display:grid;grid-template-columns:1fr 118px 1fr;gap:8px;align-items:center;padding:8px;border:3px solid rgba(255,255,255,.58);border-radius:25px;background:linear-gradient(180deg,rgba(84,43,177,.96),rgba(52,24,127,.96));box-shadow:0 7px 0 rgba(36,11,91,.65),0 12px 24px rgba(17,3,63,.24)}.p996BattleActions button{min-height:55px;border:2px solid rgba(255,255,255,.30);border-radius:17px;background:linear-gradient(#7650df,#4f2bb1);color:#fff;display:grid;grid-template-columns:auto 1fr;grid-template-rows:1fr 1fr;align-items:center;column-gap:7px;padding:6px 10px;text-align:left;box-shadow:inset 0 1px 0 rgba(255,255,255,.22)}.p996BattleActions button>span{grid-row:1/3;font-size:24px}.p996BattleActions button b{font-size:11px}.p996BattleActions button small{font-size:7px;color:#dbcfff}.p996BattleCore{text-align:center;padding:7px 5px;border:2px solid rgba(255,255,255,.40);border-radius:18px;background:linear-gradient(#9a5bf0,#6636c9);box-shadow:0 4px 0 #421d9e}.p996BattleCore>span{display:block;font-size:22px;color:#ffd556;text-shadow:0 2px 0 #b66317}.p996BattleCore b{display:block;font-size:10px}.p996BattleCore small{display:block;font-size:7px;color:#eadfff}.p996Loading{z-index:260950!important;background:radial-gradient(circle at 50% 35%,rgba(117,74,230,.95),rgba(28,11,76,.96))!important;color:#fff!important}.p996Loading .brain{font-size:44px!important;animation:p996Twinkle 1.4s ease-in-out infinite!important}
+
+/* Cosmetics follow fighter movement */
+.p996BuddyArt .p991CosmeticLayer{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;background-position:center bottom!important;background-repeat:no-repeat!important;background-size:contain!important;pointer-events:none!important;z-index:3!important}.p996BuddyArt .p991BuddyStack{position:relative!important;width:100%!important;height:100%!important;display:grid!important;place-items:end center!important}.p996BuddyArt .p991BuddyStack img{position:relative!important;z-index:1!important}
+
+/* Phone portrait: preserve the same visual hierarchy as the reference. */
+@media(max-width:640px){
+  body.bbRankedLearningPlaying .bbRankLearnTop.p996Topbar{min-height:58px!important;padding:max(5px,env(safe-area-inset-top)) 7px 5px!important;grid-template-columns:38px 1fr auto!important;gap:6px!important}.p996TopIcon{width:38px;height:38px;border-radius:13px!important;font-size:18px!important}.p996RankLife{display:none}.p996Logo{justify-self:start;font-size:30px;-webkit-text-stroke:4px #8c36c3}.p996TopRight{gap:5px}.p996Wallet{height:38px;min-width:78px;padding:0 7px 0 4px;border-radius:13px}.p996Wallet .coin{width:28px;height:28px;font-size:11px}.p996Wallet b{font-size:12px}.p996Exit{width:38px;height:38px;border-radius:13px!important;font-size:18px!important}
+  body.p971BattleActive.bbRankedLearningPlaying .bbRankLearnShell.p996BattlePage{width:calc(100% - 10px)!important;gap:7px!important;padding-top:3px!important}
+  body.p971BattleActive.bbRankedLearningPlaying .p971BattleHud.p996VSCard{min-height:214px!important;padding:8px 7px 8px!important;border-width:2px!important;border-radius:24px!important;grid-template-columns:minmax(0,1fr) 78px minmax(0,1fr)!important;box-shadow:0 7px 0 rgba(57,20,121,.62),0 12px 24px rgba(13,2,60,.32),inset 0 1px 0 rgba(255,255,255,.42)!important}
+  .p996Fighter{grid-template-columns:90px minmax(0,1fr)!important;grid-template-rows:1fr auto!important}.p996Fighter.right{grid-template-columns:minmax(0,1fr) 90px!important}.p996BuddyArt{width:90px!important;height:135px!important}.p996BuddyArt img,.p996BuddyArt>.p991BuddyStack>img{max-width:88px!important;max-height:132px!important}.p996FighterGlow{width:108px;height:108px;top:12px}.p996FighterInfo>b{margin:3px 0!important;font-size:14px!important}.p996Role{min-height:19px;padding:0 7px;font-size:6px}.p972BattleSkinName,.p991BattleLook{max-width:95px!important;padding:3px 6px!important;font-size:5px!important}.p991BattleLook{display:none!important}.p996HpLine{height:30px;padding:3px 4px;gap:3px;border-radius:15px}.p996Heart{width:22px;height:22px;font-size:14px}.p996HpLine .p971HpTrack{height:15px!important;padding:2px!important;border-width:1px!important}.p996HpLine .p971HpNum{min-width:43px!important;font-size:6px!important}.p996BattleCenter>strong{font-size:44px!important;-webkit-text-stroke-width:2px}.p996BattleLabel{margin-top:12px;padding:5px 5px;border-radius:10px}.p996BattleLabel b{font-size:7px!important}.p996BattleLabel small{font-size:4.5px!important}
+  .p996RankStrip{grid-template-columns:auto minmax(0,1fr) auto!important;gap:5px;padding:6px 7px;border-width:2px;border-radius:18px;box-shadow:0 5px 0 rgba(38,11,94,.6),0 9px 17px rgba(17,3,63,.23)}.p996RankBadge{min-width:76px;min-height:45px;padding:4px 6px;border-radius:12px}.p996RankBadge .crown{font-size:20px}.p996RankBadge b{font-size:9px}.p996RankBadge small{font-size:4.5px}.p996ModeCopy small{font-size:4.5px}.p996ModeCopy b{font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.p996ModeCopy span{font-size:5px}.p996PowerBadge{min-width:48px;padding:4px;border-radius:11px}.p996PowerBadge span{display:none}.p996PowerBadge b{font-size:10px}.p996PowerBadge small{font-size:4px}.p996Server{display:none}
+  body.p971BattleActive.bbRankedLearningPlaying .bbRLStatus.p996Stats{grid-template-columns:1.08fr 1.3fr .82fr .82fr!important;gap:4px!important;padding:6px!important;border-width:2px!important;border-radius:20px!important;box-shadow:0 5px 0 rgba(75,35,131,.20),0 10px 18px rgba(29,7,69,.14)!important}.p996Stats>div{min-height:57px!important;padding:5px!important;border-radius:13px!important}.p996Stats small{font-size:4.5px!important}.p996Stats b,.p996Stats .bbRLTimerHead strong{font-size:16px!important}.p996TimerCard .bbRLTimerHead strong{font-size:19px!important;margin-top:5px!important}.p996TimerCard::before{inset:3px;border-width:1.5px}.p996TimerCard .bbRLTimerTrack{left:11px!important;right:11px!important;bottom:7px!important;height:3px!important}.p996MiniTrack{height:4px;margin-top:5px}.p996DuelStat{display:none!important}.p996Trophy{display:none}.p996Star{font-size:10px}
+  body.p971BattleActive.bbRankedLearningPlaying .bbRLCard.p996QuestionCard{min-height:0!important;padding:22px 7px 10px!important;border-width:3px!important;border-radius:24px!important;box-shadow:0 6px 0 rgba(67,29,125,.24),0 11px 20px rgba(21,4,68,.18),inset 0 0 0 1px rgba(201,167,255,.30)!important}.p996QuestionCrest{top:-14px;width:50px;height:34px;border-width:2px;border-radius:15px}.p996QuestionCrest span{width:24px;height:24px;font-size:15px}.p996QuestionMeta{margin-bottom:4px!important}.p996QuestionMeta span{padding:3px 6px!important;font-size:4.5px!important}.p996QuestionCard h1#bbRLPrompt{margin:4px auto 2px!important;font-size:clamp(25px,8.4vw,37px)!important}.p996QuestionCard #bbRLSubPrompt{margin-bottom:8px!important;font-size:7px!important}.p996Choices{gap:6px!important;margin-top:7px!important}.p996Choices button{min-height:88px!important;padding:7px!important;border-width:3px!important;border-radius:19px!important;font-size:clamp(25px,10vw,42px)!important;box-shadow:0 5px 0 rgba(66,35,128,.22),0 8px 14px rgba(72,42,119,.12),inset 0 2px 0 rgba(255,255,255,.42)!important}.p996Choices button.p996Long{font-size:clamp(15px,4.4vw,21px)!important}.p996Choices button.p996VeryLong{font-size:clamp(12px,3.5vw,17px)!important}.p996Choices button::before{right:8px;top:5px;font-size:11px}.p996QuestionCard .bbRLLocked,.p996QuestionCard .bbRLReveal{margin-top:7px!important;padding:7px 8px!important;border-radius:13px!important}.p996QuestionCard .bbRLLocked b,.p996QuestionCard .bbRLReveal b{font-size:8px!important}.p996QuestionCard .bbRLLocked small,.p996QuestionCard .bbRLReveal p{font-size:6px!important}
+  .p996BattleActions{grid-template-columns:1fr 78px 1fr;gap:5px;padding:5px;border-width:2px;border-radius:18px;box-shadow:0 5px 0 rgba(36,11,91,.60),0 8px 15px rgba(17,3,63,.22)}.p996BattleActions button{min-height:43px;border-radius:12px;padding:4px 6px;column-gap:4px}.p996BattleActions button>span{font-size:18px}.p996BattleActions button b{font-size:7px}.p996BattleActions button small{font-size:4.5px}.p996BattleCore{padding:4px;border-radius:12px}.p996BattleCore>span{font-size:15px}.p996BattleCore b{font-size:7px}.p996BattleCore small{font-size:4.5px}
+  .p996BattleToast{top:76px!important;font-size:7px!important;padding:6px 9px!important}
 }
-
-/* ----- iPad landscape ----- */
-@media(min-width:761px) and (orientation:landscape){
-  body.p971BattleActive.bbRankedLearningPlaying .p971BattleHud{height:210px!important;min-height:210px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .p971Fighter{grid-template-columns:155px minmax(0,1fr)!important}
-  body.p971BattleActive.bbRankedLearningPlaying .p971Fighter.right{grid-template-columns:minmax(0,1fr) 155px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .p971FighterArt{width:155px!important;height:174px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .p971FighterArt img{max-width:151px!important;max-height:171px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .bbRankLearnShell{padding-top:294px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .bbRLCard{min-height:360px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .bbRLChoices button{min-height:92px!important}
-}
-
-/* ----- Phone portrait: keep the 2x2 answer grid from the concept ----- */
-@media(max-width:760px){
-  body.bbRankedLearningPlaying .bbRankLearnTop{top:max(4px,env(safe-area-inset-top))!important;width:calc(100% - 12px)!important;min-height:52px!important;border-radius:17px!important;padding:5px 7px!important}
-  body.bbRankedLearningPlaying .bbRankLearnBrand>span{width:34px!important;height:34px!important}.bbRankLearnBrand div{display:none!important}
-  body.bbRankedLearningPlaying .bbRankLearnMode{min-width:120px!important}.bbRankLearnMode small{display:none!important}
-  body.bbRankedLearningPlaying .bbRankLearnMode b{font-size:15px!important}.bbRankLearnMode span{font-size:7px!important}
-  body.bbRankedLearningPlaying .bbRLForfeit{min-height:34px!important;padding:0 9px!important;font-size:8px!important}
-
-  body.p971BattleActive.bbRankedLearningPlaying .p971BattleHud{
-    top:62px!important;width:calc(100% - 12px)!important;height:218px!important;min-height:218px!important;
-    grid-template-columns:minmax(0,1fr) 74px minmax(0,1fr)!important;border-radius:22px!important;padding:7px 7px 9px!important
-  }
-  body.p971BattleActive.bbRankedLearningPlaying .p971Fighter{grid-template-columns:92px minmax(0,1fr)!important;gap:3px!important;padding:2px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .p971Fighter.right{grid-template-columns:minmax(0,1fr) 92px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .p971FighterArt{width:92px!important;height:128px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .p971FighterArt img{max-width:90px!important;max-height:125px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .p971FighterInfo>b{font-size:13px!important;margin:4px 0 2px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .p971FighterInfo>small{min-width:38px!important;padding:3px 6px!important;font-size:6px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .p972BattleSkinName{display:block!important;width:max-content!important;max-width:70px!important;margin:0 0 4px!important;padding:2px 5px!important;font-size:5.5px!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
-  body.p971BattleActive.bbRankedLearningPlaying .p971Fighter.right .p972BattleSkinName{margin-left:auto!important}
-  body.p971BattleActive.bbRankedLearningPlaying .p971HpLine{display:block!important}
-  body.p971BattleActive.bbRankedLearningPlaying .p971HpTrack{height:18px!important;padding:2px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .p971HpNum{display:block!important;min-width:0!important;margin-top:2px!important;font-size:7px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .p971BattleCenter strong{font-size:38px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .p971BattleCenter b{min-width:66px!important;padding:4px!important;font-size:6px!important;border-radius:9px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .p971BattleCenter small{display:none!important}.p973BattleState{font-size:5px!important;min-width:45px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .p971BattleToast{top:270px!important;font-size:8px!important}
-
-  body.p971BattleActive.bbRankedLearningPlaying .bbRankLearnShell{width:calc(100% - 12px)!important;padding-top:292px!important;margin-bottom:calc(20px + env(safe-area-inset-bottom))!important}
-  .p974RankedRibbon{min-height:52px;padding:6px 8px;gap:7px;border-radius:17px}.p974RankedBadge{min-width:72px;height:36px;padding:0 7px;font-size:10px;border-radius:12px}.p974RankedInfo b{font-size:10px}.p974RankedInfo small{font-size:5.5px}.p974Server{font-size:6px}.p974Server i{width:7px;height:7px}
-  body.p971BattleActive.bbRankedLearningPlaying .bbRLStatus{grid-template-columns:1fr 1fr!important;gap:6px!important;padding:7px!important;border-radius:19px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .bbRLTimerWrap{grid-column:1!important;grid-row:1!important}
-  body.p971BattleActive.bbRankedLearningPlaying .bbRLQuestionNo{grid-column:2!important;grid-row:1!important}
-  .p974ComboStat{grid-column:1!important;grid-row:2!important}
-  body.p971BattleActive.bbRankedLearningPlaying .bbRLScore{grid-column:2!important;grid-row:2!important}
-  body.p971BattleActive.bbRankedLearningPlaying .bbRLQuestionNo,body.p971BattleActive.bbRankedLearningPlaying .bbRLScore,body.p971BattleActive.bbRankedLearningPlaying .bbRLTimerWrap,.p974BattleStat{min-height:54px!important;padding:6px 8px!important;border-radius:14px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .bbRLQuestionNo b,body.p971BattleActive.bbRankedLearningPlaying .bbRLScore b,.p974BattleStat b,body.p971BattleActive.bbRankedLearningPlaying .bbRLTimerHead strong{font-size:18px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .bbRLCard{min-height:0!important;padding:16px 9px 18px!important;border-radius:23px!important}
-  body.p971BattleActive.bbRankedLearningPlaying #bbRLPrompt{font-size:clamp(30px,9vw,46px)!important;margin-top:8px!important}
-  body.p971BattleActive.bbRankedLearningPlaying #bbRLSubPrompt{font-size:9px!important;margin-bottom:13px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .bbRLChoices{grid-template-columns:1fr 1fr!important;gap:7px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .bbRLChoices button{min-height:88px!important;border-width:3px!important;border-radius:20px!important;padding:9px!important;font-size:clamp(24px,10vw,42px)!important;box-shadow:0 6px 0 rgba(63,33,118,.17),0 10px 18px rgba(78,43,115,.10),inset 0 2px 0 rgba(255,255,255,.42)!important}
-  body.p971BattleActive.bbRankedLearningPlaying .bbRLChoices button.p974Long{font-size:clamp(15px,4.6vw,22px)!important}.bbRLChoices button.p974VeryLong{font-size:clamp(12px,3.8vw,18px)!important}
-}
-
-@media(max-width:390px){
-  body.p971BattleActive.bbRankedLearningPlaying .p971Fighter{grid-template-columns:78px minmax(0,1fr)!important}
-  body.p971BattleActive.bbRankedLearningPlaying .p971Fighter.right{grid-template-columns:minmax(0,1fr) 78px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .p971FighterArt{width:78px!important;height:114px!important}.p971FighterArt img{max-width:76px!important;max-height:111px!important}
-  body.p971BattleActive.bbRankedLearningPlaying .p971BattleCenter{transform:scale(.86)}
-}
-
-@media(prefers-reduced-motion:reduce){
-  body.p971BattleActive.bbRankedLearningPlaying .p971FighterArt.attack img,
-  body.p971BattleActive.bbRankedLearningPlaying .p971FighterArt.hit img{animation:none!important}
-}
+@media(max-width:380px){.p996Wallet{display:none}.p996Topbar{grid-template-columns:38px 1fr 38px!important}.p996Logo{justify-self:center}.p996TopRight{justify-self:end}.p996TopRight .p996Exit{display:grid}.p996Fighter{grid-template-columns:78px minmax(0,1fr)!important}.p996Fighter.right{grid-template-columns:minmax(0,1fr) 78px!important}.p996BuddyArt{width:78px!important;height:122px!important}.p996BuddyArt img,.p996BuddyArt>.p991BuddyStack>img{max-width:76px!important;max-height:119px!important}.p996FighterInfo>b{font-size:12px!important}.p996Choices button{min-height:82px!important}}
+@media(prefers-reduced-motion:reduce){.p996Spark,.p996BuddyArt img,.p996Server i,.p971FighterArt.hit img,.p971FighterArt.attack img{animation:none!important}.p996Choices button,.p996HpLine .p971HpTrack i{transition:none!important}}
 </style>
 
-<script id="pomru-v974-buddy-battle-arena-runtime">
+<script id="pomru-v996-battle-screen-rebuild-runtime">
 (function(){
   "use strict";
   const $=id=>document.getElementById(id);
-  let combo=0,lastRevealKey="",observer=null;
+  let combo=0,lastRevealKey="",observer=null,coinObserver=null;
+  const safe=v=>String(v??"").trim();
 
-  function safe(v){return String(v??"").trim()}
-  function ensureArena(){
-    const shell=document.querySelector("#bbRankedLearningOverlay .bbRankLearnShell");
-    const status=$("bbRLQuestionNo")?.closest(".bbRLStatus");
-    if(!shell||!status)return;
-
-    if(!$("p974RankedRibbon")){
-      const ribbon=document.createElement("section");
-      ribbon.id="p974RankedRibbon";ribbon.className="p974RankedRibbon";
-      ribbon.innerHTML='<div class="p974RankedBadge">♛ RANKED</div><div class="p974RankedInfo"><small>BUDDY BATTLE</small><b id="p974RankedMode">กำลังเตรียมโหมด…</b></div><span class="p974Server"><i></i> SERVER SYNC</span>';
-      status.insertAdjacentElement("beforebegin",ribbon);
-    }
-
-    if(!$("p974ComboStat")){
-      const c=document.createElement("div");c.id="p974ComboStat";c.className="p974BattleStat p974ComboStat";
-      c.innerHTML='<small>COMBO</small><b><span aria-hidden="true">★ </span><span id="p974ComboValue">0</span></b>';
-      status.appendChild(c);
-    }
-
-    const qSmall=status.querySelector(".bbRLQuestionNo small");if(qSmall)qSmall.textContent="PROGRESS";
-    const scoreSmall=status.querySelector(".bbRLScore small");if(scoreSmall)scoreSmall.textContent="SCORE";
-
-    if(!$("p974BattleActions")){
-      const actions=document.createElement("div");actions.id="p974BattleActions";actions.className="p974BattleActions";
-      actions.innerHTML='<button type="button" id="p974BattleChat">💬 แชท</button>';
-      shell.appendChild(actions);
-      $("p974BattleChat")?.addEventListener("click",()=>$("p951ChatFab")?.click());
-    }
-
-    const brand=document.querySelector("#bbRankedLearningOverlay .bbRankLearnBrand small");if(brand)brand.textContent="POMRU";
-    const brandName=document.querySelector("#bbRankedLearningOverlay .bbRankLearnBrand b");if(brandName)brandName.textContent="RANKED";
-    const modeSmall=document.querySelector("#bbRankedLearningOverlay .bbRankLearnMode small");if(modeSmall)modeSmall.textContent="BUDDY BATTLE";
-    syncArenaText();decorateChoices();setupRevealObserver();
+  function moveHud(){
+    const hud=$("p971BattleHud"),mount=$("p996BattleMount");
+    if(hud&&mount&&hud.parentElement!==mount)mount.appendChild(hud);
+    const toast=$("p971BattleToast"),overlay=$("bbRankedLearningOverlay");
+    if(toast&&overlay&&toast.parentElement!==overlay)overlay.appendChild(toast);
   }
 
-  function syncArenaText(){
+  function syncCoin(){
+    const out=$("p996CoinBalance"),src=$("pomruHomeCoinBalance")||$("bbHomeCoinBalance");if(!out)return;
+    const value=safe(src?.textContent)||"0";out.textContent=value;
+    if(src&&!coinObserver){coinObserver=new MutationObserver(syncCoin);coinObserver.observe(src,{childList:true,subtree:true,characterData:true})}
+  }
+
+  function syncMode(){
     const mode=safe($("bbRLMode")?.textContent)||"Ranked";
     const diff=safe($("bbRLDiff")?.textContent)||"";
-    const out=$("p974RankedMode");if(out)out.textContent=[mode,diff].filter(Boolean).join(" • ");
+    const out=$("p996RankedMode");if(out)out.textContent=[mode,diff].filter(Boolean).join(" • ");
+    const cat=$("bbRLCategory");if(cat)cat.textContent="RANKED • "+mode;
+  }
+
+  function syncProgress(){
+    const txt=safe($("bbRLQuestionNo")?.textContent),m=txt.match(/(\d+)\s*\/\s*(\d+)/);if(!m)return;
+    const current=Math.max(0,Number(m[1])||0),total=Math.max(1,Number(m[2])||1);
+    const bar=$("p996ProgressBar");if(bar)bar.style.width=Math.max(0,Math.min(100,current/total*100))+"%";
+    const mini=$("p996RoundMini");if(mini)mini.textContent=`ROUND ${current}`;
+  }
+
+  function syncSkinLabels(){
+    const selfChip=document.querySelector('[data-p972-battle-skin="self"]');
+    const oppChip=document.querySelector('[data-p972-battle-skin="opp"]');
+    const sSlot=document.querySelector('[data-p996-skin="self"]'),oSlot=document.querySelector('[data-p996-skin="opp"]');
+    if(sSlot){sSlot.textContent=safe(selfChip?.textContent)||"POMRU Buddy";sSlot.style.display=selfChip?"none":"inline-block"}
+    if(oSlot){oSlot.textContent=safe(oppChip?.textContent)||"POMRU Buddy";oSlot.style.display=oppChip?"none":"inline-block"}
   }
 
   function decorateChoices(){
     const host=$("bbRLChoices");if(!host)return;
-    host.querySelectorAll("button").forEach(b=>{
-      b.classList.remove("p974Long","p974VeryLong");
-      const n=safe(b.textContent).length;
-      if(n>34)b.classList.add("p974VeryLong");else if(n>16)b.classList.add("p974Long");
+    host.querySelectorAll("button").forEach((b,i)=>{
+      b.classList.remove("p996Long","p996VeryLong","p974Long","p974VeryLong");
+      const n=safe(b.textContent).length;if(n>34)b.classList.add("p996VeryLong");else if(n>16)b.classList.add("p996Long");
+      b.dataset.p996Choice=String(i+1);
     });
   }
 
-  function resetCombo(){combo=0;lastRevealKey="";const v=$("p974ComboValue");if(v)v.textContent="0"}
+  function resetCombo(){combo=0;lastRevealKey="";if($("p996ComboValue"))$("p996ComboValue").textContent="0"}
   function processReveal(){
     const reveal=$("bbRLReveal");if(!reveal||reveal.classList.contains("hidden"))return;
-    const key=safe($("bbRLQuestionNo")?.textContent)+"|"+safe($("bbRLRevealTitle")?.textContent);
-    if(!key||key===lastRevealKey)return;lastRevealKey=key;
-    const ok=!reveal.classList.contains("wrong")&&/ถูก|correct/i.test(safe($("bbRLRevealTitle")?.textContent));
-    combo=ok?combo+1:0;const v=$("p974ComboValue");if(v)v.textContent=String(combo);
+    const key=safe($("bbRLQuestionNo")?.textContent)+"|"+safe($("bbRLRevealTitle")?.textContent);if(!key||key===lastRevealKey)return;lastRevealKey=key;
+    const ok=!reveal.classList.contains("wrong")&&/ถูก|correct/i.test(safe($("bbRLRevealTitle")?.textContent));combo=ok?combo+1:0;
+    if($("p996ComboValue"))$("p996ComboValue").textContent=String(combo);
+    const card=$("p996ComboStat");if(card){card.classList.toggle("hot",combo>=2);card.animate?.([{transform:"scale(1)"},{transform:"scale(1.08)"},{transform:"scale(1)"}],{duration:260})}
   }
 
-  function setupRevealObserver(){
-    if(observer)return;
-    const reveal=$("bbRLReveal"),title=$("bbRLRevealTitle"),choices=$("bbRLChoices"),mode=$("bbRLMode"),diff=$("bbRLDiff");
-    if(!reveal)return;
-    observer=new MutationObserver(()=>{processReveal();decorateChoices();syncArenaText()});
-    observer.observe(reveal,{attributes:true,attributeFilter:["class"],childList:true,subtree:true});
-    if(title)observer.observe(title,{childList:true,subtree:true,characterData:true});
-    if(choices)observer.observe(choices,{childList:true,subtree:true,characterData:true});
-    if(mode)observer.observe(mode,{childList:true,subtree:true,characterData:true});
-    if(diff)observer.observe(diff,{childList:true,subtree:true,characterData:true});
+  function syncAll(){moveHud();syncCoin();syncMode();syncProgress();syncSkinLabels();decorateChoices()}
+
+  function setupObserver(){
+    if(observer)return;const overlay=$("bbRankedLearningOverlay");if(!overlay)return;
+    observer=new MutationObserver(()=>{syncAll();processReveal()});
+    observer.observe(overlay,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:["class","style"]});
   }
 
-  document.addEventListener("pomru:ranked-game-started",()=>{setTimeout(()=>{ensureArena();resetCombo();decorateChoices();syncArenaText()},80)});
-  document.addEventListener("pomru:battle-round-resolved",()=>setTimeout(decorateChoices,20));
-  window.addEventListener("pageshow",()=>{if(document.body.classList.contains("bbRankedLearningPlaying"))setTimeout(ensureArena,100)});
-  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(ensureArena,260),{once:true});else setTimeout(ensureArena,260);
+  function ensure(){syncAll();setupObserver();
+    const chat=$("p996BattleChat");if(chat&&!chat.dataset.bound){chat.dataset.bound="1";chat.addEventListener("click",()=>$("p951ChatFab")?.click())}
+    const buddy=$("p996BuddyBtn");if(buddy&&!buddy.dataset.bound){buddy.dataset.bound="1";buddy.addEventListener("click",()=>{const h=$("p971BattleHud");h?.animate?.([{transform:"scale(1)"},{transform:"scale(1.015)"},{transform:"scale(1)"}],{duration:260})})}
+    const menu=$("p996BattleMenu");if(menu&&!menu.dataset.bound){menu.dataset.bound="1";menu.addEventListener("click",()=>{const btn=$("bbRLForfeit");btn?.focus?.()})}
+  }
+
+  document.addEventListener("pomru:ranked-game-started",()=>setTimeout(()=>{ensure();resetCombo()},40));
+  document.addEventListener("pomru:battle-round-resolved",()=>setTimeout(()=>{syncAll();processReveal()},20));
+  document.addEventListener("pomru:battle-v2-state",()=>setTimeout(syncAll,15));
+  window.addEventListener("pageshow",()=>{if(document.body.classList.contains("bbRankedLearningPlaying"))setTimeout(ensure,80)});
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(ensure,180),{once:true});else setTimeout(ensure,180);
+  window.POMRUBattleScreen=Object.freeze({version:"99.6",sync:syncAll,resetCombo});
 })();
 </script>
 
@@ -47128,11 +46987,6 @@ window.POMRU_V9741=Object.freeze({
 });
 </script>
 
-<script id="pomru-v974-marker">
-window.POMRU_V974=Object.freeze({version:"97.4",rankedUI:"buddy-battle-arena",answerGrid:"2x2-game-cards",authorityChanges:false});
-</script>
-
-
 <!-- ==========================================================
      POMRU v97.5 — SERVER-AUTHORITATIVE BUDDY BATTLE RUNTIME
      Frontend submits selected answer only. PostgreSQL decides
@@ -47150,7 +47004,7 @@ window.POMRU_V974=Object.freeze({version:"97.4",rankedUI:"buddy-battle-arena",an
   function setHp(selfHp,oppHp){
     const sh=Math.max(0,Math.min(100,Number(selfHp??100))),oh=Math.max(0,Math.min(100,Number(oppHp??100)));
     $("p971SelfHpBar")&&($("p971SelfHpBar").style.width=sh+"%");$("p971OppHpBar")&&($("p971OppHpBar").style.width=oh+"%");
-    $("p971SelfHp")&&($("p971SelfHp").textContent=Math.round(sh)+" HP");$("p971OppHp")&&($("p971OppHp").textContent=Math.round(oh)+" HP");
+    $("p971SelfHp")&&($("p971SelfHp").textContent=Math.round(sh)+" / 100");$("p971OppHp")&&($("p971OppHp").textContent=Math.round(oh)+" / 100");
   }
   function animate(side,kind){const el=$(side==="self"?"p971SelfArt":"p971OppArt");if(!el)return;el.classList.remove("attack","hit");void el.offsetWidth;el.classList.add(kind);setTimeout(()=>el.classList.remove(kind),620)}
   async function identifyOpponent(id){
@@ -49277,6 +49131,33 @@ window.POMRUV992=Object.freeze({version:"99.2",feature:"content-admin-production
 })();
 </script>
 <script id="pomru-v995w4-marker">window.POMRUV995W4=Object.freeze({version:"99.5W.4",feature:"home-final-polish",onlineConsistency:true,buddyScaleFinal:true,speechAttached:true,goalOneGlance:true,socialGameCards:true,bondReadable:true});</script>
+
+
+<script id="pomru-v995w5-marker">
+window.POMRUV995W5=Object.freeze({
+  version:"99.5W.5",
+  feature:"friends-room-page-split",
+  friendsPage:true,
+  roomPage:true,
+  homeFriendsRoutesToFriends:true,
+  playRoomRoutesToRoom:true,
+  typingListeningRemovedFromFriendRoom:true,
+  roomReturnsToRoomPage:true,
+  roomBuddySync:true
+});
+</script>
+
+<script id="pomru-v996-marker">
+window.POMRUV996=Object.freeze({
+  version:"99.6",
+  feature:"ranked-battle-screen-rebuild",
+  uiRebuilt:true,
+  serverAuthorityPreserved:true,
+  fighterIdsPreserved:true,
+  answerRuntimePreserved:true,
+  phoneFirst:true
+});
+</script>
 
 </body>
 </html>
