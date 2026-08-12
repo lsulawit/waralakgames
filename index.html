@@ -21013,6 +21013,9 @@ button{
       <button class="p91GameCard rose" data-learning-start data-learning-subject="math" data-learning-type="multiple_choice" data-learning-title="เลือกคำตอบ">
         <span class="p91GameIcon">ABC</span><span><b>เลือกคำตอบ</b><small>เลือกคำตอบที่ถูกจากตัวเลือก</small><em><span data-content-count="math:multiple_choice">0</span> ข้อ</em></span><i>›</i>
       </button>
+      <button class="p91GameCard p99GuessGameCard" type="button" data-app-go="guess99" data-pomru-guess99>
+        <span class="p91GameIcon">99</span><span><b>ทายเลข 1–99</b><small>มี 2 หัวใจ • ทายผิดจะบอกว่าสูงกว่าหรือต่ำกว่า</small><em>❤️❤️ 2 โอกาสต่อรอบ</em></span><i>›</i>
+      </button>
       <button class="p91GameCard sand" data-learning-start data-learning-subject="math" data-learning-type="matching" data-learning-title="จับคู่สมการ">
         <span class="p91GameIcon">=</span><span><b>จับคู่สมการ</b><small>จับโจทย์ให้ตรงกับคำตอบ</small><em><span data-content-count="math:matching">0</span> ข้อ</em></span><i>›</i>
       </button>
@@ -21027,6 +21030,89 @@ button{
 </section>
 
 
+
+
+<section class="bbAppScreen p99GuessScreen" id="p99GuessScreen" data-app-screen="guess99" aria-label="เกมทายเลข 1 ถึง 99">
+  <div class="p99GuessBg" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <header class="p99GuessTopbar">
+    <button class="p99GuessBack" id="p99GuessBack" type="button" data-app-go="mathgames" aria-label="กลับเกมคณิตศาสตร์">‹</button>
+    <div class="p99GuessBrand"><small>POMRU • MATH</small><strong>ทายเลข 1–99</strong></div>
+    <div class="p99GuessTopLives" aria-label="โอกาสที่เหลือ"><span id="p99GuessHeartTop1">♥</span><span id="p99GuessHeartTop2">♥</span></div>
+  </header>
+
+  <main class="p99GuessMain">
+    <section class="p99GuessStats" aria-label="สถานะเกม">
+      <div><small>ROUND</small><strong id="p99GuessRound">1 / 5</strong></div>
+      <div><small>SCORE</small><strong id="p99GuessScore">0</strong></div>
+      <div><small>BEST</small><strong id="p99GuessBest">0</strong></div>
+    </section>
+
+    <section class="p99GuessBuddyZone">
+      <div class="p99GuessBuddyGlow" aria-hidden="true"></div>
+      <div class="p99GuessBuddy" id="p99GuessBuddy" role="img" aria-label="POMRU Buddy"></div>
+      <div class="p99GuessSpeech" id="p99GuessSpeech"><b>เลขลับพร้อมแล้ว!</b><span>เลือกเลขตั้งแต่ 1 ถึง 99</span></div>
+    </section>
+
+    <section class="p99GuessCard" id="p99GuessPlayCard">
+      <div class="p99GuessCardHead">
+        <span class="p99GuessModeBadge">🎯 1–99</span>
+        <div class="p99GuessLives" id="p99GuessLives" aria-label="2 โอกาส">
+          <span class="alive">♥</span><span class="alive">♥</span>
+          <small>2 โอกาส</small>
+        </div>
+      </div>
+
+      <div class="p99GuessQuestion">
+        <small>SECRET NUMBER</small>
+        <h1>เลขลับคือเลขอะไร?</h1>
+        <p>ทายให้ถูกภายใน 2 ครั้ง • ถ้าผิดจะมี Hint ช่วย</p>
+      </div>
+
+      <div class="p99GuessRange" aria-label="ช่วงคำตอบที่เป็นไปได้">
+        <span id="p99GuessMinLabel">1</span>
+        <div><i id="p99GuessRangeFill"></i><b id="p99GuessRangeText">1 – 99</b></div>
+        <span id="p99GuessMaxLabel">99</span>
+      </div>
+
+      <div class="p99GuessPicker">
+        <button type="button" data-guess-step="-10">−10</button>
+        <button type="button" data-guess-step="-1">−1</button>
+        <label><small>เลขที่คุณเลือก</small><input id="p99GuessInput" type="number" inputmode="numeric" pattern="[0-9]*" min="1" max="99" value="50" aria-label="เลขที่คุณเลือก"></label>
+        <button type="button" data-guess-step="1">+1</button>
+        <button type="button" data-guess-step="10">+10</button>
+      </div>
+
+      <input class="p99GuessSlider" id="p99GuessSlider" type="range" min="1" max="99" value="50" aria-label="เลือกเลข 1 ถึง 99">
+
+      <button class="p99GuessSubmit" id="p99GuessSubmit" type="button"><span>✨</span><b>ทายเลขนี้</b><small id="p99GuessSubmitHint">โอกาสที่ 1 จาก 2</small></button>
+
+      <div class="p99GuessFeedback neutral" id="p99GuessFeedback" role="status" aria-live="polite">
+        <strong>เลือกเลขแล้วกด “ทายเลขนี้”</strong>
+        <span>ถ้าผิด ระบบจะบอกว่าคำตอบมากกว่าหรือน้อยกว่า</span>
+      </div>
+
+      <button class="p99GuessNext hidden" id="p99GuessNext" type="button">รอบต่อไป ›</button>
+    </section>
+
+    <section class="p99GuessResult hidden" id="p99GuessResult">
+      <div class="p99GuessTrophy">★</div>
+      <small>GAME COMPLETE</small>
+      <h2>จบเกมทายเลข 1–99</h2>
+      <strong id="p99GuessFinalScore">0</strong>
+      <p id="p99GuessFinalSummary">ตอบถูก 0 / 5 รอบ</p>
+      <div class="p99GuessResultGrid">
+        <div><small>ตอบถูก</small><b id="p99GuessCorrect">0 / 5</b></div>
+        <div><small>ถูกครั้งแรก</small><b id="p99GuessFirstTry">0</b></div>
+        <div><small>คะแนนสูงสุด</small><b id="p99GuessBestResult">0</b></div>
+      </div>
+      <div class="p99GuessReward" id="p99GuessReward">เล่นจบแล้ว • กำลังสรุปรางวัล</div>
+      <div class="p99GuessResultActions">
+        <button type="button" id="p99GuessAgain">เล่นอีกครั้ง</button>
+        <button type="button" class="secondary" data-app-go="mathgames">กลับเกมคณิตศาสตร์</button>
+      </div>
+    </section>
+  </main>
+</section>
 
 <section class="bbAppScreen p91Screen p91Subject" id="bbAppLanguageGames" data-app-screen="languagegames">
   <header class="p91Topbar">
@@ -25734,12 +25820,12 @@ window.addEventListener("load",()=>{
     if(push&&screen!==next)previous=screen;
     screen=next;
     document.querySelectorAll(".bbAppScreen").forEach(s=>s.classList.toggle("active",s===target));
-    document.body.classList.toggle("bbCandySelect",["modes","solo","teddy","mathgames","languagegames","learningplay"].includes(next));
+    document.body.classList.toggle("bbCandySelect",["modes","solo","teddy","mathgames","languagegames","learningplay","guess99"].includes(next));
     document.body.classList.toggle("bbCandyHome",next==="home");
     document.body.classList.toggle("bbCandySetup",next==="setup");
     if(typeof setDockActive==="function"){
       if(next==="home")setDockActive("home");
-      else if(["modes","solo","teddy","mathgames","languagegames","learningplay","setup"].includes(next))setDockActive("play");
+      else if(["modes","solo","teddy","mathgames","languagegames","learningplay","guess99","setup"].includes(next))setDockActive("play");
       else if(next==="shop"||next==="inventory"||next==="topup")setDockActive("shop");
     }
     if(next==="shop")window.bbLoadShop?.();
@@ -37490,6 +37576,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let channel=null;
   let unread=0;
   let drawerOpen=false;
+  let pollTimer=null;
+  let seenRoomId=null;
+  let baselineReady=false;
+  const seenMessageIds=new Set();
 
   function client(){
     return window.__bbSupabase||window.sb||null;
@@ -37610,9 +37700,65 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function messageKey(m){
+    return String(
+      m?.message_id
+      ||m?.id
+      ||[m?.sender_id,m?.created_at,m?.body].join("|")
+    );
+  }
+
+  function emitBattleMessages(rows){
+    const list=Array.isArray(rows)?rows:[];
+
+    if(seenRoomId!==roomId){
+      seenRoomId=roomId;
+      baselineReady=false;
+      seenMessageIds.clear();
+    }
+
+    const fresh=[];
+
+    for(const m of list){
+      const key=messageKey(m);
+      if(!key||seenMessageIds.has(key))continue;
+      seenMessageIds.add(key);
+      if(baselineReady)fresh.push(m);
+    }
+
+    if(seenMessageIds.size>140){
+      const keep=list.slice(-90).map(messageKey);
+      seenMessageIds.clear();
+      keep.forEach(k=>k&&seenMessageIds.add(k));
+    }
+
+    if(!baselineReady){
+      baselineReady=true;
+      return;
+    }
+
+    if(!document.body.classList.contains("bbRankedPlaying"))return;
+
+    fresh.forEach(m=>{
+      document.dispatchEvent(new CustomEvent(
+        "pomru:battle-chat-message",
+        {detail:{
+          message_id:m?.message_id||m?.id||null,
+          sender_id:m?.sender_id||null,
+          display_name:m?.display_name||"ผู้เล่น",
+          body:String(m?.body||""),
+          is_me:!!m?.is_me,
+          room_id:roomId
+        }}
+      ));
+    });
+  }
+
   function render(rows){
     const host=$("p951ChatMessages");
     if(!host)return;
+
+    emitBattleMessages(rows);
 
     if(!rows?.length){
       host.innerHTML=
@@ -37676,6 +37822,24 @@ document.addEventListener('DOMContentLoaded', () => {
     channel=null;
   }
 
+  function stopPoll(){
+    if(pollTimer){
+      clearInterval(pollTimer);
+      pollTimer=null;
+    }
+  }
+
+  function startPoll(){
+    stopPoll();
+    pollTimer=setInterval(()=>{
+      if(
+        !roomId
+        ||!document.body.classList.contains("bbRankedPlaying")
+      )return;
+      load().catch(()=>{});
+    },1600);
+  }
+
   function subscribe(){
     stopRealtime();
 
@@ -37737,14 +37901,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const ok=await load();
     subscribe();
+    startPoll();
     return ok;
   }
 
   function stop(){
     setOpen(false);
     stopRealtime();
+    stopPoll();
 
     roomId=null;
+    seenRoomId=null;
+    baselineReady=false;
+    seenMessageIds.clear();
     unread=0;
     badge();
 
@@ -37834,6 +38003,16 @@ document.addEventListener('DOMContentLoaded', () => {
       "pomru:duel-room-left",
       stop
     );
+
+    document.addEventListener(
+      "pomru:ranked-game-ended",
+      ()=>setTimeout(stop,80)
+    );
+
+    document.addEventListener(
+      "pomru:ranked-finished",
+      ()=>setTimeout(stop,80)
+    );
   }
 
   window.POMRUInGameChat={
@@ -37845,6 +38024,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return !!roomId;
     },
     close:()=>setOpen(false),
+    stop,
     start,
     refresh:async()=>{
       if(!roomId)await start();
@@ -49359,7 +49539,7 @@ body.p996MemoryBattle #game .dock,body.p996MemoryBattle #game .hintline,body.p99
 
 <script id="pomru-v996-marker">
 window.POMRUV996=Object.freeze({
-  version:"99.6.2",
+  version:"99.6.4",
   feature:"unified-ranked-battle-ui",
   uiRebuilt:true,
   serverAuthorityPreserved:true,
@@ -49372,6 +49552,430 @@ window.POMRUV996=Object.freeze({
 <script id="pomru-v9961-hotfix-marker">window.POMRUV9961=Object.freeze({version:"99.6.2",feature:"battle-ui-freeze-hotfix",mutationLoopFixed:true,observerBattleOnly:false,attributeObservation:false,eventDrivenSync:true});</script>
 
 
+
+
+<style id="pomru-v9964-fighter-live-chat-style">
+/* ============================================================
+   POMRU v99.6.4 — Live fighter chat
+   Messages live beside the Buddy who actually spoke.
+   ============================================================ */
+body.p996UnifiedBattleActive #p951ChatFab{display:none!important}
+
+.p996FighterSpeech{
+  position:absolute;
+  z-index:18;
+  top:7px;
+  width:max-content;
+  max-width:178px;
+  min-width:72px;
+  padding:9px 11px;
+  box-sizing:border-box;
+  border:3px solid rgba(255,255,255,.94);
+  border-radius:16px;
+  background:rgba(255,255,255,.97);
+  color:#49226f;
+  font-size:10px;
+  font-weight:950;
+  line-height:1.3;
+  text-align:left;
+  word-break:break-word;
+  box-shadow:0 8px 20px rgba(22,5,68,.24),inset 0 1px 0 rgba(255,255,255,.8);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transform:translateY(8px) scale(.92);
+  transition:opacity .18s ease,transform .18s ease,visibility .18s;
+}
+.p996FighterSpeech.show{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0) scale(1);
+}
+.p996FighterSpeech b{
+  display:block;
+  margin-bottom:2px;
+  font-size:7px;
+  letter-spacing:.05em;
+  color:#8b62b7;
+}
+.p996FighterSpeech.self{left:76%;}
+.p996FighterSpeech.opp{right:76%;}
+.p996FighterSpeech::after{
+  content:"";
+  position:absolute;
+  bottom:-10px;
+  width:18px;
+  height:18px;
+  background:#fff;
+  border-right:3px solid rgba(255,255,255,.94);
+  border-bottom:3px solid rgba(255,255,255,.94);
+  transform:rotate(45deg);
+}
+.p996FighterSpeech.self::after{left:18px}
+.p996FighterSpeech.opp::after{right:18px}
+
+.p996LiveChatButton{
+  position:absolute;
+  z-index:20;
+  right:-7px;
+  bottom:17px;
+  min-width:48px;
+  height:38px;
+  padding:0 9px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  border:3px solid #fff;
+  border-radius:15px;
+  background:linear-gradient(145deg,#865cf0,#5b31c9);
+  color:#fff;
+  font-size:9px;
+  font-weight:1000;
+  box-shadow:0 6px 0 #35178e,0 9px 18px rgba(24,5,74,.28);
+  cursor:pointer;
+}
+.p996LiveChatButton:active{transform:translateY(2px);box-shadow:0 4px 0 #35178e}
+.p996LiveChatButton .ico{font-size:17px;line-height:1}
+.p996LiveChatButton .dot{
+  position:absolute;
+  right:-4px;
+  top:-5px;
+  width:11px;
+  height:11px;
+  border:2px solid #fff;
+  border-radius:50%;
+  background:#53efa8;
+  box-shadow:0 0 8px #53efa8;
+}
+.p996LiveChatButton.connecting .dot{background:#ffd65d;box-shadow:0 0 8px #ffd65d}
+
+@media(max-width:760px){
+  .p996FighterSpeech{
+    top:-2px;
+    max-width:126px;
+    padding:7px 8px;
+    border-width:2px;
+    border-radius:13px;
+    font-size:8px;
+  }
+  .p996FighterSpeech.self{left:58%}
+  .p996FighterSpeech.opp{right:58%}
+  .p996FighterSpeech::after{width:13px;height:13px;bottom:-8px}
+  .p996LiveChatButton{
+    right:-3px;
+    bottom:11px;
+    min-width:39px;
+    height:32px;
+    padding:0 7px;
+    border-width:2px;
+    border-radius:12px;
+    font-size:0;
+    box-shadow:0 4px 0 #35178e,0 7px 14px rgba(24,5,74,.24);
+  }
+  .p996LiveChatButton .ico{font-size:15px}
+}
+</style>
+
+<script id="pomru-v9964-fighter-live-chat-runtime">
+(function(){
+  "use strict";
+  const $=id=>document.getElementById(id);
+  let selfTimer=null,oppTimer=null;
+  let ensureTimer=null;
+
+  function active(){
+    return document.body.classList.contains("bbRankedPlaying")
+      &&document.body.classList.contains("p996UnifiedBattleActive");
+  }
+
+  function speech(art,id,side){
+    if(!art)return null;
+    let el=$(id);
+    if(el&&el.parentElement!==art)art.appendChild(el);
+    if(!el){
+      el=document.createElement("div");
+      el.id=id;
+      el.className=`p996FighterSpeech ${side}`;
+      el.setAttribute("role","status");
+      el.setAttribute("aria-live","polite");
+      art.appendChild(el);
+    }
+    return el;
+  }
+
+  function ensure(){
+    if(!active())return false;
+    const selfArt=$("p971SelfArt");
+    const oppArt=$("p971OppArt");
+    if(!selfArt||!oppArt)return false;
+
+    speech(selfArt,"p996SelfChatSpeech","self");
+    speech(oppArt,"p996OppChatSpeech","opp");
+
+    let btn=$("p996LiveChatButton");
+    if(!btn){
+      btn=document.createElement("button");
+      btn.type="button";
+      btn.id="p996LiveChatButton";
+      btn.className="p996LiveChatButton connecting";
+      btn.setAttribute("aria-label","เปิดแชทกับคู่แข่ง");
+      btn.innerHTML='<span class="ico">💬</span><span class="label">แชท</span><i class="dot"></i>';
+      btn.addEventListener("click",async()=>{
+        btn.classList.add("connecting");
+        const ok=await window.POMRUInGameChat?.open?.();
+        btn.classList.toggle("connecting",!ok);
+      });
+      oppArt.appendChild(btn);
+    }
+
+    const st=window.POMRUInGameChat?.state?.();
+    btn.classList.toggle("connecting",!st?.room_id);
+    return true;
+  }
+
+  function show(detail){
+    if(!active()||!detail?.body)return;
+    ensure();
+    const mine=!!detail.is_me;
+    const el=$(mine?"p996SelfChatSpeech":"p996OppChatSpeech");
+    if(!el)return;
+
+    const name=String(detail.display_name|| (mine?"YOU":"RIVAL"));
+    const body=String(detail.body||"").slice(0,120);
+    el.textContent="";
+    const b=document.createElement("b");
+    b.textContent=mine?"YOU":name;
+    const span=document.createElement("span");
+    span.textContent=body;
+    el.append(b,span);
+    el.classList.add("show");
+
+    const key=mine?"selfTimer":"oppTimer";
+    if(key==="selfTimer"){
+      if(selfTimer)clearTimeout(selfTimer);
+      selfTimer=setTimeout(()=>el.classList.remove("show"),4600);
+    }else{
+      if(oppTimer)clearTimeout(oppTimer);
+      oppTimer=setTimeout(()=>el.classList.remove("show"),4600);
+    }
+
+    const art=$(mine?"p971SelfArt":"p971OppArt");
+    art?.animate?.(
+      [{transform:"translateY(0)"},{transform:"translateY(-5px)"},{transform:"translateY(0)"}],
+      {duration:260,easing:"ease-out"}
+    );
+  }
+
+  function boot(){
+    if(!active())return;
+    ensure();
+    window.POMRUInGameChat?.start?.().then(ok=>{
+      const btn=$("p996LiveChatButton");
+      btn?.classList.toggle("connecting",!ok);
+    }).catch(()=>{});
+
+    if(ensureTimer)clearInterval(ensureTimer);
+    ensureTimer=setInterval(()=>{
+      if(!active()){
+        clearInterval(ensureTimer);ensureTimer=null;return;
+      }
+      ensure();
+    },1200);
+  }
+
+  function stop(){
+    if(ensureTimer){clearInterval(ensureTimer);ensureTimer=null}
+    if(selfTimer){clearTimeout(selfTimer);selfTimer=null}
+    if(oppTimer){clearTimeout(oppTimer);oppTimer=null}
+    $("p996SelfChatSpeech")?.classList.remove("show");
+    $("p996OppChatSpeech")?.classList.remove("show");
+    window.POMRUInGameChat?.stop?.();
+  }
+
+  document.addEventListener("pomru:battle-chat-message",e=>show(e.detail||{}));
+  document.addEventListener("pomru:ranked-game-started",()=>setTimeout(boot,90));
+  document.addEventListener("pomru:battle-v2-state",()=>{if(active())ensure()});
+  document.addEventListener("pomru:ranked-game-ended",()=>setTimeout(stop,60));
+  document.addEventListener("pomru:ranked-finished",()=>setTimeout(stop,60));
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden&&active())setTimeout(boot,100)});
+  window.addEventListener("pageshow",()=>{if(active())setTimeout(boot,120)});
+
+  window.POMRUBattleLiveChat=Object.freeze({
+    version:"99.6.4",
+    ensure,
+    open:()=>window.POMRUInGameChat?.open?.(),
+    state:()=>window.POMRUInGameChat?.state?.()||null
+  });
+})();
+</script>
+
+<script id="pomru-v9964-marker">window.POMRU_V9964=Object.freeze({version:"99.6.4",feature:"live-fighter-chat",fighterSpeech:true,battleChatButton:true,realtimePlusFallbackPoll:true,hideAfterBattle:true});</script>
+
 <script id="pomru-v9963-marker">window.POMRU_V9963=Object.freeze({version:"99.6.3",fix:"battle-finalize-race",stateRpc:"bb_ranked_battle_state_v4",finishRpc:"bb_ranked_battle_finish_v4",transition:"server-success-before-waiting-screen"});</script>
+
+<style id="pomru-guess99-style">
+/* ==========================================================
+   POMRU v99.6.5 — Guess 1–99
+   Two-heart guessing game. No HP / no battle damage.
+   ========================================================== */
+.p99GuessGameCard{background:linear-gradient(145deg,#f4e9ff,#fff0fa)!important;border-color:#dfc8ff!important}.p99GuessGameCard .p91GameIcon{background:linear-gradient(145deg,#7f5bf2,#e45aac)!important;color:#fff!important;box-shadow:0 8px 18px rgba(110,72,206,.24)}
+.p99GuessScreen{position:relative;min-height:100dvh;padding:12px 14px 120px;overflow-x:hidden;background:linear-gradient(180deg,#2e116e 0,#6842c9 18%,#f8e9ff 52%,#fff5f2 100%);color:#4e315d}.p99GuessBg{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}.p99GuessBg:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 18% 16%,rgba(255,255,255,.42) 0 2px,transparent 3px),radial-gradient(circle at 77% 20%,rgba(255,255,255,.5) 0 2px,transparent 3px),radial-gradient(circle at 88% 41%,rgba(255,220,251,.6) 0 3px,transparent 4px),linear-gradient(135deg,transparent 0 35%,rgba(255,255,255,.08) 36% 37%,transparent 38% 100%);background-size:auto}.p99GuessBg i{position:absolute;width:180px;height:180px;border-radius:50%;filter:blur(2px);opacity:.25}.p99GuessBg i:nth-child(1){left:-80px;top:160px;background:#65cfff}.p99GuessBg i:nth-child(2){right:-70px;top:280px;background:#ff83ca}.p99GuessBg i:nth-child(3){left:18%;bottom:100px;background:#fff}.p99GuessBg i:nth-child(4){right:7%;bottom:210px;background:#ffd86b}
+.p99GuessTopbar{position:sticky;top:0;z-index:20;max-width:760px;margin:0 auto 12px;padding:10px 12px;display:grid;grid-template-columns:50px 1fr auto;gap:10px;align-items:center;border:1px solid rgba(255,255,255,.35);border-radius:24px;background:rgba(48,18,109,.78);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 12px 30px rgba(37,12,83,.22)}.p99GuessBack{width:46px;height:46px;border:2px solid rgba(255,255,255,.38);border-radius:16px;background:linear-gradient(#9b75ff,#7149d9);color:#fff;font-size:38px;line-height:36px;font-weight:700;box-shadow:0 5px 0 #4b2aaa}.p99GuessBrand{min-width:0}.p99GuessBrand small{display:block;color:#e7dfff;font-size:9px;font-weight:1000;letter-spacing:.16em}.p99GuessBrand strong{display:block;margin-top:2px;color:#fff;font-size:20px;font-weight:1000}.p99GuessTopLives{display:flex;align-items:center;gap:5px;padding:8px 10px;border-radius:16px;background:rgba(255,255,255,.13)}.p99GuessTopLives span{font-size:25px;line-height:1;color:#ff5aa7;filter:drop-shadow(0 2px 0 #fff)}.p99GuessTopLives span.spent{color:#88769b;opacity:.35;filter:none;transform:scale(.86)}
+.p99GuessMain{width:min(760px,100%);margin:auto}.p99GuessStats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}.p99GuessStats>div{padding:10px;border:1px solid rgba(255,255,255,.55);border-radius:18px;text-align:center;background:rgba(255,255,255,.91);box-shadow:0 7px 20px rgba(65,38,93,.08)}.p99GuessStats small{display:block;color:#9a7aaa;font-size:8px;font-weight:1000;letter-spacing:.12em}.p99GuessStats strong{display:block;margin-top:2px;color:#5c2f86;font-size:19px;font-weight:1000}
+.p99GuessBuddyZone{position:relative;height:220px;margin:4px 0 -28px;display:grid;place-items:center}.p99GuessBuddyGlow{position:absolute;bottom:20px;width:230px;height:88px;border-radius:50%;background:radial-gradient(ellipse,rgba(108,62,207,.3),transparent 68%);filter:blur(3px)}.p99GuessBuddy{position:relative;z-index:2;width:190px;height:190px;background-image:url('/assets/buddy/default-pink-buddy.png');background-size:contain;background-repeat:no-repeat;background-position:center bottom;filter:drop-shadow(0 14px 12px rgba(53,27,83,.22));animation:p99GuessIdle 2.8s ease-in-out infinite}.p99GuessSpeech{position:absolute;z-index:4;right:max(6%,20px);top:18px;max-width:210px;padding:11px 14px;border:3px solid #fff;border-radius:18px;background:linear-gradient(145deg,#fff,#fff2fb);box-shadow:0 8px 20px rgba(73,40,91,.14);text-align:center}.p99GuessSpeech:after{content:"";position:absolute;left:24px;bottom:-12px;width:20px;height:20px;background:#fff;clip-path:polygon(0 0,100% 0,0 100%);transform:rotate(-12deg)}.p99GuessSpeech b{display:block;color:#5d3476;font-size:13px}.p99GuessSpeech span{display:block;margin-top:2px;color:#907b98;font-size:9px}.p99GuessSpeech.good{background:linear-gradient(145deg,#eafff5,#fff);border-color:#fff}.p99GuessSpeech.hot{background:linear-gradient(145deg,#fff1dd,#fff);}.p99GuessSpeech.low{background:linear-gradient(145deg,#e9f7ff,#fff)}
+@keyframes p99GuessIdle{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-7px) rotate(1deg)}}@keyframes p99HeartBreak{0%{transform:scale(1)}40%{transform:scale(1.35) rotate(-10deg)}100%{transform:scale(.8);opacity:.3}}@keyframes p99Pop{0%{transform:scale(.86);opacity:0}60%{transform:scale(1.06)}100%{transform:scale(1);opacity:1}}
+.p99GuessCard{position:relative;z-index:3;padding:18px;border:3px solid rgba(255,255,255,.86);border-radius:30px;background:linear-gradient(180deg,rgba(255,255,255,.97),rgba(255,241,251,.96));box-shadow:0 18px 40px rgba(73,35,103,.18),inset 0 0 0 1px rgba(180,125,235,.18)}.p99GuessCardHead{display:flex;justify-content:space-between;align-items:center;gap:8px}.p99GuessModeBadge{padding:7px 11px;border-radius:999px;background:#efe7ff;color:#7450cb;font-size:10px;font-weight:1000}.p99GuessLives{display:flex;align-items:center;gap:4px}.p99GuessLives>span{display:grid;place-items:center;width:34px;height:34px;border-radius:12px;background:linear-gradient(#ff75b5,#f23b8d);color:#fff;font-size:21px;box-shadow:0 5px 0 #c82c72}.p99GuessLives>span.spent{background:#e9e1ed;color:#a995b1;box-shadow:none;animation:p99HeartBreak .35s ease both}.p99GuessLives small{margin-left:3px;color:#866e91;font-size:9px;font-weight:900}.p99GuessQuestion{text-align:center;padding:12px 0 6px}.p99GuessQuestion small{color:#c16ba1;font-size:8px;font-weight:1000;letter-spacing:.15em}.p99GuessQuestion h1{margin:4px 0 3px;color:#421d74;font-size:clamp(27px,7vw,42px);line-height:1.08;font-weight:1000}.p99GuessQuestion p{margin:0;color:#8c7895;font-size:11px;font-weight:700}
+.p99GuessRange{margin:12px 0 10px;display:grid;grid-template-columns:28px 1fr 28px;align-items:center;gap:7px}.p99GuessRange>span{display:grid;place-items:center;height:28px;border-radius:9px;background:#f2ebf8;color:#735b80;font-size:10px;font-weight:1000}.p99GuessRange>div{position:relative;height:28px;border-radius:999px;overflow:hidden;background:#ece4f1}.p99GuessRange i{position:absolute;inset:0 auto 0 0;width:100%;background:linear-gradient(90deg,#6fd7be,#8f6ce8,#ff70b0);opacity:.55;transition:clip-path .25s ease}.p99GuessRange b{position:absolute;inset:0;display:grid;place-items:center;color:#5e4870;font-size:10px;font-weight:1000}
+.p99GuessPicker{display:grid;grid-template-columns:46px 46px minmax(100px,1fr) 46px 46px;gap:6px;align-items:stretch}.p99GuessPicker>button{border:0;border-radius:15px;background:linear-gradient(#f1ebff,#e6dcfb);color:#704ebf;font-size:12px;font-weight:1000;box-shadow:inset 0 0 0 1px #d9caef}.p99GuessPicker label{display:grid;place-items:center;padding:6px;border:2px solid #e5d8f0;border-radius:18px;background:#fff}.p99GuessPicker label small{color:#a28cac;font-size:7px;font-weight:1000;letter-spacing:.07em}.p99GuessPicker input{width:100%;border:0;outline:0;background:transparent;text-align:center;color:#4c237d;font-size:34px;line-height:1;font-weight:1000;-moz-appearance:textfield}.p99GuessPicker input::-webkit-inner-spin-button,.p99GuessPicker input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}.p99GuessSlider{width:100%;height:18px;margin:12px 0 8px;accent-color:#8a5ce4}.p99GuessSubmit{width:100%;min-height:66px;border:3px solid #fff;border-radius:22px;padding:8px 14px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;background:linear-gradient(180deg,#ff63ae,#e73d92);color:#fff;box-shadow:0 8px 0 #b82e72,0 14px 25px rgba(203,50,127,.24);font-weight:1000}.p99GuessSubmit span{font-size:25px}.p99GuessSubmit b{font-size:17px}.p99GuessSubmit small{font-size:8px;opacity:.9}.p99GuessSubmit:disabled{filter:grayscale(.4);opacity:.55;box-shadow:0 4px 0 #9b7991}.p99GuessSubmit:active:not(:disabled){transform:translateY(4px);box-shadow:0 4px 0 #b82e72}
+.p99GuessFeedback{margin-top:14px;padding:13px;border-radius:19px;text-align:center;border:2px solid transparent;animation:p99Pop .25s ease}.p99GuessFeedback strong{display:block;font-size:15px;font-weight:1000}.p99GuessFeedback span{display:block;margin-top:3px;font-size:10px;font-weight:700}.p99GuessFeedback.neutral{background:#f6f0fa;color:#745c82}.p99GuessFeedback.higher{background:#e9f8ff;border-color:#aadff4;color:#2c7596}.p99GuessFeedback.lower{background:#fff1dd;border-color:#ffd39a;color:#9b5b23}.p99GuessFeedback.correct{background:#e8fff4;border-color:#9de4c3;color:#34795d}.p99GuessFeedback.fail{background:#fff0f4;border-color:#f3b3c7;color:#a94f6c}.p99GuessNext{width:100%;min-height:50px;margin-top:10px;border:0;border-radius:17px;background:linear-gradient(#8d70e8,#6847ca);color:#fff;font-size:13px;font-weight:1000;box-shadow:0 6px 0 #4e32a5}.p99GuessNext.hidden{display:none!important}
+.p99GuessResult{padding:24px 18px;border:3px solid #fff;border-radius:30px;background:linear-gradient(180deg,#fff,#fff1fb);box-shadow:0 20px 45px rgba(65,30,94,.2);text-align:center}.p99GuessResult.hidden{display:none!important}.p99GuessTrophy{width:72px;height:72px;margin:auto;display:grid;place-items:center;border:5px solid #fff;border-radius:24px;background:linear-gradient(145deg,#ffd660,#ff8f43);color:#fff;font-size:37px;box-shadow:0 8px 0 #d6772e}.p99GuessResult>small{display:block;margin-top:16px;color:#b16b9e;font-size:9px;font-weight:1000;letter-spacing:.14em}.p99GuessResult h2{margin:5px 0;color:#52306c;font-size:26px}.p99GuessResult>strong{display:block;color:#784bd5;font-size:64px;line-height:1;font-weight:1000}.p99GuessResult>p{color:#88718e}.p99GuessResultGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:18px 0}.p99GuessResultGrid>div{padding:11px 5px;border-radius:17px;background:#f7f0fa}.p99GuessResultGrid small{display:block;color:#9b849f;font-size:8px;font-weight:900}.p99GuessResultGrid b{display:block;margin-top:3px;color:#5d3972;font-size:15px}.p99GuessReward{padding:11px;border-radius:16px;background:#edfdf6;color:#408268;font-size:10px;font-weight:900}.p99GuessResultActions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}.p99GuessResultActions button{min-height:50px;border:0;border-radius:17px;background:linear-gradient(#9a75ec,#704fd1);color:#fff;font-weight:1000}.p99GuessResultActions button.secondary{background:#f1eaf5;color:#735d7d}
+body.p99GuessPlaying .v17dock{display:none!important}.p99GuessScreen.active{display:block!important}
+@media(max-width:560px){.p99GuessScreen{padding:8px 8px 92px}.p99GuessTopbar{grid-template-columns:43px 1fr auto;border-radius:21px;padding:8px}.p99GuessBack{width:40px;height:40px;border-radius:14px;font-size:32px}.p99GuessBrand strong{font-size:17px}.p99GuessTopLives{padding:6px 8px}.p99GuessTopLives span{font-size:21px}.p99GuessStats{gap:5px}.p99GuessStats>div{padding:7px}.p99GuessStats strong{font-size:16px}.p99GuessBuddyZone{height:180px;margin-bottom:-24px}.p99GuessBuddy{width:158px;height:158px}.p99GuessSpeech{right:2px;top:9px;max-width:158px;padding:9px 10px}.p99GuessSpeech b{font-size:11px}.p99GuessSpeech span{font-size:8px}.p99GuessCard{padding:13px 11px;border-radius:25px}.p99GuessQuestion{padding-top:9px}.p99GuessQuestion h1{font-size:29px}.p99GuessPicker{grid-template-columns:38px 38px minmax(86px,1fr) 38px 38px;gap:4px}.p99GuessPicker>button{border-radius:12px;font-size:10px}.p99GuessPicker input{font-size:30px}.p99GuessLives>span{width:30px;height:30px;font-size:19px}.p99GuessLives small{display:none}.p99GuessSubmit{min-height:59px;border-radius:19px}.p99GuessSubmit b{font-size:15px}.p99GuessResult{padding:20px 12px}.p99GuessResult>strong{font-size:55px}.p99GuessResultActions{grid-template-columns:1fr}}
+@media(max-width:380px){.p99GuessPicker{grid-template-columns:34px 34px minmax(76px,1fr) 34px 34px}.p99GuessPicker input{font-size:27px}.p99GuessQuestion h1{font-size:25px}.p99GuessBuddy{width:145px;height:145px}.p99GuessBuddyZone{height:166px}}
+</style>
+
+<script id="pomru-guess99-game">
+(function POMRUGuess99(){
+  "use strict";
+  const $=id=>document.getElementById(id);
+  const TOTAL=5, MAX_SCORE=500;
+  let state=null;
+
+  function secureNumber(){
+    try{
+      const a=new Uint32Array(1);crypto.getRandomValues(a);return 1+(a[0]%99);
+    }catch(_){return 1+Math.floor(Math.random()*99)}
+  }
+  function clamp(n,min=1,max=99){return Math.max(min,Math.min(max,Math.round(Number(n)||min)))}
+  function best(){try{return Number(localStorage.getItem("pomru_guess99_best")||0)||0}catch(_){return 0}}
+  function setBest(v){try{localStorage.setItem("pomru_guess99_best",String(v))}catch(_){}}
+  function sound(name){try{if(typeof window.sfx==="function")window.sfx(name);else if(typeof sfx==="function")sfx(name)}catch(_){}}
+  function buddyBounce(kind="ok"){
+    const el=$("p99GuessBuddy");if(!el?.animate)return;
+    const frames=kind==="bad"?[{transform:"translateX(0)"},{transform:"translateX(-8px) rotate(-3deg)"},{transform:"translateX(8px) rotate(3deg)"},{transform:"translateX(0)"}]:[{transform:"translateY(0) scale(1)"},{transform:"translateY(-13px) scale(1.05)"},{transform:"translateY(0) scale(1)"}];
+    el.animate(frames,{duration:kind==="bad"?330:430,easing:"ease-out"});
+  }
+  function syncBuddy(){
+    const el=$("p99GuessBuddy");if(!el)return;
+    const src=String(window.__bbActiveBuddyAsset||"/assets/buddy/default-pink-buddy.png").replace(/["\n\r]/g,"");
+    el.style.backgroundImage=`url("${src}")`;
+  }
+  function speech(title,text,tone=""){
+    const el=$("p99GuessSpeech");if(!el)return;
+    el.className="p99GuessSpeech"+(tone?" "+tone:"");
+    el.innerHTML="";
+    const b=document.createElement("b"),sp=document.createElement("span");b.textContent=title;sp.textContent=text;el.append(b,sp);
+  }
+  function updateLives(){
+    const left=Math.max(0,2-state.attempts);
+    const lives=[...document.querySelectorAll("#p99GuessLives>span")];
+    lives.forEach((h,i)=>{h.classList.toggle("spent",i>=left);h.classList.toggle("alive",i<left)});
+    [$("p99GuessHeartTop1"),$("p99GuessHeartTop2")].forEach((h,i)=>h?.classList.toggle("spent",i>=left));
+    const hint=$("p99GuessSubmitHint");if(hint)hint.textContent=left>0?`โอกาสที่ ${state.attempts+1} จาก 2`:"หมดโอกาสแล้ว";
+  }
+  function updateRange(){
+    $("p99GuessMinLabel").textContent=state.min;
+    $("p99GuessMaxLabel").textContent=state.max;
+    $("p99GuessRangeText").textContent=`${state.min} – ${state.max}`;
+    const input=$("p99GuessInput"),slider=$("p99GuessSlider");
+    [input,slider].forEach(el=>{if(el){el.min=String(state.min);el.max=String(state.max)}});
+    const pctMin=((state.min-1)/98)*100,pctMax=((state.max-1)/98)*100;
+    const fill=$("p99GuessRangeFill");if(fill)fill.style.clipPath=`inset(0 ${100-pctMax}% 0 ${pctMin}%)`;
+  }
+  function setValue(v){
+    if(!state)return;v=clamp(v,state.min,state.max);
+    $("p99GuessInput").value=v;$("p99GuessSlider").value=v;
+  }
+  function feedback(type,title,text){
+    const el=$("p99GuessFeedback");if(!el)return;
+    el.className="p99GuessFeedback "+type;el.innerHTML="";
+    const b=document.createElement("strong"),sp=document.createElement("span");b.textContent=title;sp.textContent=text;el.append(b,sp);
+  }
+  function paintStats(){
+    $("p99GuessRound").textContent=`${state.round} / ${TOTAL}`;
+    $("p99GuessScore").textContent=String(state.score);
+    $("p99GuessBest").textContent=String(Math.max(best(),state.score));
+  }
+  function newRound(){
+    state.target=secureNumber();state.attempts=0;state.min=1;state.max=99;state.locked=false;
+    paintStats();updateLives();updateRange();setValue(50);
+    $("p99GuessSubmit").disabled=false;$("p99GuessNext").classList.add("hidden");
+    feedback("neutral","เลือกเลขแล้วกด “ทายเลขนี้”","คุณมี 2 หัวใจ • ทายผิดครั้งแรกจะได้ Hint");
+    speech("เลขลับพร้อมแล้ว!",`รอบ ${state.round} • เลือกเลข 1 ถึง 99`);
+  }
+  function start(){
+    document.body.classList.add("p99GuessPlaying");syncBuddy();
+    state={round:1,score:0,correct:0,firstTry:0,target:0,attempts:0,min:1,max:99,locked:false,startedAt:Date.now(),runId:`guess99-${Date.now()}-${Math.random().toString(36).slice(2,8)}`};
+    $("p99GuessPlayCard").classList.remove("hidden");$("p99GuessResult").classList.add("hidden");
+    $("p99GuessBest").textContent=String(best());newRound();
+  }
+  function endRound(correct){
+    state.locked=true;$("p99GuessSubmit").disabled=true;
+    const next=$("p99GuessNext");next.textContent=state.round>=TOTAL?"ดูผลเกม ›":"รอบต่อไป ›";next.classList.remove("hidden");
+    if(correct)buddyBounce("ok");else buddyBounce("bad");
+  }
+  function guess(){
+    if(!state||state.locked)return;
+    const raw=Number($("p99GuessInput").value);
+    if(!Number.isFinite(raw)||raw<state.min||raw>state.max){feedback("fail","เลือกเลขในช่วงที่กำหนด",`ตอนนี้เลือกได้ ${state.min} ถึง ${state.max}`);return}
+    const g=clamp(raw,state.min,state.max);state.attempts+=1;updateLives();
+    if(g===state.target){
+      const pts=state.attempts===1?100:60;state.score+=pts;state.correct+=1;if(state.attempts===1)state.firstTry+=1;
+      paintStats();feedback("correct","🎉 ถูกต้อง!",`เลขลับคือ ${state.target} • +${pts} คะแนน`);speech("เก่งมาก! ✨",`ถูกในครั้งที่ ${state.attempts} • เลข ${state.target}`,"good");sound("ok");endRound(true);return;
+    }
+    if(state.attempts>=2){
+      feedback("fail","💔 หมด 2 โอกาสแล้ว",`คำตอบคือ ${state.target}`);speech("ไม่เป็นไรนะ!",`เฉลยคือ ${state.target} • รอบหน้าลองใหม่`,"hot");sound("bad");endRound(false);return;
+    }
+    if(g<state.target){
+      state.min=Math.min(99,g+1);updateRange();setValue(Math.round((state.min+state.max)/2));
+      feedback("higher","⬆️ มากกว่านี้!",`เลขลับมากกว่า ${g} • เหลืออีก 1 หัวใจ`);speech("มากกว่านี้ ↑",`ลองเลขที่มากกว่า ${g}`,"low");
+    }else{
+      state.max=Math.max(1,g-1);updateRange();setValue(Math.round((state.min+state.max)/2));
+      feedback("lower","⬇️ น้อยกว่านี้!",`เลขลับน้อยกว่า ${g} • เหลืออีก 1 หัวใจ`);speech("น้อยกว่านี้ ↓",`ลองเลขที่น้อยกว่า ${g}`,"hot");
+    }
+    sound("bad");buddyBounce("bad");
+  }
+  async function finish(){
+    state.locked=true;const final=state.score;if(final>best())setBest(final);
+    $("p99GuessPlayCard").classList.add("hidden");$("p99GuessResult").classList.remove("hidden");
+    $("p99GuessFinalScore").textContent=String(final);$("p99GuessFinalSummary").textContent=`ตอบถูก ${state.correct} / ${TOTAL} รอบ • คะแนนเต็ม ${MAX_SCORE}`;
+    $("p99GuessCorrect").textContent=`${state.correct} / ${TOTAL}`;$("p99GuessFirstTry").textContent=String(state.firstTry);$("p99GuessBestResult").textContent=String(best());
+    const reward=$("p99GuessReward");reward.textContent="เล่นจบแล้ว • กำลังสรุปรางวัล";sound("done");speech("จบเกมแล้ว! ⭐",`ได้ ${final} คะแนน`,"good");
+    try{
+      if(typeof window.bbAwardPracticeReward==="function"){
+        const res=await window.bbAwardPracticeReward({runId:state.runId,modeCode:"math_guess_1_99",difficultyCode:"normal",rawScore:final,maxScore:MAX_SCORE,correct:state.correct,total:TOTAL,durationSeconds:Math.max(1,Math.round((Date.now()-state.startedAt)/1000)),completed:true});
+        if(res?.ok)reward.textContent=`🎁 +${Number(res.points_gained||res.exp_gained||0).toLocaleString()} แต้ม • +${Number(res.coins_gained||0).toLocaleString()} Coins`;
+        else if(res?.guest)reward.textContent="เข้าสู่ระบบเพื่อบันทึกแต้มและ Coins";
+        else reward.textContent="คะแนนเกมบันทึกแล้วในเครื่อง • รางวัลออนไลน์ยังไม่สำเร็จ";
+      }else reward.textContent="คะแนนสูงสุดบันทึกในเครื่องแล้ว";
+    }catch(_){reward.textContent="คะแนนสูงสุดบันทึกในเครื่องแล้ว"}
+  }
+  function next(){
+    if(!state?.locked)return;
+    if(state.round>=TOTAL){finish();return}
+    state.round+=1;newRound();
+  }
+  function leave(){document.body.classList.remove("p99GuessPlaying")}
+
+  document.addEventListener("input",e=>{
+    if(e.target?.id==="p99GuessSlider")setValue(e.target.value);
+    if(e.target?.id==="p99GuessInput"&&state){const n=Number(e.target.value);if(Number.isFinite(n))$("p99GuessSlider").value=clamp(n,state.min,state.max)}
+  });
+  document.addEventListener("click",e=>{
+    const entry=e.target.closest?.('[data-app-go="guess99"]');if(entry){setTimeout(start,20);return}
+    const step=e.target.closest?.("[data-guess-step]");if(step&&state){setValue(Number($("p99GuessInput").value)+Number(step.dataset.guessStep||0));return}
+    if(e.target.closest?.("#p99GuessSubmit")){guess();return}
+    if(e.target.closest?.("#p99GuessNext")){next();return}
+    if(e.target.closest?.("#p99GuessAgain")){start();return}
+    if(e.target.closest?.('#p99GuessBack,[data-app-go="mathgames"]')){leave()}
+  });
+  document.addEventListener("keydown",e=>{if(e.key==="Enter"&&document.querySelector('.p99GuessScreen.active')&&!state?.locked){e.preventDefault();guess()}});
+  window.addEventListener("pageshow",()=>{if(document.querySelector('.p99GuessScreen.active'))syncBuddy()});
+  window.POMRUGuess99=Object.freeze({version:"99.6.5",start,guess,state:()=>state?{round:state.round,score:state.score,attempts:state.attempts,min:state.min,max:state.max,locked:state.locked}:null});
+})();
+</script>
+<script id="pomru-v9965-marker">window.POMRU_V9965=Object.freeze({version:"99.6.5",game:"math_guess_1_99",rounds:5,livesPerRound:2,hp:false,hints:["higher","lower"],rewardMode:"math_guess_1_99"});</script>
+
 </body>
 </html>
