@@ -46872,8 +46872,10 @@ body.p971BattleActive.bbRankedLearningPlaying .bbRLCard.p996QuestionCard{positio
 (function(){
   "use strict";
   const $=id=>document.getElementById(id);
-  let combo=0,lastRevealKey="",observer=null,coinObserver=null;
+  let combo=0,lastRevealKey="",observer=null,coinObserver=null,raf=0,syncing=false;
   const safe=v=>String(v??"").trim();
+  const active=()=>document.body.classList.contains("bbRankedLearningPlaying");
+  const setText=(el,value)=>{if(!el)return;const v=String(value??"");if(el.textContent!==v)el.textContent=v};
 
   function moveHud(){
     const hud=$("p971BattleHud"),mount=$("p996BattleMount");
@@ -46884,70 +46886,99 @@ body.p971BattleActive.bbRankedLearningPlaying .bbRLCard.p996QuestionCard{positio
 
   function syncCoin(){
     const out=$("p996CoinBalance"),src=$("pomruHomeCoinBalance")||$("bbHomeCoinBalance");if(!out)return;
-    const value=safe(src?.textContent)||"0";out.textContent=value;
-    if(src&&!coinObserver){coinObserver=new MutationObserver(syncCoin);coinObserver.observe(src,{childList:true,subtree:true,characterData:true})}
+    setText(out,safe(src?.textContent)||"0");
+    if(src&&!coinObserver){
+      coinObserver=new MutationObserver(()=>scheduleSync(false));
+      coinObserver.observe(src,{childList:true,subtree:true,characterData:true});
+    }
   }
 
   function syncMode(){
     const mode=safe($("bbRLMode")?.textContent)||"Ranked";
     const diff=safe($("bbRLDiff")?.textContent)||"";
-    const out=$("p996RankedMode");if(out)out.textContent=[mode,diff].filter(Boolean).join(" • ");
-    const cat=$("bbRLCategory");if(cat)cat.textContent="RANKED • "+mode;
+    setText($("p996RankedMode"),[mode,diff].filter(Boolean).join(" • "));
+    setText($("bbRLCategory"),"RANKED • "+mode);
   }
 
   function syncProgress(){
     const txt=safe($("bbRLQuestionNo")?.textContent),m=txt.match(/(\d+)\s*\/\s*(\d+)/);if(!m)return;
     const current=Math.max(0,Number(m[1])||0),total=Math.max(1,Number(m[2])||1);
-    const bar=$("p996ProgressBar");if(bar)bar.style.width=Math.max(0,Math.min(100,current/total*100))+"%";
-    const mini=$("p996RoundMini");if(mini)mini.textContent=`ROUND ${current}`;
+    const bar=$("p996ProgressBar"),width=Math.max(0,Math.min(100,current/total*100))+"%";
+    if(bar&&bar.style.width!==width)bar.style.width=width;
+    setText($("p996RoundMini"),`ROUND ${current}`);
   }
 
   function syncSkinLabels(){
     const selfChip=document.querySelector('[data-p972-battle-skin="self"]');
     const oppChip=document.querySelector('[data-p972-battle-skin="opp"]');
     const sSlot=document.querySelector('[data-p996-skin="self"]'),oSlot=document.querySelector('[data-p996-skin="opp"]');
-    if(sSlot){sSlot.textContent=safe(selfChip?.textContent)||"POMRU Buddy";sSlot.style.display=selfChip?"none":"inline-block"}
-    if(oSlot){oSlot.textContent=safe(oppChip?.textContent)||"POMRU Buddy";oSlot.style.display=oppChip?"none":"inline-block"}
+    if(sSlot){setText(sSlot,safe(selfChip?.textContent)||"POMRU Buddy");const d=selfChip?"none":"inline-block";if(sSlot.style.display!==d)sSlot.style.display=d}
+    if(oSlot){setText(oSlot,safe(oppChip?.textContent)||"POMRU Buddy");const d=oppChip?"none":"inline-block";if(oSlot.style.display!==d)oSlot.style.display=d}
   }
 
   function decorateChoices(){
     const host=$("bbRLChoices");if(!host)return;
     host.querySelectorAll("button").forEach((b,i)=>{
-      b.classList.remove("p996Long","p996VeryLong","p974Long","p974VeryLong");
-      const n=safe(b.textContent).length;if(n>34)b.classList.add("p996VeryLong");else if(n>16)b.classList.add("p996Long");
-      b.dataset.p996Choice=String(i+1);
+      const n=safe(b.textContent).length;
+      const wantVery=n>34,wantLong=!wantVery&&n>16;
+      b.classList.toggle("p996VeryLong",wantVery);
+      b.classList.toggle("p996Long",wantLong);
+      b.classList.remove("p974Long","p974VeryLong");
+      const idx=String(i+1);if(b.dataset.p996Choice!==idx)b.dataset.p996Choice=idx;
     });
   }
 
-  function resetCombo(){combo=0;lastRevealKey="";if($("p996ComboValue"))$("p996ComboValue").textContent="0"}
+  function resetCombo(){combo=0;lastRevealKey="";setText($("p996ComboValue"),"0")}
   function processReveal(){
     const reveal=$("bbRLReveal");if(!reveal||reveal.classList.contains("hidden"))return;
     const key=safe($("bbRLQuestionNo")?.textContent)+"|"+safe($("bbRLRevealTitle")?.textContent);if(!key||key===lastRevealKey)return;lastRevealKey=key;
     const ok=!reveal.classList.contains("wrong")&&/ถูก|correct/i.test(safe($("bbRLRevealTitle")?.textContent));combo=ok?combo+1:0;
-    if($("p996ComboValue"))$("p996ComboValue").textContent=String(combo);
+    setText($("p996ComboValue"),String(combo));
     const card=$("p996ComboStat");if(card){card.classList.toggle("hot",combo>=2);card.animate?.([{transform:"scale(1)"},{transform:"scale(1.08)"},{transform:"scale(1)"}],{duration:260})}
   }
 
-  function syncAll(){moveHud();syncCoin();syncMode();syncProgress();syncSkinLabels();decorateChoices()}
-
-  function setupObserver(){
-    if(observer)return;const overlay=$("bbRankedLearningOverlay");if(!overlay)return;
-    observer=new MutationObserver(()=>{syncAll();processReveal()});
-    observer.observe(overlay,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:["class","style"]});
+  function syncAll(){
+    if(syncing)return;
+    syncing=true;
+    try{moveHud();syncCoin();syncMode();syncProgress();syncSkinLabels();decorateChoices()}finally{syncing=false}
   }
 
-  function ensure(){syncAll();setupObserver();
+  function scheduleSync(withReveal=true){
+    if(!active()&&withReveal)return;
+    if(raf)return;
+    raf=requestAnimationFrame(()=>{raf=0;syncAll();if(withReveal)processReveal()});
+  }
+
+  function stopObserver(){if(observer){observer.disconnect();observer=null}}
+  function setupObserver(){
+    if(!active()){stopObserver();return}
+    if(observer)return;
+    const overlay=$("bbRankedLearningOverlay");if(!overlay)return;
+    observer=new MutationObserver(()=>scheduleSync(true));
+    /* Safari freeze hotfix: never watch attributes here because syncAll changes class/style. */
+    observer.observe(overlay,{childList:true,subtree:true,characterData:true});
+  }
+
+  function bindButtons(){
     const chat=$("p996BattleChat");if(chat&&!chat.dataset.bound){chat.dataset.bound="1";chat.addEventListener("click",()=>$("p951ChatFab")?.click())}
     const buddy=$("p996BuddyBtn");if(buddy&&!buddy.dataset.bound){buddy.dataset.bound="1";buddy.addEventListener("click",()=>{const h=$("p971BattleHud");h?.animate?.([{transform:"scale(1)"},{transform:"scale(1.015)"},{transform:"scale(1)"}],{duration:260})})}
-    const menu=$("p996BattleMenu");if(menu&&!menu.dataset.bound){menu.dataset.bound="1";menu.addEventListener("click",()=>{const btn=$("bbRLForfeit");btn?.focus?.()})}
+    const menu=$("p996BattleMenu");if(menu&&!menu.dataset.bound){menu.dataset.bound="1";menu.addEventListener("click",()=>$("bbRLForfeit")?.focus?.())}
+  }
+
+  function ensure(){
+    if(!active()){stopObserver();syncCoin();return}
+    syncAll();setupObserver();bindButtons();
   }
 
   document.addEventListener("pomru:ranked-game-started",()=>setTimeout(()=>{ensure();resetCombo()},40));
-  document.addEventListener("pomru:battle-round-resolved",()=>setTimeout(()=>{syncAll();processReveal()},20));
-  document.addEventListener("pomru:battle-v2-state",()=>setTimeout(syncAll,15));
-  window.addEventListener("pageshow",()=>{if(document.body.classList.contains("bbRankedLearningPlaying"))setTimeout(ensure,80)});
-  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(ensure,180),{once:true});else setTimeout(ensure,180);
-  window.POMRUBattleScreen=Object.freeze({version:"99.6",sync:syncAll,resetCombo});
+  document.addEventListener("pomru:battle-round-resolved",()=>setTimeout(()=>scheduleSync(true),20));
+  document.addEventListener("pomru:battle-v2-state",()=>setTimeout(()=>scheduleSync(false),15));
+  document.addEventListener("pomru:ranked-game-ended",()=>setTimeout(()=>{stopObserver();resetCombo()},80));
+  document.addEventListener("pomru:ranked-finished",()=>setTimeout(stopObserver,80));
+  window.addEventListener("pageshow",()=>{if(active())setTimeout(ensure,80);else stopObserver()});
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden){if(active())setTimeout(ensure,50);else stopObserver()}});
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(syncCoin,180),{once:true});else setTimeout(syncCoin,180);
+  window.POMRUBattleScreen=Object.freeze({version:"99.6.1",sync:()=>scheduleSync(false),resetCombo,stopObserver});
 })();
 </script>
 
@@ -49149,8 +49180,8 @@ window.POMRUV995W5=Object.freeze({
 
 <script id="pomru-v996-marker">
 window.POMRUV996=Object.freeze({
-  version:"99.6",
-  feature:"ranked-battle-screen-rebuild",
+  version:"99.6.1",
+  feature:"ranked-battle-screen-rebuild-hotfix",
   uiRebuilt:true,
   serverAuthorityPreserved:true,
   fighterIdsPreserved:true,
@@ -49158,6 +49189,8 @@ window.POMRUV996=Object.freeze({
   phoneFirst:true
 });
 </script>
+
+<script id="pomru-v9961-hotfix-marker">window.POMRUV9961=Object.freeze({version:"99.6.1",feature:"battle-ui-freeze-hotfix",mutationLoopFixed:true,observerBattleOnly:true,attributeObservation:false});</script>
 
 </body>
 </html>
