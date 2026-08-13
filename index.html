@@ -21000,14 +21000,14 @@ button{
         <span class="p911WorldArt secret99Art" aria-hidden="true">
           <i class="secret99Lock"><b>?</b></i>
           <i class="secret99Num">99</i>
-          <i class="secret99Heart h1">♥</i><i class="secret99Heart h2">♥</i>
+          <i class="secret99Heart h1">∞</i><i class="secret99Heart h2">↔</i>
           <i class="secret99Arrow up">↑</i><i class="secret99Arrow down">↓</i>
         </span>
         <span class="p911WorldContent">
           <small>ภารกิจเลขลับ</small>
           <strong>เลขลับ 99</strong>
-          <p>ตามหาเลขลับ 1–99 มี 2 หัวใจ • ทายผิดจะบอกว่า “มากกว่า” หรือ “น้อยกว่า”</p>
-          <span class="p911WorldMeta"><b>♥♥</b> 2 โอกาสต่อรอบ</span>
+          <p>ดวล 2 คน • ตั้งเลขลับของตัวเอง แล้วผลัดกันทายเลขอีกฝ่าย • ผิดจะบอก “มากกว่า” หรือ “น้อยกว่า”</p>
+          <span class="p911WorldMeta"><b>∞</b> ทายได้จนกว่าจะถูก • ทุก ROUND ได้สิทธิ์เท่ากัน</span>
         </span>
         <span class="p911WorldDoor violetDoor" aria-hidden="true"><i></i></span>
         <span class="p911StartButton">เริ่มเล่น</span>
@@ -21073,88 +21073,6 @@ button{
 
 
 
-
-<section class="bbAppScreen p99GuessScreen" id="p99GuessScreen" data-app-screen="guess99" aria-label="เกมเลขลับ 99">
-  <div class="p99GuessBg" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-  <header class="p99GuessTopbar">
-    <button class="p99GuessBack" id="p99GuessBack" type="button" data-app-go="solo" aria-label="กลับหน้าเลือกเกม">‹</button>
-    <div class="p99GuessBrand"><small>POMRU • SECRET MISSION</small><strong>เลขลับ 99</strong></div>
-    <div class="p99GuessTopLives" aria-label="โอกาสที่เหลือ"><span id="p99GuessHeartTop1">♥</span><span id="p99GuessHeartTop2">♥</span></div>
-  </header>
-
-  <main class="p99GuessMain">
-    <section class="p99GuessStats" aria-label="สถานะเกม">
-      <div><small>ROUND</small><strong id="p99GuessRound">1 / 5</strong></div>
-      <div><small>SCORE</small><strong id="p99GuessScore">0</strong></div>
-      <div><small>BEST</small><strong id="p99GuessBest">0</strong></div>
-    </section>
-
-    <section class="p99GuessBuddyZone">
-      <div class="p99GuessBuddyGlow" aria-hidden="true"></div>
-      <div class="p99GuessBuddy" id="p99GuessBuddy" role="img" aria-label="POMRU Buddy"></div>
-      <div class="p99GuessSpeech" id="p99GuessSpeech"><b>เลขลับพร้อมแล้ว!</b><span>เลือกเลขตั้งแต่ 1 ถึง 99</span></div>
-    </section>
-
-    <section class="p99GuessCard" id="p99GuessPlayCard">
-      <div class="p99GuessCardHead">
-        <span class="p99GuessModeBadge">🔐 เลขลับ 1–99</span>
-        <div class="p99GuessLives" id="p99GuessLives" aria-label="2 โอกาส">
-          <span class="alive">♥</span><span class="alive">♥</span>
-          <small>2 โอกาส</small>
-        </div>
-      </div>
-
-      <div class="p99GuessQuestion">
-        <small>SECRET NUMBER</small>
-        <h1>เลขลับคือเลขอะไร?</h1>
-        <p>ทายให้ถูกภายใน 2 ครั้ง • ถ้าผิดจะมี Hint ช่วย</p>
-      </div>
-
-      <div class="p99GuessRange" aria-label="ช่วงคำตอบที่เป็นไปได้">
-        <span id="p99GuessMinLabel">1</span>
-        <div><i id="p99GuessRangeFill"></i><b id="p99GuessRangeText">1 – 99</b></div>
-        <span id="p99GuessMaxLabel">99</span>
-      </div>
-
-      <div class="p99GuessPicker">
-        <button type="button" data-guess-step="-10">−10</button>
-        <button type="button" data-guess-step="-1">−1</button>
-        <label><small>เลขที่คุณเลือก</small><input id="p99GuessInput" type="number" inputmode="numeric" pattern="[0-9]*" min="1" max="99" value="50" aria-label="เลขที่คุณเลือก"></label>
-        <button type="button" data-guess-step="1">+1</button>
-        <button type="button" data-guess-step="10">+10</button>
-      </div>
-
-      <input class="p99GuessSlider" id="p99GuessSlider" type="range" min="1" max="99" value="50" aria-label="เลือกเลข 1 ถึง 99">
-
-      <button class="p99GuessSubmit" id="p99GuessSubmit" type="button"><span>✨</span><b>ทายเลขนี้</b><small id="p99GuessSubmitHint">โอกาสที่ 1 จาก 2</small></button>
-
-      <div class="p99GuessFeedback neutral" id="p99GuessFeedback" role="status" aria-live="polite">
-        <strong>เลือกเลขแล้วกด “ทายเลขนี้”</strong>
-        <span>ถ้าผิด ระบบจะบอกว่าคำตอบมากกว่าหรือน้อยกว่า</span>
-      </div>
-
-      <button class="p99GuessNext hidden" id="p99GuessNext" type="button">รอบต่อไป ›</button>
-    </section>
-
-    <section class="p99GuessResult hidden" id="p99GuessResult">
-      <div class="p99GuessTrophy">★</div>
-      <small>GAME COMPLETE</small>
-      <h2>จบเกมเลขลับ 99</h2>
-      <strong id="p99GuessFinalScore">0</strong>
-      <p id="p99GuessFinalSummary">ตอบถูก 0 / 5 รอบ</p>
-      <div class="p99GuessResultGrid">
-        <div><small>ตอบถูก</small><b id="p99GuessCorrect">0 / 5</b></div>
-        <div><small>ถูกครั้งแรก</small><b id="p99GuessFirstTry">0</b></div>
-        <div><small>คะแนนสูงสุด</small><b id="p99GuessBestResult">0</b></div>
-      </div>
-      <div class="p99GuessReward" id="p99GuessReward">เล่นจบแล้ว • กำลังสรุปรางวัล</div>
-      <div class="p99GuessResultActions">
-        <button type="button" id="p99GuessAgain">เล่นอีกครั้ง</button>
-        <button type="button" class="secondary" data-app-go="solo">กลับหน้าเลือกเกม</button>
-      </div>
-    </section>
-  </main>
-</section>
 
 <section class="bbAppScreen p91Screen p91Subject" id="bbAppLanguageGames" data-app-screen="languagegames">
   <header class="p91Topbar">
@@ -25918,12 +25836,12 @@ window.addEventListener("load",()=>{
     if(push&&screen!==next)previous=screen;
     screen=next;
     document.querySelectorAll(".bbAppScreen").forEach(s=>s.classList.toggle("active",s===target));
-    document.body.classList.toggle("bbCandySelect",["modes","solo","teddy","mathgames","languagegames","learningplay","guess99"].includes(next));
+    document.body.classList.toggle("bbCandySelect",["modes","solo","teddy","mathgames","languagegames","learningplay"].includes(next));
     document.body.classList.toggle("bbCandyHome",next==="home");
     document.body.classList.toggle("bbCandySetup",next==="setup");
     if(typeof setDockActive==="function"){
       if(next==="home")setDockActive("home");
-      else if(["modes","solo","teddy","mathgames","languagegames","learningplay","guess99","setup"].includes(next))setDockActive("play");
+      else if(["modes","solo","teddy","mathgames","languagegames","learningplay","setup"].includes(next))setDockActive("play");
       else if(next==="shop"||next==="inventory"||next==="topup")setDockActive("shop");
     }
     if(next==="shop")window.bbLoadShop?.();
@@ -36134,7 +36052,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <button type="button" class="secret99" data-p944-subject="secret99">
       <span class="p944SubjectIcon">99</span>
       <b>เลขลับ 99</b>
-      <small>❤️❤️ เดาเลขคู่แข่ง</small>
+      <small>∞ ROUND • เดาเลขคู่แข่ง</small>
       <em class="p95SubjectRank" id="p95RankSecret99">Bronze • 0</em>
     </button>
   </div>
@@ -36374,7 +36292,7 @@ document.addEventListener('DOMContentLoaded', () => {
       math:"คณิต • เลือกคำตอบ",
       english:"English • Vocabulary",
       chinese:"จีน • 汉字 → ความหมาย",
-      secret99:"เลขลับ 99 • ❤️❤️ 2 โอกาส"
+      secret99:"เลขลับ 99 • ∞ รอบ • คนละ 1 ครั้ง"
     })[code]||"หมี • จับคู่";
   }
 
@@ -36477,7 +36395,7 @@ document.addEventListener('DOMContentLoaded', () => {
       math_multiple_choice:"Math 1",
       english_vocabulary:"A1",
       chinese_hanzi_meaning:"HSK 2",
-      secret_number_99:"1–99 • ❤️❤️ 2 โอกาส",
+      secret_number_99:"1–99 • ∞ รอบ • คนละ 1 ครั้ง",
       math_typing:"Math 4",
       english_listening:"B2",
       chinese_mix:"HSK 6"
@@ -37428,8 +37346,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if(selected==="secret99"){
       return [
         {main:"1. ตั้งเลขลับของคุณ",sub:"เลือก 1–99 แล้วล็อก",extra:"คู่แข่งจะมองไม่เห็นเลขของคุณ"},
-        {main:"2. เดาเลขของอีกฝ่าย",sub:"❤️❤️ มี 2 โอกาส",extra:"เดาผิดจะได้ Hint: มากกว่า / น้อยกว่า"},
-        {main:"3. ถ้าไม่มีใครเดาถูก",sub:"วัดเลขที่เดาใกล้ที่สุด",extra:"ใกล้เท่ากันจริง ๆ จึง DRAW"}
+        {main:"2. เดาเลขของอีกฝ่าย",sub:"∞ เดาได้จนกว่าจะถูก",extra:"แต่ละ ROUND ทุกคนทายได้คนละ 1 ครั้ง"},
+        {main:"3. ตัดสินอย่างยุติธรรม",sub:"รอทุกคนตอบ ROUND เดียวกัน",extra:"ถ้าทั้งคู่ถูกใน ROUND เดียวกัน = DRAW"}
       ];
     }
 
@@ -50064,167 +49982,6 @@ body.p996UnifiedBattleActive #p951ChatFab{display:none!important}
 
 <script id="pomru-v9963-marker">window.POMRU_V9963=Object.freeze({version:"99.6.3",fix:"battle-finalize-race",stateRpc:"bb_ranked_battle_state_v4",finishRpc:"bb_ranked_battle_finish_v4",transition:"server-success-before-waiting-screen"});</script>
 
-<style id="pomru-guess99-style">
-/* ==========================================================
-   POMRU v99.6.5 — Guess 1–99
-   Two-heart guessing game. No HP / no battle damage.
-   ========================================================== */
-.p99GuessScreen{position:relative;min-height:100dvh;padding:12px 14px 120px;overflow-x:hidden;background:linear-gradient(180deg,#2e116e 0,#6842c9 18%,#f8e9ff 52%,#fff5f2 100%);color:#4e315d}.p99GuessBg{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none}.p99GuessBg:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 18% 16%,rgba(255,255,255,.42) 0 2px,transparent 3px),radial-gradient(circle at 77% 20%,rgba(255,255,255,.5) 0 2px,transparent 3px),radial-gradient(circle at 88% 41%,rgba(255,220,251,.6) 0 3px,transparent 4px),linear-gradient(135deg,transparent 0 35%,rgba(255,255,255,.08) 36% 37%,transparent 38% 100%);background-size:auto}.p99GuessBg i{position:absolute;width:180px;height:180px;border-radius:50%;filter:blur(2px);opacity:.25}.p99GuessBg i:nth-child(1){left:-80px;top:160px;background:#65cfff}.p99GuessBg i:nth-child(2){right:-70px;top:280px;background:#ff83ca}.p99GuessBg i:nth-child(3){left:18%;bottom:100px;background:#fff}.p99GuessBg i:nth-child(4){right:7%;bottom:210px;background:#ffd86b}
-.p99GuessTopbar{position:sticky;top:0;z-index:20;max-width:760px;margin:0 auto 12px;padding:10px 12px;display:grid;grid-template-columns:50px 1fr auto;gap:10px;align-items:center;border:1px solid rgba(255,255,255,.35);border-radius:24px;background:rgba(48,18,109,.78);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 12px 30px rgba(37,12,83,.22)}.p99GuessBack{width:46px;height:46px;border:2px solid rgba(255,255,255,.38);border-radius:16px;background:linear-gradient(#9b75ff,#7149d9);color:#fff;font-size:38px;line-height:36px;font-weight:700;box-shadow:0 5px 0 #4b2aaa}.p99GuessBrand{min-width:0}.p99GuessBrand small{display:block;color:#e7dfff;font-size:9px;font-weight:1000;letter-spacing:.16em}.p99GuessBrand strong{display:block;margin-top:2px;color:#fff;font-size:20px;font-weight:1000}.p99GuessTopLives{display:flex;align-items:center;gap:5px;padding:8px 10px;border-radius:16px;background:rgba(255,255,255,.13)}.p99GuessTopLives span{font-size:25px;line-height:1;color:#ff5aa7;filter:drop-shadow(0 2px 0 #fff)}.p99GuessTopLives span.spent{color:#88769b;opacity:.35;filter:none;transform:scale(.86)}
-.p99GuessMain{width:min(760px,100%);margin:auto}.p99GuessStats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}.p99GuessStats>div{padding:10px;border:1px solid rgba(255,255,255,.55);border-radius:18px;text-align:center;background:rgba(255,255,255,.91);box-shadow:0 7px 20px rgba(65,38,93,.08)}.p99GuessStats small{display:block;color:#9a7aaa;font-size:8px;font-weight:1000;letter-spacing:.12em}.p99GuessStats strong{display:block;margin-top:2px;color:#5c2f86;font-size:19px;font-weight:1000}
-.p99GuessBuddyZone{position:relative;height:220px;margin:4px 0 -28px;display:grid;place-items:center}.p99GuessBuddyGlow{position:absolute;bottom:20px;width:230px;height:88px;border-radius:50%;background:radial-gradient(ellipse,rgba(108,62,207,.3),transparent 68%);filter:blur(3px)}.p99GuessBuddy{position:relative;z-index:2;width:190px;height:190px;background-image:url('/assets/buddy/default-pink-buddy.png');background-size:contain;background-repeat:no-repeat;background-position:center bottom;filter:drop-shadow(0 14px 12px rgba(53,27,83,.22));animation:p99GuessIdle 2.8s ease-in-out infinite}.p99GuessSpeech{position:absolute;z-index:4;right:max(6%,20px);top:18px;max-width:210px;padding:11px 14px;border:3px solid #fff;border-radius:18px;background:linear-gradient(145deg,#fff,#fff2fb);box-shadow:0 8px 20px rgba(73,40,91,.14);text-align:center}.p99GuessSpeech:after{content:"";position:absolute;left:24px;bottom:-12px;width:20px;height:20px;background:#fff;clip-path:polygon(0 0,100% 0,0 100%);transform:rotate(-12deg)}.p99GuessSpeech b{display:block;color:#5d3476;font-size:13px}.p99GuessSpeech span{display:block;margin-top:2px;color:#907b98;font-size:9px}.p99GuessSpeech.good{background:linear-gradient(145deg,#eafff5,#fff);border-color:#fff}.p99GuessSpeech.hot{background:linear-gradient(145deg,#fff1dd,#fff);}.p99GuessSpeech.low{background:linear-gradient(145deg,#e9f7ff,#fff)}
-@keyframes p99GuessIdle{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-7px) rotate(1deg)}}@keyframes p99HeartBreak{0%{transform:scale(1)}40%{transform:scale(1.35) rotate(-10deg)}100%{transform:scale(.8);opacity:.3}}@keyframes p99Pop{0%{transform:scale(.86);opacity:0}60%{transform:scale(1.06)}100%{transform:scale(1);opacity:1}}
-.p99GuessCard{position:relative;z-index:3;padding:18px;border:3px solid rgba(255,255,255,.86);border-radius:30px;background:linear-gradient(180deg,rgba(255,255,255,.97),rgba(255,241,251,.96));box-shadow:0 18px 40px rgba(73,35,103,.18),inset 0 0 0 1px rgba(180,125,235,.18)}.p99GuessCardHead{display:flex;justify-content:space-between;align-items:center;gap:8px}.p99GuessModeBadge{padding:7px 11px;border-radius:999px;background:#efe7ff;color:#7450cb;font-size:10px;font-weight:1000}.p99GuessLives{display:flex;align-items:center;gap:4px}.p99GuessLives>span{display:grid;place-items:center;width:34px;height:34px;border-radius:12px;background:linear-gradient(#ff75b5,#f23b8d);color:#fff;font-size:21px;box-shadow:0 5px 0 #c82c72}.p99GuessLives>span.spent{background:#e9e1ed;color:#a995b1;box-shadow:none;animation:p99HeartBreak .35s ease both}.p99GuessLives small{margin-left:3px;color:#866e91;font-size:9px;font-weight:900}.p99GuessQuestion{text-align:center;padding:12px 0 6px}.p99GuessQuestion small{color:#c16ba1;font-size:8px;font-weight:1000;letter-spacing:.15em}.p99GuessQuestion h1{margin:4px 0 3px;color:#421d74;font-size:clamp(27px,7vw,42px);line-height:1.08;font-weight:1000}.p99GuessQuestion p{margin:0;color:#8c7895;font-size:11px;font-weight:700}
-.p99GuessRange{margin:12px 0 10px;display:grid;grid-template-columns:28px 1fr 28px;align-items:center;gap:7px}.p99GuessRange>span{display:grid;place-items:center;height:28px;border-radius:9px;background:#f2ebf8;color:#735b80;font-size:10px;font-weight:1000}.p99GuessRange>div{position:relative;height:28px;border-radius:999px;overflow:hidden;background:#ece4f1}.p99GuessRange i{position:absolute;inset:0 auto 0 0;width:100%;background:linear-gradient(90deg,#6fd7be,#8f6ce8,#ff70b0);opacity:.55;transition:clip-path .25s ease}.p99GuessRange b{position:absolute;inset:0;display:grid;place-items:center;color:#5e4870;font-size:10px;font-weight:1000}
-.p99GuessPicker{display:grid;grid-template-columns:46px 46px minmax(100px,1fr) 46px 46px;gap:6px;align-items:stretch}.p99GuessPicker>button{border:0;border-radius:15px;background:linear-gradient(#f1ebff,#e6dcfb);color:#704ebf;font-size:12px;font-weight:1000;box-shadow:inset 0 0 0 1px #d9caef}.p99GuessPicker label{display:grid;place-items:center;padding:6px;border:2px solid #e5d8f0;border-radius:18px;background:#fff}.p99GuessPicker label small{color:#a28cac;font-size:7px;font-weight:1000;letter-spacing:.07em}.p99GuessPicker input{width:100%;border:0;outline:0;background:transparent;text-align:center;color:#4c237d;font-size:34px;line-height:1;font-weight:1000;-moz-appearance:textfield}.p99GuessPicker input::-webkit-inner-spin-button,.p99GuessPicker input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}.p99GuessSlider{width:100%;height:18px;margin:12px 0 8px;accent-color:#8a5ce4}.p99GuessSubmit{width:100%;min-height:66px;border:3px solid #fff;border-radius:22px;padding:8px 14px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;background:linear-gradient(180deg,#ff63ae,#e73d92);color:#fff;box-shadow:0 8px 0 #b82e72,0 14px 25px rgba(203,50,127,.24);font-weight:1000}.p99GuessSubmit span{font-size:25px}.p99GuessSubmit b{font-size:17px}.p99GuessSubmit small{font-size:8px;opacity:.9}.p99GuessSubmit:disabled{filter:grayscale(.4);opacity:.55;box-shadow:0 4px 0 #9b7991}.p99GuessSubmit:active:not(:disabled){transform:translateY(4px);box-shadow:0 4px 0 #b82e72}
-.p99GuessFeedback{margin-top:14px;padding:13px;border-radius:19px;text-align:center;border:2px solid transparent;animation:p99Pop .25s ease}.p99GuessFeedback strong{display:block;font-size:15px;font-weight:1000}.p99GuessFeedback span{display:block;margin-top:3px;font-size:10px;font-weight:700}.p99GuessFeedback.neutral{background:#f6f0fa;color:#745c82}.p99GuessFeedback.higher{background:#e9f8ff;border-color:#aadff4;color:#2c7596}.p99GuessFeedback.lower{background:#fff1dd;border-color:#ffd39a;color:#9b5b23}.p99GuessFeedback.correct{background:#e8fff4;border-color:#9de4c3;color:#34795d}.p99GuessFeedback.fail{background:#fff0f4;border-color:#f3b3c7;color:#a94f6c}.p99GuessNext{width:100%;min-height:50px;margin-top:10px;border:0;border-radius:17px;background:linear-gradient(#8d70e8,#6847ca);color:#fff;font-size:13px;font-weight:1000;box-shadow:0 6px 0 #4e32a5}.p99GuessNext.hidden{display:none!important}
-.p99GuessResult{padding:24px 18px;border:3px solid #fff;border-radius:30px;background:linear-gradient(180deg,#fff,#fff1fb);box-shadow:0 20px 45px rgba(65,30,94,.2);text-align:center}.p99GuessResult.hidden{display:none!important}.p99GuessTrophy{width:72px;height:72px;margin:auto;display:grid;place-items:center;border:5px solid #fff;border-radius:24px;background:linear-gradient(145deg,#ffd660,#ff8f43);color:#fff;font-size:37px;box-shadow:0 8px 0 #d6772e}.p99GuessResult>small{display:block;margin-top:16px;color:#b16b9e;font-size:9px;font-weight:1000;letter-spacing:.14em}.p99GuessResult h2{margin:5px 0;color:#52306c;font-size:26px}.p99GuessResult>strong{display:block;color:#784bd5;font-size:64px;line-height:1;font-weight:1000}.p99GuessResult>p{color:#88718e}.p99GuessResultGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:18px 0}.p99GuessResultGrid>div{padding:11px 5px;border-radius:17px;background:#f7f0fa}.p99GuessResultGrid small{display:block;color:#9b849f;font-size:8px;font-weight:900}.p99GuessResultGrid b{display:block;margin-top:3px;color:#5d3972;font-size:15px}.p99GuessReward{padding:11px;border-radius:16px;background:#edfdf6;color:#408268;font-size:10px;font-weight:900}.p99GuessResultActions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}.p99GuessResultActions button{min-height:50px;border:0;border-radius:17px;background:linear-gradient(#9a75ec,#704fd1);color:#fff;font-weight:1000}.p99GuessResultActions button.secondary{background:#f1eaf5;color:#735d7d}
-body.p99GuessPlaying .v17dock{display:none!important}.p99GuessScreen.active{display:block!important}
-@media(max-width:560px){.p99GuessScreen{padding:8px 8px 92px}.p99GuessTopbar{grid-template-columns:43px 1fr auto;border-radius:21px;padding:8px}.p99GuessBack{width:40px;height:40px;border-radius:14px;font-size:32px}.p99GuessBrand strong{font-size:17px}.p99GuessTopLives{padding:6px 8px}.p99GuessTopLives span{font-size:21px}.p99GuessStats{gap:5px}.p99GuessStats>div{padding:7px}.p99GuessStats strong{font-size:16px}.p99GuessBuddyZone{height:180px;margin-bottom:-24px}.p99GuessBuddy{width:158px;height:158px}.p99GuessSpeech{right:2px;top:9px;max-width:158px;padding:9px 10px}.p99GuessSpeech b{font-size:11px}.p99GuessSpeech span{font-size:8px}.p99GuessCard{padding:13px 11px;border-radius:25px}.p99GuessQuestion{padding-top:9px}.p99GuessQuestion h1{font-size:29px}.p99GuessPicker{grid-template-columns:38px 38px minmax(86px,1fr) 38px 38px;gap:4px}.p99GuessPicker>button{border-radius:12px;font-size:10px}.p99GuessPicker input{font-size:30px}.p99GuessLives>span{width:30px;height:30px;font-size:19px}.p99GuessLives small{display:none}.p99GuessSubmit{min-height:59px;border-radius:19px}.p99GuessSubmit b{font-size:15px}.p99GuessResult{padding:20px 12px}.p99GuessResult>strong{font-size:55px}.p99GuessResultActions{grid-template-columns:1fr}}
-@media(max-width:380px){.p99GuessPicker{grid-template-columns:34px 34px minmax(76px,1fr) 34px 34px}.p99GuessPicker input{font-size:27px}.p99GuessQuestion h1{font-size:25px}.p99GuessBuddy{width:145px;height:145px}.p99GuessBuddyZone{height:166px}}
-</style>
-
-<script id="pomru-guess99-game">
-(function POMRUGuess99(){
-  "use strict";
-  const $=id=>document.getElementById(id);
-  const TOTAL=5, MAX_SCORE=500;
-  let state=null;
-
-  function secureNumber(){
-    try{
-      const a=new Uint32Array(1);crypto.getRandomValues(a);return 1+(a[0]%99);
-    }catch(_){return 1+Math.floor(Math.random()*99)}
-  }
-  function clamp(n,min=1,max=99){return Math.max(min,Math.min(max,Math.round(Number(n)||min)))}
-  function best(){try{return Number(localStorage.getItem("pomru_guess99_best")||0)||0}catch(_){return 0}}
-  function setBest(v){try{localStorage.setItem("pomru_guess99_best",String(v))}catch(_){}}
-  function sound(name){try{if(typeof window.sfx==="function")window.sfx(name);else if(typeof sfx==="function")sfx(name)}catch(_){}}
-  function buddyBounce(kind="ok"){
-    const el=$("p99GuessBuddy");if(!el?.animate)return;
-    const frames=kind==="bad"?[{transform:"translateX(0)"},{transform:"translateX(-8px) rotate(-3deg)"},{transform:"translateX(8px) rotate(3deg)"},{transform:"translateX(0)"}]:[{transform:"translateY(0) scale(1)"},{transform:"translateY(-13px) scale(1.05)"},{transform:"translateY(0) scale(1)"}];
-    el.animate(frames,{duration:kind==="bad"?330:430,easing:"ease-out"});
-  }
-  function syncBuddy(){
-    const el=$("p99GuessBuddy");if(!el)return;
-    const src=String(window.__bbActiveBuddyAsset||"/assets/buddy/default-pink-buddy.png").replace(/["\n\r]/g,"");
-    el.style.backgroundImage=`url("${src}")`;
-  }
-  function speech(title,text,tone=""){
-    const el=$("p99GuessSpeech");if(!el)return;
-    el.className="p99GuessSpeech"+(tone?" "+tone:"");
-    el.innerHTML="";
-    const b=document.createElement("b"),sp=document.createElement("span");b.textContent=title;sp.textContent=text;el.append(b,sp);
-  }
-  function updateLives(){
-    const left=Math.max(0,2-state.attempts);
-    const lives=[...document.querySelectorAll("#p99GuessLives>span")];
-    lives.forEach((h,i)=>{h.classList.toggle("spent",i>=left);h.classList.toggle("alive",i<left)});
-    [$("p99GuessHeartTop1"),$("p99GuessHeartTop2")].forEach((h,i)=>h?.classList.toggle("spent",i>=left));
-    const hint=$("p99GuessSubmitHint");if(hint)hint.textContent=left>0?`โอกาสที่ ${state.attempts+1} จาก 2`:"หมดโอกาสแล้ว";
-  }
-  function updateRange(){
-    $("p99GuessMinLabel").textContent=state.min;
-    $("p99GuessMaxLabel").textContent=state.max;
-    $("p99GuessRangeText").textContent=`${state.min} – ${state.max}`;
-    const input=$("p99GuessInput"),slider=$("p99GuessSlider");
-    [input,slider].forEach(el=>{if(el){el.min=String(state.min);el.max=String(state.max)}});
-    const pctMin=((state.min-1)/98)*100,pctMax=((state.max-1)/98)*100;
-    const fill=$("p99GuessRangeFill");if(fill)fill.style.clipPath=`inset(0 ${100-pctMax}% 0 ${pctMin}%)`;
-  }
-  function setValue(v){
-    if(!state)return;v=clamp(v,state.min,state.max);
-    $("p99GuessInput").value=v;$("p99GuessSlider").value=v;
-  }
-  function feedback(type,title,text){
-    const el=$("p99GuessFeedback");if(!el)return;
-    el.className="p99GuessFeedback "+type;el.innerHTML="";
-    const b=document.createElement("strong"),sp=document.createElement("span");b.textContent=title;sp.textContent=text;el.append(b,sp);
-  }
-  function paintStats(){
-    $("p99GuessRound").textContent=`${state.round} / ${TOTAL}`;
-    $("p99GuessScore").textContent=String(state.score);
-    $("p99GuessBest").textContent=String(Math.max(best(),state.score));
-  }
-  function newRound(){
-    state.target=secureNumber();state.attempts=0;state.min=1;state.max=99;state.locked=false;
-    paintStats();updateLives();updateRange();setValue(50);
-    $("p99GuessSubmit").disabled=false;$("p99GuessNext").classList.add("hidden");
-    feedback("neutral","เลือกเลขแล้วกด “ทายเลขนี้”","คุณมี 2 หัวใจ • ทายผิดครั้งแรกจะได้ Hint");
-    speech("เลขลับพร้อมแล้ว!",`รอบ ${state.round} • เลือกเลข 1 ถึง 99`);
-  }
-  function start(){
-    document.body.classList.add("p99GuessPlaying");syncBuddy();
-    state={round:1,score:0,correct:0,firstTry:0,target:0,attempts:0,min:1,max:99,locked:false,startedAt:Date.now(),runId:`guess99-${Date.now()}-${Math.random().toString(36).slice(2,8)}`};
-    $("p99GuessPlayCard").classList.remove("hidden");$("p99GuessResult").classList.add("hidden");
-    $("p99GuessBest").textContent=String(best());newRound();
-  }
-  function endRound(correct){
-    state.locked=true;$("p99GuessSubmit").disabled=true;
-    const next=$("p99GuessNext");next.textContent=state.round>=TOTAL?"ดูผลเกม ›":"รอบต่อไป ›";next.classList.remove("hidden");
-    if(correct)buddyBounce("ok");else buddyBounce("bad");
-  }
-  function guess(){
-    if(!state||state.locked)return;
-    const raw=Number($("p99GuessInput").value);
-    if(!Number.isFinite(raw)||raw<state.min||raw>state.max){feedback("fail","เลือกเลขในช่วงที่กำหนด",`ตอนนี้เลือกได้ ${state.min} ถึง ${state.max}`);return}
-    const g=clamp(raw,state.min,state.max);state.attempts+=1;updateLives();
-    if(g===state.target){
-      const pts=state.attempts===1?100:60;state.score+=pts;state.correct+=1;if(state.attempts===1)state.firstTry+=1;
-      paintStats();feedback("correct","🎉 ถูกต้อง!",`เลขลับคือ ${state.target} • +${pts} คะแนน`);speech("เก่งมาก! ✨",`ถูกในครั้งที่ ${state.attempts} • เลข ${state.target}`,"good");sound("ok");endRound(true);return;
-    }
-    if(state.attempts>=2){
-      feedback("fail","💔 หมด 2 โอกาสแล้ว",`คำตอบคือ ${state.target}`);speech("ไม่เป็นไรนะ!",`เฉลยคือ ${state.target} • รอบหน้าลองใหม่`,"hot");sound("bad");endRound(false);return;
-    }
-    if(g<state.target){
-      state.min=Math.min(99,g+1);updateRange();setValue(Math.round((state.min+state.max)/2));
-      feedback("higher","⬆️ มากกว่านี้!",`เลขลับมากกว่า ${g} • เหลืออีก 1 หัวใจ`);speech("มากกว่านี้ ↑",`ลองเลขที่มากกว่า ${g}`,"low");
-    }else{
-      state.max=Math.max(1,g-1);updateRange();setValue(Math.round((state.min+state.max)/2));
-      feedback("lower","⬇️ น้อยกว่านี้!",`เลขลับน้อยกว่า ${g} • เหลืออีก 1 หัวใจ`);speech("น้อยกว่านี้ ↓",`ลองเลขที่น้อยกว่า ${g}`,"hot");
-    }
-    sound("bad");buddyBounce("bad");
-  }
-  async function finish(){
-    state.locked=true;const final=state.score;if(final>best())setBest(final);
-    $("p99GuessPlayCard").classList.add("hidden");$("p99GuessResult").classList.remove("hidden");
-    $("p99GuessFinalScore").textContent=String(final);$("p99GuessFinalSummary").textContent=`ตอบถูก ${state.correct} / ${TOTAL} รอบ • คะแนนเต็ม ${MAX_SCORE}`;
-    $("p99GuessCorrect").textContent=`${state.correct} / ${TOTAL}`;$("p99GuessFirstTry").textContent=String(state.firstTry);$("p99GuessBestResult").textContent=String(best());
-    const reward=$("p99GuessReward");reward.textContent="เล่นจบแล้ว • กำลังสรุปรางวัล";sound("done");speech("จบเกมแล้ว! ⭐",`ได้ ${final} คะแนน`,"good");
-    try{
-      if(typeof window.bbAwardPracticeReward==="function"){
-        const res=await window.bbAwardPracticeReward({runId:state.runId,modeCode:"math_guess_1_99",difficultyCode:"normal",rawScore:final,maxScore:MAX_SCORE,correct:state.correct,total:TOTAL,durationSeconds:Math.max(1,Math.round((Date.now()-state.startedAt)/1000)),completed:true});
-        if(res?.ok)reward.textContent=`🎁 +${Number(res.points_gained||res.exp_gained||0).toLocaleString()} แต้ม • +${Number(res.coins_gained||0).toLocaleString()} Coins`;
-        else if(res?.guest)reward.textContent="เข้าสู่ระบบเพื่อบันทึกแต้มและ Coins";
-        else reward.textContent="คะแนนเกมบันทึกแล้วในเครื่อง • รางวัลออนไลน์ยังไม่สำเร็จ";
-      }else reward.textContent="คะแนนสูงสุดบันทึกในเครื่องแล้ว";
-    }catch(_){reward.textContent="คะแนนสูงสุดบันทึกในเครื่องแล้ว"}
-  }
-  function next(){
-    if(!state?.locked)return;
-    if(state.round>=TOTAL){finish();return}
-    state.round+=1;newRound();
-  }
-  function leave(){document.body.classList.remove("p99GuessPlaying")}
-
-  document.addEventListener("input",e=>{
-    if(e.target?.id==="p99GuessSlider")setValue(e.target.value);
-    if(e.target?.id==="p99GuessInput"&&state){const n=Number(e.target.value);if(Number.isFinite(n))$("p99GuessSlider").value=clamp(n,state.min,state.max)}
-  });
-  document.addEventListener("click",e=>{
-    const entry=e.target.closest?.('[data-app-go="guess99"]');if(entry){setTimeout(start,20);return}
-    const step=e.target.closest?.("[data-guess-step]");if(step&&state){setValue(Number($("p99GuessInput").value)+Number(step.dataset.guessStep||0));return}
-    if(e.target.closest?.("#p99GuessSubmit")){guess();return}
-    if(e.target.closest?.("#p99GuessNext")){next();return}
-    if(e.target.closest?.("#p99GuessAgain")){start();return}
-    if(e.target.closest?.('#p99GuessBack,[data-app-go="solo"]')){leave()}
-  });
-  document.addEventListener("keydown",e=>{if(e.key==="Enter"&&document.querySelector('.p99GuessScreen.active')&&!state?.locked){e.preventDefault();guess()}});
-  window.addEventListener("pageshow",()=>{if(document.querySelector('.p99GuessScreen.active'))syncBuddy()});
-  window.POMRUGuess99=Object.freeze({version:"99.6.5",start,guess,state:()=>state?{round:state.round,score:state.score,attempts:state.attempts,min:state.min,max:state.max,locked:state.locked}:null});
-})();
-</script>
-<script id="pomru-v9966-marker">window.POMRU_V9966=Object.freeze({version:"99.6.6",game:"secret_number_99",title:"เลขลับ 99",category:"legacy-solo-disabled",rounds:5,livesPerRound:2,hp:false,hints:["higher","lower"],rewardMode:"disabled-by-v99.6.8"});</script>
 
 
 <style id="pomru-v9967-endless-hp-style">
@@ -50251,7 +50008,7 @@ body.p996UnifiedBattleActive.p996Sudden .p996RankStrip{animation:p9967SuddenPuls
   window.POMRUBattleBalance=Object.freeze({version:"99.6.7",hp:100,endCondition:"KO_ONLY",stages:["NORMAL","PRESSURE","OVERTIME","SUDDEN DEATH"],stageFor});
 })();
 </script>
-<script id="pomru-v9967-marker">window.POMRU_V9967=Object.freeze({version:"99.6.7",feature:"endless-hp-balance",rankedEndsOn:"KO",questionCounter:"round-only",internalPlanRounds:40,secretNumber99:{hp:false,lives:2}});</script>
+<script id="pomru-v9967-marker">window.POMRU_V9967=Object.freeze({version:"99.6.7",feature:"endless-hp-balance",rankedEndsOn:"KO",questionCounter:"round-only",internalPlanRounds:40,secretNumber99:{hp:false,lives:null,rounds:"unlimited",fairRound:true}});</script>
 
 <!-- ==========================================================
      POMRU v99.6.8 — SECRET 99 DUEL (2 PLAYER)
@@ -50278,7 +50035,7 @@ body.p998Secret99Active .p951ChatFab{display:none!important}
 .p998Buddy{width:min(155px,34vw);height:150px;display:flex;align-items:flex-end;justify-content:center;filter:drop-shadow(0 12px 9px rgba(23,5,60,.28));transform-origin:center bottom;animation:p998Idle 2.7s ease-in-out infinite}.p998Buddy img{width:100%;height:100%;object-fit:contain;object-position:center bottom}
 @keyframes p998Idle{50%{transform:translateY(-3px) scale(1.01)}}
 .p998Player b{font-size:17px;text-shadow:0 2px 0 rgba(52,15,93,.6)}.p998Player small{margin-top:2px;font-size:8px;font-weight:900;color:rgba(255,255,255,.84)}
-.p998Hearts{display:flex;gap:5px;margin-top:7px}.p998Heart{font-size:25px;line-height:1;filter:drop-shadow(0 3px 0 rgba(74,22,97,.45));transition:.25s}.p998Heart.off{filter:grayscale(1);opacity:.25;transform:scale(.82)}
+.p998Hearts{display:flex;gap:5px;margin-top:7px}.p998RoundBadge{display:inline-flex;align-items:center;justify-content:center;min-width:72px;min-height:27px;padding:5px 10px;border:2px solid rgba(255,255,255,.76);border-radius:999px;background:rgba(55,20,111,.55);color:#fff;font-size:8px;font-weight:1000;letter-spacing:.08em;box-shadow:inset 0 2px 0 rgba(255,255,255,.2),0 3px 8px rgba(35,8,74,.2)}
 .p998VS{z-index:3;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px}.p998VS strong{font-size:46px;line-height:.9;color:#ffe16b;-webkit-text-stroke:2px #9a461e;paint-order:stroke fill;text-shadow:0 5px 0 #7b2c8d,0 8px 15px rgba(37,3,68,.35)}.p998VS span{padding:5px 7px;border-radius:10px;background:rgba(55,20,111,.8);font-size:7px;font-weight:1000;letter-spacing:.1em}
 .p998Speech{position:absolute;z-index:8;top:42px;max-width:155px;padding:8px 10px;border:2px solid rgba(255,255,255,.8);border-radius:15px;background:#fff;color:#54336d;font-size:9px;font-weight:950;line-height:1.35;box-shadow:0 7px 16px rgba(33,8,73,.2);opacity:0;transform:translateY(5px) scale(.95);transition:.18s}.p998Speech.show{opacity:1;transform:none}.p998SelfBubble{left:9px}.p998OppBubble{right:9px}
 .p998Status{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:8px;border:2px solid rgba(255,255,255,.46);border-radius:23px;background:linear-gradient(180deg,#5c28ad,#351273);box-shadow:0 6px 0 rgba(30,7,74,.4)}
@@ -50293,7 +50050,8 @@ body.p998Secret99Active .p951ChatFab{display:none!important}
 .p998Result{text-align:center;padding-top:4px}.p998ResultBadge{width:78px;height:78px;margin:0 auto 8px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(#ffe96a,#ffb638);color:#8c4e13;font-size:34px;font-weight:1000;box-shadow:0 7px 0 #d47b1e}.p998Result h2{margin:6px 0 2px;font-size:35px;color:#542486}.p998Result p{margin:4px 0;color:#806781;font-size:10px}.p998Reveal{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:430px;margin:14px auto}.p998Reveal div{padding:12px;border-radius:17px;background:#f1e9ff}.p998Reveal small,.p998Reveal b{display:block}.p998Reveal small{font-size:7px;color:#967aa1;font-weight:900}.p998Reveal b{font-size:25px;color:#51307f}.p998RP{display:inline-block;margin-top:4px;padding:7px 11px;border-radius:999px;background:#e8fff5;color:#28795f;font-size:10px;font-weight:1000}.p998Actions{display:flex;justify-content:center;gap:8px;margin-top:13px}.p998Actions button{min-height:45px;padding:0 18px;border:0;border-radius:15px;background:#7650ce;color:#fff;font-size:10px;font-weight:1000}.p998Actions button.alt{background:#eee8f4;color:#624a70}
 .p998ChatBtn{position:fixed;right:max(14px,env(safe-area-inset-right));bottom:max(17px,env(safe-area-inset-bottom));z-index:215020;min-width:78px;height:48px;border:3px solid #fff;border-radius:18px;background:linear-gradient(#8057e6,#5630be);color:#fff;font-size:10px;font-weight:1000;box-shadow:0 6px 15px rgba(35,8,74,.3)}
 @media(max-width:520px){.p998SecretDuel{padding-left:7px;padding-right:7px}.p998Top{border-radius:18px}.p998Brand b{font-size:21px}.p998Arena{grid-template-columns:1fr 66px 1fr;min-height:212px;padding-left:7px;padding-right:7px;border-radius:24px}.p998Buddy{height:125px;width:min(128px,36vw)}.p998VS strong{font-size:37px}.p998Player b{font-size:14px}.p998Speech{top:34px;max-width:125px;font-size:8px}.p998Card{min-height:315px;padding:13px 10px;border-radius:25px}.p998Status>div{padding:7px 3px}.p998Status b{font-size:9px}.p998Title{font-size:30px}.p998Desc{font-size:9px}.p998ChatBtn{bottom:max(12px,env(safe-area-inset-bottom));height:44px}}
-@media(prefers-reduced-motion:reduce){.p998Buddy,.p998Waiting i{animation:none!important}}
+.p998RoundBadge.waiting{background:rgba(255,193,75,.3);border-color:#ffe38b;animation:p998RoundPulse 1.1s ease-in-out infinite}@keyframes p998RoundPulse{50%{transform:scale(1.04);box-shadow:0 0 16px rgba(255,226,117,.55)}}
+@media(prefers-reduced-motion:reduce){.p998Buddy,.p998Waiting i,.p998RoundBadge.waiting{animation:none!important}}
 </style>
 
 <div class="p998SecretDuel hidden" id="p998SecretDuel" aria-hidden="true">
@@ -50311,20 +50069,20 @@ body.p998Secret99Active .p951ChatFab{display:none!important}
         <span class="p998PlayerTag">YOU</span>
         <div class="p998Buddy"><img id="p998SelfBuddy" src="/assets/buddy/default-pink-buddy.png" alt=""></div>
         <b id="p998SelfName">คุณ</b><small id="p998SelfLock">กำลังเลือกเลขลับ</small>
-        <div class="p998Hearts" id="p998SelfHearts"><span class="p998Heart">♥</span><span class="p998Heart">♥</span></div>
+        <div class="p998Hearts" id="p998SelfHearts"><span class="p998RoundBadge" id="p998SelfRound">ROUND 1</span></div>
       </article>
       <div class="p998VS"><strong>VS</strong><span>ทายเลขของอีกฝ่าย</span></div>
       <article class="p998Player rival">
         <span class="p998PlayerTag">RIVAL</span>
         <div class="p998Buddy"><img id="p998OppBuddy" src="/assets/buddy/default-pink-buddy.png" alt=""></div>
         <b id="p998OppName">คู่แข่ง</b><small id="p998OppLock">กำลังเลือกเลขลับ</small>
-        <div class="p998Hearts" id="p998OppHearts"><span class="p998Heart">♥</span><span class="p998Heart">♥</span></div>
+        <div class="p998Hearts" id="p998OppHearts"><span class="p998RoundBadge" id="p998OppRound">ROUND 1</span></div>
       </article>
     </section>
 
     <section class="p998Status">
       <div><small>MODE</small><b>🔐 SECRET 99</b></div>
-      <div><small>RULE</small><b>❤️❤️ 2 โอกาส</b></div>
+      <div><small>RULE</small><b>∞ รอบ • คนละ 1 ครั้ง</b></div>
       <div><small>SERVER</small><b id="p998Sync">● SYNC</b></div>
     </section>
 
@@ -50345,7 +50103,7 @@ body.p998Secret99Active .p951ChatFab{display:none!important}
       <section class="p998Phase" id="p998GuessPhase">
         <div class="p998Kicker">STEP 2 • GUESS THE RIVAL</div>
         <h1 class="p998Title" id="p998GuessTitle">เลขลับของคู่แข่งคือ?</h1>
-        <p class="p998Desc">คุณมี 2 หัวใจ • ถ้าทายผิด Server จะบอกว่าเลขจริงมากกว่าหรือน้อยกว่า</p>
+        <p class="p998Desc">ทายได้ไม่จำกัดรอบ • แต่ละ ROUND ทุกคนมีสิทธิ์ทายคนละ 1 ครั้ง • ถ้าทายผิด Server จะบอกว่าสูงกว่าหรือต่ำกว่า</p>
         <div class="p998GuessRange"><span id="p998Range">ช่วง 1–99</span></div>
         <div class="p998SecretLock">
           <div class="p998NumberBox"><button type="button" data-p998-guess-step="-1">−</button><input id="p998GuessInput" type="number" inputmode="numeric" min="1" max="99" value="50"><button type="button" data-p998-guess-step="1">+</button></div>
@@ -50353,7 +50111,7 @@ body.p998Secret99Active .p951ChatFab{display:none!important}
           <button class="p998Confirm" id="p998GuessBtn" type="button">🎯 ทายเลขนี้</button>
         </div>
         <div class="p998Hint" id="p998Hint"><b>เลือกเลขแล้วลองทาย</b><span>Hint จะขึ้นตรงนี้</span></div>
-        <div class="p998Waiting"><i></i><span id="p998GuessWait">คู่แข่งยังมี 2 หัวใจ</span></div>
+        <div class="p998Waiting"><i></i><span id="p998GuessWait">ROUND 1 • ทุกคนได้ทายคนละ 1 ครั้ง</span></div>
       </section>
 
       <section class="p998Phase p998Result" id="p998ResultPhase">
@@ -50402,19 +50160,38 @@ body.p998Secret99Active .p951ChatFab{display:none!important}
   function hintText(h,g){if(h==="higher")return [`⬆️ มากกว่านี้!`,`เลขลับของคู่แข่งมากกว่า ${g}`];if(h==="lower")return [`⬇️ น้อยกว่านี้!`,`เลขลับของคู่แข่งน้อยกว่า ${g}`];if(h==="correct")return [`🎉 ถูกต้อง!`,`คุณเจอเลขลับของคู่แข่งแล้ว`];return ["เลือกเลขแล้วลองทาย","Hint จะขึ้นตรงนี้"]}
   function draw(s){
     state=s||state;if(!state)return;
-    hearts("p998SelfHearts",state.self_lives);hearts("p998OppHearts",state.opponent_lives);
+    const mine=Number(state.self_guesses_used||0),opp=Number(state.opponent_guesses_used||0);
+    const round=mine===opp?mine+1:Math.max(mine,opp);
+    const canGuess=state.phase==="guess" && state.self_last_hint!=="correct" && mine<=opp;
+    $("p998SelfRound")&&($("p998SelfRound").textContent=`ROUND ${Math.max(1,mine+(mine<=opp?1:0))}`);
+    $("p998OppRound")&&($("p998OppRound").textContent=`ROUND ${Math.max(1,opp+(opp<=mine?1:0))}`);
+    $("p998SelfRound")?.classList.toggle("waiting",state.phase==="guess"&&mine>opp);
+    $("p998OppRound")?.classList.toggle("waiting",state.phase==="guess"&&opp>mine);
     $("p998SelfLock").textContent=state.self_secret_locked?"เลขลับพร้อมแล้ว 🔒":"กำลังเลือกเลขลับ";
     $("p998OppLock").textContent=state.opponent_secret_locked?"เลขลับพร้อมแล้ว 🔒":"กำลังเลือกเลขลับ";
     $("p998Sync").textContent="● SERVER SYNC";
     if(state.phase==="choose"){
       phase("p998ChoosePhase");
       $("p998Locked").classList.toggle("show",!!state.self_secret_locked);$("p998MySecret").textContent=state.self_secret??"—";$("p998LockSecret").disabled=!!state.self_secret_locked;
-      $("p998ChooseWait").textContent=state.self_secret_locked?(state.opponent_secret_locked?"ทั้งสองคนพร้อม • กำลังเริ่มทาย":"ล็อกแล้ว • รอคู่แข่งตั้งเลขลับ"):"เลือกเลขของคุณแล้วกดล็อก";
+      $("p998ChooseWait").textContent=state.self_secret_locked?(state.opponent_secret_locked?"ทั้งสองคนพร้อม • เริ่ม ROUND 1":"ล็อกแล้ว • รอคู่แข่งตั้งเลขลับ"):"เลือกเลขของคุณแล้วกดล็อก";
     }else if(state.phase==="guess"){
-      phase("p998GuessPhase");const min=Number(state.self_min||1),max=Number(state.self_max||99);$("p998Range").textContent=`ช่วง ${min}–${max}`;$("p998GuessSlider").min=min;$("p998GuessSlider").max=max;$("p998GuessInput").min=min;$("p998GuessInput").max=max;
+      phase("p998GuessPhase");
+      const min=Number(state.self_min||1),max=Number(state.self_max||99);
+      $("p998Range").textContent=`ROUND ${round} • ช่วง ${min}–${max}`;
+      $("p998GuessSlider").min=min;$("p998GuessSlider").max=max;$("p998GuessInput").min=min;$("p998GuessInput").max=max;
       const current=clamp($("p998GuessInput").value,min,max);setNum("guess",current);
-      const ht=hintText(state.self_last_hint,state.self_last_guess),hint=$("p998Hint");hint.className=`p998Hint ${state.self_last_hint||""}`;hint.innerHTML=`<b>${ht[0]}</b><span>${ht[1]}</span>`;
-      $("p998GuessBtn").disabled=Number(state.self_lives||0)<1;$("p998GuessWait").textContent=Number(state.opponent_lives||0)>0?`คู่แข่งยังเหลือ ${state.opponent_lives} หัวใจ`:`คู่แข่งใช้ครบ 2 โอกาสแล้ว`;
+      const ht=hintText(state.self_last_hint,state.self_last_guess),hint=$("p998Hint");hint.className=`p998Hint ${state.self_last_hint||""}`;
+      hint.innerHTML=`<b>${ht[0]}</b><span>${ht[1]}</span>`;
+      $("p998GuessBtn").disabled=!canGuess;
+      if(state.self_last_hint==="correct" && mine>opp){
+        $("p998GuessWait").textContent=`คุณทายถูกใน ROUND ${mine} • รอคู่แข่งใช้สิทธิ์ในรอบเดียวกัน`;
+      }else if(!canGuess && mine>opp){
+        $("p998GuessWait").textContent=`ส่งคำตอบ ROUND ${mine} แล้ว • รอคู่แข่งตอบรอบเดียวกัน`;
+      }else if(canGuess && opp>mine){
+        $("p998GuessWait").textContent=`คู่แข่งตอบ ROUND ${opp} แล้ว • ถึงตาคุณ`;
+      }else{
+        $("p998GuessWait").textContent=`ROUND ${round} • ทั้งสองคนมีสิทธิ์ทายคนละ 1 ครั้ง`;
+      }
       $("p998GuessTitle").textContent=`เลขลับของ ${$("p998OppName").textContent||"คู่แข่ง"} คือ?`;
     }else if(state.phase==="finished"){
       showResult();
@@ -50422,9 +50199,11 @@ body.p998Secret99Active .p951ChatFab{display:none!important}
   }
   async function refresh(){if(!match?.id||busy)return;busy=true;try{const data=await rpc("bb_secret99_state",{p_match_id:match.id});const row=Array.isArray(data)?data[0]:data;if(row)draw(row)}catch(e){console.warn("Secret99 state:",e?.message||e);$("p998Sync").textContent="● RETRY"}finally{busy=false}}
   async function showResult(){
-    phase("p998ResultPhase");if(!state)return;const mine=user?.id,win=state.winner_id;let title="DRAW",text="ใกล้เท่ากัน • ไม่มีผู้ชนะ",badge="=";
-    if(win&&win===mine){title="VICTORY!";text=state.result_reason==="correct_guess"?"คุณทายเลขลับของคู่แข่งได้ก่อน!":"เลขที่คุณทายใกล้ที่สุด • คุณชนะ!";badge="★"}
-    else if(win){title="DEFEAT";text=state.result_reason==="forfeit"?"คุณออกจากการแข่งขัน":"คู่แข่งทายได้ดีกว่าในรอบนี้";badge="×"}
+    phase("p998ResultPhase");if(!state)return;
+    const mine=user?.id,win=state.winner_id;
+    let title="DRAW",text="ทั้งสองคนทายถูกใน ROUND เดียวกัน • เสมอ",badge="=";
+    if(win&&win===mine){title="VICTORY!";text="คุณทายเลขลับถูก และคู่แข่งไม่ถูกใน ROUND เดียวกัน";badge="★"}
+    else if(win){title="DEFEAT";text=state.result_reason==="forfeit"?"คุณออกจากการแข่งขัน":"คู่แข่งทายเลขลับถูก และคุณไม่ถูกใน ROUND เดียวกัน";badge="×"}
     $("p998ResultTitle").textContent=title;$("p998ResultText").textContent=text;$("p998ResultBadge").textContent=badge;$("p998RevealSelf").textContent=state.self_secret??"—";$("p998RevealOpp").textContent=state.revealed_opponent_secret??"—";
     const ch=Number(state.self_rp_change||0);$("p998RP").textContent=`RP ${ch>=0?"+":""}${ch}${state.self_rp_after!=null?` • รวม ${state.self_rp_after}`:""}`;
     if(!finishedHandled){finishedHandled=true;stopPoll();window.POMRUInGameChat?.stop?.();window.BB_RANKED_ACTIVE=false;window.POMRURankedCheckpoint?.clearActive?.();try{localStorage.removeItem("bb_ranked_waiting_match")}catch(_){}document.body.classList.remove("bbRankedPlaying","bbGameActive");document.dispatchEvent(new CustomEvent("pomru:ranked-game-ended",{detail:{match_id:match?.id,secret99:true}}))}
@@ -50440,7 +50219,29 @@ body.p998Secret99Active .p951ChatFab{display:none!important}
   function stopPoll(){if(timer){clearInterval(timer);timer=null}}
   function startPoll(){stopPoll();timer=setInterval(()=>refresh(),650)}
   async function lockSecret(){if(!match?.id||state?.self_secret_locked)return;const n=clamp($("p998SecretInput").value);$("p998LockSecret").disabled=true;try{await rpc("bb_secret99_set_secret",{p_match_id:match.id,p_secret:n});bubble("self",`เลขลับพร้อมแล้ว 🔒`);await refresh()}catch(e){alert(String(e?.message||e));$("p998LockSecret").disabled=false}}
-  async function guess(){if(!match?.id||Number(state?.self_lives||0)<1)return;const n=clamp($("p998GuessInput").value,Number(state?.self_min||1),Number(state?.self_max||99));$("p998GuessBtn").disabled=true;try{const data=await rpc("bb_secret99_guess",{p_match_id:match.id,p_guess:n});const row=Array.isArray(data)?data[0]:data;if(row?.hint==="higher")bubble("self","มากกว่านี้ ↑");else if(row?.hint==="lower")bubble("self","น้อยกว่านี้ ↓");else if(row?.hint==="correct")bubble("self","เจอแล้ว! ⭐");await refresh()}catch(e){alert(String(e?.message||e))}finally{if(state?.phase!=="finished"&&Number(state?.self_lives||0)>0)$("p998GuessBtn").disabled=false}}
+  async function guess(){
+    if(!match?.id||state?.phase!=="guess")return;
+    const mine=Number(state?.self_guesses_used||0),opp=Number(state?.opponent_guesses_used||0);
+    if(state?.self_last_hint==="correct"||mine>opp)return;
+    const n=clamp($("p998GuessInput").value,Number(state?.self_min||1),Number(state?.self_max||99));
+    $("p998GuessBtn").disabled=true;
+    try{
+      const round=mine===opp?mine+1:Math.max(mine,opp);const data=await rpc("bb_secret99_guess_round",{p_match_id:match.id,p_round:round,p_guess:n});
+      const row=Array.isArray(data)?data[0]:data;
+      if(row?.hint==="higher")bubble("self","มากกว่านี้ ↑");
+      else if(row?.hint==="lower")bubble("self","น้อยกว่านี้ ↓");
+      else if(row?.hint==="correct")bubble("self","ถูกแล้ว! รอคู่แข่งทายรอบนี้ ⭐");
+      await refresh();
+    }catch(e){
+      const msg=String(e?.message||e);
+      if(msg.includes("wait_for_opponent"))bubble("self","รอคู่แข่งตอบ ROUND นี้ก่อน");
+      else if(msg.includes("correct_waiting_for_opponent"))bubble("self","คุณตอบถูกแล้ว • รอคู่แข่งใช้สิทธิ์");
+      else alert(msg);
+    }finally{
+      const a=Number(state?.self_guesses_used||0),b=Number(state?.opponent_guesses_used||0);
+      if(state?.phase==="guess"&&state?.self_last_hint!=="correct"&&a<=b)$("p998GuessBtn").disabled=false;
+    }
+  }
   async function forfeit(){if(!match?.id)return;if(!confirm("ออกจากเลขลับ 99 ตอนนี้? คู่แข่งจะชนะรอบนี้"))return;try{await rpc("bb_secret99_forfeit",{p_match_id:match.id});await refresh()}catch(e){alert(String(e?.message||e))}}
   function close(){stopPoll();window.POMRUInGameChat?.stop?.();$("p998SecretDuel")?.classList.add("hidden");$("p998SecretDuel")?.setAttribute("aria-hidden","true");document.body.classList.remove("p998Secret99Active","bbRankedPlaying","bbGameActive");window.BB_RANKED_ACTIVE=false;window.__bbRankedMatch=null;window.POMRU_RANKED_MATCHMAKING_RESULT=null;window.POMRU_RANKED_ROOM_ID=null}
   function goHome(){close();const h=document.querySelector('[data-app-go="home"]');if(h)h.click();else window.POMRUApp?.go?.("home")}
@@ -50464,10 +50265,10 @@ body.p998Secret99Active .p951ChatFab{display:none!important}
   document.addEventListener("pomru:battle-chat-message",e=>{if(!document.body.classList.contains("p998Secret99Active"))return;const d=e.detail||{};bubble(d.is_me?"self":"opp",d.body||"")});
   document.addEventListener("pomru:progress-updated",()=>setTimeout(refreshRankCard,120));
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(refreshRankCard,1500),{once:true});else setTimeout(refreshRankCard,1500);
-  window.POMRUSecret99Duel=Object.freeze({version:"99.6.8",start,refresh,close,state:()=>state?{...state}:null,rules:{range:[1,99],lives:2,hp:false,twoPlayer:true,tieBreak:"closest"}});
+  window.POMRUSecret99Duel=Object.freeze({version:"99.6.10",start,refresh,close,state:()=>state?{...state}:null,rules:{range:[1,99],lives:null,hp:false,twoPlayer:true,rounds:"unlimited",fairRound:true}});
 })();
 </script>
-<script id="pomru-v9968-marker">window.POMRU_V9968=Object.freeze({version:"99.6.8",game:"secret_number_99",title:"เลขลับ 99",type:"two-player-ranked-duel",players:2,secretRange:[1,99],lives:2,hp:false,hints:["higher","lower"],tieBreak:"closest-guess",solo:false});</script>
+<script id="pomru-v9968-marker">window.POMRU_V9968=Object.freeze({version:"99.6.8",game:"secret_number_99",title:"เลขลับ 99",type:"two-player-ranked-duel",players:2,secretRange:[1,99],lives:null,hp:false,hints:["higher","lower"],rounds:"unlimited",fairRound:true,solo:false});</script>
 
 
 <style id="pomru-v9969-ranked-lobby-rebuild">
@@ -50546,7 +50347,7 @@ body.p998Secret99Active .p951ChatFab{display:none!important}
   }
   function currentRank(){
     const s=subject();
-    if(s==='secret99')return {ranked_tier:profile?.ranked_tier||'Bronze',ranked_points:num(profile?.ranked_points),ranked_games:num(profile?.ranked_games),ranked_wins:num(profile?.ranked_wins),ranked_losses:num(profile?.ranked_losses),ranked_streak:num(profile?.ranked_streak),level_label:'1–99 • ❤️❤️ 2 โอกาส'};
+    if(s==='secret99')return {ranked_tier:profile?.ranked_tier||'Bronze',ranked_points:num(profile?.ranked_points),ranked_games:num(profile?.ranked_games),ranked_wins:num(profile?.ranked_wins),ranked_losses:num(profile?.ranked_losses),ranked_streak:num(profile?.ranked_streak),level_label:'1–99 • ∞ รอบ • คนละ 1 ครั้ง'};
     return window.POMRUFourRanks?.get?.(s)||{ranked_tier:'Bronze',ranked_points:0,ranked_games:0,ranked_wins:0,ranked_losses:0,ranked_streak:0,level_label:''};
   }
   function renderRank(){
@@ -50593,5 +50394,7 @@ body.p998Secret99Active .p951ChatFab{display:none!important}
 </script>
 <script id="pomru-v9969-marker">window.POMRUV9969=Object.freeze({version:'99.6.9',feature:'ranked-lobby-rebuild',secret99:true,databaseMigration:false});</script>
 
+
+<script id="pomru-v99610-marker">window.POMRU_V99610=Object.freeze({version:"99.6.10",game:"secret_number_99",players:2,range:[1,99],hp:false,lives:null,rounds:"unlimited",oneGuessPerPlayerPerRound:true,decision:"after-both-submit",sameRoundBothCorrect:"draw",solo:false});</script>
 </body>
 </html>
